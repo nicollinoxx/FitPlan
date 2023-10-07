@@ -1,0 +1,16 @@
+<% content_for(:title, 'Exercicio') %>
+
+<div class="container">
+  <% if notice %>
+    <div class="alert alert-warning mb-3" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <%= render @treino %>
+  <hr>
+  <div class='btn-toolbar'>
+    <%= link_to "Editar treino", edit_treino_path(@treino), class: 'btn btn-secondary me-4' %>
+    <%= button_to "Excluir treino", @treino, method: :delete, data: {'turbo-confirm': 'Excluir treino?' }, class: 'btn btn-danger' %>
+  </div>
+</div>

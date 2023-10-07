@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  exercicio: MyString
+  series: 1
+  repeticoes: MyString
+  carga: MyString
+
+two:
+  exercicio: MyString
+  series: 1
+  repeticoes: MyString
+  carga: MyString
