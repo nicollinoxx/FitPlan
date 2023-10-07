@@ -1,0 +1,18 @@
+<div id="<%= dom_id diet %>">
+  <p>
+    <strong>Refeicao:</strong>
+    <%= diet.refeicao %>
+  </p>
+
+  <p>
+    <strong>Descricao:</strong>
+    <%= diet.descricao %>
+  </p>
+
+  <% if diet.calorias != 0.0  %>
+    <p>
+      <strong>Calorias totais:</strong>
+      <%= diet.calorias %>
+    </p>
+  <% end %>
+</div>

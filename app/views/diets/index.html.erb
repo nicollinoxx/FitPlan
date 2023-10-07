@@ -1,0 +1,19 @@
+<h1 class='text-center'><% content_for(:title, "Dietas") %></h1>
+
+<div class="container">
+  <div id="diets">
+    <% @diets.each do |diet| %>
+      <%= render diet %>
+      <p>
+        <%= link_to "Ver dietas", diet, class: 'btn btn-secondary' %>
+      </p>
+      <% if Diet %>
+        <hr>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="d-grid gap-2">
+    <%= link_to "Nova Dieta", new_diet_path, class: 'btn btn-primary' %>
+  </div>
+</div>

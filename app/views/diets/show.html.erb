@@ -1,0 +1,14 @@
+<div class="container">
+  <% if notice %>
+    <div class="alert alert-warning mb-3" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <%= render @diet %>
+
+  <div class='btn-toolbar'>
+    <%= link_to "Editar dieta", edit_diet_path(@diet), class: 'btn btn-secondary me-4' %>
+    <%= button_to "Excluir dieta", @diet, method: :delete, data: {'turbo-confirm': 'Excluir treino?' }, class: 'btn btn-danger' %>
+  </div>
+</div>

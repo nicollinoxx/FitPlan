@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  refeicao: MyString
+  descricao: MyString
+  proteina_g: 9.99
+  carboidratos_g: 9.99
+  gordura_g: 9.99
+  calorias: 9.99
+
+two:
+  refeicao: MyString
+  descricao: MyString
+  proteina_g: 9.99
+  carboidratos_g: 9.99
+  gordura_g: 9.99
+  calorias: 9.99

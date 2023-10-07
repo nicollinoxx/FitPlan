@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_07_173145) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_07_173851) do
+  create_table "diets", force: :cascade do |t|
+    t.string "refeicao"
+    t.string "descricao"
+    t.decimal "proteina_g"
+    t.decimal "carboidratos_g"
+    t.decimal "gordura_g"
+    t.decimal "calorias"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "treinos", force: :cascade do |t|
     t.string "exercicio"
     t.integer "series"
