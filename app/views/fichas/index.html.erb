@@ -1,14 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<h1 class='text-center'><% content_for(:title, "Dietas") %></h1>
 
-<h1>Fichas</h1>
+<p style="color: green"><%= notice %></p>
 
 <div id="fichas">
   <% @fichas.each do |ficha| %>
     <%= render ficha %>
     <p>
-      <%= link_to "Show this ficha", ficha %>
+      <%= link_to "Show this ficha", ficha, class: 'btn btn-secondary' %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New ficha", new_ficha_path %>
+<div class="d-grid gap-2">
+  <%= link_to "Nova Dieta", new_ficha_path, class: 'btn btn-primary' %>
+</div>

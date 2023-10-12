@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_07_173851) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_12_193504) do
   create_table "diets", force: :cascade do |t|
     t.string "refeicao"
     t.string "descricao"
@@ -18,6 +18,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_173851) do
     t.decimal "carboidratos_g"
     t.decimal "gordura_g"
     t.decimal "calorias"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fichas", force: :cascade do |t|
+    t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

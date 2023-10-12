@@ -11,12 +11,12 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
+  <div class='mb-3'>
+    <%= form.label :nome, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :nome, class: 'form-control border border-primary' %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "#{@action} dieta", class: 'btn btn-primary' %>
   </div>
 <% end %>

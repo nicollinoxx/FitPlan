@@ -1,39 +1,37 @@
-<div class="container">
-  <%= form_with(model: treino) do |form| %>
-    <% if treino.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(treino.errors.count, "Erros") %> proibiram este treino de ser salvo:</h2>
+<%= form_with(model: treino) do |form| %>
+  <% if treino.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(treino.errors.count, "Erros") %> proibiram este treino de ser salvo:</h2>
 
-        <ul>
-          <% treino.errors.each do |error| %>
-            <li>O campo "<%= error.attribute %>" não pode estar em branco</li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class='mb-3'>
-      <%= form.label :exercicio, style: "display: block", class: 'form-label' %>
-      <%= form.text_field :exercicio, class: 'form-control border border-primary' %>
-    </div>
-
-    <div class='mb-3 w-2'>
-      <%= form.label :series, style: "display: block", class: 'form-label' %>
-      <%= form.number_field :series, class: 'form-control border border-primary' %>
-    </div>
-
-    <div class='mb-3'>
-      <%= form.label :repetições, style: "display: block", class: 'form-label' %>
-      <%= form.text_field :repeticoes, class: 'form-control border border-primary' %>
-    </div>
-
-    <div class='mb-3'>
-      <%= form.label :carga, style: "display: block", class: 'form-label' %>
-      <%= form.text_field :carga, class: 'form-control border border-primary' %>
-    </div>
-
-    <div class='mb-3'>
-        <%= form.submit "#{@action} treino", class: 'btn btn-primary text-white' %>
+      <ul>
+        <% treino.errors.each do |error| %>
+          <li>O campo "<%= error.attribute %>" não pode estar em branco</li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
-</div>
+
+  <div class='mb-3'>
+    <%= form.label :exercicio, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :exercicio, class: 'form-control border border-primary' %>
+  </div>
+
+  <div class='mb-3 w-2'>
+    <%= form.label :series, style: "display: block", class: 'form-label' %>
+    <%= form.number_field :series, class: 'form-control border border-primary' %>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.label :repetições, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :repeticoes, class: 'form-control border border-primary' %>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.label :carga, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :carga, class: 'form-control border border-primary' %>
+  </div>
+
+  <div class='mb-3'>
+      <%= form.submit "#{@action} treino", class: 'btn btn-primary text-white' %>
+  </div>
+<% end %>

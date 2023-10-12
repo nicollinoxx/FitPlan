@@ -13,10 +13,12 @@ class FichasController < ApplicationController
   # GET /fichas/new
   def new
     @ficha = Ficha.new
+    @action = 'Criar'
   end
 
   # GET /fichas/1/edit
   def edit
+    @action = 'Criar'
   end
 
   # POST /fichas or /fichas.json
@@ -28,6 +30,7 @@ class FichasController < ApplicationController
         format.html { redirect_to ficha_url(@ficha), notice: "Ficha was successfully created." }
         format.json { render :show, status: :created, location: @ficha }
       else
+        @action = 'Criar'
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @ficha.errors, status: :unprocessable_entity }
       end
@@ -41,6 +44,7 @@ class FichasController < ApplicationController
         format.html { redirect_to ficha_url(@ficha), notice: "Ficha was successfully updated." }
         format.json { render :show, status: :ok, location: @ficha }
       else
+          @action = 'Editar'
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @ficha.errors, status: :unprocessable_entity }
       end

@@ -1,18 +1,17 @@
 <h1 class='text-center'><% content_for(:title, "Treinos") %></h1>
 
-<div class="container">
-  <div id="treinos">
-    <% @treinos.each do |treino| %>
-      <%= render treino %>
-      <p>
-        <%= link_to "Ver treino", treino, class: 'btn btn-secondary' %>
-      </p>
-      <% if Treino %>
-        <hr>
-      <% end %>
+
+<div id="treinos">
+  <% @treinos.each do |treino| %>
+    <%= render treino %>
+    <p>
+      <%= link_to "Ver treino", treino, class: 'btn btn-secondary' %>
+    </p>
+    <% if Treino %>
+      <hr>
     <% end %>
-  </div>
-    <div class="d-grid gap-2">
-      <%= link_to "Novo treino", new_treino_path, class: 'btn btn-primary' %>
-    </div>
+  <% end %>
 </div>
+  <div class="d-grid gap-2">
+    <%= link_to "Novo treino", new_treino_path, class: 'btn btn-primary' %>
+  </div>
