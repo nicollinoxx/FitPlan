@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @ficha %>
+
+<div>
+  <%= link_to "Edit this ficha", edit_ficha_path(@ficha) %> |
+  <%= link_to "Back to fichas", fichas_path %>
+
+  <%= button_to "Destroy this ficha", @ficha, method: :delete %>
+</div>
