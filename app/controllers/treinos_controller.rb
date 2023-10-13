@@ -1,6 +1,7 @@
 class TreinosController < ApplicationController
+  include CurrentFicha
   before_action :set_treino, only: %i[ show edit update destroy ]
-
+  before_action :set_ficha, only: %i[ new create update ]
   # GET /treinos or /treinos.json
   def index
     @treinos = Treino.all
@@ -18,12 +19,13 @@ class TreinosController < ApplicationController
 
   # GET /treinos/1/edit
   def edit
+    @ficha = @treino.ficha
     @action = 'Editar'
   end
 
   # POST /treinos or /treinos.json
   def create
-     @treino = Treino.new(treino_params)
+    @treino = @ficha.treinos.new(treino_params)
 
     respond_to do |format|
       if @treino.save
@@ -40,7 +42,7 @@ class TreinosController < ApplicationController
   # PATCH/PUT /treinos/1 or /treinos/1.json
   def update
     respond_to do |format|
-      if @treino.update(treino_params)
+      if @ficha.treinos.update(treino_params)
         format.html { refresh_or_redirect_to treino_url(@treino), notice: "Treino was successfully updated." }
         format.json { render :show, status: :ok, location: @treino }
       else

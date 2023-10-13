@@ -3,7 +3,10 @@
 <%= render @ficha %>
 
 
-<div class='btn-toolbar'>
+<div class='btn-toolbar mb-5'>
   <%= link_to "Editar ficha", edit_ficha_path(@ficha), class: 'btn btn-secondary me-4' %>
   <%= button_to "Excluir ficha", @ficha, method: :delete, data: {'turbo-confirm': 'Excluir treino?' }, class: 'btn btn-danger' %>
 </div>
+
+
+<%= render partial: 'layouts/treinos' %>

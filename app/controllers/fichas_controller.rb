@@ -3,7 +3,7 @@ class FichasController < ApplicationController
 
   # GET /fichas or /fichas.json
   def index
-    @fichas = Ficha.all
+    @fichas = Ficha.all.order(:nome)
   end
 
   # GET /fichas/1 or /fichas/1.json

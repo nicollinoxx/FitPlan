@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_12_193504) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_12_210155) do
   create_table "diets", force: :cascade do |t|
     t.string "refeicao"
     t.string "descricao"
@@ -35,6 +35,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_193504) do
     t.string "carga"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "ficha_id", null: false
+    t.index ["ficha_id"], name: "index_treinos_on_ficha_id"
   end
 
+  add_foreign_key "treinos", "fichas"
 end

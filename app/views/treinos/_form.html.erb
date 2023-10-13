@@ -32,6 +32,14 @@
   </div>
 
   <div class='mb-3'>
+    <%= form.text_field :ficha_id, type: :hidden, value: @ficha.id %>
+  </div>
+
+
+
+  <input type="hidden" name="ficha_id" value="<%= @ficha.id %>">
+
+  <div class='mb-3'>
       <%= form.submit "#{@action} treino", class: 'btn btn-primary text-white' %>
   </div>
 <% end %>
