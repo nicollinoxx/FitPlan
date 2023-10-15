@@ -4,5 +4,17 @@
 
 import { application } from "./application"
 
+import Bridge__FlashMessageController from "./bridge/flash_message_controller"
+application.register("bridge--flash-message", Bridge__FlashMessageController)
+
+import Bridge__FormController from "./bridge/form_controller"
+application.register("bridge--form", Bridge__FormController)
+
+import Bridge__MenuController from "./bridge/menu_controller"
+application.register("bridge--menu", Bridge__MenuController)
+
+import Bridge__NavButtonController from "./bridge/nav_button_controller"
+application.register("bridge--nav-button", Bridge__NavButtonController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
