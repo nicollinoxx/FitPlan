@@ -1,21 +1,29 @@
 <div id="<%= dom_id treino %>">
-  <h3 class='text-center text-white bg-secondary opacity-50 rounded'>
-    <%= treino.exercicio %>
-  </h3>
+
+<h2 class='text-center mb-3 p-2'>
+  <%= treino.exercicio %>
+</h2>
 
 <div class="text-center">
-  <h3 class='mb-2 bg-secondary-subtle rounded'>
-    Series:
-    <%= treino.series %>
-  </h3>
+  <div class="row g-3">
+    <div class="col">
+      <div class="bg-warning-subtle rounded">
+          <h5>Series</h5>
+          <h5><%= treino.series %></h5>
+      </div>
+    </div>
+    <div class="col">
+      <div class="bg-warning-subtle rounded">
+          <h5>repeticoes</h5>
+          <h5><%= treino.repeticoes %></h5>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <h3 class='mb-2 bg-secondary-subtle rounded'>
-  Repeticoes:
-  <%= treino.repeticoes %>
-  </h3>
 
-  <h3 class='mb-2 bg-secondary-subtle rounded'>
-    Carga:
-    <%= treino.carga %>
-  </h3>
+  <div class="bg-warning-subtle rounded text-center">
+    <h5>Carga</h5>
+    <h5><%= treino.carga %></h5>
+  </div>
 </div>

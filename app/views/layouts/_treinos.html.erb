@@ -1,12 +1,13 @@
 <div id="treinos">
   <% @ficha.treinos.each do |treino| %>
-    <%= render treino %>
-    <p>
-      <%= link_to "Ver treino", treino, class: 'btn btn-secondary' %>
-    </p>
+    <%= link_to treino, class: "link-dark link-offset-2 link-underline link-underline-opacity-0" do %>
+      <%= render treino %>
+    <% end %>
+
     <% if Treino %>
       <hr>
     <% end %>
+
   <% end %>
 </div>
 

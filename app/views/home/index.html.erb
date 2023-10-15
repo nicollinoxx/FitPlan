@@ -4,32 +4,39 @@
   </div>
 <% end %>
 
-<%= link_to fichas_path, class: 'link-dark link-underline-opacity-0' do %>
-  <div class="bg-info bg-opacity-10 border border-info rounded mb-3">
-    <div class="text-center p-2">
-      <h5>Treinos</h5>
-      <p>This is a wider card with supporting text below as a natural lead-in
-        to additional content.</p>
-    </div>
-  </div>
-<% end %>
+<div class="d-flex justify-content-center">
+  <div class="row g-3">
+      <div class="col">
+        <div style="max-width: 180px;">
+          <%= link_to fichas_path, class: 'link-dark' do %>
+            <div class="bg-dark rounded">
+              <%= image_tag 'exercicio_image.png', class: "img-fluid rounded" %>
+              <h5 class='link-dark text-white text-center'>Treinos</h5>
+            </div>
+          <% end %>
+        </div>
+      </div>
 
-<%= link_to diets_path, class: 'link-dark link-underline-opacity-0' do %>
-  <div class="bg-info bg-opacity-10 border border-info rounded mb-3">
-    <div class="text-center p-2">
-      <h5>Dietas</h5>
-      <p>This is a wider card with supporting text below as a natural lead-in
-        to additional content.</p>
+    <div class="col">
+      <div style="max-width: 180px;">
+        <%= link_to diets_path, class: 'link-dark' do %>
+          <div class="bg-dark rounded">
+             <%= image_tag 'dieta_image.png', class: "img-fluid rounded" %>
+             <h5 class='link-dark text-white text-center'>Dietas</h5>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% end %>
 
-<%= link_to treinos_path, class: 'link-dark link-underline-opacity-0' do %>
-  <div class="bg-info bg-opacity-10 border border-info rounded mb-3">
-    <div class="text-center p-2">
-      <h5>Treinos</h5>
-      <p>This is a wider card with supporting text below as a natural lead-in
-        to additional content.</p>
+    <div class="col">
+      <div style="max-width: 180px;">
+        <%= link_to fichas_path, class: 'link-dark' do %>
+          <div class="bg-dark rounded">
+            <%= image_tag 'exercicio_image.png', class: "img-fluid rounded" %>
+            <h5 class='link-dark text-white text-center'>Treinos</h5>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-<% end %>
+</div>

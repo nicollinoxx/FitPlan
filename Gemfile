@@ -73,3 +73,5 @@ group :test do
   gem "selenium-webdriver"
 
 end
+
+gem "strada-rails", "~> 0.0.2"
