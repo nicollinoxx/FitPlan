@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :fichas
+
   resources :diets
-  resources :treinos
+  resources :fichas do
+    resources :treinos
+  end 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

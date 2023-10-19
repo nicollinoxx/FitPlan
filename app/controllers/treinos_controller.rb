@@ -1,10 +1,12 @@
 class TreinosController < ApplicationController
   include CurrentFicha
+
+  before_action :set_ficha
   before_action :set_treino, only: %i[ show edit update destroy ]
-  before_action :set_ficha, only: %i[ new create update ]
+
   # GET /treinos or /treinos.json
   def index
-    @treinos = Treino.all
+    @treinos = @ficha.treinos
   end
 
   # GET /treinos/1 or /treinos/1.json
@@ -19,7 +21,6 @@ class TreinosController < ApplicationController
 
   # GET /treinos/1/edit
   def edit
-    @ficha = @treino.ficha
     @action = 'Editar'
   end
 
@@ -29,7 +30,7 @@ class TreinosController < ApplicationController
 
     respond_to do |format|
       if @treino.save
-        format.html { redirect_to treino_url(@treino), notice: "Treino was successfully created." }
+        format.html { refresh_or_redirect_to ficha_treino_url(@ficha, @treino), notice: "Treino was successfully created." }
         format.json { render :show, status: :created, location: @treino }
       else
         @action = 'Criar'
@@ -42,8 +43,8 @@ class TreinosController < ApplicationController
   # PATCH/PUT /treinos/1 or /treinos/1.json
   def update
     respond_to do |format|
-      if @ficha.treinos.update(treino_params)
-        format.html { refresh_or_redirect_to treino_url(@treino), notice: "Treino was successfully updated." }
+      if @treino.update(treino_params)
+        format.html { refresh_or_redirect_to ficha_treino_url(@ficha, @treino), notice: "Treino was successfully updated." }
         format.json { render :show, status: :ok, location: @treino }
       else
         @action = 'Editar'
@@ -58,7 +59,7 @@ class TreinosController < ApplicationController
     @treino.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_url, notice: "Treino was successfully destroyed." }
+      format.html { recede_or_redirect_to fichas_url, notice: "Treino was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,11 +67,13 @@ class TreinosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_treino
-      @treino = Treino.find(params[:id])
+      @treino = @ficha.treinos.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      recede_or_redirect_to fichas_url
     end
 
     # Only allow a list of trusted parameters through.
     def treino_params
-      params.require(:treino).permit(:exercicio, :series, :repeticoes, :carga, :ficha)
+      params.require(:treino).permit(:exercicio, :series, :repeticoes, :carga)
     end
 end
