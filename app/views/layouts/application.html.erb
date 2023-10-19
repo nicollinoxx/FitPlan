@@ -15,6 +15,12 @@
   </head>
 
   <body class='container'>
+    <% if notice.present? %>
+      <div class="alert alert-success" role="alert" data-controller="bridge--flash-message">
+        <%= notice %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

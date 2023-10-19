@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        treino:
+          attributes:
+            exercicio:
+              blank: "não pode ficar em branco"
+            series:
+              blank: "não pode ficar em branco"
+            repeticoes:
+              blank: "não pode ficar em branco"
+        ficha:
+          attributes:
+            nome:
+              blank: "não pode ficar em branco"
+              taken: "já está em uso"

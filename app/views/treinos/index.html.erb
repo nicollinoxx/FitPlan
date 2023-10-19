@@ -1,14 +1,7 @@
 <h1 class='text-center'><% content_for(:title, "Treinos") %></h1>
 
-
 <div id="treinos">
   <% @treinos.each do |treino| %>
     <%= render treino %>
-    <p>
-      <%= link_to "Ver treino", treino, class: 'btn btn-secondary' %>
-    </p>
-    <% if Treino %>
-      <hr>
-    <% end %>
   <% end %>
 </div>

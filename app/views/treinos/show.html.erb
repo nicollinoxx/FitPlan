@@ -1,14 +1,13 @@
 <% content_for(:title, 'Exercicio') %>
 
-<% if notice %>
-  <div class="alert alert-warning mb-3" role="alert">
-    <%= notice %>
-  </div>
-<% end %>
-
 <%= render @treino %>
 
-<div class='btn-toolbar'>
-  <%= link_to "Editar treino", edit_treino_path, class: 'btn btn-secondary me-4' %>
-  <%= button_to "Excluir treino", @treino, method: :delete, data: {'turbo-confirm': 'Excluir treino?' }, class: 'btn btn-danger' %>
+<div data-controller="bridge--menu">
+  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>
+
+  <div class='btn-toolbar'>
+    <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
+    <%= link_to "Editar treino", edit_ficha_treino_path(@ficha, @treino), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
+    <%= button_to "Excluir treino", ficha_treino_path(@ficha, @treino), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Excluir treino?' }, class: 'btn btn-danger' %>
+  </div>
 </div>
