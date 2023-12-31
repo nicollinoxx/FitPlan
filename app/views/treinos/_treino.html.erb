@@ -1,35 +1,46 @@
-<div class="collapse show" id="<%= dom_id treino %>">
+<div id="<%= dom_id treino %>">
 
   <div class="bg-secondary-subtle rounded mb-3 p-1">
-    <h2 class='text-center mb-3 p-2'>
-      <%= treino.exercicio %>
-    </h2>
-
     <div class="container">
-      <div class="text-center text-white">
+      <h1 class='text-center mb-3'>
+        <%= treino.exercicio %>
+      </h1>
+
+      <div class="text-center text-dark">
         <div class="row g-3">
           <div class="col">
-            <div class="rounded" style="background-color: indigo;">
+            <div class="rounded bg-light">
               <h5>Series</h5>
-              <h5 class='p-1'>
+              <h6 class='fw-light'>
                 <%= treino.series %>
-              </h5>
+              </h6>
             </div>
           </div>
           <div class="col">
-            <div class="rounded" style="background-color: indigo;">
+            <div class="rounded bg-light">
               <h5>Repetições</h5>
-              <h5 class='p-1'>
+              <h6 class='fw-light'>
                 <%= treino.repeticoes %>
-              </h5>
+              </h6>
             </div>
           </div>
         </div>
-        <div class="rounded mb-3" style="background-color: indigo;">
-          <h5>Carga</h5>
-          <h5 class='p-1'>
-            <%= treino.carga %>
-          </h5>
+
+        <div class="row">
+          <div class="col">
+            <div class="text-dark">
+              <h6 class="mt-2"><strong>Intervalo: </strong>30seg</h6>
+              <p class="link-primary">Visualizar</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="rounded bg-light">
+                <h5>Carga</h5>
+                <p class='fw-light'>
+                  <%= treino.carga %>
+                </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

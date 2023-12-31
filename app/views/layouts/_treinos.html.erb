@@ -1,17 +1,11 @@
-<div id="treinos">
+<h1><% content_for(:title, 'Fichas de treinos') %></h1>
 
 <% @ficha.treinos.each do |treino| %>
-    <p class='text-end mb-2'>
-      <input class="form-check-input me-1" type="checkbox" value="" data-bs-toggle="collapse" data-bs-target="#<%= dom_id treino %>" aria-expanded="false" aria-controls="collapseExample">
-      <label class="form-check-label" for="thirdCheckbox">Concluir <%= treino.exercicio %></label>
-    </p>
   <%= link_to ficha_treino_path(@ficha, treino), class: "link-dark link-offset-2 link-underline link-underline-opacity-0" do %>
     <%= render treino %>
   <% end %>
 <% end %>
 
-</div>
-
 <div class="d-grid gap-2">
-  <%= link_to "Novo treino", new_ficha_treino_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-primary' %>
+  <%= link_to "Novo treino", new_ficha_treino_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ Treino" }, class: 'btn btn-primary' %>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_12_210155) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_31_205000) do
   create_table "diets", force: :cascade do |t|
     t.string "refeicao"
     t.string "descricao"
@@ -20,12 +20,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_210155) do
     t.decimal "calorias"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "ficha_id", null: false
+    t.index ["ficha_id"], name: "index_diets_on_ficha_id"
   end
 
   create_table "fichas", force: :cascade do |t|
     t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tipo"
+    t.string "descricao"
   end
 
   create_table "treinos", force: :cascade do |t|
@@ -39,5 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_210155) do
     t.index ["ficha_id"], name: "index_treinos_on_ficha_id"
   end
 
+  add_foreign_key "diets", "fichas"
   add_foreign_key "treinos", "fichas"
 end

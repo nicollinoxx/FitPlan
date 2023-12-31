@@ -1,0 +1,13 @@
+<div id="<%= dom_id ficha %>">
+  <div class="row rounded mb-3">
+    <div class="col-auto">
+      <%= image_tag 'image 3.png', class: 'mt-2 ms-2', style: 'max-width: 110px; height: 83%;'%>
+    </div>
+    <div class="col-8">
+        <h4 class='mt-2 ms-4 link-primary'><%= ficha.nome %></h4>
+      <p class='ms-4'>
+        <strong>Descrição: </strong><%= ficha.descricao %></p>
+      </p>
+    </div>
+  </div>
+</div>

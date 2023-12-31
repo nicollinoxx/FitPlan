@@ -1,4 +1,5 @@
 class Diet < ApplicationRecord
+  belongs_to :ficha
   validates :refeicao, :descricao, presence: true
 
   def calcular_kcal

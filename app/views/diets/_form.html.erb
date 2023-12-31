@@ -1,4 +1,4 @@
-<%= form_with(model: diet) do |form| %>
+<%= form_with(model: [@ficha, @diet], data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if diet.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(diet.errors.count, "Erros") %> proibiram dessa dieta ser salva:</h2>
@@ -37,6 +37,6 @@
   </div>
 
   <div>
-    <%= form.submit "#{@action} dieta", class: 'btn btn-primary text-white' %>
+    <%= form.submit "#{@action} dieta", data: { "bridge--form-target": "submit", "bridge-title": "Salvar" }, class: 'btn btn-primary text-white' %>
   </div>
 <% end %>

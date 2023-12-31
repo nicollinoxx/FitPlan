@@ -1,0 +1,12 @@
+<h1><% content_for(:title, "Fichas") %></h1>
+
+  <% @fichas.each do |ficha| %>
+    <%= link_to ficha, class: "link-offset-2 link-underline link-underline-opacity-0" do %>
+      <%= render ficha %>
+    <% end %>
+  <% end %>
+
+
+  <div class="d-grid gap-2">
+    <%= link_to "Nova ficha", new_ficha_path, data: { controller: "bridge--nav-button", bridge_title: "+ Ficha" }, class: 'btn btn-primary' %>
+  </div>

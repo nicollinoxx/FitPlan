@@ -15,3 +15,5 @@ pt-BR:
             nome:
               blank: "não pode ficar em branco"
               taken: "já está em uso"
+            tipo:
+              blank: "não pode ficar em branco"

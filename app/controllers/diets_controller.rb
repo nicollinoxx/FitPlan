@@ -1,9 +1,11 @@
 class DietsController < ApplicationController
+  include CurrentFicha
+  before_action :set_ficha
   before_action :set_diet, only: %i[ show edit update destroy ]
 
   # GET /diets or /diets.json
   def index
-    @diets = Diet.all
+    @diets = @ficha.diet.all
   end
 
   # GET /diets/1 or /diets/1.json
@@ -23,12 +25,12 @@ class DietsController < ApplicationController
 
   # POST /diets or /diets.json
   def create
-    @diet = Diet.new(diet_params)
+    @diet = @ficha.diet.new(diet_params)
 
     respond_to do |format|
       if @diet.save
         @diet.calcular_kcal
-        format.html { redirect_to diet_url(@diet), notice: "Diet was successfully created." }
+        format.html { redirect_to ficha_diet_url(@ficha, @diet), notice: "Diet was successfully created." }
         format.json { render :show, status: :created, location: @diet }
       else
         @action = 'Criar'
@@ -43,7 +45,7 @@ class DietsController < ApplicationController
     respond_to do |format|
       if @diet.update(diet_params)
         @diet.calcular_kcal
-        format.html { refresh_or_redirect_to diet_url(@diet), notice: "Diet was successfully updated." }
+        format.html { refresh_or_redirect_to ficha_diet_url(@ficha, @diet), notice: "Diet was successfully updated." }
         format.json { render :show, status: :ok, location: @diet }
       else
         @action = 'Edit'
@@ -64,9 +66,10 @@ class DietsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_diet
-      @diet = Diet.find(params[:id])
+      @diet = @ficha.diet.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      recede_or_redirect_to fichas_url
     end
 
     # Only allow a list of trusted parameters through.

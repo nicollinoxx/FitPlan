@@ -1,3 +1,31 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'strada.css';
+
+$green-bootstrap: #28A745;
+$indigo-bootstrap: #7749F8;
+
+.bg-success-custom {
+  background-color: $green-bootstrap;
+  border-color: $green-bootstrap;
+}
+
+.text-indigo {
+  color: $indigo-bootstrap;
+}
+
+.custom-border {
+  border-color: #28A745;
+}
+
+.custom-border:focus {
+  border-color: $green-bootstrap; /* ou qualquer outra cor desejada */
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); /* Adiciona uma sombra sutil quando o campo está focado */
+}
+
+.btn-success-custom {
+  background-color: $green-bootstrap;
+  &:hover {
+   background-color: #218838; /* ou outra cor desejada ao passar o mouse */
+ }
+}
