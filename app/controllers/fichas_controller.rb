@@ -3,7 +3,17 @@ class FichasController < ApplicationController
 
   # GET /fichas or /fichas.json
   def index
-    @fichas = Ficha.all.order(:nome)
+    @tipo = params[:tipo]
+    if @tipo == 'diet'
+      @fichas = Ficha.where(tipo: 'diet').order(:nome)
+      @titulo = 'Fichas de dietas'
+    elsif @tipo == 'treino'
+      @fichas = Ficha.where(tipo: 'treino').order(:nome)
+      @titulo = 'Fichas de treinos'
+    else
+      @fichas = Ficha.all.order(:nome)
+      @titulo = 'Fichas'
+    end
   end
 
   # GET /fichas/1 or /fichas/1.json
@@ -18,7 +28,7 @@ class FichasController < ApplicationController
 
   # GET /fichas/1/edit
   def edit
-    @action = 'Criar'
+    @action = 'Editar'
   end
 
   # POST /fichas or /fichas.json
@@ -56,19 +66,22 @@ class FichasController < ApplicationController
     @ficha.destroy
 
     respond_to do |format|
-      format.html { redirect_to fichas_url, notice: "Ficha was successfully destroyed." }
+      format.html { redirect_to fichas_url, notice: "A foi destruida com sucesso." }
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_ficha
       @ficha = Ficha.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to fichas_url, notice: 'Ficha não foi encontrada ou não existe'
     end
 
     # Only allow a list of trusted parameters through.
     def ficha_params
-      params.require(:ficha).permit(:nome)
+      params.require(:ficha).permit(:nome, :tipo, :descricao)
     end
 end

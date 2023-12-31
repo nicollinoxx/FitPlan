@@ -1,4 +1,4 @@
-<%= form_with(model: ficha) do |form| %>
+<%= form_with(model: ficha, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if ficha.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(ficha.errors.count, "error") %> prohibited this ficha from being saved:</h2>
@@ -13,10 +13,29 @@
 
   <div class='mb-3'>
     <%= form.label :nome, style: "display: block", class: 'form-label' %>
-    <%= form.text_field :nome, class: 'form-control border border-primary' %>
+    <%= form.text_field :nome, class: 'form-control custom-border:focus custom-border' %>
   </div>
 
+  <div class='mb-3'>
+    <%= form.label :descrição, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :descricao, class: 'form-control custom-border:focus custom-border' %>
+  </div>
+
+    <p class='form-label'>Tipo de ficha</p>
+    <div class="form-check mb-3">
+      <div class="form-check-inline">
+        <%= form.radio_button :tipo, 'treino', class: 'form-check-input' %>
+        <%= form.label :tipo, 'Treino', class: 'form-check-label me-4' %>
+      </div>
+
+      <div class="form-check-inline">
+        <%= form.radio_button :tipo, 'diet', class: 'form-check-input' %>
+        <%= form.label :tipo, 'Dieta', class: 'form-check-label' %>
+      </div>
+    </div>
+
+
   <div>
-    <%= form.submit "#{@action} dieta", class: 'btn btn-primary' %>
+    <%= form.submit "#{@action} ficha", data: { "bridge--form-target": "submit", "bridge-title": "Salvar" }, class: 'btn btn-success-custom text-white' %>
   </div>
 <% end %>
