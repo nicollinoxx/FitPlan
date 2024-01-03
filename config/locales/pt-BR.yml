@@ -17,3 +17,7 @@ pt-BR:
               taken: "já está em uso"
             tipo:
               blank: "não pode ficar em branco"
+            descricao:
+              blank: "não pode ficar em branco"
+              too_short: 'deve ter um minimo de 10 caracteres'
+              too_long: 'deve ter no maximo 100 caracteres'

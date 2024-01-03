@@ -1,3 +1,9 @@
+<% if @ficha.tipo == 'treino'%>
+  <h1><% content_for(:title, "Ficha de treino") %></h1>
+<% else %>
+  <h1><% content_for(:title, "Ficha de dieta") %></h1>
+<% end %>
+
 <%= render @ficha %>
 
 <div class='btn-toolbar mb-5'>
@@ -6,9 +12,26 @@
 </div>
 
 
-<% if @ficha.tipo == 'treino' %>
-  <%= render partial: 'layouts/treinos' %> <br>
-<% end %>
 <% if @ficha.tipo == 'diet' %>
-  <%= render partial: 'layouts/diets' %> <br>
+  <% @ficha.diet.each do |diet| %>
+    <%= link_to ficha_diet_path(@ficha, diet), class: "link-dark link-offset-2 link-underline link-underline-opacity-0" do %>
+      <%= render diet %>
+    <% end %>
+  <% end %>
+
+  <div class="d-grid gap-2">
+    <%= link_to "Nova Dieta", new_ficha_diet_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ Dieta" }, class: 'btn btn-primary' %>
+  </div>
+
+<% else %>
+
+  <% @ficha.treinos.each do |treino| %>
+    <%= link_to ficha_treino_path(@ficha, treino), class: "link-dark link-offset-2 link-underline link-underline-opacity-0" do %>
+      <%= render treino %>
+    <% end %>
+  <% end %>
+
+  <div class="d-grid gap-2">
+    <%= link_to "Novo treino", new_ficha_treino_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ Treino" }, class: 'btn btn-primary' %>
+  </div>
 <% end %>

@@ -1,11 +1,9 @@
 <h1><% content_for(:title, "Fichas de treinos") %></h1>
 
 <% @fichas.each do |ficha| %>
-  <%= link_to ficha, class: "link-underline link-underline-opacity-0 link-white" do %>
-    <div class='<%= cycle('bg-secondary-subtle link-dark', 'bg-white link-dark') %> rounded'>
-      <%= render 'fichas/ficha_index', ficha: ficha %>
-    </div>
-  <% end %>
+  <div class='<%= cycle('bg-secondary-subtle link-dark', 'bg-white link-dark') %> rounded'>
+    <%= render 'fichas/ficha_index', ficha: ficha %>
+  </div>
 <% end %>
 
 <div class="d-grid gap-2">

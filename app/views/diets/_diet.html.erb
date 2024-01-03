@@ -1,18 +1,19 @@
 <div id="<%= dom_id diet %>">
-  <p>
-    <strong>Refeicao:</strong>
-    <%= diet.refeicao %>
-  </p>
-
-  <p>
-    <strong>Descricao:</strong>
-    <%= diet.descricao %>
-  </p>
-
-  <% if diet.calorias != 0.0  %>
-    <p>
-      <strong>Calorias totais:</strong>
-      <%= diet.calorias %>
-    </p>
-  <% end %>
+  <div class="bg-secondary-subtle rounded mb-3 p-2">
+      <h1 class='text-center'><%= diet.refeicao %></h1>
+      <div class="bg-light rounded p-2">
+        <div>
+          <p class=''>
+            <%= diet.descricao %>
+          </p>
+          <hr>
+          <% if diet.calorias != 0.0  %>
+            <p class='text-center'>
+              <strong>Calorias totais:</strong>
+              <%= diet.calorias %> kcal
+            </p>
+          <% end %>
+        </div>
+      </div>
+  </div>
 </div>
