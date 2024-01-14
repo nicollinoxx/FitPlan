@@ -166,6 +166,20 @@
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.1.0.tgz#9b1543b0abf5a0a7ef7088882ee3d6092b2745b3"
   integrity sha512-MBGzAQHOk+sXblpCQsM0MPxQDzvTLFwaFu8jqYbfWDejpZPszo9xaAOF/3+iv7ab1o6PFiTpdbh+PR4osofIWw==
 
+"@rails/actiontext@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.1.2.tgz#2f7772b33951f76a07e9ff83d54519c362d99fd5"
+  integrity sha512-qiSUtop7rIb9BlwvgU98u+y8erlWhOiV0AveoHQ4EzN11VAWj3Euao9O+Q1iEJfIPcgXRvnsVLIJPrz3ldizFg==
+  dependencies:
+    "@rails/activestorage" ">= 7.1.0-alpha"
+
+"@rails/activestorage@>= 7.1.0-alpha":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-7.1.2.tgz#088dce680fa1e0a4f8e0c5ac91073f729204ed06"
+  integrity sha512-evC/xGlpq5XGpcNJina3oNVVB8pUp1GpnN3a84SVA+UNuB6O91OdNRl9BGHNAOo6/jxmFtLb73PIjWqQyVE14w==
+  dependencies:
+    spark-md5 "^3.0.1"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -723,6 +737,11 @@ slash@^5.0.0:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
+spark-md5@^3.0.1:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/spark-md5/-/spark-md5-3.0.2.tgz#7952c4a30784347abcee73268e473b9c0167e3fc"
+  integrity sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==
+
 string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
@@ -764,6 +783,11 @@ touch@^3.1.0:
   integrity sha512-WBx8Uy5TLtOSRtIq+M03/sKDrXCLHxwDcquSP2c43Le03/9serjQBIztjRz6FkJez9D/hleyAXTBGLwwZUw9lA==
   dependencies:
     nopt "~1.0.10"
+
+trix@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.8.tgz#6fff81b9e02c4f60a181febb3f6e862fbb98f1c4"
+  integrity sha512-tPqJl+NjALVUOC8sNfRrY42K7cfp4QBb9svXxmfhxYrspF9fOOzXq+GnDa9l2ZAcfM43msnPpkJ7MrJQA3FgrA==
 
 undefsafe@^2.0.5:
   version "2.0.5"

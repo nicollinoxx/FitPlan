@@ -6,6 +6,7 @@
     "@hotwired/strada": "^1.0.0-beta1",
     "@hotwired/turbo-rails": "^7.3.0",
     "@popperjs/core": "^2.11.8",
+    "@rails/actiontext": "^7.1.2",
     "autoprefixer": "^10.4.16",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
@@ -13,7 +14,8 @@
     "nodemon": "^3.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
-    "sass": "^1.69.0"
+    "sass": "^1.69.0",
+    "trix": "^2.0.8"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets",
