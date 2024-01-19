@@ -1,13 +1,13 @@
 <div id="<%= dom_id diet %>">
   <div class="bg-secondary-subtle rounded mb-3 p-2">
-    <div class="row">
+    <div class="row mb-2">
       <div class="col-8">
-        <h1 class='text-start'><%= diet.refeicao %></h1>
+        <h3 class='text-start fw-bold'><%= diet.refeicao %></h3>
       </div>
       <% if controller.controller_name == 'fichas' %>
-        <div class="col text-end">
-          <div class="btn btn-success-custom">
-            <%= link_to 'Mostrar', ficha_diet_path(@ficha, diet), class: "link-dark link-offset-2 link-underline link-underline-opacity-0 link-light" %>
+        <div class="col">
+          <div class="text-end">
+            <%= link_to 'Mostrar', ficha_diet_path(@ficha, diet), class: "link-light link-offset-2 link-underline link-underline-opacity-0 btn btn-success-custom" %>
           </div>
         </div>
       <% end %>

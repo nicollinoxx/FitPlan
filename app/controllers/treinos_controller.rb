@@ -44,7 +44,7 @@ class TreinosController < ApplicationController
   def update
     respond_to do |format|
       if @treino.update(treino_params)
-        format.html { refresh_or_redirect_to ficha_treino_url(@ficha, @treino), notice: "Treino was successfully updated." }
+        format.html { redirect_to ficha_treino_url(@ficha, @treino), notice: "Treino was successfully updated." }
         format.json { render :show, status: :ok, location: @treino }
       else
         @action = 'Editar'
@@ -59,7 +59,7 @@ class TreinosController < ApplicationController
     @treino.destroy
 
     respond_to do |format|
-      format.html { recede_or_redirect_to fichas_url, notice: "Treino was successfully destroyed." }
+      format.html { recede_or_redirect_to @ficha, notice: "Treino was successfully destroyed." }
       format.json { head :no_content }
     end
   end

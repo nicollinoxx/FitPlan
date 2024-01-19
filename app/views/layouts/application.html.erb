@@ -20,22 +20,22 @@
       <h1 class='text-center text-white'>
         <%= content_for(:title || FitPlan ) %>
       </h1>
-     <nav class="navbar navbar-expand-lg bg-body-tertiary">
+     <nav class="navbar navbar-expand-lg bg-light mb-3">
         <div class="container-fluid">
-          <%= link_to 'Inicio', root_path, class: 'navbar-brand'%>
+          <%= link_to 'Inicio', root_path, class: 'navbar-brand text-indigo'%>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <%= link_to 'Fichas', fichas_path, class: 'nav-link link-dark'%>
+                <%= link_to 'Fichas', fichas_path, class: 'nav-link text-indigo'%>
               </li>
               <li class="nav-item">
-                <%= link_to 'Dietas', fichas_diets_path, class: 'nav-link link-dark'%>
+                <%= link_to 'Dietas', fichas_diets_path, class: 'nav-link text-indigo'%>
               </li>
               <li class="nav-item">
-                <%= link_to 'Treinos', fichas_treinos_path, class: 'nav-link link-dark'%>
+                <%= link_to 'Treinos', fichas_treinos_path, class: 'nav-link text-indigo'%>
               </li>
             </ul>
           </div>

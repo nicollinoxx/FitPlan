@@ -3,7 +3,7 @@
 <%= form_with(model: ficha, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if ficha.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(ficha.errors.count, "error") %> prohibited this ficha from being saved:</h2>
+      <h2><%= pluralize(ficha.errors.count, "Erros") %> proibiram dessa ficha ser salva:</h2>
 
       <ul>
         <% ficha.errors.each do |error| %>

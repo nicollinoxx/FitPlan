@@ -1,32 +1,32 @@
 <div id="<%= dom_id treino %>">
-  <div class="bg-secondary-subtle rounded mb-3 p-1">
+  <div class="bg-secondary-subtle shadow rounded mb-3 p-1 mt-2">
     <div class="container">
-      <div class="row ">
-        <div class="col-9">
-          <h1 class='text-start'><%= treino.exercicio %></h1>
+      <div class="row">
+        <div class="col-8">
+          <h5 class='fw-bold text-start'><%= treino.exercicio %></h5>
         </div>
-        <% if controller.controller_name == 'fichas' %>
-          <div class="col text-end">
-            <div class="btn btn-success-custom">
-              <%= link_to 'Mostrar', ficha_treino_path(@ficha, treino), class: 'link-offset-2 link-underline link-underline-opacity-0 link-light' %>
+
+          <div class="col-4">
+            <div class="text-end mt-1 mb-1">
+              <%= link_to 'Mostrar', ficha_treino_path(@ficha, treino), class: 'link-offset-2 link-underline link-underline-opacity-0 link-light btn btn-success-custom' %>
             </div>
           </div>
-        <% end %>
+        <hr>
       </div>
 
-      <div class="text-center text-dark">
-        <div class="row g-3">
+      <div class="text-center">
+        <div class="row g-3 mb-2">
           <div class="col">
-            <div class="rounded bg-light">
-              <h5>Series</h5>
+            <div class="rounded bg-light p-1">
+              <h6>Series</h6>
               <h6 class='fw-light'>
                 <%= treino.series %>
               </h6>
             </div>
           </div>
           <div class="col">
-            <div class="rounded bg-light">
-              <h5>Repetições</h5>
+            <div class="rounded bg-light p-1">
+              <h6>Repetições</h6>
               <h6 class='fw-light'>
                 <%= treino.repeticoes %>
               </h6>
@@ -36,17 +36,15 @@
 
         <div class="row">
           <div class="col">
-            <div class="text-dark">
               <h6 class="mt-2"><strong>Intervalo: </strong>30seg</h6>
               <p class="link-primary">Visualizar</p>
-            </div>
           </div>
           <div class="col">
-            <div class="rounded bg-light">
-                <h5>Carga</h5>
-                <p class='fw-light'>
+            <div class="rounded bg-light p-1">
+                <h6>Carga</h6>
+                <h6 class='fw-light'>
                   <%= treino.carga %>
-                </p>
+                </h6>
             </div>
           </div>
         </div>

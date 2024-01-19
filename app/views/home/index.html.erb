@@ -1,34 +1,53 @@
 <h1><% content_for(:title, "FitPlan") %></h1>
 
+<div class="mb-4">
+  <h1 class='fw-bold'>Bem vindo(a)</h1>
+</div>
 
-<div class="bg-secondary-subtle shadow rounded mb-3">
-  <%= link_to fichas_diets_path, class: 'link-offset-2 link-underline link-underline-opacity-0' do %>
-        <div class="row rounded">
-          <div class="col-auto">
-            <%= image_tag 'img_dieta.png', class: 'ms-2 mt-2 rounded', style: 'max-width: 100px; height: 85%;'%>
-          </div>
-          <div class="col-8">
-            <h4 class='mt-2 ms-2'>Dietas</h4>
-            <p class='ms-2 link-dark'>
-              <strong>Descrição:</strong> Aqui contem seus dados de perfil, como: idade, altura, TMB, IMC...
-            </p>
-          </div>
-        </div>
+<div class="bg-success-subtle shadow rounded mb-3">
+  <%= link_to fichas_diets_path, class: 'link-offset-2 link-underline link-underline-opacity-0 link-dark' do %>
+    <div class="row">
+      <div class="col-auto">
+        <%= image_tag 'img_dieta.png', class: 'mt-2 ms-2 rounded', style: 'max-width: 90px; height: 80%;'%>
+      </div>
+      <div class="col-8">
+        <h4 class='fw-bold mt-2'>Fichas de dietas</h4>
+        <p>
+          <strong>Descrição:</strong> Aqui contem seus dados de perfil, como: idade, altura, TMB, IMC...
+        </p>
+      </div>
+    </div>
   <% end %>
 </div>
 
 <div class="bg-light shadow rounded mb-3">
-  <%= link_to fichas_treinos_path, class: 'link-offset-2 link-underline link-underline-opacity-0' do %>
-      <div class="row">
-        <div class="col-auto">
-          <%= image_tag 'img_treino.png', class: 'ms-2 mt-2 rounded', style: 'max-width: 100px; height: 85%;'%>
-        </div>
-        <div class="col-8">
-          <h4 class='mt-2 ms-2'>Treinos</h4>
-          <p class='ms-2 link-dark'>
-            <strong>Descrição:</strong> Aqui contem seus dados de perfil, como: idade, altura, TMB, IMC...
-          </p>
-        </div>
+  <%= link_to fichas_treinos_path, class: 'link-offset-2 link-underline link-underline-opacity-0 link-dark' do %>
+    <div class="row">
+      <div class="col-auto">
+        <%= image_tag 'image 3.png', class: 'ms-2 mt-2 rounded', style: 'max-width: 90px; height: 80%;' %>
       </div>
+      <div class="col-8">
+        <h4 class='fw-bold mt-2'>Fichas de treinos</h4>
+        <p>
+          <strong>Descrição:</strong> Aqui contem seus dados de perfil, como: idade, altura, TMB, IMC...
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="bg-success-subtle shadow rounded mb-3">
+  <%= link_to fichas_path, class: 'link-offset-2 link-underline link-underline-opacity-0 link-dark' do %>
+    <div class="row">
+      <div class="col-auto">
+        <%= image_tag 'image 2.png', class: 'ms-2 mt-2 rounded', style: 'max-width: 90px; height: 80%;' %>
+      </div>
+      <div class="col-8">
+        <h4 class='fw-bold mt-2'>Gerenciar fichas</h4>
+        <p>
+          <strong>Descrição:</strong> Aqui contem seus dados de perfil, como: idade, altura, TMB, IMC...
+        </p>
+      </div>
+    </div>
   <% end %>
 </div>

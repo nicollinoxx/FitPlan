@@ -1,13 +1,14 @@
-<% if @ficha.tipo == 'treino'%>
-  <h1><% content_for(:title, "Ficha de treino") %></h1>
-<% else %>
-  <h1><% content_for(:title, "Ficha de dieta") %></h1>
+<h1><% content_for(:title, "#{@ficha.nome}") %></h1>
+
+<% if flash[:message].present? %>
+  <div class="alert alert-warning" role='alert'>
+    <%= flash[:message] %>
+  </div>
 <% end %>
 
-<%= render @ficha %>
 
 <% if @ficha.tipo == 'diet' %>
-  <% @ficha.diet.each do |diet| %>
+  <% @ficha.diets.each do |diet| %>
       <%= render diet %>
   <% end %>
 
@@ -16,7 +17,6 @@
   </div>
 
 <% else %>
-
   <% @ficha.treinos.each do |treino| %>
       <%= render treino %>
   <% end %>

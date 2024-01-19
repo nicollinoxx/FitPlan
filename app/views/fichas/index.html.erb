@@ -1,13 +1,11 @@
 <h1><% content_for(:title, "Todas as fichas") %></h1>
 
   <% @fichas.each do |ficha| %>
-    <%= link_to ficha, class: 'link-dark link-offset-2 link-underline link-underline-opacity-0' do %>
-      <div class='<%= cycle('bg-secondary-subtle', 'bg-ligh') %> shadow rounded mb-4'>
-        <%= render ficha %>
-      </div>
-    <% end %>
+    <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded mb-4'>
+      <%= render ficha %>
+    </div>
   <% end %>
 
   <div class="d-grid gap-2">
-    <%= link_to "Nova ficha", new_ficha_path, data: { controller: "bridge--nav-button", bridge_title: "+ Ficha" }, class: 'btn btn-primary' %>
+    <%= link_to "Nova ficha", new_ficha_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ ficha" }, class: 'btn btn-primary' %>
   </div>

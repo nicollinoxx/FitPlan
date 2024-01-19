@@ -25,12 +25,12 @@ class DietsController < ApplicationController
 
   # POST /diets or /diets.json
   def create
-    @diet = @ficha.diet.new(diet_params)
+    @diet = @ficha.diets.new(diet_params)
 
     respond_to do |format|
       if @diet.save
         @diet.calcular_kcal
-        format.html { redirect_to ficha_diet_url(@ficha, @diet), notice: "Diet was successfully created." }
+        format.html { refresh_or_redirect_to ficha_diet_url(@ficha, @diet), notice: "Diet was successfully created." }
         format.json { render :show, status: :created, location: @diet }
       else
         @action = 'Criar'
@@ -60,14 +60,14 @@ class DietsController < ApplicationController
     @diet.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_url, notice: "Diet was successfully destroyed." }
+      format.html { recede_or_redirect_to @ficha, notice: "Diet was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
     def set_diet
-      @diet = @ficha.diet.find(params[:id])
+      @diet = @ficha.diets.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       recede_or_redirect_to fichas_url
     end

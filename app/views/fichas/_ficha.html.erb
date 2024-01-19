@@ -1,25 +1,16 @@
 <div id="<%= dom_id ficha %>">
-  <% if action_name == 'index'%>
-    <div class="p-2">
-      <div>
-        <h2 class='fw-bold'><%= ficha.nome %></h2>
-        <p> <strong>Descrição: </strong><%= ficha.descricao %></p>
+  <%= link_to ficha, class: 'link-dark link-offset-2 link-underline link-underline-opacity-0' do %>
+      <div class="p-2">
+        <div>
+          <h2 class='fw-bold'><%= ficha.nome %></h2>
+          <p> <strong>Descrição: </strong><%= ficha.descricao %></p>
+        </div>
+        <% if action_name == 'index' %>
+          <div class='btn-toolbar'>
+            <%= link_to 'Editar ficha', edit_ficha_path(ficha), class: 'btn btn-secondary me-2' %>
+            <%= button_to 'Excluir ficha', ficha, method: :delete, data: {turbo_confirm: 'Você tem certeza? Todas os treinos ou dietas que pertencem a esta ficha serão apagados!'}, class: 'btn btn-danger' %>
+          </div>
+        <% end %>
       </div>
-      <div class='btn-toolbar'>
-        <%= link_to 'Editar ficha', edit_ficha_path(ficha), class: 'btn btn-secondary me-2' %>
-        <%= button_to 'Excluir ficha', ficha, method: :delete, data: {turbo_confirm: 'Você tem certeza? Todas os treinos ou dietas que pertencem a esta ficha serão apagados!'}, class: 'btn btn-danger' %>
-      </div>
-    </div>
-  <% elsif action_name == 'show' %>
-    <div class="mt-4 bg-secondary-subtle rounded mb-3">
-      <h1 class='text-center p-2'><%= ficha.nome %></h1>
-    </div>
-  <% else %>
-    <div class="p-2">
-      <div>
-        <h2 class='fw-bold'><%= ficha.nome %></h2>
-        <p> <strong>Descrição: </strong><%= ficha.descricao %></p>
-      </div>
-    </div>
   <% end %>
 </div>

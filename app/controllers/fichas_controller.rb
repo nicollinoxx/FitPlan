@@ -1,5 +1,6 @@
 class FichasController < ApplicationController
   before_action :set_ficha, only: %i[ show edit update destroy ]
+  before_action :set_notice, only: %i[ show ]
 
   # GET /fichas or /fichas.json
   def index
@@ -29,7 +30,7 @@ class FichasController < ApplicationController
 
     respond_to do |format|
       if @ficha.save
-        format.html { redirect_to ficha_url(@ficha), notice: "Ficha was successfully created." }
+        format.html { refresh_or_redirect_to ficha_url(@ficha), notice: "Ficha was successfully created." }
         format.json { render :show, status: :created, location: @ficha }
       else
         @action = 'Criar'
@@ -43,7 +44,7 @@ class FichasController < ApplicationController
   def update
     respond_to do |format|
       if @ficha.update(ficha_params)
-        format.html { redirect_to fichas_url(@ficha), notice: "Ficha was successfully updated." }
+        format.html { redirect_to ficha_url(@ficha), notice: "Ficha was successfully updated." }
         format.json { render :show, status: :ok, location: @ficha }
       else
           @action = 'Editar'
@@ -58,7 +59,7 @@ class FichasController < ApplicationController
     @ficha.destroy
 
     respond_to do |format|
-      format.html { redirect_to fichas_url, notice: "A #{@ficha.nome} foi destruida com sucesso." }
+      format.html { refresh_or_redirect_to fichas_url, notice: "A #{@ficha.nome} foi destruida com sucesso." }
       format.json { head :no_content }
     end
   end
@@ -83,5 +84,13 @@ class FichasController < ApplicationController
     # Only allow a list of trusted parameters through.
     def ficha_params
       params.require(:ficha).permit(:nome, :tipo, :descricao)
+    end
+
+    def set_notice
+      if @ficha.diets.count == 0 && @ficha.treinos.count == 0
+        flash[:message] = 'Hum, parece que esta ficha ainda esta vazia'
+      else
+        flash[:message] = nil
+      end
     end
 end
