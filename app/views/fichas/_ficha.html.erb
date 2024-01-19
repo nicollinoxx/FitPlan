@@ -1,8 +1,25 @@
 <div id="<%= dom_id ficha %>">
-  <div class="mt-4 text-center">
-    <h2 class="text-indigo">
-      <%= ficha.nome %>
-    </h2>
-    <hr>
-  </div>
+  <% if action_name == 'index'%>
+    <div class="p-2">
+      <div>
+        <h2 class='fw-bold'><%= ficha.nome %></h2>
+        <p> <strong>Descrição: </strong><%= ficha.descricao %></p>
+      </div>
+      <div class='btn-toolbar'>
+        <%= link_to 'Editar ficha', edit_ficha_path(ficha), class: 'btn btn-secondary me-2' %>
+        <%= button_to 'Excluir ficha', ficha, method: :delete, data: {turbo_confirm: 'Você tem certeza? Todas os treinos ou dietas que pertencem a esta ficha serão apagados!'}, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% elsif action_name == 'show' %>
+    <div class="mt-4 bg-secondary-subtle rounded mb-3">
+      <h1 class='text-center p-2'><%= ficha.nome %></h1>
+    </div>
+  <% else %>
+    <div class="p-2">
+      <div>
+        <h2 class='fw-bold'><%= ficha.nome %></h2>
+        <p> <strong>Descrição: </strong><%= ficha.descricao %></p>
+      </div>
+    </div>
+  <% end %>
 </div>

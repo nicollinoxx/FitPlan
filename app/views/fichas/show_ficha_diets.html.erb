@@ -1,0 +1,7 @@
+<h1><% content_for(:title, "Fichas") %></h1>
+
+<% @fichas.each do |ficha| %>
+  <div class='<%= cycle('bg-secondary-subtle', 'bg-light') %> shadow link-dark rounded mb-4'>
+    <%= render ficha %>
+  </div>
+<% end %>

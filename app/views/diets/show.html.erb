@@ -1,3 +1,5 @@
+<h1 class='text-center'><% content_for(:title, "Dieta") %></h1>
+
 <%= render @diet %>
 
 <div data-controller="bridge--menu">
@@ -8,4 +10,6 @@
     <%= link_to "Editar dieta", edit_ficha_diet_path(@ficha, @diet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
     <%= button_to "Excluir dieta", ficha_diet_path(@ficha, @diet), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Excluir dieta?' }, class: 'btn btn-danger' %>
   </div>
+  <hr>
+    <%= link_to 'voltar', @ficha %>
 </div>

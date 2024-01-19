@@ -3,17 +3,8 @@ class FichasController < ApplicationController
 
   # GET /fichas or /fichas.json
   def index
-    @tipo = params[:tipo]
-    if @tipo == 'diet'
-      @fichas = Ficha.where(tipo: 'diet').order(:nome)
-      @titulo = 'Fichas de dietas'
-    elsif @tipo == 'treino'
-      @fichas = Ficha.where(tipo: 'treino').order(:nome)
-      @titulo = 'Fichas de treinos'
-    else
-      @fichas = Ficha.all.order(:nome)
-      @titulo = 'Fichas'
-    end
+    @fichas = Ficha.order('created_at desc')
+    @titulo = 'Fichas'
   end
 
   # GET /fichas/1 or /fichas/1.json
@@ -24,6 +15,7 @@ class FichasController < ApplicationController
   def new
     @ficha = Ficha.new
     @action = 'Criar'
+    @ficha.tipo = params[:tipo]
   end
 
   # GET /fichas/1/edit
@@ -51,7 +43,7 @@ class FichasController < ApplicationController
   def update
     respond_to do |format|
       if @ficha.update(ficha_params)
-        format.html { redirect_to ficha_url(@ficha), notice: "Ficha was successfully updated." }
+        format.html { redirect_to fichas_url(@ficha), notice: "Ficha was successfully updated." }
         format.json { render :show, status: :ok, location: @ficha }
       else
           @action = 'Editar'
@@ -66,9 +58,17 @@ class FichasController < ApplicationController
     @ficha.destroy
 
     respond_to do |format|
-      format.html { redirect_to fichas_url, notice: "A foi destruida com sucesso." }
+      format.html { redirect_to fichas_url, notice: "A #{@ficha.nome} foi destruida com sucesso." }
       format.json { head :no_content }
     end
+  end
+
+  def show_ficha_diets
+    @fichas = Ficha.where(tipo: 'diet').order('created_at desc')
+  end
+
+  def show_ficha_treinos
+    @fichas = Ficha.where(tipo: 'treino').order('created_at desc')
   end
 
   private

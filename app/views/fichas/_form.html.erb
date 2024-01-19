@@ -1,3 +1,5 @@
+<h1><% content_for(:title, "Criando ficha") %></h1>
+
 <%= form_with(model: ficha, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if ficha.errors.any? %>
     <div style="color: red">
@@ -18,7 +20,7 @@
 
   <div class='mb-3'>
     <%= form.label :descrição, style: "display: block", class: 'form-label' %>
-    <%= form.text_field :descricao, class: 'form-control custom-border:focus custom-border' %>
+    <%= form.text_area :descricao, class: 'form-control custom-border:focus custom-border' %>
   </div>
 
     <p class='form-label'>Tipo de ficha</p>

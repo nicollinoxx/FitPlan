@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'fichas_treinos', to: 'fichas_treinos#index'
-  get 'fichas_diets', to: 'fichas_diets#index'
+  get 'fichas_treinos', to: 'fichas#show_ficha_treinos'
+  get 'fichas_diets', to: 'fichas#show_ficha_diets'
 
   resources :fichas do
     resources :diets

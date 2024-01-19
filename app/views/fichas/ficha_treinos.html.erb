@@ -1,8 +1,0 @@
-
-<h1><% content_for(:title, "Fichas") %></h1>
-
-  <% @fichas.each do |ficha| %>
-    <%= link_to ficha, class: "link-offset-2 link-underline link-underline-opacity-0" do %>
-      <%= render ficha %>
-    <% end %>
-  <% end %>

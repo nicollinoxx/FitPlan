@@ -1,41 +1,11 @@
-<h1><% content_for(:title, "#{@titulo}") %></h1>
-
-
-<p class="d-inline-flex gap-1">
-  <a class="link-underline-primary" data-bs-toggle="collapse" href="#tipos_fichas" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Filtrar fichas
-  </a>
-</p>
-
-<div class="collapse" id="tipos_fichas">
-  <%= form_with url: "/fichas", method: :get do |form| %>
-    <div class="form-check mb-3">
-      <div class="form-check-inline">
-        <%= form.radio_button :tipo, 'treino', checked: params[:tipo] == 'treino', class: 'form-check-input' %>
-        <%= form.label :tipo, 'Treinos', class: 'form-check-label me-4' %>
-      </div>
-
-      <div class="form-check-inline">
-        <%= form.radio_button :tipo, 'diet', checked: params[:tipo] == 'diet', class: 'form-check-input' %>
-        <%= form.label :tipo, 'Dietas', class: 'form-check-label me-4' %>
-      </div>
-
-      <div class="form-check-inline">
-        <%= form.radio_button :tipo, 'fichas', checked: params[:tipo] == 'fichas', class: 'form-check-input' %>
-        <%= form.label :tipo, 'Todas', class: 'form-check-label' %>
-      </div>
-    </div>
-    <div>
-      <%= form.submit "Filtrar", class: 'btn btn-success-custom text-white' %>
-    </div>
-  <% end %>
-  <hr>
-</div>
+<h1><% content_for(:title, "Todas as fichas") %></h1>
 
   <% @fichas.each do |ficha| %>
-    <div class='<%= cycle('bg-secondary-subtle link-dark', 'bg-white link-dark') %> rounded mb-3'>
-      <%= render 'ficha_index', ficha: ficha %>
-    </div>
+    <%= link_to ficha, class: 'link-dark link-offset-2 link-underline link-underline-opacity-0' do %>
+      <div class='<%= cycle('bg-secondary-subtle', 'bg-ligh') %> shadow rounded mb-4'>
+        <%= render ficha %>
+      </div>
+    <% end %>
   <% end %>
 
   <div class="d-grid gap-2">

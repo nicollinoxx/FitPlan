@@ -1,9 +1,18 @@
 <div id="<%= dom_id treino %>">
   <div class="bg-secondary-subtle rounded mb-3 p-1">
     <div class="container">
-      <h1 class='text-center mb-3'>
-        <%= treino.exercicio %>
-      </h1>
+      <div class="row ">
+        <div class="col-9">
+          <h1 class='text-start'><%= treino.exercicio %></h1>
+        </div>
+        <% if controller.controller_name == 'fichas' %>
+          <div class="col text-end">
+            <div class="btn btn-success-custom">
+              <%= link_to 'Mostrar', ficha_treino_path(@ficha, treino), class: 'link-offset-2 link-underline link-underline-opacity-0 link-light' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
 
       <div class="text-center text-dark">
         <div class="row g-3">
