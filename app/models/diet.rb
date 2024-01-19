@@ -1,4 +1,6 @@
 class Diet < ApplicationRecord
+  has_rich_text :decricao
+
   belongs_to :ficha
   validates :refeicao, :descricao, presence: true
 
