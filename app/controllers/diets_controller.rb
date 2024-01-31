@@ -5,7 +5,7 @@ class DietsController < ApplicationController
 
   # GET /diets or /diets.json
   def index
-    @diets = @ficha.diet.all
+    @diets = @ficha.diets.all
   end
 
   # GET /diets/1 or /diets/1.json
@@ -15,12 +15,10 @@ class DietsController < ApplicationController
   # GET /diets/new
   def new
     @diet = Diet.new
-    @action = 'Criar'
   end
 
   # GET /diets/1/edit
   def edit
-    @action = 'Editar'
   end
 
   # POST /diets or /diets.json
@@ -29,11 +27,9 @@ class DietsController < ApplicationController
 
     respond_to do |format|
       if @diet.save
-        @diet.calcular_kcal
-        format.html { refresh_or_redirect_to ficha_diet_url(@ficha, @diet), notice: "Diet was successfully created." }
+        format.html { refresh_or_redirect_to ficha_diet_url(@ficha, @diet), notice: "Dieta foi criada com sucesso." }
         format.json { render :show, status: :created, location: @diet }
       else
-        @action = 'Criar'
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @diet.errors, status: :unprocessable_entity }
       end
@@ -43,12 +39,11 @@ class DietsController < ApplicationController
   # PATCH/PUT /diets/1 or /diets/1.json
   def update
     respond_to do |format|
+
       if @diet.update(diet_params)
-        @diet.calcular_kcal
-        format.html { refresh_or_redirect_to ficha_diet_url(@ficha, @diet), notice: "Diet was successfully updated." }
+        format.html { refresh_or_redirect_to ficha_diet_url(@ficha, @diet), notice: "Dieta foi atualizada com sucesso." }
         format.json { render :show, status: :ok, location: @diet }
       else
-        @action = 'Edit'
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @diet.errors, status: :unprocessable_entity }
       end
@@ -60,7 +55,7 @@ class DietsController < ApplicationController
     @diet.destroy
 
     respond_to do |format|
-      format.html { recede_or_redirect_to @ficha, notice: "Diet was successfully destroyed." }
+      format.html { recede_or_redirect_to @ficha, notice: "Dieta foi destruido com sucesso." }
       format.json { head :no_content }
     end
   end

@@ -1,27 +1,19 @@
 <h1><% content_for(:title, "#{@ficha.nome}") %></h1>
 
-<% if flash[:message].present? %>
-  <div class="alert alert-warning" role='alert'>
-    <%= flash[:message] %>
+<div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded mb-4'>
+  <div class="p-2">
+    <%= render @ficha %>
   </div>
-<% end %>
+</div>
 
+<div data-controller="bridge--menu">
+  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Opções</div>
 
-<% if @ficha.tipo == 'diet' %>
-  <% @ficha.diets.each do |diet| %>
-      <%= render diet %>
-  <% end %>
-
-  <div class="d-grid gap-2">
-    <%= link_to "Nova Dieta", new_ficha_diet_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ Dieta" }, class: 'btn btn-primary' %>
+  <div class='btn-toolbar'>
+    <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
+    <%= link_to "Editar ficha", edit_ficha_path(@ficha), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
+    <%= button_to "Excluir ficha", ficha_path(@ficha), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Tem certeza? todos os treinos ou dietas presente nesta ficha serão apagados' }, class: 'btn btn-danger' %>
   </div>
-
-<% else %>
-  <% @ficha.treinos.each do |treino| %>
-      <%= render treino %>
-  <% end %>
-
-  <div class="d-grid gap-2">
-    <%= link_to "Novo treino", new_ficha_treino_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ Treino" }, class: 'btn btn-primary' %>
-  </div>
-<% end %>
+  <hr>
+    <%= link_to 'voltar', fichas_path, class: 'hide-on-mobile text-indigo' %>
+</div>

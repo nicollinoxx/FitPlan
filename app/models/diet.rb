@@ -1,29 +1,16 @@
 class Diet < ApplicationRecord
+  before_save :calcular_kcal
+
   has_rich_text :decricao
 
   belongs_to :ficha
   validates :refeicao, :descricao, presence: true
 
   def calcular_kcal
-    if proteina_g
-      proteina_kcal = proteina_g * 4
-    else
-      proteina_kcal = 0
-    end
+    proteina_kcal = proteina_g.to_f * 4
+    carboidratos_kcal = carboidratos_g.to_f * 4
+    gordura_kcal = gordura_g.to_f * 9
 
-    if carboidratos_g
-      carboidratos_kcal = carboidratos_g * 4
-    else
-      carboidratos_kcal = 0
-    end
-
-    if gordura_g
-      gordura_kcal = gordura_g * 9
-    else
-      gordura_kcal = 0
-    end
-
-    calorias_kcal = (proteina_kcal + carboidratos_kcal + gordura_kcal)
-    update(calorias: calorias_kcal)
+    self.calorias = proteina_kcal + carboidratos_kcal + gordura_kcal
   end
 end

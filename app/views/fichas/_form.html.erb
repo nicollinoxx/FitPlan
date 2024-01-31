@@ -1,5 +1,3 @@
-<h1><% content_for(:title, "Criando ficha") %></h1>
-
 <%= form_with(model: ficha, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if ficha.errors.any? %>
     <div style="color: red">
@@ -38,6 +36,6 @@
 
 
   <div>
-    <%= form.submit "#{@action} ficha", data: { "bridge--form-target": "submit", "bridge-title": "Salvar" }, class: 'btn btn-success-custom text-white' %>
+    <%= form.submit "Salvar", data: { "bridge--form-target": "submit", "bridge-title": "Salvar" }, class: 'btn btn-success-custom text-white' %>
   </div>
 <% end %>

@@ -4,28 +4,26 @@
       <div class="col-8">
         <h3 class='text-start fw-bold'><%= diet.refeicao %></h3>
       </div>
-      <% if controller.controller_name == 'fichas' %>
-        <div class="col">
-          <div class="text-end">
-            <%= link_to 'Mostrar', ficha_diet_path(@ficha, diet), class: "link-light link-offset-2 link-underline link-underline-opacity-0 btn btn-success-custom" %>
-          </div>
+      <% if action_name != 'show' %>
+        <div class="col text-end">
+          <%= link_to 'Mostrar', ficha_diet_path(@ficha, diet), class: "link-light link-offset-2 link-underline link-underline-opacity-0 btn btn-success-custom" %>
         </div>
       <% end %>
     </div>
 
-      <div class="bg-light rounded p-2">
-        <div>
-          <p>
-            <%= raw diet.descricao %>
+    <div class="bg-light rounded p-2">
+      <div>
+        <p>
+          <%= raw diet.descricao %>
+        </p>
+        <hr>
+        <% if diet.calorias != 0.0  %>
+          <p class='text-center'>
+            <strong>Calorias totais:</strong>
+            <%= diet.calorias %> kcal
           </p>
-          <hr>
-          <% if diet.calorias != 0.0  %>
-            <p class='text-center'>
-              <strong>Calorias totais:</strong>
-              <%= diet.calorias %> kcal
-            </p>
-          <% end %>
-        </div>
+        <% end %>
       </div>
+    </div>
   </div>
 </div>

@@ -1,7 +1,11 @@
 <h1><% content_for(:title, "Fichas de treinos") %></h1>
 
 <% @fichas.each do |ficha| %>
-  <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow link-dark rounded mb-4'>
-    <%= render ficha %>
+  <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded mb-4'>
+    <div class="p-2">
+      <%= link_to ficha_diets_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
+        <%= render ficha %>
+      <% end %>
+    </div>
   </div>
 <% end %>

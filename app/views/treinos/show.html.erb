@@ -11,5 +11,5 @@
     <%= button_to "Excluir treino", ficha_treino_path(@ficha, @treino), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Excluir treino?' }, class: 'btn btn-danger' %>
   </div>
   <hr>
-    <%= link_to 'voltar', @ficha %>
+    <%= link_to 'voltar', ficha_treinos_path(@ficha), class: 'hide-on-mobile text-indigo' %>
 </div>

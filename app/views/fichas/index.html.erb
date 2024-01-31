@@ -1,11 +1,27 @@
-<h1><% content_for(:title, "Todas as fichas") %></h1>
+<h1><% content_for(:title, "fichas") %></h1>
 
+<div id="fichas">
   <% @fichas.each do |ficha| %>
     <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded mb-4'>
-      <%= render ficha %>
+      <% if ficha.tipo == 'diet' %>
+        <%= link_to ficha_diets_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
+          <div class="p-2">
+            <%= render ficha %>
+            <%= link_to '+ Detalhes', ficha, class: 'btn btn-success-custom text-light' %>
+          </div>
+        <% end %>
+      <% else %>
+        <%= link_to ficha_treinos_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
+          <div class="p-2">
+            <%= render ficha %>
+            <%= link_to '+ Detalhes', ficha, class: 'btn btn-success-custom text-light' %>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
+</div>
 
-  <div class="d-grid gap-2">
-    <%= link_to "Nova ficha", new_ficha_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ ficha" }, class: 'btn btn-primary' %>
-  </div>
+<div class="d-grid gap-2">
+  <%= link_to "Nova ficha", new_ficha_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ ficha" }, class: 'btn btn-primary' %>
+</div>

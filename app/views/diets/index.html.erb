@@ -1,1 +1,17 @@
 <h1 class='text-center'><% content_for(:title, "Dietas") %></h1>
+
+<% if @diets.count == 0 %>
+  <div class="alert alert-warning" role='alert'>
+    Hum, parece que esta ficha ainda esta vazia
+  </div>
+<% end %>
+
+<div id="diets">
+  <% @diets.each do |diet| %>
+    <%= render diet %>
+  <% end %>
+</div>
+
+<div class="d-grid gap-2">
+  <%= link_to "Nova Dieta", new_ficha_diet_path(@ficha), data: { controller: "bridge--nav-button", bridge_title: "+ Dieta" }, class: 'btn btn-primary' %>
+</div>
