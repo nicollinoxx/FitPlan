@@ -22,7 +22,7 @@
   </div>
 
   <div class='mb-3'>
-    <%= form.label :repetições, style: "display: block", class: 'form-label' %>
+    <%= form.label :repeticoes, style: "display: block", class: 'form-label' %>
     <%= form.text_field :repeticoes, class: 'form-control border border-primary' %>
   </div>
 
@@ -32,6 +32,11 @@
   </div>
 
   <div class='mb-3'>
-      <%= form.submit "#{@action} treino", data: { "bridge--form-target": "submit", "bridge-title": "Salvar" }, class: 'btn btn-primary text-white' %>
+    <%= form.label :video, style: "display: block", class: 'form-label' %>
+    <%= form.file_field :video, class: 'form-control border border-primary' %>
+  </div>
+
+  <div class='mb-3'>
+      <%= form.submit "Salvar", data: { "bridge--form-target": "submit", "bridge-title": "Salvar" }, class: 'btn btn-primary text-white' %>
   </div>
 <% end %>

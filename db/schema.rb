@@ -78,6 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_170738) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ficha_id", null: false
+    t.integer "treino_associado"
     t.index ["ficha_id"], name: "index_treinos_on_ficha_id"
   end
 

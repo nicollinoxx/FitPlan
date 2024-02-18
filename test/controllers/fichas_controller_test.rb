@@ -17,7 +17,7 @@ class FichasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create ficha" do
     assert_difference("Ficha.count") do
-      post fichas_url, params: { ficha: { nome: @ficha.nome } }
+      post fichas_url, params: { ficha: { nome: @ficha.nome, tipo: @ficha.tipo, descricao: @ficha.descricao } }
     end
 
     assert_redirected_to ficha_url(Ficha.last)

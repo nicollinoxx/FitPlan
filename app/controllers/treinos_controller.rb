@@ -1,27 +1,23 @@
 class TreinosController < ApplicationController
-  include CurrentFicha
+  include FichaScoped
 
-  before_action :set_ficha
   before_action :set_treino, only: %i[ show edit update destroy ]
 
   # GET /treinos or /treinos.json
   def index
-    @treinos = @ficha.treinos
+    @treinos = @ficha.treinos.all
   end
 
   # GET /treinos/1 or /treinos/1.json
   def show
   end
 
-  # GET /treinos/new
-  def new
-    @treino = Treino.new
-    @action = 'Criar'
-  end
-
   # GET /treinos/1/edit
   def edit
-    @action = 'Editar'
+  end
+
+  def new
+    @treino = Treino.new
   end
 
   # POST /treinos or /treinos.json
@@ -30,10 +26,9 @@ class TreinosController < ApplicationController
 
     respond_to do |format|
       if @treino.save
-        format.html { refresh_or_redirect_to ficha_treino_url(@ficha, @treino), notice: "Treino was successfully created." }
+        format.html { refresh_or_redirect_to ficha_treino_url(@ficha, @treino), notice: "Treino foi criado com sucesso." }
         format.json { render :show, status: :created, location: @treino }
       else
-        @action = 'Criar'
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @treino.errors, status: :unprocessable_entity }
       end
@@ -44,10 +39,9 @@ class TreinosController < ApplicationController
   def update
     respond_to do |format|
       if @treino.update(treino_params)
-        format.html { redirect_to ficha_treino_url(@ficha, @treino), notice: "Treino was successfully updated." }
+        format.html { recede_or_redirect_to ficha_treino_url(@ficha, @treino), notice: "Treino foi atualizado com sucesso." }
         format.json { render :show, status: :ok, location: @treino }
       else
-        @action = 'Editar'
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @treino.errors, status: :unprocessable_entity }
       end
@@ -59,7 +53,7 @@ class TreinosController < ApplicationController
     @treino.destroy
 
     respond_to do |format|
-      format.html { recede_or_redirect_to @ficha, notice: "Treino was successfully destroyed." }
+      format.html { recede_or_redirect_to ficha_treinos_path(@ficha), notice: "Treino foi destruido com sucesso." }
       format.json { head :no_content }
     end
   end
@@ -74,6 +68,6 @@ class TreinosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def treino_params
-      params.require(:treino).permit(:exercicio, :series, :repeticoes, :carga)
+      params.require(:treino).permit(:exercicio, :series, :repeticoes, :carga, :video)
     end
 end

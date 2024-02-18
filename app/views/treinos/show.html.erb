@@ -8,8 +8,9 @@
   <div class='btn-toolbar'>
     <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
     <%= link_to "Editar treino", edit_ficha_treino_path(@ficha, @treino), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
-    <%= button_to "Excluir treino", ficha_treino_path(@ficha, @treino), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Excluir treino?' }, class: 'btn btn-danger' %>
+    <%= button_to "Excluir treino", ficha_treino_path(@ficha, @treino), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Excluir treino? Subtreinos serão apagados em sequência se houver!' }, class: 'btn btn-danger' %>
   </div>
   <hr>
-    <%= link_to 'voltar', ficha_treinos_path(@ficha), class: 'hide-on-mobile text-indigo' %>
 </div>
+
+<%= link_to 'voltar', ficha_treinos_path(@ficha), class: 'hide-on-mobile link-primary link-underline link-underline-opacity-0' %>

@@ -6,43 +6,43 @@ class TreinosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get treinos_url
+    get ficha_treinos_url(@treino.ficha_id)
     assert_response :success
   end
 
   test "should get new" do
-    get new_treino_url
+    get new_ficha_treino_url(@treino.ficha_id)
     assert_response :success
   end
 
   test "should create treino" do
     assert_difference("Treino.count") do
-      post treinos_url, params: { treino: { carga: @treino.carga, exercicio: @treino.exercicio, repeticoes: @treino.repeticoes, series: @treino.series } }
+      post ficha_treinos_url(@treino.ficha_id), params: { treino: { carga: @treino.carga, exercicio: @treino.exercicio, repeticoes: @treino.repeticoes, series: @treino.series } }
     end
 
-    assert_redirected_to treino_url(Treino.last)
+    assert_redirected_to ficha_treino_url(@treino.ficha_id, Treino.last)
   end
 
   test "should show treino" do
-    get treino_url(@treino)
+    get ficha_treino_url(@treino.ficha_id, @treino)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_treino_url(@treino)
+    get edit_ficha_treino_url(@treino.ficha_id, @treino)
     assert_response :success
   end
 
   test "should update treino" do
-    patch treino_url(@treino), params: { treino: { carga: @treino.carga, exercicio: @treino.exercicio, repeticoes: @treino.repeticoes, series: @treino.series } }
-    assert_redirected_to treino_url(@treino)
+    patch ficha_treino_url(@treino.ficha_id, @treino), params: { treino: { carga: @treino.carga, exercicio: @treino.exercicio, repeticoes: @treino.repeticoes, series: @treino.series } }
+    assert_redirected_to ficha_treino_url(@treino.ficha_id, @treino)
   end
 
   test "should destroy treino" do
     assert_difference("Treino.count", -1) do
-      delete treino_url(@treino)
+      delete ficha_treino_url(@treino.ficha_id, @treino)
     end
 
-    assert_redirected_to treinos_url
+    assert_redirected_to ficha_url(@treino.ficha_id)
   end
 end

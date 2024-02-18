@@ -6,43 +6,43 @@ class DietsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get diets_url
+    get ficha_diets_url(@diet.ficha_id)
     assert_response :success
   end
 
   test "should get new" do
-    get new_diet_url
+    get new_ficha_diet_url(@diet.ficha_id)
     assert_response :success
   end
 
   test "should create diet" do
     assert_difference("Diet.count") do
-      post diets_url, params: { diet: { calorias: @diet.calorias, carboidratos_g: @diet.carboidratos_g, descricao: @diet.descricao, gordura_g: @diet.gordura_g, proteina_g: @diet.proteina_g, refeicao: @diet.refeicao } }
+      post ficha_diets_url(@diet.ficha_id), params: { diet: { calorias: @diet.calorias, carboidratos_g: @diet.carboidratos_g, descricao: @diet.descricao, gordura_g: @diet.gordura_g, proteina_g: @diet.proteina_g, refeicao: @diet.refeicao } }
     end
 
-    assert_redirected_to diet_url(Diet.last)
+    assert_redirected_to ficha_diet_url(@diet.ficha_id, Diet.last)
   end
 
   test "should show diet" do
-    get diet_url(@diet)
+    get ficha_diet_url(@diet.ficha_id, @diet)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_diet_url(@diet)
+    get edit_ficha_diet_url(@diet.ficha_id, @diet)
     assert_response :success
   end
 
   test "should update diet" do
-    patch diet_url(@diet), params: { diet: { calorias: @diet.calorias, carboidratos_g: @diet.carboidratos_g, descricao: @diet.descricao, gordura_g: @diet.gordura_g, proteina_g: @diet.proteina_g, refeicao: @diet.refeicao } }
-    assert_redirected_to diet_url(@diet)
+    patch ficha_diet_url(@diet.ficha_id, @diet), params: { diet: { calorias: @diet.calorias, carboidratos_g: @diet.carboidratos_g, descricao: @diet.descricao, gordura_g: @diet.gordura_g, proteina_g: @diet.proteina_g, refeicao: @diet.refeicao } }
+    assert_redirected_to ficha_diet_url(@diet.ficha_id, @diet)
   end
 
   test "should destroy diet" do
     assert_difference("Diet.count", -1) do
-      delete diet_url(@diet)
+      delete ficha_diet_url(@diet.ficha_id, @diet)
     end
 
-    assert_redirected_to diets_url
+    assert_redirected_to ficha_url(@diet.ficha_id)
   end
 end

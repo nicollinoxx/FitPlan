@@ -5,9 +5,11 @@ one:
   series: 1
   repeticoes: MyString
   carga: MyString
+  ficha_id: 2
 
 two:
   exercicio: MyString
   series: 1
   repeticoes: MyString
   carga: MyString
+  ficha_id: 2

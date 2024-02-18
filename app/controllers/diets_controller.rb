@@ -55,7 +55,7 @@ class DietsController < ApplicationController
     @diet.destroy
 
     respond_to do |format|
-      format.html { recede_or_redirect_to @ficha, notice: "Dieta foi destruido com sucesso." }
+      format.html { recede_or_redirect_to ficha_diet_path(@ficha), notice: "Dieta foi destruido com sucesso." }
       format.json { head :no_content }
     end
   end

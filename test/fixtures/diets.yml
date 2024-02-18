@@ -7,6 +7,7 @@ one:
   carboidratos_g: 9.99
   gordura_g: 9.99
   calorias: 9.99
+  ficha_id: 2
 
 two:
   refeicao: MyString
@@ -15,3 +16,4 @@ two:
   carboidratos_g: 9.99
   gordura_g: 9.99
   calorias: 9.99
+  ficha_id: 2

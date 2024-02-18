@@ -12,7 +12,7 @@
   <div class='btn-toolbar'>
     <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
     <%= link_to "Editar ficha", edit_ficha_path(@ficha), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
-    <%= button_to "Excluir ficha", ficha_path(@ficha), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Tem certeza? todos os treinos ou dietas presente nesta ficha serão apagados' }, class: 'btn btn-danger' %>
+    <%= button_to "Excluir ficha", ficha_path(@ficha), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Tem certeza? todos os treinos ou dietas presente nesta ficha serão apagados!' }, class: 'btn btn-danger' %>
   </div>
   <hr>
     <%= link_to 'voltar', fichas_path, class: 'hide-on-mobile text-indigo' %>
