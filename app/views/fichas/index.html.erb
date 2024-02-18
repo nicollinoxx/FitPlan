@@ -4,7 +4,7 @@
   <% @fichas.each do |ficha| %>
     <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded mb-4'>
       <% if ficha.tipo == 'diet' %>
-        <%= link_to ficha_diets_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
+        <%= link_to ficha_dietas_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
           <div class="p-2">
             <%= render ficha %>
             <%= link_to '+ Detalhes', ficha, class: 'btn btn-success-custom text-light' %>

@@ -1,10 +1,10 @@
-<%= form_with(model: [@ficha, @diet], data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
-  <% if diet.errors.any? %>
+<%= form_with(model: [@ficha, @dieta], data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
+  <% if dieta.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(diet.errors.count, "Erros") %> proibiram dessa dieta ser salva:</h2>
+      <h2><%= pluralize(dieta.errors.count, "Erros") %> proibiram dessa dieta ser salva:</h2>
 
       <ul>
-        <% diet.errors.each do |error| %>
+        <% dieta.errors.each do |error| %>
           <li><%= error.attribute%> não pode estar vazio</li>
         <% end %>
       </ul>
@@ -12,27 +12,27 @@
   <% end %>
 
   <div class='mb-3'>
-    <%= form.label :refeição, style: "display: block", class: 'form-label' %>
+    <%= form.label :refeicao, "Refeição", style: "display: block", class: 'form-label' %>
     <%= form.text_field :refeicao, class: 'form-control border border-primary' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :decricao, style: "display: block", class: 'form-label' %>
+    <%= form.label :decricao, "Descricão", style: "display: block", class: 'form-label' %>
     <%= form.rich_text_area :descricao, class: 'border border-primary' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :Kg_total_de_Proteina, style: "display: block", class: 'form-label' %>
+    <%= form.label :proteina_g, "Gramas de proteina", style: "display: block", class: 'form-label' %>
     <%= form.text_field :proteina_g, class: 'form-control border border-primary' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :Kg_total_de_carboidratos, style: "display: block", class: 'form-label' %>
+    <%= form.label :carboidratos_g, "Gramas de carboidrato", style: "display: block", class: 'form-label' %>
     <%= form.text_field :carboidratos_g, class: 'form-control border border-primary' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :Kg_total_de_gordura, style: "display: block", class: 'form-label' %>
+    <%= form.label :gordura_g, "Gramas de gordura", style: "display: block", class: 'form-label' %>
     <%= form.text_field :gordura_g, class: 'form-control border border-primary' %>
   </div>
 

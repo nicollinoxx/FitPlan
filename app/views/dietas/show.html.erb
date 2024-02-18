@@ -1,0 +1,15 @@
+<h1 class='text-center'><% content_for(:title, "Dieta") %></h1>
+
+<%= render @dieta %>
+
+<div data-controller="bridge--menu">
+  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Opções</div>
+
+  <div class='btn-toolbar'>
+    <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
+    <%= link_to "Editar dieta", edit_ficha_dieta_path(@ficha, @dieta), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
+    <%= button_to "Excluir dieta", ficha_dieta_path(@ficha, @dieta), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Excluir dieta?' }, class: 'btn btn-danger' %>
+  </div>
+  <hr>
+    <%= link_to 'voltar', ficha_dietas_path(@ficha), class: 'hide-on-mobile text-indigo' %>
+</div>

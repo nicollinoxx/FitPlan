@@ -1,4 +1,4 @@
-class Diet < ApplicationRecord
+class Dieta < ApplicationRecord
   before_save :calcular_kcal
 
   has_rich_text :decricao

@@ -1,12 +1,12 @@
-<div id="<%= dom_id diet %>">
+<div id="<%= dom_id dieta %>">
   <div class="bg-secondary-subtle rounded mb-3 p-2">
     <div class="row mb-2">
       <div class="col-8">
-        <h3 class='text-start fw-bold'><%= diet.refeicao %></h3>
+        <h3 class='text-start fw-bold'><%= dieta.refeicao %></h3>
       </div>
       <% if action_name != 'show' %>
         <div class="col text-end">
-          <%= link_to 'Mostrar', ficha_diet_path(@ficha, diet), class: "link-light link-offset-2 link-underline link-underline-opacity-0 btn btn-success-custom" %>
+          <%= link_to 'Mostrar', ficha_dieta_path(@ficha, dieta), class: "link-light link-offset-2 link-underline link-underline-opacity-0 btn btn-success-custom" %>
         </div>
       <% end %>
     </div>
@@ -14,13 +14,13 @@
     <div class="bg-light rounded p-2">
       <div>
         <p>
-          <%= raw diet.descricao %>
+          <%= raw dieta.descricao %>
         </p>
         <hr>
-        <% if diet.calorias != 0.0  %>
+        <% if dieta.calorias != 0.0  %>
           <p class='text-center'>
             <strong>Calorias totais:</strong>
-            <%= diet.calorias %> kcal
+            <%= dieta.calorias %> kcal
           </p>
         <% end %>
       </div>

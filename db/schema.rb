@@ -49,9 +49,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_170738) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "diets", force: :cascade do |t|
+  create_table "dietas", force: :cascade do |t|
     t.string "refeicao"
-    t.text "descricao"
+    t.string "descricao"
     t.decimal "proteina_g"
     t.decimal "carboidratos_g"
     t.decimal "gordura_g"
@@ -59,7 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_170738) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ficha_id", null: false
-    t.index ["ficha_id"], name: "index_diets_on_ficha_id"
+    t.index ["ficha_id"], name: "index_dietas_on_ficha_id"
   end
 
   create_table "fichas", force: :cascade do |t|
@@ -78,12 +78,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_14_170738) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ficha_id", null: false
-    t.integer "treino_associado"
     t.index ["ficha_id"], name: "index_treinos_on_ficha_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "diets", "fichas"
+  add_foreign_key "dietas", "fichas"
   add_foreign_key "treinos", "fichas"
 end
