@@ -3,21 +3,18 @@
 <div id="fichas">
   <% @fichas.each do |ficha| %>
     <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded mb-4'>
-      <% if ficha.tipo == 'diet' %>
-        <%= link_to ficha_dietas_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
-          <div class="p-2">
+      <div class="p-2">
+        <% if ficha.tipo == 'dieta' %>
+          <%= link_to ficha_dietas_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
             <%= render ficha %>
-            <%= link_to '+ Detalhes', ficha, class: 'btn btn-success-custom text-light' %>
-          </div>
-        <% end %>
-      <% else %>
-        <%= link_to ficha_treinos_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
-          <div class="p-2">
+          <% end %>
+        <% else %>
+          <%= link_to ficha_treinos_path(ficha), class: 'text-dark link-offset-2 link-underline link-underline-opacity-0' do %>
             <%= render ficha %>
-            <%= link_to '+ Detalhes', ficha, class: 'btn btn-success-custom text-light' %>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
+        <%= link_to '+ Detalhes', ficha, class: 'btn btn-success-custom text-light' %>
+      </div>
     </div>
   <% end %>
 </div>

@@ -1,5 +1,6 @@
 class FichasController < ApplicationController
   before_action :set_ficha, only: %i[ show edit update destroy ]
+  after_action :destroi_conteudo_se_tipo_alterado, only: %i[ update ]
 
   # GET /fichas or /fichas.json
   def index
@@ -12,8 +13,7 @@ class FichasController < ApplicationController
 
   # GET /fichas/new
   def new
-    @ficha = Ficha.new
-    @ficha.tipo = params[:tipo]
+    @ficha = Ficha.new(tipo: params[:tipo])
   end
 
   # GET /fichas/1/edit
@@ -59,7 +59,7 @@ class FichasController < ApplicationController
   end
 
   def show_ficha_diets
-    @fichas = Ficha.where(tipo: 'diet').order('created_at desc')
+    @fichas = Ficha.where(tipo: 'dieta').order('created_at desc')
   end
 
   def show_ficha_treinos
@@ -71,8 +71,16 @@ class FichasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_ficha
       @ficha = Ficha.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to fichas_url, notice: 'Ficha não foi encontrada ou não existe'
+    end
+
+    def destroi_conteudo_se_tipo_alterado
+      if @ficha.tipo == 'treino' && @ficha.dietas.exists?
+        @ficha.dietas.destroy_all
+      end
+
+      if @ficha.tipo == 'dieta' && @ficha.treinos.exists?
+        @ficha.treinos.destroy_all
+      end
     end
 
     # Only allow a list of trusted parameters through.

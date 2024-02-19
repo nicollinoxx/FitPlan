@@ -1,5 +1,13 @@
 <h1><% content_for(:title, "Editando ficha") %></h1>
 
+<div class="alert alert-danger" role='alert'>
+  <% if @ficha.tipo == 'dieta' %>
+    <strong>Observação: Se mudar o tipo de ficha para treino, todos as dietas serão apagadas. Se houver!</strong>
+  <% else %>
+    <strong>Observação: Se mudar o tipo de ficha para dieta, todos os treinos serão apagados. Se houver!</strong>
+  <% end %>
+</div>
+
 <%= render "form", ficha: @ficha %>
 
 <br>

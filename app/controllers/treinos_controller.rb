@@ -1,6 +1,7 @@
 class TreinosController < ApplicationController
   include FichaScoped
 
+  before_action :verifica_se_corresponde_controller_name
   before_action :set_treino, only: %i[ show edit update destroy ]
 
   # GET /treinos or /treinos.json
@@ -62,12 +63,16 @@ class TreinosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_treino
       @treino = @ficha.treinos.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      recede_or_redirect_to fichas_url
     end
 
     # Only allow a list of trusted parameters through.
     def treino_params
       params.require(:treino).permit(:exercicio, :series, :repeticoes, :carga, :video)
+    end
+
+    def verifica_se_corresponde_controller_name
+      if @ficha.tipo == 'dieta'
+        redirect_to fichas_url, notice: 'Esta ficha é do tipo dieta'
+      end
     end
 end

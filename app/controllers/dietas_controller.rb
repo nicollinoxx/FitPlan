@@ -1,7 +1,7 @@
 class DietasController < ApplicationController
   include FichaScoped
 
-  before_action :set_ficha
+  before_action :verifica_se_corresponde_controller_name
   before_action :set_dieta, only: %i[ show edit update destroy ]
 
   # GET /diets or /dietas.json
@@ -69,5 +69,11 @@ class DietasController < ApplicationController
     # Only allow a list of trusted parameters through.
     def dieta_params
       params.require(:dieta).permit(:refeicao, :descricao, :proteina_g, :carboidratos_g, :gordura_g, :calorias)
+    end
+
+    def verifica_se_corresponde_controller_name
+      if @ficha.tipo == 'treino'
+        redirect_to fichas_url, notice: 'Esta ficha é do tipo treino'
+      end
     end
 end
