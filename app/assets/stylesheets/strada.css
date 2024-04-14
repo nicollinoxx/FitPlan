@@ -1,0 +1,36 @@
+/* Strada — hide elements for registered bridge components */
+
+/*
+ * Hide elements with "hide-on-native" when strada is registered.
+ */
+[data-bridge-platform] .hide-on-native {
+  display: none;
+}
+
+/*
+ * Hide the submit button when the "form" component is registered.
+ */
+[data-bridge-components~=form] [data-controller~=bridge--form] [type=submit] {
+  display: none;
+}
+
+/*
+ * Hide when the "nav-button" component is registered.
+ */
+[data-bridge-components~=nav-button] [data-controller~=bridge--nav-button] {
+  display: none;
+}
+
+/*
+ * Hide when the "menu" component is registered.
+ */
+[data-bridge-components~=menu] [data-controller~=bridge--menu] {
+  display: none;
+}
+
+/*
+ * Hide when the "flash-message" component is registered.
+ */
+[data-bridge-components~=flash-message] [data-controller~=bridge--flash-message] {
+  display: none;
+}

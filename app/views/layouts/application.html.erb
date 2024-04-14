@@ -1,16 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FitPlan1</title>
+    <title><%= content_for(:title || FitPlan ) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+    <% if turbo_native_app? %>
+      <style>.hide-on-mobile { display: none; }</style>
+    <% end %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="hide-on-mobile mb-4">
+      <div class="bg-success p-3 text-light">
+        <h1 class='fw-bold'>FitPlan</h1>
+      </div>
+
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <%= link_to 'Inicio', root_path, class: 'navbar-brand link-primary'%>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <%= link_to 'Fichas', root_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Dietas', root_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Treinos', root_path, class: 'nav-link' %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <h2 class='fw-bold container mt-2'><%= content_for(:title || FitPlan ) %></h2>
+    </div>
+
+    <div class="container">
+      <% if notice.present? %>
+        <div class="alert alert-success" role="alert" data-controller="bridge--flash-message">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <div class="fw-bold">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
