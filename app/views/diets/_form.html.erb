@@ -1,0 +1,47 @@
+<%= form_with(model: diet) do |form| %>
+  <% if diet.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(diet.errors.count, "error") %> prohibited this diet from being saved:</h2>
+
+      <ul>
+        <% diet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :snack, style: "display: block" %>
+    <%= form.text_field :snack %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :protein_g, style: "display: block" %>
+    <%= form.text_field :protein_g %>
+  </div>
+
+  <div>
+    <%= form.label :carbohydrate_g, style: "display: block" %>
+    <%= form.text_field :carbohydrate_g %>
+  </div>
+
+  <div>
+    <%= form.label :fat_g, style: "display: block" %>
+    <%= form.text_field :fat_g %>
+  </div>
+
+  <div>
+    <%= form.label :calories, style: "display: block" %>
+    <%= form.text_field :calories %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
