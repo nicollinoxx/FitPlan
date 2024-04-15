@@ -1,14 +1,15 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Diets</h1>
+<h1 class='text-center'><% content_for(:title, 'Diets') %></h1>
 
 <div id="diets">
-  <% @diets.each do |diet| %>
-    <%= render diet %>
-    <p>
-      <%= link_to "Show this diet", diet %>
-    </p>
-  <% end %>
+  <div class="row">
+    <% @diets.each do |diet| %>
+      <div class="col-md-6">
+        <%= render diet %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<%= link_to "New diet", new_diet_path %>
+<div class="d-grid gap-2">
+  <%= link_to "New diet", new_diet_path, data: { controller: "bridge--nav-button", bridge_title: "+ Diet" }, class: 'btn btn-success' %>
+</div>

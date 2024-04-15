@@ -1,10 +1,5 @@
-<h1>Editing diet</h1>
+<% content_for(:title, "Edit Diet") %>
 
 <%= render "form", diet: @diet %>
 
 <br>
-
-<div>
-  <%= link_to "Show this diet", @diet %> |
-  <%= link_to "Back to diets", diets_path %>
-</div>

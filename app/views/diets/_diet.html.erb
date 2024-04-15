@@ -1,32 +1,41 @@
 <div id="<%= dom_id diet %>">
-  <p>
-    <strong>Snack:</strong>
-    <%= diet.snack %>
-  </p>
+  <div class="bg-secondary-subtle rounded mb-3 p-2">
+    <div class="row mb-2">
+      <div class="col-8">
+        <h3 class='text-start fw-bold'><%= diet.snack %></h3>
+      </div>
+      <div class="col text-end">
+        <% if action_name != 'show' %>
+          <%= link_to 'Show', diet, class: "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
 
-  <p>
-    <strong>Description:</strong>
-    <%= diet.description %>
-  </p>
+    <div class="bg-light rounded p-2">
+        <p>
+          <%= diet.description %>
+        </p>
+        <hr>
+        <h1 class='h4'>Descrição de refeição</h1>
 
-  <p>
-    <strong>Protein g:</strong>
-    <%= diet.protein_g %>
-  </p>
-
-  <p>
-    <strong>Carbohydrate g:</strong>
-    <%= diet.carbohydrate_g %>
-  </p>
-
-  <p>
-    <strong>Fat g:</strong>
-    <%= diet.fat_g %>
-  </p>
-
-  <p>
-    <strong>Calories:</strong>
-    <%= diet.calories %>
-  </p>
-
+        <ul>
+          <li>
+            <strong>Proteinas:</strong>
+            <%= diet.protein_g %>
+          </li>
+          <li>
+            <strong>Carboidratos:</strong>
+            <%= diet.carbohydrate_g %>
+          </li>
+          <li>
+            <strong>Gordura:</strong>
+            <%= diet.fat_g %>
+          </li>
+          <li>
+            <strong>Calorias totais:</strong>
+            <%= diet.calories %> kcal
+          </li>
+        </ul>
+    </div>
+  </div>
 </div>

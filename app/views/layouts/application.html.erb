@@ -8,6 +8,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_importmap_tags %>
 
     <% if turbo_native_app? %>
       <style>.hide-on-mobile { display: none; }</style>
@@ -32,7 +33,7 @@
                 <%= link_to 'Fichas', root_path, class: 'nav-link' %>
               </li>
               <li class="nav-item">
-                <%= link_to 'Dietas', root_path, class: 'nav-link' %>
+                <%= link_to 'Dietas', diets_path, class: 'nav-link' %>
               </li>
               <li class="nav-item">
                 <%= link_to 'Treinos', root_path, class: 'nav-link' %>
@@ -44,16 +45,14 @@
       <h2 class='fw-bold container mt-2'><%= content_for(:title || FitPlan ) %></h2>
     </div>
 
-    <div class="container">
+    <div class="container mt-3">
       <% if notice.present? %>
         <div class="alert alert-success" role="alert" data-controller="bridge--flash-message">
           <%= notice %>
         </div>
       <% end %>
 
-      <div class="fw-bold">
-        <%= yield %>
-      </div>
+      <%= yield %>
     </div>
   </body>
 </html>
