@@ -1,16 +1,15 @@
-<% if notice.present? %>
-  <p style="color: green" data-controller="bridge--flash-message"><%= notice %></p>
-<% end %>
-
-<h1 class="hide-on-native">Workouts</h1>
+<h1 class='text-center'><% content_for(:title, 'Workouts') %></h1>
 
 <div id="workouts">
-  <% @workouts.each do |workout| %>
-    <%= render workout %>
-    <p>
-      <%= link_to "Show this workout", workout %>
-    </p>
-  <% end %>
+  <div class="row">
+    <% @workouts.each do |workout| %>
+      <div class="col-md-6">
+        <%= render workout %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<%= link_to "New workout", new_workout_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" } %>
+<div class="d-grid gap-2">
+  <%= link_to "New workout", new_workout_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
+</div>

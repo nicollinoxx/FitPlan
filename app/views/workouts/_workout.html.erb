@@ -1,22 +1,31 @@
 <div id="<%= dom_id workout %>">
-  <p>
-    <strong>Exercise:</strong>
-    <%= workout.exercise %>
-  </p>
+  <div class="bg-secondary-subtle rounded p-2 mb-3">
+    <div class="row mb-2">
+      <div class="col-8">
+        <h1 class='h5 fw-bold'><%= workout.exercise %></h1>
+      </div>
+      <div class="col-4 text-end">
+        <%= link_to 'show', workout, class: 'btn btn-success' if action_name != 'show' %>
+      </div>
+    </div>
 
-  <p>
-    <strong>Series:</strong>
-    <%= workout.series %>
-  </p>
-
-  <p>
-    <strong>Repetitions:</strong>
-    <%= workout.repetitions %>
-  </p>
-
-  <p>
-    <strong>Charge:</strong>
-    <%= workout.charge %>
-  </p>
-
+    <div class="row text-center">
+      <div class="col mb-2">
+        <div class="bg-light rounded">
+          <p class='h6'>Series</p>
+          <p class='fw-light'><%= workout.series %></p>
+        </div>
+          <p class='fw-light'><strong>Interval: </strong> 30 seg</p>
+      </div>
+      <div class="col">
+        <div class="bg-light rounded pb-1">
+          <p class='h6'>Repetitions</p>
+          <p class='fw-light'><%= workout.repetitions %></p>
+          <hr>
+          <p class='h6'>Charge</p>
+          <p class='fw-light'><%= workout.charge %></p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

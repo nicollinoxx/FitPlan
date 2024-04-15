@@ -11,27 +11,28 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :exercise, style: "display: block" %>
-    <%= form.text_field :exercise %>
+
+  <div class='mb-3'>
+    <%= form.label :exercise, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :exercise, class: 'form-control border border-success' %>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.label :series, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :series, class: 'form-control border border-success' %>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.label :repetitions, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :repetitions, class: 'form-control border border-success' %>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.label :charge, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :charge, class: 'form-control border border-success' %>
   </div>
 
   <div>
-    <%= form.label :series, style: "display: block" %>
-    <%= form.number_field :series %>
-  </div>
-
-  <div>
-    <%= form.label :repetitions, style: "display: block" %>
-    <%= form.text_field :repetitions %>
-  </div>
-
-  <div>
-    <%= form.label :charge, style: "display: block" %>
-    <%= form.text_field :charge %>
-  </div>
-
-  <div>
-    <%= form.submit nil, data: { "bridge--form-target": "submit", "bridge-title": "Save" } %>
+    <%= form.submit "Save", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>
 <% end %>

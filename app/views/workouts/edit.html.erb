@@ -1,10 +1,5 @@
-<h1 class="hide-on-native">Editing workout</h1>
+<% content_for(:title, "Edit Diet") %>
 
 <%= render "form", workout: @workout %>
 
 <br>
-
-<div class="hide-on-native">
-  <%= link_to "Show this workout", @workout %> |
-  <%= link_to "Back to workouts", workouts_path %>
-</div>

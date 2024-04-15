@@ -3,13 +3,13 @@
 <%= render @diet %>
 
 <div data-controller="bridge--menu">
-  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Opções</div>
+  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>
 
-  <div class='btn-toolbar'>
-    <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
-    <%= link_to "Editar dieta", edit_diet_path(@diet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
-    <%= button_to "Excluir dieta", @diet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Excluir dieta?' }, class: 'btn btn-danger' %>
-  </div>
+    <div class='btn-toolbar'>
+      <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
+      <%= link_to "Editar dieta", edit_diet_path(@diet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
+      <%= button_to "Excluir dieta", @diet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Excluir dieta?' }, class: 'btn btn-danger' %>
+    </div>
   <hr>
     <%= link_to 'voltar', diets_path, class: 'hide-on-mobile' %>
 </div>
