@@ -37,6 +37,11 @@
     <%= form.text_field :charge, class: 'form-control border border-success' %>
   </div>
 
+  <div class='mb-3'>
+    <%= form.label :video, style: "display: block", class: 'form-label' %>
+    <%= form.file_field :video, class: 'form-control border border-success' %>
+  </div>
+
   <div>
     <%= form.submit "Save", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>

@@ -15,7 +15,12 @@
           <p class='h6'>Series</p>
           <p class='fw-light'><%= workout.series %></p>
         </div>
+        <% if workout.interval.present? %>
           <p class='fw-light'><strong>Interval: </strong><%= workout.interval %></p>
+        <% else %>
+          <p class='fw-light'><strong>Interval: </strong> indefinido</p>
+        <% end %>
+        <%= link_to "Ver vídeo", "##{workout.id} ", data: { bs_toggle: "collapse" }, aria: { expanded: "false", controls: "collapseExample" } if workout.video.attached? %>
       </div>
       <div class="col">
         <div class="bg-light rounded pb-1">
@@ -26,6 +31,10 @@
           <p class='fw-light'><%= workout.charge %></p>
         </div>
       </div>
+    </div>
+
+    <div class="collapse mt-2" id="<%= workout.id %>">
+      <%= video_tag url_for(workout.video), controls: true, class: 'bg-dark rounded img-fluid' if workout.video.attached? %>
     </div>
   </div>
 </div>
