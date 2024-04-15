@@ -41,6 +41,7 @@ class WorkoutsController < ApplicationController
         format.html { refresh_or_redirect_to workout_url(@workout), notice: "Workout was successfully updated." }
         format.json { render :show, status: :ok, location: @workout }
       else
+        @workout.video.purge if @workout.errors.any?
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @workout.errors, status: :unprocessable_entity }
       end

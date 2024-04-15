@@ -25,11 +25,13 @@
   <div class='mb-3'>
     <%= form.label :repetitions, style: "display: block", class: 'form-label' %>
     <%= form.text_field :repetitions, class: 'form-control border border-success' %>
+    <%= content_tag :small, "Máximun characters: 15", class: "text-muted" %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :interval, style: "display: block", class: 'form-label' %>
     <%= form.text_field :interval, class: 'form-control border border-success' %>
+    <%= content_tag :small, "Máximun characters: 15", class: "text-muted" %>
   </div>
 
   <div class='mb-3'>
@@ -39,6 +41,14 @@
 
   <div class='mb-3'>
     <%= form.label :video, style: "display: block", class: 'form-label' %>
+
+    <% if workout.video.present? %>
+      <div id="video">
+        <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
+        <%= link_to "Excluir video", workout_video_path(workout), data: { turbo_method: :delete, 'turbo-confirm': 'Tem certeza?' }, class: 'btn btn-danger mb-4' %>
+      </div>
+    <% end %>
+
     <%= form.file_field :video, class: 'form-control border border-success' %>
   </div>
 

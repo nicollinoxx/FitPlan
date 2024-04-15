@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :workouts
-  get 'start/index'
+  resources :workouts do
+    resources :videos, only: [:destroy], module: :workouts
+  end
   resources :diets
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
