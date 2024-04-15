@@ -1,0 +1,16 @@
+<% if notice.present? %>
+  <p style="color: green" data-controller="bridge--flash-message"><%= notice %></p>
+<% end %>
+
+<h1 class="hide-on-native">Workouts</h1>
+
+<div id="workouts">
+  <% @workouts.each do |workout| %>
+    <%= render workout %>
+    <p>
+      <%= link_to "Show this workout", workout %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New workout", new_workout_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" } %>
