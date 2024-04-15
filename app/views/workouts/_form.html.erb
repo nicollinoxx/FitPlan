@@ -19,13 +19,12 @@
 
   <div class='mb-3'>
     <%= form.label :series, style: "display: block", class: 'form-label' %>
-    <%= form.text_field :series, class: 'form-control border border-success' %>
+    <%= form.number_field :series, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :repetitions, style: "display: block", class: 'form-label' %>
-    <%= form.text_field :repetitions, class: 'form-control border border-success' %>
-    <%= content_tag :small, "Máximun characters: 15", class: "text-muted" %>
+    <%= form.number_field :repetitions, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>

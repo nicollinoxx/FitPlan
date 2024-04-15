@@ -1,2 +1,7 @@
-<%= link_to 'Diets', diets_path %>
-<%= link_to 'Workouts', workouts_path %>
+<%= content_for(:title, 'Home' )%>
+
+
+<div class="">
+  <%= link_to 'Diets', diets_path %><br>
+  <%= link_to 'Workouts', workouts_path %>
+</div>
