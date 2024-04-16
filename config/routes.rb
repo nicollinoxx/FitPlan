@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sheets
   resources :workouts do
     resources :videos, only: [:destroy], module: :workouts
   end
