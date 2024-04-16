@@ -1,16 +1,14 @@
-<% if notice.present? %>
-  <p style="color: green" data-controller="bridge--flash-message"><%= notice %></p>
-<% end %>
-
-<h1 class="hide-on-native">Sheets</h1>
+<h1><% content_for(:title, "Sheets") %></h1>
 
 <div id="sheets">
   <% @sheets.each do |sheet| %>
-    <%= render sheet %>
-    <p>
-      <%= link_to "Show this sheet", sheet %>
-    </p>
+    <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded p-2 mb-3'>
+      <%= render sheet %>
+      <%= link_to "show sheet", sheet, class: 'btn btn-success' %>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New sheet", new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" } %>
+<div class="d-grid gap-2">
+  <%= link_to "New sheet", new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
+</div>

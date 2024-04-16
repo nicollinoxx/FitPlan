@@ -1,17 +1,19 @@
 <div id="<%= dom_id sheet %>">
-  <p>
+  <h2 class='fw-bold'>
     <strong>Name:</strong>
     <%= sheet.name %>
-  </p>
+  </h2>
 
   <p>
     <strong>Description:</strong>
-    <%= sheet.description %>
+    <% if action_name == 'index' %>
+      <%= truncate(sheet.description, length: 120) %>
+    <% else %>
+      <%= sheet.description %>
+    <% end %>
   </p>
 
-  <p>
-    <strong>Type:</strong>
-    <%= sheet.sheet_type %>
-  </p>
-
+  <% if action_name == 'show' %>
+    <p><strong>Type: </strong><%= sheet.sheet_type %></p>
+  <% end %>
 </div>

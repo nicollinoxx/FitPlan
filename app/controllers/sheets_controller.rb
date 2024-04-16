@@ -25,7 +25,7 @@ class SheetsController < ApplicationController
 
     respond_to do |format|
       if @sheet.save
-        format.html { redirect_to sheet_url(@sheet), notice: "Sheet was successfully created." }
+        format.html { refresh_or_redirect_to sheet_url(@sheet), notice: "Sheet was successfully created." }
         format.json { render :show, status: :created, location: @sheet }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class SheetsController < ApplicationController
   def update
     respond_to do |format|
       if @sheet.update(sheet_params)
-        format.html { redirect_to sheet_url(@sheet), notice: "Sheet was successfully updated." }
+        format.html { refresh_or_redirect_to sheet_url(@sheet), notice: "Sheet was successfully updated." }
         format.json { render :show, status: :ok, location: @sheet }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class SheetsController < ApplicationController
     @sheet.destroy!
 
     respond_to do |format|
-      format.html { redirect_to sheets_url, notice: "Sheet was successfully destroyed." }
+      format.html { recede_or_redirect_to sheets_url, notice: "Sheet was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -11,26 +11,25 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class='mb-3'>
+    <%= form.label :name, style: "display: block", class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control border border-success' %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class='mb-3'>
+    <%= form.label :description, style: "display: block", class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-control border border-success' %>
   </div>
 
-  <div>
-    <%= form.label :sheet_type, 'Sheet type' %><br>
-    <%= form.radio_button :sheet_type, 'workout' %>
-    <%= form.label :sheet_type, 'Workout' %>
+  <div class="field mb-3">
+   <%= form.label :sheet_type, 'Sheet type', class: 'form-check-label mb-1' %><br />
+   <%= form.radio_button :sheet_type, 'workout', class: 'form-check-input' %>
+   <%= form.label :sheet_type, "Workout", class: 'form-check-label me-2' %>
+   <%= form.radio_button :sheet_type, 'diet', class: 'form-check-input' %>
+   <%= form.label :sheet_type, "Diet", class: 'form-check-label'  %>
+ </div>
 
-    <%= form.radio_button :sheet_type, 'diet' %>
-    <%= form.label :sheet_type, 'Diet' %>
-  </div>
-
   <div>
-    <%= form.submit nil, data: { "bridge--form-target": "submit", "bridge-title": "Save" } %>
+    <%= form.submit "Salvar", data: { "bridge--form-target": "submit", "bridge-title": "Salvar" }, class: 'btn btn-success' %>
   </div>
 <% end %>

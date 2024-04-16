@@ -1,14 +1,19 @@
-<% if notice.present? %>
-  <p style="color: green" data-controller="bridge--flash-message"><%= notice %></p>
-<% end %>
+<h1><% content_for(:title, "Sheet") %></h1>
 
-<%= render @sheet %>
-
-<div>
-  <div class="hide-on-native">
-    <%= link_to "Edit this sheet", edit_sheet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "Edit" } %> |
-    <%= link_to "Back to sheets", sheets_path %>
+<div class='bg-success-subtle shadow rounded mb-4'>
+  <div class="p-2">
+    <%= render @sheet %>
   </div>
+</div>
 
-  <%= link_to "Destroy this sheet", @sheet, "data-turbo-method": :delete %>
+<div data-controller="bridge--menu">
+  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>
+
+  <div class='btn-toolbar'>
+    <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
+    <%= link_to "Edit sheet", edit_sheet_path(@sheet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
+    <%= button_to "Destroy ficha", @sheet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Are you sure?' }, class: 'btn btn-danger' %>
+  </div>
+  <hr>
+    <%= link_to 'Back to sheet', sheets_path, class: 'hide-on-mobile' %>
 </div>
