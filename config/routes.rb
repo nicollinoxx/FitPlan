@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   resources :sheets do
+    resources :diets
     resources :workouts do
       resources :videos, only: [:destroy], module: :workouts
     end
   end
-
-  resources :diets
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

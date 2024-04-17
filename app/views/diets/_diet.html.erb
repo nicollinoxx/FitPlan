@@ -6,7 +6,7 @@
       </div>
       <div class="col text-end">
         <% if action_name != 'show' %>
-          <%= link_to 'Show', diet, class: "btn btn-success" %>
+          <%= link_to 'Show', sheet_diet_path(@sheet, diet), class: "btn btn-success" %>
         <% end %>
       </div>
     </div>

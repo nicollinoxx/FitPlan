@@ -3,9 +3,16 @@
 <div id="sheets">
   <% @sheets.each do |sheet| %>
     <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded p-2 mb-3'>
-      <%= link_to sheet_workouts_path(sheet), class: 'link-dark link-underline link-underline-opacity-0' do %>
-        <%= render sheet %>
-        <%= link_to "show sheet", sheet, class: 'btn btn-success' %>
+      <% if sheet.sheet_type == 'workout' %>
+        <%= link_to sheet_workouts_path(sheet), class: 'link-dark link-underline link-underline-opacity-0' do %>
+          <%= render sheet %>
+          <%= link_to "show sheet", sheet, class: 'btn btn-success' %>
+        <% end %>
+      <% else %>
+        <%= link_to sheet_diets_path(sheet), class: 'link-dark link-underline link-underline-opacity-0' do %>
+          <%= render sheet %>
+          <%= link_to "show sheet", sheet, class: 'btn btn-success' %>
+        <% end %>
       <% end %>
     </div>
   <% end %>

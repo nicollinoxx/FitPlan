@@ -1,4 +1,4 @@
-<%= form_with(model: diet, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
+<%= form_with(model: [@sheet, @diet], data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if diet.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(diet.errors.count, "error") %> prohibited this diet from being saved:</h2>
