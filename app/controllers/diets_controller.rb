@@ -1,6 +1,7 @@
 class DietsController < ApplicationController
   include SheetScoped
   before_action :set_diet, only: %i[ show edit update destroy ]
+  before_action :redirect_if_sheet_type_is_same_as_workout
 
   # GET /diets or /diets.json
   def index
@@ -67,5 +68,11 @@ class DietsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def diet_params
       params.require(:diet).permit(:snack, :description, :protein_g, :carbohydrate_g, :fat_g, :calories)
+    end
+
+    def redirect_if_sheet_type_is_same_as_workout
+      if @sheet.sheet_type == 'workout'
+        redirect_to sheet_workouts_path(@sheet)
+      end
     end
 end
