@@ -1,4 +1,4 @@
-<%= form_with(model: workout, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
+<%= form_with(model: [@sheet, @workout], data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if workout.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
@@ -44,7 +44,7 @@
     <% if workout.video.present? %>
       <div id="video">
         <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
-        <%= link_to "Excluir video", workout_video_path(workout), data: { turbo_method: :delete, 'turbo-confirm': 'Tem certeza?' }, class: 'btn btn-danger mb-4' %>
+        <%= link_to "Excluir video", sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': 'Tem certeza?' }, class: 'btn btn-danger mb-4' %>
       </div>
     <% end %>
 

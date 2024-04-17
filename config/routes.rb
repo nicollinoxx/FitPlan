@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :sheets
-  resources :workouts do
-    resources :videos, only: [:destroy], module: :workouts
+  resources :sheets do
+    resources :workouts do
+      resources :videos, only: [:destroy], module: :workouts
+    end
   end
+
   resources :diets
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

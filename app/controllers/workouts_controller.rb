@@ -1,9 +1,10 @@
 class WorkoutsController < ApplicationController
+  include SheetScoped
   before_action :set_workout, only: %i[ show edit update destroy ]
 
   # GET /workouts or /workouts.json
   def index
-    @workouts = Workout.all
+    @workouts = @sheet.workouts
   end
 
   # GET /workouts/1 or /workouts/1.json
@@ -12,7 +13,7 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/new
   def new
-    @workout = Workout.new
+    @workout = @sheet.workouts.new
   end
 
   # GET /workouts/1/edit
@@ -21,11 +22,11 @@ class WorkoutsController < ApplicationController
 
   # POST /workouts or /workouts.json
   def create
-    @workout = Workout.new(workout_params)
+    @workout = @sheet.workouts.new(workout_params)
 
     respond_to do |format|
       if @workout.save
-        format.html { refresh_or_redirect_to workout_url(@workout), notice: "Workout was successfully created." }
+        format.html { refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: "Workout was successfully created." }
         format.json { render :show, status: :created, location: @workout }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class WorkoutsController < ApplicationController
   def update
     respond_to do |format|
       if @workout.update(workout_params)
-        format.html { refresh_or_redirect_to workout_url(@workout), notice: "Workout was successfully updated." }
+        format.html { refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: "Workout was successfully updated." }
         format.json { render :show, status: :ok, location: @workout }
       else
         @workout.video.purge if @workout.errors.any?
@@ -53,7 +54,7 @@ class WorkoutsController < ApplicationController
     @workout.destroy!
 
     respond_to do |format|
-      format.html { recede_or_redirect_to workouts_url, notice: "Workout was successfully destroyed." }
+      format.html { recede_or_redirect_to sheet_workouts_url(@sheet), notice: "Workout was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -61,7 +62,7 @@ class WorkoutsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workout
-      @workout = Workout.find(params[:id])
+      @workout =  @sheet.workouts.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
