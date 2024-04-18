@@ -25,28 +25,19 @@ class WorkoutsController < ApplicationController
   def create
     @workout = @sheet.workouts.new(workout_params)
 
-    respond_to do |format|
-      if @workout.save
-        format.html { refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: "Workout was successfully created." }
-        format.json { render :show, status: :created, location: @workout }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @workout.errors, status: :unprocessable_entity }
-      end
+    if @workout.save
+      refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: "Workout was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /workouts/1 or /workouts/1.json
   def update
-    respond_to do |format|
-      if @workout.update(workout_params)
-        format.html { refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: "Workout was successfully updated." }
-        format.json { render :show, status: :ok, location: @workout }
-      else
-        @workout.video.purge if @workout.errors.any?
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @workout.errors, status: :unprocessable_entity }
-      end
+    if @workout.update(workout_params)
+      refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: "Workout was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -54,10 +45,7 @@ class WorkoutsController < ApplicationController
   def destroy
     @workout.destroy!
 
-    respond_to do |format|
-      format.html { recede_or_redirect_to sheet_workouts_url(@sheet), notice: "Workout was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    recede_or_redirect_to sheet_workouts_url(@sheet), notice: "Workout was successfully destroyed."
   end
 
   private

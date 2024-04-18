@@ -24,27 +24,19 @@ class SheetsController < ApplicationController
   def create
     @sheet = Sheet.new(sheet_params)
 
-    respond_to do |format|
-      if @sheet.save
-        format.html { refresh_or_redirect_to sheet_url(@sheet), notice: "Sheet was successfully created." }
-        format.json { render :show, status: :created, location: @sheet }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @sheet.errors, status: :unprocessable_entity }
-      end
+    if @sheet.save
+      refresh_or_redirect_to sheet_url(@sheet), notice: "Sheet was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /sheets/1 or /sheets/1.json
   def update
-    respond_to do |format|
-      if @sheet.update(sheet_params)
-        format.html { refresh_or_redirect_to sheet_url(@sheet), notice: "Sheet was successfully updated." }
-        format.json { render :show, status: :ok, location: @sheet }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @sheet.errors, status: :unprocessable_entity }
-      end
+    if @sheet.update(sheet_params)
+      refresh_or_redirect_to sheet_url(@sheet), notice: "Sheet was successfully updated."
+    else
+      render :show, status: :unprocessable_entity
     end
   end
 
@@ -52,10 +44,7 @@ class SheetsController < ApplicationController
   def destroy
     @sheet.destroy!
 
-    respond_to do |format|
-      format.html { recede_or_redirect_to sheets_url, notice: "Sheet was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    recede_or_redirect_to sheets_url, notice: "Sheet was successfully destroyed."
   end
 
 

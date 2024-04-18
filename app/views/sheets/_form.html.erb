@@ -21,13 +21,13 @@
     <%= form.text_area :description, class: 'form-control border border-success' %>
   </div>
 
-  <div class="field mb-3">
-   <%= form.label :sheet_type, 'Sheet type', class: 'form-check-label mb-1' %><br />
-   <%= form.radio_button :sheet_type, 'workout', class: 'form-check-input' %>
-   <%= form.label :sheet_type, "Workout", class: 'form-check-label me-2' %>
-   <%= form.radio_button :sheet_type, 'diet', class: 'form-check-input' %>
-   <%= form.label :sheet_type, "Diet", class: 'form-check-label'  %>
- </div>
+  <div class="mb-3">
+     <%= form.label :sheet_type, 'Sheet type', class: 'form-check-label mb-1' %><br />
+     <%= form.radio_button :sheet_type, 'workout', class: 'form-check-input' %>
+     <%= form.label :sheet_type, "Workout", class: 'form-check-label me-2' %>
+     <%= form.radio_button :sheet_type, 'diet', class: 'form-check-input' %>
+     <%= form.label :sheet_type, "Diet", class: 'form-check-label'  %>
+  </div>
 
   <div>
     <%= form.submit "Salvar", data: { "bridge--form-target": "submit", "bridge-title": "Salvar" }, class: 'btn btn-success' %>

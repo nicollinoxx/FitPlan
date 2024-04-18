@@ -25,27 +25,19 @@ class DietsController < ApplicationController
   def create
     @diet = @sheet.diets.new(diet_params)
 
-    respond_to do |format|
-      if @diet.save
-        format.html { refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: "Diet was successfully created." }
-        format.json { render :show, status: :created, location: @diet }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @diet.errors, status: :unprocessable_entity }
-      end
+    if @diet.save
+      refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: "Diet was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /diets/1 or /diets/1.json
   def update
-    respond_to do |format|
-      if @diet.update(diet_params)
-        format.html { refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: "Diet was successfully updated." }
-        format.json { render :show, status: :ok, location: @diet }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @diet.errors, status: :unprocessable_entity }
-      end
+    if @diet.update(diet_params)
+      refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: "Diet was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -53,10 +45,7 @@ class DietsController < ApplicationController
   def destroy
     @diet.destroy!
 
-    respond_to do |format|
-      format.html { recede_or_redirect_to sheet_diets_url(@sheet), notice: "Diet was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    recede_or_redirect_to sheet_diets_url(@sheet), notice: "Diet was successfully destroyed."
   end
 
   private
