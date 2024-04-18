@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'sheets_diet', to: 'sheets#sheet_diets_index'
+  get 'sheets_workout', to: 'sheets#sheet_workouts_index'
+
   resources :sheets do
     resources :diets
     resources :workouts do

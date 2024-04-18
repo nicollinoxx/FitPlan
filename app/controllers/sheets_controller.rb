@@ -58,6 +58,17 @@ class SheetsController < ApplicationController
     end
   end
 
+
+  def sheet_diets_index
+    @sheets = Sheet.where(sheet_type: 'diet')
+    render :index
+  end
+
+  def sheet_workouts_index
+    @sheets = Sheet.where(sheet_type: 'workout')
+    render :index
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sheet
@@ -69,12 +80,20 @@ class SheetsController < ApplicationController
       params.require(:sheet).permit(:name, :description, :sheet_type)
     end
 
+    def filter_sheets_by_type
+      if params[:sheet_type].present? && ['diet', 'workout'].include?(params[:sheet_type])
+        @sheets = Sheet.where(sheet_type: params[:sheet_type])
+      else
+        @sheets = Sheet.all
+      end
+    end
+
     def destroy_content_if_sheet_type_was_changed
-      if @sheet.sheet_type == 'treino' && @sheet.diets.exists?
+      if @sheet.sheet_type == 'workout' && @sheet.diets.exists?
         @sheet.diets.destroy_all
       end
 
-      if @sheet.sheet_type == 'dieta' && @sheet.workout.exists?
+      if @sheet.sheet_type == 'diet' && @sheet.workout.exists?
         @sheet.workout.destroy_all
       end
     end
