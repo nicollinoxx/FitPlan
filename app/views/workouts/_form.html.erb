@@ -41,10 +41,10 @@
   <div class='mb-3'>
     <%= form.label :video, style: "display: block", class: 'form-label' %>
 
-    <% if workout.persisted? && workout.video.present? %>
+    <% if workout.video.persisted? && workout.video.attached? %>
       <div id="video">
         <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
-        <%= link_to "Excluir video", sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': 'Tem certeza?' }, class: 'btn btn-danger mb-4' %>
+        <%= link_to "Destroy video", sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': 'Are you sure' }, class: 'btn btn-danger mb-4' %>
       </div>
     <% end %>
 
