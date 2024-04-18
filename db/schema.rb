@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_17_220906) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_154948) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -50,7 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_17_220906) do
   end
 
   create_table "diets", force: :cascade do |t|
-    t.string "snack"
+    t.text "meal"
     t.string "description"
     t.decimal "protein_g"
     t.decimal "carbohydrate_g"

@@ -2,7 +2,7 @@ class Diet < ApplicationRecord
   belongs_to :sheet
 
   has_rich_text :description
-  validates :snack, :description, presence: true
+  validates :meal, :description, presence: true
 
   before_save :calculate_calories
   def calculate_calories
