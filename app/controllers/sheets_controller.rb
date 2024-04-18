@@ -1,5 +1,6 @@
 class SheetsController < ApplicationController
   before_action :set_sheet, only: %i[ show edit update destroy ]
+  after_action :destroy_content_if_sheet_type_was_changed, only: %i[ update ]
 
   # GET /sheets or /sheets.json
   def index
@@ -66,5 +67,15 @@ class SheetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def sheet_params
       params.require(:sheet).permit(:name, :description, :sheet_type)
+    end
+
+    def destroy_content_if_sheet_type_was_changed
+      if @sheet.sheet_type == 'treino' && @sheet.diets.exists?
+        @sheet.diets.destroy_all
+      end
+
+      if @sheet.sheet_type == 'dieta' && @sheet.workout.exists?
+        @sheet.workout.destroy_all
+      end
     end
 end

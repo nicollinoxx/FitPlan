@@ -1,7 +1,51 @@
-<%= content_for(:title, 'Home' )%>
+<h1 class='hide-on-mobile mb-4'>Home</h1>
 
+<h3 class='fw-bold mt-3'>Minhas fichas</h3>
+<%= link_to sheets_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
+  <div class="bg-success-subtle shadow rounded p-2 mb-3">
+    <div class="d-flex align-items-center p-1">
+      <div class="flex-shrink-0">
+        <%= image_tag 'image 3.png', class: 'm-0 rounded' %>
+      </div>
+      <div class="flex-grow-1 ms-3">
+        <h1 class='h4 fw-bold'>Fichas de treinos</h1>
+        <p>
+          <strong>Descrição:</strong> Contem fichas de treinos. Escolha uma ficha e comece sua jornada fitness.
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
 
-<div class="">
-  <%= link_to 'Diets', diets_path %><br>
-  <%= link_to 'Sheets', sheets_path %>
-</div>
+<%= link_to sheets_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
+  <div class="bg-light shadow mb-3">
+    <div class="d-flex align-items-center p-2">
+      <div class="flex-shrink-0">
+        <%= image_tag 'image 1.png', class: 'rounded' %>
+      </div>
+      <div class="flex-grow-1 ms-3">
+        <h1 class='h4 fw-bold'>Fichas de dietas</h1>
+        <p>
+          <strong>Descrição:</strong> Contem fichas de dietas. Escolha uma ficha e comece sua jornada fitness.
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<h3 class='fw-bold'>Gerenciar fichas</h3>
+<%= link_to sheets_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
+  <div class="bg-success-subtle shadow rounded">
+    <div class="d-flex align-items-center p-2">
+      <div class="flex-shrink-0">
+        <%= image_tag 'image 2.png', class: 'rounded' %>
+      </div>
+      <div class="flex-grow-1 ms-3">
+        <h1 class='h4 fw-bold'>Criar e editar fichas</h1>
+        <p>
+          <strong>Descrição:</strong> Crie fichas de treinos ou dietas personalizadas para seus clientes.
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>

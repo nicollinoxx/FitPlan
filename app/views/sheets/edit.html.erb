@@ -1,5 +1,11 @@
 <h1><% content_for(:title, "Edit Sheet") %></h1>
 
+<div class="alert alert-danger" role='alert'>
+  <p>
+    <strong>Alert: </strong>If you change the sheet type, all content will be deleted!
+  </p>
+</div>
+
 <%= render "form", sheet: @sheet %>
 
 <div class='hide-on-mobile mt-2'>
