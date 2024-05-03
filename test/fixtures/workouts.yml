@@ -3,11 +3,13 @@
 one:
   exercise: MyString
   series: 1
-  repetitions: MyString
+  repetitions: 12
   charge: MyString
+  sheet_id: 1
 
 two:
   exercise: MyString
   series: 1
-  repetitions: MyString
+  repetitions: 12
   charge: MyString
+  sheet_id: 1

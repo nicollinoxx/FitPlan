@@ -17,7 +17,7 @@ class SheetsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create sheet" do
     assert_difference("Sheet.count") do
-      post sheets_url, params: { sheet: { description: @sheet.description, name: @sheet.name, type: @sheet.type } }
+      post sheets_url, params: { sheet: { description: @sheet.description, name: @sheet.name, sheet_type: @sheet.sheet_type } }
     end
 
     assert_redirected_to sheet_url(Sheet.last)
@@ -34,7 +34,7 @@ class SheetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update sheet" do
-    patch sheet_url(@sheet), params: { sheet: { description: @sheet.description, name: @sheet.name, type: @sheet.type } }
+    patch sheet_url(@sheet), params: { sheet: { description: @sheet.description, name: @sheet.name, sheet_type: @sheet.sheet_type } }
     assert_redirected_to sheet_url(@sheet)
   end
 
