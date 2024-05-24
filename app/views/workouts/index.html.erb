@@ -1,5 +1,11 @@
 <% content_for(:title, 'Workouts') %>
 
+<% if !@workouts.exists? %>
+  <div class="alert alert-warning">
+    This sheets is empty!
+  </div>
+<% end %>
+
 <div id="workouts">
   <div class="row">
     <% @workouts.each do |workout| %>

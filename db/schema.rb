@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_18_154948) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_24_225259) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -50,8 +50,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_154948) do
   end
 
   create_table "diets", force: :cascade do |t|
-    t.text "meal"
-    t.string "description"
+    t.string "meal"
+    t.text "description"
     t.decimal "protein_g"
     t.decimal "carbohydrate_g"
     t.decimal "fat_g"
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_18_154948) do
   create_table "workouts", force: :cascade do |t|
     t.string "exercise"
     t.integer "series"
-    t.integer "repetitions"
+    t.string "repetitions"
     t.string "charge"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

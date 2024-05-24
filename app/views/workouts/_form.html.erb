@@ -24,12 +24,12 @@
 
   <div class='mb-3'>
     <%= form.label :repetitions, style: "display: block", class: 'form-label' %>
-    <%= form.number_field :repetitions, class: 'form-control border border-success' %>
+    <%= form.text_field :repetitions,  maxlength: 15, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :interval, style: "display: block", class: 'form-label' %>
-    <%= form.text_field :interval, class: 'form-control border border-success' %>
+    <%= form.text_field :interval, maxlength: 15, class: 'form-control border border-success' %>
     <%= content_tag :small, "Máximun characters: 15", class: "text-muted" %>
   </div>
 

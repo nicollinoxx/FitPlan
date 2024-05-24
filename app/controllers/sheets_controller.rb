@@ -82,7 +82,7 @@ class SheetsController < ApplicationController
         @sheet.diets.destroy_all
       end
 
-      if @sheet.sheet_type == 'diet' && @sheet.workout.exists?
+      if @sheet.sheet_type == 'diet' && @sheet.workouts.exists?
         @sheet.workout.destroy_all
       end
     end

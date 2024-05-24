@@ -1,4 +1,4 @@
-<h1 class='hide-on-mobile mb-4 fw-bold'>Home</h1>
+<h1><% content_for(:title, 'home') %></h1>
 
 <h3 class='fw-bold mt-3'>My sheets</h3>
 <%= link_to sheets_workout_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
@@ -18,7 +18,7 @@
 <% end %>
 
 <%= link_to sheets_diet_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
-  <div class="bg-light shadow mb-3">
+  <div class="bg-light shadow rounded mb-3">
     <div class="d-flex align-items-center p-2">
       <div class="flex-shrink-0">
         <%= image_tag 'image 1.png', class: 'rounded' %>

@@ -3,7 +3,7 @@ class Workout < ApplicationRecord
   has_one_attached :video
 
   validates :exercise, :series, :repetitions, presence: true
-  validates :interval, length: { maximum: 15 }, allow_blank: true
+  validates :interval, :repetitions, length: { maximum: 15 }, allow_blank: true
   validate :video_content_type
 
    private
