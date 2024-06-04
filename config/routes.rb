@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
+  get  "sign_in", to: "sessions#new"
+  post "sign_in", to: "sessions#create"
+  get  "sign_up", to: "registrations#new"
+  post "sign_up", to: "registrations#create"
+  resources :sessions, only: [:index, :show, :destroy]
+  resource  :password, only: [:edit, :update]
+  namespace :identity do
+    resource :email,              only: [:edit, :update]
+    resource :email_verification, only: [:show, :create]
+    resource :password_reset,     only: [:new, :edit, :create, :update]
+  end
+  root "home#index"
   get 'sheets_diet', to: 'sheets#sheet_diets_index'
   get 'sheets_workout', to: 'sheets#sheet_workouts_index'
+  get 'start', to: 'start#index'
 
   resources :sheets do
     resources :diets
@@ -14,5 +27,4 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live
 
   # Defines the root path route ("/")
-  root "start#index"
 end

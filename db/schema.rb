@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_225259) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_231623) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -62,12 +62,30 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_225259) do
     t.index ["sheet_id"], name: "index_diets_on_sheet_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "user_agent"
+    t.string "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "sheets", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "sheet_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.boolean "verified", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "workouts", force: :cascade do |t|
@@ -85,5 +103,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_225259) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "diets", "sheets"
+  add_foreign_key "sessions", "users"
   add_foreign_key "workouts", "sheets"
 end
