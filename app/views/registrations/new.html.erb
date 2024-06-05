@@ -1,4 +1,4 @@
-<h1>Sign up</h1>
+<% content_for(:title, "Sign Up") %>
 
 <%= form_with(url: sign_up_path) do |form| %>
   <% if @user.errors.any? %>
@@ -13,23 +13,23 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email" %>
+  <div class='mb-3'>
+    <%= form.label :email, style: "display: block", class: 'form-label' %>
+    <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email", class: 'form-control border border-success' %>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.label :password, style: "display: block", class: 'form-label' %>
+    <%= form.password_field :password, required: true, autocomplete: "new-password", class: 'form-control border border-success' %>
+    <%= content_tag :small, "12 characters minimum.", class: "text-muted" %>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.label :password_confirmation, style: "display: block", class: 'form-label' %>
+    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control border border-success' %>
   </div>
 
   <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.password_field :password, required: true, autocomplete: "new-password" %>
-    <div>12 characters minimum.</div>
-  </div>
-
-  <div>
-    <%= form.label :password_confirmation, style: "display: block" %>
-    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
-  </div>
-
-  <div>
-    <%= form.submit "Sign up" %>
+    <%= form.submit "Sign up", class: 'btn btn-success' %>
   </div>
 <% end %>

@@ -17,8 +17,18 @@
 
   <body>
     <div class="hide-on-mobile mb-4">
-      <div class="bg-success p-3 text-light">
-        <h1 class='fw-bold'>FitPlan</h1>
+      <div class="bg-success p-2 text-light">
+        <div class="d-flex justify-content-between">
+          <h1 class='fw-bold mt-2'>FitPlan</h1>
+          <% if Current.user.present? %>
+            <%= link_to root_path, class: 'link-light' do %>
+                <p class='fw-bold h6'>
+                  <%= Current.user.email.truncate(16) %>
+                  <%= image_tag 'example_avatar.png', class: 'rounded-circle mt-2', style: "width: 54px; height: 50px;" %>
+                </p>
+            <% end %>
+          <% end %>
+        </div>
       </div>
 
       <nav class="navbar navbar-expand-lg bg-light">
@@ -42,16 +52,25 @@
           </div>
         </div>
       </nav>
-      <h1 class='fw-bold container mt-2'><%= content_for(:title || FitPlan ) %></h1>
+
+      <div class="container mt-3">
+        <% if notice.present? %>
+          <div class="alert alert-success" role="alert" data-controller="bridge--flash-message">
+            <%= notice %>
+          </div>
+        <% end %>
+
+        <% if alert.present? %>
+          <div class="alert alert-danger" role="alert" data-controller="bridge--flash-message">
+            <%= alert %>
+          </div>
+        <% end %>
+      </div>
+
+      <h1 class='fw-bold container mt-3'><%= content_for(:title || FitPlan ) %></h1>
     </div>
 
     <div class="container mt-3">
-      <% if notice.present? %>
-        <div class="alert alert-success" role="alert" data-controller="bridge--flash-message">
-          <%= notice %>
-        </div>
-      <% end %>
-
       <%= yield %>
     </div>
   </body>

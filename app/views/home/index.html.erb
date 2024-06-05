@@ -1,23 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:title, "Profile") %>
 
-<p>Signed as <%= Current.user.email %></p>
-
-<h2>Login and verification</h2>
-
-<div>
-  <%= link_to "Change password", edit_password_path %>
+<div class="text-center mb-3">
+  <%= image_tag 'example_avatar.png', class: 'rounded-circle', style: "width: 200px; height: 190px;"%>
+  <p>Signed as: <%= Current.user.email %></p>
 </div>
 
-<div>
-  <%= link_to "Change email address", edit_identity_email_path %>
+<div class="mb-4">
+  <h2 class='fw-bold'>Options</h2>
+
+  <ul class="list-group">
+    <li class="list-group-item"><%= link_to "Change password", edit_password_path %></li>
+    <li class="list-group-item"><%= link_to "Change email address", edit_identity_email_path %></li>
+  </ul>
 </div>
 
-<h2>Access history</h2>
 
-<div>
+<h3 class='fw-bold mt-2'>History</h3>
+
+<div class="bg-light">
   <%= link_to "Devices & Sessions", sessions_path %>
 </div>
 
 <br>
 
-<%= button_to "Log out", Current.session, method: :delete %>
+<%= button_to "Log out", Current.session, method: :delete, class: 'btn btn-danger' %>

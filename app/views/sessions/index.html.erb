@@ -1,30 +1,32 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Devices & Sessions</h1>
+<% content_for(:title, "Devices & Sessions") %>
 
 <div id="sessions">
-  <% @sessions.each do |session| %>
-    <div id="<%= dom_id session %>">
-      <p>
-        <strong>User Agent:</strong>
-        <%= session.user_agent %>
-      </p>
+  <ul class="list-group rounded">
+    <% @sessions.each do |session| %>
+      <div id="<%= dom_id session %>">
+        <li class="list-group-item">
+          <p>
+            <strong>User Agent:</strong>
+            <%= session.user_agent %>
+          </p>
 
-      <p>
-        <strong>Ip Address:</strong>
-        <%= session.ip_address %>
-      </p>
+          <p>
+            <strong>Ip Address:</strong>
+            <%= session.ip_address %>
+          </p>
 
-      <p>
-        <strong>Created at:</strong>
-        <%= session.created_at %>
-      </p>
+          <p>
+            <strong>Created at:</strong>
+            <%= session.created_at %>
+          </p>
 
-    </div>
-    <p>
-      <%= button_to "Log out", session, method: :delete %>
-    </p>
-  <% end %>
+          <p>
+            <%= button_to "Log out", session, method: :delete, class: 'btn btn-danger d-grid' %>
+          </p>
+        </li>
+      </div>
+    <% end %>
+  </ul>
 </div>
 
 <br>
