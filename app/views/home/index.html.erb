@@ -14,13 +14,17 @@
   </ul>
 </div>
 
-
-<h3 class='fw-bold mt-2'>History</h3>
-
-<div class="bg-light">
-  <%= link_to "Devices & Sessions", sessions_path %>
+<div class='mb-3'>
+  <h3 class='fw-bold'>History</h3>
+  <div class="border rounded p-2">
+    <%= link_to "Devices & Sessions", sessions_path %>
+  </div>
 </div>
 
-<br>
-
-<%= button_to "Log out", Current.session, method: :delete, class: 'btn btn-danger' %>
+<div data-controller="bridge--menu">
+  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Log out</div>
+    <div data-bridge--menu-target="title" class="d-none">Log out of account</div>
+    <%= button_to "Log out", Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Log out?' }, class: 'btn btn-danger' %>
+    <hr>
+    <%= link_to 'back to home', root_path, class: 'hide-on-mobile' %>
+</div>

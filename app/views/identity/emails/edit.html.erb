@@ -6,7 +6,7 @@
   <p><%= button_to "Re-send verification email", identity_email_verification_path, class: 'btn btn-warning mb-4' %></p>
 <% end %>
 
-<%= form_with(url: identity_email_path, method: :patch) do |form| %>
+<%= form_with(url: identity_email_path, method: :patch, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if @user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -30,10 +30,10 @@
   </div>
 
   <div class='mb-3'>
-    <%= form.submit "Save changes", class: 'btn btn-success' %>
+    <%= form.submit "Save changes", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>
 <% end %>
 
-<div>
-  <%= link_to "Back", root_path %>
+<div class='hide-on-mobile'>
+  <%= link_to "Back", home_path %>
 </div>

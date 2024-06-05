@@ -1,4 +1,4 @@
-<h1>Reset your password</h1>
+<% content_for(:title, 'Forgot your password') %>
 
 <%= form_with(url: identity_password_reset_path, method: :patch) do |form| %>
   <% if @user.errors.any? %>
@@ -16,14 +16,14 @@
   <%= form.hidden_field :sid, value: params[:sid] %>
 
   <div>
-    <%= form.label :password, "New password", style: "display: block" %>
-    <%= form.password_field :password, required: true, autofocus: true, autocomplete: "new-password" %>
-    <div>12 characters minimum.</div>
+    <%= form.label :password, "New password", style: "display: block", class: 'form-label' %>
+    <%= form.password_field :password, required: true, autofocus: true, autocomplete: "new-password", class: 'form-control border border-success' %>
+    <%= content_tag :small, "12 characters minimum.", class: "text-muted" %>
   </div>
 
   <div>
-    <%= form.label :password_confirmation, "Confirm new password", style: "display: block" %>
-    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
+    <%= form.label :password_confirmation, "Confirm new password", style: "display: block", class: 'form-label' %>
+    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control border border-success' %>
   </div>
 
   <div>

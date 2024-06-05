@@ -20,7 +20,7 @@
         <% else %>
           <p class='fw-light'><strong>Interval: </strong> Undefined</p>
         <% end %>
-        <%= link_to "Ver vídeo", "##{workout.id} ", data: { bs_toggle: "collapse" }, aria: { expanded: "false", controls: "collapseExample" } if workout.video.attached? %>
+        <%= link_to "Show video", "##{workout.id} ", data: { bs_toggle: "collapse" }, aria: { expanded: "false", controls: "collapseExample" } if workout.video.attached? %>
       </div>
       <div class="col">
         <div class="bg-light rounded">

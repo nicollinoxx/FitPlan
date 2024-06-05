@@ -1,4 +1,17 @@
-<h1><% content_for(:title, 'Home') %></h1>
+<% content_for(:title, 'Home') %>
+
+<h3 class='fw-bold mt-3'>My profile</h3>
+<%= link_to home_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
+    <div class="bg-light shadow rounded p-2 mb-3">
+      <div class="d-flex align-items-center p-1 w-25">
+        <%= image_tag 'example_avatar.png', class: 'rounded-circle', style: "width: 80px; height: 75px;" %>
+        <div class="flex-grow-1 ms-3">
+          <h1 class='h4 fw-bold'>Profile</h1>
+          <p><%= Current.user.email %></p>
+        </div>
+      </div>
+    </div>
+<% end %>
 
 <h3 class='fw-bold mt-3'>My sheets</h3>
 <%= link_to sheets_workout_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>

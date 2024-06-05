@@ -21,7 +21,7 @@
         <div class="d-flex justify-content-between">
           <h1 class='fw-bold mt-2'>FitPlan</h1>
           <% if Current.user.present? %>
-            <%= link_to root_path, class: 'link-light' do %>
+            <%= link_to home_path, class: 'link-light' do %>
                 <p class='fw-bold h6'>
                   <%= Current.user.email.truncate(16) %>
                   <%= image_tag 'example_avatar.png', class: 'rounded-circle mt-2', style: "width: 54px; height: 50px;" %>
@@ -33,7 +33,7 @@
 
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-          <%= link_to 'Home', start_path, class: 'navbar-brand link-primary'%>
+          <%= link_to 'Home', root_path, class: 'navbar-brand link-primary'%>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -54,15 +54,13 @@
       </nav>
 
       <div class="container mt-3">
-        <% if notice.present? %>
+        <% if notice.present? && controller.controller_name != 'sessions' %>
           <div class="alert alert-success" role="alert" data-controller="bridge--flash-message">
             <%= notice %>
           </div>
-        <% end %>
-
-        <% if alert.present? %>
+        <% elsif notice.present? %>
           <div class="alert alert-danger" role="alert" data-controller="bridge--flash-message">
-            <%= alert %>
+            <%= notice %>
           </div>
         <% end %>
       </div>
