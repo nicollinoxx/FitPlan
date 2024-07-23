@@ -1,4 +1,4 @@
-<h1><% content_for(:title, "Sheets") %></h1>
+<h1><% content_for(:title, t(@title) || t('.title')) %></h1>
 
 <div id="sheets">
   <% @sheets.each do |sheet| %>
@@ -6,18 +6,22 @@
       <% if sheet.sheet_type == 'workout' %>
         <%= link_to sheet_workouts_path(sheet), class: 'link-dark link-underline link-underline-opacity-0' do %>
           <%= render sheet %>
-          <%= link_to "show sheet", sheet, class: 'btn btn-success' %>
+          <%= link_to t('.action_show'), sheet, class: 'btn btn-success' %>
         <% end %>
       <% else %>
         <%= link_to sheet_diets_path(sheet), class: 'link-dark link-underline link-underline-opacity-0' do %>
           <%= render sheet %>
-          <%= link_to "show sheet", sheet, class: 'btn btn-success' %>
+          <%= link_to  t('.action_show'), sheet, class: 'btn btn-success' %>
         <% end %>
       <% end %>
     </div>
   <% end %>
 </div>
 
-<div class="d-grid gap-2">
-  <%= link_to "New sheet", new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
+<div class="d-grid gap-2 mb-3">
+  <%= link_to t('.action_new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
 </div>
+
+<br>
+
+<%= link_to t('.link_back'), root_path, class: 'hide-on-mobile' %>

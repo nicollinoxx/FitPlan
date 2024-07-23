@@ -26,7 +26,7 @@ class WorkoutsController < ApplicationController
     @workout = @sheet.workouts.new(workout_params)
 
     if @workout.save
-      refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: "Workout was successfully created."
+      refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: I18n.t('workouts.create.success')
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,7 +35,7 @@ class WorkoutsController < ApplicationController
   # PATCH/PUT /workouts/1 or /workouts/1.json
   def update
     if @workout.update(workout_params)
-      refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: "Workout was successfully updated."
+      refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: I18n.t('workouts.update.success')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,7 +45,7 @@ class WorkoutsController < ApplicationController
   def destroy
     @workout.destroy!
 
-    recede_or_redirect_to sheet_workouts_url(@sheet), notice: "Workout was successfully destroyed."
+    recede_or_redirect_to sheet_workouts_url(@sheet), notice: I18n.t('workouts.destroy.success')
   end
 
   private

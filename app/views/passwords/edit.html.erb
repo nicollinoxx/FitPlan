@@ -1,9 +1,9 @@
-<% content_for(:title, "Change password") %>
+<% content_for(:title, t('.title')) %>
 
 <%= form_with(url: password_path, method: :patch, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if @user.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, t('.error')) %> <%= t('.error_message_form')%></h2>
 
       <ul>
         <% @user.errors.each do |error| %>
@@ -14,26 +14,26 @@
   <% end %>
 
   <div class='mb-3'>
-    <%= form.label :password_challenge, style: "display: block", class: 'form-label' %>
+    <%= form.label :password_challenge, t('.password_challenge_label'), style: "display: block", class: 'form-label' %>
     <%= form.password_field :password_challenge, required: true, autofocus: true, autocomplete: "current-password", class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :password, "New password", style: "display: block", class: 'form-label' %>
+    <%= form.label :password, t('.password_label'), style: "display: block", class: 'form-label' %>
     <%= form.password_field :password, required: true, autocomplete: "new-password", class: 'form-control border border-success' %>
-    <%= content_tag :small, "12 characters minimum.", class: "text-muted" %>
+    <%= content_tag :small, t('.minimum_characters'), class: "text-muted" %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :password_confirmation, "Confirm new password", style: "display: block", class: 'form-label' %>
+    <%= form.label :password_confirmation, t('.confirmation_new_password_label'), style: "display: block", class: 'form-label' %>
     <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.submit "Save changes", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+    <%= form.submit t('.submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>
 <% end %>
 
 <div class='hide-on-mobile'>
-  <%= link_to "Back", root_path %>
+  <%= link_to t('.link_back'), home_path %>
 </div>

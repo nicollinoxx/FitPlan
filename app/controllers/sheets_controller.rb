@@ -25,7 +25,7 @@ class SheetsController < ApplicationController
     @sheet = Sheet.new(sheet_params)
 
     if @sheet.save
-      refresh_or_redirect_to sheet_url(@sheet), notice: "Sheet was successfully created."
+      refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('sheets.create.success')
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class SheetsController < ApplicationController
   # PATCH/PUT /sheets/1 or /sheets/1.json
   def update
     if @sheet.update(sheet_params)
-      refresh_or_redirect_to sheet_url(@sheet), notice: "Sheet was successfully updated."
+      refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('sheets.update.success')
     else
       render :show, status: :unprocessable_entity
     end
@@ -44,17 +44,19 @@ class SheetsController < ApplicationController
   def destroy
     @sheet.destroy!
 
-    recede_or_redirect_to sheets_url, notice: "Sheet was successfully destroyed."
+    recede_or_redirect_to sheets_url, notice: I18n.t('sheets.destroy.success')
   end
 
-
+  #filter sheets by type and adds specific title for filtered content
   def sheet_diets_index
     @sheets = Sheet.where(sheet_type: 'diet')
+    @title = '.sheets_diet_title'
     render :index
   end
 
   def sheet_workouts_index
     @sheets = Sheet.where(sheet_type: 'workout')
+    @title = '.sheets_workout_title'
     render :index
   end
 
@@ -67,14 +69,6 @@ class SheetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def sheet_params
       params.require(:sheet).permit(:name, :description, :sheet_type)
-    end
-
-    def filter_sheets_by_type
-      if params[:sheet_type].present? && ['diet', 'workout'].include?(params[:sheet_type])
-        @sheets = Sheet.where(sheet_type: params[:sheet_type])
-      else
-        @sheets = Sheet.all
-      end
     end
 
     def destroy_content_if_sheet_type_was_changed

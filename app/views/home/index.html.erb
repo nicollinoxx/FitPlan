@@ -1,4 +1,4 @@
-<% content_for(:title, "Profile") %>
+<% content_for(:title, t('.title')) %>
 
 <div class="text-center mb-3">
   <%= image_tag 'example_avatar.png', class: 'rounded-circle', style: "width: 200px; height: 190px;"%>
@@ -6,25 +6,36 @@
 </div>
 
 <div class="mb-4">
-  <h2 class='fw-bold'>Options</h2>
+  <h2 class='fw-bold'><%= t('.section') %></h2>
 
-  <ul class="list-group">
-    <li class="list-group-item"><%= link_to "Change password", edit_password_path %></li>
-    <li class="list-group-item"><%= link_to "Change email address", edit_identity_email_path %></li>
+  <ul class="list-group mb-2">
+    <li class="list-group-item"><%= link_to t('.change_password'), edit_password_path %></li>
+    <li class="list-group-item"><%= link_to t('.Change_email_address'), edit_identity_email_path %></li>
   </ul>
 </div>
 
 <div class='mb-3'>
-  <h3 class='fw-bold'>History</h3>
+  <h3 class='fw-bold'><%= t('.section_1') %></h3>
   <div class="border rounded p-2">
-    <%= link_to "Devices & Sessions", sessions_path %>
+    <%= link_to t('.sessions'), sessions_path %>
   </div>
+</div>
+
+<div class="mb-4">
+  <h3 class='fw-bold'><%= t('.section_2') %></h3>
+
+  <%= form_tag(home_path, method: :get) do %>
+    <div class="d-flex" style='max-width: 22rem;'>
+      <%= select_tag :locale, options_for_select([[t('.language_1'), 'en'], [t('.language_2'), 'pt-BR']], I18n.locale), class: 'form-select' %>
+      <%= submit_tag t('.submit'), class: 'ms-3 btn btn-secondary' %>
+    </div>
+  <% end %>
 </div>
 
 <div data-controller="bridge--menu">
   <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Log out</div>
     <div data-bridge--menu-target="title" class="d-none">Log out of account</div>
-    <%= button_to "Log out", Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Log out?' }, class: 'btn btn-danger' %>
+    <%= button_to t('.log_out'), Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Log out?' }, class: 'btn btn-danger' %>
     <hr>
-    <%= link_to 'back to home', root_path, class: 'hide-on-mobile' %>
+    <%= link_to t('.link_back'), root_path, class: 'hide-on-mobile' %>
 </div>

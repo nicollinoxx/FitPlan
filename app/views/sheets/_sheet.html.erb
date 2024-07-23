@@ -4,15 +4,15 @@
   </h2>
 
   <p>
-    <strong>Description:</strong>
-    <% if action_name == 'index' %>
-      <%= truncate(sheet.description, length: 120) %>
-    <% else %>
-      <%= sheet.description %>
-    <% end %>
+    <strong><%= t('.description')%></strong>
+    <%= sheet.description %>
   </p>
 
   <% if action_name == 'show' %>
-    <p><strong>Type: </strong><%= sheet.sheet_type %></p>
+    <% if sheet.sheet_type == 'workout' %>
+      <p><strong><%= t('.type')%></strong><%= t('.sheet_type') %></p>
+    <% else %>
+      <p><strong><%= t('.type')%></strong><%= t('.sheet_type_1') %></p>
+    <% end %>
   <% end %>
 </div>

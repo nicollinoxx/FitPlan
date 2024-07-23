@@ -1,4 +1,4 @@
-<% content_for(:title, 'Forgot your password?') %>
+<% content_for(:title, t('.title')) %>
 
 <%= form_with(url: identity_password_reset_path) do |form| %>
   <div class='mb-3'>
@@ -7,6 +7,6 @@
   </div>
 
   <div>
-    <%= form.submit "Send password reset email", class: 'btn btn-success' %>
+    <%= form.submit t('.send_password_reset_email'), class: 'btn btn-success' %>
   </div>
 <% end %>

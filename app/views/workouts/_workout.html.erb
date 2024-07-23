@@ -5,30 +5,32 @@
         <h1 class='h5 fw-bold'><%= workout.exercise %></h1>
       </div>
       <div class="col-4 text-end">
-        <%= link_to 'show', sheet_workout_path(@sheet, workout), class: 'btn btn-success' if action_name != 'show' %>
+        <%= link_to t('.action_show'), sheet_workout_path(@sheet, workout), class: 'btn btn-success' if action_name != 'show' %>
       </div>
     </div>
 
     <div class="row text-center">
       <div class="col mb-2">
         <div class="bg-light rounded">
-          <p class='h6'>Series</p>
+          <p class='h6'><%= t('.series') %></p>
           <p class='fw-light'><%= workout.series %></p>
         </div>
         <% if workout.interval.present? %>
-          <p class='fw-light'><strong>Interval: </strong><%= workout.interval %></p>
-        <% else %>
-          <p class='fw-light'><strong>Interval: </strong> Undefined</p>
+          <p class='fw-light'><strong><%= t('.interval') %></strong><%= workout.interval %></p>
         <% end %>
-        <%= link_to "Show video", "##{workout.id} ", data: { bs_toggle: "collapse" }, aria: { expanded: "false", controls: "collapseExample" } if workout.video.attached? %>
+        <%= link_to t('.show_video'), "##{workout.id} ", data: { bs_toggle: "collapse" }, aria: { expanded: "false", controls: "collapseExample" } if workout.video.attached? %>
       </div>
       <div class="col">
         <div class="bg-light rounded">
-          <p class='h6'>Repetitions</p>
+          <p class='h6'><%= t('.repetitions') %></p>
           <p class='fw-light'><%= workout.repetitions %></p>
           <hr>
-          <p class='h6'>Charge</p>
-          <p class='fw-light'><%= workout.charge %></p>
+          <p class='h6'><%= t('.charge') %></p>
+          <% if workout.charge.present? %>
+            <p class='fw-light'><%= workout.charge %></p>
+          <% else %>
+            <p class='fw-light'>- - - - -</p>
+          <% end %>
         </div>
       </div>
     </div>

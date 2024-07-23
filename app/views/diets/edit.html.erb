@@ -1,5 +1,7 @@
-<% content_for(:title, "Edit diet") %>
+<% content_for(:title, t('.title')) %>
 
 <%= render "form", diet: @diet %>
 
 <br>
+
+<%= link_to t('.link_back'), sheet_diet_path(@sheet, @diet), class: 'hide-on-mobile mt-2' %>

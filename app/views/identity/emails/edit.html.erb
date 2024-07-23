@@ -1,15 +1,15 @@
 <% if Current.user.verified? %>
-  <% content_for(:title, "Change email") %>
+  <% content_for(:title, t('.change_email_title')) %>
 <% else %>
-  <% content_for(:title, "Verify email") %>
-  <p>We sent a verification email to the address below. Check that email and follow those instructions to confirm it's your email address.</p>
-  <p><%= button_to "Re-send verification email", identity_email_verification_path, class: 'btn btn-warning mb-4' %></p>
+  <% content_for(:title, t('.verify_email_title')) %>
+  <p><%= t('.message_verification') %></p>
+  <p><%= button_to t('.send_verification_email'), identity_email_verification_path, class: 'btn btn-warning mb-4' %></p>
 <% end %>
 
 <%= form_with(url: identity_email_path, method: :patch, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if @user.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, t('.error')) %> <%= t('.error_message_form')%> </h2>
 
       <ul>
         <% @user.errors.each do |error| %>
@@ -20,20 +20,20 @@
   <% end %>
 
   <div class='mb-3'>
-    <%= form.label :email, "New email", style: "display: block", class: 'form-label' %>
+    <%= form.label :email, t('.email_label'), style: "display: block", class: 'form-label' %>
     <%= form.email_field :email, required: true, autofocus: true, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :password_challenge, style: "display: block", class: 'form-label' %>
+    <%= form.label :password_challenge, t('.password_challenge_label'), style: "display: block", class: 'form-label' %>
     <%= form.password_field :password_challenge, required: true, autocomplete: "current-password", class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.submit "Save changes", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+    <%= form.submit t('.submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>
 <% end %>
 
 <div class='hide-on-mobile'>
-  <%= link_to "Back", home_path %>
+  <%= link_to t('.link_back'), home_path %>
 </div>

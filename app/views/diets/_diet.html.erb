@@ -6,7 +6,7 @@
       </div>
       <div class="col text-end">
         <% if action_name != 'show' %>
-          <%= link_to 'Show', sheet_diet_path(@sheet, diet), class: "btn btn-success" %>
+          <%= link_to t('.action_show'), sheet_diet_path(@sheet, diet), class: "btn btn-success" %>
         <% end %>
       </div>
     </div>
@@ -16,23 +16,23 @@
           <%= raw diet.description %>
         </p>
         <hr>
-        <h1 class='h4'>Description</h1>
+        <h1 class='h4'><%= t('.details') %></h1>
 
         <ul>
           <li>
-            <strong>Protein:</strong>
-            <%= diet.protein_g %>
+            <strong><%= t('.proteins') %> </strong>
+            <%= diet.protein_g %> g
           </li>
           <li>
-            <strong>Carbohydrates:</strong>
-            <%= diet.carbohydrate_g %>
+            <strong><%= t('.carbohydrates') %> </strong>
+            <%= diet.carbohydrate_g %> g
           </li>
           <li>
-            <strong>Gordura:</strong>
-            <%= diet.fat_g %>
+            <strong><%= t('.fats') %> </strong>
+            <%= diet.fat_g %> g
           </li>
           <li>
-            <strong>Total calories:</strong>
+            <strong><%= t('.calories') %> </strong>
             <%= diet.calories %> kcal
           </li>
         </ul>

@@ -1,4 +1,4 @@
-<% content_for(:title, "Devices & Sessions") %>
+<% content_for(:title, t('.title')) %>
 
 <div id="sessions">
   <ul class="list-group rounded">
@@ -6,22 +6,22 @@
       <div id="<%= dom_id session %>">
         <li class="list-group-item">
           <p>
-            <strong>User Agent:</strong>
+            <strong><%= t('.user_agent') %></strong>
             <%= session.user_agent %>
           </p>
 
           <p>
-            <strong>Ip Address:</strong>
+            <strong><%= t('.ip_address') %></strong>
             <%= session.ip_address %>
           </p>
 
           <p>
-            <strong>Created at:</strong>
+            <strong><%= t('.created_at') %></strong>
             <%= session.created_at %>
           </p>
 
           <p>
-            <%= button_to "Log out", session, method: :delete, class: 'btn btn-danger d-grid' %>
+            <%= button_to t('.submit'), session, method: :delete, class: 'btn btn-danger d-grid' %>
           </p>
         </li>
       </div>
@@ -32,5 +32,5 @@
 <br>
 
 <div class='hide-on-mobile'>
-  <%= link_to "Back", root_path %>
+  <%= link_to t('.link_back'), home_path %>
 </div>

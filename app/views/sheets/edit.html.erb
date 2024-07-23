@@ -1,13 +1,16 @@
-<h1><% content_for(:title, "Edit Sheet") %></h1>
+<h1><% content_for(:title, t('.title')) %></h1>
 
-<div class="alert alert-danger" role='alert'>
-  <p>
-    <strong>Alert: </strong>If you change the sheet type, all content will be deleted!
-  </p>
-</div>
+
+<% if @sheet.workouts.exists? || @sheet.diets.exists? %>
+  <div class="alert alert-danger" role='alert'>
+    <p>
+      <strong><%= t('.alert') %></strong><%= t('.alert_detail')%>
+    </p>
+  </div>
+<% end %>
 
 <%= render "form", sheet: @sheet %>
 
-<div class='hide-on-mobile mt-2'>
-  <%= link_to "Back to fichas", sheets_path %>
-</div>
+<br>
+
+<%= link_to t('.link_back'), @sheet, class: 'hide-on-mobile' %>

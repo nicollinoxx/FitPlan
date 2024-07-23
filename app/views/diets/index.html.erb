@@ -1,10 +1,4 @@
-<% content_for(:title, 'Diets') %>
-
-<% if !@diets.exists? %>
-  <div class="alert alert-warning">
-    This sheets is empty!
-  </div>
-<% end %>
+<% content_for(:title, t('.title')) %>
 
 <div id="diets">
   <div class="row">
@@ -17,5 +11,9 @@
 </div>
 
 <div class="d-grid gap-2">
-  <%= link_to "New diet", new_sheet_diet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ Diet" }, class: 'btn btn-success' %>
+  <%= link_to t('.action_new'), new_sheet_diet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ Diet" }, class: 'btn btn-success' %>
 </div>
+
+<br>
+
+<%= link_to t('.link_back'), sheets_diet_path, class: 'hide-on-mobile' %>

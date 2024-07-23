@@ -1,19 +1,19 @@
-<% content_for(:title, 'Home') %>
+<% content_for(:title, t('.title')) %>
 
-<h3 class='fw-bold mt-3'>My profile</h3>
+<h3 class='fw-bold mt-3'><%= t('.section') %></h3>
 <%= link_to home_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
     <div class="bg-light shadow rounded p-2 mb-3">
       <div class="d-flex align-items-center p-1 w-25">
         <%= image_tag 'example_avatar.png', class: 'rounded-circle', style: "width: 80px; height: 75px;" %>
-        <div class="flex-grow-1 ms-3">
-          <h1 class='h4 fw-bold'>Profile</h1>
-          <p><%= Current.user.email %></p>
+        <div class="flex-grow-1 ms-3 text-md-left">
+          <h1 class='h4 fw-bold'><%= t('.section_title') %></h1>
+          <p class=''><%= Current.user.email %></p>
         </div>
       </div>
     </div>
 <% end %>
 
-<h3 class='fw-bold mt-3'>My sheets</h3>
+<h3 class='fw-bold mt-3'><%= t('.section_1') %></h3>
 <%= link_to sheets_workout_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
   <div class="bg-success-subtle shadow rounded p-2 mb-3">
     <div class="d-flex align-items-center p-1">
@@ -21,9 +21,9 @@
         <%= image_tag 'image 3.png', class: 'm-0 rounded' %>
       </div>
       <div class="flex-grow-1 ms-3">
-        <h1 class='h4 fw-bold'>Training sheets</h1>
+        <h1 class='h4 fw-bold'><%= t('.section_1_title') %></h1>
         <p>
-          <strong>Description:</strong> Contains training sheets. Choose a card and start your fitness journey.
+          <strong><%= t('.description') %></strong> <%= t('.section_1_detail') %>
         </p>
       </div>
     </div>
@@ -37,16 +37,16 @@
         <%= image_tag 'image 1.png', class: 'rounded' %>
       </div>
       <div class="flex-grow-1 ms-3">
-        <h1 class='h4 fw-bold'>Diet sheets</h1>
+        <h1 class='h4 fw-bold'><%= t('.section_1_title_1') %></h1>
         <p>
-          <strong>Description:</strong> Contains diet cards. Choose a card and start your fitness journey.
+          <strong><%= t('.description') %></strong> <%= t('.section_1_detail_1') %>
         </p>
       </div>
     </div>
   </div>
 <% end %>
 
-<h3 class='fw-bold'>Manage sheets</h3>
+<h3 class='fw-bold'><%= t('.section_2') %></h3>
 <%= link_to sheets_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
   <div class="bg-success-subtle shadow rounded">
     <div class="d-flex align-items-center p-2">
@@ -54,9 +54,9 @@
         <%= image_tag 'image 2.png', class: 'rounded' %>
       </div>
       <div class="flex-grow-1 ms-3">
-        <h1 class='h4 fw-bold'>Sheets</h1>
+        <h1 class='h4 fw-bold'><%= t('.section_2_title') %></h1>
         <p>
-          <strong>Description:</strong> Create personalized training sheets or diets for your clients.
+          <strong><%= t('.description') %></strong> <%= t('.section_2_detail') %>
         </p>
       </div>
     </div>

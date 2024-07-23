@@ -1,0 +1,375 @@
+pt-BR:
+  common:
+    home:                   'Inicio'
+    description:            'Descrição: '
+    back_to_home:           'Voltar para inicio'
+    save:                   'Salvar'
+    alert:                  'Alerta: '
+    message_destroy:        'Você tem certeza?'
+    errors:                 'erros'
+    minimum:                '12 caracteres mínimos'
+
+    #language
+    section_2:              'Idioma'
+    language_1:             'Inglês'
+    language_2:             'Português'
+
+    #error_message, email and password
+    error_message_form:     'proibiram este usuário de ser salvo:'
+    password_challenge:     'Senha atual'
+    new_password:           'Nova senha'
+    confirmation_password:  'Confirmar nova senha'
+
+    #diet
+    diet:                   'Dieta'
+    new_diet:               'Nova dieta'
+    back_to_diets:          'Voltar para dietas'
+
+    #workout
+    workout:                'Treino'
+    new_workout:            'Novo treino'
+    back_to_workout:        'Voltar para treinos'
+
+    #sheet
+    sheets:                 'Fichas'
+    new_sheet:              'Nova ficha'
+    back_to_sheet:          'Voltar para fichas'
+    name:                   'Nome'
+    type:                   'Tipo: '
+
+  layouts:
+    application:
+      home:                 :common.home
+      link_sheets:          :common.sheets
+      link_diet_sheets:     'Fichas de dietas'
+      link_training_sheets: 'Fichas de treinos'
+
+  start:
+    index:
+      title:                :common.home
+      section:              'Meu Perfil'
+      section_1:            'Minhas fichas'
+      section_2:            'Gerenciar fichas'
+      section_title:        'Perfil'
+      section_1_title:      'Fichas de treinos'
+      section_1_title_1:    'Fichas de dietas'
+      section_2_title:      'Gerenciar'
+      description:          :common.description
+      section_1_detail:     'Contem fichas de treinos. escolha uma ficha e inicie sua jornada fitness.'
+      section_1_detail_1:   'Contem fichas de dietas. escolha uma ficha e inicie sua jornada fitness.'
+      section_2_detail:     'Criar ficha personalizadas de treinos ou dietas'
+
+  sheets:
+    form:
+      error_message_form:   'impediu que essa ficha seja salva:'
+      error:                :common.errors
+      name_label:           :common.name
+      description_label:    :common.description
+      sheet_type_label:     'Tipo da ficha'
+      workout_label:        :common.workout
+      diet_label:           :common.diet
+      submit:               :common.save
+    sheet:
+      description:          :common.description
+      type:                 :common.type
+      sheet_type:           :common.workout
+      sheet_type_1:         :common.diet
+    edit:
+      title:                'Editar ficha'
+      alert:                :common.alert
+      alert_detail:         'O conteudo presente na ficha será deletado se mudar o tipo atual da ficha.'
+      link_back:            'Voltar para ficha'
+    index:
+      title:                :common.sheets
+      sheets_workout_title: 'Fichas de treinos'
+      sheets_diet_title:    'Fichas de dietas'
+      action_show:          'Mostrar detalhes'
+      action_new:           :common.new_sheet
+      link_back:            :common.back_to_home
+    new:
+      title:                :common.new_sheet
+      link_back:            :common.back_to_sheet
+    show:
+      title:                'Ficha'
+      action_edit:          'Editar ficha'
+      action_destroy:       'Destruir Ficha'
+      message_destroy:      :common.message_destroy
+      link_back:            :common.back_to_sheet
+    create:
+      success:              'Ficha criada com sucesso'
+    update:
+      success:              'Ficha editada com sucesso'
+    destroy:
+      success:              'Ficha destruida com sucesso'
+
+  workouts:
+    form:
+      error_message_form:   'impediu que esse treino seja salvo:'
+      error:                :common.errors
+      exercise_label:       'Exercicio'
+      series_label:         'Series'
+      repetitions_label:    'Repetições'
+      interval_label:       'Intervalo'
+      charge_label:         'Carga'
+      submit:               :common.save
+    workout:
+      action_show:          'Mostrar'
+      exercise:             'Exercicio'
+      repetitions:          'Repetições'
+      show_video:           'Mostrar video'
+      interval:             'Intervalo: '
+      charge:               'Carga'
+    edit:
+      title:                'Editar treino'
+      link_back:            'Voltar para treino'
+    index:
+      title:                'Treinos'
+      action_new:           :common.new_workout
+      link_back:            :common.back_to_sheet
+    new:
+      title:                :common.new_workout
+      link_back:            :common.back_to_workout
+    show:
+      title:                :common.workout
+      action_edit:          'Editar treino'
+      action_destroy:       'Destruir treino'
+      message_destroy:      :common.message_destroy
+      link_back:            :common.back_to_workout
+    create:
+      success:              'Treino criado com sucesso'
+    update:
+      success:              'Treino editado com sucesso'
+    destroy:
+      success:              'Treino destruido com sucesso'
+
+  diets:
+    form:
+      error_message_form:   'impediu que essa dieta seja salva:'
+      error:                :common.errors
+      meal_label:           'Refeição'
+      description_label:    'Descrição'
+      protein_g_label:      'Quantidade de proteinas em gramas'
+      carbohydrate_g_label: 'Quanitdade de carboidratos em gramas'
+      fat_g_label:          'Quantidade de gorduras em gramas'
+      submit:               :common.save
+    diet:
+      action_show:          'Mostrar'
+      details:              'Detalhes'
+      proteins:             'Proteinas:'
+      carbohydrates:        'Caboidratos:'
+      fats:                 'Gorduras:'
+    edit:
+      title:                'Editar dieta'
+      link_back:            'Voltar para dieta'
+    index:
+      title:                :common.diet
+      action_new:           :common.new_diet
+      link_back:            :common.back_to_sheet
+    new:
+      title:                :common.new_diet
+      link_back:            :common.back_to_diets
+    show:
+      title:                :common.dieta
+      action_edit:          'Editar dieta'
+      action_destroy:       'Destruida dieta'
+      message_destroy:      :common.message_destroy
+      link_back:            :common.back_to_diets
+    create:
+      success:              'Dieta criada com sucesso'
+    update:
+      success:              'Dieta editada com sucesso'
+    destroy:
+      success:              'Dieta destruida com sucesso'
+
+  home:
+    index:
+      title:                'Perfil'
+      section:              'Opções'
+      section_1:            'Histórico'
+      section_2:            :common.section_2
+      change_password:      'Mudar senha'
+      Change_email_address: 'Mudar email'
+      language_1:           :common.language_1
+      language_2:           :common.language_2
+      submit:               :common.save
+      log_out:              'Sair'
+      link_back:            :common.back_to_home
+      sessions:             'Sessões'
+
+  identity:
+    emails:
+      edit:
+        change_email_title:              'Mudar email'
+        verify_email_title:              'Verificar email'
+        message_verification:            'Enviamos um email de verificação para o endereço abaixo.
+                                          Verifique esse email e siga as instruções para confirmar
+                                          que é o seu endereço de email.'
+        send_verification_email:         'Reenviar verificação de email'
+        error_message_form:              :common.error_message_form
+        error:                           :common.errors
+        email_label:                     'Novo email'
+        password_challenge_label:        :common.password_challenge
+        submit:                          :common.save
+        link_back:                       'Voltar para perfil'
+      update:
+        success:                         "Seu email foi alterado"
+    password_resets:
+      edit:
+        title:                           'Esqueceu sua senha'
+        error_message_form:              :common.error_message_form
+        error:                           :common.errors
+        password_label:                  :common.new_password
+        confirmation_new_password_label: :common.confirmation_password
+        submit:                          :common.save
+        minimum_characters:                :common.minimum
+      new:
+        title:                           'Esqueceu sua senha?'
+        send_password_reset_email:       'Send password reset email'
+      create:
+        success_notice:                  'Verifique seu email para instruções de redefinição'
+        success_alert:                   "Você não pode resetar sua senha até que você verifique o seu email"
+      update:
+        success:                         "Sua senha foi redefinida com sucesso. Por favor faça o login"
+      set_user:
+        success:                         "Esse link de redefinição de senha é invalido"
+    show:
+      success:                           "Obrigado por verificar seu endereço de email"
+    create:
+      success:                           "Nós enviamos um email de verificação para seu endereço de email"
+    set_user:
+      success:                           "Esse email de verificação é invalido"
+
+
+  passwords:
+    edit:
+      title:                             'Mudar senha'
+      error_message_form:                :common.error_message_form
+      error:                             :common.errors
+      password_challenge_label:          :common.password_challenge
+      password_label:                    :common.new_password
+      confirmation_new_password_label:   :common.confirmation_password
+      submit:                            :common.save
+      link_back:                         'Voltar para perfil'
+      minimum_characters:                :common.minimum
+    update:
+      success:                           "Sua senha foi modificada"
+
+  registrations:
+    new:
+      title:                             'Cadastrar'
+      error_message_form:                :common.error_message_form
+      error:                             :common.errors
+      password_label:                    'Senha'
+      confirmation_password_label:       'Confirmar senha'
+      submit:                            'Cadastrar'
+      minimum_characters:                :common.minimum
+    create:
+      success:                           'Bem vindo! Login efetuado com successo'
+
+  sessions:
+    new:
+      title:                             'Login'
+      password_label:                    'Senha'
+      link_forgot_password:              'Esqueceu sua senha?'
+      submit_sign_in:                    'Login'
+      section:                           "Ainda não possui um perfil?"
+      submit_sign_up:                    'Cadastrar'
+      section_1:                         :common.section_2
+      language_1:                        :common.language_1
+      language_2:                        :common.language_2
+      submit:                            :common.save
+      link_back:                         'Voltar para perfil'
+    index:
+      title:                             'Dispositivos & Sessões'
+      user_agent:                        'Login:'
+      ip_address:                        'Endereço:'
+      created_at:                        'Login feito em:'
+      submit:                            'Sair'
+      link_back:                         'Voltar para perfil'
+    create:
+      success_notice:                    'Login efetuado com sucesso'
+      success_alert:                     'Email ou senha esta incorreto'
+    destroy:
+      success:                           "Essa sessão foi desconectada"
+
+  user_mailer:
+    password_reset:
+      subject:                           "Redefinir sua senha"
+      greeting:                          "Ola"
+      message:                           'Nao lembra sua senha para %{email}? Tudo bem, isso acontece. Basta clicar no link
+                                          abaixo para definir uma nova senha.'
+      expiration_message:                "Se voce nao solicitou redefinir a senha, voce pode ignorar este email com seguranca,
+                                          ele expira em 20 minutos. Somente alguem com acesso a esta conta de email pode redefinir sua senha."
+      link_text:                         "Redefinir sua senha"
+      help_message:                      "Tem perguntas ou precisa de ajuda? Basta responder a este email e nossa equipe
+                                          de suporteira ajuda-lo a resolver."
+    email_verification:
+      subject:                           "Verifique seu email"
+      greeting:                          "Ola"
+      message:                           'Este email e para confirmar que %{email} e o email que voce deseja usar na sua conta.
+                                         Se voce perder sua senha, e para la que enviaremos um link de redefinicao.'
+      strong_confirm:                    "Voce deve clicar no link abaixo para confirmar que recebeu este email."
+      confirm_link:                      "Sim, use este email para a minha conta"
+      help_message:                      "Tem perguntas ou precisa de ajuda? Basta responder a este email e nossa equipe de suporte
+                                         ira ajuda-lo a resolver."
+
+  activerecord:
+    attributes:
+      sheet:
+        sheet_type:                      "Tipo de ficha"
+        name:                            'Nome'
+      workout:
+        exercise:                        'Exercicio'
+        series:                          'Series'
+        repetitions:                     'Repetições'
+      diet:
+        meal:                            'Refeição'
+        description:                     'Descrição'
+      user:
+        password:                        'Senha'
+        password_challenge:              'Senha Atual'
+        password_confirmation:           'Confirmar senha'
+    errors:
+      messages:
+        record_invalid:                  'A validação falhou: %{errors}'
+        restrict_dependent_destroy:
+          has_one:                       Não é possível excluir o registro pois existe um %{record} dependente
+          has_many:                      Não é possível excluir o registro pois existem %{record} dependentes
+      format:                            "%{attribute} %{message}"
+      messages:
+        accepted:                        deve ser aceito
+        blank:                           não pode ficar em branco
+        confirmation:                    não é igual a %{attribute}
+        empty:                           não pode ficar vazio
+        equal_to:                        deve ser igual a %{count}
+        even:                            deve ser par
+        exclusion:                       não está disponível
+        greater_than:                    deve ser maior que %{count}
+        greater_than_or_equal_to:        deve ser maior ou igual a %{count}
+        in:                              deve estar em %{count}
+        inclusion:                       não está incluído na lista
+        invalid:                         não é válido
+        less_than:                       deve ser menor que %{count}
+        less_than_or_equal_to:           deve ser menor ou igual a %{count}
+        model_invalid:                   'A validação falhou: %{errors}'
+        not_a_number:                    não é um número
+        not_an_integer:                  não é um número inteiro
+        odd:                             deve ser ímpar
+        other_than:                      deve ser diferente de %{count}
+        present:                         deve ficar em branco
+        required:                        é obrigatório(a)
+        taken:                           já está em uso
+        too_long:
+          one:                           'é muito longo (máximo: %{count} caracter)'
+          other:                         'é muito longo (máximo: %{count} caracteres)'
+        too_short:
+          one:                           'é muito curto (mínimo: %{count} caracter)'
+          other:                         'é muito curto (mínimo: %{count} caracteres)'
+        wrong_length:
+          one:                            não possui o tamanho esperado (%{count} caracter)
+          other:                          não possui o tamanho esperado (%{count} caracteres)
+      template:
+        body:                             'Por favor, verifique o(s) seguinte(s) campo(s):'
+        header:
+          one:                            'Não foi possível gravar %{model}: %{count} erro'
+          other:                          'Não foi possível gravar %{model}: %{count} erros'

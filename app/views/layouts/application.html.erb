@@ -19,12 +19,15 @@
     <div class="hide-on-mobile mb-4">
       <div class="bg-success p-2 text-light">
         <div class="d-flex justify-content-between">
-          <h1 class='fw-bold mt-2'>FitPlan</h1>
+          <h1 class='fw-bold mt-1'>
+            <%= link_to 'FitPlan', root_path, class: 'link-light link-underline-success' %>
+          </h1>
+
           <% if Current.user.present? %>
             <%= link_to home_path, class: 'link-light' do %>
                 <p class='fw-bold h6'>
                   <%= Current.user.email.truncate(16) %>
-                  <%= image_tag 'example_avatar.png', class: 'rounded-circle mt-2', style: "width: 54px; height: 50px;" %>
+                  <%= image_tag 'example_avatar.png', class: 'rounded-circle', style: "width: 54px; height: 50px;" %>
                 </p>
             <% end %>
           <% end %>
@@ -54,13 +57,13 @@
       </nav>
 
       <div class="container mt-3">
-        <% if notice.present? && controller.controller_name != 'sessions' %>
+        <% if notice.present?  %>
           <div class="alert alert-success" role="alert" data-controller="bridge--flash-message">
             <%= notice %>
           </div>
-        <% elsif notice.present? %>
+        <% elsif alert.present? %>
           <div class="alert alert-danger" role="alert" data-controller="bridge--flash-message">
-            <%= notice %>
+            <%= alert %>
           </div>
         <% end %>
       </div>

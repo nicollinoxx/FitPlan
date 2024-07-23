@@ -1,9 +1,9 @@
-<h1><% content_for(:title, "New sheet") %></h1>
+<h1><% content_for(:title, t('.title')) %></h1>
 
 <%= render "form", sheet: @sheet %>
 
 <br>
 
 <div class="hide-on-mobile mt-2">
-  <%= link_to "Back to sheets", sheets_path %>
+  <%= link_to t('.link_back'), @sheet, class: 'hide-on-mobile mt-2' %>
 </div>

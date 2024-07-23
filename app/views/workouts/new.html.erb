@@ -1,7 +1,7 @@
-<% content_for(:title, "New workout") %>
+<% content_for(:title, t('.title')) %>
 
 <%= render "form", workout: @workout %>
 
 <br>
 
-<%= link_to 'back', sheet_workouts_path(@sheet), class: 'hide-on-mobile' %>
+<%= link_to t('.link_back'), sheet_workouts_path(@sheet), class: 'hide-on-mobile mt-2' %>
