@@ -14,7 +14,7 @@ class DietsController < ApplicationController
 
   # GET /diets/new
   def new
-    @diet = @sheet.diets.new
+    @diet = @sheet.diets.build
   end
 
   # GET /diets/1/edit
@@ -23,7 +23,7 @@ class DietsController < ApplicationController
 
   # POST /diets or /diets.json
   def create
-    @diet = @sheet.diets.new(diet_params)
+    @diet = @sheet.diets.build(diet_params)
 
     if @diet.save
       refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('diets.create.success')

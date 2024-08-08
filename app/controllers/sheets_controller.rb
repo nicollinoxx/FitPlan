@@ -14,7 +14,7 @@ class SheetsController < ApplicationController
 
   # GET /sheets/new
   def new
-    @sheet = @user.sheets.new
+    @sheet = @user.sheets.build
   end
 
   # GET /sheets/1/edit
@@ -23,7 +23,7 @@ class SheetsController < ApplicationController
 
   # POST /sheets or /sheets.json
   def create
-    @sheet = @user.sheets.new(sheet_params)
+    @sheet = @user.sheets.build(sheet_params)
 
     if @sheet.save
       refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('sheets.create.success')
@@ -65,7 +65,7 @@ class SheetsController < ApplicationController
     def set_user
       @user = Current.user if Current.user.present?
     end
-    
+
     # Use callbacks to share common setup or constraints between actions.
     def set_sheet
       @sheet = @user.sheets.find(params[:id])

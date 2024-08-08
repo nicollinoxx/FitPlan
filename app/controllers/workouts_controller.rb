@@ -14,7 +14,7 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/new
   def new
-    @workout = @sheet.workouts.new
+    @workout = @sheet.workouts.build
   end
 
   # GET /workouts/1/edit
@@ -23,7 +23,7 @@ class WorkoutsController < ApplicationController
 
   # POST /workouts or /workouts.json
   def create
-    @workout = @sheet.workouts.new(workout_params)
+    @workout = @sheet.workouts.build(workout_params)
 
     if @workout.save
       refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: I18n.t('workouts.create.success')
