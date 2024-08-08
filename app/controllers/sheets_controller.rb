@@ -1,10 +1,11 @@
 class SheetsController < ApplicationController
+  before_action :set_user
   before_action :set_sheet, only: %i[ show edit update destroy ]
   after_action :destroy_content_if_sheet_type_was_changed, only: %i[ update ]
 
   # GET /sheets or /sheets.json
   def index
-    @sheets = Sheet.all
+    @sheets = @user.sheets
   end
 
   # GET /sheets/1 or /sheets/1.json
@@ -13,7 +14,7 @@ class SheetsController < ApplicationController
 
   # GET /sheets/new
   def new
-    @sheet = Sheet.new
+    @sheet = @user.sheets.new
   end
 
   # GET /sheets/1/edit
@@ -22,7 +23,7 @@ class SheetsController < ApplicationController
 
   # POST /sheets or /sheets.json
   def create
-    @sheet = Sheet.new(sheet_params)
+    @sheet = @user.sheets.new(sheet_params)
 
     if @sheet.save
       refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('sheets.create.success')
@@ -49,21 +50,25 @@ class SheetsController < ApplicationController
 
   #filter sheets by type and adds specific title for filtered content
   def sheet_diets_index
-    @sheets = Sheet.where(sheet_type: 'diet')
+    @sheets = @user.sheets.where(sheet_type: 'diet')
     @title = '.sheets_diet_title'
     render :index
   end
 
   def sheet_workouts_index
-    @sheets = Sheet.where(sheet_type: 'workout')
+    @sheets = @user.sheets.where(sheet_type: 'workout')
     @title = '.sheets_workout_title'
     render :index
   end
 
   private
+    def set_user
+      @user = Current.user if Current.user.present?
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_sheet
-      @sheet = Sheet.find(params[:id])
+      @sheet = @user.sheets.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
