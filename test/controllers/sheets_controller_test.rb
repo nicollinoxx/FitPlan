@@ -2,6 +2,7 @@ require "test_helper"
 
 class SheetsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in_as(users(:lazaro_nixon))
     @sheet = sheets(:one)
   end
 

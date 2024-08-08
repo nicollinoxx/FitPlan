@@ -2,7 +2,8 @@ require "test_helper"
 
 class DietsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @diet = diets(:one)
+    sign_in_as(users(:lazaro_nixon))
+    @diet  = diets(:one)
     @sheet = sheets(:two)
   end
 
