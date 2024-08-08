@@ -24,13 +24,9 @@
         <div class="bg-light rounded">
           <p class='h6'><%= t('.repetitions') %></p>
           <p class='fw-light'><%= workout.repetitions %></p>
-          <hr>
+          <hr/>
           <p class='h6'><%= t('.charge') %></p>
-          <% if workout.charge.present? %>
-            <p class='fw-light'><%= workout.charge %></p>
-          <% else %>
-            <p class='fw-light'>- - - - -</p>
-          <% end %>
+          <p class="fw-light"><%= workout.charge.present? ? workout.charge : '- - - - -' %></p>
         </div>
       </div>
     </div>
