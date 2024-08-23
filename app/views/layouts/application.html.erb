@@ -18,16 +18,20 @@
   <body>
     <div class="hide-on-mobile mb-4">
       <div class="bg-success p-2 text-light">
-        <div class="d-flex justify-content-between">
-          <h1 class='fw-bold mt-1'>
+        <div class="d-flex justify-content-between mt-2">
+          <h1 class='fw-bold'>
             <%= link_to 'FitPlan', root_path, class: 'link-light link-underline-success' %>
           </h1>
 
           <% if Current.user.present? %>
             <%= link_to home_path, class: 'link-light' do %>
-                <p class='fw-bold h6'>
-                  <%= Current.user.email.truncate(16) %>
-                  <%= image_tag 'example_avatar.png', class: 'rounded-circle', style: "width: 54px; height: 50px;" %>
+                <p class='fw-bold h6 text-break'>
+                  <%= Current.user.email %>
+                  <% if Current.user.avatar.persisted? && Current.user.avatar.attached? %>
+                    <%= image_tag Current.user.avatar, class: 'ms-2 rounded-circle', style: "width: 54px; height: 50px;" %>
+                  <% else %>
+                    <%= image_tag 'avatar.png', class: 'ms-2 rounded-circle', style: "width: 54px; height: 50px;" %>
+                  <% end %>
                 </p>
             <% end %>
           <% end %>

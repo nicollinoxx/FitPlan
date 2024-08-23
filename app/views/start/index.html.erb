@@ -4,10 +4,14 @@
 <%= link_to home_path, class: 'link-underline-light link-dark' do %>
   <div class="bg-light rounded shadow mb-3">
     <div class="d-flex p-2">
-      <%= image_tag 'example_avatar.png', class: 'rounded-circle', width: 80, height: 75 %>
+      <% if Current.user.avatar.attached? %>
+        <%= image_tag Current.user.avatar, class: 'rounded-circle', style: "width: 80px; height: 75px;" %>
+      <% else %>
+        <%= image_tag 'avatar.png', class: 'rounded-circle', style: "width: 80px; height: 75px;" %>
+      <% end %>
       <div class="flex-grow-1 ms-3 mt-1">
         <h1 class="h4 fw-bold"><%= t('.section_title') %></h1>
-        <p><%= Current.user.email %></p>
+        <p class='text-break'><%= Current.user.email %></p>
       </div>
     </div>
   </div>

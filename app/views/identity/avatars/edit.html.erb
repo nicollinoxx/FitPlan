@@ -1,0 +1,11 @@
+<h1 class='fw-bold'>Edit avatar</h1>
+
+<div class="d-flex justify-content-center mb-3">
+  <% if @user.avatar.persisted? && @user.avatar.attached? %>
+    <%= image_tag @user.avatar, class: 'rounded-circle', style: "width: 190px; height: 180px;" %>
+  <% end %>
+</div>
+
+<div id="avatar">
+  <%= render 'identity/avatars/form', user: @user %>
+</div>

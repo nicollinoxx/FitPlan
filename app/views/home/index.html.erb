@@ -1,14 +1,19 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="text-center mb-3">
-  <%= image_tag 'example_avatar.png', class: 'rounded-circle', style: "width: 200px; height: 190px;"%>
-  <p>Signed as: <%= Current.user.email %></p>
+<div class="d-flex justify-content-center mb-3">
+  <% if Current.user.avatar.attached? %>
+    <%= image_tag Current.user.avatar, class: 'rounded-circle', style: "width: 190px; height: 180px;" %>
+  <% else %>
+    <%= image_tag 'avatar.png', class: 'rounded-circle', style: "width: 190px; height: 180px;" %>
+  <% end %>
 </div>
+<p class='text-center'>Signed as: <%= Current.user.email %></p>
 
 <div class="mb-4">
   <h2 class='fw-bold'><%= t('.section') %></h2>
 
   <ul class="list-group mb-2">
+    <li class="list-group-item"><%= link_to 'Change avatar', identity_avatar_path(Current.user) %></li>
     <li class="list-group-item"><%= link_to t('.change_password'), edit_password_path %></li>
     <li class="list-group-item"><%= link_to t('.Change_email_address'), edit_identity_email_path %></li>
   </ul>

@@ -1,0 +1,22 @@
+<%= form_with(url: identity_avatar_path, method: :patch, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
+  <% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, t('.error')) %> <%= t('.error_message_form') %> </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :avatar, 'New avatar', style: "display: block", class: 'form-label' %>
+    <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: 'form-control border border-success' %>
+    <%= content_tag :small, "Supported files: PNG, JPEG/JPG", class: "text-muted" %>
+  </div>
+
+  <div>
+    <%= form.submit t('.submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+  </div>
+<% end %>
