@@ -200,6 +200,8 @@ pt-BR:
   identity:
     avatars:
        form:
+        error:                           :common.errors
+        error_message_form:              :common.error_message_form
         submit:                          :common.save
         avatar_label:                    'Novo avatar'
         supported_files:                 "Arquivos suportados: PNG, JPEG/JPG"
@@ -211,6 +213,10 @@ pt-BR:
          action_destroy:                 'Destruir avatar'
          message_destroy:                :common.message_destroy
          link_back:                      'Voltar para perfil'
+       update:
+         success:                        'Avatar atualizado com successo'
+       destroy:
+         success:                        'Avatar destruido com sucesso'
     emails:
       edit:
         change_email_title:              'Mudar email'
@@ -348,7 +354,7 @@ pt-BR:
           attributes:
             video:
               error_video_type:          "deve ser um arquivo MP4, MPEG ou QuickTime"
-              error_video_size:          "é muito grande. O tamanho máximo permitido é 12MB."
+              error_video_size:          "é muito grande. O tamanho máximo permitido é 16MB."
         user:
           attributes:
             avatar:

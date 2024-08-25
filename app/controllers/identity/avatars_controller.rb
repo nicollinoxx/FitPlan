@@ -9,11 +9,11 @@ class Identity::AvatarsController < ApplicationController
 
   def update
     if @user.update(user_params)
-      refresh_or_redirect_to home_path, notice: 'Avatar updated successfully'
+      refresh_or_redirect_to home_path, notice: I18n.t('identity.avatars.update.success')
     else
       respond_to do |format|
         format.turbo_stream {
-          render turbo_stream: turbo_stream.replace('avatar',
+          render turbo_stream: turbo_stream.replace('form',
                       partial: 'identity/avatars/form',
                        locals: { user: @user }) }
       end
@@ -23,7 +23,7 @@ class Identity::AvatarsController < ApplicationController
   def destroy
     @user.avatar.purge_later
 
-    recede_or_redirect_to home_path, notice: 'Avatar destroyed successfully'
+    recede_or_redirect_to home_path, notice: I18n.t('identity.avatars.destroy.success')
   end
 
   private

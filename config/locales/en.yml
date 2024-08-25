@@ -187,6 +187,7 @@ en:
       section:              'Options'
       section_1:            'Historic'
       section_2:            :common.section_2
+      change_avatar:        'Change avatar'
       change_password:      'Change password'
       Change_email_address: 'Change email address'
       language_1:           :common.language_1
@@ -199,6 +200,8 @@ en:
   identity:
     avatars:
        form:
+        error:                           :common.errors
+        error_message_form:              :common.error_message_form
         submit:                          :common.save
         avatar_label:                    'New avatar'
         supported_files:                 "Supported files: PNG, JPEG/JPG"
@@ -210,6 +213,10 @@ en:
          action_destroy:                 'Destroy Avatar'
          message_destroy:                :common.message_destroy
          link_back:                      'Back to profile'
+       update:
+         success:                        'Avatar updated successfully'
+       destroy:
+          success:                        'Avatar destroyed successfully'
     emails:
       edit:
         change_email_title:              'Change email'
@@ -330,7 +337,7 @@ en:
           attributes:
             video:
               error_video_type:          "must be a file (MP4, MPEG, QuickTime"
-              error_video_size:          "is too big. Maximum size allowed is 12MB."
+              error_video_size:          "is too big. Maximum size allowed is 16MB."
         user:
           attributes:
             avatar:

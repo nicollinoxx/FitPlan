@@ -15,7 +15,7 @@ class Workout < ApplicationRecord
     end
 
     def video_size_validation
-      if video.attached? && video.byte_size > 12.megabytes
+      if video.attached? && video.byte_size > 16.megabytes
         errors.add(:video, :error_video_size)
       end
     end
