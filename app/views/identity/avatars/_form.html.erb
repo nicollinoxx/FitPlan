@@ -11,9 +11,9 @@
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :avatar, 'New avatar', style: "display: block", class: 'form-label' %>
+    <%= form.label :avatar, t('.avatar_label'), style: "display: block", class: 'form-label' %>
     <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: 'form-control border border-success' %>
-    <%= content_tag :small, "Supported files: PNG, JPEG/JPG", class: "text-muted" %>
+    <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
   </div>
 
   <div>

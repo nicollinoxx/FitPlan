@@ -1,4 +1,4 @@
-<h1 class='fw-bold'>Avatar</h1>
+<% content_for(:title, t('.title')) %>
 
 <div class="d-flex justify-content-center mb-3">
   <% if @user.avatar.attached? %>
@@ -9,7 +9,7 @@
 </div>
 
 <div class='d-flex flex-row'>
-  <%= link_to 'Change Avatar', edit_identity_avatar_path(@user), class: 'btn btn-secondary me-3' %>
+  <%= link_to t('.action_update'), edit_identity_avatar_path(@user), class: 'btn btn-secondary me-3' %>
 
   <% if @user.avatar.attached? %>
     <%= button_to t('.action_destroy'), identity_avatar_path(@user), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('.message_destroy') }, class: 'btn btn-danger' %>
@@ -18,4 +18,4 @@
 
 <hr>
 
-<%= link_to 'Back to home', home_path %>
+<%= link_to t('.link_back'), home_path %>

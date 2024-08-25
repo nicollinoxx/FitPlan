@@ -49,6 +49,7 @@
     <% end %>
 
     <%= form.file_field :video, class: 'form-control border border-success' %>
+    <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
   </div>
 
   <div>

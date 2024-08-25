@@ -54,9 +54,8 @@ en:
       section_1_title:      'Training sheets'
       section_1_title_1:    'Diet sheets'
       section_2_title:      'Manage'
-      description:          :common.description
-      section_1_detail:     'Contains training sheets. Choose a sheet and start your fitness journey.'
-      section_1_detail_1:   'Contains diet sheets. Choose a sheet and start your fitness journey.'
+      section_1_detail:     'Training sheets. Choose a sheet and start your fitness journey.'
+      section_1_detail_1:   'Diet sheets. Choose a sheet and start fitness journey.'
       section_2_detail:     'Create personalized training or diet sheets.'
 
   sheets:
@@ -111,6 +110,7 @@ en:
       repetitions_label:    'Repetitions'
       interval_label:       'Interval'
       charge_label:         'Charge'
+      supported_files:      "Supported files: PNG, JPEG/JPG"
       submit:               :common.save
     workout:
       action_show:          'Show'
@@ -197,6 +197,19 @@ en:
       sessions:             'Sessions'
 
   identity:
+    avatars:
+       form:
+        submit:                          :common.save
+        avatar_label:                    'New avatar'
+        supported_files:                 "Supported files: PNG, JPEG/JPG"
+       edit:
+         title:                          'Change Avatar'
+       show:
+         title:                          'Avatar'
+         action_update:                  'Change Avatar'
+         action_destroy:                 'Destroy Avatar'
+         message_destroy:                :common.message_destroy
+         link_back:                      'Back to profile'
     emails:
       edit:
         change_email_title:              'Change email'
@@ -273,7 +286,7 @@ en:
       submit_sign_in:                    'Sign In'
       section:                           "Don't have any account yet?"
       submit_sign_up:                    'Sign Up'
-      section_1:                         :common.section_1
+      section_1:                         :common.section_2
       language_1:                        :common.language_1
       language_2:                        :common.language_2
       submit:                            :common.save
@@ -309,3 +322,17 @@ en:
       confirm_link:                      "Yes, use this email for my account"
       help_message:                      "Have questions or need help? Just reply to this email and our support team will help
                                          you sort it out."
+
+  activerecord:
+    errors:
+      models:
+        workout:
+          attributes:
+            video:
+              error_video_type:          "must be a file (MP4, MPEG, QuickTime"
+              error_video_size:          "is too big. Maximum size allowed is 12MB."
+        user:
+          attributes:
+            avatar:
+              error_avatar_type:         'must be a file (png, jpeg, jpg)'
+              error_avatar_size:         "is too big. Maximum size allowed is 2MB."

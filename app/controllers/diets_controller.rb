@@ -26,7 +26,7 @@ class DietsController < ApplicationController
     @diet = @sheet.diets.build(diet_params)
 
     if @diet.save
-      refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('diets.create.success')
+      redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('diets.create.success')
     else
       render :new, status: :unprocessable_entity
     end

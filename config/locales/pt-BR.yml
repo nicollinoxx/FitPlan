@@ -54,9 +54,8 @@ pt-BR:
       section_1_title:      'Fichas de treinos'
       section_1_title_1:    'Fichas de dietas'
       section_2_title:      'Gerenciar'
-      description:          :common.description
-      section_1_detail:     'Contem fichas de treinos. escolha uma ficha e inicie sua jornada fitness.'
-      section_1_detail_1:   'Contem fichas de dietas. escolha uma ficha e inicie sua jornada fitness.'
+      section_1_detail:     'Fichas de treinos. Escolha uma ficha e inicie sua jornada fitness.'
+      section_1_detail_1:   'Fichas de dietas. Escolha uma ficha e inicie sua jornada fitness.'
       section_2_detail:     'Criar ficha personalizadas de treinos ou dietas'
 
   sheets:
@@ -111,6 +110,7 @@ pt-BR:
       repetitions_label:    'Repetições'
       interval_label:       'Intervalo'
       charge_label:         'Carga'
+      supported_files:      "Arquivos suportados: PNG, JPEG/JPG"
       submit:               :common.save
     workout:
       action_show:          'Mostrar'
@@ -187,6 +187,7 @@ pt-BR:
       section:              'Opções'
       section_1:            'Histórico'
       section_2:            :common.section_2
+      change_avatar:        'Mudar avatar'
       change_password:      'Mudar senha'
       Change_email_address: 'Mudar email'
       language_1:           :common.language_1
@@ -197,6 +198,19 @@ pt-BR:
       sessions:             'Sessões'
 
   identity:
+    avatars:
+       form:
+        submit:                          :common.save
+        avatar_label:                    'Novo avatar'
+        supported_files:                 "Arquivos suportados: PNG, JPEG/JPG"
+       edit:
+        title:                           'Mudar avatar'
+       show:
+         title:                          'Avatar'
+         action_update:                  'Mudar avatar'
+         action_destroy:                 'Destruir avatar'
+         message_destroy:                :common.message_destroy
+         link_back:                      'Voltar para perfil'
     emails:
       edit:
         change_email_title:              'Mudar email'
@@ -238,7 +252,6 @@ pt-BR:
       success:                           "Nós enviamos um email de verificação para seu endereço de email"
     set_user:
       success:                           "Esse email de verificação é invalido"
-
 
   passwords:
     edit:
@@ -330,6 +343,17 @@ pt-BR:
         password_challenge:              'Senha Atual'
         password_confirmation:           'Confirmar senha'
     errors:
+      models:
+        workout:
+          attributes:
+            video:
+              error_video_type:          "deve ser um arquivo MP4, MPEG ou QuickTime"
+              error_video_size:          "é muito grande. O tamanho máximo permitido é 12MB."
+        user:
+          attributes:
+            avatar:
+              error_avatar_type:         "deve ser um arquivo MP4, MPEG ou QuickTime"
+              error_avatar_size:         "é muito grande. O tamanho máximo permitido é 12MB."
       messages:
         record_invalid:                  'A validação falhou: %{errors}'
         restrict_dependent_destroy:

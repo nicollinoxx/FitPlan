@@ -16,7 +16,7 @@
           <p class='fw-light'><%= workout.series %></p>
         </div>
         <% if workout.interval.present? %>
-          <p class='fw-light'><strong><%= t('.interval') %></strong><%= workout.interval %></p>
+          <p class='fw-light m-0'><strong><%= t('.interval') %></strong><%= workout.interval %></p>
         <% end %>
         <%= link_to t('.show_video'), "##{workout.id} ", data: { bs_toggle: "collapse" }, aria: { expanded: "false", controls: "collapseExample" } if workout.video.attached? %>
       </div>
@@ -26,7 +26,7 @@
           <p class='fw-light'><%= workout.repetitions %></p>
           <hr/>
           <p class='h6'><%= t('.charge') %></p>
-          <p class="fw-light"><%= workout.charge.present? ? workout.charge : '- - - - -' %></p>
+          <p class="fw-light pb-2"><%= workout.charge.present? ? workout.charge : '- - - - -' %></p>
         </div>
       </div>
     </div>

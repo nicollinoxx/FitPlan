@@ -26,7 +26,7 @@ class WorkoutsController < ApplicationController
     @workout = @sheet.workouts.build(workout_params)
 
     if @workout.save
-      refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: I18n.t('workouts.create.success')
+      redirect_to sheet_workout_url(@sheet, @workout), notice: I18n.t('workouts.create.success')
     else
       render :new, status: :unprocessable_entity
     end

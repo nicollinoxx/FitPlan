@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   skip_before_action :authenticate, only: %i[ new create ]
-
   before_action :set_session, only: :destroy
 
   def index
@@ -22,7 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    @session.destroy; refresh_or_redirect_to(sessions_path, notice: I18n.t('sessions.destroy.success')) 
+    @session.destroy; recede_or_redirect_to(sessions_path, notice: I18n.t('sessions.destroy.success'))
   end
 
   private

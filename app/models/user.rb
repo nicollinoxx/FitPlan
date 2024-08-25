@@ -31,13 +31,13 @@ class User < ApplicationRecord
 
     def avatar_content_type
       if avatar.attached? && !avatar.content_type.in?(%w(image/png image/jpeg image/jpg))
-        errors.add(:avatar, 'must be a file (png, jpeg, jpg)')
+        errors.add(:avatar, :error_avatar_type)
       end
     end
 
     def avatar_size_validation
       if avatar.attached? && avatar.byte_size > 2.megabytes
-        errors.add(:avatar, "is too big. Maximum size allowed is 2MB.")
+        errors.add(:avatar, :error_avatar_size)
       end
     end
 end

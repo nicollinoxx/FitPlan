@@ -26,7 +26,7 @@ class SheetsController < ApplicationController
     @sheet = @user.sheets.build(sheet_params)
 
     if @sheet.save
-      refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('sheets.create.success')
+      redirect_to sheet_url(@sheet), notice: I18n.t('sheets.create.success')
     else
       render :new, status: :unprocessable_entity
     end

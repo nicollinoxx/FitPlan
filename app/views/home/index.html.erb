@@ -13,7 +13,7 @@
   <h2 class='fw-bold'><%= t('.section') %></h2>
 
   <ul class="list-group mb-2">
-    <li class="list-group-item"><%= link_to 'Change avatar', identity_avatar_path(Current.user) %></li>
+    <li class="list-group-item"><%= link_to t('.change_avatar'), identity_avatar_path(Current.user) %></li>
     <li class="list-group-item"><%= link_to t('.change_password'), edit_password_path %></li>
     <li class="list-group-item"><%= link_to t('.Change_email_address'), edit_identity_email_path %></li>
   </ul>
@@ -29,7 +29,7 @@
 <div class="mb-4">
   <h3 class='fw-bold'><%= t('.section_2') %></h3>
 
-  <%= form_tag(home_path, method: :get) do %>
+  <%= form_tag(root_path, method: :get) do %>
     <div class="d-flex" style='max-width: 22rem;'>
       <%= select_tag :locale, options_for_select([[t('.language_1'), 'en'], [t('.language_2'), 'pt-BR']], I18n.locale), class: 'form-select' %>
       <%= submit_tag t('.submit'), class: 'ms-3 btn btn-secondary' %>
