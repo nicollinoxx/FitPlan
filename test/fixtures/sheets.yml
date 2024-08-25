@@ -5,9 +5,11 @@ one:
   name: MyString
   description: MyText
   sheet_type: workout
+  user_id: 1
 
 two:
   id: 2
   name: MyString
   description: MyText
   sheet_type: diet
+  user_id: 1
