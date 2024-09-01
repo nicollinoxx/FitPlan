@@ -1,6 +1,8 @@
 class Diet < ApplicationRecord
   belongs_to :sheet
 
+  has_rich_text :description
+
   validates :meal, :description, :protein_g, :carbohydrate_g, :fat_g, presence: true
 
   before_save :calculate_calories

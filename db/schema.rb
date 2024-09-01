@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_08_161425) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_01_214315) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -51,7 +51,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_08_161425) do
 
   create_table "diets", force: :cascade do |t|
     t.string "meal"
-    t.text "description"
     t.decimal "protein_g", default: "0.0"
     t.decimal "carbohydrate_g", default: "0.0"
     t.decimal "fat_g", default: "0.0"
