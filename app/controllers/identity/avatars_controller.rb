@@ -21,7 +21,7 @@ class Identity::AvatarsController < ApplicationController
   end
 
   def destroy
-    @user.avatar.purge_later
+    @user.avatar.purge
 
     recede_or_redirect_to home_path, notice: I18n.t('identity.avatars.destroy.success')
   end

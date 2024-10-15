@@ -359,7 +359,7 @@ pt-BR:
           attributes:
             avatar:
               error_avatar_type:         "deve ser um arquivo MP4, MPEG ou QuickTime"
-              error_avatar_size:         "é muito grande. O tamanho máximo permitido é 12MB."
+              error_avatar_size:         "é muito grande. O tamanho máximo permitido é 4MB."
       messages:
         record_invalid:                  'A validação falhou: %{errors}'
         restrict_dependent_destroy:
