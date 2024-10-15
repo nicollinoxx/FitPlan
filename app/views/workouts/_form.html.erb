@@ -41,15 +41,20 @@
   <div class='mb-3'>
     <%= form.label :video, style: "display: block", class: 'form-label' %>
 
-    <% if workout.video.persisted? && workout.video.attached? %>
-      <div id="video">
-        <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
-        <%= link_to "Destroy video", sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': 'Are you sure' }, class: 'btn btn-danger mb-4' %>
+    <div data-controller="upload-preview">
+      <div style="style: block;" data-upload-preview-target="currentFile">
+        <div id="video">
+          <% if workout.video.attached? && workout.video.persisted? %>
+            <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
+            <%= link_to "Destroy video", sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': 'Are you sure'}, class: 'btn btn-danger mb-4' %>
+          <% end %>
+        </div>
       </div>
-    <% end %>
 
-    <%= form.file_field :video, accept: 'video/mp4, video/mpeg, video/quicktime', class: 'form-control border border-success' %>
-    <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
+      <%= video_tag "", controls: true, data: { "upload-preview-target": "previewUpload" }, class: 'rounded bg-secondary img-fluid mb-2', style: 'display: none; height: 160px' %>
+      <%= form.file_field :video, accept: 'video/mp4, video/mpeg, video/quicktime', data: { "upload-preview-target": "fileInput", "action": "upload-preview#preview" }, class: 'form-control border border-success' %>
+      <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
+    </div>
   </div>
 
   <div>
