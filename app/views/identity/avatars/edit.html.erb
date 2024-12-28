@@ -3,7 +3,7 @@
 <div data-controller="upload-preview">
   <div class="d-flex justify-content-center mb-3">
     <% if @user.avatar.persisted? && @user.avatar.attached? %>
-      <%= image_tag @user.avatar, data: { "upload-preview-target": "currentFile" }, class: 'rounded-circle', style: "display: block; width: 190px; height: 180px;" %>
+      <%= image_tag @user.avatar, data: { "upload-preview-target": "currentFile" }, class: 'rounded-circle', style: "width: 190px; height: 180px;" %>
     <% end %>
     <%= image_tag "", data: { "upload-preview-target": "previewUpload" }, class: 'rounded-circle', style: "display: none; width: 190px; height: 180px;" %>
   </div>

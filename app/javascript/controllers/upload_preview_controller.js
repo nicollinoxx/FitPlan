@@ -16,8 +16,8 @@ export default class extends Controller {
 
     reader.onload = (event) => {
       this.previewUploadTarget.src = event.target.result;
-      this.currentFileTarget.style.display   = "none";
       this.previewUploadTarget.style.display = "block";
+      this.currentFileTarget.style.display   = "none";
     };
 
     reader.readAsDataURL(file);
