@@ -4,7 +4,7 @@ class SheetsController < ApplicationController
 
   # GET /sheets or /sheets.json
   def index
-    @sheets = @user.sheets
+    @sheets = params[:type] ? @user.sheets.where(sheet_type: params[:type]) : @user.sheets 
   end
 
   # GET /sheets/1 or /sheets/1.json
@@ -45,19 +45,6 @@ class SheetsController < ApplicationController
     @sheet.destroy!
 
     recede_or_redirect_to sheets_url, notice: I18n.t('sheets.destroy.success')
-  end
-
-  #filter sheets by type and adds specific title for filtered content
-  def sheet_diets_index
-    @sheets = @user.sheets.where(sheet_type: 'diet')
-    @title = '.sheets_diet_title'
-    render :index
-  end
-
-  def sheet_workouts_index
-    @sheets = @user.sheets.where(sheet_type: 'workout')
-    @title = '.sheets_workout_title'
-    render :index
   end
 
   private

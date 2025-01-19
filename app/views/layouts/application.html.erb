@@ -51,10 +51,10 @@
                 <%= link_to t('.link_sheets'), sheets_path, class: 'nav-link' %>
               </li>
               <li class="nav-item">
-                <%= link_to t('.link_diet_sheets'), sheets_diet_path, class: 'nav-link' %>
+                <%= link_to t('.link_diet_sheets'), sheets_path(type: 'diet'), class: 'nav-link' %>
               </li>
               <li class="nav-item">
-                <%= link_to t('.link_training_sheets'), sheets_workout_path, class: 'nav-link' %>
+                <%= link_to t('.link_training_sheets'), sheets_path(type: 'workout'), class: 'nav-link' %>
               </li>
             </ul>
           </div>
