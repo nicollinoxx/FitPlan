@@ -19,8 +19,10 @@ class Sheet < ApplicationRecord
   private
 
   def destroy_invalid_content
-    diets.destroy_all if sheet_type == 'workout'
-
-    workouts.destroy_all if sheet_type == 'diet'
+    if workout?
+      diets.destroy_all
+    elsif diet?
+      workouts.destroy_all
+    end
   end
 end
