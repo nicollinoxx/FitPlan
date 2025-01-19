@@ -60,7 +60,7 @@ class DietsController < ApplicationController
     end
 
     def redirect_if_sheet_type_is_same_as_workout
-      if @sheet.sheet_type == 'workout'
+      if @sheet.workout?
         redirect_to sheet_workouts_path(@sheet)
       end
     end
