@@ -5,4 +5,12 @@ class Sheet < ApplicationRecord
 
   validates :name, :sheet_type, presence: true
   validates :sheet_type, inclusion: { in: %w(workout diet) }
+
+  before_update :destroy_invalid_content, if: :will_save_change_to_sheet_type?
+
+  def destroy_invalid_content
+    diets.destroy_all if sheet_type == 'workout'
+
+    workouts.destroy_all if sheet_type == 'diet'
+  end
 end
