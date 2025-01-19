@@ -22,11 +22,13 @@
   </div>
 
   <div class="mb-3">
-     <%= form.label :sheet_type, t('.sheet_type_label'), class: 'form-check-label mb-1' %><br />
-     <%= form.radio_button :sheet_type, 'workout', class: 'form-check-input' %>
-     <%= form.label :sheet_type, t('.workout_label'), class: 'form-check-label me-2' %>
-     <%= form.radio_button :sheet_type, 'diet', class: 'form-check-input' %>
-     <%= form.label :sheet_type, t('.diet_label'), class: 'form-check-label'  %>
+    <%= form.label :sheet_type, t('.sheet_type_label'), class: 'form-check-label mb-1' %><br />
+
+    <%= form.radio_button :sheet_type, 'workout', class: 'form-check-input' %>
+    <%= form.label :sheet_type_workout, t('.workout_label'), class: 'form-check-label me-2' %>
+
+    <%= form.radio_button :sheet_type, 'diet', class: 'form-check-input' %>
+    <%= form.label :sheet_type_diet, t('.diet_label'), class: 'form-check-label'  %>
   </div>
 
   <div>

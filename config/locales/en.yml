@@ -1,7 +1,7 @@
 en:
   common:
     home:                   'Home'
-    description:            'Description: '
+    description:            'Description '
     back_to_home:           'Back to home'
     save:                   'Save'
     alert:                  'Alert: '
@@ -110,6 +110,10 @@ en:
       repetitions_label:    'Repetitions'
       interval_label:       'Interval'
       charge_label:         'Charge'
+      options_charge:
+                            - 'low'
+                            - 'medium'
+                            - 'high'
       supported_files:      "Supported files: PNG, JPEG/JPG"
       submit:               :common.save
     workout:

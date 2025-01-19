@@ -1,7 +1,7 @@
 pt-BR:
   common:
     home:                   'Inicio'
-    description:            'Descrição: '
+    description:            'Descrição '
     back_to_home:           'Voltar para inicio'
     save:                   'Salvar'
     alert:                  'Alerta: '
@@ -110,6 +110,10 @@ pt-BR:
       repetitions_label:    'Repetições'
       interval_label:       'Intervalo'
       charge_label:         'Carga'
+      options_charge:
+                            - 'baixo'
+                            - 'medio'
+                            - 'alto'
       supported_files:      "Arquivos suportados: PNG, JPEG/JPG"
       submit:               :common.save
     workout:
