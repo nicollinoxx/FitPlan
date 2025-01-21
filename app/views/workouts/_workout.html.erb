@@ -1,10 +1,10 @@
 <div id="<%= dom_id workout %>">
   <div class="bg-secondary-subtle rounded p-2 mb-3">
-    <div class="row mb-2">
-      <div class="col-8">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div>
         <h1 class='h5 fw-bold'><%= workout.exercise %></h1>
       </div>
-      <div class="col-4 text-end">
+      <div>
         <%= link_to t('.action_show'), sheet_workout_path(@sheet, workout), class: 'btn btn-success' if action_name != 'show' %>
       </div>
     </div>
@@ -13,26 +13,28 @@
       <div class="col mb-2">
         <div class="bg-light rounded">
           <p class='h6'><%= t('.series') %></p>
-          <p class='fw-light'><%= workout.series %></p>
+          <p><%= workout.series %></p>
         </div>
         <% if workout.interval.present? %>
-          <p class='fw-light mb-1'><strong><%= t('.interval') %></strong><%= workout.interval %></p>
+          <p class='mb-1'><strong><%= t('.interval') %></strong><%= workout.interval %></p>
         <% end %>
         <%= link_to t('.show_video'), "##{workout.id} ", data: { bs_toggle: "collapse" }, aria: { expanded: "false", controls: "collapseExample" } if workout.video.attached? %>
       </div>
+
       <div class="col">
         <div class="bg-light rounded">
           <p class='h6'><%= t('.repetitions') %></p>
-          <p class='fw-light'><%= workout.repetitions %></p>
-          <hr/>
+          <p><%= workout.repetitions %></p>
+        </div>
+        <div class="bg-light rounded">
           <p class='h6'><%= t('.charge') %></p>
-          <p class="fw-light pb-2"><%= workout.charge.present? ? workout.charge : '- - - - -' %></p>
+          <p class="mb-2"><%= workout.charge.present? ? workout.charge : '- - - - -' %></p>
         </div>
       </div>
     </div>
 
     <div class="collapse mt-2" id="<%= workout.id %>">
-      <%= video_tag url_for(workout.video), controls: true, class: 'bg-dark rounded img-fluid' if workout.video.attached? %>
+      <%= video_tag url_for(workout.video), controls: true, class: 'bg-dark rounded img-fluid', style: 'width: 100%; height: 250px;' if workout.video.attached? %>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@
   <div class="row">
     <% @sheets.each do |sheet| %>
       <div class="col-md-6">
-        <div class='<%= cycle('bg-success-subtle', 'bg-light') %> shadow rounded p-2 mb-3'>
+        <div class='border-start border-5 <%= cycle('bg-success-subtle border-dark', 'bg-light border-success') %> shadow rounded p-2 mb-3'>
           <%= link_to sheet_diets_or_workouts_path(sheet), class: 'link-dark link-underline link-underline-opacity-0' do %>
             <%= render sheet %>
           <% end %>
@@ -21,4 +21,4 @@
 
 <br>
 
-<%= link_to t('.link_back'), root_path, class: 'hide-on-mobile' %>
+<%= link_to 'Home', root_path, class: 'hide-on-mobile' %>

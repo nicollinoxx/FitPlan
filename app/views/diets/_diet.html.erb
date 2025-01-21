@@ -1,41 +1,35 @@
 <div id="<%= dom_id diet %>">
-  <div class="bg-secondary-subtle rounded mb-3 p-2">
-    <div class="row mb-2">
-      <div class="col-8">
-        <h3 class='text-start fw-bold'><%= diet.meal %></h3>
-      </div>
-      <div class="col text-end">
-        <% if action_name != 'show' %>
-          <%= link_to t('.action_show'), sheet_diet_path(@sheet, diet), class: "btn btn-success" %>
-        <% end %>
-      </div>
+  <div class="bg-secondary-subtle rounded mb-2 p-2">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h3 class='text-start fw-bold'><%= diet.meal %></h3>
+      <% if action_name != 'show' %>
+        <%= link_to t('.action_show'), sheet_diet_path(@sheet, diet), class: "btn btn-success" %>
+      <% end %>
     </div>
 
-    <div class="bg-light rounded p-2">
-        <p>
-          <%= diet.description %>
-        </p>
-        <hr>
-        <h1 class='h4'><%= t('.details') %></h1>
+    <div class="bg-light rounded py-1 px-3">
+      <p><%= diet.description %></p>
+      <hr>
+      <h1 class='h4'><%= t('.details') %></h1>
 
-        <ul>
-          <li>
-            <strong><%= t('.proteins') %> </strong>
-            <%= diet.protein_g %> g
-          </li>
-          <li>
-            <strong><%= t('.carbohydrates') %> </strong>
-            <%= diet.carbohydrate_g %> g
-          </li>
-          <li>
-            <strong><%= t('.fats') %> </strong>
-            <%= diet.fat_g %> g
-          </li>
-          <li>
-            <strong><%= t('.calories') %> </strong>
-            <%= diet.calories %> kcal
-          </li>
-        </ul>
+      <ul>
+        <li>
+          <strong><%= t('.proteins') %> </strong>
+          <%= diet.protein_g %> g
+        </li>
+        <li>
+          <strong><%= t('.carbohydrates') %> </strong>
+          <%= diet.carbohydrate_g %> g
+        </li>
+        <li>
+          <strong><%= t('.fats') %> </strong>
+          <%= diet.fat_g %> g
+        </li>
+        <li>
+          <strong><%= t('.calories') %> </strong>
+          <%= diet.calories %> kcal
+        </li>
+      </ul>
     </div>
   </div>
 </div>

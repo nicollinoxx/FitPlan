@@ -1,46 +1,39 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="d-flex justify-content-center mb-3">
+<div class="text-center mb-3">
   <% if Current.user.avatar.attached? %>
-    <%= image_tag Current.user.avatar, class: 'rounded-circle', style: "width: 190px; height: 180px;" %>
+    <%= image_tag Current.user.avatar, class: 'rounded-circle mx-auto img-fluid', style: "width: 180px; height: 180px;" %>
   <% else %>
-    <%= image_tag 'avatar.png', class: 'rounded-circle', style: "width: 190px; height: 180px;" %>
+    <%= image_tag 'avatar.png', class: 'rounded-circle mx-auto img-fluid', style: "width: 180px; height: 180px;" %>
   <% end %>
 </div>
+
 <p class='text-center'>Signed as: <%= Current.user.email %></p>
 
-<div class="mb-4">
-  <h2 class='fw-bold'><%= t('.section') %></h2>
-
-  <ul class="list-group mb-2">
-    <li class="list-group-item"><%= link_to t('.change_avatar'), identity_avatar_path(Current.user) %></li>
-    <li class="list-group-item"><%= link_to t('.change_password'), edit_password_path %></li>
-    <li class="list-group-item"><%= link_to t('.Change_email_address'), edit_identity_email_path %></li>
-  </ul>
+<h2 class='fw-bold'><i class="bi bi-person-gear"></i>  <%= t('.section') %></h2>
+<div class="list-group mb-4">
+  <%= link_to t('.change_avatar'), identity_avatar_path(Current.user), class: "list-group-item list-group-item-action link-primary" %>
+  <%= link_to t('.change_password'), edit_password_path,  class: "list-group-item list-group-item-action link-primary" %>
+  <%= link_to t('.Change_email_address'), edit_identity_email_path, class: "list-group-item list-group-item-action link-primary" %>
 </div>
 
-<div class='mb-3'>
-  <h3 class='fw-bold'><%= t('.section_1') %></h3>
-  <div class="border rounded p-2">
-    <%= link_to t('.sessions'), sessions_path %>
+<h3 class='fw-bold'><i class="bi bi-pc-display"></i>  <%= t('.section_1') %></h3>
+<div class="list-group mb-4">
+  <%= link_to t('.sessions'), sessions_path, class: "list-group-item list-group-item-action link-primary" %>
+</div>
+
+<h3 class='fw-bold'><i class="bi bi-translate"></i>  <%= t('.section_2') %></h3>
+<%= form_tag(root_path, method: :get) do %>
+  <div class="d-flex mb-4" style='max-width: 35rem;'>
+    <%= select_tag :locale, options_for_select([[t('.language_1'), 'en'], [t('.language_2'), 'pt']], I18n.locale), class: 'form-select' %>
+    <%= submit_tag t('.submit'), class: 'ms-3 btn btn-secondary' %>
   </div>
-</div>
+<% end %>
 
-<div class="mb-4">
-  <h3 class='fw-bold'><%= t('.section_2') %></h3>
-
-  <%= form_tag(root_path, method: :get) do %>
-    <div class="d-flex" style='max-width: 22rem;'>
-      <%= select_tag :locale, options_for_select([[t('.language_1'), 'en'], [t('.language_2'), 'pt-BR']], I18n.locale), class: 'form-select' %>
-      <%= submit_tag t('.submit'), class: 'ms-3 btn btn-secondary' %>
-    </div>
-  <% end %>
-</div>
-
-<div data-controller="bridge--menu">
-  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Log out</div>
+<div data-controller="bridge--menu" class='mb-4'>
+  <div data-controller="bridge--nav-button" data-action="click->bridge--menu#show" class="d-none">Log out</div>
     <div data-bridge--menu-target="title" class="d-none">Log out of account</div>
     <%= button_to t('.log_out'), Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Log out?' }, class: 'btn btn-danger' %>
-    <hr>
-    <%= link_to t('.link_back'), root_path, class: 'hide-on-mobile' %>
 </div>
+
+<%= link_to 'Home', root_path, class: 'hide-on-mobile' %>

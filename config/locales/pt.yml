@@ -1,8 +1,7 @@
-pt-BR:
+pt:
   common:
-    home:                   'Inicio'
+    remove_preview:         'remover visualização'
     description:            'Descrição '
-    back_to_home:           'Voltar para inicio'
     save:                   'Salvar'
     alert:                  'Alerta: '
     message_destroy:        'Você tem certeza?'
@@ -39,14 +38,12 @@ pt-BR:
 
   layouts:
     application:
-      home:                 :common.home
       link_sheets:          :common.sheets
       link_diet_sheets:     'Fichas de dietas'
       link_training_sheets: 'Fichas de treinos'
 
   start:
     index:
-      title:                :common.home
       section:              'Meu Perfil'
       section_1:            'Minhas fichas'
       section_2:            'Gerenciar fichas'
@@ -54,9 +51,9 @@ pt-BR:
       section_1_title:      'Fichas de treinos'
       section_1_title_1:    'Fichas de dietas'
       section_2_title:      'Gerenciar'
-      section_1_detail:     'Fichas de treinos. Escolha uma ficha e inicie sua jornada fitness.'
-      section_1_detail_1:   'Fichas de dietas. Escolha uma ficha e inicie sua jornada fitness.'
-      section_2_detail:     'Criar ficha personalizadas de treinos ou dietas'
+      section_1_detail:     'Fichas de treinos personalizadas para ajudar você a alcançar seus objetivos. Escolha uma ficha e inicie sua jornada fitness com exercícios.'
+      section_1_detail_1:   'Fichas de dietas para otimizar seu desempenho e bem-estar. Escolha uma ficha e siga um plano nutricional adaptado à seu objetivo.'
+      section_2_detail:     'Crie e gerencie fichas personalizadas de treinos ou dietas. Ajuste exercícios, séries, repetições e planos alimentares.'
 
   sheets:
     form:
@@ -69,7 +66,7 @@ pt-BR:
       diet_label:           :common.diet
       submit:               :common.save
     sheet:
-      description:          :common.description
+      description:          'Descrição: '
       type:                 :common.type
       sheet_type:           :common.workout
       sheet_type_1:         :common.diet
@@ -114,6 +111,9 @@ pt-BR:
                             - 'baixo'
                             - 'medio'
                             - 'alto'
+      destroy_video:        "Destruir video"
+      remove_preview:       :common.remove_preview
+      message_destroy:      :common.message_destroy
       supported_files:      "Arquivos suportados: PNG, JPEG/JPG"
       submit:               :common.save
     workout:
@@ -127,7 +127,6 @@ pt-BR:
       title:                'Editar treino'
       link_back:            'Voltar para treino'
     index:
-      title:                'Treinos'
       action_new:           :common.new_workout
       link_back:            :common.back_to_sheet
     new:
@@ -166,7 +165,6 @@ pt-BR:
       title:                'Editar dieta'
       link_back:            'Voltar para dieta'
     index:
-      title:                :common.diet
       action_new:           :common.new_diet
       link_back:            :common.back_to_sheet
     new:
@@ -189,7 +187,7 @@ pt-BR:
     index:
       title:                'Perfil'
       section:              'Opções'
-      section_1:            'Histórico'
+      section_1:            'Dispositivos e Sessões'
       section_2:            :common.section_2
       change_avatar:        'Mudar avatar'
       change_password:      'Mudar senha'
@@ -209,6 +207,7 @@ pt-BR:
         submit:                          :common.save
         avatar_label:                    'Novo avatar'
         supported_files:                 "Arquivos suportados: PNG, JPEG/JPG"
+        remove_preview:                  :common.remove_preview
        edit:
         title:                           'Mudar avatar'
        show:
@@ -317,24 +316,20 @@ pt-BR:
 
   user_mailer:
     password_reset:
-      subject:                           "Redefinir sua senha"
-      greeting:                          "Ola"
-      message:                           'Nao lembra sua senha para %{email}? Tudo bem, isso acontece. Basta clicar no link
-                                          abaixo para definir uma nova senha.'
-      expiration_message:                "Se voce nao solicitou redefinir a senha, voce pode ignorar este email com seguranca,
-                                          ele expira em 20 minutos. Somente alguem com acesso a esta conta de email pode redefinir sua senha."
+      greeting:                          "Olá"
+      message:                           "Não consegue lembrar sua senha para %{email}? Tudo bem, isso acontece.
+                                          Basta clicar no link abaixo para definir uma nova."
+      expiration_message:                'Se você não solicitou a redefinição de senha, pode ignorar este e-mail com segurança,
+                                          ele expirará em 20 minutos. Somente alguém com acesso a esta conta de e-mail pode redefinir sua senha.'
       link_text:                         "Redefinir sua senha"
-      help_message:                      "Tem perguntas ou precisa de ajuda? Basta responder a este email e nossa equipe
-                                          de suporteira ajuda-lo a resolver."
+      help_message:                      "Se você não solicitou a redefinição de senha, ignore este e-mail."
     email_verification:
-      subject:                           "Verifique seu email"
-      greeting:                          "Ola"
-      message:                           'Este email e para confirmar que %{email} e o email que voce deseja usar na sua conta.
-                                         Se voce perder sua senha, e para la que enviaremos um link de redefinicao.'
-      strong_confirm:                    "Voce deve clicar no link abaixo para confirmar que recebeu este email."
-      confirm_link:                      "Sim, use este email para a minha conta"
-      help_message:                      "Tem perguntas ou precisa de ajuda? Basta responder a este email e nossa equipe de suporte
-                                         ira ajuda-lo a resolver."
+      greeting:                          "Olá,"
+      message:                           'Este e-mail confirma que %{email} é o endereço que você deseja usar na sua conta.
+                                          Se você perder sua senha, é para esse endereço que enviaremos um link de redefinição.'
+      strong_confirm:                    "Você deve clicar no link abaixo para confirmar que recebeu este e-mail."
+      confirm_link:                      'Sim, usar este e-mail para minha conta'
+
 
   activerecord:
     attributes:

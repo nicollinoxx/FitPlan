@@ -11,12 +11,14 @@
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :avatar, t('.avatar_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :avatar, t('.avatar_label'), class: 'form-label' %>
     <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: 'form-control border border-success', data: { "upload-preview-target": "fileInput", "action": "upload-preview#preview" } %>
     <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
   </div>
 
-  <div>
+  <div class='d-flex gap-4'>
     <%= form.submit t('.submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+
+    <button type="button" class="btn btn-danger hide-on-mobile" data-upload-preview-target="removeButton" data-action="upload-preview#removePreview" hidden><%= t('.remove_preview') %></button>
   </div>
 <% end %>

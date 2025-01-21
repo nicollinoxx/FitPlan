@@ -1,61 +1,39 @@
-<% content_for(:title, t('.title')) %>
+<% content_for(:title, 'FitPlan') %>
 
-<h3 class="fw-bold mt-3"><%= t('.section') %></h3>
-<%= link_to home_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
-  <div class="bg-light rounded shadow mb-3">
-    <div class="d-flex p-2">
+<h3 class="fw-bold border-bottom mt-3 py-2"><i class="bi bi-person me-2"></i> <%= t('.section') %></h3>
+<%= link_to home_path, class: 'text-decoration-none link-dark' do %>
+  <div class="bg-light shadow rounded border-start border-5 border-success p-3 mb-3">
+    <h4 class="fw-bold"><%= t('.section_title') %></h4>
+    <div class="d-flex align-items-center gap-2">
       <% if Current.user.avatar.attached? %>
-        <%= image_tag Current.user.avatar, class: 'rounded-circle', style: "width: 80px; height: 75px;" %>
+        <%= image_tag Current.user.avatar, class: "rounded-circle img-fluid object-fit-cover", style: "width: 50px; height: 50px;"%>
       <% else %>
-        <%= image_tag 'avatar.png', class: 'rounded-circle', style: "width: 80px; height: 75px;" %>
+        <%= image_tag 'avatar.png', class: "rounded-circle img-fluid object-fit-cover", style: "width: 50px; height: 50px;"%>
       <% end %>
-      <div class="flex-grow-1 ms-3 mt-1">
-        <h1 class="h4 fw-bold"><%= t('.section_title') %></h1>
-        <p class='text-break'><%= Current.user.email %></p>
-      </div>
+      <p class="my-2"><%= Current.user.email %></p>
     </div>
   </div>
 <% end %>
 
-
-<h3 class='fw-bold mt-3'><%= t('.section_1') %></h3>
-<%= link_to sheets_path(type: 'workout'), class: 'link-underline link-underline-opacity-0 link-dark' do %>
-  <div class="bg-success-subtle rounded shadow mb-3">
-    <div class="d-flex p-2">
-      <%= image_tag 'image 3.png', class: 'img-fluid rounded' %>
-      <div class="flex-grow-1 ms-3 mt-2">
-        <h1 class='h4 fw-bold'><%= t('.section_1_title') %></h1>
-        <p><%= t('.section_1_detail') %></p>
-      </div>
-    </div>
+<h3 class="fw-bold border-bottom mt-3 py-2"><i class="bi bi-clipboard-pulse me-2"></i> <%= t('.section_1') %></h3>
+<%= link_to sheets_path(type: 'workout'), class: 'text-decoration-none link-dark' do %>
+  <div class="bg-success-subtle shadow rounded border-start border-5 border-dark p-3 mb-3">
+    <h4 class='fw-bold'><%= t('.section_1_title') %></h4>
+    <p  class='my-2'><%= t('.section_1_detail') %></p>
   </div>
 <% end %>
 
-<%= link_to sheets_path(type: 'diet'), class: 'link-underline link-underline-opacity-0 link-dark' do %>
-  <div class="bg-light rounded shadow mb-3">
-    <div class="d-flex p-2">
-      <%= image_tag 'image 1.png', class: 'rounded' %>
-      <div class="flex-grow-1 ms-3 mt-2">
-        <h1 class='h4 fw-bold'><%= t('.section_1_title_1') %></h1>
-        <p>
-          <%= t('.section_1_detail_1') %>
-        </p>
-      </div>
-    </div>
+<%= link_to sheets_path(type: 'diet'), class: 'text-decoration-none link-dark' do %>
+  <div class="bg-light shadow rounded border-start border-5 border-success p-3 mb-3">
+    <h4 class='fw-bold'><%= t('.section_1_title_1') %></h4>
+    <p  class='my-2'><%= t('.section_1_detail_1') %></p>
   </div>
 <% end %>
 
-<h3 class='fw-bold'><%= t('.section_2') %></h3>
-<%= link_to sheets_path, class: 'link-underline link-underline-opacity-0 link-dark' do %>
-  <div class="bg-success-subtle shadow rounded">
-    <div class="d-flex p-2">
-      <%= image_tag 'image 2.png', class: 'rounded' %>
-      <div class="flex-grow-1 ms-3 mt-2">
-        <h1 class='h4 fw-bold'><%= t('.section_2_title') %></h1>
-        <p>
-          <%= t('.section_2_detail') %>
-        </p>
-      </div>
-    </div>
+<h3 class="fw-bold border-bottom mt-3 py-2"><i class="bi bi-clipboard-check me-2"></i> <%= t('.section_2') %></h3>
+<%= link_to sheets_path, class: 'text-decoration-none link-dark' do %>
+  <div class="bg-success-subtle shadow rounded border-start border-5 border-dark p-3 mb-3">
+    <h4 class='fw-bold'><%= t('.section_2_title') %></h4>
+    <p  class='my-2'><%= t('.section_2_detail') %></p>
   </div>
 <% end %>

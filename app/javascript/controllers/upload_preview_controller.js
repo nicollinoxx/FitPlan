@@ -1,25 +1,33 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ['fileInput', 'previewUpload', 'currentFile'];
+  static targets = ['fileInput', 'previewUpload', 'currentFile', 'removeButton'];
 
   preview() {
-    const file   = this.fileInputTarget.files[0];
+    const file = this.fileInputTarget.files[0];
     const reader = new FileReader();
 
-    //if field for null old file appears
     if (!file) {
-      this.currentFileTarget.style.display   = "block";
-      this.previewUploadTarget.style.display = "none";
-      return;
-    }
+      this.toggleVisibility(!!file);
+      return;
+    }
 
-    reader.onload = (event) => {
-      this.previewUploadTarget.src = event.target.result;
-      this.previewUploadTarget.style.display = "block";
-      this.currentFileTarget.style.display   = "none";
-    };
+    reader.onload = () => {
+      this.previewUploadTarget.src = reader.result;
+      this.toggleVisibility(!!file);
+    };
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
+  }
+
+  removePreview() {
+    this.fileInputTarget.value = null;
+    this.toggleVisibility(false);
+  }
+
+  toggleVisibility(hasFile) {
+    this.previewUploadTarget.hidden = !hasFile;
+    this.currentFileTarget.hidden = hasFile;
+    this.removeButtonTarget.hidden = !hasFile;
   }
 }

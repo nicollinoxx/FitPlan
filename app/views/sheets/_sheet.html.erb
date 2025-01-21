@@ -9,10 +9,6 @@
   </p>
 
   <% if action_name == 'show' %>
-    <% if sheet.sheet_type == 'workout' %>
-      <p><strong><%= t('.type')%></strong><%= t('.sheet_type') %></p>
-    <% else %>
-      <p><strong><%= t('.type')%></strong><%= t('.sheet_type_1') %></p>
-    <% end %>
+      <p><strong><%= t('.type')%></strong><%= sheet.workout? ? t('.sheet_type') : t('.sheet_type_1') %></p>
   <% end %>
 </div>
