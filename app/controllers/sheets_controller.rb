@@ -4,7 +4,11 @@ class SheetsController < ApplicationController
 
   # GET /sheets or /sheets.json
   def index
-    @sheets = params[:type] ? @user.sheets.where(sheet_type: params[:type]) : @user.sheets 
+    if has_sheet_type?
+      @sheets = @user.sheets.where(sheet_type: params[:type])
+    else
+      @sheets = @user.sheets
+    end
   end
 
   # GET /sheets/1 or /sheets/1.json
@@ -60,5 +64,9 @@ class SheetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def sheet_params
       params.require(:sheet).permit(:name, :description, :sheet_type)
+    end
+
+    def has_sheet_type?
+      Sheet.sheet_types.keys.include?(params[:type])
     end
 end

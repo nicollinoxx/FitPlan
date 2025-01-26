@@ -6,23 +6,17 @@ class Sheet < ApplicationRecord
   validates :name, :sheet_type, presence: true
   validates :sheet_type, inclusion: { in: %w(workout diet) }
 
-  before_update :destroy_invalid_content, if: :will_save_change_to_sheet_type?
+  enum :sheet_type, { workout: "workout", diet: "diet" }
 
-  def workout?
-    sheet_type == 'workout'
-  end
-
-  def diet?
-    sheet_type == 'diet'
-  end
+  after_update :destroy_invalid_content, if: :saved_change_to_sheet_type?
 
   private
 
-  def destroy_invalid_content
-    if workout?
-      diets.destroy_all
-    elsif diet?
-      workouts.destroy_all
+    def destroy_invalid_content
+      if workout?
+        diets.destroy_all
+      elsif diet?
+        workouts.destroy_all
+      end
     end
-  end
 end
