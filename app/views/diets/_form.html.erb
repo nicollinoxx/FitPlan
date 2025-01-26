@@ -23,17 +23,17 @@
 
   <div class='mb-3' >
     <%= form.label :protein_g, t('.protein_g_label'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :protein_g, class: 'form-control border border-success' %>
+    <%= form.number_field :protein_g, step: 'any', class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3' >
     <%= form.label :carbohydrate_g, t('.carbohydrate_g_label'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :carbohydrate_g, class: 'form-control border border-success' %>
+    <%= form.number_field :carbohydrate_g, step: 'any', class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3' >
     <%= form.label :fat_g, t('.fat_g_label'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :fat_g, class: 'form-control border border-success' %>
+    <%= form.number_field :fat_g, step: 'any', class: 'form-control border border-success' %>
   </div>
 
   <div>
