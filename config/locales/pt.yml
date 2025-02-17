@@ -152,7 +152,7 @@ pt:
       meal_label:           'Refeição'
       description_label:    'Descrição'
       protein_g_label:      'Quantidade de proteinas em gramas'
-      carbohydrate_g_label: 'Quanitdade de carboidratos em gramas'
+      carbohydrate_g_label: 'Quantidade de carboidratos em gramas'
       fat_g_label:          'Quantidade de gorduras em gramas'
       submit:               :common.save
     diet:
@@ -161,6 +161,7 @@ pt:
       proteins:             'Proteinas:'
       carbohydrates:        'Caboidratos:'
       fats:                 'Gorduras:'
+      calories:             'Calorias:'
     edit:
       title:                'Editar dieta'
       link_back:            'Voltar para dieta'
@@ -171,9 +172,9 @@ pt:
       title:                :common.new_diet
       link_back:            :common.back_to_diets
     show:
-      title:                :common.dieta
+      title:                :common.diet
       action_edit:          'Editar dieta'
-      action_destroy:       'Destruida dieta'
+      action_destroy:       'Destruir dieta'
       message_destroy:      :common.message_destroy
       link_back:            :common.back_to_diets
     create:
