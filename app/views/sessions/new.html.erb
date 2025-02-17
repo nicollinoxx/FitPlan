@@ -29,12 +29,15 @@
 <hr>
 
 <div>
-  <h5 class='fw-bold'><i class="bi bi-translate"></i> <%= t('.section_1') %></h5>
+  <h5 class="fw-bold"><i class="bi bi-translate"></i> <%= t('.section_1') %></h5>
 
-  <%= form_tag(root_path, method: :get) do %>
-    <div class="d-flex" style='max-width: 20rem;'>
-      <%= select_tag :locale, options_for_select([[t('.language_1'), 'en'], [t('.language_2'), 'pt']], I18n.locale), class: 'form-select' %>
-      <%= submit_tag t('.submit'), class: 'ms-3 btn btn-secondary' %>
-    </div>
-  <% end %>
+  <div class="btn-group dropend">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= I18n.locale == :en ? t('.language_1') : t('.language_2') %>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="languageButton">
+      <li><%= link_to t('.language_1'), set_locale_path('en'), class: 'dropdown-item' %></li>
+      <li><%= link_to t('.language_2'), set_locale_path('pt'), class: 'dropdown-item' %></li>
+    </ul>
+  </div>
 </div>

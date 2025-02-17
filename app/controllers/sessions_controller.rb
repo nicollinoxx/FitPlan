@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
       redirect_to root_path, notice: I18n.t('sessions.create.success_notice')
     else
-      refresh_or_redirect_to sign_in_path(email_hint: params[:email]), alert: I18n.t('sessions.create.success_alert')
+      refresh_or_redirect_to sign_in_path(email_hint: params[:email]), notice: I18n.t('sessions.create.success_alert')
     end
   end
 

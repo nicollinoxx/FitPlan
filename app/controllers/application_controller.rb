@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
-  before_action :set_i18n_locale_from_params
   before_action :set_current_request_details
-  before_action :authenticate
+  before_action :authenticate, except: %i[ set_session_locale ]
+  before_action :set_locale
+
+  def set_session_locale
+    session[:locale] = params[:locale] if I18n.available_locales.include?(params[:locale].to_sym)
+
+    recede_or_redirect_to root_path
+  end
 
   private
     def authenticate
@@ -18,14 +24,8 @@ class ApplicationController < ActionController::Base
     end
 
   protected
-    def set_i18n_locale_from_params
-      if params[:locale].present?
-        if I18n.available_locales.map(&:to_s).include?(params[:locale])
-          session[:locale] = params[:locale]
-          I18n.locale = session[:locale]
-        end
-      else
-        I18n.locale = session[:locale] || I18n.default_locale
-      end
+
+    def set_locale
+      I18n.locale = session[:locale] || I18n.default_locale
     end
 end

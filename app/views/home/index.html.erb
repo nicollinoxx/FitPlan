@@ -23,14 +23,17 @@
 </div>
 
 <h3 class='fw-bold'><i class="bi bi-translate"></i>  <%= t('.section_2') %></h3>
-<%= form_tag(root_path, method: :get) do %>
-  <div class="d-flex mb-4" style='max-width: 35rem;'>
-    <%= select_tag :locale, options_for_select([[t('.language_1'), 'en'], [t('.language_2'), 'pt']], I18n.locale), class: 'form-select' %>
-    <%= submit_tag t('.submit'), class: 'ms-3 btn btn-secondary' %>
-  </div>
-<% end %>
+<div class="btn-group dropend">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= I18n.locale == :en ? t('.language_1') : t('.language_2') %>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="languageButton">
+    <li><%= link_to t('.language_1'), set_locale_path('en'), class: 'dropdown-item' %></li>
+    <li><%= link_to t('.language_2'), set_locale_path('pt'), class: 'dropdown-item' %></li>
+  </ul>
+</div>
 
-<div data-controller="bridge--menu" class='mb-4'>
+<div data-controller="bridge--menu" class='my-4'>
   <div data-controller="bridge--nav-button" data-action="click->bridge--menu#show" class="d-none">Log out</div>
     <div data-bridge--menu-target="title" class="d-none">Log out of account</div>
     <%= button_to t('.log_out'), Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Log out?' }, class: 'btn btn-danger' %>

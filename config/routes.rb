@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "set_locale/(:locale)", to: "application#set_session_locale", as: :set_locale
+
   root 'start#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
