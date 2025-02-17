@@ -37,7 +37,7 @@ pt:
     type:                   'Tipo: '
 
   layouts:
-    application:
+    navbar:
       link_sheets:          :common.sheets
       link_diet_sheets:     'Fichas de dietas'
       link_training_sheets: 'Fichas de treinos'

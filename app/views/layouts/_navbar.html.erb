@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg bg-light border-bottom py-3">
+  <div class="container container-fluid">
+    <%= link_to "FITPLAN", root_path, class: 'fw-bold navbar-brand link-success'%>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav w-100">
+        <li class="nav-item">
+          <%= link_to t('.link_sheets'), sheets_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('.link_diet_sheets'), sheets_path(type: 'diet'), class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('.link_training_sheets'), sheets_path(type: 'workout'), class: 'nav-link' %>
+        </li>
+        <li class="nav-item ms-lg-auto d-flex align-items-center gap-2 m-0">
+          <%= link_to "#{Current.user.email}", home_path, class: 'nav-link' %>
+          <% if Current.user.avatar.attached? %>
+            <%= image_tag Current.user.avatar, class: 'rounded-circle img-fluid object-fit-cover', style: "width: 42px; height: 42px;" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

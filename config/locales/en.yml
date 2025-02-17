@@ -39,7 +39,7 @@ en:
     type:                   'Type: '
 
   layouts:
-    application:
+    navbar:
       link_sheets:          :common.sheets
       link_diet_sheets:     'Diet sheets'
       link_training_sheets: 'Training sheets'
