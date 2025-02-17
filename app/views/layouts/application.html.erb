@@ -18,8 +18,8 @@
 
   <body>
     <div class="hide-on-mobile mb-4">
-      <% if Current.user %>
-        <nav class="navbar navbar-expand-lg bg-light py-3">
+      <% if Current.user.present? %>
+        <nav class="navbar navbar-expand-lg bg-light border-bottom py-3">
           <div class="container container-fluid">
             <%= link_to "FITPLAN", root_path, class: 'fw-bold navbar-brand link-success'%>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,13 +52,7 @@
         <h1 class='fw-bold'><%= content_for(:title || FitPlan ) %></h1>
 
         <% if notice.present?  %>
-          <div class="alert alert-success" role="alert" data-controller="bridge--flash-message">
-            <%= notice %>
-          </div>
-        <% elsif alert.present? %>
-          <div class="alert alert-danger" role="alert" data-controller="bridge--flash-message">
-            <%= alert %>
-          </div>
+          <div class="alert alert alert-dark" role="alert" data-controller="bridge--flash-message"><%= notice %></div>
         <% end %>
       </div>
     </div>

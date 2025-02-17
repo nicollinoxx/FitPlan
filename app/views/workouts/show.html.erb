@@ -4,7 +4,7 @@
 
 <div data-controller="bridge--menu">
   <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>
-    <div class='btn-toolbar'>
+    <div class='d-flex'>
       <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
       <%= link_to t('.action_edit'), edit_sheet_workout_path(@sheet, @workout), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
       <%= button_to t('.action_destroy'), sheet_workout_path(@sheet, @workout), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('.message_destroy') }, class: 'btn btn-danger' %>
