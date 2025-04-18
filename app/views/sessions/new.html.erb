@@ -1,43 +1,55 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="mb-3 text-center">
-  <%= image_tag 'logo.png' %>
-</div>
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="shadow-sm border-0 rounded-4 mb-4">
+        <div class="p-2 p-md-4">
+          <div class="d-flex justify-content-center align-items-center text-center mb-3">
+            <%= image_tag 'logo.png', class: 'img-fluid', style: 'max-height: 80px;' %>
+            <h2 class="text-success ms-3"><%= t('.title') %></h2>
+          </div>
 
-<%= form_with(url: sign_in_path) do |form| %>
-  <div class='mb-3'>
-    <%= form.label :email, style: "display: block", class: 'form-label' %>
-    <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, autocomplete: "email", class: 'form-control border border-success' %>
-  </div>
+          <%= form_with(url: sign_in_path) do |form| %>
+            <div class="mb-3">
+              <%= form.label :email, class: 'form-label' %>
+              <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "nome@exemplo.com" %>
+            </div>
 
-  <div class='mb-3'>
-    <%= form.label :password, t('.password_label'), style: "display: block", class: 'form-label' %>
-    <%= form.password_field :password, required: true, autocomplete: "current-password", class: 'form-control border border-success' %>
-    <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'text-decoration-none' %>
-  </div>
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <%= form.label :password, t('.password_label'), class: 'form-label' %>
+                <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'text-decoration-none small' %>
+              </div>
+                <%= form.password_field :password, required: true, autocomplete: "current-password", class: 'form-control', placeholder: "Senha" %>
+            </div>
 
-  <div class='mb-3 d-grid'>
-    <%= form.submit t('.submit_sign_in'), class: 'btn btn-success' %>
-  </div>
-<% end %>
+            <div class="d-grid mb-4">
+              <%= form.submit t('.submit_sign_in'), class: 'btn btn-success btn-lg fw-medium rounded-3' %>
+            </div>
+          <% end %>
 
-<div class='mb-3'>
-  <p class='h4 fw-bold'><i class="bi bi-person-plus"></i> <%= t('.section')%></p>
-    <%= link_to t('.submit_sign_up'), sign_up_path, class: 'btn btn-secondary d-grid' %>
-</div>
+          <div class="text-center">
+            <p class="mb-3"><%= t('.section') %></p>
+            <%= link_to t('.submit_sign_up'), sign_up_path,
+                       class: 'btn btn-outline-secondary rounded-3 fw-medium px-4' %>
+          </div>
+        </div>
+      </div>
 
-<hr>
-
-<div>
-  <h5 class="fw-bold"><i class="bi bi-translate"></i> <%= t('.section_1') %></h5>
-
-  <div class="btn-group dropend">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown" aria-expanded="false">
-      <%= I18n.locale == :en ? t('.language_1') : t('.language_2') %>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="languageButton">
-      <li><%= link_to t('.language_1'), set_locale_path('en'), class: 'dropdown-item' %></li>
-      <li><%= link_to t('.language_2'), set_locale_path('pt'), class: 'dropdown-item' %></li>
-    </ul>
-  </div>
-</div>
+      <div class="p-3 border-0 shadow-sm rounded-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0"><i class="bi bi-translate"></i><%= t('.section_1') %></h6>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                      id="languageButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      <%= I18n.locale == :en ? t('.language_1') : t('.language_2') %>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageButton">
+                <li><%= link_to t('.language_1'), set_locale_path('en'), class: 'dropdown-item' %></li>
+                <li><%= link_to t('.language_2'), set_locale_path('pt'), class: 'dropdown-item' %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -19,7 +19,7 @@ class DietsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create diet" do
     assert_difference("Diet.count") do
-      post sheet_diets_url(@sheet), params: { diet: { calories: @diet.calories, carbohydrate_g: @diet.carbohydrate_g, description: @diet.description, fat_g: @diet.fat_g, protein_g: @diet.protein_g, meal: @diet.meal } }
+      post sheet_diets_url(@sheet), params: { diet: { calories: @diet.calories, carbohydrate_g: @diet.carbohydrate_g, description: "my description", fat_g: @diet.fat_g, protein_g: @diet.protein_g, meal: @diet.meal } }
     end
 
     assert_redirected_to sheet_diet_url(@sheet, Diet.last)
@@ -36,7 +36,7 @@ class DietsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update diet" do
-    patch sheet_diet_url(@sheet, @diet), params: { diet: { calories: @diet.calories, carbohydrate_g: @diet.carbohydrate_g, description: @diet.description, fat_g: @diet.fat_g, protein_g: @diet.protein_g, meal: @diet.meal } }
+    patch sheet_diet_url(@sheet, @diet), params: { diet: { calories: @diet.calories, carbohydrate_g: @diet.carbohydrate_g, description: "my description", fat_g: @diet.fat_g, protein_g: @diet.protein_g, meal: @diet.meal } }
     assert_redirected_to sheet_diet_url(@sheet, @diet)
   end
 

@@ -13,7 +13,7 @@ class Identity::PasswordResetsController < ApplicationController
       send_password_reset_email
       refresh_or_redirect_to sign_in_path, notice: I18n.t('identity.password_resets.create.success_notice')
     else
-      refresh_or_redirect_to new_identity_password_reset_path, notice: I18n.t('identity.password_resets.create.success_alert')
+      recede_or_redirect_to new_identity_password_reset_path, notice: I18n.t('identity.password_resets.create.success_alert')
     end
   end
 

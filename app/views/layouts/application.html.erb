@@ -25,7 +25,7 @@
       <div class="container my-3">
         <h1 class='fw-bold'><%= content_for(:title || FitPlan ) %></h1>
 
-        <% if notice.present?  %>
+        <% if notice.present? %>
           <div class="alert alert alert-dark" role="alert" data-controller="bridge--flash-message"><%= notice %></div>
         <% end %>
       </div>

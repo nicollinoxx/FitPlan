@@ -31,7 +31,7 @@ class Identity::PasswordResetsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to new_identity_password_reset_url
-    assert_equal "You can't reset your password until you verify your email", flash[:alert]
+    assert_equal "You can't reset your password until you verify your email", flash[:notice]
   end
 
   test "should not send a password reset email to a unverified email" do
@@ -42,7 +42,7 @@ class Identity::PasswordResetsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to new_identity_password_reset_url
-    assert_equal "You can't reset your password until you verify your email", flash[:alert]
+    assert_equal "You can't reset your password until you verify your email", flash[:notice]
   end
 
   test "should update password" do

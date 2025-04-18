@@ -2,7 +2,6 @@
 
 one:
   meal: MyString
-  description: <div>MyText</div>
   protein_g: 9.99
   carbohydrate_g: 9.99
   fat_g: 9.99
@@ -11,7 +10,6 @@ one:
 
 two:
   meal: MyString
-  description: MyText
   protein_g: 9.99
   carbohydrate_g: 9.99
   fat_g: 9.99
