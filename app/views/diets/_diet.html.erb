@@ -13,23 +13,23 @@
   <div class="px-3 pb-3">
     <p class="mb-3"><%= diet.description %></p>
 
-    <div class="bg-dark-subtle rounded d-flex align-items-center justify-content-between flex-wrap gap-2">
-      <div class="text-center p-2 flex-grow-1">
-        <p class="small text-muted mb-0"><i class="bi bi-egg-fried"></i> <%= t('.proteins') %></p>
+    <div class="small bg-dark-subtle rounded row g-0 m-0">
+      <div class="col-6 col-md-3 text-center p-1 border-end border-bottom">
+        <p class="text-muted mb-0"><i class="bi bi-egg-fried"></i> <%= t('.proteins') %></p>
         <p class="fw-bold mb-0 text-primary"><%= diet.protein_g %>g</p>
       </div>
 
-      <div class="text-center p-2 flex-grow-1">
+      <div class="col-6 col-md-3 text-center p-1 border-bottom">
         <p class="small text-muted mb-0"><i class="bi bi-basket"></i> <%= t('.carbohydrates') %></p>
         <p class="fw-bold mb-0 text-success"><%= diet.carbohydrate_g %>g</p>
       </div>
 
-      <div class="text-center p-2 flex-grow-1">
+      <div class="col-6 col-md-3 text-center p-1 border-end">
         <p class="small text-muted mb-0"><i class="bi bi-droplet"></i> <%= t('.fats') %></p>
         <p class="fw-bold mb-0 text-warning"><%= diet.fat_g %>g</p>
       </div>
 
-      <div class="text-center p-2 flex-grow-1">
+      <div class="col-6 col-md-3 text-center p-1">
         <p class="small text-muted mb-0"><i class="bi bi-fire"></i> <%= t('.calories')%></p>
         <p class="fw-bold mb-0 text-danger"><%= diet.calories %></p>
       </div>

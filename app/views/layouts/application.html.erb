@@ -18,9 +18,7 @@
 
   <body>
     <div class="hide-on-mobile mb-4">
-      <% if Current.user.present? %>
-        <%= render 'layouts/navbar' %>
-      <% end %>
+      <%= render 'layouts/navbar' if Current.user.present? %>
 
       <div class="container my-3">
         <% if notice.present? %>

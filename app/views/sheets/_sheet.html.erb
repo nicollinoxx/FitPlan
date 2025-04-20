@@ -1,20 +1,22 @@
-<div id="<%= dom_id sheet %>">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="h5 mb-0 fw-bold">
-      <i class="bi <%= sheet.workout? ? 'bi-activity' : 'bi-cup-hot' %> text-dark"></i>
-      <%= sheet.name %>
-    </h2>
+<% cache sheet do %>
+    <div id="<%= dom_id sheet %>">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 mb-0 fw-bold">
+          <i class="bi <%= sheet.workout? ? 'bi-activity' : 'bi-cup-hot' %> text-dark"></i>
+          <%= sheet.name %>
+        </h2>
 
-    <% unless action_name == "show" %>
-        <%= link_to sheet_path(sheet), class: "btn btn-sm btn-outline-success me-1" do %>
-          <i class="bi bi-pencil"></i>
+        <% unless action_name == "show" %>
+            <%= link_to sheet_path(sheet), class: "btn btn-sm btn-outline-success me-1" do %>
+              <i class="bi bi-pencil"></i>
+            <% end %>
         <% end %>
-    <% end %>
-  </div>
+      </div>
 
-  <p class="text-muted mb-3"><%= sheet.description %></p>
+      <p class="text-muted mb-3"><%= sheet.description %></p>
 
-  <% if action_name == "show" %>
-    <p><%= sheet.workout? ? t('.sheet_type') : t('.sheet_type_1') %></p>
-  <% end %>
-</div>
+      <% if action_name == "show" %>
+        <p><%= sheet.workout? ? t('.sheet_type') : t('.sheet_type_1') %></p>
+      <% end %>
+    </div>
+<% end %>
