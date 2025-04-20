@@ -2,9 +2,9 @@
 
 <div class="text-center mb-3">
   <% if @user.avatar.attached? %>
-    <%= image_tag @user.avatar, class: 'rounded-circle img-fluid', style: "width: 180px; height: 180px;" %>
+    <%= image_tag @user.avatar, class: 'rounded-circle object-fit-cover border', style: "width: 160px; height: 160px;" %>
   <% else %>
-    <%= image_tag 'avatar.png', class: 'rounded-circle img-fluid', style: "width: 180px; height: 180px;" %>
+    <%= image_tag 'avatar.png', class: 'rounded-circle object-fit-cover border', style: "width: 160px; height: 160px;" %>
   <% end %>
 </div>
 

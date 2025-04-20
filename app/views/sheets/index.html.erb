@@ -1,24 +1,29 @@
-<h1><% content_for(:title, t('.title')) %></h1>
+<% content_for(:title, t('.title')) %>
 
-<div id="sheets">
-  <div class="row">
-    <% @sheets.each do |sheet| %>
-      <div class="col-md-6">
-        <div class='border-start border-5 <%= cycle('bg-success-subtle border-dark', 'bg-light border-success') %> shadow rounded p-2 mb-3'>
-          <%= link_to sheet_diets_or_workouts_path(sheet), class: 'link-dark link-underline link-underline-opacity-0' do %>
-            <%= render sheet %>
-          <% end %>
-          <%= link_to  t('.action_show'), sheet, class: 'btn btn-success' %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="d-grid gap-2 mb-3">
+<div class="d-flex justify-content-between align-items-center">
+  <h1><%= t('.title') %></h1>
   <%= link_to t('.action_new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
 </div>
 
-<br>
+<div class="text-end dropdown my-3">
+  <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+      <i class="bi bi-funnel-fill">Filter</i>
+  </button>
+  <ul class="dropdown-menu">
+    <li><%= link_to t('.diet'), root_path(type: 'diet'), class: 'dropdown-item' %></li>
+    <li><%= link_to t('.workout'), root_path(type: 'workout'), class: 'dropdown-item' %></li>
+    <li><%= link_to 'all', root_path, class: "dropdown-item" %></li>
+  </ul>
+</div>
 
-<%= link_to 'Home', root_path, class: 'hide-on-mobile' %>
+
+<div id="sheets" class="row">
+    <% @sheets.each do |sheet| %>
+        <div class="col-md-6 p-2 mb-2">
+            <div class="rounded p-3 shadow-lg d-flex flex-column h-100">
+                <%= render 'sheets/sheet', sheet: sheet %>
+                <%= link_to "show content", sheet_diets_or_workouts_path(sheet), class: "btn btn-sm btn-success mt-auto d-grid" %>
+            </div>
+        </div>
+    <% end %>
+</div>

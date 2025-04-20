@@ -10,6 +10,7 @@ class DietsController < ApplicationController
 
   # GET /diets/1 or /diets/1.json
   def show
+    @percentage = @diet.calculate_percentage_of_calories
   end
 
   # GET /diets/new
@@ -26,7 +27,7 @@ class DietsController < ApplicationController
     @diet = @sheet.diets.build(diet_params)
 
     if @diet.save
-      redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('diets.create.success')
+      refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('diets.create.success')
     else
       render :new, status: :unprocessable_entity
     end

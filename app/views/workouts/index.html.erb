@@ -1,17 +1,18 @@
 <% content_for(:title, @sheet.name) %>
 
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1><%= @sheet.name %></h1>
+  <%= link_to t('.action_new'), new_sheet_workout_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
+</div>
+
 <div id="workouts">
   <div class="row">
     <% @workouts.each do |workout| %>
-      <div class="col-md-6">
+      <div class="col-md-6 mb-4">
         <%= render workout %>
       </div>
     <% end %>
   </div>
-</div>
-
-<div class="d-grid gap-2">
-  <%= link_to t('.action_new'), new_sheet_workout_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
 </div>
 
 <br>

@@ -1,40 +1,49 @@
-<div id="<%= dom_id workout %>">
-  <div class="bg-secondary-subtle rounded p-2 mb-3">
-    <div class="d-flex justify-content-between align-items-center mb-2">
-      <div>
-        <h1 class='h5 fw-bold'><%= workout.exercise %></h1>
+<div id="<%= dom_id workout %>" class="shadow rounded">
+  <div class="bg-success bg-opacity-10 p-2 rounded-top d-flex justify-content-between align-items-center">
+    <h2 class="h5 fw-bold text-success mb-0 text-truncate">
+      <i class="bi bi-activity me-1"></i><%= workout.exercise %>
+    </h2>
+    <% if action_name != 'show' %>
+      <%= link_to sheet_workout_path(@sheet, workout), class: 'btn btn-sm btn-success flex-shrink-0 ms-2' do %>
+        <i class="bi bi-eye-fill"></i>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="p-3">
+    <div class="d-flex flex-wrap gap-2">
+      <div class="bg-light text-center p-2 rounded flex-grow-1" style="min-width: 45%">
+        <p class="small text-muted mb-0"><i class="bi bi-repeat"></i> <%= t('.series') %></p>
+        <p class="fw-bold mb-0"><%= workout.series %></p>
       </div>
-      <div>
-        <%= link_to t('.action_show'), sheet_workout_path(@sheet, workout), class: 'btn btn-success' if action_name != 'show' %>
+
+      <div class="bg-light text-center p-2 rounded flex-grow-1" style="min-width: 45%">
+        <p class="small text-muted mb-0"><i class="bi bi-arrow-repeat"></i> <%= t('.repetitions') %></p>
+        <p class="fw-bold mb-0"><%= workout.repetitions %></p>
+      </div>
+
+      <div class="bg-light text-center p-2 rounded flex-grow-1" style="min-width: 45%">
+        <p class="small text-muted mb-0"><i class="bi bi-stopwatch"></i> <%= t('.interval') %></p>
+        <p class="fw-bold mb-0"><%= workout.interval.present? ? workout.interval : '—' %></p>
+      </div>
+
+      <div class="bg-light text-center p-2 rounded flex-grow-1" style="min-width: 45%">
+        <p class="small text-muted mb-0"><i class="bi bi-weight"></i> <%= t('.charge') %></p>
+        <p class="fw-bold mb-0"><%= workout.charge.present? ? workout.charge : '—' %></p>
       </div>
     </div>
 
-    <div class="row text-center">
-      <div class="col mb-2">
-        <div class="bg-light rounded">
-          <p class='h6'><%= t('.series') %></p>
-          <p><%= workout.series %></p>
-        </div>
-        <% if workout.interval.present? %>
-          <p class='mb-1'><strong><%= t('.interval') %></strong><%= workout.interval %></p>
-        <% end %>
-        <%= link_to t('.show_video'), "##{workout.id} ", data: { bs_toggle: "collapse" }, aria: { expanded: "false", controls: "collapseExample" } if workout.video.attached? %>
-      </div>
-
-      <div class="col">
-        <div class="bg-light rounded">
-          <p class='h6'><%= t('.repetitions') %></p>
-          <p><%= workout.repetitions %></p>
-        </div>
-        <div class="bg-light rounded">
-          <p class='h6'><%= t('.charge') %></p>
-          <p class="mb-2"><%= workout.charge.present? ? workout.charge : '- - - - -' %></p>
+    <% if workout.video.attached? %>
+      <div class="mt-3 text-center">
+        <button class="btn btn-sm btn-outline-success" data-bs-toggle="collapse" data-bs-target="#v-<%= workout.id %>">
+          <i class="bi bi-play-circle"></i> <%= t('.show_video') %>
+        </button>
+        <div class="collapse mt-2" id="v-<%= workout.id %>">
+          <div class="ratio ratio-16x9">
+            <%= video_tag url_for(workout.video), controls: true, class: 'rounded' %>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="collapse mt-2" id="<%= workout.id %>">
-      <%= video_tag url_for(workout.video), controls: true, class: 'bg-dark rounded img-fluid', style: 'width: 100%; height: 250px;' if workout.video.attached? %>
-    </div>
+    <% end %>
   </div>
 </div>

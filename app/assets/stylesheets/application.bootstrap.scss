@@ -2,3 +2,13 @@
 @import 'strada.css';
 @import 'actiontext.css';
 @import "bootstrap-icons/font/bootstrap-icons";
+
+input {
+  border-color: var(--bs-success) !important;
+}
+
+input:focus {
+  border-color: var(--bs-success) !important;
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important; // Sombra verde semitransparente
+  outline: 0 !important;
+}

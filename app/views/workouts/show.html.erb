@@ -1,6 +1,8 @@
 <% content_for(:title, t('.title')) %>
 
-<%= render @workout %>
+<div class="my-4">
+    <%= render @workout %>
+</div>
 
 <div data-controller="bridge--menu">
   <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>

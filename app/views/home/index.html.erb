@@ -1,42 +1,62 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="text-center mb-3">
-  <% if Current.user.avatar.attached? %>
-    <%= image_tag Current.user.avatar, class: 'rounded-circle mx-auto img-fluid', style: "width: 180px; height: 180px;" %>
-  <% else %>
-    <%= image_tag 'avatar.png', class: 'rounded-circle mx-auto img-fluid', style: "width: 180px; height: 180px;" %>
-  <% end %>
+<div class="text-center mb-4">
+    <div class="position-relative d-inline-block mb-4">
+        <%= image_tag Current.user.avatar.attached? ? Current.user.avatar : 'avatar.png', class: 'rounded-circle object-fit-cover border', width: 120, height: 120 %>
+    </div>
+    <p class="text-muted small"><i class="bi bi-envelope-fill me-1"></i><%= Current.user.email %></p>
 </div>
 
-<p class='text-center'>Signed as: <%= Current.user.email %></p>
-
-<h2 class='fw-bold'><i class="bi bi-person-gear"></i>  <%= t('.section') %></h2>
-<div class="list-group mb-4">
-  <%= link_to t('.change_avatar'), identity_avatar_path(Current.user), class: "list-group-item list-group-item-action link-primary" %>
-  <%= link_to t('.change_password'), edit_password_path,  class: "list-group-item list-group-item-action link-primary" %>
-  <%= link_to t('.Change_email_address'), edit_identity_email_path, class: "list-group-item list-group-item-action link-primary" %>
+<div class="card shadow-sm mb-4 border-0 rounded-3">
+    <div class="card-header bg-transparent border-bottom-0">
+        <h2 class="h5 fw-bold mb-0">
+        <i class="bi bi-person-gear me-2 text-primary"></i><%= t('.section') %>
+        </h2>
+    </div>
+    <div class="list-group list-group-flush rounded-bottom">
+        <%= link_to identity_avatar_path(Current.user), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+        <i class="bi bi-image me-3 text-muted"></i><%= t('.change_avatar') %>
+        <% end %>
+        <%= link_to edit_password_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+        <i class="bi bi-key me-3 text-muted"></i><%= t('.change_password') %>
+        <% end %>
+        <%= link_to edit_identity_email_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+        <i class="bi bi-envelope me-3 text-muted"></i><%= t('.Change_email_address') %>
+        <% end %>
+    </div>
 </div>
 
-<h3 class='fw-bold'><i class="bi bi-pc-display"></i>  <%= t('.section_1') %></h3>
-<div class="list-group mb-4">
-  <%= link_to t('.sessions'), sessions_path, class: "list-group-item list-group-item-action link-primary" %>
+<div class="card shadow-sm mb-4 border-0 rounded-3">
+    <div class="card-header bg-transparent border-bottom-0">
+        <h3 class="h5 fw-bold mb-0">
+        <i class="bi bi-pc-display me-2 text-primary"></i><%= t('.section_1') %>
+        </h3>
+    </div>
+    <div class="list-group list-group-flush rounded-bottom">
+        <%= link_to sessions_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+        <i class="bi bi-clock-history me-3 text-muted"></i><%= t('.sessions') %>
+        <% end %>
+    </div>
 </div>
 
-<h3 class='fw-bold'><i class="bi bi-translate"></i>  <%= t('.section_2') %></h3>
-<div class="btn-group dropend">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown" aria-expanded="false">
-    <%= I18n.locale == :en ? t('.language_1') : t('.language_2') %>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="languageButton">
-    <li><%= link_to t('.language_1'), set_locale_path('en'), class: 'dropdown-item' %></li>
-    <li><%= link_to t('.language_2'), set_locale_path('pt'), class: 'dropdown-item' %></li>
-  </ul>
+<div class="card shadow-sm mb-4 border-0 rounded-3">
+    <div class="card-header bg-transparent border-bottom-0 d-flex justify-content-between align-items-center">
+        <h3 class="h5 fw-bold mb-0">
+            <i class="bi bi-translate me-2 text-primary"></i><%= t('.section_2') %>
+        </h3>
+        <div class="dropdown">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+                <%= I18n.locale == :en ? t('.language_1') : t('.language_2') %>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><%= link_to t('.language_1'), set_locale_path('en'), class: 'dropdown-item' %></li>
+                <li><%= link_to t('.language_2'), set_locale_path('pt'), class: 'dropdown-item' %></li>
+            </ul>
+        </div>
+    </div>
 </div>
 
-<div data-controller="bridge--menu" class='my-4'>
-  <div data-controller="bridge--nav-button" data-action="click->bridge--menu#show" class="d-none">Log out</div>
-    <div data-bridge--menu-target="title" class="d-none">Log out of account</div>
-    <%= button_to t('.log_out'), Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': 'Log out?' }, class: 'btn btn-danger' %>
-</div>
-
-<%= link_to 'Home', root_path, class: 'hide-on-mobile' %>
+<div data-controller="bridge--menu" class="mb-4">
+<div data-controller="bridge--nav-button" data-action="click->bridge--menu#show" class="d-none">Log out</div>
+<div data-bridge--menu-target="title" class="d-none">Log out of account</div>
+<%= button_to t('.log_out'), Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('.log_out') }, class: 'btn btn-danger w-100 py-2' %>

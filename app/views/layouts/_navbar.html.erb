@@ -1,27 +1,22 @@
-<nav class="navbar navbar-expand-lg bg-light border-bottom py-3">
-  <div class="container container-fluid">
-    <%= link_to "FITPLAN", root_path, class: 'fw-bold navbar-brand link-success'%>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-top sticky-top py-2">
+  <div class="container">
+    <%= link_to root_path, class: 'navbar-brand d-flex align-items-center' do %>
+      <span class="fw-bold text-success">FITPLAN</span>
+    <% end %>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon" style="width: 15px; height: 20px;"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav w-100">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to t('.link_sheets'), sheets_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to t('.link_diet_sheets'), sheets_path(type: 'diet'), class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to t('.link_training_sheets'), sheets_path(type: 'workout'), class: 'nav-link' %>
-        </li>
-        <li class="nav-item ms-lg-auto d-flex align-items-center gap-2 m-0">
-          <%= link_to "#{Current.user.email}", home_path, class: 'nav-link' %>
-          <% if Current.user.avatar.attached? %>
-            <%= image_tag Current.user.avatar, class: 'rounded-circle img-fluid object-fit-cover', style: "width: 42px; height: 42px;" %>
+          <%= link_to sheets_path, class: 'nav-link px-3 fw-medium' do %>
+            <i class="bi bi-clipboard-data me-1"></i> <%= t('.link_sheets') %>
           <% end %>
         </li>
       </ul>
+      <%= link_to Current.user.email, home_path, class: 'btn btn-sm btn-primary text-truncate', style: 'max-width: 10rem;' %>
     </div>
   </div>
 </nav>

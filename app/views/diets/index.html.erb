@@ -1,17 +1,16 @@
 <% content_for(:title, @sheet.name) %>
 
-<div id="diets">
-  <div class="row">
-    <% @diets.each do |diet| %>
-      <div class="col-md-6">
-        <%= render diet %>
-      </div>
-    <% end %>
-  </div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1><%= @sheet.name %></h1>
+    <%= link_to t('.action_new'), new_sheet_diet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ Diet" }, class: 'btn btn-success' %>
 </div>
 
-<div class="d-grid gap-2">
-  <%= link_to t('.action_new'), new_sheet_diet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ Diet" }, class: 'btn btn-success' %>
+<div id="diets" class="row">
+    <% @diets.each do |diet| %>
+        <div class="col-md-6 p-2 mb-2">
+            <%= render diet %>
+        </div>
+    <% end %>
 </div>
 
 <br>

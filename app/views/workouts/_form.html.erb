@@ -45,7 +45,7 @@
       <div id="video" data-upload-preview-target="currentFile">
         <% if workout.video.attached? && workout.video.persisted? %>
           <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
-          <%= link_to t('.destroy_video'), sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': t('.message_destroy')}, class: 'btn btn-danger mb-4' %>
+          <%= link_to t('.destroy'), sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': t('.message_destroy')}, class: 'btn btn-danger mb-4' %>
         <% end %>
       </div>
 

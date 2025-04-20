@@ -1,5 +1,6 @@
-<h1><% content_for(:title, t('.title')) %></h1>
+<% content_for(:title, t('.title')) %>
 
+<h1><%= t('.title') %></h1>
 
 <% if @sheet.workouts.exists? || @sheet.diets.exists? %>
   <div class="alert alert-danger" role='alert'>
