@@ -9,7 +9,7 @@ class Identity::EmailVerificationsController < ApplicationController
 
   def create
     send_email_verification
-    redirect_to home_path, notice: I18n.t('identity.create.success')
+    redirect_to account_path, notice: I18n.t('identity.create.success')
   end
 
   private
