@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  get    "home",    to: "home#index"
+  get "account", to: "account#index"
+
+  namespace :account do
+    resource :metrics, only: [ :edit, :update ]
+  end
+
   get    "sign_in", to: "sessions#new"
   post   "sign_in", to: "sessions#create"
   get    "sign_up", to: "registrations#new"
