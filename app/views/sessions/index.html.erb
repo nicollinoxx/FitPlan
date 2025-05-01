@@ -23,7 +23,7 @@
           </p>
 
           <p>
-            <%= button_to t('submit'), session, method: :delete, class: 'btn btn-danger d-grid' %>
+            <%= button_to t('destroy'), session, method: :delete, data: { turbo_confirm: t("message_destroy")}, class: 'btn btn-danger d-grid' %>
           </p>
         </li>
       </div>

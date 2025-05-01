@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def set_session_locale
     session[:locale] = params[:locale] if I18n.available_locales.include?(params[:locale].to_sym)
 
-    recede_or_redirect_to root_path
+    recede_or_redirect_to account_path
   end
 
   private

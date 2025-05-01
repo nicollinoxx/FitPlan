@@ -5,39 +5,37 @@
   <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
 </div>
 
-<% if turbo_native_app? %>
-    <div class="position-relative me-0">
-        <div class="position-fixed top-0 mt-1 start-2">
-            <%= link_to account_path, class: "text-decoration-none" do %>
-                <div class="d-flex align-items-center mt-1">
-                    <%= image_tag @user.avatar, class: 'rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
-                    <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
-                </div>
-            <% end %>
+<div class="sticky-top d-flex align-items-center justify-content-between mb-3">
+  <% if turbo_native_app? %>
+      <%= link_to account_path, class: "text-decoration-none" do %>
+        <div class="d-flex align-items-center">
+          <%= image_tag @user.avatar, class: 'rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
+          <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
         </div>
-    </div>
-<% end %>
+      <% end %>
+  <% end %>
 
-
-<div class="text-end dropdown my-3">
-  <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+  <div class="ms-auto dropdown">
+    <button class="btn btn-sm bg-white border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
       <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
-  </button>
-  <ul class="dropdown-menu">
-    <li><%= link_to t('diet'), root_path(type: 'diet'), class: 'dropdown-item' %></li>
-    <li><%= link_to t('workout'), root_path(type: 'workout'), class: 'dropdown-item' %></li>
-    <li><%= link_to 'all', root_path, class: "dropdown-item" %></li>
-  </ul>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><%= link_to t('diet'), sheets_path(type: 'diet'), data: { turbo_frame: 'sheets' }, class: 'dropdown-item' %></li>
+      <li><%= link_to t('workout'), sheets_path(type: 'workout'), data: { turbo_frame: 'sheets' }, class: 'dropdown-item' %></li>
+      <li><%= link_to 'all', sheets_path, data: { turbo_frame: 'sheets' }, class: "dropdown-item" %></li>
+    </ul>
+  </div>
 </div>
 
-
-<div id="sheets" class="row">
+<%= turbo_frame_tag "sheets" do %>
+  <div class="row">
     <% @sheets.each do |sheet| %>
-        <div class="col-md-6 p-2 mb-2">
-            <div class="rounded p-3 shadow-lg d-flex flex-column h-100">
-                <%= render 'sheets/sheet', sheet: sheet %>
-                <%= link_to t("show"), sheet_diets_or_workouts_path(sheet), class: "btn btn-sm btn-success mt-auto d-grid" %>
-            </div>
+      <div class="col-md-6 p-2 mb-2">
+        <div class="rounded p-3 shadow d-flex flex-column h-100">
+          <%= render "sheets/sheet", sheet: sheet %>
+          <%= link_to t("show"), sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm btn-success mt-auto d-grid" %>
         </div>
+      </div>
     <% end %>
-</div>
+  </div>
+<% end %>

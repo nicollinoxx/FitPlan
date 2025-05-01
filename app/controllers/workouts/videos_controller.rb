@@ -4,9 +4,7 @@ class Workouts::VideosController < ApplicationController
   def destroy
     @workout.video.purge
 
-    respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.remove('video') }
-    end
+    render turbo_stream: turbo_stream.remove('video')
   end
 
   private

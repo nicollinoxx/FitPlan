@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    @session.destroy; recede_or_redirect_to(sessions_path, notice: I18n.t('notice.session.destroy'))
+    @session.destroy; refresh_or_redirect_to(sessions_path, notice: I18n.t('notice.session.destroy'))
   end
 
   private

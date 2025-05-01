@@ -1,4 +1,4 @@
-class HealthCalculatorService
+class User::HealthCalculator
   def initialize(params)
     @height = params[:height].to_f
     @weight = params[:weight].to_f

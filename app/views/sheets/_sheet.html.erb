@@ -7,7 +7,7 @@
         </h2>
 
         <% unless action_name == "show" %>
-            <%= link_to sheet_path(sheet), class: "btn btn-sm btn-outline-success me-1" do %>
+            <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm btn-outline-success me-1" do %>
               <i class="bi bi-pencil"></i>
             <% end %>
         <% end %>

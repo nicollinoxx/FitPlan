@@ -11,7 +11,7 @@ class Identity::AvatarsController < ApplicationController
     if @user.update(user_params)
       refresh_or_redirect_to account_path, notice: I18n.t('notice.avatar.update')
     else
-      render turbo_stream: turbo_stream.replace('form', partial: 'identity/avatars/form', locals: { user: @user }) }
+      render turbo_stream: turbo_stream.replace('form', partial: 'identity/avatars/form', locals: { user: @user })
     end
   end
 
