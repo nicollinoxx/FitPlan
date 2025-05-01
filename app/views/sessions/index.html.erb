@@ -1,5 +1,7 @@
 <% content_for(:title, t('.title')) %>
 
+<h1><%= t('.title') %></h1>
+
 <div id="sessions">
   <ul class="list-group rounded">
     <% @sessions.each do |session| %>
@@ -21,7 +23,7 @@
           </p>
 
           <p>
-            <%= button_to t('.submit'), session, method: :delete, class: 'btn btn-danger d-grid' %>
+            <%= button_to t('submit'), session, method: :delete, class: 'btn btn-danger d-grid' %>
           </p>
         </li>
       </div>
@@ -32,5 +34,5 @@
 <br>
 
 <div class='hide-on-mobile'>
-  <%= link_to t('.link_back'), account_path %>
+  <%= link_to 'back', account_path %>
 </div>

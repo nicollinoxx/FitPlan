@@ -11,9 +11,9 @@
 
   <div class="d-flex">
     <div data-bridge--menu-target="title" class="d-none d-flex gap-2">Contact Options</div>
-    <%= link_to t('.action_edit'), edit_sheet_diet_path(@sheet, @diet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
-    <%= button_to t('.action_destroy'), sheet_diet_path(@sheet, @diet), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('.message_destroy') }, class: 'btn btn-danger' %>
+    <%= link_to t('edit'), edit_sheet_diet_path(@sheet, @diet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
+    <%= button_to t('destroy'), sheet_diet_path(@sheet, @diet), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger' %>
   </div>
   <hr>
-    <%= link_to t('.link_back'), sheet_diets_path(@sheet), class: 'hide-on-mobile mt-2' %>
+    <%= link_to 'back', sheet_diets_path(@sheet), class: 'hide-on-mobile mt-2' %>
 </div>

@@ -1,37 +1,46 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="mx-auto py-3 shadow p-4 rounded" style="max-width: 460px;">
-    <%= form_with(url: sign_up_path) do |form| %>
-      <% if @user.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(@user.errors.count, t('.error')) %> <%= t('.error_message_form')%></h2>
+<div class="mx-auto" style="max-width: 500px;">
+    <div class="py-3 shadow p-4 rounded mb-3">
+      <div class="text-center mb-4">
+        <%= image_tag 'logo.png', class: 'img-fluid mb-3', style: 'max-height: 70px;' %>
+        <h2 class="text-success"><%= t('.title') %></h2>
+      </div>
 
-          <ul>
-            <% @user.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
+      <%= form_with(url: sign_up_path) do |form| %>
+        <% if @user.errors.any? %>
+          <div style="color: red">
+            <h2><%= pluralize(@user.errors.count, t('error')) %> <%= t('.error_message_form')%></h2>
+
+            <ul>
+              <% @user.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class='mb-3'>
+          <%= form.label :email, style: "display: block", class: 'form-label' %>
+          <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        </div>
+
+        <div class='mb-3'>
+          <%= form.label :password, t('.label.passowrd'), style: "display: block", class: 'form-label' %>
+          <%= form.password_field :password, required: true, autocomplete: "new-password", class: 'form-control' %>
+          <%= content_tag :small, t('minimum_characters'), class: "text-muted" %>
+        </div>
+
+        <div class='mb-3'>
+          <%= form.label :password_confirmation, t('.label.password_confirmation'),style: "display: block", class: 'form-label' %>
+          <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control' %>
+        </div>
+
+        <div class='pt-3'>
+          <%= form.submit t('.submit'), class: 'btn btn-success w-100' %>
         </div>
       <% end %>
+    </div>
 
-      <div class='mb-3'>
-        <%= form.label :email, style: "display: block", class: 'form-label' %>
-        <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email", class: 'form-control' %>
-      </div>
-
-      <div class='mb-3'>
-        <%= form.label :password, t('.password_label'), style: "display: block", class: 'form-label' %>
-        <%= form.password_field :password, required: true, autocomplete: "new-password", class: 'form-control' %>
-        <%= content_tag :small, t('.minimum_characters'), class: "text-muted" %>
-      </div>
-
-      <div class='mb-3'>
-        <%= form.label :password_confirmation, t('.confirmation_password_label'),style: "display: block", class: 'form-label' %>
-        <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control' %>
-      </div>
-
-      <div class='pt-3'>
-        <%= form.submit t('.submit'), class: 'btn btn-success w-100' %>
-      </div>
-    <% end %>
+    <%= link_to "back", sign_in_path, class: "hide-on-mobile" %>
 </div>

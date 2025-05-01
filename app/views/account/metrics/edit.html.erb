@@ -2,24 +2,24 @@
 
 <%= form_with url: account_metrics_path, method: :patch do |form| %>
     <div class="mb-3">
-        <%= form.label :height, "Height (cm)", style: "display: block", class: 'form-label' %>
+        <%= form.label :height, t('.label.height'), style: "display: block", class: 'form-label' %>
         <%= form.number_field :height, class: "form-control", placeholder: "Enter your height 0,0", step: "any", min: 0 %>
     </div>
 
     <div class="mb-3">
-        <%= form.label :weight, "Weight (kg)", style: "display: block", class: 'form-label' %>
-        <%= form.number_field :weight, placeholder: "Enter your weight 0,0", class: "form-control", step: "any", min: 0 %>
+        <%= form.label :weight, t('.label.weight'), style: "display: block", class: 'form-label' %>
+        <%= form.number_field :weight, class: "form-control", placeholder: "Enter your weight 0,0", step: "any", min: 0 %>
     </div>
 
     <div class="mb-3">
-        <%= form.label :age, "Age", style: "display: block", class: 'form-label' %>
+        <%= form.label :age, t('.label.age'), style: "display: block", class: 'form-label' %>
         <%= form.number_field :age, placeholder: "Enter your age", class: "form-control" %>
     </div>
 
     <div class="mb-3">
-        <%= form.label :gender, "Gender", style: "display: block", class: 'form-label' %>
+        <%= form.label :gender, t('.label.gender'), style: "display: block", class: 'form-label' %>
         <%= form.select :gender, options_for_select([['Male', 'male'], ['Female', 'female']]), {}, { class: "form-select" } %>
     </div>
 
-    <%= form.submit "save", class: "btn btn-success" %>
+    <%= form.submit t('submit'), class: "btn btn-success" %>
 <% end %>

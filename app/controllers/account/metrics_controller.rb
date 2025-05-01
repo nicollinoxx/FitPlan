@@ -8,7 +8,7 @@ class Account::MetricsController < ApplicationController
     calculator = HealthCalculatorService.new(metrics_params)
 
     if @user.update(imc: calculator.imc, tmb: calculator.tmb)
-      redirect_to account_path, notice: 'Metrics updated successfully'
+      redirect_to account_path, notice: I18n.t('notice.account_metrics.update')
     else
       render :edit, status: :unprocessable_entity
     end

@@ -1,7 +1,7 @@
 <%= form_with(model: [@sheet, @diet], data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if diet.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(diet.errors.count, t('.error')) %> <%= t('.error_message_form')%></h2>
+      <h2><%= pluralize(diet.errors.count, t('error')) %> <%= t('.error_message_form')%></h2>
 
       <ul>
         <% diet.errors.each do |error| %>
@@ -12,31 +12,31 @@
   <% end %>
 
   <div class='mb-3' >
-    <%= form.label :meal, t('.meal_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :meal, t('.label.meal'), style: "display: block", class: 'form-label' %>
     <%= form.text_field :meal, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3' >
-    <%= form.label :description, t('.description_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :description, t('.label.description'), style: "display: block", class: 'form-label' %>
     <%= form.rich_text_area :description, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3' >
-    <%= form.label :protein_g, t('.protein_g_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :protein_g, t('.label.protein'), style: "display: block", class: 'form-label' %>
     <%= form.number_field :protein_g, step: 'any', class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3' >
-    <%= form.label :carbohydrate_g, t('.carbohydrate_g_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :carbohydrate_g, t('.label.carbohydrate'), style: "display: block", class: 'form-label' %>
     <%= form.number_field :carbohydrate_g, step: 'any', class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3' >
-    <%= form.label :fat_g, t('.fat_g_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :fat_g, t('.label.fat'), style: "display: block", class: 'form-label' %>
     <%= form.number_field :fat_g, step: 'any', class: 'form-control border border-success' %>
   </div>
 
   <div>
-    <%= form.submit t('.submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+    <%= form.submit t('submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>
 <% end %>

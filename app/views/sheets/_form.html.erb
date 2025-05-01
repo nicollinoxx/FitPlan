@@ -1,7 +1,7 @@
 <%= form_with(model: sheet, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if sheet.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(sheet.errors.count, t('.error')) %> <%= t('.error_message_form')%></h2>
+      <h2><%= pluralize(sheet.errors.count, t('error')) %> <%= t('.error_message_form')%></h2>
 
       <ul>
         <% sheet.errors.each do |error| %>
@@ -12,26 +12,26 @@
   <% end %>
 
   <div class='mb-3'>
-    <%= form.label :name, t('.name_label'),style: "display: block", class: 'form-label' %>
+    <%= form.label :name, t('.label.name'),style: "display: block", class: 'form-label' %>
     <%= form.text_field :name, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :description, t('.description_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :description, t('.label.description'), style: "display: block", class: 'form-label' %>
     <%= form.text_area :description, class: 'form-control border border-success' %>
   </div>
 
   <div class="mb-3">
-    <%= form.label :sheet_type, t('.sheet_type_label'), class: 'form-check-label mb-1' %><br />
+    <%= form.label :sheet_type, t('.label.sheet_type'), class: 'form-check-label mb-1' %><br />
 
     <%= form.radio_button :sheet_type, 'workout', class: 'form-check-input' %>
-    <%= form.label :sheet_type_workout, t('.workout_label'), class: 'form-check-label me-2' %>
+    <%= form.label :sheet_type_workout, t('workout'), class: 'form-check-label me-2' %>
 
     <%= form.radio_button :sheet_type, 'diet', class: 'form-check-input' %>
-    <%= form.label :sheet_type_diet, t('.diet_label'), class: 'form-check-label'  %>
+    <%= form.label :sheet_type_diet, t('diet'), class: 'form-check-label'  %>
   </div>
 
   <div>
-    <%= form.submit t('.submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+    <%= form.submit t('submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>
 <% end %>

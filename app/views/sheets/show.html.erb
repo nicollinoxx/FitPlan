@@ -1,4 +1,4 @@
-<h1><% content_for(:title, t('.title')) %></h1>
+<% content_for(:title, t('.title')) %>
 
 <div class="shadow-lg rounded p-2 mb-3">
     <%= render @sheet %>
@@ -9,9 +9,9 @@
 
   <div class='d-flex'>
     <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
-    <%= link_to t('.action_edit'), edit_sheet_path(@sheet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
-    <%= button_to t('.action_destroy'), @sheet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('.message_destroy') }, class: 'btn btn-danger' %>
+    <%= link_to t('edit'), edit_sheet_path(@sheet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-2' %>
+    <%= button_to t('destroy'), @sheet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger' %>
   </div>
   <hr>
-    <%= link_to t('.link_back'), sheets_path, class: 'hide-on-mobile' %>
+    <%= link_to 'back', sheets_path, class: 'hide-on-mobile' %>
 </div>

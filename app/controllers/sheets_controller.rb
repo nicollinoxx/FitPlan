@@ -29,7 +29,7 @@ class SheetsController < ApplicationController
     @sheet = @user.sheets.build(sheet_params)
 
     if @sheet.save
-      refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('sheets.create.success')
+      refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('notice.sheet.create')
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,9 +38,9 @@ class SheetsController < ApplicationController
   # PATCH/PUT /sheets/1 or /sheets/1.json
   def update
     if @sheet.update(sheet_params)
-      refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('sheets.update.success')
+      refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('notice.sheet.update')
     else
-      render :show, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -48,7 +48,7 @@ class SheetsController < ApplicationController
   def destroy
     @sheet.destroy!
 
-    recede_or_redirect_to sheets_url, notice: I18n.t('sheets.destroy.success')
+    recede_or_redirect_to sheets_url, notice: I18n.t('notice.sheet.destroy')
   end
 
   private

@@ -1,17 +1,13 @@
 <% content_for(:title, t('.title')) %>
 
-<h1><%= t('.title') %></h1>
-
 <% if @sheet.workouts.exists? || @sheet.diets.exists? %>
-  <div class="alert alert-danger" role='alert'>
-    <p>
-      <strong><%= t('.alert') %></strong><%= t('.alert_detail')%>
-    </p>
+  <div class="bg-dark text-light p-2 rounded" role='alert'>
+    <p class="pb-0 mb-0"><%= t('.alert')%></p>
   </div>
 <% end %>
 
-<%= render "form", sheet: @sheet %>
+<div class="my-4">
+    <%= render "form", sheet: @sheet %>
+</div>
 
-<br>
-
-<%= link_to t('.link_back'), @sheet, class: 'hide-on-mobile' %>
+<%= link_to 'back', @sheet, class: 'hide-on-mobile' %>

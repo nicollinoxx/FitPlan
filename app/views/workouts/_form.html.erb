@@ -1,7 +1,7 @@
 <%= form_with(model: [@sheet, @workout], data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if workout.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(workout.errors.count, t('.error')) %> <%= t('.error_message_form')%></h2>
+      <h2><%= pluralize(workout.errors.count, t('error')) %> <%= t('.error_message_form')%></h2>
 
       <ul>
         <% workout.errors.each do |error| %>
@@ -13,28 +13,28 @@
 
 
   <div class='mb-3'>
-    <%= form.label :exercise, t('.exercise_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :exercise, t('.label.exercise'), style: "display: block", class: 'form-label' %>
     <%= form.text_field :exercise, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :series, t('.series_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :series, t('.label.series'), style: "display: block", class: 'form-label' %>
     <%= form.number_field :series, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :repetitions, t('.repetitions_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :repetitions, t('.label.repetitions'), style: "display: block", class: 'form-label' %>
     <%= form.text_field :repetitions,  maxlength: 15, class: 'form-control border border-success' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :interval, t('.interval_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :interval, t('.label.interval'), style: "display: block", class: 'form-label' %>
     <%= form.text_field :interval, maxlength: 15, class: 'form-control border border-success' %>
     <%= content_tag :small, "Máximun characters: 15", class: "text-muted" %>
   </div>
 
   <div class='mb-3'>
-    <%= form.label :charge, t('.charge_label'), style: "display: block", class: 'form-label' %>
+    <%= form.label :charge, t('.label.charge'), style: "display: block", class: 'form-label' %>
     <%= form.select :charge, t('.options_charge'), {}, class: "form-select border border-success" %>
   </div>
 
@@ -45,13 +45,13 @@
       <div id="video" data-upload-preview-target="currentFile">
         <% if workout.video.attached? && workout.video.persisted? %>
           <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
-          <%= link_to t('.destroy'), sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': t('.message_destroy')}, class: 'btn btn-danger mb-4' %>
+          <%= link_to t('destroy'), sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': t('message_destroy')}, class: 'btn btn-danger mb-4' %>
         <% end %>
       </div>
 
       <div>
         <%= video_tag "", controls: true, data: { "upload-preview-target": "previewUpload" }, class: 'rounded bg-secondary img-fluid', hidden: true, style: 'height: 160px' %>
-        <button type="button" class="btn btn-danger mb-4" data-upload-preview-target="removeButton" data-action="upload-preview#removePreview" hidden><%= t('.remove_preview') %></button>
+        <button type="button" class="btn btn-danger mb-4" data-upload-preview-target="removeButton" data-action="upload-preview#removePreview" hidden><%= t('remove_preview') %></button>
       </div>
 
       <%= form.file_field :video, accept: 'video/mp4, video/mpeg, video/quicktime', data: { "upload-preview-target": "fileInput", "action": "upload-preview#preview" }, class: 'form-control border border-success' %>
@@ -60,6 +60,6 @@
   </div>
 
   <div>
-    <%= form.submit t('.submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+    <%= form.submit t('submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>
 <% end %>

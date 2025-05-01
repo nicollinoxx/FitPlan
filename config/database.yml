@@ -16,15 +16,15 @@ development:
   queue:
     <<: *default
     database: storage/development_queue.sqlite3
-    migrations_paths: db/queue_migrate
+    migrations_paths: db/queue_schema
   cache:
     <<: *default
     database: storage/development_cache.sqlite3
-    migrations_paths: db/cache_migrate
+    migrations_paths: db/cache_schema
   cable:
     <<: *default
     database: storage/production_cable.sqlite3
-    migrations_paths: db/cable_migrate
+    migrations_paths: db/cable_schema
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -40,12 +40,12 @@ production:
   cache:
     <<: *default
     database: storage/production_cache.sqlite3
-    migrations_paths: db/cache_migrate
+    migrations_paths: db/cache_schema
   queue:
     <<: *default
     database: storage/production_queue.sqlite3
-    migrations_paths: db/queue_migrate
+    migrations_paths: db/queue_schema
   cable:
       <<: *default
       database: storage/production_cable.sqlite3
-      migrations_paths: db/cable_migrate
+      migrations_paths: db/cable_schema

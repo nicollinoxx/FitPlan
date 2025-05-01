@@ -27,7 +27,7 @@ class DietsController < ApplicationController
     @diet = @sheet.diets.build(diet_params)
 
     if @diet.save
-      refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('diets.create.success')
+      refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('notice.diet.create')
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class DietsController < ApplicationController
   # PATCH/PUT /diets/1 or /diets/1.json
   def update
     if @diet.update(diet_params)
-      refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('diets.update.success')
+      refresh_or_redirect_to sheet_diet_url(@sheet, @diet), notice: I18n.t('notice.diet.update')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class DietsController < ApplicationController
   def destroy
     @diet.destroy!
 
-    recede_or_redirect_to sheet_diets_url(@sheet), notice: I18n.t('diets.destroy.success')
+    recede_or_redirect_to sheet_diets_url(@sheet), notice: I18n.t('notice.diet.destroy')
   end
 
   private

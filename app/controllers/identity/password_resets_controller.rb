@@ -11,15 +11,15 @@ class Identity::PasswordResetsController < ApplicationController
   def create
     if @user = User.find_by(email: params[:email], verified: true)
       send_password_reset_email
-      refresh_or_redirect_to sign_in_path, notice: I18n.t('identity.password_resets.create.success_notice')
+      refresh_or_redirect_to sign_in_path, notice: I18n.t('notice.password_reset.create')
     else
-      recede_or_redirect_to new_identity_password_reset_path, notice: I18n.t('identity.password_resets.create.success_alert')
+      recede_or_redirect_to new_identity_password_reset_path, notice: I18n.t('alert.password_reset.create')
     end
   end
 
   def update
     if @user.update(user_params)
-      refresh_or_redirect_to sign_in_path, notice: I18n.t('identity.password_resets.update.success')
+      refresh_or_redirect_to sign_in_path, notice: I18n.t('notice.password_reset.update')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Identity::PasswordResetsController < ApplicationController
     def set_user
       @user = User.find_by_token_for!(:password_reset, params[:sid])
     rescue StandardError
-      refresh_or_redirect_to new_identity_password_reset_path, alert: I18n.t('identity.password_resets.set_user.success')
+      refresh_or_redirect_to new_identity_password_reset_path, alert: I18n.t('notice.password_reset.set_user')
     end
 
     def user_params
