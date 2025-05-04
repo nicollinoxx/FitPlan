@@ -5,35 +5,36 @@
   <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
 </div>
 
-<div class="sticky-top d-flex align-items-center justify-content-between mb-3">
-  <% if turbo_native_app? %>
-      <%= link_to account_path, class: "text-decoration-none" do %>
-        <div class="d-flex align-items-center">
-          <%= image_tag @user.avatar, class: 'rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
-          <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
-        </div>
-      <% end %>
-  <% end %>
-
-  <div class="ms-auto dropdown">
-    <button class="btn btn-sm bg-white border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-      <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end">
-      <li><%= link_to t('diet'), sheets_path(type: 'diet'), data: { turbo_frame: 'sheets' }, class: 'dropdown-item' %></li>
-      <li><%= link_to t('workout'), sheets_path(type: 'workout'), data: { turbo_frame: 'sheets' }, class: 'dropdown-item' %></li>
-      <li><%= link_to 'all', sheets_path, data: { turbo_frame: 'sheets' }, class: "dropdown-item" %></li>
-    </ul>
-  </div>
-</div>
-
 <%= turbo_frame_tag "sheets" do %>
+  <div class="sticky-top d-flex align-items-center justify-content-between mb-3">
+    <% if turbo_native_app? %>
+        <%= link_to account_path, class: "text-decoration-none" do %>
+          <div class="d-flex align-items-center">
+            <%= image_tag @user.avatar, class: 'rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
+            <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
+          </div>
+        <% end %>
+    <% end %>
+
+
+    <div class="ms-auto dropdown">
+      <button class="btn btn-sm bg-white border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+        <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><%= link_to t('diet'), sheets_path(type: 'diet'), class: 'dropdown-item' %></li>
+        <li><%= link_to t('workout'), sheets_path(type: 'workout'), class: 'dropdown-item' %></li>
+        <li><%= link_to 'all', sheets_path, class: "dropdown-item" %></li>
+      </ul>
+    </div>
+  </div>
+
   <div class="row">
     <% @sheets.each do |sheet| %>
       <div class="col-md-6 p-2 mb-2">
         <div class="rounded p-3 shadow d-flex flex-column h-100">
           <%= render "sheets/sheet", sheet: sheet %>
-          <%= link_to t("show"), sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm btn-success mt-auto d-grid" %>
+          <%= link_to t("show"), sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top"}, class: "btn btn-sm btn-success mt-auto d-grid" %>
         </div>
       </div>
     <% end %>
