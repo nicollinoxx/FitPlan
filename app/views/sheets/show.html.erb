@@ -16,4 +16,6 @@
     <%= link_to 'back', sheets_path, class: 'hide-on-mobile' %>
 </div>
 
-<%= link_to "share", new_sheet_share_path(@sheet) %>
+<div class="row g-3 mt-3">
+  <%= render partial: "clone", collection: User.all, as: :user %>
+</div>
