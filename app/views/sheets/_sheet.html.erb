@@ -16,7 +16,8 @@
       <p class="text-muted mb-3"><%= sheet.description %></p>
 
       <% if action_name == "show" %>
-        <p class="text-warning mb-0"><%= sheet.workout? ? t('workout') : t('diet') %></p>
+        <p class="text-warning mb-0">type: <%= sheet.workout? ? t('workout') : t('diet') %></p>
+        <p class="text-dark mb-0">font: <%= sheet.copy? ? "copied" : "original" %></p>
       <% end %>
     </div>
 <% end %>

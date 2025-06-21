@@ -16,6 +16,6 @@
     <%= link_to 'back', sheets_path, class: 'hide-on-mobile' %>
 </div>
 
-<div class="row g-3 mt-3">
-  <%= render partial: "clone", collection: User.all, as: :user %>
+<div class="d-flex flex-wrap gap-2">
+  <%= render partial: "sheets/copies/form_copy_sheet", collection: User.all, as: :user %>
 </div>

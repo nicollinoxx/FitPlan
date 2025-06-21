@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :sheets do
-    resources :clones, params: :user_id, only: [:create], module: :sheets
+    resources :copies, only: [:create], module: :sheets
     resources :diets
     resources :workouts do
       resources :videos, only: [:destroy], module: :workouts
