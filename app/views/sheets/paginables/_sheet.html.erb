@@ -1,0 +1,6 @@
+<div class="col-md-6 p-2 mb-2">
+  <div class="rounded p-3 border d-flex flex-column h-100">
+    <%= render sheet %>
+    <%= link_to t("show"), sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top"}, class: "btn btn-sm btn-success mt-auto d-grid" %>
+  </div>
+</div>

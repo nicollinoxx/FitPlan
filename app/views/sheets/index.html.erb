@@ -28,14 +28,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <% @sheets.each do |sheet| %>
-      <div class="col-md-6 p-2 mb-2">
-        <div class="shadow rounded p-3 border d-flex flex-column h-100">
-          <%= render "sheets/sheet", sheet: sheet %>
-          <%= link_to t("show"), sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top"}, class: "btn btn-sm btn-success mt-auto d-grid" %>
-        </div>
-      </div>
-    <% end %>
+  <div id="paginables" class="row">
+    <%= render partial: "sheets/paginables/sheet", collection: @page.records, as: :sheet %>
+    <%= render "sheets/paginables/next_page_container", page: @page.next_param unless @page.last? %>
   </div>
 <% end %>

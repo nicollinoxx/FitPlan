@@ -1,0 +1,4 @@
+<%= turbo_frame_tag :next_page_container, loading: :lazy, src: sheets_path(page: page, format: :turbo_stream), class: "flex justify-center" do %>
+  <span class="icon icon--loading" style="--icon-size: 2rem;" aria-hidden="true"></span>
+  <span class="sr-only">Loading...</span>
+<% end %>

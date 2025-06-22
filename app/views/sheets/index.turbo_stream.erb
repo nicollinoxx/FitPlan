@@ -1,0 +1,5 @@
+<%= turbo_stream.replace :next_page_container, partial: "sheets/paginables/sheet", collection: @page.records, as: :sheet %>
+
+<% unless @page.last? %>
+  <%= turbo_stream.append :paginables, partial: "sheets/paginables/next_page_container", locals: { page: @page.next_param } %>
+<% end %>
