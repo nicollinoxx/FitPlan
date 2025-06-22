@@ -6,7 +6,7 @@ class SheetsController < ApplicationController
   def index
     @sheets = index_by_type || @user.sheets
 
-    set_page_and_extract_portion_from @sheets.order(created_at: :desc), per_page: 10
+    set_page_and_extract_portion_from @sheets.order(created_at: :desc)
     sleep 2.seconds unless @page.first?
   end
 

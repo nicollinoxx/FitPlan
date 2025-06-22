@@ -36,3 +36,9 @@ select.form-select:focus {
     background-color: var(--bs-dark) !important;
   }
 }
+
+@include color-mode(light) {
+  .bg-dark-subtle {
+    background-color: var(--bs-light) !important;
+  }
+}

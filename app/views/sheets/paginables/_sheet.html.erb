@@ -1,6 +1,9 @@
-<div class="col-md-6 p-2 mb-2">
-  <div class="rounded p-3 border d-flex flex-column h-100">
+<div class="col-md-6 p-2">
+  <div class="rounded p-3 bg-dark-subtle shadow border position-relative">
     <%= render sheet %>
-    <%= link_to t("show"), sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top"}, class: "btn btn-sm btn-success mt-auto d-grid" %>
+    <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm btn-outline-success position-absolute", style: "top: 1rem; right: 1rem; z-index: 2;" do %>
+      <i class="bi bi-pencil"></i>
+    <% end %>
+    <%= link_to "", sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top"}, class: "stretched-link" %>
   </div>
 </div>
