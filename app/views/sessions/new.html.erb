@@ -7,7 +7,7 @@
         <h2 class="text-success"><%= t('.title') %></h2>
       </div>
 
-      <%= form_with(url: sign_in_path, class: 'mb-4') do |form| %>
+      <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
         <div class="mb-3">
           <%= form.label :email, class: 'form-label' %>
           <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control focus-ring focus-ring-success py-1 px-2', placeholder: "name@example.com" %>
