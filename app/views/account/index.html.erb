@@ -86,6 +86,16 @@
     </div>
 </div>
 
-<div data-controller="bridge--menu" class="mb-4">
-<div data-controller="bridge--nav-button" data-action="click->bridge--menu#show" class="d-none">Log out</div>
-<div data-bridge--menu-target="title" class="d-none">Log out of account</div>
+<% if turbo_native_app? %>
+  <div class="position-fixed top-0 end-0 p-2 my-2" style="z-index: 1050">
+    <button data-action="theme#applyTheme" class="btn bg-light border rounded-circle", style="width: 42px; height: 42px;">
+      <i data-theme-target="icon" class="bi bi-sun-fill"></i>
+    </button>
+  </div>
+<% end %>
+
+<div data-controller="bridge--menu" class="mb-4 d-none">
+  <div data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Log out</div>
+  <div data-bridge--menu-target="title">Log out of account</div>
+  <%= button_to "Log out", Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
+</div>

@@ -16,8 +16,10 @@ export default class extends Controller {
   }
 
   changeIcon(theme) {
-    this.iconTarget.classList.toggle("bi-sun-fill", theme === "light")
-    this.iconTarget.classList.toggle("bi-moon-stars-fill", theme === "dark")
+    this.iconTargets.forEach((icon) => {
+      icon.classList.toggle("bi-sun-fill", theme === "light")
+      icon.classList.toggle("bi-moon-stars-fill", theme === "dark")
+    })
   }
 
   getlocalStorage() {return localStorage.getItem("theme") || "light"}
