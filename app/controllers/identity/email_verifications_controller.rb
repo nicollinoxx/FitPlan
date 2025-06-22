@@ -16,7 +16,7 @@ class Identity::EmailVerificationsController < ApplicationController
     def set_user
       @user = User.find_by_token_for!(:email_verification, params[:sid])
     rescue StandardError
-      redirect_to edit_identity_email_path, alert: I18n.t('notice.email_verification.invalid')
+      redirect_to edit_identity_email_path, alert: I18n.t('alert.email_verification.invalid')
     end
 
     def send_email_verification

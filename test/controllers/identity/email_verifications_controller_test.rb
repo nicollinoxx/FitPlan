@@ -11,7 +11,7 @@ class Identity::EmailVerificationsControllerTest < ActionDispatch::IntegrationTe
       post identity_email_verification_url
     end
 
-    assert_redirected_to home_url
+    assert_redirected_to account_url
   end
 
   test "should verify email" do

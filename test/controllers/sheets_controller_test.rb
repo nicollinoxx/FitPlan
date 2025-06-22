@@ -4,6 +4,7 @@ class SheetsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in_as(users(:lazaro_nixon))
     @sheet = sheets(:one)
+    @user = users(:lazaro_nixon)
   end
 
   test "should get index" do
@@ -25,7 +26,7 @@ class SheetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show sheet" do
-    get sheet_url(@sheet)
+    get sheet_url(@sheet, @user)
     assert_response :success
   end
 

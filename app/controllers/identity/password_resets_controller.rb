@@ -29,7 +29,7 @@ class Identity::PasswordResetsController < ApplicationController
     def set_user
       @user = User.find_by_token_for!(:password_reset, params[:sid])
     rescue StandardError
-      refresh_or_redirect_to new_identity_password_reset_path, alert: I18n.t('notice.password_reset.set_user')
+      refresh_or_redirect_to new_identity_password_reset_path, alert: I18n.t('alert.password_reset.invalid')
     end
 
     def user_params
