@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-top sticky-top py-2">
+<nav class="navbar navbar-expand-lg bg-light shadow sticky-top py-2">
   <div class="container">
     <%= link_to root_path, class: 'navbar-brand d-flex align-items-center' do %>
       <span class="fw-bold text-success">FITPLAN</span>
@@ -16,7 +16,13 @@
           <% end %>
         </li>
       </ul>
-      <%= link_to Current.user.email, account_path, class: 'btn btn-sm btn-primary text-truncate', style: 'max-width: 10rem;' %>
+
+      <div class="d-flex align-items-center gap-2">
+        <button data-action="theme#applyTheme" class="ms-2 btn btn-sm border rounded-circle">
+          <i data-theme-target="icon" class="bi bi-sun-fill"></i>
+        </button>
+        <%= link_to Current.user.email, account_path, class: 'btn btn-sm btn-primary text-truncate', style: 'max-width: 10rem;' %>
+      </div>
     </div>
   </div>
 </nav>

@@ -18,6 +18,31 @@
   max-width: 33%;
 }
 
+[data-bs-theme="dark"] trix-toolbar [data-trix-button-group] button {
+  filter: invert(1) brightness(2) contrast(200%);
+}
+
+[data-bs-theme="dark"] trix-toolbar button[disabled] {
+  filter: invert(1) brightness(4) contrast(100%);
+  opacity: 100%;
+}
+
+[data-bs-theme="dark"] trix-toolbar .trix-dialog {
+  background-color: #212529;
+  border-color: #495057;
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] trix-toolbar .trix-dialog input {
+  background-color: #343a40;
+  border: 1px solid #495057;
+  color: #dee2e6;
+}
+
+[data-bs-theme="dark"] trix-toolbar .trix-dialog input::placeholder {
+  color: #adb5bd;
+}
+
 .trix-content .attachment-gallery.attachment-gallery--2 > action-text-attachment,
 .trix-content .attachment-gallery.attachment-gallery--2 > .attachment, .trix-content .attachment-gallery.attachment-gallery--4 > action-text-attachment,
 .trix-content .attachment-gallery.attachment-gallery--4 > .attachment {

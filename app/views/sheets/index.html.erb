@@ -2,23 +2,22 @@
 
 <div class="d-flex justify-content-between align-items-center">
   <h1><%= t('.title') %></h1>
-  <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
+  <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3' %>
 </div>
 
 <%= turbo_frame_tag "sheets" do %>
   <div class="sticky-top d-flex align-items-center justify-content-between mb-3">
     <% if turbo_native_app? %>
-        <%= link_to account_path, class: "text-decoration-none" do %>
+        <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
           <div class="d-flex align-items-center">
-            <%= image_tag @user.avatar, class: 'rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
+            <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
             <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
           </div>
         <% end %>
     <% end %>
 
-
-    <div class="ms-auto dropdown">
-      <button class="btn btn-sm bg-white border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+    <div class="ms-auto dropdown  bg-light rounded">
+      <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
         <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
@@ -32,7 +31,7 @@
   <div class="row">
     <% @sheets.each do |sheet| %>
       <div class="col-md-6 p-2 mb-2">
-        <div class="rounded p-3 shadow d-flex flex-column h-100">
+        <div class="shadow rounded p-3 border d-flex flex-column h-100">
           <%= render "sheets/sheet", sheet: sheet %>
           <%= link_to t("show"), sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top"}, class: "btn btn-sm btn-success mt-auto d-grid" %>
         </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="light">
   <head>
     <title><%= content_for(:title || FitPlan ) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,21 +8,21 @@
 
     <%= stylesheet_link_tag "application" , "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_importmap_tags %>
+
 
     <% if turbo_native_app? %>
       <style>.hide-on-mobile, h1 { display: none; }</style>
     <% end %>
   </head>
 
-  <body>
+  <body data-controller="theme">
     <div class="hide-on-mobile mb-4">
       <%= render 'layouts/navbar' if Current.user.present? %>
 
       <div class="container my-3">
         <% if notice.present? %>
-          <div class="bg-dark text-light p-2 rounded" role="alert" data-controller="bridge--flash-message"><%= notice %></div>
+          <div class="alert alert-dark alert-white-on-dark py-2 rounded" role="alert" data-controller="bridge--flash-message"><%= notice %></div>
         <% end %>
       </div>
     </div>

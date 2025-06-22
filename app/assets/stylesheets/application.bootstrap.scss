@@ -3,6 +3,8 @@
 @import 'actiontext.css';
 @import "bootstrap-icons/font/bootstrap-icons";
 
+$color-mode-type: data;
+
 input.form-control {
   border-color: var(--bs-success) !important;
 }
@@ -21,4 +23,23 @@ select.form-select:focus {
   border-color: var(--bs-success) !important;
   box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important; /* Sombra verde semitransparente */
   outline: 0 !important;
+}
+
+// dark and light mode styles
+
+
+.alert-dark {
+  background-color: var(--bs-dark); // fundo claro
+  color: var(--bs-light);
+}
+
+@include color-mode(dark) {
+  .alert-dark {
+    background-color: var(--bs-light); // fundo claro
+    color: var(--bs-dark);             // texto preto
+  }
+
+  .bg-light {
+    background-color: var(--bs-dark) !important; // fundo escuro
+  }
 }

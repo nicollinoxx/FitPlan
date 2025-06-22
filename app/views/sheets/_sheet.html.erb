@@ -1,23 +1,26 @@
 <% cache [sheet, action_name] do %>
-    <div id="<%= dom_id sheet %>">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h5 mb-0 fw-bold">
-          <i class="bi <%= sheet.workout? ? 'bi-activity' : 'bi-cup-hot' %> text-dark"></i>
-          <%= sheet.name %>
-        </h2>
-
-        <% unless action_name == "show" %>
-            <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm btn-outline-success me-1" do %>
-              <i class="bi bi-pencil"></i>
-            <% end %>
-        <% end %>
+  <div id="<%= dom_id sheet %>">
+    <div class="d-flex justify-content-between align-items-start mb-2">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi <%= sheet.workout? ? 'bi-heart-pulse text-danger' : 'bi-egg-fried text-warning' %> fs-4"></i>
+        <div>
+          <h2 class="h5 mb-0 fw-bold"><%= sheet.name %></h2>
+          <small class="text-muted fs-6"><%= sheet.workout? ? t('workout') : t('diet') %></small>
+        </div>
       </div>
 
-      <p class="text-muted mb-3"><%= sheet.description %></p>
-
-      <% if action_name == "show" %>
-        <p class="text-warning mb-0">type: <%= sheet.workout? ? t('workout') : t('diet') %></p>
-        <p class="text-dark mb-0">font: <%= sheet.copy? ? "copied" : "original" %></p>
-      <% end %>
+      <div class="text-end fs-6">
+        <% if action_name == "show" %>
+          <small class="text-muted d-block">type: <%= sheet.workout? ? t('workout') : t('diet') %></small>
+          <small class="text-muted">font: <%= sheet.copy? ? "copied" : "original" %></small>
+        <% else %>
+          <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm border" do %>
+            <i class="bi bi-pencil"></i>
+          <% end %>
+        <% end %>
+      </div>
     </div>
+
+    <p class="fs-6"><%= sheet.description %></p>
+  </div>
 <% end %>

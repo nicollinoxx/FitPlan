@@ -1,15 +1,18 @@
 <% content_for(:title, t('.title')) %>
 
-<h1><%= t('.title') %></h1>
-
-<div class="text-center mb-4">
-    <div class="position-relative d-inline-block mb-4">
-        <%= image_tag Current.user.avatar.attached? ? Current.user.avatar : 'avatar.png', class: 'rounded-circle object-fit-cover border', width: 120, height: 120 %>
-    </div>
-    <p class="text-muted small"><i class="bi bi-envelope-fill me-1"></i><%= Current.user.email %></p>
+<div class="d-flex justify-content-between">
+  <h1><%= t('.title') %></h1>
+  <%= button_to "Log out", Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
 </div>
 
-<div class="card shadow-sm mb-4 border-0 rounded-3">
+<div class="text-center mb-4">
+  <div class="position-relative d-inline-block mb-4">
+    <%= image_tag Current.user.avatar.attached? ? Current.user.avatar : 'avatar.png', class: 'rounded-circle object-fit-cover border border-3 border-primary', width: 120, height: 120 %>
+  </div>
+  <p class="text-muted small"><i class="bi bi-envelope-fill me-1"></i><%= Current.user.email %></p>
+</div>
+
+<div class="card shadow-sm mb-4 border rounded-3">
     <div class="card-header bg-transparent border-bottom-0">
         <h2 class="h5 fw-bold mb-0">
             <i class="bi bi-heart me-3 text-primary"></i><%= t('.metrics.title') %>
@@ -34,7 +37,7 @@
     </div>
 </div>
 
-<div class="card shadow-sm mb-4 border-0 rounded-3">
+<div class="card shadow-sm mb-4 border rounded-3">
     <div class="card-header bg-transparent border-bottom-0">
         <h2 class="h5 fw-bold mb-0">
         <i class="bi bi-person-gear me-2 text-primary"></i><%= t('.settings.title') %>
@@ -53,7 +56,7 @@
     </div>
 </div>
 
-<div class="card shadow-sm mb-4 border-0 rounded-3">
+<div class="card shadow-sm mb-4 border rounded-3">
     <div class="card-header bg-transparent border-bottom-0">
         <h3 class="h5 fw-bold mb-0">
         <i class="bi bi-pc-display me-2 text-primary"></i><%= t('.session.title') %>
@@ -66,13 +69,13 @@
     </div>
 </div>
 
-<div class="card shadow-sm mb-4 border-0 rounded-3">
+<div class="card shadow-sm mb-4 border rounded-3 mb-5">
     <div class="card-header bg-transparent border-bottom-0 d-flex justify-content-between align-items-center">
         <h3 class="h5 fw-bold mb-0">
             <i class="bi bi-translate me-2 text-primary"></i><%= t('language') %>
         </h3>
         <div class="dropdown">
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+            <button class="btn btn-sm dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
                 <%= I18n.locale == :en ? t('languages.en') : t('languages.pt') %>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -86,4 +89,3 @@
 <div data-controller="bridge--menu" class="mb-4">
 <div data-controller="bridge--nav-button" data-action="click->bridge--menu#show" class="d-none">Log out</div>
 <div data-bridge--menu-target="title" class="d-none">Log out of account</div>
-<%= button_to "Log out", Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger w-100 py-2' %>

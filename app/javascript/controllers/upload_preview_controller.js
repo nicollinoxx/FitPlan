@@ -8,16 +8,16 @@ export default class extends Controller {
     const reader = new FileReader();
 
     if (!file) {
-      this.toggleVisibility(!!file);
-      return;
-    }
+      this.toggleVisibility(!!file);
+      return;
+  }
 
-    reader.onload = () => {
-      this.previewUploadTarget.src = reader.result;
-      this.toggleVisibility(!!file);
-    };
+  reader.onload = () => {
+    this.previewUploadTarget.src = reader.result;
+    this.toggleVisibility(!!file);
+  };
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
   }
 
   removePreview() {
