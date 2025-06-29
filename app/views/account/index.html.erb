@@ -88,8 +88,9 @@
 
 <% if turbo_native_app? %>
   <div class="position-fixed top-0 end-0 p-2 my-2" style="z-index: 1050">
-    <button data-action="theme#applyTheme" class="btn bg-light border rounded-circle", style="width: 42px; height: 42px;">
-      <i data-theme-target="icon" class="bi bi-sun-fill"></i>
+    <button data-action="theme#toggleTheme" class="btn bg-light border rounded-circle", style="width: 42px; height: 42px;">
+      <i class="bi bi-sun-fill"></i>
+      <i class="bi bi-moon-stars-fill"></i>
     </button>
   </div>
 <% end %>

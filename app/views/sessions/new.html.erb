@@ -1,35 +1,51 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="mx-auto py-3" style="max-width: 500px;">
-  <div class="shadow p-4 rounded border">
-      <div class="text-center mb-4">
-        <%= image_tag 'logo.png', class: 'img-fluid mb-3', style: 'max-height: 70px;' %>
-        <h2 class="text-success"><%= t('.title') %></h2>
+  <div class="shadow p-4 rounded border position-relative">
+
+    <div class="position-absolute top-0 end-0 m-2">
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggleTheme">
+          <i class="bi bi-sun-fill"></i>
+          <i class="bi bi-moon-stars-fill"></i>
+        </button>
+        <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown"></button>
+        <div class="dropdown-menu">
+          <button class="dropdown-item" type="button" data-action="theme#setSystemMode">
+            <i class="bi bi-laptop"></i> System
+          </button>
+        </div>
       </div>
+    </div>
 
-      <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
-        <div class="mb-3">
-          <%= form.label :email, class: 'form-label' %>
-          <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control focus-ring focus-ring-success py-1 px-2', placeholder: "name@example.com" %>
-        </div>
+    <div class="text-center mb-4">
+      <%= image_tag 'logo.png', class: 'img-fluid mb-3', style: 'max-height: 70px;' %>
+      <h2 class="text-success"><%= t('.title') %></h2>
+    </div>
 
-        <div class="mb-3">
-          <div class="d-flex justify-content-between">
-            <%= form.label :password, t('.label.password'), class: 'form-label' %>
-            <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'small' %>
-          </div>
-          <%= form.password_field :password, required: true, class: 'form-control', placeholder: "password" %>
-        </div>
-
-        <div class="my-4">
-          <%= form.submit t('.submit'), class: 'btn btn-success w-100' %>
-        </div>
-      <% end %>
+    <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
+      <div class="mb-3">
+        <%= form.label :email, class: 'form-label' %>
+        <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control focus-ring focus-ring-success py-1 px-2', placeholder: "name@example.com" %>
+      </div>
 
       <div class="mb-3">
-        <p class="mb-2"><%= t('.section_signup') %></p>
-        <%= link_to t('.signup'), sign_up_path, class: 'btn btn-secondary w-100' %>
+        <div class="d-flex justify-content-between">
+          <%= form.label :password, t('.label.password'), class: 'form-label' %>
+          <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'small' %>
+        </div>
+        <%= form.password_field :password, required: true, class: 'form-control', placeholder: "password" %>
       </div>
+
+      <div class="my-4">
+        <%= form.submit t('.submit'), class: 'btn btn-success w-100' %>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <p class="mb-2"><%= t('.section_signup') %></p>
+      <%= link_to t('.signup'), sign_up_path, class: 'btn btn-secondary w-100' %>
+    </div>
   </div>
 
   <div class="border d-flex justify-content-between align-items-center shadow p-3 rounded mt-3">
@@ -43,11 +59,5 @@
         <li><%= link_to t('languages.pt'), set_locale_path('pt'), class: 'dropdown-item' %></li>
       </ul>
     </div>
-  </div>
-
-  <div class="position-fixed top-0 end-0 p-3 my-2" style="z-index: 1050;">
-    <button data-action="theme#applyTheme" class="btn btn-light border rounded-circle shadow-lg" style="width: 50px; height: 50px;">
-      <i data-theme-target="icon" class="bi bi-sun-fill"></i>
-    </button>
   </div>
 </div>

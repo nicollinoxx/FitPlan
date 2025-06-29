@@ -5,22 +5,31 @@
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="width: 15px; height: 20px;"></span>
+      <span class="navbar-toggler-icon" style="width: 15px; height: 20px;"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <%= link_to sheets_path, class: 'nav-link px-3 fw-medium' do %>
             <i class="bi bi-clipboard-data me-1"></i> <%= t('link_sheets') %>
           <% end %>
         </li>
       </ul>
-
-      <div class="d-flex align-items-center gap-2">
-        <button data-action="theme#applyTheme" class="ms-2 btn btn-sm border rounded-circle">
-          <i data-theme-target="icon" class="bi bi-sun-fill"></i>
-        </button>
+      <!-- ms-auto empurra para a direita, align-items-center alinha verticalmente -->
+      <div class="d-flex align-items-center ms-auto">
+        <div class="btn-group me-2">
+          <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggleTheme">
+            <i class="bi bi-sun-fill"></i>
+            <i class="bi bi-moon-stars-fill"></i>
+          </button>
+          <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown"></button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" type="button" data-action="theme#setSystemMode">
+              <i class="bi bi-laptop"></i> System
+            </button>
+          </div>
+        </div>
         <%= link_to Current.user.email, account_path, class: 'btn btn-sm btn-primary text-truncate', style: 'max-width: 10rem;' %>
       </div>
     </div>

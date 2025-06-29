@@ -1,44 +1,32 @@
 $color-mode-type: data;
 
-input.form-control {
-  border-color: var(--bs-success) !important;
-}
+input.form-control { border-color: var(--bs-success) !important; }
+select.form-select { border-color: var(--bs-success) !important; }
 
 input.form-control:focus {
   border-color: var(--bs-success) !important;
-  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important; /* Sombra verde semitransparente */
+  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
   outline: 0 !important;
-}
-
-select.form-select {
-  border-color: var(--bs-success) !important;
-}
-
-select.form-select:focus {
-  border-color: var(--bs-success) !important;
-  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important; /* Sombra verde semitransparente */
-  outline: 0 !important;
-}
-
-// dark and light mode styles
-.alert-dark {
-  background-color: var(--bs-dark);
-  color: var(--bs-light);
 }
 
 @include color-mode(dark) {
+  .bi-sun-fill { display: inline; }
+  .bi-moon-stars-fill { display: none; }
+  .bg-light { background-color: var(--bs-dark) !important; }
+
   .alert-dark {
     background-color: var(--bs-light);
     color: var(--bs-dark);
   }
-
-  .bg-light {
-    background-color: var(--bs-dark) !important;
-  }
 }
 
 @include color-mode(light) {
-  .bg-dark-subtle {
-    background-color: var(--bs-light) !important;
+  .bi-sun-fill { display: none; }
+  .bi-moon-stars-fill { display: inline; }
+  .bg-dark-subtle { background-color: var(--bs-light) !important; }
+
+  .alert-dark {
+    background-color: var(--bs-dark);
+    color: var(--bs-light);
   }
 }
