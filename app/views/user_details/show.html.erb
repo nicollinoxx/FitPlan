@@ -1,6 +1,8 @@
-<%= @user_detail.height %>
-<%= @user_detail.imc %>
-<%= @user_detail.tmb %>
+<% content_for(:title, t('.title')) %>
 
+<div class="d-flex justify-content-between align-items-center">
+  <h1><%= t('.title') %></h1>
+  <%= link_to t('edit'), edit_user_detail_path(@user_detail), data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3' %>
+</div>
 
-<%= link_to "edit", edit_user_detail_path(@user_detail), class: 'btn btn-success' %>
+<%= render 'user_detail', user_detail: @user_detail %>
