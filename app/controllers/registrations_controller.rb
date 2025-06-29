@@ -13,7 +13,6 @@ class RegistrationsController < ApplicationController
       cookies.signed.permanent[:session_token] = { value: session_record.id, httponly: true }
 
       send_email_verification
-      redirect_to root_path, notice: I18n.t('notice.registration.create')
     else
       render :new, status: :unprocessable_entity
     end
