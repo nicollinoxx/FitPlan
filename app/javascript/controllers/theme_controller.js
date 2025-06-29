@@ -1,33 +1,32 @@
 import { Controller } from "@hotwired/stimulus"
 
-const COLOR_SCHEME_DARK = '(prefers-color-scheme: dark)';
-
 export default class extends Controller {
   static targets = ["icon"]
 
   connect() {
-    this.#setColorMode(this.#localStorageTheme || this.#systemColorScheme)
-    if (!this.#localStorageTheme) { this.#setupSystemColorSchemeListener() }
+    this.#applyTheme(this.#current)
+    this.#setupSystemColorSchemeListener()
   }
 
   toggleTheme() {
-    const theme = this.#localStorageTheme === 'dark' ? 'light' : 'dark'
-    this.#setColorMode(theme), this.#setLocalStorage(theme)
+    const theme = this.#current === 'dark' ? 'light' : 'dark'
+    localStorage.setItem("theme", theme)
+    this.#applyTheme(theme)
   }
 
-  setSystemMode() {
-    this.#preferSystemColorScheme(),
-    this.#setColorMode(this.#systemColorScheme)
+  setSystemTheme() {
+    localStorage.removeItem("theme")
+    this.#applyTheme(this.#system)
   }
 
-  get #systemColorScheme() { return window.matchMedia(COLOR_SCHEME_DARK).matches ? "dark" : "light" }
-  get #localStorageTheme() { return localStorage.getItem('theme') }
+  get #current() { return localStorage.getItem('theme') || this.#system }
+  get #system() { return matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light" }
 
-  #preferSystemColorScheme() { localStorage.removeItem("theme") }
-  #setLocalStorage(theme) { localStorage.setItem("theme", theme) }
-  #setColorMode(theme) { document.documentElement.setAttribute("data-bs-theme", theme) }
+  #applyTheme(theme) { document.documentElement.setAttribute("data-bs-theme", theme) }
 
   #setupSystemColorSchemeListener() {
-    window.matchMedia(COLOR_SCHEME_DARK).addEventListener("change", () => { this.#setColorMode(this.#systemColorScheme) })
+    if (!localStorage.getItem('theme')) {
+      matchMedia('(prefers-color-scheme: dark)').addEventListener("change", () => this.#applyTheme(this.#system))
+    }
   }
 }
