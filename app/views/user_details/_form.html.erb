@@ -1,6 +1,18 @@
 <% content_for(:title, t('.title')) %>
 
-<%= form_with url: account_metrics_path, method: :patch do |form| %>
+<%= form_with(model: user_detail) do |form| %>
+    <% if user_detail.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(user_detail.errors.count, t('error')) %> <%= t('.error_message_form')%></h2>
+
+        <ul>
+          <% user_detail.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div class="mb-3">
         <%= form.label :height, t('.label.height'), style: "display: block", class: 'form-label' %>
         <%= form.number_field :height, class: "form-control", placeholder: "1,75", step: "any", min: 0 %>
@@ -12,8 +24,8 @@
     </div>
 
     <div class="mb-3">
-        <%= form.label :age, t('.label.age'), style: "display: block", class: 'form-label' %>
-        <%= form.number_field :age, placeholder: "18", class: "form-control" %>
+        <%= form.label :birth_date, t('.label.age'), class: 'form-label' %>
+        <%= form.date_field :birth_date, class: "form-control", max: Date.today %>
     </div>
 
     <div class="mb-3">

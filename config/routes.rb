@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   get "account", to: "account#index"
 
-  namespace :account do
-    resource :metrics, only: [ :edit, :update ]
-  end
+  resources :user_details, except: [ :destroy ]
 
   get    "sign_in", to: "sessions#new"
   post   "sign_in", to: "sessions#create"
@@ -16,6 +14,7 @@ Rails.application.routes.draw do
     resource  :email_verification, only: [:show, :create]
     resource  :password_reset,     only: [:new,  :edit, :create, :update]
     resources :avatars,            only: [:show, :edit, :update, :destroy]
+
   end
 
   resources :sheets do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_01_134735) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_29_182639) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -81,14 +81,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_01_134735) do
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
 
+  create_table "user_details", force: :cascade do |t|
+    t.decimal "height"
+    t.decimal "weight"
+    t.date "birth_date"
+    t.string "gender"
+    t.decimal "imc"
+    t.decimal "tmb"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_details_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.boolean "verified", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "imc"
-    t.decimal "tmb"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
@@ -109,5 +120,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_01_134735) do
   add_foreign_key "diets", "sheets"
   add_foreign_key "sessions", "users"
   add_foreign_key "sheets", "users"
+  add_foreign_key "user_details", "users"
   add_foreign_key "workouts", "sheets"
 end
