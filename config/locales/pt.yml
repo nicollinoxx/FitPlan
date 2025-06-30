@@ -1,6 +1,6 @@
 pt:
   #system Theme
-  system_theme: 'cor do sistema'
+  system_theme: 'Sistema'
 
   #navbar
   link_sheets: 'Fichas'
