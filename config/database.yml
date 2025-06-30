@@ -23,7 +23,7 @@ development:
     migrations_paths: db/cache_schema
   cable:
     <<: *default
-    database: storage/production_cable.sqlite3
+    database: storage/development_queue.sqlite3
     migrations_paths: db/cable_schema
 
 # Warning: The database defined as "test" will be erased and
@@ -46,6 +46,6 @@ production:
     database: storage/production_queue.sqlite3
     migrations_paths: db/queue_schema
   cable:
-      <<: *default
-      database: storage/production_cable.sqlite3
-      migrations_paths: db/cable_schema
+    <<: *default
+    database: storage/production_cable.sqlite3
+    migrations_paths: db/cable_schema
