@@ -1,4 +1,6 @@
 class Sheet < ApplicationRecord
+  include Sheets::SheetCopyable
+
   belongs_to :user
   has_many   :workouts, dependent: :destroy
   has_many   :diets,    dependent: :destroy
