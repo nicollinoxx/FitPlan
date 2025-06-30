@@ -1,53 +1,53 @@
 <div class="row justify-content-center">
-      <div class="col-md-25">
-          <div class="shadow rounded border">
-              <div class="bg-success p-2 text-light rounded-top d-flex justify-content-between align-items-center">
-                  <h2 class="h5 fw-bold mb-0">
-                      <i class="bi bi-person-heart me-1"></i>Perfil de Saúde
-                  </h2>
-              </div>
-              <div class="p-3">
-                  <div class="table-responsive">
-                      <table class="table table-borderless mb-0">
-                          <tbody>
-                              <tr>
-                                  <td class="text-muted small">
-                                      <i class="bi bi-ruler me-1"></i>Altura
-                                  </td>
-                                  <td class="fw-bold text-info text-end">1,75m</td>
-                              </tr>
-                              <tr>
-                                  <td class="text-muted small">
-                                      <i class="bi bi-speedometer2 me-1"></i>Peso
-                                  </td>
-                                  <td class="fw-bold text-success text-end">70kg</td>
-                              </tr>
-                              <tr>
-                                  <td class="text-muted small">
-                                      <i class="bi bi-gender-ambiguous me-1"></i>Gênero
-                                  </td>
-                                  <td class="fw-bold text-primary text-end">Masculino</td>
-                              </tr>
-                              <tr>
-                                  <td class="text-muted small">
-                                      <i class="bi bi-calculator me-1"></i>IMC
-                                  </td>
-                                  <td class="fw-bold text-warning text-end">
-                                      22,86 <small class="text-success">kg/m²</small>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td class="text-muted small border-bottom-0">
-                                      <i class="bi bi-fire me-1"></i>TMB
-                                  </td>
-                                  <td class="fw-bold text-danger text-end border-bottom-0">
-                                      1.700 <small class="text-muted">kcal/dia</small>
-                                  </td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
+    <div class="col-md-25">
+        <div class="shadow rounded border">
+            <div class="bg-success p-2 text-light rounded-top d-flex justify-content-between align-items-center">
+                <h2 class="h5 fw-bold mb-0">
+                  <i class="bi bi-person-heart me-1"></i><%= t("title") %>
+                </h2>
+            </div>
+            <div class="p-3">
+              <div class="table-responsive">
+                <table class="table table-borderless mb-0">
+                  <tbody>
+                    <tr>
+                      <td class="text-muted small">
+                        <i class="bi bi-ruler me-1"></i><%= t("height") %>
+                      </td>
+                      <td class="fw-bold text-info text-end"><%= user_detail.height %></td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted small">
+                        <i class="bi bi-speedometer2 me-1"></i><%= t("weight") %>
+                      </td>
+                      <td class="fw-bold text-success text-end"><%= user_detail.weight %></td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted small">
+                        <i class="bi bi-gender-ambiguous me-1"></i><%= t("gender") %>
+                      </td>
+                      <td class="fw-bold text-primary text-end"><%= user_detail.male? ? t("male") : t("female") %></td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted small">
+                        <i class="bi bi-calculator me-1"></i><%= t("imc") %>
+                      </td>
+                      <td class="fw-bold text-warning text-end">
+                        <%= user_detail.imc %><small class="text-success"> kg/m²</small>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-muted small border-bottom-0">
+                        <i class="bi bi-fire me-1"></i><%= t("tmb") %>
+                      </td>
+                      <td class="fw-bold text-danger text-end border-bottom-0">
+                        <%= user_detail.tmb %><small class="text-muted"> kcal/dia</small>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
           </div>
       </div>
   </div>
+</div>

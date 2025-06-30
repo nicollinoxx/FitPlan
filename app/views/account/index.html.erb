@@ -15,20 +15,20 @@
 <div class="card shadow-sm mb-4 border rounded-3">
     <div class="card-header bg-transparent border-bottom-0">
         <h2 class="h5 fw-bold mb-0">
-            <i class="bi bi-heart me-3 text-primary"></i><%= "Metrics" %>
+            <i class="bi bi-heart me-3 text-primary"></i><%= t('.user_details.title') %>
         </h2>
     </div>
 
     <% if Current.user.user_detail.present? %>
       <div class="list-group list-group-flush rounded-bottom">
         <%= link_to Current.user.user_detail, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
-            <i class="bi bi-calculator-fill me-3 text-muted"></i><%= "Show account details" %>
+            <i class="bi bi-calculator-fill me-3 text-muted"></i><%= t('.user_details.show') %>
         <% end %>
       </div>
     <% else %>
       <div class="list-group list-group-flush rounded-bottom">
         <%= link_to new_user_detail_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
-            <i class="bi bi-calculator-fill me-3 text-muted"></i><%= "create account details" %>
+            <i class="bi bi-calculator-fill me-3 text-muted"></i><%= t('.user_details.add') %>
         <% end %>
       </div>
     <% end %>
@@ -85,10 +85,18 @@
 
 <% if turbo_native_app? %>
   <div class="position-fixed top-0 end-0 p-2 my-2" style="z-index: 1050">
-    <button data-action="theme#toggleTheme" class="btn bg-light border rounded-circle", style="width: 42px; height: 42px;">
-      <i class="bi bi-sun-fill"></i>
-      <i class="bi bi-moon-stars-fill"></i>
-    </button>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggleTheme">
+        <i class="bi bi-sun-fill"></i>
+        <i class="bi bi-moon-stars-fill"></i>
+      </button>
+      <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown"></button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item" type="button" data-action="theme#setSystemTheme">
+          <i class="bi bi-laptop"></i> <%= t('system_theme') %>
+        </button>
+      </div>
+    </div>
   </div>
 <% end %>
 

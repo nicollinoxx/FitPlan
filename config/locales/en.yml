@@ -1,4 +1,7 @@
 en:
+  #system Theme
+  system_theme: 'cor do sistema'
+
   #navbar
   link_sheets: 'Sheets'
 
@@ -53,8 +56,9 @@ en:
     email_verification:
       verify:               'Thank you for verifying your email address'
       create:               'We sent a verification email to your email address'
-    account_metrics:
-      update:               'Account metrics updated successfully'
+    user_details:
+      update:               'User details edited successfully'
+      create:               'User details added successfully'
 
   #when the notice was not successfully
   alert:
@@ -152,11 +156,10 @@ en:
           gender:               'Gender'
     index:
       title:                    'Account'
-      metrics:
-        title:                  'Health Metrics'
-        bmi:                    'BMI'
-        bmr:                    'BMR'
-        calculate_metric:       'Calculate Metrics'
+      user_details:
+        title:                  'Profile Details'
+        show:                   'View Profile Details'
+        add:                    'Add Profile Details'
       settings:
         title:                  'Settings'
         change_avatar:          'Change Avatar'
@@ -165,6 +168,25 @@ en:
       session:
         title:                  'Session'
         collection_sessions:    'Sessions'
+
+  #user_details------------------------------------
+  height: 'Height (cm)'
+  weight: 'Weight (kg)'
+  age:    'Age'
+  gender: 'Gender'
+  imc:    'BMI'
+  tmb:    'BMR'
+  male:   'Male'
+  female: 'Female'
+  title:  'Health Profile'
+
+  user_details:
+    show:
+      title: 'Profile Details'
+    new:
+      title: 'Add Detail'
+    edit:
+      title: 'Profile Detail'
 
   #sessions------------------------------
   sessions:

@@ -1,4 +1,7 @@
 pt:
+  #system Theme
+  system_theme: 'cor do sistema'
+
   #navbar
   link_sheets: 'Fichas'
 
@@ -53,8 +56,9 @@ pt:
     email_verification:
       verify:               'Obrigado por verificar seu endereço de e-mail'
       create:               'Enviamos um e-mail de verificação para o seu endereço'
-    account_metrics:
-      update:               'Métricas da conta atualizadas com sucesso'
+    user_details:
+      update:               'Detalhes de usuário editado com sucesso'
+      create:               'Detalhes de usuário adicionado com sucesso'
 
   #when the notice was not successfully
   alert:
@@ -132,7 +136,7 @@ pt:
     show:
       title:                'Dieta'
     form:
-      error_message_form:     'impediu que esta dieta fosse salva:'
+      error_message_form:   'impediu que esta dieta fosse salva:'
       label:
         meal:               'Refeição'
         carbohydrates:      'Carboidratos g'
@@ -141,21 +145,12 @@ pt:
 
   #account------------------------------------
   account:
-    metrics:
-      edit:
-        title:                  'Métricas'
-        label:
-          height:               'Altura (cm)'
-          weight:               'Peso (kg)'
-          age:                  'Idade'
-          gender:               'Gênero'
     index:
       title:                    'Conta'
-      metrics:
-        title:                  'Métricas de Saúde'
-        bmi:                    'IMC'
-        bmr:                    'TMB'
-        calculate_metric:       'Calcular Métricas'
+      user_details:
+        title:                  'Detalhes de perfil'
+        show:                   'Ver detalhes de perfil'
+        add:                    'Adicionar dados de perfil'
       settings:
         title:                  'Configurações'
         change_avatar:          'Alterar Avatar'
@@ -164,6 +159,25 @@ pt:
       session:
         title:                  'Sessão'
         collection_sessions:    'Sessões'
+
+  #user_details------------------------------------
+  height:  'Altura (cm)'
+  weight:  'Peso (kg)'
+  age:     'Idade'
+  gender:  'Gênero'
+  imc:     'IMC'
+  tmb:     'TMB'
+  male:    'Masculino'
+  female:  'Feminino'
+  title:   'Perfil de saude'
+
+  user_details:
+    show:
+      title: 'Detalhes de perfil'
+    new:
+      title: 'Adicionar Detalhe'
+    edit:
+      title: 'Detalhe de perfil'
 
   #sessions------------------------------
   sessions:
