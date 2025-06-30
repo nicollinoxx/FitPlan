@@ -16,7 +16,7 @@ class UserDetailsController < ApplicationController
     @user_detail = @user.build_user_detail(user_detail_params)
 
     if @user_detail.save
-      redirect_to @user_detail, notice: I18n.t('notice.user_details.create')
+      refresh_or_redirect_to @user_detail, notice: I18n.t('notice.user_details.create')
     else
       render :new, status: :unprocessable_entity
     end

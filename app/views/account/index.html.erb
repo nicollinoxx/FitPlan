@@ -6,8 +6,9 @@
 </div>
 
 <div class="text-center mb-4">
-  <div class="position-relative d-inline-block mb-4">
+  <div class="position-relative d-inline-block mb-4" style="width: 120px; height: 120px;">
     <%= image_tag Current.user.avatar.attached? ? Current.user.avatar : 'avatar.png', class: 'rounded-circle object-fit-cover border border-3 border-primary', width: 120, height: 120 %>
+    <%= link_to "", identity_avatar_path(Current.user), class: "stretched-link", style: "position:absolute; inset:0; z-index:2;" %>
   </div>
   <p class="text-muted small"><i class="bi bi-envelope-fill me-1"></i><%= Current.user.email %></p>
 </div>
