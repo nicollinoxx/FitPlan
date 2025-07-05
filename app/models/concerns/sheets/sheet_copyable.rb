@@ -1,22 +1,30 @@
 module Sheets::SheetCopyable
   extend ActiveSupport::Concern
 
-  def copy_content_to(copy_sheet)
-    copy_workouts_to(copy_sheet) if workout?
-    copy_diets_to(copy_sheet) if diet?
+  def copy_sheet(recipient)
+    sheet_copy = recipient.sheets.build(sheet_params)
+    return unless sheet_copy.save
+
+    copy_workouts(sheet_copy) if workout?
+    copy_diets(sheet_copy) if diet?
   end
 
   private
 
-  def copy_workouts_to(target_sheet)
+  def copy_workouts(sheet_copy)
     workouts.find_each do |workout|
-      target_sheet.workouts.create!(workout.attributes.except("id", "created_at", "updated_at"))
+      new_workout = sheet_copy.workouts.create(workout.attributes.except("id", "created_at", "updated_at"))
+      new_workout.video.attach(workout.video.blob)
     end
   end
 
-  def copy_diets_to(target_sheet)
+  def copy_diets(sheet_copy)
     diets.find_each do |diet|
-      target_sheet.diets.create!(diet.attributes.except("id", "created_at", "updated_at"))
+      sheet_copy.diets.create(assocation_attributes(diet).merge(description: diet.description.body.to_html))
     end
+  end
+
+  def sheet_params
+    attributes.except("id", "created_at", "updated_at").merge(copy: true)
   end
 end
