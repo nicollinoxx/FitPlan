@@ -1,4 +1,4 @@
-module UserDetail::BodyMetrics
+module BodyMetrics
   extend ActiveSupport::Concern
 
   included do

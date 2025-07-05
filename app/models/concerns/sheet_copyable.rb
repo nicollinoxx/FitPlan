@@ -1,4 +1,4 @@
-module Sheets::SheetCopyable
+module SheetCopyable
   extend ActiveSupport::Concern
 
   def copy_sheet(recipient)

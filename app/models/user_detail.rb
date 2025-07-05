@@ -1,5 +1,5 @@
 class UserDetail < ApplicationRecord
-  include UserDetail::BodyMetrics
+  include BodyMetrics
 
   belongs_to :user
 

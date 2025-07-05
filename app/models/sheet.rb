@@ -1,5 +1,5 @@
 class Sheet < ApplicationRecord
-  include Sheets::SheetCopyable
+  include SheetCopyable
 
   belongs_to :user
 
