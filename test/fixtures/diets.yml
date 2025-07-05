@@ -6,7 +6,7 @@ one:
   carbohydrate_g: 9.99
   fat_g: 9.99
   calories: 9.99
-  sheet_id: 2
+  sheet: two
 
 two:
   meal: MyString
@@ -14,4 +14,4 @@ two:
   carbohydrate_g: 9.99
   fat_g: 9.99
   calories: 9.99
-  sheet_id: 2
+  sheet: two

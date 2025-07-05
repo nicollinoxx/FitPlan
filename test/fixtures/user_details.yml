@@ -1,11 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  height: '1.76'
+  weight: '71.6'
+  birth_date: '19/02/2000'
+  gender: 'male'
   imc: 9.99
   tmb: 9.99
-  user: one
+  user: lazaro_nixon
 
 two:
+  height: '1.76'
+  weight: '71.6'
+  birth_date: '19/02/2000'
+  gender: 'male'
   imc: 9.99
   tmb: 9.99
-  user: two
+  user: lazaro_nixon

@@ -1,15 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: 1
   name: MyString
   description: MyText
   sheet_type: workout
-  user_id: 1
+  user: lazaro_nixon
 
 two:
-  id: 2
   name: MyString
   description: MyText
   sheet_type: diet
-  user_id: 1
+  user: lazaro_nixon

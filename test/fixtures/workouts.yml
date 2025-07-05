@@ -5,11 +5,11 @@ one:
   series: 1
   repetitions: 12
   charge: MyString
-  sheet_id: 1
+  sheet: one
 
 two:
   exercise: MyString
   series: 1
   repetitions: 12
   charge: MyString
-  sheet_id: 1
+  sheet: two
