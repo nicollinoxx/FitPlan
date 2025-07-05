@@ -1,0 +1,5 @@
+<% @notifications.each do |notification| %>
+  <%= notification.sender.email %>
+  <%= notification.message %>
+  <%= button_to "Accept", accept_notification_path(notification), method: :patch, class: "btn btn-success" %>
+<% end %>

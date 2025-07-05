@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get "account", to: "account#index"
-
-  resources :user_details, except: [ :destroy ]
+  resources :user_details, except: [:destroy]
 
   get    "sign_in", to: "sessions#new"
   post   "sign_in", to: "sessions#create"
@@ -14,15 +13,17 @@ Rails.application.routes.draw do
     resource  :email_verification, only: [:show, :create]
     resource  :password_reset,     only: [:new,  :edit, :create, :update]
     resources :avatars,            only: [:show, :edit, :update, :destroy]
-
   end
 
   resources :sheets do
-    resources :copies, only: [:create], module: :sheets
     resources :diets
     resources :workouts do
       resources :videos, only: [:destroy], module: :workouts
     end
+  end
+
+  resources :notifications, only: [:index, :create, :destroy] do
+    patch :accept, on: :member
   end
 
   root 'sheets#index'
