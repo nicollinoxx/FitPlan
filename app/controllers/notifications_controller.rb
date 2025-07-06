@@ -3,11 +3,15 @@ class NotificationsController < ApplicationController
   before_action :set_notification, only: %i[ accept destroy ]
 
   def index
-    @notifications = @user.received_notifications
+    @notifications = @user.received_notifications.order(created_at: :desc)
   end
 
   def accept
-    @notification.sheet.accept_notification(@notification.recipient_id) if @notification.update(accepted: true)
+    if @notification.update(accepted: true)
+    @notification.sheet.accept_notification(@notification.recipient_id)
+    else
+      puts  @notification.errors.full_messages.to_sentence
+    end
   end
 
   def destroy

@@ -2,10 +2,10 @@
 
 <h1>Notifications</h1>
 
-<div class="row">
+<%= turbo_stream_from [:notifications, @user] %>
+
+<div id="notifications" class="row">
   <% @notifications.each do |notification| %>
-    <div id="<%= dom_id notification %>" class="col-md-6 p-2">
-      <%= render notification %>
-    </div>
+    <%= render notification %>
   <% end %>
 </div>
