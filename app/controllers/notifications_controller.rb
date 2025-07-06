@@ -7,16 +7,11 @@ class NotificationsController < ApplicationController
   end
 
   def accept
-    if @notification.update(accepted: true)
-      @notification.sheet.accept_notification(@notification.recipient_id)
-
-      refresh_or_redirect_to notifications_path, notice: "Notificação aceita com sucesso!"
-    end
+    @notification.sheet.accept_notification(@notification.recipient_id) if @notification.update(accepted: true)
   end
 
   def destroy
     @notification.destroy
-
     render turbo_stream: turbo_stream.remove("notification_#{@notification.id}")
   end
 

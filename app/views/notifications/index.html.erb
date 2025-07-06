@@ -4,10 +4,8 @@
 
 <div class="row">
   <% @notifications.each do |notification| %>
-    <div class="col-md-6 p-2">
-      <div class="border rounded shadow p-2">
-        <%= render notification %>
-      </div>
+    <div id="<%= dom_id notification %>" class="col-md-6 p-2">
+      <%= render notification %>
     </div>
   <% end %>
 </div>
