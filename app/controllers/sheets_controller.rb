@@ -4,7 +4,7 @@ class SheetsController < ApplicationController
 
   # GET /sheets or /sheets.json
   def index
-    @sheets = index_by_type || @user.sheets
+    @sheets = @user.sheets.search_by_type(params[:type])
 
     set_page_and_extract_portion_from @sheets.order(created_at: :desc)
     sleep 2.seconds unless @page.first?
@@ -12,6 +12,7 @@ class SheetsController < ApplicationController
 
   # GET /sheets/1 or /sheets/1.json
   def show
+    @users = User.search_by_name(params[:name], @user.id) if params[:name].present?
   end
 
   # GET /sheets/new
@@ -61,13 +62,5 @@ class SheetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def sheet_params
       params.require(:sheet).permit(:name, :description, :sheet_type)
-    end
-
-    def index_by_type
-      @user.sheets.where(sheet_type: params[:type]) if has_sheet_type?
-    end
-
-    def has_sheet_type?
-      Sheet.sheet_types.keys.include?(params[:type])
     end
 end

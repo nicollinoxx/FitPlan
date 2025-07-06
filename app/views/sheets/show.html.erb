@@ -16,9 +16,16 @@
   <%= link_to 'back', sheets_path, class: 'hide-on-mobile my-2' %>
 </div>
 
+<h3>Send copies</h3>
+<%= form_with url: sheet_path(@sheet), method: :get, local: true do |form| %>
+  <div class="input-group mb-3">
+    <%= form.text_field :name, value: params[:name], class: "form-control", placeholder: "Search by username..." %>
+    <button class="btn btn-outline-secondary" type="submit">Search</button>
+  </div>
+<% end %>
+
 <div class="mt-4">
-  <h3>Send copies</h3>
   <div class="d-flex flex-wrap gap-2">
-    <%= render partial: "notifications/form", collection: User.all, as: :user, locals: { sheet: @sheet } %>
+    <%= render partial: "notifications/form", collection: @users, as: :user, locals: { sheet: @sheet } %>
   </div>
 </div>

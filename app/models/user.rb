@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   has_one_attached :avatar
 
+  scope :search_by_name, ->(name, exclude_id) { where("LOWER(username) LIKE ? AND id != ?", "#{name.downcase}%", exclude_id) }
+
   generates_token_for :email_verification, expires_in: 2.days do
     email
   end

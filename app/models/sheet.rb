@@ -14,6 +14,8 @@ class Sheet < ApplicationRecord
 
   after_update :destroy_invalid_content, if: :saved_change_to_sheet_type?
 
+  scope :search_by_type, ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
+
   def accept_notification(recipient_id)
     CopySheetJob.perform_later(recipient_id, self.id)
   end
