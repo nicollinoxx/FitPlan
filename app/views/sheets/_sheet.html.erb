@@ -1,22 +1,14 @@
 <% cache [sheet] do %>
   <div id="<%= dom_id sheet %>">
-    <div class="d-flex justify-content-between align-items-start mb-2">
-      <div class="d-flex align-items-center gap-2">
-        <i class="bi <%= sheet.workout? ? 'bi-heart-pulse text-danger' : 'bi-egg-fried text-warning' %> fs-4"></i>
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-2">
+        <i class="bi <%= sheet.workout? ? 'bi-heart-pulse text-danger' : 'bi-egg-fried text-warning' %> fs-3 me-2"></i>
         <div>
-          <h2 class="h5 mb-0 fw-bold"><%= sheet.name %></h2>
-          <small class="badge <%= sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>">
-            <%= sheet.workout? ? t('workout') : t('diet') %>
-          </small>
+          <h5 class="card-title mb-1"><%= sheet.name %></h5>
+          <small class="text-muted"><%= sheet.workout? ? t('workout') : t('diet') %></small>
         </div>
       </div>
-      <div class="text-end fs-6">
-        <% if action_name == "show" %>
-          <small class="text-muted d-block">type: <%= sheet.workout? ? t('workout') : t('diet') %></small>
-          <small class="text-muted">font: <%= sheet.copy? ? "copied" : "original" %></small>
-        <% end %>
-      </div>
+      <p class="card-text text-muted mb-0"><%= sheet.description %></p>
     </div>
-    <p class="fs-6 mb-0"><%= sheet.description %></p>
   </div>
 <% end %>

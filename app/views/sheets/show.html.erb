@@ -1,7 +1,13 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="shadow-sm border rounded p-2 mb-3">
+  <div class="d-flex justify-content-between">
     <%= render @sheet %>
+    <div class="text-end fs-6">
+      <small class="text-muted d-block">type: <%= @sheet.workout? ? t('workout') : t('diet') %></small>
+      <small class="text-muted">font: <%= @sheet.copy? ? "copied" : "original" %></small>
+    </div>
+  </div>
 </div>
 
 <div id="sheets" data-controller="bridge--menu">
@@ -14,18 +20,4 @@
   </div>
 
   <%= link_to 'back', sheets_path, class: 'hide-on-mobile my-2' %>
-</div>
-
-<h3>Send copies</h3>
-<%= form_with url: sheet_path(@sheet), method: :get, local: true do |form| %>
-  <div class="input-group mb-3">
-    <%= form.text_field :name, value: params[:name], class: "form-control", placeholder: "Search by username..." %>
-    <button class="btn btn-outline-secondary" type="submit">Search</button>
-  </div>
-<% end %>
-
-<div class="mt-4">
-  <div class="d-flex flex-wrap gap-2">
-    <%= render partial: "notifications/form", collection: @users, as: :user, locals: { sheet: @sheet } %>
-  </div>
 </div>

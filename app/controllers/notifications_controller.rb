@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :set_user, except: %i[ create ]
+  before_action :set_user
   before_action :set_notification, only: %i[ accept destroy ]
 
   def index

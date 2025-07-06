@@ -12,7 +12,6 @@ class SheetsController < ApplicationController
 
   # GET /sheets/1 or /sheets/1.json
   def show
-    @users = User.search_by_name(params[:name], @user.id) if params[:name].present?
   end
 
   # GET /sheets/new

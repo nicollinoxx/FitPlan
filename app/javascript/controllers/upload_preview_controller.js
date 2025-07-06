@@ -26,8 +26,8 @@ export default class extends Controller {
   }
 
   toggleVisibility(hasFile) {
-    this.previewUploadTarget.hidden = !hasFile;
-    this.currentFileTarget.hidden = hasFile;
-    this.removeButtonTarget.hidden = !hasFile;
+    if (this.hasPreviewUploadTarget) this.previewUploadTarget.hidden = !hasFile;
+    if (this.hasCurrentFileTarget) this.currentFileTarget.hidden = hasFile;
+    if (this.hasRemoveButtonTarget) this.removeButtonTarget.hidden = !hasFile;
   }
 }

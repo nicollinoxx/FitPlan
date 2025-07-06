@@ -1,0 +1,15 @@
+<div class="border-bottom py-2">
+  <div class="d-flex align-items-center justify-content-between gap-3">
+    <div class="d-flex align-items-center gap-2 flex-grow-1">
+      <% if user.avatar.attached? %>
+        <%= image_tag user.avatar, class: "img-fluid rounded-circle border border-primary", style: "width: 30px; height:30px;" %>
+      <% end %>
+      <p class="mb-0 text-truncate fw-semibold"><%= user.username %></p>
+    </div>
+    <%= form_with url: notifications_path(recipient_id: user.id, sheet_id: sheet.id), class: "mb-0" do |form| %>
+      <%= button_tag type: "submit", class: "btn btn-success btn-sm" do %>
+        send a copy <i class="bi bi-send ms-2"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>

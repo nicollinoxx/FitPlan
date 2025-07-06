@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :sheets do
+    resources :shareables, only: [:index], module: :sheets
     resources :diets
     resources :workouts do
       resources :videos, only: [:destroy], module: :workouts

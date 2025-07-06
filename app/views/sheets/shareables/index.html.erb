@@ -1,0 +1,19 @@
+<h3 class="mb-3">Send copies</h3>
+
+<div class="shadow-sm border rounded p-2 mb-3">
+  <div class="d-flex justify-content-between">
+    <%= render "sheets/sheet", sheet: @sheet %>
+    <div class="text-end fs-6">
+      <small class="text-muted d-block">type: <%= @sheet.workout? ? t('workout') : t('diet') %></small>
+      <small class="text-muted">font: <%= @sheet.copy? ? "copied" : "original" %></small>
+    </div>
+  </div>
+</div>
+
+<%= turbo_frame_tag "shareable-results" do %>
+  <%= form_with url: sheet_shareables_path(@sheet), method: :get, turbo_frame: "shareable-results" do |form| %>
+    <%= form.text_field :name, value: params[:name], placeholder: "Buscar usuário...", class: "form-control", oninput: "this.form.requestSubmit()" %>
+  <% end %>
+
+  <%= render partial: "sheets/shareables/shareable", collection: @users, as: :user, locals: { sheet: @sheet } %>
+<% end %>
