@@ -20,19 +20,21 @@
         </h2>
     </div>
 
-    <% if Current.user.user_detail.present? %>
-      <div class="list-group list-group-flush rounded-bottom">
+    <div class="list-group list-group-flush rounded-bottom">
+      <%= link_to edit_identity_username_path(Current.user), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+          <i class="bi bi-calculator-fill me-3 text-muted"></i><%= "edit username" %>
+      <% end %>
+
+      <% if Current.user.user_detail.present? %>
         <%= link_to Current.user.user_detail, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
             <i class="bi bi-calculator-fill me-3 text-muted"></i><%= t('.user_details.show') %>
         <% end %>
-      </div>
-    <% else %>
-      <div class="list-group list-group-flush rounded-bottom">
+      <% else %>
         <%= link_to new_user_detail_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
             <i class="bi bi-calculator-fill me-3 text-muted"></i><%= t('.user_details.add') %>
         <% end %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 </div>
 
 <div class="card shadow-sm mb-4 border rounded-3">
