@@ -4,13 +4,13 @@
     <%= render @sheet %>
 </div>
 
-<div data-controller="bridge--menu">
+<div id="sheets" data-controller="bridge--menu">
   <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>
 
   <div class='d-flex'>
     <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
     <%= link_to t('edit'), edit_sheet_path(@sheet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-2' %>
-    <%= button_to t('destroy'), @sheet, method: :delete, data: { turbo_frame: "_top", bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger' %>
+    <%= button_to t('destroy'), @sheet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy'),  controller: "redirect", 'redirect-url-value': sheets_path }, class: 'btn btn-danger' %>
   </div>
 
   <%= link_to 'back', sheets_path, class: 'hide-on-mobile my-2' %>

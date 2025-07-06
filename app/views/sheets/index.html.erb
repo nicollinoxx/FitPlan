@@ -14,6 +14,9 @@
             <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
           </div>
         <% end %>
+        <%= link_to notifications_path, data: {turbo_frame: "_top"}, class: 'btn btn-sm btn-outline-warning rounded-circle' do %>
+          <i class="bi bi-bell"></i>
+        <% end %>
     <% end %>
 
     <div class="ms-auto dropdown bg-light rounded mt-2">

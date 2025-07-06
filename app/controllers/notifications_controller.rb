@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :set_user, except: %i[ create ]
-  before_action :set_notification, only: %i[ accept reject ]
+  before_action :set_notification, only: %i[ accept destroy ]
 
   def index
     @notifications = @user.received_notifications
@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
   def create
     recipient = User.find(params[:recipient_id])
     sheet = Sheet.find(params[:sheet_id])
-    @notification = sheet.notifications.build(sender: Current.user, recipient: recipient, message: "send you a sheet copy #{sheet.sheet_type}")
+    @notification = sheet.notifications.build(sender: Current.user, recipient: recipient, message: "Want to send a copy of the type sheet #{sheet.sheet_type}")
 
     if @notification.save
       refresh_or_redirect_to sheet, notice: "Notification copy sheet sent"

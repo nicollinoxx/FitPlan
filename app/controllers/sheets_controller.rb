@@ -45,9 +45,7 @@ class SheetsController < ApplicationController
 
   # DELETE /sheets/1 or /sheets/1.json
   def destroy
-    @sheet.destroy!
-
-    recede_or_redirect_to sheets_url, notice: I18n.t('notice.sheet.destroy')
+    @sheet.destroy
   end
 
   private
