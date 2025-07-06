@@ -1,24 +1,23 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <div class="d-flex align-items-center text-truncate" style="max-width: 70%;">
+<div id="<%= dom_id notification %>">
+  <div class="d-flex gap-2 mb-2">
     <% if notification.sender.avatar.attached? %>
-      <%= image_tag notification.sender.avatar, class: "rounded-circle me-2 border border-primary", style: "width:30px; height:30px;" %>
+      <%= image_tag notification.sender.avatar, class: "rounded-circle border", style: "width:32px; height:32px;" %>
     <% end %>
-    <span class="text-truncate" title="<%= notification.sender.email %>">
-      <%= notification.sender.email %>
-    </span>
-  </div>
-  <% unless notification.accepted? %>
-    <div class="d-flex gap-2">
-      <%= button_to accept_notification_path(notification), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
-        <i class="bi bi-check-lg"></i>
-      <% end %>
-      <%= button_to notification, method: :delete, class: "btn btn-danger btn-sm rounded-circle" do %>
-        <i class="bi bi-x-lg"></i>
-      <% end %>
+    <div class="flex-grow-1">
+      <div class="d-flex justify-content-between align-items-center">
+        <small class="text-muted"><%= notification.sender.username %></small>
+        <% unless notification.accepted? %>
+          <div class="d-flex gap-1">
+            <%= button_to shareables_path(notification), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
+              <i class="bi bi-check"></i>
+            <% end %>
+            <%= button_to notification, method: :delete, class: "btn btn-danger btn-sm rounded-circle" do %>
+              <i class="bi bi-x"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+  </div>
+  <p class="m-2 small text-muted"><i class="bi bi-chat-right-text me-2"></i> <%= notification.message %> </p>
 </div>
-<p class="mb-0 mt-2">
-  <i class="bi bi-chat-right-text me-2"></i>
-  <%= notification.message %>
-</p>

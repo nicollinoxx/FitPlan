@@ -6,16 +6,6 @@ class NotificationsController < ApplicationController
     @notifications = @user.received_notifications
   end
 
-  def create
-    recipient = User.find(params[:recipient_id])
-    sheet = Sheet.find(params[:sheet_id])
-    @notification = sheet.notifications.build(sender: Current.user, recipient: recipient, message: "Want to send a copy of the type sheet #{sheet.sheet_type}")
-
-    if @notification.save
-      refresh_or_redirect_to sheet, notice: "Notification copy sheet sent"
-    end
-  end
-
   def accept
     if @notification.update(accepted: true)
       @notification.sheet.accept_notification(@notification.recipient_id)
@@ -26,6 +16,8 @@ class NotificationsController < ApplicationController
 
   def destroy
     @notification.destroy
+
+    render turbo_stream: turbo_stream.remove("notification_#{@notification.id}")
   end
 
   private
