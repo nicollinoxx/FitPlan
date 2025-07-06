@@ -2,8 +2,6 @@ class User < ApplicationRecord
   has_secure_password
   has_one_attached :avatar
 
-  scope :search_by_name, ->(name, exclude_id) { where("LOWER(username) LIKE ? AND id != ?", "#{name.downcase}%", exclude_id) }
-
   generates_token_for :email_verification, expires_in: 2.days do
     email
   end
@@ -20,8 +18,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 12 }
+  validates :handle, uniqueness: true, allow_nil: true
   validate  :avatar_content_type, :avatar_size_validation
-  validates :username, uniqueness: true
 
   normalizes :email, with: -> { _1.strip.downcase }
 
@@ -33,7 +31,13 @@ class User < ApplicationRecord
     sessions.where.not(id: Current.session).delete_all
   end
 
+  before_create :generate_handle_unique
+
   private
+
+    def generate_handle_unique
+      self.handle ||= "@user#{id || User.maximum(:id).to_i + 1}"
+    end
 
     def avatar_content_type
       if avatar.attached? && !avatar.content_type.in?(%w(image/png image/jpeg image/jpg))

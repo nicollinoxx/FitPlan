@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resource  :email_verification, only: [:show, :create]
     resource  :password_reset,     only: [:new,  :edit, :create, :update]
     resources :avatars,            only: [:show, :edit, :update, :destroy]
-    resource  :username,           only: [:edit, :update]
+    resource  :users,              only: [:edit, :update]
   end
 
   resources :sheets do

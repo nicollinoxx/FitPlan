@@ -27,6 +27,6 @@ class Identity::AvatarsController < ApplicationController
     end
 
     def user_params
-      params.permit(:avatar)
+      params.require(:user).permit(:avatar)
     end
 end

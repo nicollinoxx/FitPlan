@@ -7,11 +7,7 @@ class NotificationsController < ApplicationController
   end
 
   def accept
-    if @notification.update(accepted: true)
-    @notification.sheet.accept_notification(@notification.recipient_id)
-    else
-      puts  @notification.errors.full_messages.to_sentence
-    end
+    @notification.sheet.accept_notification(@notification.recipient_id) if @notification.update(accepted: true)
   end
 
   def destroy

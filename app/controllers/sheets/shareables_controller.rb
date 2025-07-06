@@ -2,7 +2,7 @@ class Sheets::ShareablesController < ApplicationController
   include SheetScoped
 
   def index
-    @users = User.search_by_name(params[:name], Current.user.id) if params[:name].present?
+    @user = User.find_by(handle: params[:handle]) if params[:handle].present?
   end
 
   def create
