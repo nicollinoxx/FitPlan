@@ -13,7 +13,7 @@
   <%= form_with url: sheet_shareables_path(@sheet), method: :get do |form| %>
     <%= form.text_field :handle, value: params[:handle], placeholder: "search hundle", class: "form-control", onchange: "this.form.requestSubmit()" %>
   <% end %>
-  <small class="text-muted">search by user identifier: @hundle</small>
+  <small class="text-muted">search by user identifier "hundle"</small>
 
   <div class="mt-3">
     <%= render "sheets/shareables/shareable", user: @user if @user.present? %>

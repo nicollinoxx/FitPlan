@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-bs-theme="light">
+<html data-controller="theme" <%= "data-bs-theme=#{cookies[:theme].present? ? cookies[:theme] : 'light'}" %>>
   <head>
     <title><%= content_for(:title || FitPlan ) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -14,7 +14,7 @@
     <% end %>
   </head>
 
-  <body data-controller="theme">
+  <body>
     <div class="hide-on-mobile mb-4">
       <%= render 'layouts/navbar' if Current.user.present? %>
 

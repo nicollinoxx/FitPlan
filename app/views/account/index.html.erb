@@ -13,14 +13,18 @@
   <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-envelope-fill me-1"></i><%= Current.user.email %></h6>
   <% if Current.user.username.present? && Current.user.handle.present? %>
     <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-person-fill me-1"></i><%= Current.user.username %></h6>
-    <h6 class="card-subtitle mb-2 text-danger"><i class="bi bi-at"></i><%= Current.user.handle %></h6>
+    <h6 class="card-subtitle mb-2 text-danger">
+      <small>
+        handle -
+      </small>
+      <%= Current.user.handle %></h6>
   <% end %>
 </div>
 
 <div class="card shadow-sm mb-4 border rounded-3">
     <div class="card-header bg-transparent border-bottom-0">
         <h2 class="h5 fw-bold mb-0">
-            <i class="bi bi-heart me-3 text-primary"></i><%= t('.user_details.title') %>
+            <i class="bi bi-person-gear me-3 text-primary"></i><%= t('.user_details.title') %>
         </h2>
     </div>
 
@@ -44,7 +48,7 @@
 <div class="card shadow-sm mb-4 border rounded-3">
     <div class="card-header bg-transparent border-bottom-0">
         <h2 class="h5 fw-bold mb-0">
-        <i class="bi bi-person-gear me-2 text-primary"></i><%= t('.settings.title') %>
+        <i class="bi bi-gear me-2 text-primary"></i><%= t('.settings.title') %>
         </h2>
     </div>
     <div class="list-group list-group-flush rounded-bottom">

@@ -2,29 +2,33 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
+    this.listener = () => this.#applyTheme(this.#system)
+    matchMedia('(prefers-color-scheme: dark)').addEventListener("change", this.listener)
     this.#applyTheme(this.#current)
-    this.#setupSystemColorSchemeListener()
+  }
+
+  disconnect() {
+    matchMedia('(prefers-color-scheme: dark)').removeEventListener("change", this.listener)
   }
 
   toggleTheme() {
-    const theme = this.#current === 'dark' ? 'light' : 'dark'
-    localStorage.setItem("theme", theme)
-    this.#applyTheme(theme)
+    this.#applyTheme(this.#current === 'dark' ? 'light' : 'dark')
   }
 
   setSystemTheme() {
-    localStorage.removeItem("theme")
     this.#applyTheme(this.#system)
   }
 
-  get #current() { return localStorage.getItem('theme') || this.#system }
-  get #system() { return matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light" }
+  get #current() {
+    return document.cookie.match(/theme=(light|dark)/)?.[1] || this.#system
+  }
 
-  #applyTheme(theme) { document.documentElement.setAttribute("data-bs-theme", theme) }
+  get #system() {
+    return matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light"
+  }
 
-  #setupSystemColorSchemeListener() {
-    if (!localStorage.getItem('theme')) {
-      matchMedia('(prefers-color-scheme: dark)').addEventListener("change", () => this.#applyTheme(this.#system))
-    }
+  #applyTheme(theme) {
+    document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax`
+    document.documentElement.dataset.bsTheme = theme
   }
 }
