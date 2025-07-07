@@ -24,10 +24,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only: [:index, :destroy] do
-    patch :accept, on: :member
-  end
-
   root 'sheets#index'
   get "set_locale/(:locale)", to: "application#set_session_locale", as: :set_locale
 end

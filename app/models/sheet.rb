@@ -1,11 +1,9 @@
 class Sheet < ApplicationRecord
   include SheetCopyable
-
   belongs_to :user
 
   has_many :workouts, dependent: :destroy
   has_many :diets,    dependent: :destroy
-  has_many :notifications, dependent: :destroy
 
   validates :name, :sheet_type, presence: true
   validates :sheet_type, inclusion: { in: %w(workout diet) }
