@@ -1,0 +1,22 @@
+<%= form_with url: new_shares_shared_sheet_path, method: :get, local: true do %>
+  <div>
+    <label for="handle">Pesquisar usuário pelo handle:</label>
+    <%= text_field_tag :handle, params[:handle] %>
+    <%= submit_tag "Buscar" %>
+  </div>
+<% end %>
+
+<% if @recipient.present? %>
+  <p>Usuário encontrado: <strong><%= @recipient.username %> (<%= @recipient.handle %>)</strong></p>
+
+  <%= form_with url: shares_shared_sheets_path(handle: @recipient.handle), method: :post, local: true do |form| %>
+    <div>
+      <label for="sheet_ids">Selecione as fichas para compartilhar:</label><br>
+      <%= select_tag "sheet_ids[]", options_from_collection_for_select(@sheets, :id, :name), multiple: true, size: 5 %>
+    </div>
+
+    <div>
+      <%= form.submit "Compartilhar" %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,21 @@
+<div class="card">
+  <!-- Imagem de perfil do remetente -->
+  <div>
+    <%= image_tag shared_sheet.sender.avatar, alt: shared_sheet.sender.username, width: 50, height: 50 if shared_sheet.sender.avatar.attached? %>
+  </div>
+
+  <!-- Nome do remetente -->
+  <p><strong><%= shared_sheet.sender.username %></strong> compartilhou uma ficha:</p>
+
+  <!-- Informações da ficha -->
+  <ul>
+    <li><strong>Título:</strong> <%= shared_sheet.sheet.name %></li>
+    <li><strong>Tipo:</strong> <%= shared_sheet.sheet.sheet_type %></li>
+  </ul>
+
+  <!-- Botões de ação -->
+  <div>
+    <%= button_to "Aceitar", accept_shares_shared_sheet_path(shared_sheet), method: :patch %>
+    <%= button_to "Excluir", shares_shared_sheet_path(shared_sheet), method: :delete, data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } %>
+  </div>
+</div>
