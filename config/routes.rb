@@ -17,10 +17,15 @@ Rails.application.routes.draw do
   end
 
   resources :sheets do
-    resources :shareables, only: [:index, :create], module: :sheets
     resources :diets
     resources :workouts do
       resources :videos, only: [:destroy], module: :workouts
+    end
+  end
+
+  namespace :shares do
+    resources :shared_sheets, only: [:index, :new, :create, :destroy] do
+      patch :accept, on: :member
     end
   end
 

@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :sessions,    dependent: :destroy
   has_many :sheets,      dependent: :destroy
 
+  has_many :sent_shared_sheets, class_name: "SharedSheet", foreign_key: :sender_id, dependent: :destroy
+  has_many :received_shared_sheets, class_name: "SharedSheet", foreign_key: :recipient_id, dependent: :destroy
+
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 12 }
   validates :handle, uniqueness: true, allow_nil: true
