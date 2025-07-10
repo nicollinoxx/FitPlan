@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 12 }
   validates :handle, uniqueness: true, allow_nil: true
+  validates :username, presence: true
   validate  :avatar_content_type, :avatar_size_validation
 
   normalizes :email, with: -> { _1.strip.downcase }
@@ -36,7 +37,7 @@ class User < ApplicationRecord
   private
 
     def generate_handle_unique
-      self.handle ||= "@user#{id || User.maximum(:id).to_i + 1}"
+      self.handle ||= "user_#{id || User.maximum(:id).to_i + 1}"
     end
 
     def avatar_content_type

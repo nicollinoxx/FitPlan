@@ -4,7 +4,6 @@ export default class extends Controller {
   connect() {
     this.listener = () => this.#applyTheme(this.#system)
     matchMedia('(prefers-color-scheme: dark)').addEventListener("change", this.listener)
-    this.#applyTheme(this.#current)
   }
 
   disconnect() {
