@@ -1,4 +1,4 @@
-<div class="col-md-6 p-2">
+<div id="<%= dom_id(shared_sheet) %>" class="col-md-6 p-2">
   <div class="border shadow-sm rounded p-2">
     <div class="d-flex align-items-center mb-2">
       <div class="me-3">
@@ -15,11 +15,13 @@
       </div>
 
       <div class="d-flex gap-2">
-        <%= button_to accept_shares_shared_sheet_path(shared_sheet), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
-          <i class="bi bi-check2-all"></i>
+        <% unless shared_sheet.accepted? %>
+          <%= button_to accept_shares_shared_sheet_path(shared_sheet), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
+            <i class="bi bi-check2-all"></i>
+          <% end %>
         <% end %>
-        <%= button_to shares_shared_sheet_path(shared_sheet), method: :delete, class: "btn btn-outline-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
-          <i class="bi bi-x-lg"></i>
+        <%= button_to shares_shared_sheet_path(shared_sheet), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
+          <i class="bi <%= shared_sheet.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
         <% end %>
       </div>
     </div>
@@ -29,7 +31,7 @@
         <%= shared_sheet.sheet.workout? ? t('workout') : t('diet') %>
       </small>
     </p>
-    <div class="m-0">
+    <div class="text-muted m-0">
       <% if shared_sheet.sheet.description.present? %>
         <small><i class="bi bi-blockquote-right me-1"></i><%= shared_sheet.sheet.description %></small>
       <% end %>

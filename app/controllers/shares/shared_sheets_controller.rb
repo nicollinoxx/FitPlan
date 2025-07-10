@@ -36,6 +36,7 @@ class Shares::SharedSheetsController < ApplicationController
 
   def destroy
     @shared_sheet.destroy
+    render turbo_stream: turbo_stream.remove("shared_sheet_#{@shared_sheet.id}")
   end
 
   private

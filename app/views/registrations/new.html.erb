@@ -21,6 +21,11 @@
         <% end %>
 
         <div class='mb-3'>
+          <%= form.label :username, style: "display: block", class: 'form-label' %>
+          <%= form.text_field :username, value: @user.username, required: true, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        </div>
+
+        <div class='mb-3'>
           <%= form.label :email, style: "display: block", class: 'form-label' %>
           <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email", class: 'form-control' %>
         </div>
