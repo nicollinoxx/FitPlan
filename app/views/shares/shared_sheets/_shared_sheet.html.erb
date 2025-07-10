@@ -1,21 +1,38 @@
-<div class="card">
-  <!-- Imagem de perfil do remetente -->
-  <div>
-    <%= image_tag shared_sheet.sender.avatar, alt: shared_sheet.sender.username, width: 50, height: 50 if shared_sheet.sender.avatar.attached? %>
-  </div>
+<div class="col-md-6 p-2">
+  <div class="border shadow-sm rounded p-2">
+    <div class="d-flex align-items-center mb-2">
+      <div class="me-3">
+        <% if shared_sheet.sender.avatar.attached? %>
+          <%= image_tag shared_sheet.sender.avatar, class: "rounded-circle", width: 40, height: 40 %>
+        <% else %>
+          <%= image_tag "avatar.png", class: "rounded-circle", width: 40, height: 40 %>
+        <% end %>
+      </div>
 
-  <!-- Nome do remetente -->
-  <p><strong><%= shared_sheet.sender.username %></strong> compartilhou uma ficha:</p>
+      <div class="flex-grow-1">
+        <h6 class="m-0 text-success"><%= shared_sheet.sender.username %></h6>
+        <small class="text-muted">compartilhou uma ficha</small>
+      </div>
 
-  <!-- Informações da ficha -->
-  <ul>
-    <li><strong>Título:</strong> <%= shared_sheet.sheet.name %></li>
-    <li><strong>Tipo:</strong> <%= shared_sheet.sheet.sheet_type %></li>
-  </ul>
-
-  <!-- Botões de ação -->
-  <div>
-    <%= button_to "Aceitar", accept_shares_shared_sheet_path(shared_sheet), method: :patch %>
-    <%= button_to "Excluir", shares_shared_sheet_path(shared_sheet), method: :delete, data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } %>
+      <div class="d-flex gap-2">
+        <%= button_to accept_shares_shared_sheet_path(shared_sheet), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
+          <i class="bi bi-check2-all"></i>
+        <% end %>
+        <%= button_to shares_shared_sheet_path(shared_sheet), method: :delete, class: "btn btn-outline-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
+          <i class="bi bi-x-lg"></i>
+        <% end %>
+      </div>
+    </div>
+    <p class="m-0">
+      <i class="bi bi-file-earmark-spreadsheet-fill me-1"></i><%= shared_sheet.sheet.name %>
+      <small class="badge <%= shared_sheet.sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>">
+        <%= shared_sheet.sheet.workout? ? t('workout') : t('diet') %>
+      </small>
+    </p>
+    <div class="m-0">
+      <% if shared_sheet.sheet.description.present? %>
+        <small><i class="bi bi-blockquote-right me-1"></i><%= shared_sheet.sheet.description %></small>
+      <% end %>
+    </div>
   </div>
 </div>
