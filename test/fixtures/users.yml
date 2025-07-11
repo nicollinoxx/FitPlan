@@ -4,4 +4,12 @@ lazaro_nixon:
   username: "lazaro_nixon"
   email: lazaronixon@hotmail.com
   password_digest: <%= BCrypt::Password.create("Secret1*3*5*") %>
+  handle: "1234"
+  verified: true
+
+lazaro:
+  username: "lazaro_nixon"
+  email: lazaro@hotmail.com
+  password_digest: <%= BCrypt::Password.create("Secret1*3*5*") %>
+  handle: "123"
   verified: true

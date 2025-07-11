@@ -2,12 +2,12 @@
 
 one:
   sender: lazaro_nixon
-  recipient: lazaro_nixon
+  recipient: lazaro
   status: pending
   sheet: one
 
 two:
-  sender: lazaro_nixon
+  sender: lazaro
   recipient: lazaro_nixon
   status: pending
   sheet: two
