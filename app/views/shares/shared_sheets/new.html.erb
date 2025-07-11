@@ -2,18 +2,6 @@
 
 <%= turbo_frame_tag "shared_sheets" do %>
   <%= form_with url: new_shares_shared_sheet_path, method: :get, local: true do %>
-    <% if @shared_sheet&.errors&.any? %>
-      <div class="alert alert-danger">
-        <h4><%= pluralize(@shared_sheet.errors.count, "erro") %> proibiu o compartilhamento:</h4>
-        <ul>
-          <% @shared_sheet.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-
     <div class="mb-3">
       <label class="form-label">Search user:</label>
       <div class="input-group">

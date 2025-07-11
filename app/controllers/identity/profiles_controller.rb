@@ -1,4 +1,4 @@
-class Identity::UsersController < ApplicationController
+class Identity::ProfilesController < ApplicationController
   before_action :set_user
 
   def edit
@@ -19,6 +19,6 @@ class Identity::UsersController < ApplicationController
     end
 
     def user_params
-      params.expect(user: [:username, :handle])
+      params.expect(user: [:name, :handle])
     end
 end

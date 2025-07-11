@@ -11,10 +11,8 @@
     <%= link_to "", identity_avatar_path(Current.user), class: "stretched-link", style: "position:absolute; inset:0; z-index:2;" %>
   </div>
   <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-envelope-fill me-1"></i><%= Current.user.email %></h6>
-
-    <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-person-fill me-1"></i><%= Current.user&.username %></h6>
-    <h6 class="card-subtitle mb-2 text-warning"><small>@ </small><%= Current.user&.handle %></h6>
-
+  <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-person-fill me-1"></i><%= Current.user.name %></h6>
+  <h6 class="card-subtitle mb-2 text-warning"><small>@ </small><%= Current.user.handle %></h6>
 </div>
 
 <div class="card shadow-sm mb-4 border rounded-3">
@@ -25,7 +23,7 @@
     </div>
 
     <div class="list-group list-group-flush rounded-bottom">
-      <%= link_to edit_identity_users_path(Current.user), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+      <%= link_to edit_identity_profile_path(Current.user), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
           <i class="bi bi-calculator-fill me-3 text-muted"></i><%= "Edit Username & Handle" %>
       <% end %>
 

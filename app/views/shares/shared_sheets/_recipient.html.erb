@@ -4,7 +4,7 @@
   <% else %>
     <%= image_tag "avatar.png", class: "rounded-circle", width: 40, height: 40 %>
   <% end %>
-  <p class="text-success m-0"><%= recipient.username %></p>
+  <p class="text-success m-0"><%= recipient.name %></p>
 </div>
 
 <%= form_with url: shares_shared_sheets_path(handle: recipient.handle), method: :post, local: true do |form| %>
