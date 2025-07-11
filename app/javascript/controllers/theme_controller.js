@@ -2,32 +2,26 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    this.listener = () => this.#applyTheme(this.#system)
-    matchMedia('(prefers-color-scheme: dark)').addEventListener("change", this.listener)
+    this.media = window.matchMedia("(prefers-color-scheme: dark)")
+    this.media.addEventListener("change", this.handler = () => this.#update())
   }
 
-  disconnect() {
-    matchMedia('(prefers-color-scheme: dark)').removeEventListener("change", this.listener)
+  disconnect() { this.media?.removeEventListener("change", this.handler) }
+
+  toggle() {
+    this.element.dataset.bsTheme = this.#nextTheme
+    localStorage.setItem("theme", this.#nextTheme)
   }
 
-  toggleTheme() {
-    this.#applyTheme(this.#current === 'dark' ? 'light' : 'dark')
+  system() {
+    this.element.dataset.bsTheme = this.#systemTheme
+    localStorage.removeItem("theme")
   }
 
-  setSystemTheme() {
-    this.#applyTheme(this.#system)
+  #update() {
+    if (!localStorage.getItem("theme")) { this.element.dataset.bsTheme = this.#systemTheme }
   }
 
-  get #current() {
-    return document.cookie.match(/theme=(light|dark)/)?.[1] || this.#system
-  }
-
-  get #system() {
-    return matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light"
-  }
-
-  #applyTheme(theme) {
-    document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax`
-    document.documentElement.dataset.bsTheme = theme
-  }
+  get #systemTheme() { return this.media.matches ? "dark" : "light" }
+  get #nextTheme() { return localStorage.getItem("theme") === "dark" ? "light" : "dark" || "light" }
 }

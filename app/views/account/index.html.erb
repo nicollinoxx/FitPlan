@@ -93,13 +93,13 @@
 <% if turbo_native_app? %>
   <div class="position-fixed top-0 end-0 p-2 my-2" style="z-index: 1050">
     <div class="btn-group">
-      <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggleTheme">
+      <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggle">
         <i class="bi bi-sun-fill"></i>
         <i class="bi bi-moon-stars-fill"></i>
       </button>
       <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown"></button>
       <div class="dropdown-menu">
-        <button class="dropdown-item" type="button" data-action="theme#setSystemTheme">
+        <button class="dropdown-item" type="button" data-action="theme#system">
           <i class="bi bi-laptop"></i> <%= t('system_theme') %>
         </button>
       </div>

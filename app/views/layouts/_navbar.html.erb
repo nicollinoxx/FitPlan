@@ -24,13 +24,13 @@
       <!-- ms-auto empurra para a direita, align-items-center alinha verticalmente -->
       <div class="d-flex align-items-center ms-auto">
         <div class="btn-group me-2">
-          <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggleTheme">
+          <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggle">
             <i class="bi bi-sun-fill"></i>
             <i class="bi bi-moon-stars-fill"></i>
           </button>
           <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown"></button>
           <div class="dropdown-menu">
-            <button class="dropdown-item" type="button" data-action="theme#setSystemTheme">
+            <button class="dropdown-item" type="button" data-action="theme#system">
               <i class="bi bi-laptop"></i> <%= t('system_theme') %>
             </button>
           </div>
