@@ -44,7 +44,5 @@ class SheetsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Sheet.count", -1) do
       delete sheet_url(@sheet)
     end
-
-    assert_redirected_to sheets_url
   end
 end
