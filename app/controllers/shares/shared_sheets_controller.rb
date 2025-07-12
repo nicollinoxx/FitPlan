@@ -13,10 +13,10 @@ class Shares::SharedSheetsController < ApplicationController
   end
 
   def create
-    sheet_ids = Array(params[:sheet_ids]).reject(&:blank?)
+    sheets = Array(params[:sheets])
 
-    unless sheet_ids.empty?
-      shared_sheets = sheet_ids.map do |sheet_id|
+    unless sheets.empty?
+      shared_sheets = sheets.map do |sheet_id|
         @user.sent_shared_sheets.build(recipient: @recipient, sheet_id: sheet_id)
       end
 
