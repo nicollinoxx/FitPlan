@@ -1,20 +1,18 @@
-<div class="d-flex align-items-center  p-2 mb-3">
-  <% if recipient.avatar.attached? %>
-    <%= image_tag recipient.avatar, class: "rounded-circle me-2", width: 40, height: 40 %>
-  <% else %>
-    <%= image_tag "avatar.png", class: "rounded-circle", width: 40, height: 40 %>
+<div class="border-top pt-3">
+  <%= form_with url: shares_shared_sheets_path(handle: recipient.handle), method: :post, data: { turbo_frame: "_top" } do |form| %>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="d-flex align-items-center">
+        <% if recipient.avatar.attached? %>
+          <%= image_tag recipient.avatar, class: "rounded-circle me-2 border border-success", width: 42, height: 42 %>
+        <% else %>
+          <%= image_tag "avatar.png", class: "rounded-circle me-2 border border-success", width: 42, height: 42 %>
+        <% end %>
+
+        <p class="m-0 fw-semibold text-success"><%= recipient.name %></p>
+      </div>
+      <%= form.submit "Share", class: "btn btn-success" %>
+    </div>
+    <%= select_tag :sheets, options_from_collection_for_select(sheets, :id, :name), include_blank: "Select sheets to share...",
+      multiple: true, id: "sheets",  class: "shadow-sm rounded border w-100 mb-3", data: {controller: "combobox" } %>
   <% end %>
-  <p class="text-success m-0"><%= recipient.name %></p>
 </div>
-
-<%= form_with url: shares_shared_sheets_path(handle: recipient.handle), method: :post, local: true do |form| %>
-  <div class="mb-3">
-    <label class="form-label">Fichas para compartilhar:</label>
-    <%= select_tag "sheet_ids[]", options_from_collection_for_select(sheets, :id, :name), multiple: true, class: "form-select", size: 5 %>
-  </div>
-
-  <div class="d-flex gap-2">
-    <%= form.submit "Compartilhar", class: "btn btn-primary", data: { turbo_frame: "_top" } %>
-    <%= link_to "Cancelar", shares_shared_sheets_path, class: "btn btn-secondary" %>
-  </div>
-<% end %>
