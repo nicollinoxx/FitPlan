@@ -4,7 +4,7 @@
       <div class="d-flex align-items-center mb-2">
         <i class="bi <%= sheet.workout? ? 'bi-heart-pulse text-danger' : 'bi-egg-fried text-warning' %> fs-3 me-2"></i>
         <div>
-          <h2 class="h5 mb-0 fw-bold"><%= sheet.name %></h2>
+          <h2 class="h5 mb-0"><%= sheet.name %></h2>
           <small class="badge <%= sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>">
             <%= sheet.workout? ? t('workout') : t('diet') %>
           </small>
