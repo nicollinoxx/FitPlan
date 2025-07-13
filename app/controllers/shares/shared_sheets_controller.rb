@@ -25,10 +25,10 @@ class Shares::SharedSheetsController < ApplicationController
   end
 
   def accept
-    sheet_id = @shared_sheet.sheet_id
-    recipient_id = @shared_sheet.recipient_id
+    sheet = @shared_sheet.sheet
+    recipient = @shared_sheet.recipient
 
-    CopySheetJob.perform_later(recipient_id, sheet_id) if @shared_sheet.update(status: 'accepted')
+    CopySheetJob.perform_later(recipient, sheet) if @shared_sheet.update(status: 'accepted')
   end
 
   def destroy
