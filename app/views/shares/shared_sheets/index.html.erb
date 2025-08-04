@@ -5,6 +5,7 @@
 
 <%= turbo_frame_tag "shared_sheets" do %>
   <div class="sticky-top d-flex align-items-center justify-content-between mb-3">
+    <h5><%= params[:filter] == "sent" ? "Sent" : "Received" %><h5>
     <div class="ms-auto dropdown bg-light rounded mt-2">
       <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
         <i class="bi bi-funnel-fill"><%= t('.filter') %></i>

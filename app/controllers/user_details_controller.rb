@@ -13,21 +13,13 @@ class UserDetailsController < ApplicationController
   end
 
   def create
-    @user_detail = @user.build_user_detail(user_detail_params)
-
-    if @user_detail.save
-      refresh_or_redirect_to @user_detail, notice: I18n.t('notice.user_details.create')
-    else
-      render :new, status: :unprocessable_entity
-    end
+    @user_detail = @user.create_user_detail!(user_detail_params)
+    refresh_or_redirect_to @user_detail, notice: I18n.t('notice.user_details.create')
   end
 
   def update
-    if @user_detail.update(user_detail_params)
-      redirect_to @user_detail, notice: I18n.t('notice.user_details.update')
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @user_detail.update!(user_detail_params)
+    redirect_to @user_detail, notice: I18n.t('notice.user_details.update')
   end
 
   private
@@ -37,7 +29,7 @@ class UserDetailsController < ApplicationController
   end
 
   def set_user_detail
-    @user_detail = @user.user_detail || (raise ActiveRecord::RecordNotFound)
+    @user_detail = @user.user_detail
   end
 
   def user_detail_params

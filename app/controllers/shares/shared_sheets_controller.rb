@@ -17,7 +17,7 @@ class Shares::SharedSheetsController < ApplicationController
 
     unless sheets.empty?
       shared_sheets = sheets.map do |sheet_id|
-        @user.sent_shared_sheets.create(recipient: @recipient, sheet_id: sheet_id)
+        @user.sent_shared_sheets.create(recipient: @recipient, sheet_id: sheet_id, status: "pending")
       end
 
       redirect_to shares_shared_sheets_path(filter: "sent"), notice: "Fichas compartilhadas com sucesso!"
@@ -25,14 +25,16 @@ class Shares::SharedSheetsController < ApplicationController
   end
 
   def accept
-    sheet = @shared_sheet.sheet
-    recipient = @shared_sheet.recipient
+    return unless @shared_sheet.receiver?
 
-    CopySheetJob.perform_later(recipient, sheet) if @shared_sheet.update(status: 'accepted')
+    @shared_sheet.update!(status: 'accepted')
+    CopySheetJob.perform_later(@shared_sheet.recipient, @shared_sheet.sheet)
   end
 
   def destroy
-    @shared_sheet.destroy
+    return unless @shared_sheet.receiver? || @shared_sheet.owner?
+
+    @shared_sheet.destroy!
     render turbo_stream: turbo_stream.remove("shared_sheet_#{@shared_sheet.id}")
   end
 

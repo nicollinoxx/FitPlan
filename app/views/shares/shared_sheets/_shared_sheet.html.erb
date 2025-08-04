@@ -1,47 +1,40 @@
 <div id="<%= dom_id(shared_sheet) %>" class="col-md-6 p-2">
   <div class="border shadow-sm rounded p-2">
     <div class="d-flex align-items-center mb-2">
-      <div class="me-3">
-        <% if shared_sheet.sender.avatar.attached? %>
-          <%= image_tag shared_sheet.sender.avatar, class: "rounded-circle", width: 40, height: 40 %>
-        <% else %>
-          <%= image_tag "avatar.png", class: "rounded-circle", width: 40, height: 40 %>
-        <% end %>
-      </div>
-
+      <% user = params[:filter] == "recipient" ? shared_sheet.sender : shared_sheet.recipient %>
+      <%= image_tag user.avatar.attached? ? user.avatar : "avatar.png", class: "object-fit-cover rounded-circle me-3", width: 40, height: 40 %>
       <div class="flex-grow-1">
-        <h6 class="m-0 text-success"><%= shared_sheet.sender.name %></h6>
-        <small class="text-muted">compartilhou uma ficha</small>
+        <h6 class="m-0 text-success"><%= user.name %></h6>
+        <small class="text-muted"><%= params[:filter] == "recipient" ? "compartilhou uma ficha" : "recebeu uma ficha" %></small>
       </div>
 
       <div class="d-flex gap-2">
-        <% unless shared_sheet.accepted? %>
+        <% if shared_sheet.pending? && shared_sheet.receiver? %>
           <%= button_to accept_shares_shared_sheet_path(shared_sheet), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
             <i class="bi bi-check2-all"></i>
           <% end %>
         <% end %>
-        <%= button_to shares_shared_sheet_path(shared_sheet), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
-          <i class="bi <%= shared_sheet.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
+
+        <% if shared_sheet.owner? || shared_sheet.receiver? %>
+          <%= button_to shares_shared_sheet_path(shared_sheet), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
+            <i class="bi <%= shared_sheet.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
+          <% end %>
         <% end %>
       </div>
     </div>
+
     <p class="m-0">
       <i class="bi bi-file-earmark-spreadsheet-fill me-1"></i><%= shared_sheet.sheet.name %>
-      <small class="badge <%= shared_sheet.sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>">
-        <%= shared_sheet.sheet.workout? ? t('workout') : t('diet') %>
-      </small>
+      <small class="badge <%= shared_sheet.sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>"><%= shared_sheet.sheet.workout? ? t('workout') : t('diet') %></small>
     </p>
 
-    <div class="mt-2">
-      <% if shared_sheet.sheet.description.present? %>
+    <% if shared_sheet.sheet.description.present? %>
+      <div class="mt-2">
         <a class="text-muted small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= shared_sheet.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= shared_sheet.id %>">
           <i class="bi bi-blockquote-right me-1"></i> Show description
         </a>
-
-        <div class="collapse mt-2 border-top" id="desc-<%= shared_sheet.id %>">
-          <%= shared_sheet.sheet.description %>
-        </div>
-      <% end %>
-    </div>
+        <div class="collapse mt-2 border-top" id="desc-<%= shared_sheet.id %>"><%= shared_sheet.sheet.description %></div>
+      </div>
+    <% end %>
   </div>
 </div>

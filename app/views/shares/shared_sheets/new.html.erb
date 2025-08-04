@@ -12,6 +12,6 @@
   <% end %>
 
   <% if @recipient.present? %>
-    <%= render partial: "recipient", locals: { recipient: @recipient, sheets: @sheets } %>
+    <%= render partial: "recipient_form", locals: { recipient: @recipient, sheets: @sheets } %>
   <% end %>
 <% end %>

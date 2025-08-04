@@ -2,9 +2,7 @@
 
 <%= render @diet %>
 
-<% if @percentage.present? %>
-    <%= render 'diets/analyze', percentage: @percentage %>
-<% end %>
+<%= render 'diets/analyze', percentage: @percentage unless @diet.calories.zero? %>
 
 <div class="mt-3" data-controller="bridge--menu">
   <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>

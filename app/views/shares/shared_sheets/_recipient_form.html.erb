@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
       <div class="d-flex align-items-center">
         <% if recipient.avatar.attached? %>
-          <%= image_tag recipient.avatar, class: "rounded-circle me-2 border border-success", width: 42, height: 42 %>
+          <%= image_tag recipient.avatar, class: "rounded-circle me-2 object-fit-cover border border-success", width: 42, height: 42 %>
         <% else %>
           <%= image_tag "avatar.png", class: "rounded-circle me-2 border border-success", width: 42, height: 42 %>
         <% end %>
@@ -12,7 +12,8 @@
       </div>
       <%= form.submit "Share", class: "btn btn-success" %>
     </div>
+
     <%= select_tag :sheets, options_from_collection_for_select(sheets, :id, :name), include_blank: "Select sheets to share...",
-      multiple: true, id: "sheets",  class: "shadow-sm rounded border w-100 mb-3", data: {controller: "combobox" } %>
+      multiple: true, id: "sheets",  class: "shadow-sm rounded border w-100 mb-3", data: {controller: "combobox", combobox_max_selections_value: 5  } %>
   <% end %>
 </div>

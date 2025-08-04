@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html data-controller="theme">
   <head>
-    <script>
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.setAttribute("data-bs-theme", localStorage.getItem("theme") || (prefersDark ? "dark" : "light"));
-    </script>
-
     <title><%= content_for(:title || FitPlan) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
