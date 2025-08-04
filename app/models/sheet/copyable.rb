@@ -1,6 +1,4 @@
-module SheetCopyable
-  extend ActiveSupport::Concern
-
+module Sheet::Copyable
   def copy_sheet(recipient)
     ActiveRecord::Base.transaction do
       sheet_copy = recipient.sheets.build(sheet_params)

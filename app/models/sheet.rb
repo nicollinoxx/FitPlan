@@ -1,12 +1,12 @@
 class Sheet < ApplicationRecord
-  include SheetCopyable
+  include Sheet::Copyable
+
   belongs_to :user
 
   has_many :workouts, dependent: :destroy
   has_many :diets,    dependent: :destroy
   has_many :shared_sheets, dependent: :destroy
 
-  validates :name, :sheet_type, presence: true
   validates :sheet_type, inclusion: { in: %w(workout diet) }
 
   enum :sheet_type, { workout: "workout", diet: "diet" }
