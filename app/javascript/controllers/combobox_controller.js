@@ -6,12 +6,21 @@ export default class extends Controller {
   static values = {
     url: String,
     optionCreate: { type: String, default: "Add" },
-    noResults: { type: String, default: "No results found" }
+    noResults: { type: String, default: "No results found" },
+    maxItems: { type: Number, default: 5 }
   }
 
   connect() {
     const settings = this.element.nodeName === "INPUT" ? this.#inputSettings : this.#selectSettings
-    this.tomSelect = new TomSelect(this.element, settings)
+    this.tomSelect = new TomSelect(this.element, { ...settings, maxItems: this.maxItemsValue });
+
+    this.tomSelect.on('item_add', () => {
+      if (this.tomSelect.items.length >= this.maxItemsValue) { this.tomSelect.disable(); }
+    });
+
+    this.tomSelect.on('item_remove', () => {
+      if (this.tomSelect.items.length < this.maxItemsValue) { this.tomSelect.enable(); }
+    });
   }
 
   disconnect() {
@@ -49,8 +58,9 @@ export default class extends Controller {
 
   get #render() {
     return {
-      option_create: (data, escape) =>`<div class="create">${this.optionCreateValue} <b>${escape(data.input)}</b>...</div>`,
-      no_results: () => `<div class="no-results">${this.noResultsValue}</div>`}
+      option_create: (data, escape) => `<div class="create">${this.optionCreateValue} <b>${escape(data.input)}</b>...</div>`,
+      no_results: () => `<div class="no-results">${this.noResultsValue}</div>`
+    }
   }
 
   get #loadSetting() {

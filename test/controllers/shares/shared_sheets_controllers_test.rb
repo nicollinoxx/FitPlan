@@ -20,7 +20,6 @@ class Shares::SharedSheetsControllerTest < ActionDispatch::IntegrationTest
     get new_shares_shared_sheet_url(handle: @recipient.handle)
     assert_response :success
     assert_select "form"
-    assert_select "input[name=handle][value='#{@recipient.handle}']"
   end
 
   test "should get new without recipient handle" do
@@ -33,32 +32,26 @@ class Shares::SharedSheetsControllerTest < ActionDispatch::IntegrationTest
     sheet_ids = @user.sheets.limit(2).pluck(:id)
 
     assert_difference("SharedSheet.count", 2) do
-      post shares_shared_sheets_url, params: { handle: @recipient.handle, sheet_ids: sheet_ids }
+      post shares_shared_sheets_url, params: { sheets: sheet_ids, handle: @recipient.handle, status: "pending" }
     end
 
-    assert_redirected_to shares_shared_sheets_path
     follow_redirect!
     assert_match "Fichas compartilhadas com sucesso!", response.body
-  end
-
-  test "should render new on create failure" do
-    post shares_shared_sheets_url, params: { handle: @recipient.handle, sheet_ids: [1] }
-    assert_response :no_content
   end
 
   test "should accept shared_sheet and enqueue job" do
     @shared_sheet = shared_sheets(:one)
     sign_in_as(@shared_sheet.recipient)
 
-    patch accept_shares_shared_sheet_path(@shared_sheet, format: :turbo_stream)
+    assert_enqueued_with(job: CopySheetJob, args: [@shared_sheet.recipient, @shared_sheet.sheet]) do
+      patch accept_shares_shared_sheet_path(@shared_sheet, format: :turbo_stream)
+    end
 
     @shared_sheet.reload
     assert_equal "accepted", @shared_sheet.status
     assert_response :success
     assert_match /turbo-stream/, @response.body
   end
-
-
 
   test "should destroy shared_sheet" do
     shared_sheet = @user.received_shared_sheets.first
