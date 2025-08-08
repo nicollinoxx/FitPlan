@@ -13,7 +13,7 @@
       <%= form.submit "Share", class: "btn btn-success" %>
     </div>
 
-    <%= select_tag :sheets, options_from_collection_for_select(sheets, :id, :name), include_blank: "Select sheets to share...",
-      multiple: true, id: "sheets",  class: "shadow-sm rounded border w-100 mb-3", data: {controller: "combobox", combobox_max_selections_value: 5  } %>
+    <%= form.collection_select :sheet_ids, sheets, :id, :name, { include_hidden: false }, multiple: true, id: "sheets",
+          class: "rounded", data: { controller: "combobox", combobox_max_selections_value: 5 } %>
   <% end %>
 </div>

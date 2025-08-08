@@ -4,24 +4,23 @@ class Shares::SharedSheetsController < ApplicationController
   before_action :set_shared_sheet, only: %i[ accept destroy ]
 
   def index
-    @shared_sheets = SharedSheet.filtered_for(@user, params[:filter])
+    @shared_sheets = SharedSheet.filtered_by(@user, params[:filter])
   end
 
   def new
     @sheets = @user.sheets
-    @shared_sheet = @user.sent_shared_sheets.build(recipient: @recipient)
   end
 
   def create
-    sheets = Array(params[:sheets])
+    sheet_ids = params[:sheet_ids]
 
-    unless sheets.empty?
-      shared_sheets = sheets.map do |sheet_id|
-        @user.sent_shared_sheets.create(recipient: @recipient, sheet_id: sheet_id, status: "pending")
+    ActiveRecord::Base.transaction do
+      sheet_ids.each do |sheet_id|
+        @user.sent_shared_sheets.create!(recipient: @recipient, sheet_id: sheet_id, status: "pending")
       end
-
-      redirect_to shares_shared_sheets_path(filter: "sent"), notice: "Fichas compartilhadas com sucesso!"
     end
+
+    redirect_to shares_shared_sheets_path(filter: "sent"), notice: "Fichas compartilhadas com sucesso!"
   end
 
   def accept

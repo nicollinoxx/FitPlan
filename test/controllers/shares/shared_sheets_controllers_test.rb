@@ -32,11 +32,16 @@ class Shares::SharedSheetsControllerTest < ActionDispatch::IntegrationTest
     sheet_ids = @user.sheets.limit(2).pluck(:id)
 
     assert_difference("SharedSheet.count", 2) do
-      post shares_shared_sheets_url, params: { sheets: sheet_ids, handle: @recipient.handle, status: "pending" }
+      post shares_shared_sheets_url, params: { sheet_ids: sheet_ids, handle: @recipient.handle }
     end
 
     follow_redirect!
     assert_match "Fichas compartilhadas com sucesso!", response.body
+
+    sheet_ids.each do |sheet_id|
+      shared_sheet = SharedSheet.find_by(recipient: @recipient, sheet_id: sheet_id)
+      assert_equal "pending", shared_sheet.status, "O status do SharedSheet deve ser 'pending'"
+    end
   end
 
   test "should accept shared_sheet and enqueue job" do
