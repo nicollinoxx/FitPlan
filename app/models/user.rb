@@ -20,7 +20,6 @@ class User < ApplicationRecord
   validates :password, allow_nil: true, length: { minimum: 12 }
   validates :handle, uniqueness: true, allow_nil: true
   validates :name, presence: true
-  validate  :avatar_content_type, :avatar_size_validation
 
   normalizes :email, with: -> { _1.strip.downcase }
 
@@ -38,17 +37,5 @@ class User < ApplicationRecord
 
     def generate_handle_unique
       self.handle ||= "user_#{id || User.maximum(:id).to_i + 1}"
-    end
-
-    def avatar_content_type
-      if avatar.attached? && !avatar.content_type.in?(%w(image/png image/jpeg image/jpg))
-        errors.add(:avatar, :error_avatar_type)
-      end
-    end
-
-    def avatar_size_validation
-      if avatar.attached? && avatar.byte_size > 4.megabytes
-        errors.add(:avatar, :error_avatar_size)
-      end
     end
 end

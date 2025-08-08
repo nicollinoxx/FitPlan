@@ -41,23 +41,23 @@
   <div class='mb-3'>
     <%= form.label :video, style: "display: block", class: 'form-label' %>
 
-    <div data-controller="upload-preview">
-      <div id="video" data-upload-preview-target="currentFile">
-        <% if workout.video.attached? && workout.video.persisted? %>
-          <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
-          <%= link_to t('destroy'), sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': t('message_destroy')}, class: 'btn btn-danger mb-4' %>
-        <% end %>
-      </div>
+    <div data-controller="files--upload-preview">
+     <div id="video" data-files--upload-preview-target="currentFile">
+       <% if workout.video.attached? && workout.video.persisted? %>
+         <%= video_tag url_for(workout.video), controls: true, class: 'rounded bg-secondary img-fluid', style: 'height: 160px' %>
+         <%= link_to t('destroy'), sheet_workout_video_path(@sheet, @workout), data: { turbo_method: :delete, 'turbo-confirm': t('message_destroy')}, class: 'btn btn-danger mb-4' %>
+       <% end %>
+     </div>
 
-      <div>
-        <%= video_tag "", controls: true, data: { "upload-preview-target": "previewUpload" }, class: 'rounded bg-secondary img-fluid', hidden: true, style: 'height: 160px' %>
-        <button type="button" class="btn btn-danger mb-4" data-upload-preview-target="removeButton" data-action="upload-preview#removePreview" hidden><%= t('remove_preview') %></button>
-      </div>
+     <div>
+       <%= video_tag "", controls: true, data: { "files--upload-preview-target": "previewUpload" }, class: 'rounded bg-secondary img-fluid', hidden: true, style: 'height: 160px' %>
+       <button type="button" class="btn btn-danger mb-4" data-files--upload-preview-target="removeButton" data-action="files--upload-preview#removePreview" hidden><%= t('remove_preview') %></button>
+     </div>
 
-      <%= form.file_field :video, accept: 'video/mp4, video/mpeg, video/quicktime', data: { "upload-preview-target": "fileInput", "action": "upload-preview#preview" }, class: 'form-control border border-success' %>
-      <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
+     <%= form.file_field :video, accept: 'video/mp4, video/mpeg, video/quicktime', class: 'form-control border border-success',
+     data: { controller: "files--size-validation", "files--upload-preview-target": "fileInput", action: "change->files--size-validation#validate change->files--upload-preview#preview"} %>
+     <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
     </div>
-  </div>
 
   <div>
     <%= form.submit t('submit'), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>

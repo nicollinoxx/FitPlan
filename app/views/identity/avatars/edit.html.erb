@@ -1,11 +1,11 @@
 <% content_for(:title, t('.title')) %>
 
-<div data-controller="upload-preview">
+<div data-controller="files--upload-preview">
   <div class="text-center mb-3">
     <% if @user.avatar.persisted? && @user.avatar.attached? %>
-      <%= image_tag @user.avatar, data: { "upload-preview-target": "currentFile" }, class: 'rounded-circle object-fit-cover border', style: "width: 160px; height: 160px;" %>
+      <%= image_tag @user.avatar, data: { "files--upload-preview-target": "currentFile" }, class: 'rounded-circle object-fit-cover border', style: "width: 160px; height: 160px;" %>
     <% end %>
-    <%= image_tag "", data: { "upload-preview-target": "previewUpload" }, class: 'rounded-circle object-fit-cover border', hidden: true, style: "width: 160px; height: 160px;" %>
+    <%= image_tag "", data: { "files--upload-preview-target": "previewUpload" }, class: 'rounded-circle object-fit-cover border', hidden: true, style: "width: 160px; height: 160px;" %>
   </div>
 
   <div id="form">
