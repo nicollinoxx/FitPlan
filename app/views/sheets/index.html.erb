@@ -21,12 +21,24 @@
 
     <div class="ms-auto dropdown bg-light rounded mt-2">
       <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-        <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
+        <i class="bi bi-funnel-fill"></i> <%= t('.filter') %>
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><%= link_to t('diet'), sheets_path(type: 'diet'), class: 'dropdown-item' %></li>
-        <li><%= link_to t('workout'), sheets_path(type: 'workout'), class: 'dropdown-item' %></li>
-        <li><%= link_to 'all', sheets_path, class: "dropdown-item" %></li>
+        <li>
+          <%= link_to sheets_path(type: 'diet'), class: 'dropdown-item' do %>
+            <i class="bi bi-egg-fried me-2"></i> <%= t('diet') %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to sheets_path(type: 'workout'), class: 'dropdown-item' do %>
+            <i class="bi-heart-pulse me-2"></i> <%= t('workout') %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to sheets_path, class: 'dropdown-item' do %>
+            <i class="bi bi-list-ul me-2"></i> all
+          <% end %>
+        </li>
       </ul>
     </div>
   </div>
