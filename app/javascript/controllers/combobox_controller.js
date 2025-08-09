@@ -15,7 +15,7 @@ export default class extends Controller {
     this.tomSelect = new TomSelect(this.element, { ...settings, maxItems: this.maxItemsValue });
 
     this.tomSelect.on('item_add', () => {
-      if (this.tomSelect.items.length >= this.maxItemsValue) { this.tomSelect.disable(); }
+      if (this.tomSelect.items.length >= this.maxItemsValue) { this.tomSelect.settings.maxItems = this.maxItemsValue; }
     });
 
     this.tomSelect.on('item_remove', () => {
@@ -23,9 +23,7 @@ export default class extends Controller {
     });
   }
 
-  disconnect() {
-    this.tomSelect?.destroy()
-  }
+  disconnect() { this.tomSelect?.destroy() }
 
   async load(query, callback) {
     const response = await get(this.urlValue, {
