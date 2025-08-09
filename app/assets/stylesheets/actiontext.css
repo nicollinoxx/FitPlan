@@ -46,6 +46,11 @@
   color: #adb5bd;
 }
 
+[data-bs-theme="dark"] .trix-content pre {
+  color: #dee2e6; /* Texto claro para tema escuro */
+  background-color: #343a40; /* Fundo escuro para contraste */
+}
+
 trix-editor {
   border: 1px solid #bbb;
   border-radius: 3px;
