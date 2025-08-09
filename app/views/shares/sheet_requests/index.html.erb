@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-between align-items-center">
   <h1><%= t('.title') %></h1>
-  <%= link_to t('new'), new_shares_shared_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3' %>
+  <%= link_to t('new'), new_shares_sheet_request_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3' %>
 </div>
 
-<%= turbo_frame_tag "shared_sheets" do %>
+<%= turbo_frame_tag "sheet_requests" do %>
   <div class="sticky-top d-flex align-items-center justify-content-between mb-3">
     <h5><%= params[:filter] == "sent" ? "Sent" : "Received" %><h5>
     <div class="ms-auto dropdown bg-light rounded mt-2">
@@ -11,13 +11,13 @@
         <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><%= link_to 'sent', shares_shared_sheets_path(filter: 'sent'), class: 'dropdown-item' %></li>
-        <li><%= link_to 'received', shares_shared_sheets_path(filter: 'received'), class: 'dropdown-item' %></li>
+        <li><%= link_to 'sent', shares_sheet_requests_path(filter: 'sent'), class: 'dropdown-item' %></li>
+        <li><%= link_to 'received', shares_sheet_requests_path(filter: 'received'), class: 'dropdown-item' %></li>
       </ul>
     </div>
   </div>
 
   <div class="row">
-    <%= render partial: "shared_sheet", collection: @shared_sheets, as: :shared_sheet, id: "shared_sheet" %>
+    <%= render partial: "sheet_request", collection: @sheet_requests, as: :sheet_request, id: "sheet_request" %>
   </div>
 <% end %>

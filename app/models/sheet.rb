@@ -5,7 +5,7 @@ class Sheet < ApplicationRecord
 
   has_many :workouts, dependent: :destroy
   has_many :diets,    dependent: :destroy
-  has_many :shared_sheets, dependent: :destroy
+  has_many :sheet_requests, dependent: :destroy
 
   validates :sheet_type, inclusion: { in: %w(workout diet) }
 

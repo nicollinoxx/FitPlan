@@ -1,4 +1,4 @@
-class SharedSheet < ApplicationRecord
+class SheetRequest < ApplicationRecord
   belongs_to :sender, class_name: "User"
   belongs_to :recipient, class_name: "User"
   belongs_to :sheet
@@ -7,6 +7,6 @@ class SharedSheet < ApplicationRecord
 
   scope :filtered_by, ->(user, filter) { filter == "sent" ? where(sender: user) : where(recipient: user) }
 
-  def owner?    = (sender == Current.user)
+  def sender?    = (sender == Current.user)
   def receiver? = (recipient == Current.user)
 end

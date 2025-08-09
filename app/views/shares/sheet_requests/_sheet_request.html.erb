@@ -1,0 +1,40 @@
+<div id="<%= dom_id(sheet_request) %>" class="col-md-6 p-2">
+  <div class="border shadow-sm rounded p-2">
+    <div class="d-flex align-items-center mb-2">
+      <% user = params[:filter] == "recipient" ? sheet_request.sender : sheet_request.recipient %>
+      <%= image_tag user.avatar.attached? ? user.avatar : "avatar.png", class: "object-fit-cover rounded-circle me-3", width: 40, height: 40 %>
+      <div class="flex-grow-1">
+        <h6 class="m-0 text-success"><%= user.name %></h6>
+        <small class="text-muted"><%= params[:filter] == "recipient" ? "compartilhou uma ficha" : "recebeu uma ficha" %></small>
+      </div>
+
+      <div class="d-flex gap-2">
+        <% if sheet_request.pending? && sheet_request.receiver? %>
+          <%= button_to accept_shares_sheet_request_path(sheet_request), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
+            <i class="bi bi-check2-all"></i>
+          <% end %>
+        <% end %>
+
+        <% if sheet_request.sender? || sheet_request.receiver? %>
+          <%= button_to shares_sheet_request_path(sheet_request), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
+            <i class="bi <%= sheet_request.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <p class="m-0">
+      <i class="bi bi-file-earmark-spreadsheet-fill me-1"></i><%= sheet_request.sheet.name %>
+      <small class="badge <%= sheet_request.sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>"><%= sheet_request.sheet.workout? ? t('workout') : t('diet') %></small>
+    </p>
+
+    <% if sheet_request.sheet.description.present? %>
+      <div class="mt-2">
+        <a class="text-muted small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= sheet_request.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= sheet_request.id %>">
+          <i class="bi bi-blockquote-right me-1"></i> Show description
+        </a>
+        <div class="collapse mt-2 border-top" id="desc-<%= sheet_request.id %>"><%= sheet_request.sheet.description %></div>
+      </div>
+    <% end %>
+  </div>
+</div>

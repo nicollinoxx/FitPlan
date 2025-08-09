@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   end
 
   namespace :shares do
-    resources :shared_sheets, only: [:index, :new, :create, :destroy] do
+    resources :sheet_requests, only: [:index, :new, :create, :destroy] do
       patch :accept, on: :member
     end
   end

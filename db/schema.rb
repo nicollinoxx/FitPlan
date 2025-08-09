@@ -70,16 +70,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_224401) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "shared_sheets", force: :cascade do |t|
+  create_table "sheet_requests", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.integer "recipient_id", null: false
     t.string "status"
     t.integer "sheet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipient_id"], name: "index_shared_sheets_on_recipient_id"
-    t.index ["sender_id"], name: "index_shared_sheets_on_sender_id"
-    t.index ["sheet_id"], name: "index_shared_sheets_on_sheet_id"
+    t.index ["recipient_id"], name: "index_sheet_requests_on_recipient_id"
+    t.index ["sender_id"], name: "index_sheet_requests_on_sender_id"
+    t.index ["sheet_id"], name: "index_sheet_requests_on_sheet_id"
   end
 
   create_table "sheets", force: :cascade do |t|
@@ -133,9 +133,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_224401) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "diets", "sheets"
   add_foreign_key "sessions", "users"
-  add_foreign_key "shared_sheets", "sheets"
-  add_foreign_key "shared_sheets", "users", column: "recipient_id"
-  add_foreign_key "shared_sheets", "users", column: "sender_id"
+  add_foreign_key "sheet_requests", "sheets"
+  add_foreign_key "sheet_requests", "users", column: "recipient_id"
+  add_foreign_key "sheet_requests", "users", column: "sender_id"
   add_foreign_key "sheets", "users"
   add_foreign_key "user_details", "users"
   add_foreign_key "workouts", "sheets"
