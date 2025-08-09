@@ -12,7 +12,7 @@ class Shares::SheetRequestsController < ApplicationController
   end
 
   def create
-    sheet_ids = params[:sheet_ids]
+    sheet_ids = params[:sheet_ids] || []
 
     SheetRequest.transaction do
       sheet_ids.each do |sheet_id|

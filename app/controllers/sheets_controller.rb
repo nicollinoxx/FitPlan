@@ -2,7 +2,6 @@ class SheetsController < ApplicationController
   before_action :set_user
   before_action :set_sheet, only: %i[ show edit update destroy ]
 
-  # GET /sheets or /sheets.json
   def index
     @sheets = @user.sheets.search_by_type(params[:type])
 
@@ -10,20 +9,16 @@ class SheetsController < ApplicationController
     sleep 2.seconds unless @page.first?
   end
 
-  # GET /sheets/1 or /sheets/1.json
   def show
   end
 
-  # GET /sheets/new
   def new
     @sheet = @user.sheets.build
   end
 
-  # GET /sheets/1/edit
   def edit
   end
 
-  # POST /sheets or /sheets.json
   def create
     @sheet = @user.sheets.build(sheet_params)
 
@@ -34,7 +29,6 @@ class SheetsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sheets/1 or /sheets/1.json
   def update
     if @sheet.update(sheet_params)
       refresh_or_redirect_to sheet_url(@sheet), notice: I18n.t('notice.sheet.update')
@@ -43,7 +37,6 @@ class SheetsController < ApplicationController
     end
   end
 
-  # DELETE /sheets/1 or /sheets/1.json
   def destroy
     @sheet.destroy
   end
@@ -53,12 +46,10 @@ class SheetsController < ApplicationController
       @user = Current.user if Current.user.present?
     end
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_sheet
       @sheet = @user.sheets.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def sheet_params
       params.require(:sheet).permit(:name, :description, :sheet_type)
     end
