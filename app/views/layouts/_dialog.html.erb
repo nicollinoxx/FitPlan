@@ -2,14 +2,14 @@
   <form method="dialog" class="d-flex flex-column justify-content-between h-100">
     <div class="d-flex align-items-center gap-1">
         <i class="bi bi-exclamation-diamond-fill fs-6 alert alert-danger rounded-circle px-2 py-1"></i>
-        <p class="fw-bold mb-3 fs-6">Are you sure?</p>
+        <p class="fw-bold mb-3 fs-6"><%= t('message_destroy') %></p>
     </div>
     <div class="d-flex justify-content-end gap-2">
       <button value="cancel" class="btn btn-secondary btn-sm">
-        <i class="bi bi-x"></i> Cancel
+        <i class="bi bi-x"></i> <%= t("cancel") %>
       </button>
       <button value="confirm" class="btn btn-success btn-sm">
-        <i class="bi bi-check-lg"></i> Confirm
+        <i class="bi bi-check-lg"></i> <%= t("confirm") %>
       </button>
     </div>
   </form>

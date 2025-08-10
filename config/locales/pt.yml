@@ -20,6 +20,9 @@ pt:
   destroy:            "Excluir"
   message_destroy:    "Você tem certeza?"
   minimum_characters: "Mínimo de 12 caracteres."
+  cancel:             "Cancelar"
+  confirm:            "Confirmar"
+
 
   #error forms
   error:                 'erros'

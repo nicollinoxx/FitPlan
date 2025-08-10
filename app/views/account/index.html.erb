@@ -7,7 +7,6 @@
 
 <div class="card-body text-center">
   <div class="position-relative d-inline-block mb-3" style="width: 120px; height: 120px;">
-
     <% if @user.avatar.attached? %>
       <%= image_tag @user.avatar, class: 'rounded-circle object-fit-cover border border-3 border-primary', width: 120, height: 120 %>
       <%= button_to identity_avatar_path(@user), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') },
@@ -15,9 +14,7 @@
         <i class="bi bi-x-lg text-white"></i>
       <% end %>
     <% else %>
-      <div class="rounded-circle border border-3 border-primary d-flex justify-content-center align-items-center" style="width:120px; height:120px;">
-        <i class="bi bi-person-fill fs-1"></i>
-      </div>
+      <%= image_tag "avatar.png", class: 'rounded-circle object-fit-cover border border-3 border-primary m-0 p-0', width: 120, height: 120 %>
     <% end %>
 
     <%= link_to "", edit_identity_avatar_path(@user), class: "stretched-link", style: "position:absolute; inset:0; z-index:2;" %>

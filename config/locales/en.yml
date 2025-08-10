@@ -20,6 +20,8 @@ en:
   destroy:            "Destroy"
   message_destroy:    "Are you sure?"
   minimum_characters: "12 characters minimum."
+  cancel:             "Cancel"
+  confirm:            "Confirm"
 
   #error forms
   error:                 'errors'
