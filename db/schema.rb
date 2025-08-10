@@ -61,6 +61,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_224401) do
     t.index ["sheet_id"], name: "index_diets_on_sheet_id"
   end
 
+  create_table "healthy_metrics", force: :cascade do |t|
+    t.decimal "height"
+    t.decimal "weight"
+    t.date "birth_date"
+    t.string "gender"
+    t.decimal "imc"
+    t.decimal "tmb"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_healthy_metrics_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "user_agent"
@@ -93,19 +106,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_224401) do
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
 
-  create_table "user_details", force: :cascade do |t|
-    t.decimal "height"
-    t.decimal "weight"
-    t.date "birth_date"
-    t.string "gender"
-    t.decimal "imc"
-    t.decimal "tmb"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_details_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -132,11 +132,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_224401) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "diets", "sheets"
+  add_foreign_key "healthy_metrics", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "sheet_requests", "sheets"
   add_foreign_key "sheet_requests", "users", column: "recipient_id"
   add_foreign_key "sheet_requests", "users", column: "sender_id"
   add_foreign_key "sheets", "users"
-  add_foreign_key "user_details", "users"
   add_foreign_key "workouts", "sheets"
 end

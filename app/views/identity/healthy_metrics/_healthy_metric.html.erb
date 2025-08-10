@@ -14,26 +14,26 @@
                       <td class="text-muted small">
                         <i class="bi bi-ruler me-1"></i><%= t("height") %>
                       </td>
-                      <td class="fw-bold text-info text-end"><%= user_detail.height %></td>
+                      <td class="fw-bold text-info text-end"><%= healthy_metric&.height %></td>
                     </tr>
                     <tr>
                       <td class="text-muted small">
                         <i class="bi bi-speedometer2 me-1"></i><%= t("weight") %>
                       </td>
-                      <td class="fw-bold text-success text-end"><%= user_detail.weight %></td>
+                      <td class="fw-bold text-success text-end"><%= healthy_metric&.weight %></td>
                     </tr>
                     <tr>
                       <td class="text-muted small">
                         <i class="bi bi-gender-ambiguous me-1"></i><%= t("gender") %>
                       </td>
-                      <td class="fw-bold text-primary text-end"><%= user_detail.male? ? t("male") : t("female") %></td>
+                      <td class="fw-bold text-primary text-end"><%= healthy_metric&.male? ? t("male") : t("female") %></td>
                     </tr>
                     <tr>
                       <td class="text-muted small">
                         <i class="bi bi-calculator me-1"></i><%= t("imc") %>
                       </td>
                       <td class="fw-bold text-warning text-end">
-                        <%= user_detail.imc %><small class="text-success"> kg/m²</small>
+                        <%= healthy_metric&.imc %><small class="text-success"> kg/m²</small>
                       </td>
                     </tr>
                     <tr>
@@ -41,7 +41,7 @@
                         <i class="bi bi-fire me-1"></i><%= t("tmb") %>
                       </td>
                       <td class="fw-bold text-danger text-end border-bottom-0">
-                        <%= user_detail.tmb %><small class="text-muted"> kcal/dia</small>
+                        <%= healthy_metric&.tmb %><small class="text-muted"> kcal/dia</small>
                       </td>
                     </tr>
                   </tbody>

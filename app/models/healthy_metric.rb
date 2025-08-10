@@ -1,4 +1,4 @@
-class UserDetail < ApplicationRecord
+class HealthyMetric < ApplicationRecord
   belongs_to :user
 
   validates :height, :weight, numericality: { greater_than: 0 }

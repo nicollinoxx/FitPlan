@@ -1,9 +1,9 @@
-class CreateUserDetails < ActiveRecord::Migration[8.0]
+class CreateHealthyMetrics < ActiveRecord::Migration[8.0]
   def change
-    create_table :user_details do |t|
+    create_table :healthy_metrics do |t|
       t.decimal :height
       t.decimal :weight
-      t.date    :birth_date  # em vez de :age
+      t.date    :birth_date
       t.string  :gender
       t.decimal :imc
       t.decimal :tmb

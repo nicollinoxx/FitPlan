@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get "account", to: "account#index"
-  resources :user_details, except: [:destroy]
 
   get    "sign_in", to: "sessions#new"
   post   "sign_in", to: "sessions#create"
@@ -9,11 +8,12 @@ Rails.application.routes.draw do
   resources :sessions, only: [:index, :show, :destroy]
   resource  :password, only: [:edit, :update]
   namespace :identity do
-    resource  :email,              only: [:edit, :update]
-    resource  :email_verification, only: [:show, :create]
-    resource  :password_reset,     only: [:new,  :edit, :create, :update]
-    resources :avatars,            only: [:show, :edit, :update, :destroy]
-    resource  :profile,            only: [:edit, :update]
+    resource :email,              only: [:edit, :update]
+    resource :email_verification, only: [:show, :create]
+    resource :password_reset,     only: [:new,  :edit, :create, :update]
+    resource :profile,            only: [:edit, :update]
+    resource :avatar,            except: [:new, :create]
+    resource :healthy_metric,     except: [:destroy]
   end
 
   resources :sheets do

@@ -1,8 +1,0 @@
-<% content_for(:title, t('user_details.title')) %>
-
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1><%= t('user_details.title') %></h1>
-  <%= link_to t('edit'), edit_user_detail_path(@user_detail), data: { controller: "bridge--nav-button", bridge_title: "Edit" }, class: 'btn btn-success mb-3' %>
-</div>
-
-<%= render 'user_detail', user_detail: @user_detail %>

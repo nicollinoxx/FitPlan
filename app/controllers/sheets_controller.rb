@@ -38,7 +38,7 @@ class SheetsController < ApplicationController
   end
 
   def destroy
-    @sheet.destroy
+    @sheet.destroy!; flash[:notice] = I18n.t('notice.sheet.destroy')
   end
 
   private
