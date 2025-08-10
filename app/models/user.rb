@@ -36,6 +36,6 @@ class User < ApplicationRecord
   private
 
     def generate_handle_unique
-      self.handle ||= "user_#{id || User.maximum(:id).to_i + 1}"
+      self.handle ||= "#{name.parameterize}_#{id}_#{SecureRandom.random_number(10000)}"
     end
 end
