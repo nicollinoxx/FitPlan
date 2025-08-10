@@ -1,26 +1,9 @@
 <% content_for(:title, t('.title')) %>
 
 <%= form_with(model: @user, url: identity_profile_path) do |form| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, t('error')) %> <%= t('.error_message_form')%></h2>
-
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class='mb-3'>
     <%= form.label :name, t('.name'), style: "display: block", class: 'form-label' %>
     <%= form.text_field :name, required: true, class: 'form-control border border-success' %>
-  </div>
-
-  <div class='mb-3'>
-    <%= form.label :handle, style: "display: block", class: 'form-label' %>
-    <%= form.text_field :handle, required: true, class: 'form-control border border-success' %>
   </div>
 
   <div>

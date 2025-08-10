@@ -18,8 +18,6 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 12 }
-  validates :handle, uniqueness: true, allow_nil: true
-  validates :name, presence: true
 
   normalizes :email, with: -> { _1.strip.downcase }
 
@@ -31,11 +29,11 @@ class User < ApplicationRecord
     sessions.where.not(id: Current.session).delete_all
   end
 
-  before_create :generate_handle_unique
+  after_save :generate_handle_unique, if: :saved_change_to_name?
 
   private
 
     def generate_handle_unique
-      self.handle ||= "#{name.parameterize}_#{id}_#{SecureRandom.random_number(10000)}"
+      self.update(handle: name.parameterize + "#{id}#{SecureRandom.random_number(1000)}")
     end
 end

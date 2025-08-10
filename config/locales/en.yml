@@ -60,6 +60,8 @@ en:
       create:               'User details added successfully'
     sheet_request:
       create:               'Sheet request created successfully'
+    profiles:
+      update:               'Profile updated successfully'
 
   #when the notice was not successfully
   alert:
@@ -173,7 +175,7 @@ en:
         title:                  'Profile Details'
         show:                   'View Profile Details'
         add:                    'Add Profile Details'
-        edit_identification:    'Change Name and Handle'
+        edit_profile:           'Change profile information'
       settings:
         title:                  'Settings'
         change_avatar:          'Change Avatar'

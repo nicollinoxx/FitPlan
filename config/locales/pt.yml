@@ -60,6 +60,8 @@ pt:
       create:               'Detalhes de usuário adicionado com sucesso'
     sheet_request:
       create:               'Solicitação de ficha criada com sucesso'
+    profiles:
+      update:               'Informações de perfil editadas com sucesso'
 
   #when the notice was not successfully
   alert:
@@ -165,7 +167,7 @@ pt:
         title:                  'Detalhes de perfil'
         show:                   'Ver detalhes de perfil'
         add:                    'Adicionar dados de perfil'
-        edit_identification:    'Alterar nome e handle'
+        edit_profile:           'Editar informações de perfil'
       settings:
         title:                  'Configurações'
         change_avatar:          'Alterar Avatar'

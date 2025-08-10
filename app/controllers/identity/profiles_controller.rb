@@ -5,11 +5,8 @@ class Identity::ProfilesController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      recede_or_redirect_to account_path, notice: "username updated successfully"
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @user.update!(user_params)
+    recede_or_redirect_to account_path, notice: I18n.t('notice.profiles.update')
   end
 
   private
@@ -19,6 +16,6 @@ class Identity::ProfilesController < ApplicationController
     end
 
     def user_params
-      params.expect(user: [:name, :handle])
+      params.expect(user: [:name])
     end
 end

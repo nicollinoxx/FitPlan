@@ -24,7 +24,7 @@
 
     <div class="list-group list-group-flush rounded-bottom">
       <%= link_to edit_identity_profile_path(@user), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
-          <i class="bi bi-calculator-fill me-3 text-muted"></i><%= t('.user_details.edit_identification') %>
+          <i class="bi bi-calculator-fill me-3 text-muted"></i><%= t('.user_details.edit_profile') %>
       <% end %>
 
       <% if @user.user_detail.present? %>
