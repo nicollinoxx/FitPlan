@@ -1,5 +1,3 @@
-<% content_for(:title, t('.title')) %>
-
 <%= form_with(model: user_detail) do |form| %>
     <% if user_detail.errors.any? %>
       <div style="color: red">
@@ -33,5 +31,5 @@
         <%= form.select :gender, options_for_select([['Male', 'male'], ['Female', 'female']], @user_detail.gender), {}, { required: true, class: "form-select" } %>
     </div>
 
-    <%= form.submit t('submit'), class: "btn btn-success" %>
+    <%= form.submit "Save", class: "btn btn-success" %>
 <% end %>

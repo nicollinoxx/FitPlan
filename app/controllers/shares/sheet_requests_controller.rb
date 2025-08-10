@@ -20,7 +20,7 @@ class Shares::SheetRequestsController < ApplicationController
       end
     end
 
-    redirect_to shares_sheet_requests_path(filter: "sent"), notice: "Fichas compartilhadas com sucesso!"
+    redirect_to shares_sheet_requests_path(filter: "sent"), notice: I18n.t('notice.sheet_request.create')
   end
 
   def accept

@@ -16,7 +16,6 @@ en:
   show:               "Show"
   edit:               "Edit"
   new:                "+ New"
-  submit:             "Save"
   destroy:            "Destroy"
   message_destroy:    "Are you sure?"
   minimum_characters: "12 characters minimum."
@@ -59,6 +58,8 @@ en:
     user_details:
       update:               'User details edited successfully'
       create:               'User details added successfully'
+    sheet_request:
+      create:               'Sheet request created successfully'
 
   #when the notice was not successfully
   alert:
@@ -93,6 +94,19 @@ en:
         name:               'Name'
         description:        'Description'
         sheet_type:         'Type'
+
+  #sheet_requests----------------------------------
+  shares:
+    sheet_requests:
+      index:
+        title:                 'Sheet Requests'
+        filter:                'Filter'
+        filters:
+          all:      'All'
+          sent:     'Sent by me'
+          received: 'Received by me'
+      new:
+        title:                'New Sheet Request'
 
   #workouts------------------------------
   repetitions:        'Repetitions'
@@ -160,6 +174,7 @@ en:
         title:                  'Profile Details'
         show:                   'View Profile Details'
         add:                    'Add Profile Details'
+        edit_identification:    'Change Name and Handle'
       settings:
         title:                  'Settings'
         change_avatar:          'Change Avatar'
@@ -168,6 +183,8 @@ en:
       session:
         title:                  'Session'
         collection_sessions:    'Sessions'
+
+
 
   #user_details------------------------------------
   height: 'Height (cm)'
@@ -181,12 +198,9 @@ en:
   title:  'Health Profile'
 
   user_details:
-    show:
-      title: 'Profile Details'
+    title: 'Profile Details'
     new:
       title: 'Add Detail'
-    edit:
-      title: 'Profile Detail'
 
   #sessions------------------------------
   sessions:
@@ -230,6 +244,12 @@ en:
 
   #identity----------------------------
   identity:
+    profiles:
+      edit:
+        title:                   'Edit informations'
+        name:                    'Name'
+      show:
+        title:                   'Profile'
     avatars:
       edit:
         title:                   'Edit Avatar'

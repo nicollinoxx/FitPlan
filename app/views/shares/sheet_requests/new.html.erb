@@ -1,9 +1,9 @@
-<h1><%= t('.title') %></h1>
+<% content_for(:title, t('.title')) %>
 
 <%= turbo_frame_tag "sheet_requests" do %>
   <%= form_with url: new_shares_sheet_request_path, method: :get, local: true do %>
     <div class="mb-4">
-      <label class="form-label">Search user:</label>
+      <label class="form-label"><%= t('.search_user') %></label>
       <div class="input-group">
         <span class="input-group-text">@</span>
         <%= text_field_tag :handle, params[:handle], class: "form-control", placeholder: "handle do usuário", onchange: "this.form.requestSubmit();" %>

@@ -10,7 +10,7 @@
 
         <p class="m-0 fw-semibold text-success"><%= recipient.name %></p>
       </div>
-      <%= form.submit "Share", class: "btn btn-success" %>
+      <%= form.submit "Save", class: "btn btn-success" %>
     </div>
 
     <%= form.collection_select :sheet_ids, sheets, :id, :name, { include_hidden: false }, multiple: true, id: "sheets", required: true,

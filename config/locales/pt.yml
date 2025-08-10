@@ -16,7 +16,6 @@ pt:
   show:               "Mostrar"
   edit:               "Editar"
   new:                "+ Novo"
-  submit:             "Salvar"
   destroy:            "Excluir"
   message_destroy:    "Tem certeza?"
   minimum_characters: "Mínimo de 12 caracteres."
@@ -59,6 +58,8 @@ pt:
     user_details:
       update:               'Detalhes de usuário editado com sucesso'
       create:               'Detalhes de usuário adicionado com sucesso'
+    sheet_request:
+      create:               'Solicitação de ficha criada com sucesso'
 
   #when the notice was not successfully
   alert:
@@ -92,6 +93,20 @@ pt:
         name:               'Nome'
         description:        'Descrição'
         sheet_type:         'Tipo'
+
+  #sheet_requests----------------------------------
+  shares:
+    sheet_requests:
+      index:
+        title:              'Solicitação de fichas'
+        filter:             'Filtrar'
+        filters:
+          all:      'Todos'
+          sent:     'Compartilhados por mim'
+          received: 'Compartilhados comigo'
+      new:
+        title:              'Nova Solicitação de Ficha'
+        search_user:        'Pesquisar Usuário'
 
   #workouts------------------------------
   repetitions:        'Repetições'
@@ -151,6 +166,7 @@ pt:
         title:                  'Detalhes de perfil'
         show:                   'Ver detalhes de perfil'
         add:                    'Adicionar dados de perfil'
+        edit_identification:    'Alterar nome e handle'
       settings:
         title:                  'Configurações'
         change_avatar:          'Alterar Avatar'
@@ -172,12 +188,9 @@ pt:
   title:   'Perfil de saude'
 
   user_details:
-    show:
-      title: 'Detalhes de perfil'
+    title: 'Detalhe de perfil'
     new:
       title: 'Adicionar Detalhe'
-    edit:
-      title: 'Detalhe de perfil'
 
   #sessions------------------------------
   sessions:
@@ -201,11 +214,10 @@ pt:
       title:      'Editar senha'
       submit:     'Alterar Senha'
       error_message_form:     'impediu que esta senha fosse salva:'
-      form:
-        label:
-          password_challenge:    'Senha Atual'
-          password:              'Nova Senha'
-          password_confirmation: 'Confirme a Nova Senha'
+      label:
+        password_challenge:    'Senha Atual'
+        password:              'Nova Senha'
+        password_confirmation: 'Confirme a Nova Senha'
 
   #registrations------------------------
   registrations:
@@ -219,6 +231,10 @@ pt:
 
   #identity----------------------------
   identity:
+    profiles:
+      edit:
+        title:                   'Editar Informações'
+        name:                    'Nome'
     avatars:
       edit:
         title:                   'Editar Avatar'
@@ -238,6 +254,7 @@ pt:
         label:
           email:                         'Novo e-mail'
           password_challenge:            "Senha Atual"
+        submit:                          'Salvar'
 
     password_resets:
       edit:
