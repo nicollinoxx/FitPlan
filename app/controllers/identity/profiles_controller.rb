@@ -6,7 +6,7 @@ class Identity::ProfilesController < ApplicationController
 
   def update
     if @user.update(user_params)
-      refresh_or_redirect_to account_path, notice: "username updated successfully"
+      recede_or_redirect_to account_path, notice: "username updated successfully"
     else
       render :edit, status: :unprocessable_entity
     end

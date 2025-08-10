@@ -14,12 +14,12 @@ class UserDetailsController < ApplicationController
 
   def create
     @user_detail = @user.create_user_detail!(user_detail_params)
-    refresh_or_redirect_to @user_detail, notice: I18n.t('notice.user_details.create')
+    recede_or_redirect_to @user_detail, notice: I18n.t('notice.user_details.create')
   end
 
   def update
     @user_detail.update!(user_detail_params)
-    redirect_to @user_detail, notice: I18n.t('notice.user_details.update')
+    refresh_or_redirect_to @user_detail, notice: I18n.t('notice.user_details.update')
   end
 
   private
