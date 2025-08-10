@@ -44,7 +44,7 @@
   </div>
 
   <div id="paginables" class="row">
-    <%= render partial: "sheets/paginables/sheet", collection: @page.records, as: :sheet %>
-    <%= render "sheets/paginables/next_page_container", page: @page.next_param unless @page.last? %>
+    <%= render partial: "sheet_card", collection: @page.records, as: :sheet %>
+    <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
   </div>
 <% end %>

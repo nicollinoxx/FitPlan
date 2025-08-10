@@ -1,0 +1,5 @@
+<%= turbo_stream.replace :next_page_container, partial: "sheet_request", collection: @page.records, as: :sheet_request %>
+
+<% unless @page.last? %>
+  <%= turbo_stream.append :paginables, partial: "shared/paginables/next_page_container", locals: { src: sheet_requests_path(page: @page.next_param, format: :turbo_stream) } %>
+<% end %>

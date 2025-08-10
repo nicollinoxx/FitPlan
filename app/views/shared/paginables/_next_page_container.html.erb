@@ -1,0 +1,8 @@
+<%= turbo_frame_tag :next_page_container, loading: :lazy, src: src, class: "flex justify-center" do %>
+  <div class="d-flex justify-content-center align-items-center gap-2 mb-3 mt-1">
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+    <p class="m-0">Loading...</p>
+  </div>
+<% end %>

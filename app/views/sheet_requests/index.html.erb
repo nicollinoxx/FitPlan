@@ -20,7 +20,7 @@
   </div>
 
   <div id="paginables" class="row">
-    <%= render partial: "shared/paginables/sheet_request", collection: @page.records, as: :sheet %>
+    <%= render partial: "sheet_request", collection: @page.records, as: :sheet_request %>
     <%= render "shared/paginables/next_page_container", src: sheet_requests_path(@page.next_param, format: :turbo_stream) unless @page.last? %>
   </div>
 <% end %>
