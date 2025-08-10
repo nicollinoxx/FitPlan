@@ -1,11 +1,11 @@
 <div id="<%= dom_id(sheet_request) %>" class="col-md-6 p-2">
   <div class="border shadow-sm rounded p-2">
     <div class="d-flex align-items-center mb-2">
-      <% user = params[:filter] == "sent" ? sheet_request.recipient : sheet_request.sender %>
+      <% user = params[:filter] == "received" ? sheet_request.sender : sheet_request.recipient %>
       <%= image_tag user.avatar.attached? ? user.avatar : "avatar.png", class: "object-fit-cover rounded-circle me-3", width: 40, height: 40 %>
       <div class="flex-grow-1">
         <h6 class="m-0 text-success"><%= user.name %></h6>
-        <small class="text-muted"><%= params[:filter] == "sent" ? "recebeu uma ficha" : "compartilhou uma ficha" %></small>
+        <small class="text-muted"><%= params[:filter] == "received" ? "compartilhou uma ficha" : "recebeu uma ficha" %></small>
       </div>
 
       <div class="d-flex gap-2">

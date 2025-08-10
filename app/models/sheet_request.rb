@@ -5,7 +5,7 @@ class SheetRequest < ApplicationRecord
 
   enum :status, { pending: "pending", accepted: "accepted", rejected: "rejected" }
 
-  scope :filtered_by, ->(user, filter) { filter == "sent" ? where(sender: user) : where(recipient: user) }
+  scope :filtered_by, ->(user, filter) { filter == "received" ? where(recipient: user) : where(sender: user) }
 
   def sender?   = (sender == Current.user)
   def receiver? = (recipient == Current.user)

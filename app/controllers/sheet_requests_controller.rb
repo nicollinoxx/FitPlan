@@ -23,7 +23,7 @@ class SheetRequestsController < ApplicationController
       end
     end
 
-    refresh_or_redirect_to sheet_requests_path(filter: "sent"), notice: I18n.t('notice.sheet_request.create')
+    flash[:notice] = I18n.t('notice.sheet_request.create')
   end
 
   def accept

@@ -14,7 +14,7 @@
             <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
           </div>
         <% end %>
-        <%= link_to shares_sheet_requests_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info rounded-circle' do %>
+        <%= link_to sheet_requests_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info rounded-circle' do %>
           <i class="bi bi-file-earmark-spreadsheet-fill"></i>
         <% end %>
     <% end %>

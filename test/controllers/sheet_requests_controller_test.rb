@@ -32,11 +32,8 @@ class SheetRequestsControllerTest < ActionDispatch::IntegrationTest
     sheet_ids = @user.sheets.limit(2).pluck(:id)
 
     assert_difference("SheetRequest.count", 2) do
-      post sheet_requests_url, params: { sheet_ids: sheet_ids, handle: @recipient.handle }
+      post sheet_requests_url, params: { sheet_ids: sheet_ids, handle: @recipient.handle }, as: :turbo_stream
     end
-
-    follow_redirect!
-    assert_match "Fichas compartilhadas com sucesso!", response.body
 
     sheet_ids.each do |sheet_id|
       sheet_request = SheetRequest.find_by(recipient: @recipient, sheet_id: sheet_id)
