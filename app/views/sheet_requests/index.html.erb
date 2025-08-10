@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center">
   <h1><%= t('.title') %></h1>
-  <%= link_to t('new'), new_shares_sheet_request_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3' %>
+  <%= link_to t('new'), new_sheet_request_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3' %>
 </div>
 
 <%= turbo_frame_tag "sheet_requests" do %>
@@ -13,13 +13,14 @@
         <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><%= link_to t('.filters.sent'), shares_sheet_requests_path(filter: 'sent'), class: 'dropdown-item' %></li>
-        <li><%= link_to t('.filters.received'), shares_sheet_requests_path(filter: 'received'), class: 'dropdown-item' %></li>
+        <li><%= link_to t('.filters.sent'), sheet_requests_path(filter: 'sent'), class: 'dropdown-item' %></li>
+        <li><%= link_to t('.filters.received'), sheet_requests_path(filter: 'received'), class: 'dropdown-item' %></li>
       </ul>
     </div>
   </div>
 
-  <div class="row">
-    <%= render partial: "sheet_request", collection: @sheet_requests, as: :sheet_request, id: "sheet_request" %>
+  <div id="paginables" class="row">
+    <%= render partial: "shared/paginables/sheet_request", collection: @page.records, as: :sheet %>
+    <%= render "shared/paginables/next_page_container", src: sheet_requests_path(@page.next_param, format: :turbo_stream) unless @page.last? %>
   </div>
 <% end %>

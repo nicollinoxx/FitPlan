@@ -10,13 +10,13 @@
 
       <div class="d-flex gap-2">
         <% if sheet_request.pending? && sheet_request.receiver? %>
-          <%= button_to accept_shares_sheet_request_path(sheet_request), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
+          <%= button_to accept_sheet_request_path(sheet_request), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
             <i class="bi bi-check2-all"></i>
           <% end %>
         <% end %>
 
         <% if sheet_request.sender? || sheet_request.receiver? %>
-          <%= button_to shares_sheet_request_path(sheet_request), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
+          <%= button_to sheet_request_path(sheet_request), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
             <i class="bi <%= sheet_request.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
           <% end %>
         <% end %>

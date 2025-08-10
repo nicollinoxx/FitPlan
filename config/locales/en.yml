@@ -96,17 +96,16 @@ en:
         sheet_type:         'Type'
 
   #sheet_requests----------------------------------
-  shares:
-    sheet_requests:
-      index:
-        title:                 'Sheet Requests'
-        filter:                'Filter'
-        filters:
-          all:      'All'
-          sent:     'Sent by me'
-          received: 'Received by me'
-      new:
-        title:                'New Sheet Request'
+  sheet_requests:
+    index:
+      title:                 'Sheet Requests'
+      filter:                'Filter'
+      filters:
+        all:      'All'
+        sent:     'Sent by me'
+        received: 'Received by me'
+    new:
+      title:                'New Sheet Request'
 
   #workouts------------------------------
   repetitions:        'Repetitions'

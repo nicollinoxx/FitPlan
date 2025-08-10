@@ -23,10 +23,8 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :shares do
-    resources :sheet_requests, only: [:index, :new, :create, :destroy] do
-      patch :accept, on: :member
-    end
+  resources :sheet_requests, only: [:index, :new, :create, :destroy] do
+    patch :accept, on: :member
   end
 
   root 'sheets#index'

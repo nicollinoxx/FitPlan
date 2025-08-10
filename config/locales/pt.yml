@@ -95,18 +95,17 @@ pt:
         sheet_type:         'Tipo'
 
   #sheet_requests----------------------------------
-  shares:
-    sheet_requests:
-      index:
-        title:              'Solicitação de fichas'
-        filter:             'Filtrar'
-        filters:
-          all:      'Todos'
-          sent:     'Compartilhados por mim'
-          received: 'Compartilhados comigo'
-      new:
-        title:              'Nova Solicitação de Ficha'
-        search_user:        'Pesquisar Usuário'
+  sheet_requests:
+    index:
+      title:              'Solicitação de fichas'
+      filter:             'Filtrar'
+      filters:
+        all:      'Todos'
+        sent:     'Compartilhados por mim'
+        received: 'Compartilhados comigo'
+    new:
+      title:              'Nova Solicitação de Ficha'
+      search_user:        'Pesquisar Usuário'
 
   #workouts------------------------------
   repetitions:        'Repetições'

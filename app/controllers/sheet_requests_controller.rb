@@ -1,10 +1,13 @@
-class Shares::SheetRequestsController < ApplicationController
+class SheetRequestsController < ApplicationController
   before_action :set_user
   before_action :set_recipient, only: %i[new create]
   before_action :set_sheet_request, only: %i[accept destroy]
 
   def index
     @sheet_requests = SheetRequest.filtered_by(@user, params[:filter])
+
+    set_page_and_extract_portion_from @sheet_requests
+    sleep 2.seconds unless @page.first?
   end
 
   def new
@@ -20,7 +23,7 @@ class Shares::SheetRequestsController < ApplicationController
       end
     end
 
-    refresh_or_redirect_to shares_sheet_requests_path(filter: "sent"), notice: I18n.t('notice.sheet_request.create')
+    refresh_or_redirect_to sheet_requests_path(filter: "sent"), notice: I18n.t('notice.sheet_request.create')
   end
 
   def accept

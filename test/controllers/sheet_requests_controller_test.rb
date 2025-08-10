@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Shares::SheetRequestsControllerTest < ActionDispatch::IntegrationTest
+class SheetRequestsControllerTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
   setup do
@@ -12,18 +12,18 @@ class Shares::SheetRequestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get shares_sheet_requests_url
+    get sheet_requests_url
     assert_response :success
   end
 
   test "should get new with recipient handle" do
-    get new_shares_sheet_request_url(handle: @recipient.handle)
+    get new_sheet_request_url(handle: @recipient.handle)
     assert_response :success
     assert_select "form"
   end
 
   test "should get new without recipient handle" do
-    get new_shares_sheet_request_url
+    get new_sheet_request_url
     assert_response :success
     assert_select "form"
   end
@@ -32,7 +32,7 @@ class Shares::SheetRequestsControllerTest < ActionDispatch::IntegrationTest
     sheet_ids = @user.sheets.limit(2).pluck(:id)
 
     assert_difference("SheetRequest.count", 2) do
-      post shares_sheet_requests_url, params: { sheet_ids: sheet_ids, handle: @recipient.handle }
+      post sheet_requests_url, params: { sheet_ids: sheet_ids, handle: @recipient.handle }
     end
 
     follow_redirect!
@@ -49,7 +49,7 @@ class Shares::SheetRequestsControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@sheet_request.recipient)
 
     assert_enqueued_with(job: CopySheetJob, args: [@sheet_request.recipient, @sheet_request.sheet]) do
-      patch accept_shares_sheet_request_path(@sheet_request, format: :turbo_stream)
+      patch accept_sheet_request_path(@sheet_request, format: :turbo_stream)
     end
 
     @sheet_request.reload
@@ -62,7 +62,7 @@ class Shares::SheetRequestsControllerTest < ActionDispatch::IntegrationTest
     sheet_request = @user.received_sheet_requests.first
 
     assert_difference("SheetRequest.count", -1) do
-      delete shares_sheet_request_url(sheet_request, format: :turbo_stream)
+      delete sheet_request_url(sheet_request, format: :turbo_stream)
     end
 
     assert_response :success
