@@ -58,6 +58,7 @@
      data: { controller: "files--size-validation", "files--upload-preview-target": "fileInput", action: "change->files--size-validation#validate change->files--upload-preview#preview"} %>
      <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
     </div>
+  </div>
 
   <div>
     <%= form.submit "Save", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
