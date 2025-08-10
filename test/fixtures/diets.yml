@@ -15,3 +15,11 @@ two:
   fat_g: 9.99
   calories: 9.99
   sheet: two
+
+diet_without_calories:
+  meal: MyString
+  protein_g: 10
+  carbohydrate_g: 20
+  fat_g: 5
+  calories: 0
+  sheet: two

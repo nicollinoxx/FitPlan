@@ -21,7 +21,7 @@ class Identity::PasswordResetsTest < ApplicationSystemTestCase
 
     fill_in "New password", with: "Secret6*4*2*"
     fill_in "Confirm new password", with: "Secret6*4*2*"
-    click_on "Save changes"
+    click_on "Save"
 
     assert_text "Your password was reset successfully. Please sign in"
   end

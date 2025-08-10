@@ -6,17 +6,20 @@ class Identity::EmailsTest < ApplicationSystemTestCase
   end
 
   test "updating the email" do
+    visit account_url
+
     click_on "Change email address"
 
     fill_in "New email", with: "new_email@hey.com"
     fill_in "Password challenge", with: "Secret1*3*5*"
-    click_on "Save changes"
+    click_on "Save"
 
     assert_text "Your email has been changed"
   end
 
   test "sending a verification email" do
     @user.update! verified: false
+    visit account_url
 
     click_on "Change email address"
     click_on "Re-send verification email"

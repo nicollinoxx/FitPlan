@@ -18,7 +18,7 @@ class Identity::EmailVerificationsControllerTest < ActionDispatch::IntegrationTe
     sid = @user.generate_token_for(:email_verification)
 
     get identity_email_verification_url(sid: sid, email: @user.email)
-    assert_redirected_to root_url
+    assert_redirected_to account_url
   end
 
   test "should not verify email with expired token" do

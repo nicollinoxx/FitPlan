@@ -2,45 +2,56 @@ require "application_system_test_case"
 
 class WorkoutsTest < ApplicationSystemTestCase
   setup do
+    sign_in_as(users(:lazaro_nixon))
     @workout = workouts(:one)
+    @sheet = sheets(:one)
   end
 
   test "visiting the index" do
-    visit workouts_url
-    assert_selector "h1", text: "Workouts"
+    visit sheet_workouts_url(@sheet)
+    assert_selector "h1", text: @sheet.name
   end
 
   test "should create workout" do
-    visit workouts_url
-    click_on "New workout"
+    visit new_sheet_workout_path(@sheet)
 
-    fill_in "Charge", with: @workout.charge
-    fill_in "Exercise", with: @workout.exercise
-    fill_in "Repetitions", with: @workout.repetitions
-    fill_in "Series", with: @workout.series
-    click_on "Create Workout"
+    fill_in "Exercise", with: "Push ups"
+    fill_in "Repetitions", with: "12"
+    fill_in "Series", with: "3"
+    fill_in "Interval", with: "30 seconds"
+
+    select "low", from: "Charge"
+
+    click_on "Save"
 
     assert_text "Workout was successfully created"
-    click_on "Back"
   end
 
-  test "should update Workout" do
-    visit workout_url(@workout)
-    click_on "Edit this workout", match: :first
 
-    fill_in "Charge", with: @workout.charge
+  test "should update Workout" do
+    visit sheet_workout_url(@sheet, @workout)
+    click_on "Edit", match: :first
+
     fill_in "Exercise", with: @workout.exercise
     fill_in "Repetitions", with: @workout.repetitions
     fill_in "Series", with: @workout.series
-    click_on "Update Workout"
+
+    select "low", from: "Charge"
+
+    click_on "Save"
 
     assert_text "Workout was successfully updated"
-    click_on "Back"
   end
 
   test "should destroy Workout" do
-    visit workout_url(@workout)
-    click_on "Destroy this workout", match: :first
+    visit sheet_workout_url(@sheet, @workout)
+    click_on "Destroy"
+
+    assert_selector "dialog[open]", visible: true
+
+    within "dialog[open]" do
+      click_on "Confirm"
+    end
 
     assert_text "Workout was successfully destroyed"
   end

@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class SheetsTest < ApplicationSystemTestCase
   setup do
+    sign_in_as(users(:lazaro_nixon))
     @sheet = sheets(:one)
   end
 
@@ -12,33 +13,39 @@ class SheetsTest < ApplicationSystemTestCase
 
   test "should create sheet" do
     visit sheets_url
-    click_on "New sheet"
+    click_on "+ New"
 
     fill_in "Description", with: @sheet.description
     fill_in "Name", with: @sheet.name
-    fill_in "Type", with: @sheet.type
-    click_on "Create Sheet"
+    choose @sheet.sheet_type.capitalize
+
+    click_on "Save"
 
     assert_text "Sheet was successfully created"
-    click_on "Back"
   end
 
   test "should update Sheet" do
     visit sheet_url(@sheet)
-    click_on "Edit this sheet", match: :first
+    click_on "Edit", match: :first
 
     fill_in "Description", with: @sheet.description
     fill_in "Name", with: @sheet.name
-    fill_in "Type", with: @sheet.type
-    click_on "Update Sheet"
+    choose @sheet.sheet_type.capitalize
+
+    click_on "Save"
 
     assert_text "Sheet was successfully updated"
-    click_on "Back"
   end
 
   test "should destroy Sheet" do
     visit sheet_url(@sheet)
-    click_on "Destroy this sheet", match: :first
+    click_on "Destroy", match: :first
+
+    assert_selector "dialog[open]", visible: true
+
+    within "dialog[open]" do
+      click_on "Confirm"
+    end
 
     assert_text "Sheet was successfully destroyed"
   end

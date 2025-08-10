@@ -12,7 +12,7 @@ class Identity::EmailsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update email" do
     patch identity_email_url, params: { email: "new_email@hey.com", password_challenge: "Secret1*3*5*" }
-    assert_redirected_to root_url
+    assert_redirected_to account_url
   end
 
 
