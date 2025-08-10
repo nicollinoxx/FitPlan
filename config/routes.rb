@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resource :email_verification, only: [:show, :create]
     resource :password_reset,     only: [:new,  :edit, :create, :update]
     resource :profile,            only: [:edit, :update]
-    resource :avatar,            except: [:new, :create]
+    resource :avatar,             only: [:edit, :update, :destroy]
     resource :healthy_metric,     except: [:destroy]
   end
 

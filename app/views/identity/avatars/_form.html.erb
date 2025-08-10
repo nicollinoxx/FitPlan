@@ -1,8 +1,8 @@
-<%= form_with(url: identity_avatar_path, method: :patch, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
+<%= form_with(model: @user, url: identity_avatar_path, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <div class="mb-3">
     <%= form.label :avatar, class: 'form-label' %>
 
-    <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: 'form-control border border-success',
+    <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', required: true, class: 'form-control border border-success',
       data: { controller: "files--size-validation", "files--upload-preview-target": "fileInput",
         action: "change->files--size-validation#validate change->files--upload-preview#preview"} %>
 

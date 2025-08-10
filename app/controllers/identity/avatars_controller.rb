@@ -1,20 +1,17 @@
 class Identity::AvatarsController < ApplicationController
   before_action :set_user
 
-  def show
-  end
-
   def edit
   end
 
   def update
     @user.update!(user_params)
-    refresh_or_redirect_to account_path, notice: I18n.t('notice.avatar.update')
+    recede_or_redirect_to account_path, notice: I18n.t('notice.avatar.update')
   end
 
   def destroy
     @user.avatar.purge_later
-    recede_or_redirect_to account_path, notice: I18n.t('notice.avatar.destroy')
+    refresh_or_redirect_to account_path, notice: I18n.t('notice.avatar.destroy')
   end
 
   private
@@ -23,6 +20,6 @@ class Identity::AvatarsController < ApplicationController
     end
 
     def user_params
-      params.permit(:avatar)
+      params.expect(user: [:avatar])
     end
 end

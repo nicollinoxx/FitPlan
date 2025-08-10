@@ -7,9 +7,22 @@
 
 <div class="card-body text-center">
   <div class="position-relative d-inline-block mb-3" style="width: 120px; height: 120px;">
-    <%= image_tag @user.avatar.attached? ? @user.avatar : 'avatar.png', class: 'rounded-circle object-fit-cover border border-3 border-primary', width: 120, height: 120 %>
-    <%= link_to "", identity_avatar_path(@user), class: "stretched-link", style: "position:absolute; inset:0; z-index:2;" %>
+
+    <% if @user.avatar.attached? %>
+      <%= image_tag @user.avatar, class: 'rounded-circle object-fit-cover border border-3 border-primary', width: 120, height: 120 %>
+      <%= button_to identity_avatar_path(@user), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') },
+        class: "position-absolute btn btn-sm btn-danger rounded-circle p-0", style: "width: 26px; height: 26px; line-height: 26px; bottom: 8px; right: 8px; z-index: 3;" do %>
+        <i class="bi bi-x-lg text-white"></i>
+      <% end %>
+    <% else %>
+      <div class="rounded-circle border border-3 border-primary d-flex justify-content-center align-items-center" style="width:120px; height:120px;">
+        <i class="bi bi-person-fill fs-1"></i>
+      </div>
+    <% end %>
+
+    <%= link_to "", edit_identity_avatar_path(@user), class: "stretched-link", style: "position:absolute; inset:0; z-index:2;" %>
   </div>
+
   <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-envelope-fill me-1"></i><%= @user.email %></h6>
   <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-person-fill me-1"></i><%= @user.name %></h6>
   <h6 class="card-subtitle mb-2 text-warning"><small>@ </small><%= @user.handle %></h6>
@@ -38,7 +51,7 @@
           <% end %>
         <% end %>
 
-        <%= link_to identity_avatar_path(@user), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+        <%= link_to edit_identity_avatar_path(@user), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
             <i class="bi bi-image me-3 text-muted"></i><%= t('.settings.change_avatar') %>
         <% end %>
       </div>
