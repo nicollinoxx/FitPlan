@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center">
   <h1><%= t('.title') %></h1>
-  <%= link_to t('new'), new_sheet_request_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3' %>
+  <%= link_to t('new'), new_sheet_request_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3 flex-shrink-0' %>
 </div>
 
 <%= turbo_frame_tag "sheet_requests" do %>
