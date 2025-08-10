@@ -3,7 +3,8 @@ pt:
   system_theme: 'Sistema'
 
   #navbar
-  link_sheets: 'Fichas'
+  link_sheets:         'Planilhas'
+  link_sheet_requests: 'Solicitações de Planilha'
 
   #languages
   language:     'Idioma'
@@ -17,7 +18,7 @@ pt:
   edit:               "Editar"
   new:                "+ Novo"
   destroy:            "Excluir"
-  message_destroy:    "Tem certeza?"
+  message_destroy:    "Você tem certeza?"
   minimum_characters: "Mínimo de 12 caracteres."
 
   #error forms
@@ -26,9 +27,9 @@ pt:
   #when the notice was successfully
   notice:
     sheet:
-      create:               'Ficha criada com sucesso'
-      update:               'Ficha atualizada com sucesso'
-      destroy:              'Ficha excluída com sucesso'
+      create:               'Planilha criada com sucesso'
+      update:               'Planilha atualizada com sucesso'
+      destroy:              'Planilha excluída com sucesso'
     workout:
       create:               'Treino criado com sucesso'
       update:               'Treino atualizado com sucesso'
@@ -38,10 +39,10 @@ pt:
       update:               'Dieta atualizada com sucesso'
       destroy:              'Dieta excluída com sucesso'
     password:
-      update:               'Senha atualizada com sucesso'
+      update:               'Sua senha foi alterada'
     password_reset:
       create:               'Verifique seu e-mail para instruções de redefinição'
-      update:               'Senha redefinida com sucesso'
+      update:               'Sua senha foi redefinida com sucesso. Faça login'
     registration:
       create:               'Bem-vindo! Cadastro realizado com sucesso'
     session:
@@ -55,13 +56,13 @@ pt:
     email_verification:
       verify:               'Obrigado por verificar seu endereço de e-mail'
       create:               'Enviamos um e-mail de verificação para o seu endereço'
-    user_details:
-      update:               'Detalhes de usuário editado com sucesso'
-      create:               'Detalhes de usuário adicionado com sucesso'
+    healthy_metric:
+      update:               'Health metric updated successfully'
+      create:               'Health metric added successfully'
     sheet_request:
-      create:               'Solicitação de ficha criada com sucesso'
+      create:               'Solicitação de planilha criada com sucesso'
     profiles:
-      update:               'Informações de perfil editadas com sucesso'
+      update:               'Perfil atualizado com sucesso'
 
   #when the notice was not successfully
   alert:
@@ -69,7 +70,7 @@ pt:
       invalid:               'E-mail ou senha incorretos'
     password_reset:
       create:               "Você não pode redefinir sua senha até verificar seu e-mail"
-      invalid:              'O link de redefinição de senha é inválido'
+      invalid:              'O link para redefinir a senha é inválido'
     email_verification:
       invalid:              'O link de verificação de e-mail é inválido'
 
@@ -80,17 +81,17 @@ pt:
 
   sheets:
     index:
-      title:                'Fichas'
+      title:                'Planilhas'
       filter:               'Filtrar'
     new:
-      title:                'Nova Ficha'
+      title:                'Nova planilha'
     edit:
-      title:                'Editar Ficha'
-      alert:                'O conteúdo presente na ficha será apagado se você mudar o tipo atual da ficha.'
+      title:                'Editar planilha'
+      alert:                'O conteúdo desta planilha será apagado se você alterar o tipo atual.'
     show:
-      title:                'Ficha'
+      title:                'Planilha'
     form:
-      error_message_form:     'impediu que esta ficha fosse salva:'
+      error_message_form:     'impediram esta planilha de ser salva:'
       label:
         name:               'Nome'
         description:        'Descrição'
@@ -99,44 +100,45 @@ pt:
   #sheet_requests----------------------------------
   sheet_requests:
     index:
-      title:              'Solicitação de fichas'
-      filter:             'Filtrar'
+      title:                 'Solicitações de planilha'
+      filter:                'Filtrar'
       filters:
-        all:      'Todos'
-        sent:     'Compartilhados por mim'
-        received: 'Compartilhados comigo'
+        all:      'Todas'
+        sent:     'Enviadas por mim'
+        received: 'Recebidas por mim'
+      sent:       "compartilhou uma ficha"
+      received:   "recebeu uma ficha"
     new:
-      title:              'Nova Solicitação de Ficha'
-      search_user:        'Pesquisar Usuário'
+      title:                'Nova solicitação de planilha'
 
   #workouts------------------------------
   repetitions:        'Repetições'
   series:             'Séries'
   interval:           'Intervalo'
   charge:             'Carga'
-  show_video:         'Mostrar Vídeo'
+  show_video:         'Mostrar vídeo'
 
   workouts:
     show:
       title:                'Treino'
     edit:
-      title:                'Editar Treino'
+      title:                'Editar treino'
     new:
-      title:                'Novo Treino'
+      title:                'Novo treino'
     form:
-      error_message_form:     'impediu que este treino fosse salvo:'
+      error_message_form:     'impediram este treino de ser salvo:'
       label:
-        name:               :name
-        repetitions:        :repetitions
-        series:             :series
-        interval:           :interval
-        charge:             :charge
+        name:               'Nome'
+        repetitions:        'Repetições'
+        series:             'Séries'
+        interval:           'Intervalo'
+        charge:             'Carga'
       options_charge:
-                            - 'baixo'
-                            - 'médio'
-                            - 'alto'
+                            - 'leve'
+                            - 'média'
+                            - 'alta'
       supported_files:      'Arquivos suportados: mp4, mpeg e quicktime'
-      remove_preview:       'Remover Pré-visualização'
+      remove_preview:       'Remover pré-visualização'
 
   #diets--------------------------------------
   carbohydrates:            'Carboidratos'
@@ -146,52 +148,61 @@ pt:
 
   diets:
     new:
-      title:                'Nova Dieta'
+      title:                'Nova dieta'
     edit:
-      title:                'Editar Dieta'
+      title:                'Editar dieta'
     show:
       title:                'Dieta'
     form:
-      error_message_form:   'impediu que esta dieta fosse salva:'
+      error_message_form:     'impediram esta dieta de ser salva:'
       label:
         meal:               'Refeição'
+        description:        'Descrição'
         carbohydrates:      'Carboidratos g'
         proteins:           'Proteínas g'
-        fats:               'Gorduras g'
+        fat:                'Gorduras g'
 
   #account------------------------------------
   account:
+    metrics:
+      edit:
+        title:                  'Métricas'
+        label:
+          height:               'Altura (cm)'
+          weight:               'Peso (kg)'
+          age:                  'Idade'
+          gender:               'Gênero'
     index:
       title:                    'Conta'
-      user_details:
-        title:                  'Detalhes de perfil'
-        show:                   'Ver detalhes de perfil'
-        add:                    'Adicionar dados de perfil'
-        edit_profile:           'Editar informações de perfil'
+      identity:
+        title:                  'Informação de usuário'
+        show:                   'Ver métricas saudáveis'
+        add:                    'Adicionar métricas saudáveis'
+        edit_profile:           'Alterar informações de perfil'
       settings:
         title:                  'Configurações'
-        change_avatar:          'Alterar Avatar'
-        change_password:        'Alterar Senha'
-        change_email:           'Alterar E-mail'
+        change_avatar:          'Alterar avatar'
+        change_password:        'Alterar senha'
+        change_email:           'Alterar endereço de e-mail'
       session:
         title:                  'Sessão'
         collection_sessions:    'Sessões'
 
-  #user_details------------------------------------
-  height:  'Altura (cm)'
-  weight:  'Peso (kg)'
-  age:     'Idade'
-  gender:  'Gênero'
-  imc:     'IMC'
-  tmb:     'TMB'
-  male:    'Masculino'
-  female:  'Feminino'
-  title:   'Perfil de saude'
+  #healthy_metric------------------------------------
+  height: 'Altura (cm)'
+  weight: 'Peso (kg)'
+  age:    'Idade'
+  gender: 'Gênero'
+  imc:    'IMC'
+  tmb:    'TMB'
+  male:   'Masculino'
+  female: 'Feminino'
+  title:  'Perfil de saúde'
 
-  user_details:
-    title: 'Detalhe de perfil'
+  healthy_metric:
+    title:   'Métricas'
     new:
-      title: 'Adicionar Detalhe'
+      title: 'Adicionar métricas'
 
   #sessions------------------------------
   sessions:
@@ -205,40 +216,44 @@ pt:
       submit:     'Entrar'
       signup:     'Cadastrar'
       section_signup: "Não tem uma conta?"
-      link_forgot_password: 'Esqueceu sua Senha?'
-      label:
-        password: 'Senha'
+      link_forgot_password: 'Esqueceu sua senha?'
+      form:
+        error_message_form: 'impediram esta sessão de ser salva:'
+        label:
+          password: 'Senha'
 
   #passwords------------------------------
   passwords:
     edit:
       title:      'Editar senha'
-      submit:     'Alterar Senha'
-      error_message_form:     'impediu que esta senha fosse salva:'
+      submit:     'Alterar senha'
+      error_message_form:     'impediram esta senha de ser salva:'
       label:
-        password_challenge:    'Senha Atual'
-        password:              'Nova Senha'
-        password_confirmation: 'Confirme a Nova Senha'
+        password_challenge:    'Senha atual'
+        password:              'Nova senha'
+        password_confirmation: 'Confirme a nova senha'
 
   #registrations------------------------
   registrations:
     new:
       title:                   'Cadastrar'
       submit:                  'Cadastrar'
-      error_message_form:      'impediu que este cadastro fosse salvo:'
+      error_message_form:      'impediram este cadastro de ser salvo:'
       label:
         password:              'Senha'
-        password_confirmation: 'Confirmação de Senha'
+        password_confirmation: 'Confirmação de senha'
 
   #identity----------------------------
   identity:
     profiles:
       edit:
-        title:                   'Editar Informações'
+        title:                   'Editar informações'
         name:                    'Nome'
+      show:
+        title:                   'Perfil'
     avatars:
       edit:
-        title:                   'Editar Avatar'
+        title:                   'Editar avatar'
       form:
         supported_files:         'Arquivos suportados: jpg, jpeg e png'
       show:
@@ -248,29 +263,25 @@ pt:
         change_email_title:              'Alterar e-mail'
         verify_email_title:              'Verificar e-mail'
         message_verification:            "Enviamos um e-mail de verificação para o endereço abaixo.
-                                          Verifique esse e-mail e siga as instruções para
-                                          confirmar que é seu endereço de e-mail."
+                                          Verifique seu e-mail e siga as instruções para confirmar que ele pertence a você."
         send_verification_email:         'Reenviar e-mail de verificação'
-        error_message_form:              'impediu que este e-mail fosse salvo:'
+        error_message_form:              'impediram este e-mail de ser salvo:'
         label:
           email:                         'Novo e-mail'
-          password_challenge:            "Senha Atual"
-        submit:                          'Salvar'
+          password_challenge:            "Senha atual"
 
     password_resets:
       edit:
-        title:                   'Redefinir Senha'
+        title:                   'Redefinir senha'
         message:                 "Enviamos um e-mail de redefinição de senha para o endereço abaixo.
-                                  Verifique esse e-mail e siga as instruções para
-                                  redefinir sua senha."
+                                  Verifique seu e-mail e siga as instruções para redefinir sua senha."
         send_reset_email:        'Enviar e-mail de redefinição de senha'
-        error_message_form:     'impediu que esta senha fosse salva:'
-      form:
+        error_message_form:     'impediram esta senha de ser salva:'
         label:
-          password:                'Nova Senha'
-          password_confirmation:   'Confirmar Nova Senha'
+          password:                'Nova senha'
+          password_confirmation:   'Confirmar nova senha'
       new:
-        title:                     'Nova Senha'
+        title:                     'Nova senha'
         send_reset_email:          'Enviar e-mail de redefinição de senha'
 
   #mailers------------------------------
@@ -278,18 +289,17 @@ pt:
 
   user_mailer:
     email_verification:
-      message:                           "Isso é para confirmar que %{email} é o e-mail que você quer usar em sua conta.
-                                          Se você perder sua senha, é para lá que enviaremos o link de redefinição."
+      message:                           "Este e-mail confirma que %{email} é o e-mail que você deseja usar na sua conta.
+                                          Caso perca sua senha, é para este endereço que enviaremos o link de redefinição."
       strong_confirm:                    "Você deve clicar no link abaixo para confirmar que recebeu este e-mail."
       confirm_link:                      "Sim, usar este e-mail na minha conta"
-      help_message:                      "Tem dúvidas ou precisa de ajuda? Basta responder este e-mail e nossa equipe de suporte vai te ajudar."
+      help_message:                      "Tem dúvidas ou precisa de ajuda? Responda a este e-mail e nossa equipe de suporte ajudará você."
     password_reset:
-      message:                           "Não consegue lembrar sua senha de %{email}? Tudo bem, isso acontece.
-                                          É só clicar no link abaixo para criar uma nova."
-      expiration_message:                'Se você não solicitou uma redefinição de senha, pode ignorar este e-mail,
-                                          ele expira em 20 minutos. Apenas alguém com acesso a este e-mail pode redefinir a senha.'
+      message:                           "Não lembra a senha da conta %{email}? Tudo bem, acontece.
+                                          Clique no link abaixo para definir uma nova senha."
+      expiration_message:                'Se você não solicitou a redefinição, pode ignorar este e-mail. Ele expira em 20 minutos. Apenas alguém com acesso a este e-mail pode redefinir a senha.'
       link_text:                         "Redefinir sua senha"
-      help_message:                      "Se você não solicitou uma redefinição de senha, por favor ignore este e-mail."
+      help_message:                      "Se você não solicitou a redefinição de senha, ignore este e-mail."
 
   activerecord:
     attributes:
@@ -305,7 +315,7 @@ pt:
         description:                     'Descrição'
       user:
         password:                        'Senha'
-        password_challenge:              'Senha Atual'
+        password_challenge:              'Senha atual'
         password_confirmation:           'Confirmar senha'
     errors:
       models:

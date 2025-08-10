@@ -4,6 +4,7 @@ en:
 
   #navbar
   link_sheets: 'Sheets'
+  link_sheet_requests: 'Sheet Requests'
 
   #languages
   language:     'Language'
@@ -26,40 +27,40 @@ en:
   #when the notice was successfully
   notice:
     sheet:
-      create:               'Sheet created successfully'
-      update:               'Sheet updated successfully'
-      destroy:              'Sheet destroyed successfully'
+      create:               'Sheet was successfully created'
+      update:               'Sheet was successfully updated'
+      destroy:              'Sheet was successfully destroyed'
     workout:
-      create:               'Workout created successfully'
-      update:               'Workout updated successfully'
-      destroy:              'Workout destroyed successfully'
+      create:               'Workout was successfully created'
+      update:               'Workout was successfully updated'
+      destroy:              'Workout was successfully destroyed'
     diet:
-      create:               'Diet created successfully'
-      update:               'Diet updated successfully'
-      destroy:              'Diet destroyed successfully'
+      create:               'Diet was successfully created'
+      update:               'Diet was successfully updated'
+      destroy:              'Diet was successfully destroyed'
     password:
-      update:               'Password updated successfully'
+      update:               'Your password has been changed'
     password_reset:
       create:               'Check your email for reset instructions'
-      update:               'Password reset successfully'
+      update:               'Your password was reset successfully. Please sign in'
     registration:
       create:               'Welcome! You have signed up successfully'
     session:
       create:               'Signed in successfully'
-      destroy:              'Session destroyed successfully'
+      destroy:              'This session was successfully destroyed'
     avatar:
-      update:               'Avatar updated successfully'
-      destroy:              'Avatar destroyed successfully'
+      update:               'Avatar was successfully updated'
+      destroy:              'Avatar was successfully destroyed'
     email:
       update:               'Your email has been changed'
     email_verification:
       verify:               'Thank you for verifying your email address'
       create:               'We sent a verification email to your email address'
-    user_details:
-      update:               'User details edited successfully'
-      create:               'User details added successfully'
+    healthy_metric:
+      update:               'Healthy metric was successfully updated'
+      create:               'Healthy metric was successfully created'
     sheet_request:
-      create:               'Sheet request created successfully'
+      create:               'Sheet request was successfully created'
     profiles:
       update:               'Profile updated successfully'
 
@@ -84,9 +85,9 @@ en:
       title:                'Sheets'
       filter:               'Filter'
     new:
-      title:                'New Sheet'
+      title:                'New sheet'
     edit:
-      title:                'Edit Sheet'
+      title:                'Edit sheet'
       alert:                'The content present in the sheet will be deleted if you change the current sheet type.'
     show:
       title:                'Sheet'
@@ -100,14 +101,14 @@ en:
   #sheet_requests----------------------------------
   sheet_requests:
     index:
-      title:                 'Sheet Requests'
+      title:                 'Sheet requests'
       filter:                'Filter'
       filters:
         all:      'All'
         sent:     'Sent by me'
         received: 'Received by me'
     new:
-      title:                'New Sheet Request'
+      title:                'New sheet request'
 
   #workouts------------------------------
   repetitions:        'Repetitions'
@@ -118,30 +119,30 @@ en:
 
   workouts:
     show:
-      title:                'Workout'
+      title:                'workout'
     edit:
-      title:                'Edit Workout'
+      title:                'Edit workout'
     new:
-      title:                'New Workout'
+      title:                'New workout'
     form:
       error_message_form:     'prohibited this workout from being saved:'
       label:
-        name:               :name
-        repetitions:        :repetitions
-        series:             :series
-        interval:           :interval
-        charge:             :charge
+        name:               'Name'
+        repetitions:        'Repetitions'
+        series:             'Series'
+        interval:           'Interval'
+        charge:             'Charge'
       options_charge:
                             - 'low'
                             - 'medium'
                             - 'high'
-      supported_files:      'Supported Files mp4, mpeg and quicktime'
-      remove_preview:       'Remove Preview'
+      supported_files:      'Supported files mp4, mpeg and quicktime'
+      remove_preview:       'Remove preview'
 
   #diets--------------------------------------
   carbohydrates:            'Carbohydrates'
   proteins:                 'Proteins'
-  fats:                     'Fats'
+  fats:                     'Fat'
   calories:                 'Calories'
 
   diets:
@@ -155,9 +156,10 @@ en:
       error_message_form:     'prohibited this diet from being saved:'
       label:
         meal:               'Meal'
+        description:        'Description'
         carbohydrates:      'Carbohydrates g'
         proteins:           'Proteins g'
-        fats:               'Fats g'
+        fat:                'Fat g'
 
   #account------------------------------------
   account:
@@ -171,23 +173,23 @@ en:
           gender:               'Gender'
     index:
       title:                    'Account'
-      user_details:
-        title:                  'Profile Details'
-        show:                   'View Profile Details'
-        add:                    'Add Profile Details'
+      identity:
+        title:                  'Profile information'
+        show:                   'View healthy metrics'
+        add:                    'Add healthy metrics'
         edit_profile:           'Change profile information'
       settings:
         title:                  'Settings'
-        change_avatar:          'Change Avatar'
-        change_password:        'Change Password'
-        change_email:           'Change Email Address'
+        change_avatar:          'Change avatar'
+        change_password:        'Change password'
+        change_email:           'Change email address'
       session:
         title:                  'Session'
         collection_sessions:    'Sessions'
 
 
 
-  #user_details------------------------------------
+  #healthy_metric------------------------------------
   height: 'Height (cm)'
   weight: 'Weight (kg)'
   age:    'Age'
@@ -196,26 +198,26 @@ en:
   tmb:    'BMR'
   male:   'Male'
   female: 'Female'
-  title:  'Health Profile'
+  title:  'Health profile'
 
-  user_details:
-    title: 'Profile Details'
+  healthy_metric:
+    title: 'Health Metrics'
     new:
-      title: 'Add Detail'
+      title: 'Add Health Metric'
 
   #sessions------------------------------
   sessions:
     index:
       title:      'Sessions'
       user_agent: 'Device'
-      ip_address: 'IP Address'
-      created_at: 'Created At'
+      ip_address: 'IP address'
+      created_at: 'Created at'
     new:
-      title:      'Log in'
-      submit:     'Log in'
+      title:      'Sign in'
+      submit:     'Sign in'
       signup:     'Sign up'
       section_signup: "Don't have an account?"
-      link_forgot_password: 'Forgot your Password?'
+      link_forgot_password: 'Forgot your password?'
       form:
         error_message_form: 'prohibited this session from being saved:'
         label:
@@ -225,13 +227,12 @@ en:
   passwords:
     edit:
       title:      'Edit password'
-      submit:     'Change Password'
+      submit:     'Change password'
       error_message_form:     'prohibited this password from being saved:'
-      form:
-        label:
-          password_challenge:    'Password Challenge'
-          password:              'Password'
-          password_confirmation: 'Password Confirmation'
+      label:
+        password_challenge:    'Password challenge'
+        password:              'New password'
+        password_confirmation: 'Confirm new password'
 
   #registrations------------------------
   registrations:
@@ -241,7 +242,7 @@ en:
       error_message_form:      'prohibited this registration from being saved:'
       label:
         password:              'Password'
-        password_confirmation: 'Password Confirmation'
+        password_confirmation: 'Password confirmation'
 
   #identity----------------------------
   identity:
@@ -269,22 +270,21 @@ en:
         error_message_form:              'prohibited this email from being saved:'
         label:
           email:                         'New email'
-          password_challenge:            "Password Challenge"
+          password_challenge:            "Password challenge"
 
     password_resets:
       edit:
-        title:                   'Reset Password'
+        title:                   'Reset password'
         message:                 "We sent a password reset email to the address below.
                                   Check that email and follow those instructions to
                                   reset your password."
         send_reset_email:        'Send password reset email'
         error_message_form:     'prohibited this password from being saved:'
-      form:
         label:
-          password:                'New Password'
-          password_confirmation:   'Confirm New Password'
+          password:                'New password'
+          password_confirmation:   'Confirm new password'
       new:
-        title:                     'New Password'
+        title:                     'New password'
         send_reset_email:          'Send password reset email'
 
   #mailers------------------------------
@@ -305,8 +305,6 @@ en:
                                           it expires in 20 minutes. Only someone with access to this email account can reset your password.'
       link_text:                         "Reset your password"
       help_message:                      "If you did not request a password reset, please ignore this email."
-
-
 
   #--------------------------------------
   activerecord:
