@@ -6,7 +6,7 @@ class PasswordsController < ApplicationController
 
   def update
     if @user.update(user_params)
-      refresh_or_redirect_to root_path, notice: I18n.t('notice.password.update')
+      refresh_or_redirect_to account_path, notice: I18n.t('notice.password.update')
     else
       render :edit, status: :unprocessable_entity
     end

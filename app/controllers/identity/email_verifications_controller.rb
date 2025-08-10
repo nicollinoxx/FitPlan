@@ -4,7 +4,7 @@ class Identity::EmailVerificationsController < ApplicationController
 
   def show
     @user.update! verified: true
-    redirect_to root_path, notice: I18n.t('notice.email_verification.verify')
+    redirect_to account_path, notice: I18n.t('notice.email_verification.verify')
   end
 
   def create

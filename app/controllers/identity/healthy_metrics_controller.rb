@@ -14,12 +14,12 @@ class Identity::HealthyMetricsController < ApplicationController
 
   def create
     @healthy_metric = @user.create_healthy_metric!(user_metric_params)
-    recede_or_redirect_to identity_healthy_metric_path(@healthy_metric), notice: I18n.t('notice.user_details.create')
+    recede_or_redirect_to identity_healthy_metric_path(@healthy_metric), notice: I18n.t('notice.healthy_metric.create')
   end
 
   def update
     @healthy_metric.update!(user_metric_params)
-    refresh_or_redirect_to identity_healthy_metric_path(@healthy_metric), notice: I18n.t('notice.user_details.update')
+    refresh_or_redirect_to identity_healthy_metric_path(@healthy_metric), notice: I18n.t('notice.healthy_metric.update')
   end
 
   private
