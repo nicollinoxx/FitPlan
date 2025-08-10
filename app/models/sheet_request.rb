@@ -7,6 +7,6 @@ class SheetRequest < ApplicationRecord
 
   scope :filtered_by, ->(user, filter) { filter == "sent" ? where(sender: user) : where(recipient: user) }
 
-  def sender?    = (sender == Current.user)
+  def sender?   = (sender == Current.user)
   def receiver? = (recipient == Current.user)
 end
