@@ -7,7 +7,7 @@
 
 <%= turbo_frame_tag "sheet_requests" do %>
   <div class="sticky-top d-flex align-items-center justify-content-between mb-3">
-    <h5 class="text-success"><%= params[:filter] == "received" ? t('.filters.received') : t('.filters.sent') %></h5>
+    <h5 class="text-success"><%= params[:filter] == "sent" ? t('.filters.sent') : t('.filters.received') %></h5>
     <div class="ms-auto dropdown bg-light rounded mt-2">
       <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
         <i class="bi bi-funnel-fill"><%= t('.filter') %></i>

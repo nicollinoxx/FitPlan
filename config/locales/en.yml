@@ -101,14 +101,17 @@ en:
         sheet_type:         'Type'
 
   #sheet_requests----------------------------------
+  sheet_request_shared:      'Shared a sheet'
+  sheet_request_received:    'Received a sheet'
+
   sheet_requests:
     index:
       title:                 'Sheet requests'
       filter:                'Filter'
       filters:
-        all:      'All'
-        sent:     'Sent by me'
-        received: 'Received by me'
+        all:                 'All'
+        sent:                'Sent by me'
+        received:            'Received'
     new:
       title:                'New sheet request'
       search_user:          'Search user'

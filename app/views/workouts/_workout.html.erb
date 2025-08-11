@@ -1,10 +1,10 @@
 <div id="<%= dom_id workout %>" class="shadow rounded border">
   <div class="bg-success text-light bg-opacity-20 p-2 rounded-top d-flex justify-content-between align-items-center">
-    <h2 class="h5 mb-0 text-truncate">
+    <h2 class="h6 mb-0 text-truncate">
       <i class="bi bi-activity me-1"></i><%= workout.exercise %>
     </h2>
     <% if action_name != 'show' %>
-      <%= link_to sheet_workout_path(@sheet, workout), class: 'btn btn-sm btn-outline-light' do %>
+      <%= link_to sheet_workout_path(@sheet, workout), class: 'btn btn-sm btn-outline-light rounded-circle' do %>
         <i class="bi bi-pencil"></i>
       <% end %>
     <% end %>

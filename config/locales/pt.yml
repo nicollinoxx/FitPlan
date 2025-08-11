@@ -102,15 +102,18 @@ pt:
         sheet_type:         'Tipo'
 
   #sheet_requests----------------------------------
+  sheet_request_shared:      'Compartilhou uma ficha'
+  sheet_request_received:    'Recebeu uma ficha'
+
   sheet_requests:
     index:
       title:                 'Solicitações de planilha'
       filter:                'Filtrar'
       filters:
-        sent:     'Enviadas por mim'
-        received: 'Recebidas por mim'
-      sent:       "compartilhou uma ficha"
-      received:   "recebeu uma ficha"
+        sent:                'Enviado por min'
+        received:            'Recebido'
+      sent:                  "compartilhou uma ficha"
+      received:              "recebeu uma ficha"
     new:
       title:                'Nova solicitação de planilha'
       search_user:          'Pesquisar usuário'

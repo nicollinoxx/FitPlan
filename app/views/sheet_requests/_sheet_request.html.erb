@@ -1,11 +1,11 @@
 <div id="<%= dom_id(sheet_request) %>" class="col-md-6 p-2">
   <div class="border shadow-sm rounded p-2">
     <div class="d-flex align-items-center mb-2">
-      <% user = params[:filter] == "received" ? sheet_request.sender : sheet_request.recipient %>
+      <% user = params[:filter] == "sent" ? sheet_request.recipient : sheet_request.sender %>
       <%= image_tag user.avatar.attached? ? user.avatar : "avatar.png", class: "object-fit-cover rounded-circle me-3", width: 40, height: 40 %>
       <div class="flex-grow-1">
         <h6 class="m-0 text-success"><%= user.name %></h6>
-        <small class="text-muted"><%= params[:filter] == "received" ? "compartilhou uma ficha" : "recebeu uma ficha" %></small>
+        <small class="text-muted"><%= params[:filter] == "sent" ? t("sheet_request_received") : t("sheet_request_shared") %></small>
       </div>
 
       <div class="d-flex gap-2">
@@ -30,12 +30,10 @@
 
     <% if sheet_request.sheet.description.present? %>
       <div class="mt-2">
-        <a class="text-primary small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= sheet_request.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= sheet_request.id %>">
-          Show description
+        <a class="text-muted small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= sheet_request.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= sheet_request.id %>">
+          <i class="bi bi-blockquote-right me-1"></i> Show description
         </a>
-        <div class="collapse mt-2 bg-dark-subtle rounded p-1 px-2" id="desc-<%= sheet_request.id %>">
-          <%= sheet_request.sheet.description %>
-        </div>
+        <div class="collapse mt-1 bg-dark-subtle rounded py-1 px-2" id="desc-<%= sheet_request.id %>"><%= sheet_request.sheet.description %></div>
       </div>
     <% end %>
   </div>

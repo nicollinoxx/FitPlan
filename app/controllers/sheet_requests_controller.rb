@@ -4,7 +4,7 @@ class SheetRequestsController < ApplicationController
   before_action :set_sheet_request, only: %i[accept destroy]
 
   def index
-    @sheet_requests = SheetRequest.filtered_by(@user, params[:filter])
+    @sheet_requests = params[:filter] == "sent" ? @user.sent_sheet_requests : @user.received_sheet_requests
 
     set_page_and_extract_portion_from @sheet_requests
     sleep 2.seconds unless @page.first?
@@ -47,7 +47,7 @@ class SheetRequestsController < ApplicationController
   end
 
   def set_recipient
-    @recipient = User.find_by(handle: params[:handle]) if params[:handle].present?
+    @recipient = User.find_by(handle: params[:handle])
   end
 
   def set_sheet_request
