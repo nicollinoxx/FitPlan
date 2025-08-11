@@ -22,6 +22,7 @@ pt:
   minimum_characters: "Mínimo de 12 caracteres."
   cancel:             "Cancelar"
   confirm:            "Confirmar"
+  all:                'Todos'
 
 
   #error forms
@@ -106,13 +107,14 @@ pt:
       title:                 'Solicitações de planilha'
       filter:                'Filtrar'
       filters:
-        all:      'Todas'
         sent:     'Enviadas por mim'
         received: 'Recebidas por mim'
       sent:       "compartilhou uma ficha"
       received:   "recebeu uma ficha"
     new:
       title:                'Nova solicitação de planilha'
+      search_user:          'Pesquisar usuário'
+      handle:               'Handle do usuário (@)'
 
   #workouts------------------------------
   repetitions:        'Repetições'

@@ -111,6 +111,8 @@ en:
         received: 'Received by me'
     new:
       title:                'New sheet request'
+      search_user:          'Search user'
+      handle:               'Handle (@)'
 
   #workouts------------------------------
   repetitions:        'Repetitions'

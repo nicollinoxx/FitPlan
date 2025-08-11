@@ -6,7 +6,7 @@
       <label class="form-label"><%= t('.search_user') %></label>
       <div class="input-group">
         <span class="input-group-text">@</span>
-        <%= text_field_tag :handle, params[:handle], class: "form-control", placeholder: "handle do usuário", onchange: "this.form.requestSubmit();" %>
+        <%= text_field_tag :handle, params[:handle], class: "form-control", placeholder: t('.handle'), onchange: "this.form.requestSubmit();" %>
       </div>
     </div>
   <% end %>
