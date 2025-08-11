@@ -22,8 +22,8 @@
     </div>
 
     <div class="mb-3">
-        <%= form.label :birth_date, t('age'), class: 'form-label' %>
-        <%= form.date_field :birth_date, required: true, class: "form-control", max: Date.today %>
+      <%= form.label :birth_date, "#{t('age')} (DD-MM-YYYY)", class: 'form-label' %>
+      <%= form.date_field :birth_date, required: true, class: "form-control", max: Date.today %>
     </div>
 
     <div class="mb-3">

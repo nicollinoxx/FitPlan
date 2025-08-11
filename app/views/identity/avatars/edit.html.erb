@@ -11,6 +11,22 @@
 
 
   <div id="form">
-    <%= render 'identity/avatars/form', user: @user %>
+    <%= form_with(model: @user, url: identity_avatar_path, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
+      <div class="mb-3">
+        <%= form.label :avatar, class: 'form-label' %>
+
+        <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: 'form-control border border-success',
+          data: { controller: "files--size-validation", "files--upload-preview-target": "fileInput",
+            action: "change->files--size-validation#validate change->files--upload-preview#preview"} %>
+
+        <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
+      </div>
+
+      <div class='d-flex gap-4'>
+        <%= form.submit "Save", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+
+        <button type="button" class="btn btn-danger hide-on-mobile" data-files--upload-preview-target="removeButton" data-action="files--upload-preview#removePreview" hidden><%= t('.remove_preview') %></button>
+      </div>
+    <% end %>
   </div>
 </div>

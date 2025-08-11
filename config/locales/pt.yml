@@ -60,8 +60,8 @@ pt:
       verify:               'Obrigado por verificar seu endereço de e-mail'
       create:               'Enviamos um e-mail de verificação para o seu endereço'
     healthy_metric:
-      update:               'Health metric updated successfully'
-      create:               'Health metric added successfully'
+      update:               'Métrica atualizada com sucesso'
+      create:               'Métrica adicionada com sucesso'
     sheet_request:
       create:               'Solicitação de planilha criada com sucesso'
     profiles:
