@@ -30,10 +30,12 @@
 
     <% if sheet_request.sheet.description.present? %>
       <div class="mt-2">
-        <a class="text-muted small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= sheet_request.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= sheet_request.id %>">
-          <i class="bi bi-blockquote-right me-1"></i> Show description
+        <a class="text-primary small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= sheet_request.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= sheet_request.id %>">
+          Show description
         </a>
-        <div class="collapse mt-2 border-top" id="desc-<%= sheet_request.id %>"><%= sheet_request.sheet.description %></div>
+        <div class="collapse mt-2 bg-dark-subtle rounded p-1 px-2" id="desc-<%= sheet_request.id %>">
+          <%= sheet_request.sheet.description %>
+        </div>
       </div>
     <% end %>
   </div>

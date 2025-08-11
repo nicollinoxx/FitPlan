@@ -4,13 +4,13 @@
       <div class="d-flex align-items-center mb-2">
         <i class="bi <%= sheet.workout? ? 'bi-heart-pulse text-danger' : 'bi-egg-fried text-warning' %> fs-3 me-2"></i>
         <div>
-          <h2 class="h5 mb-0"><%= sheet.name %></h2>
+          <h2 class="h6 mb-0"><%= sheet.name %></h2>
           <small class="badge <%= sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>">
             <%= sheet.workout? ? t('workout') : t('diet') %>
           </small>
         </div>
       </div>
-      <p class="card-text text-muted mb-0"><%= sheet.description %></p>
+      <p class="card-text text-muted mb-0 fs-6"><%= sheet.description %></p>
     </div>
   </div>
 <% end %>

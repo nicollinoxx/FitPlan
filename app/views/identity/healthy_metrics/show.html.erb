@@ -1,7 +1,7 @@
 <% content_for(:title, t('healthy_metric.title')) %>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h1><%= t('healthy_metric.title') %></h1>
+  <h1 class="h2"><%= t('healthy_metric.title') %></h1>
   <%= link_to t('edit'), edit_identity_healthy_metric_path(@metric), data: { controller: "bridge--nav-button", bridge_title: "Edit" }, class: 'btn btn-success mb-3' %>
 </div>
 
