@@ -1,0 +1,28 @@
+<div data-controller="upload-preview" class="text-center">
+  <%= form_with url: identity_avatar_path, method: :patch do |form| %>
+    <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
+      <button type="submit" class="btn btn-success btn-sm">
+        <i class="bi bi-check-lg"></i>
+      </button>
+
+      <%= form.label :avatar, class: "d-inline-block position-relative mb-0" do %>
+        <%= image_tag @user.avatar.attached? ? url_for(@user.avatar) : "avatar.png", class: "rounded-circle object-fit-cover", style: "width:115px; height:115px;",
+          data: { "upload-preview-target": "preview", default: @user.avatar.attached? ? url_for(@user.avatar) : asset_path("avatar.png")
+          } %>
+      <% end %>
+
+      <div class="d-flex flex-column gap-2">
+        <button type="button" class="btn btn-warning btn-sm" data-upload-preview-target="clearButton" data-action="click->upload-preview#removePreview" hidden>
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <%= link_to identity_avatar_path, data: { turbo_method: :delete, turbo_confirm: t("message_destroy"), "upload-preview-target": "removeButton" }, class: "btn btn-danger btn-sm" do %>
+          <i class="bi bi-trash3"></i>
+        <% end %>
+      </div>
+    </div>
+
+    <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: "d-none",
+      data: { controller: "size-validation", "upload-preview-target": "fileInput", action: "change->size-validation#validate change->upload-preview#preview"} %>
+  <% end %>
+</div>
