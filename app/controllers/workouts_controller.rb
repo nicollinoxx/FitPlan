@@ -20,7 +20,7 @@ class WorkoutsController < ApplicationController
   def create
     @workout = @sheet.workouts.build(workout_params)
 
-    if @workout.save!
+    if @workout.save
       refresh_or_redirect_to sheet_workout_url(@sheet, @workout), notice: I18n.t('notice.workout.create')
     else
       render :new, status: :unprocessable_entity
