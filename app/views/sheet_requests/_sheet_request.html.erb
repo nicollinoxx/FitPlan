@@ -1,5 +1,5 @@
 <div id="<%= dom_id(sheet_request) %>" class="col-md-6 p-2">
-  <div class="border shadow-sm rounded p-2">
+  <div class="hover-zoom-sm border shadow-sm rounded p-2">
     <div class="d-flex align-items-center mb-2">
       <% user = params[:filter] == "sent" ? sheet_request.recipient : sheet_request.sender %>
       <%= image_tag user.avatar.attached? ? user.avatar : "avatar.png", class: "object-fit-cover rounded-circle me-3", width: 40, height: 40 %>
