@@ -24,6 +24,7 @@
       </div>
     </div>
 
-    <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: "d-none", data: { "upload-preview-target": "fileInput", action: "change->upload-preview#preview" } %>
+    <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: "d-none",
+      data: { controller: "size-validation", "upload-preview-target": "fileInput", action: "change->size-validation#validate change->upload-preview#preview" } %>
   <% end %>
 </div>
