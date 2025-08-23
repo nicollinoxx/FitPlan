@@ -205,12 +205,13 @@ en:
   tmb:    'BMR'
   male:   'Male'
   female: 'Female'
-  title:  'Health profile'
 
   healthy_metric:
     title: 'Health Metrics'
     new:
       title: 'Add Health Metric'
+    edit:
+      title: 'Edit Health Metric'
 
   #sessions------------------------------
   sessions:

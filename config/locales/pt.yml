@@ -1,3 +1,4 @@
+
 pt:
   #system Theme
   system_theme: 'Sistema'
@@ -205,12 +206,13 @@ pt:
   tmb:    'TMB'
   male:   'Masculino'
   female: 'Feminino'
-  title:  'Perfil de saúde'
 
   healthy_metric:
     title:   'Métricas'
     new:
       title: 'Adicionar métricas'
+    edit:
+      title: 'Editar métricas'
 
   #sessions------------------------------
   sessions:
