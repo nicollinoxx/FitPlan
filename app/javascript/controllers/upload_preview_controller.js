@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["fileInput", "preview", "clearButton", "removeButton"]
+  static targets = ["fileInput", "preview", "saveButton", "removeButton"]
 
   preview() {
     const file = this.fileInputTarget.files[0]
@@ -10,23 +10,20 @@ export default class extends Controller {
     const reader = new FileReader()
     reader.onload = () => {
       this.previewTarget.src = reader.result
-      this.previewTarget.hidden = false
-      this.updateButtons()
+      this.showSaveButton()
+
+      if (file.type.startsWith("video/")) this.videoPreview()
     }
     reader.readAsDataURL(file)
   }
 
-  removePreview() {
-    this.fileInputTarget.value = null
-    this.previewTarget.src = this.previewTarget.dataset.default || ""
-    this.previewTarget.hidden = this.previewTarget.dataset.default ? false : true
-    this.updateButtons()
+  videoPreview() {
+    this.previewTarget.hidden = false
+    this.previewTarget.load()
   }
 
-  updateButtons() {
-    const hasFile = this.fileInputTarget.files.length > 0
-
-    if (this.hasClearButtonTarget) this.clearButtonTarget.hidden = !hasFile
-    if (this.hasRemoveButtonTarget) this.removeButtonTarget.hidden = hasFile
+  showSaveButton() {
+    if (this.hasSaveButtonTarget) this.saveButtonTarget.hidden = false
+    if (this.hasRemoveButtonTarget) this.removeButtonTarget.hidden = true
   }
 }

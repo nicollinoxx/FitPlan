@@ -49,20 +49,20 @@
           <% end %>
         </div>
 
-        <%= video_tag "", controls: true, data: { "upload-preview-target": "preview" }, class: 'rounded bg-secondary img-fluid mb-2', style: 'height: 160px', hidden: true %>
+        <%= video_tag "", controls: true, class: 'rounded bg-secondary img-fluid mb-2', data: { "upload-preview-target": "preview" }, style: 'height: 160px', hidden: true %>
 
-        <button type="button" class="btn btn-danger mb-3" data-upload-preview-target="clearButton" data-action="upload-preview#removePreview" hidden>
+        <button type="button" class="btn btn-danger mb-3"
+          data-upload-preview-target="clearButton" data-action="upload-preview#removePreview" hidden>
           <%= t('remove_preview') %>
         </button>
 
-        <%= form.file_field :video, accept: 'video/mp4, video/mpeg, video/quicktime', class: 'form-control', data: { controller: "size-validation", "upload-preview-target": "fileInput", action: "change->size-validation#validate change->upload-preview#preview" } %>
+        <%= form.file_field :video, accept: 'video/mp4, video/mpeg, video/quicktime', class: 'form-control',
+          data: { controller: "size-validation", "upload-preview-target": "fileInput", action: "change->size-validation#validate change->upload-preview#preview" } %>
+
         <%= content_tag :small, t('.supported_files'), class: "text-muted" %>
       </div>
-    </div>
-
     <div>
-      <%= form.submit "Save",
-            data: { "bridge--form-target": "submit", "bridge-title": "Save" },
-            class: 'btn btn-success' %>
-    </div>
+
+    <%= form.submit "Save", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+  </div>
   <% end %>
