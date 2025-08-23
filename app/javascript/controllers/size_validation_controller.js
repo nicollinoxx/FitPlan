@@ -5,7 +5,7 @@ export default class extends Controller {
     const file = event.target.files[0]
     if (!file) return
 
-    const maxSize = file.type.startsWith("video/") ? 16 * 1024 * 1024 : 2 * 1024 * 1024
+    const maxSize = file.type.startsWith("video/") ? 16 * 1024 * 1024 : 4 * 1024 * 1024
 
     if (file.size > maxSize) event.target.value = ''
   }
