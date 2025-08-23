@@ -3,7 +3,7 @@ class Identity::AvatarsController < ApplicationController
 
   def update
     @user.update!(params.permit(:avatar))
-    recede_or_redirect_to account_path, notice: I18n.t('notice.avatar.update')
+    refresh_or_redirect_to account_path, notice: I18n.t('notice.avatar.update')
   end
 
   def destroy

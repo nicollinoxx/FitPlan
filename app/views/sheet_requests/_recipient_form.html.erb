@@ -1,5 +1,5 @@
 <div class="border-top pt-3">
-  <%= form_with url: sheet_requests_path(handle: recipient.handle), data: { controller: "redirect", redirect_url_value: sheet_requests_path(filter: "sent") } do |form| %>
+  <%= form_with url: sheet_requests_path(handle: recipient.handle), data: { controller: "redirect", redirect_url_value: sheet_requests_path(filter: "sent"), redirect_refresh_value: true } do |form| %>
     <div class="d-flex justify-content-between align-items-center mb-3">
       <div class="d-flex align-items-center">
         <% if recipient.avatar.attached? %>

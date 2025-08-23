@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 import { Turbo } from "@hotwired/turbo-rails";
 
 export default class extends Controller {
-  static values = { url: String };
+  static values = { url: String, refresh: Boolean };
 
   connect() {
     this.handleSubmitEndBound = this.handleSubmitEnd.bind(this);
@@ -15,6 +15,11 @@ export default class extends Controller {
   }
 
   handleSubmitEnd(event) {
-    if (event.detail.success && this.hasUrlValue) {Turbo.visit(this.urlValue);}
+    if (!event.detail.success || !this.hasUrlValue) return;
+    this.#redirect()(this.urlValue || window.location.href);
   }
+
+  #redirect()   { return this.refreshValue ? this.#refresh : this.#visit; }
+  #visit(url)   { Turbo.visit(url); }
+  #refresh(url) { Turbo.visit(url, { action: "replace" }); }
 }
