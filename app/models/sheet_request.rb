@@ -5,6 +5,11 @@ class SheetRequest < ApplicationRecord
 
   enum :status, { pending: "pending", accepted: "accepted", rejected: "rejected" }
 
-  def sender?   = (sender == Current.user)
-  def receiver? = (recipient == Current.user)
+  def sender?(user = Current.user)
+    sender == user
+  end
+
+  def receiver?(user = Current.user)
+    recipient == user
+  end
 end

@@ -7,7 +7,7 @@ class Sheet < ApplicationRecord
   has_many :diets,    dependent: :destroy
   has_many :sheet_requests, dependent: :destroy
 
-  validates :sheet_type, inclusion: { in: %w(workout diet) }
+  validates :sheet_type, inclusion: { in: %w[ workout diet ] }
 
   enum :sheet_type, { workout: "workout", diet: "diet" }
 
