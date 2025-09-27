@@ -1,6 +1,6 @@
 <% content_for(:title, t('.title')) %>
 
-<%= render @diet %>
+<%= render 'diet', diet: @diet %>
 
 <%= render 'diets/analyze', percentage: @percentage unless @diet.calories.zero? %>
 

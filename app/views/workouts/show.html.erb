@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="my-4">
-    <%= render @workout %>
+    <%= render 'workout', workout: @workout %>
 </div>
 
 <div data-controller="bridge--menu">

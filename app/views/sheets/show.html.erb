@@ -2,7 +2,7 @@
 
 <div class="shadow-sm border rounded p-2 mb-3">
   <div class="d-flex justify-content-between">
-    <%= render @sheet %>
+    <%= render 'sheet', sheet: @sheet %>
     <div class="text-end fs-6">
       <small class="text-muted d-block">type: <%= @sheet.workout? ? t('workout') : t('diet') %></small>
       <small class="text-muted">font: <%= @sheet.copy? ? "copied" : "original" %></small>
