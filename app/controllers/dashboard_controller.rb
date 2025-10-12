@@ -20,9 +20,16 @@ class DashboardController < ApplicationController
   end
 
   def grouped_sheets(sheets)
-    sheets.public_send("group_by_#{params[:period].to_s}", :created_at).count
-  rescue NoMethodError
-    sheets.group_by_month(:created_at).count
+    case params[:period].to_s
+    when "day"
+      sheets.group_by_day(:created_at).count
+    when "week"
+      sheets.group_by_week(:created_at).count
+    when "year"
+      sheets.group_by_year(:created_at).count
+    else
+      sheets.group_by_month(:created_at).count
+    end
   end
 
   def diet_calories_by_sheet
