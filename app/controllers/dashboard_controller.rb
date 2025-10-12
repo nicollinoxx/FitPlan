@@ -1,5 +1,7 @@
 # app/controllers/dashboard_controller.rb
 class DashboardController < ApplicationController
+  before_action :set_user
+
   def index
     @healthy_metric = Current.user.healthy_metric
 
@@ -14,37 +16,28 @@ class DashboardController < ApplicationController
 
   def sheets_by_type
     [
-      { name: "Workout", data: grouped_sheets(Current.user.sheets.workout) },
-      { name: "Diet",    data: grouped_sheets(Current.user.sheets.diet) }
+      { name: "Workout", data: @user.sheets.workout.grouped_by(params[:period]) },
+      { name: "Diet",    data: @user.sheets.diet.grouped_by(params[:period]) }
     ]
   end
 
-  def grouped_sheets(sheets)
-    case params[:period].to_s
-    when "day"
-      sheets.group_by_day(:created_at).count
-    when "week"
-      sheets.group_by_week(:created_at).count
-    when "year"
-      sheets.group_by_year(:created_at).count
-    else
-      sheets.group_by_month(:created_at).count
-    end
+  def sheets_with_diets
+    @sheets_with_diets ||= @user.sheets.diet.joins(:diets)
   end
 
   def diet_calories_by_sheet
-    sheets_with_diets.group('sheets.id, sheets.name').pluck('sheets.name, SUM(diets.calories)')
+    sheets_with_diets.group('sheets.id', 'sheets.name').pluck('sheets.name, SUM(diets.calories)')
   end
 
   def total_diet_calories
-    sheets_with_diets.sum('diets.calories')
+    sheets_with_diets.sum('diets.calories')&.round(2) || 0
   end
 
   def average_diet_calories
-    sheets_with_diets.average('diets.calories')
+    sheets_with_diets.average('diets.calories')&.round(2) || 0
   end
 
-  def sheets_with_diets
-    Current.user.sheets.diet.joins(:diets)
+  def set_user
+    @user = Current.user
   end
 end
