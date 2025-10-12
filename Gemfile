@@ -73,3 +73,6 @@ gem "solid_cable"
 gem "solid_cache"
 
 gem "geared_pagination"
+
+gem "chartkick"
+gem "groupdate"
