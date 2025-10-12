@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     patch :accept, on: :member
   end
 
+  get :dashboard, to: "dashboard#index", as: :dashboard
+
   root 'sheets#index'
   get "set_locale/(:locale)", to: "application#set_session_locale", as: :set_locale
 end

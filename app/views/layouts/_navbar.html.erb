@@ -21,7 +21,14 @@
             <i class="bi bi-share me-1"></i> <%= t('link_sheet_requests') %>
           <% end %>
         </li>
+
+        <li class="nav-item">
+          <%= link_to dashboard_path, class: 'nav-link px-3 fw-medium' do %>
+            <i class="bi bi-activity me-1"></i> <%= t('link_dashboard') %>
+          <% end %>
+        </li>
       </ul>
+
       <!-- ms-auto empurra para a direita, align-items-center alinha verticalmente -->
       <div class="d-flex align-items-center ms-auto">
         <div class="btn-group me-2">

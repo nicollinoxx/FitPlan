@@ -5,6 +5,7 @@ en:
   #navbar
   link_sheets: 'Sheets'
   link_sheet_requests: 'Sheet Requests'
+  link_dashboard: 'Dashboard'
 
   #languages
   language:     'Language'
@@ -212,6 +213,23 @@ en:
       title: 'Add Health Metric'
     edit:
       title: 'Edit Health Metric'
+
+   #dashboard-------------------------------------
+  dashboard:
+    index:
+      title: "Dashboard"
+      cards:
+        total_calories: "Total calories"
+        average_calories: "Average calories"
+      charts:
+        sheets_created: "Sheets created"
+        diets_calories_by_sheet: "Calories by sheet"
+      filters:
+        period:
+          day:   "day"
+          week:  "week"
+          month: "month"
+          year:  "year"
 
   #sessions------------------------------
   sessions:

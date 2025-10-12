@@ -1,0 +1,36 @@
+<h1><%= t('.title') %></h1>
+
+<div class="row g-3 mb-3">
+  <%= render 'card', title: t('.cards.imc'), content: @healthy_metric.imc, icon: "bi bi-person-fill" %>
+  <%= render 'card', title: t('.cards.tmb'), content: "#{@healthy_metric.tmb} kcal/dia", icon: "bi bi-fire" %>
+  <%= render 'card', title: t('.cards.total_calories'), content: "#{@total_diet_calories} kcal", icon: "bi bi-fire" %>
+  <%= render 'card', title: t('.cards.average_calories'), content: "#{@average_diet_calories} kcal", icon: "bi bi-activity" %>
+</div>
+
+<div class="d-flex justify-content-end mb-2 mt-4">
+  <%= form_with(url: dashboard_path, method: :get, data: { turbo_frame: :sheets }) do |form| %>
+    <%= form.select :period, period_options, { selected: params[:period] || 'month' },
+      class: "form-select form-select-sm", onchange: "this.form.requestSubmit()" %>
+  <% end %>
+</div>
+
+<div class="row my-2">
+  <div class="col-md-6 mb-3">
+    <%= turbo_frame_tag :sheets do %>
+      <div class="p-3 border rounded">
+        <h5 class="card-title mb-3">
+          <%= t('.charts.sheets_created') %>
+          <%= t(".filters.period.#{params[:period] || 'month'}") %>
+        </h5>
+        <%= line_chart @sheets, colors: ["green", "red"], height: "300px" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-6 mb-3">
+    <div class="p-3 border rounded">
+      <h5 class="card-title mb-3"><%= t('.charts.diets_calories_by_sheet') %></h5>
+      <%= column_chart @diets_calories, colors: ["#4caf50"], height: "300px" %>
+    </div>
+  </div>
+</div>

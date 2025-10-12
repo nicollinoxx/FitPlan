@@ -6,6 +6,7 @@ pt:
   #navbar
   link_sheets:         'Planilhas'
   link_sheet_requests: 'Solicitações de Planilha'
+  link_dashboard:      'Painel'
 
   #languages
   language:     'Idioma'
@@ -196,6 +197,23 @@ pt:
       session:
         title:                  'Sessão'
         collection_sessions:    'Sessões'
+
+  #dashboard-------------------------------------
+  dashboard:
+    index:
+      title: "Painel"
+      cards:
+        total_calories: "Calorias totais"
+        average_calories: "Calorias médias"
+      charts:
+        sheets_created: "Fichas criadas por"
+        diets_calories_by_sheet: "Calorias das dietas por ficha"
+      filters:
+        period:
+          day:   "dia"
+          week:  "semana"
+          month: "mês"
+          year:  "ano"
 
   #healthy_metric------------------------------------
   height: 'Altura (cm)'
