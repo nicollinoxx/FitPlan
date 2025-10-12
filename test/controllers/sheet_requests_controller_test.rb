@@ -42,10 +42,9 @@ class SheetRequestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should accept sheet_request and enqueue job" do
-    @sheet_request = sheet_requests(:one)
     sign_in_as(@sheet_request.recipient)
 
-    assert_enqueued_with(job: CopySheetJob, args: [@sheet_request.recipient, @sheet_request.sheet]) do
+    assert_enqueued_with(job: CopySheetJob, args: [@sheet_request]) do
       patch accept_sheet_request_path(@sheet_request, format: :turbo_stream)
     end
 
@@ -56,14 +55,12 @@ class SheetRequestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy sheet_request" do
-    sheet_request = @user.received_sheet_requests.first
-
     assert_difference("SheetRequest.count", -1) do
-      delete sheet_request_url(sheet_request, format: :turbo_stream)
+      delete sheet_request_url(@sheet_request, format: :turbo_stream)
     end
 
     assert_response :success
     assert_match "turbo-stream", response.media_type
-    assert_match "sheet_request_#{sheet_request.id}", response.body
+    assert_match "sheet_request_#{@sheet_request.id}", response.body
   end
 end

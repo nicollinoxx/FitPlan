@@ -30,7 +30,7 @@ class SheetRequestsController < ApplicationController
     return unless @sheet_request.receiver?
 
     @sheet_request.update!(status: "accepted")
-    CopySheetJob.perform_later(@sheet_request.recipient, @sheet_request.sheet)
+    CopySheetJob.perform_later(@sheet_request)
   end
 
   def destroy
