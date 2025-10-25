@@ -31,4 +31,6 @@ Rails.application.routes.draw do
 
   root 'sheets#index'
   get "set_locale/(:locale)", to: "application#set_session_locale", as: :set_locale
+
+  get "up" => "rails/health#show", as: :rails_health_check
 end
