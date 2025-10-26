@@ -1,8 +1,8 @@
 <h1><%= t('.title') %></h1>
 
 <div class="row g-3 mb-3">
-  <%= render 'card', title: t('.cards.imc'), content: @healthy_metric.imc, icon: "bi bi-person-fill" %>
-  <%= render 'card', title: t('.cards.tmb'), content: "#{@healthy_metric.tmb} kcal/dia", icon: "bi bi-fire" %>
+  <%= render 'card', title: t('.cards.imc'), content: "#{@healthy_metric&.imc || 0} kg/m²", icon: "bi bi-person-fill" %>
+  <%= render 'card', title: t('.cards.tmb'), content: "#{@healthy_metric&.tmb || 0} kcal/dia", icon: "bi bi-fire" %>
   <%= render 'card', title: t('.cards.total_calories'), content: "#{@total_diet_calories} kcal", icon: "bi bi-fire" %>
   <%= render 'card', title: t('.cards.average_calories'), content: "#{@average_diet_calories} kcal", icon: "bi bi-activity" %>
 </div>
