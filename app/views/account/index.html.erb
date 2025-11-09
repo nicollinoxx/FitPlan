@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between">
   <h1 class="h4"><%= t('.title') %></h1>
-  <%= button_to "Log out", Current.session, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
+  <%= button_to "Log out", Current.session, method: :delete, data: { controller: "bridge--nav-button", bridge_title: "Log out", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
 </div>
 
 <div class="card-body text-center">
@@ -87,19 +87,4 @@
     </div>
 </div>
 
-<% if turbo_native_app? %>
-  <div class="position-fixed top-0 end-0 p-2 my-2" style="z-index: 1050">
-    <div class="btn-group">
-      <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggle">
-        <i class="bi bi-sun-fill"></i>
-        <i class="bi bi-moon-stars-fill"></i>
-      </button>
-      <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown"></button>
-      <div class="dropdown-menu">
-        <button class="dropdown-item" type="button" data-action="theme#system">
-          <i class="bi bi-laptop"></i> <%= t('system_theme') %>
-        </button>
-      </div>
-    </div>
-  </div>
-<% end %>
+<%= render 'shared/theme_toggle' if turbo_native_app? %>
