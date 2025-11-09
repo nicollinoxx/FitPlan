@@ -20,7 +20,7 @@ en:
   new:                "+ New"
   destroy:            "Destroy"
   message_destroy:    "Are you sure?"
-  minimum_characters: "12 characters minimum."
+  minimum_characters: "6 characters minimum."
   cancel:             "Cancel"
   confirm:            "Confirm"
 
@@ -214,7 +214,25 @@ en:
     edit:
       title: 'Edit Health Metric'
 
-   #dashboard-------------------------------------
+  #welcome------------------------------------
+  welcome:
+    title: "FitPlan"
+    subtitle_html: "Build and organize your workouts and diets in a <span class='text-primary fw-medium'>practical, personalized, and shareable way.</span>"
+    sign_in: "Sign In"
+    sign_up: "Create Account"
+    cards:
+      training:
+        title: "Workout Plans"
+        text: "Create and track your personalized workout plans."
+      diet:
+        title: "Diets Plans"
+        text: "Build diets, monitor calories and macronutrients."
+      progress:
+        title: "Progress Tracking"
+        text: "View your performance, compare results, and improve."
+
+
+  #dashboard-------------------------------------
   dashboard:
     index:
       title: "Dashboard"
@@ -239,9 +257,10 @@ en:
       ip_address: 'IP address'
       created_at: 'Created at'
     new:
-      title:      'Sign in'
-      submit:     'Sign in'
-      signup:     'Sign up'
+      title:        'Sign in'
+      submit:       'Sign in'
+      signup:       'Sign up'
+      welcome_link: 'Welcome'
       section_signup: "Don't have an account?"
       link_forgot_password: 'Forgot your password?'
       form:

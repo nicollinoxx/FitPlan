@@ -1,0 +1,48 @@
+<% content_for(:title, t("welcome.title")) %>
+
+<div class="fixed-top mt-5 pt-1 start-50 translate-middle-x w-100" style="max-width: 60rem;">
+  <%= render 'shared/theme_toggle' %>
+</div>
+
+<div class="mt-5 text-center">
+  <h1 class="fw-bold text-success"><%= t("welcome.title") %></h1>
+  <p class="lead mt-3 mb-4">
+    <%= t("welcome.subtitle_html") %>
+  </p>
+
+  <div class="d-flex flex-column align-items-center gap-3">
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <%= link_to t("welcome.sign_in"), sign_in_path, class: "btn btn-success px-4" %>
+      <%= link_to t("welcome.sign_up"), sign_up_path, class: "btn btn-secondary px-4" %>
+    </div>
+
+    <div class="border d-flex justify-content-between align-items-center shadow-sm p-2 rounded"style="max-width: 18rem; width: 100%; font-size: 0.9rem;">
+      <div class="d-flex align-items-center"><i class="bi bi-translate me-2"></i><%= t('language') %></div>
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+          <%= I18n.locale == :en ? t('languages.en') : t('languages.pt') %>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><%= link_to t('languages.en'), set_locale_path('en'), class: 'dropdown-item' %></li>
+          <li><%= link_to t('languages.pt'), set_locale_path('pt'), class: 'dropdown-item' %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap justify-content-center gap-4 mt-5">
+    <% [
+      { icon: "📋", title: t("welcome.cards.training.title"), text: t("welcome.cards.training.text") },
+      { icon: "🥗", title: t("welcome.cards.diet.title"), text: t("welcome.cards.diet.text") },
+      { icon: "📈", title: t("welcome.cards.progress.title"), text: t("welcome.cards.progress.text") }
+    ].each do |card| %>
+      <div class="card border shadow-sm" style="width: 21rem;">
+        <div class="card-body">
+          <div class="fs-2 mb-2"><%= card[:icon] %></div>
+          <h5 class="card-title text-success fw-semibold"><%= card[:title] %></h5>
+          <p class="card-text"><%= card[:text] %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

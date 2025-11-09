@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "welcome", to: "welcome#index"
   get "account", to: "account#index"
 
   get    "sign_in", to: "sessions#new"

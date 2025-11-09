@@ -21,7 +21,7 @@ pt:
   new:                "+ Novo"
   destroy:            "Excluir"
   message_destroy:    "Você tem certeza?"
-  minimum_characters: "Mínimo de 12 caracteres."
+  minimum_characters: "Mínimo de 6 caracteres."
   cancel:             "Cancelar"
   confirm:            "Confirmar"
   all:                'Todos'
@@ -198,6 +198,26 @@ pt:
         title:                  'Sessão'
         collection_sessions:    'Sessões'
 
+  #welcome------------------------------------
+  welcome:
+    title: "FitPlan"
+    subtitle_html: >
+      Construa e organize seus treinos e dietas de forma
+      <span class="text-primary fw-medium">prática, personalizada com possibilidade de compartilhamento.</span>
+    sign_in: "Entrar"
+    sign_up: "Criar Conta"
+    cards:
+      training:
+        title: "Fichas de Treino"
+        text: "Crie e acompanhe planos de treino personalizados."
+      diet:
+        title: "Fichas de Dietas"
+        text: "Monte dietas, monitore calorias e macronutrientes."
+      progress:
+        title: "Acompanhamento"
+        text: "Visualize seu desempenho, compare resultados e evolua."
+
+
   #dashboard-------------------------------------
   dashboard:
     index:
@@ -240,9 +260,10 @@ pt:
       ip_address: 'Endereço IP'
       created_at: 'Criado em'
     new:
-      title:      'Entrar'
-      submit:     'Entrar'
-      signup:     'Cadastrar'
+      title:        'Entrar'
+      submit:       'Entrar'
+      signup:       'Cadastrar'
+      welcome_link: 'Bem-vindo'
       section_signup: "Não tem uma conta?"
       link_forgot_password: 'Esqueceu sua senha?'
       form:
