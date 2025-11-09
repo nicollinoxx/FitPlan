@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :received_sheet_requests, class_name: "SheetRequest", foreign_key: :recipient_id, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, allow_nil: true, length: { minimum: 12 }
+  validates :password, allow_nil: true, length: { minimum: 6 }
 
   normalizes :email, with: -> { _1.strip.downcase }
 
