@@ -7,7 +7,7 @@ image: nicollinoxx/fitplan
 # Deploy to these servers.
 servers:
   web:
-    - 46.224.4.204
+    - 64.181.176.150
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -23,13 +23,8 @@ proxy:
 
 # Credentials for your image host.
 registry:
-  # Specify the registry server, if you're not using Docker Hub
-  # server: registry.digitalocean.com / ghcr.io / ...
-  username: nicollinoxx
-
-  # Always use an access token rather than real password when possible.
-  password:
-    - KAMAL_REGISTRY_PASSWORD
+  # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
+  server: localhost:5555
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
@@ -59,7 +54,7 @@ aliases:
   console: app exec --interactive --reuse "bin/rails console"
   shell: app exec --interactive --reuse "bash"
   logs: app logs -f
-  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+  dbc: app exec --interactive --reuse "bin/rails dbconsole --include-password"
 
 
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
@@ -88,8 +83,8 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+   user: ubuntu
 
 # Use accessory services (secrets come from .kamal/secrets).
 # accessories:
