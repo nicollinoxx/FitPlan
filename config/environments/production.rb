@@ -66,7 +66,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     user_name: Rails.application.credentials.dig(:smtp, :user_name),
     password: Rails.application.credentials.dig(:smtp, :password),
-    address: "smtp.mailersend.net",
+    address: "smtp-relay.brevo.com",
     port: 587,
     starttls: true
   }
