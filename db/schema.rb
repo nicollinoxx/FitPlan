@@ -50,7 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_26_011934) do
   end
 
   create_table "diets", force: :cascade do |t|
-    t.string "meal"
+    t.string "snack"
     t.decimal "protein_g", default: "0.0"
     t.decimal "carbohydrate_g", default: "0.0"
     t.decimal "fat_g", default: "0.0"
@@ -122,9 +122,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_26_011934) do
     t.integer "series"
     t.string "repetitions"
     t.string "charge"
+    t.time "interval"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "interval"
     t.integer "sheet_id", null: false
     t.index ["sheet_id"], name: "index_workouts_on_sheet_id"
   end
