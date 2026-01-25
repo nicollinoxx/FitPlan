@@ -24,12 +24,12 @@
 
       <div class="border text-center p-2 rounded flex-grow-1" style="min-width: 45%">
         <p class="small text-muted mb-0"><i class="bi bi-stopwatch"></i> <%= t('interval') %></p>
-        <p class="fw-bold mb-0"><%= workout.interval.present? ? workout.interval : '—' %></p>
+        <p class="fw-bold mb-0"><%= workout.interval %></p>
       </div>
 
       <div class="border text-center p-2 rounded flex-grow-1" style="min-width: 45%">
         <p class="small text-muted mb-0"><i class="bi bi-weight"></i> <%= t('charge') %></p>
-        <p class="fw-bold mb-0"><%= workout.charge.present? ? workout.charge : '—' %></p>
+        <p class="fw-bold mb-0"><%= workout.charge %></p>
       </div>
     </div>
 
