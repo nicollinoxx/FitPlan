@@ -206,6 +206,7 @@ pt:
       <span class="text-primary fw-medium">prática, personalizada com possibilidade de compartilhamento.</span>
     sign_in: "Entrar"
     sign_up: "Criar Conta"
+    section_signup: "Não tem uma conta?"
     cards:
       training:
         title: "Fichas de Treino"

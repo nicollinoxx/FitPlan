@@ -220,6 +220,7 @@ en:
     subtitle_html: "Build and organize your workouts and diets in a <span class='text-primary fw-medium'>practical, personalized, and shareable way.</span>"
     sign_in: "Sign In"
     sign_up: "Create Account"
+    section_signup: "Don't have an account?"
     cards:
       training:
         title: "Workout Plans"
