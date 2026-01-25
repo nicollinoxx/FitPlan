@@ -50,7 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_26_011934) do
   end
 
   create_table "diets", force: :cascade do |t|
-    t.string "snack"
+    t.string "meal"
     t.decimal "protein_g", default: "0.0"
     t.decimal "carbohydrate_g", default: "0.0"
     t.decimal "fat_g", default: "0.0"

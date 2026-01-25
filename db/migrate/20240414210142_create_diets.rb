@@ -1,7 +1,7 @@
 class CreateDiets < ActiveRecord::Migration[7.1]
   def change
     create_table :diets do |t|
-      t.string :snack
+      t.string :meal
       t.decimal :protein_g
       t.decimal :carbohydrate_g
       t.decimal :fat_g
