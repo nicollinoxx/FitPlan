@@ -17,7 +17,7 @@ module Sheets
       )
 
       assert_difference -> { @recipient.sheets.count }, 1 do
-        sheet.copy_sheet(@recipient)
+        sheet.copy_to(@recipient)
       end
 
       copied_sheet = @recipient.sheets.order(created_at: :desc).first
@@ -34,7 +34,7 @@ module Sheets
       diet.update!(sheet: sheet, description: "<p>Rich description for testing</p>")
 
       assert_difference -> { @recipient.sheets.count }, 1 do
-        sheet.copy_sheet(@recipient)
+        sheet.copy_to(@recipient)
       end
 
       copied_sheet = @recipient.sheets.order(created_at: :desc).first
@@ -49,7 +49,7 @@ module Sheets
       sheet = sheets(:empty_workout)
 
       assert_no_difference -> { @recipient.sheets.count } do
-        sheet.copy_sheet(@recipient)
+        sheet.copy_to(@recipient)
       end
     end
 
@@ -57,7 +57,7 @@ module Sheets
       sheet = sheets(:empty_diet)
 
       assert_no_difference -> { @recipient.sheets.count } do
-        sheet.copy_sheet(@recipient)
+        sheet.copy_to(@recipient)
       end
     end
   end
