@@ -7,7 +7,7 @@ image: nicollinoxx/fitplan
 # Deploy to these servers.
 servers:
   web:
-    - 64.181.176.150
+    - 163.176.235.50
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -39,7 +39,7 @@ env:
     # JOB_CONCURRENCY: 3
 
     # Set number of cores available to the application on each server (default: 1).
-    WEB_CONCURRENCY: 0
+    # WEB_CONCURRENCY:
 
     # Match this to any external database server to configure Active Record correctly
     # Use generate_kamal-db for a db accessory server on same machine via local kamal docker network.
