@@ -4,7 +4,12 @@ module Sheet::Copyable
 
     ActiveRecord::Base.transaction do
       copy = recipient.sheets.create!(attributes_for_copy)
-      workout? ? copy_workouts_to(copy) : copy_diets_to(copy)
+
+      if workout?
+        copy_workouts_to(copy)
+      else
+        copy_diets_to(copy)
+      end
 
       raise ActiveRecord::RecordInvalid.new(copy) unless copy.workouts.exists? || copy.diets.exists?
     end
@@ -15,15 +20,15 @@ module Sheet::Copyable
   private
 
   def copy_workouts_to(copy)
-    workouts.find_each(batch_size: 5) do |workout|
-      item = copy.workouts.create!(copy_item_attributes(workout))
-      item.video.attach(workout.video.blob) if workout.video.attached?
+    workouts.find_each do |workout|
+      new_workout = copy.workouts.create!(copy_item_attributes(workout))
+      new_workout.video.attach(workout.video.blob) if workout.video.attached?
     end
   end
 
   def copy_diets_to(copy)
-    diets.find_each(batch_size: 5) do |diet|
-      copy.diets.create!(copy_item_attributes(diet).merge(description: diet.description&.body&.to_s))
+    diets.find_each do |diet|
+      copy.diets.create!(copy_item_attributes(diet).merge(description: diet.description&.to_s))
     end
   end
 
