@@ -29,20 +29,16 @@
         </li>
       </ul>
 
-      <div class="d-flex align-items-center ms-auto">
-        <div class="btn-group me-2">
-          <button type="button" class="btn btn-sm border rounded-circle" data-action="theme#toggle">
-            <i class="bi bi-sun-fill"></i>
-            <i class="bi bi-moon-stars-fill"></i>
-          </button>
-          <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown"></button>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" type="button" data-action="theme#system">
-              <i class="bi bi-laptop"></i> <%= t('system_theme') %>
-            </button>
-          </div>
-        </div>
-        <%= link_to Current.user.email, account_path, class: 'btn btn-sm btn-primary text-truncate', style: 'max-width: 10rem;' %>
+      <div class="d-flex align-items-center flex-wrap ms-auto gap-1 ps-3">
+        <%= render 'shared/theme_toggle' %>
+
+        <%= link_to account_path, class: 'd-flex align-items-center btn btn-sm btn-primary rounded' do %>
+          <span class="text-truncate" style="max-width: 8rem;" ><%= Current.user.email %></span>
+
+          <% if Current.user.avatar.attached? %>
+            <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', style: 'width: 30px; height: 30px;' %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

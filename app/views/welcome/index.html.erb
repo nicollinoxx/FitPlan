@@ -1,24 +1,18 @@
 <% content_for(:title, t("welcome.title")) %>
-<div class="fixed-top mt-5 pt-1 start-50 translate-middle-x w-100" style="max-width: 65rem;">
-  <%= render 'shared/theme_toggle' %>
-</div>
-
-<div class="fixed-top mt-5 pt-1 start-50 translate-middle-x w-100" style="max-width: 65rem;">
-  <div class="position-absolute top-0 start-25 m-2">
-    <div class="dropdown ms-2">
-      <button class="btn btn-sm border rounded dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-        <i class="bi bi-translate me-2"></i>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li><%= link_to t('languages.en'), set_locale_path('en'), class: 'dropdown-item' %></li>
-        <li><%= link_to t('languages.pt'), set_locale_path('pt'), class: 'dropdown-item' %></li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <div class="mt-5 text-center">
   <h1 class="fw-bold text-success"><%= t("welcome.title") %></h1>
+
+  <div class="fixed-top mt-5 p-5 start-50 translate-middle-x w-100" style="max-width: 60rem;">
+    <div class="position-absolute top-0 end-0">
+      <%= render 'shared/theme_toggle' %>
+    </div>
+
+    <div class="position-absolute top-0 start-0">
+      <%= render 'shared/language_dropdown' %>
+    </div>
+  </div>
+
   <p class="lead mt-3 mb-2">
     <%= t("welcome.subtitle_html") %>
   </p>

@@ -1,0 +1,11 @@
+<div class="position-absolute top-0 start-0">
+  <div class="dropdown ms-2">
+    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+      <i class="bi bi-translate"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><%= link_to t('languages.en'), set_locale_path('en'), class: 'dropdown-item' %></li>
+      <li><%= link_to t('languages.pt'), set_locale_path('pt'), class: 'dropdown-item' %></li>
+    </ul>
+  </div>
+</div>

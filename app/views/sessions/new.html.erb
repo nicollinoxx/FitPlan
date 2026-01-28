@@ -1,8 +1,12 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="mx-auto py-3" style="max-width: 500px;">
-  <div class="shadow p-4 rounded border position-relative">
-    <div class="z-3">
+  <div class="shadow p-4 rounded border position-relative mb-3">
+    <div class="position-absolute top-0 start-0 m-2 z-3">
+      <%= render 'shared/language_dropdown' %>
+    </div>
+
+    <div class="position-absolute top-0 end-0 m-2 z-3">
       <%= render 'shared/theme_toggle' %>
     </div>
 
@@ -32,22 +36,9 @@
       </div>
     <% end %>
 
-    <div class="mb-3">
+    <div>
       <p class="mb-2"><%= t('.section_signup') %></p>
       <%= link_to t('.signup'), sign_up_path, class: 'btn btn-secondary w-100' %>
-    </div>
-  </div>
-
-  <div class="border d-flex justify-content-between align-items-center shadow p-3 rounded my-3">
-    <div><i class="bi bi-translate me-2"></i><%= t('language') %></div>
-    <div class="dropdown">
-      <button class="btn btn-sm dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-        <%= I18n.locale == :en ? t('languages.en') : t('languages.pt') %>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li><%= link_to t('languages.en'), set_locale_path('en'), class: 'dropdown-item' %></li>
-        <li><%= link_to t('languages.pt'), set_locale_path('pt'), class: 'dropdown-item' %></li>
-      </ul>
     </div>
   </div>
 
