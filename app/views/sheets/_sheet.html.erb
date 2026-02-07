@@ -1,16 +1,14 @@
 <% cache [sheet] do %>
   <div id="<%= dom_id sheet %>">
-    <div class="card-body">
-      <div class="d-flex align-items-center mb-2">
-        <i class="bi <%= sheet.workout? ? 'bi-heart-pulse text-danger' : 'bi-egg-fried text-warning' %> fs-3 me-2"></i>
-        <div>
-          <h2 class="h6 mb-0"><%= sheet.name %></h2>
-          <small class="badge <%= sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>">
-            <%= sheet.workout? ? t('workout') : t('diet') %>
-          </small>
-        </div>
+    <div class="d-flex align-items-center mb-2">
+      <i class="bi <%= sheet.workout? ? 'bi-heart-pulse text-success' : 'bi-egg-fried text-warning' %> fs-3 me-2"></i>
+      <div>
+        <h2 class="h6 mb-0 fw-semibold"><%= sheet.name %></h2>
+        <small class="badge <%= sheet.workout? ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning' %>">
+          <%= sheet.workout? ? t('workout') : t('diet') %>
+        </small>
       </div>
-      <p class="card-text text-muted fs-6"><%= sheet.description %></p>
     </div>
+    <p class="card-text text-muted fs-6"><%= sheet.description %></p>
   </div>
 <% end %>

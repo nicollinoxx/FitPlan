@@ -15,9 +15,9 @@
   </head>
 
   <body>
-    <div class="hide-on-mobile mb-4">
-      <%= render 'layouts/navbar' if Current.user.present? %>
+    <%= render 'layouts/navbar' if Current.user.present? %>
 
+    <div class="hide-on-mobile">
       <div class="container my-3">
         <% if notice.present? %>
           <div class="alert alert-dark alert-white-on-dark py-2 rounded" role="alert" data-controller="bridge--flash-message"><%= notice %></div>

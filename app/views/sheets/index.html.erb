@@ -1,12 +1,12 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="d-flex justify-content-between align-items-center">
-  <h1 class="h2"><%= t('.title') %></h1>
-  <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3' %>
+  <h1><%= t('.title') %></h1>
+  <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-2' %>
 </div>
 
 <%= turbo_frame_tag "sheets" do %>
-  <div class="sticky-top d-flex align-items-center justify-content-between mb-3">
+  <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-2" style="top: 64px;">
     <% if turbo_native_app? %>
         <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
           <div class="d-flex align-items-center">
@@ -20,7 +20,7 @@
     <% end %>
 
     <div class="ms-auto dropdown bg-light rounded mt-2">
-      <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+      <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
         <i class="bi bi-funnel-fill"></i> <%= t('.filter') %>
       </button>
       <ul class="dropdown-menu dropdown-menu-end">

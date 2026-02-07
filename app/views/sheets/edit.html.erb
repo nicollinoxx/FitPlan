@@ -1,9 +1,7 @@
 <% content_for(:title, t('.title')) %>
 
 <% if @sheet.workouts.exists? || @sheet.diets.exists? %>
-  <div class="bg-dark text-light p-2 rounded" role='alert'>
-    <p class="pb-0 mb-0"><%= t('.alert')%></p>
-  </div>
+  <div class="alert alert-warning py-2 rounded" role="alert"><%= t('.alert')%></div>
 <% end %>
 
 <div class="my-4">

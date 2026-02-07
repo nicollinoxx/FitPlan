@@ -17,7 +17,7 @@
 <div class="row my-2">
   <div class="col-md-6 mb-3">
     <%= turbo_frame_tag :sheets do %>
-      <div class="p-3 border rounded">
+      <div class="p-3 bg-body-tertiary border-start border-bottom border-success rounded">
         <h5 class="card-title mb-3">
           <%= t('.charts.sheets_created') %>
           <%= t(".filters.period.#{params[:period] || 'month'}") %>
@@ -28,7 +28,7 @@
   </div>
 
   <div class="col-md-6 mb-3">
-    <div class="p-3 border rounded">
+    <div class="p-3 bg-body-tertiary border-start border-bottom border-success rounded">
       <h5 class="card-title mb-3"><%= t('.charts.diets_calories_by_sheet') %></h5>
       <%= column_chart @diets_calories, colors: ["#4caf50"], height: "300px" %>
     </div>
