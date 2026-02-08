@@ -5,7 +5,7 @@ module SheetsHelper
 
   def visibility_badge_class(sheet)
     case sheet.visibility
-    when "shareable" then "bg-primary-subtle text-primary"
+    when "shareable" then "bg-info-subtle text-info"
     when "visible"   then "bg-secondary-subtle text-body"
     when "premium"   then "bg-purple-subtle text-purple"
     end

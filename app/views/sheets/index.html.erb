@@ -1,50 +1,34 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="d-flex justify-content-between align-items-center">
+<div class="d-flex justify-content-between align-items-center mb-3">
   <h1><%= t('.title') %></h1>
   <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-2' %>
 </div>
 
 <%= turbo_frame_tag "sheets" do %>
-  <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-2">
-    <% if turbo_native_app? %>
-        <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
-          <div class="d-flex align-items-center">
-            <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
-            <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
-          </div>
-        <% end %>
-        <%= link_to sheet_requests_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info rounded-circle' do %>
-          <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-        <% end %>
-    <% end %>
+  <% if turbo_native_app? %>
+    <div class="sticky-top z-3 mb-3">
 
-    <div class="ms-auto dropdown bg-light rounded mt-2">
-      <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-        <i class="bi bi-funnel-fill"></i> <%= t('.filter') %>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-          <%= link_to sheets_path(type: 'diet'), class: 'dropdown-item' do %>
-            <i class="bi bi-egg-fried me-2"></i> <%= t('diet') %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to sheets_path(type: 'workout'), class: 'dropdown-item' do %>
-            <i class="bi-heart-pulse me-2"></i> <%= t('workout') %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to sheets_path, class: 'dropdown-item' do %>
-            <i class="bi bi-list-ul me-2"></i> <%= t('all') %>
-          <% end %>
-        </li>
-      </ul>
+      <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
+        <div class="d-flex align-items-center">
+          <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
+          <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
+        </div>
+      <% end %>
+
+      <%= link_to sheet_requests_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info rounded-circle' do %>
+        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+      <% end %>
+
     </div>
+  <% end %>
+
+  <div class="sticky-top d-flex justify-content-end mx-0 mb-3" style="top: 64px; z-index: 1010;">
+    <%= render "filter" %>
   </div>
 
   <div id="paginables" class="row">
     <%= render partial: "sheet_card", collection: @page.records, as: :sheet %>
-    <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
+    <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, type: params[:type], visibility: params[:visibility], format: :turbo_stream) unless @page.last? %>
   </div>
 <% end %>

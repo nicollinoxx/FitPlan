@@ -6,21 +6,23 @@
 </div>
 
 <%= turbo_frame_tag "sheet_requests" do %>
-  <div class="sticky-top d-flex align-items-center justify-content-between mb-3 py-2 z-4">
-    <h5 class="text-success"><%= params[:filter] == "sent" ? t('.filters.sent') : t('.filters.received') %></h5>
-    <div class="ms-auto dropdown bg-light rounded mt-2">
-      <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-        <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li><%= link_to t('.filters.sent'), sheet_requests_path(filter: 'sent'), class: 'dropdown-item' %></li>
-        <li><%= link_to t('.filters.received'), sheet_requests_path(filter: 'received'), class: 'dropdown-item' %></li>
-      </ul>
-    </div>
+  <div class="sticky-top d-flex justify-content-end mb-3" style="top: 64px; z-index: 1010;">
+    <ul class="nav nav-pills gap-1 rounded bg-body-tertiary shadow-sm fw-medium border-bottom" style="--bs-bg-opacity: .8;">
+      <li class="nav-item">
+        <%= link_to sheet_requests_path(filter: "sent"), class: "nav-link text-body #{'bg-info-subtle text-info-emphasis' if params[:filter] == 'sent'}" do %>
+          <i class="bi bi-send"></i> <%= t(".filters.sent") %>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to sheet_requests_path(filter: "received"), class: "nav-link text-body #{'bg-success-subtle text-success-emphasis' if params[:filter] == 'received'}" do %>
+          <i class="bi bi-inbox"></i> <%= t(".filters.received") %>
+        <% end %>
+      </li>
+    </ul>
   </div>
 
   <div id="paginables" class="row">
     <%= render partial: "sheet_request", collection: @page.records, as: :sheet_request %>
-    <%= render "shared/paginables/next_page_container", src: sheet_requests_path(@page.next_param, format: :turbo_stream) unless @page.last? %>
+    <%= render "shared/paginables/next_page_container", src: sheet_requests_path(page: @page.next_param, filter: params[:filter], format: :turbo_stream) unless @page.last? %>
   </div>
 <% end %>

@@ -3,7 +3,7 @@ class SheetsController < ApplicationController
   before_action :set_sheet, only: %i[ show edit update destroy ]
 
   def index
-    @sheets = @user.sheets.search_by_type(params[:type])
+    @sheets = @user.sheets.search_by_type(params[:type]).search_by_visibility(params[:visibility])
 
     set_page_and_extract_portion_from @sheets.order(created_at: :desc)
     sleep 2.seconds unless @page.first?

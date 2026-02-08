@@ -1,0 +1,50 @@
+<ul class="nav nav-pills rounded bg-body-tertiary shadow-sm fw-medium border-bottom" style="--bs-bg-opacity: .8;">
+  <li>
+    <%= link_to sheets_path(type: 'diet', visibility: params[:visibility]), class: "nav-link p-2 text-body #{'bg-warning-subtle text-warning-emphasis' if params[:type] == 'diet'}" do %>
+      <i class="bi bi-egg-fried"></i> <%= t('diet') %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to sheets_path(type: 'workout', visibility: params[:visibility]), class: "nav-link p-2 text-body #{'bg-success-subtle text-success-emphasis' if params[:type] == 'workout'}" do %>
+      <i class="bi bi-heart-pulse"></i> <%= t('workout') %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to sheets_path(visibility: params[:visibility]), class: "nav-link p-2 text-body #{'bg-info-subtle text-info-emphasis' if params[:type].blank?}" do %>
+      <i class="bi bi-x-circle"></i> <%= t('all') %>
+    <% end %>
+  </li>
+  <li>
+    <div class="dropdown pt-1">
+      <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">Visibility</button>
+      <ul class="dropdown-menu mt-2">
+        <li>
+          <%= link_to sheets_path(type: params[:type], visibility: 'shareable'),
+            class: "dropdown-item text-body #{'bg-info-subtle text-info-emphasis' if params[:visibility] == 'shareable'}" do %>
+
+            <i class="bi bi-share"></i> <%= t('visibility.shareable') %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to sheets_path(type: params[:type], visibility: 'visible'),
+            class: "dropdown-item text-body #{'bg-secondary-subtle text-secondary-emphasis' if params[:visibility] == 'visible'}" do %>
+
+            <i class="bi bi-eye-fill"></i> <%= t('visibility.visible') %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to sheets_path(type: params[:type], visibility: 'premium'),
+            class: "dropdown-item text-body #{'bg-purple-subtle text-purple-emphasis' if params[:visibility] == 'premium'}" do %>
+
+            <i class="bi bi-cash-coin"></i> <%= t('visibility.premium') %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to sheets_path(type: params[:type]), class: "dropdown-item text-body" do %>
+            <i class="bi bi-x-circle"></i> <%= t('all') %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>

@@ -3,8 +3,8 @@ class Sheet < ApplicationRecord
 
   belongs_to :user
 
-  has_many :workouts, dependent: :destroy
-  has_many :diets,    dependent: :destroy
+  has_many :workouts,       dependent: :destroy
+  has_many :diets,          dependent: :destroy
   has_many :sheet_requests, dependent: :destroy
 
   enum :sheet_type, { workout: "workout", diet: "diet" }
@@ -12,8 +12,9 @@ class Sheet < ApplicationRecord
 
   after_update :destroy_invalid_content, if: :saved_change_to_sheet_type?
 
-  scope :search_by_type, ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
-  scope :originals, -> { where(copy: false) }
+  scope :search_by_type,       -> (type)      { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
+  scope :search_by_visibility, -> (visibility) { visibilities.keys.include?(visibility) ? where(visibility: visibilities[visibility]) : all }
+  scope :originals,            -> { where(copy: false) }
 
   def self.grouped_by(period)
     case period.to_s
