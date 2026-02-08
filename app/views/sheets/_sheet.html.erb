@@ -4,9 +4,14 @@
       <i class="bi <%= sheet.workout? ? 'bi-heart-pulse text-success' : 'bi-egg-fried text-warning' %> fs-3 me-2"></i>
       <div>
         <h2 class="h6 mb-0 fw-semibold"><%= sheet.name %></h2>
-        <small class="badge <%= sheet.workout? ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning' %>">
-          <%= sheet.workout? ? t('workout') : t('diet') %>
-        </small>
+        <div class="d-flex gap-2 mt-1 flex-wrap">
+          <small class="badge <%= sheet.workout? ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning' %>">
+            <%= t("#{sheet.sheet_type}") %>
+          </small>
+          <small class="badge <%= visibility_badge_class(sheet) %>">
+            <%= t("visibility.#{sheet.visibility || 'undefined'}") %>
+          </small>
+        </div>
       </div>
     </div>
     <p class="card-text text-muted fs-6"><%= sheet.description %></p>

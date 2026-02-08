@@ -22,16 +22,31 @@
   </div>
 
   <div class="mb-3">
-    <%= form.label :sheet_type, t('.label.sheet_type'), class: 'form-check-label mb-1' %><br />
+    <%= form.label :visibility, t('.label.visibility'), class: 'form-label' %>
+    <%= form.select :visibility, Sheet.visibilities.keys.map { |key| [t("visibility.#{key}"), key] },
+      { selected: form.object.visibility }, class: 'form-select border border-success' %>
+  </div>
 
-    <div class="form-check form-check-inline">
-      <%= form.radio_button :sheet_type, 'workout', class: 'form-check-input' %>
-      <%= form.label :sheet_type_workout, t('workout'), class: 'form-check-label me-2' %>
-    </div>
+  <div class="mb-4">
+    <%= form.label :sheet_type, t('.label.sheet_type'), class: 'form-label mb-1' %>
 
-    <div class="form-check form-check-inline">
-      <%= form.radio_button :sheet_type, 'diet', class: 'form-check-input' %>
-      <%= form.label :sheet_type_diet, t('diet'), class: 'form-check-label'  %>
+    <div class="d-flex align-items-center gap-2">
+      <span class="fw-semibold fs-6 d-flex align-items-center gap-1
+        <%= @sheet.sheet_type == 'workout' ? 'text-success' : 'text-muted' %>">
+        <%= t('workout') %>
+        <i class="bi bi-heart-pulse fs-6"></i>
+      </span>
+
+      <div class="form-check form-switch ms-1 switch-success">
+        <%= form.check_box :sheet_type,
+            { class: 'form-check-input', role: 'switch', onchange: "this.value = this.checked ? 'diet' : 'workout'",
+              checked: @sheet.sheet_type == 'diet' }, 'diet', 'workout' %>
+      </div>
+
+      <span class="fw-semibold fs-6 d-flex align-items-center gap-1 <%= 'text-success' if @sheet.sheet_type == 'diet' %>">
+        <i class="bi bi-cup-hot fs-6"></i>
+        <%= t('diet') %>
+      </span>
     </div>
   </div>
 

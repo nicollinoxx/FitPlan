@@ -82,8 +82,14 @@ pt:
 
   #views
   #sheets--------------------------------
-  workout:            "Treino"
-  diet:               "Dieta"
+  workout:      "Treino"
+  diet:         "Dieta"
+
+  visibility:    "Visibilidade"
+  visibility:
+    shareable:    "Compartilhável"
+    visible:      "Visível"
+    premium:      "Premium"
 
   sheets:
     index:
@@ -97,11 +103,12 @@ pt:
     show:
       title:                'Planilha'
     form:
-      error_message_form:     'impediram esta planilha de ser salva:'
+      error_message_form:   'impediram esta planilha de ser salva:'
       label:
         name:               'Nome'
         description:        'Descrição'
         sheet_type:         'Tipo'
+        visibility:         'Visibilidade'
 
   #sheet_requests----------------------------------
   sheet_request_shared:      'Compartilhou uma ficha'

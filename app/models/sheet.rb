@@ -1,5 +1,5 @@
 class Sheet < ApplicationRecord
-  include Sheet::Copyable
+  include Copyable
 
   belongs_to :user
 
@@ -7,9 +7,8 @@ class Sheet < ApplicationRecord
   has_many :diets,    dependent: :destroy
   has_many :sheet_requests, dependent: :destroy
 
-  validates :sheet_type, inclusion: { in: %w[ workout diet ] }
-
   enum :sheet_type, { workout: "workout", diet: "diet" }
+  enum :visibility, { shareable: "sharable", visible: "visible", premium: "premium" }
 
   after_update :destroy_invalid_content, if: :saved_change_to_sheet_type?
 
@@ -23,6 +22,10 @@ class Sheet < ApplicationRecord
     when "year" then originals.group_by_year(:created_at).count
     else originals.group_by_month(:created_at).count
     end
+  end
+
+  def can_import?
+    visible? || premium?
   end
 
   private

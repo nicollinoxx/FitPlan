@@ -16,3 +16,21 @@ input.form-control:focus {
 .hover-zoom-sm:hover { transform: scale(1.02); }
 .hover-zoom:hover    { transform: scale(1.05); }
 .hover-zoom-lg:hover { transform: scale(1.1);  }
+
+.switch-success .form-check-input:checked {
+  background-color: #22c55e !important;
+  border-color: #22c55e !important;
+}
+
+/* Switch verde usando variáveis Bootstrap */
+.switch-success {
+  --bs-form-switch-bg: var(--bs-success);
+  --bs-form-switch-border-color: var(--bs-success);
+  --bs-form-switch-focus-color: var(--bs-success);
+}
+
+.text-purple { color: #8b5cf6; }
+.bg-purple-subtle { background-color: rgba(139, 92, 246, .18); }
+
+.bg-teal-subtle { background-color: rgba(20, 184, 166, .16); }
+.text-teal { color: #14b8a6; }

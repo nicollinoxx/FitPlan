@@ -51,6 +51,6 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params.require(:sheet).permit(:name, :description, :sheet_type)
+      params.require(:sheet).permit(:name, :description, :sheet_type, :visibility)
     end
 end

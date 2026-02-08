@@ -80,8 +80,15 @@ en:
 
   #views
   #sheets--------------------------------
-  workout:            "Workout"
-  diet:               "Diet"
+  workout:     "Workout"
+  diet:        "Diet"
+
+  visibility:  "Visibility"
+  visibility:
+    shareable: "Shareable"
+    visible:   "Visible"
+    premium:   "Premium"
+
 
   sheets:
     index:
@@ -95,11 +102,12 @@ en:
     show:
       title:                'Sheet'
     form:
-      error_message_form:     'prohibited this sheet from being saved:'
+      error_message_form:   'prohibited this sheet from being saved:'
       label:
         name:               'Name'
         description:        'Description'
         sheet_type:         'Type'
+        visibility:         'Visibility'
 
   #sheet_requests----------------------------------
   sheet_request_shared:      'Shared a sheet'

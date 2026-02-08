@@ -11,7 +11,7 @@ class SheetRequestsController < ApplicationController
   end
 
   def new
-    @sheets = @user.sheets
+    @sheets = @user.sheets.shareable
   end
 
   def create
