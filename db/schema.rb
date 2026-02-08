@@ -10,36 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_26_011934) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_08_033756) do
   create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
     t.text "body"
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
+    t.string "content_type"
     t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -50,45 +50,45 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_26_011934) do
   end
 
   create_table "diets", force: :cascade do |t|
+    t.decimal "calories", default: "0.0"
+    t.decimal "carbohydrate_g", default: "0.0"
+    t.datetime "created_at", null: false
+    t.decimal "fat_g", default: "0.0"
     t.string "meal"
     t.decimal "protein_g", default: "0.0"
-    t.decimal "carbohydrate_g", default: "0.0"
-    t.decimal "fat_g", default: "0.0"
-    t.decimal "calories", default: "0.0"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "sheet_id", null: false
+    t.datetime "updated_at", null: false
     t.index ["sheet_id"], name: "index_diets_on_sheet_id"
   end
 
   create_table "healthy_metrics", force: :cascade do |t|
-    t.decimal "height"
-    t.decimal "weight"
     t.date "birth_date"
+    t.datetime "created_at", null: false
     t.string "gender"
+    t.decimal "height"
     t.decimal "imc"
     t.decimal "tmb"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.decimal "weight"
     t.index ["user_id"], name: "index_healthy_metrics_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "user_agent"
-    t.string "ip_address"
     t.datetime "created_at", null: false
+    t.string "ip_address"
     t.datetime "updated_at", null: false
+    t.string "user_agent"
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "sheet_requests", force: :cascade do |t|
-    t.integer "sender_id", null: false
-    t.integer "recipient_id", null: false
-    t.string "status"
-    t.integer "sheet_id", null: false
     t.datetime "created_at", null: false
+    t.integer "recipient_id", null: false
+    t.integer "sender_id", null: false
+    t.integer "sheet_id", null: false
+    t.string "status"
     t.datetime "updated_at", null: false
     t.index ["recipient_id"], name: "index_sheet_requests_on_recipient_id"
     t.index ["sender_id"], name: "index_sheet_requests_on_sender_id"
@@ -96,36 +96,37 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_26_011934) do
   end
 
   create_table "sheets", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "sheet_type"
+    t.boolean "copy", default: false, null: false
     t.datetime "created_at", null: false
+    t.text "description"
+    t.string "name"
+    t.string "sheet_type"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.boolean "copy", default: false, null: false
+    t.string "visibility", default: "private"
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.boolean "verified", default: false, null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "email", null: false
     t.string "handle"
+    t.string "name"
+    t.string "password_digest", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "verified", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "workouts", force: :cascade do |t|
-    t.string "exercise"
-    t.integer "series"
-    t.string "repetitions"
     t.string "charge"
-    t.time "interval"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "exercise"
+    t.time "interval"
+    t.string "repetitions"
+    t.integer "series"
     t.integer "sheet_id", null: false
+    t.datetime "updated_at", null: false
     t.index ["sheet_id"], name: "index_workouts_on_sheet_id"
   end
 
