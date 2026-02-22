@@ -6,7 +6,8 @@ module SheetScoped
   end
 
   private
+
     def set_sheet
-      @sheet = Sheet.find(params[:sheet_id])
+      @sheet = Current.user.sheets.find(params.expect(:sheet_id))
     end
 end
