@@ -6,9 +6,9 @@ The platform allows you to create personalized workout and diet records, calcula
 
 ## Technologies
 
-- Ruby 3.4.1  
+- Ruby 3.4.5
 - Rails 8
-- SQLite (default for development)  
+- PostgreSQL  
 - Bootstrap 5 for frontend  
 
 ## Prerequisites / Dependencies
@@ -16,11 +16,10 @@ The platform allows you to create personalized workout and diet records, calcula
 - Git  
 - Ruby 3.4.1  
 - Bundler  
-- SQLite  
+- PostgreSQL  
 
 ## setup
 - bundle install
-- rails db:migrate
-- rails assets:precompile
+- rails db:prepare
+- rails yarn build:css
 - rails s
-
