@@ -7,7 +7,7 @@ image: nicollinoxx/fitplan
 # Deploy to these servers.
 servers:
   web:
-    - 163.176.235.50
+    - 46.224.4.204
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -30,6 +30,11 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
+    - DATABASE_URL
+    - CACHE_DATABASE_URL
+    - QUEUE_DATABASE_URL
+    - CABLE_DATABASE_URL
+
   clear:
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
@@ -57,7 +62,7 @@ aliases:
   dbc: app exec --interactive --reuse "bin/rails dbconsole --include-password"
 
 
-# Use a persistent storage volume for sqlite database files and local Active Storage files.
+# Use a persistent storage volume for local Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.
 volumes:
   - "fitplan_storage:/rails/storage"
@@ -84,28 +89,20 @@ builder:
 
 # Use a different ssh user than root
 ssh:
-   user: ubuntu
+  user: root
+  keys:
+    - ~/.ssh/id_ed25519_hetzner
 
 # Use accessory services (secrets come from .kamal/secrets).
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     # Change to 3306 to expose port to the world instead of just local network.
-#     port: "127.0.0.1:3306:3306"
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
-#   redis:
-#     image: redis:7.0
-#     host: 192.168.0.2
-#     port: 6379
-#     directories:
-#       - data:/data
+accessories:
+  db:
+    image: postgres:16
+    host: 46.224.4.204
+    env:
+      clear:
+        POSTGRES_DB: fitplan_production
+        POSTGRES_USER: fitplan
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
