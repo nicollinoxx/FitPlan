@@ -55,6 +55,20 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: fitplan_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d fitplan_test"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     # services:
     #  redis:
@@ -78,6 +92,7 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/fitplan_test
           # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare test
 
