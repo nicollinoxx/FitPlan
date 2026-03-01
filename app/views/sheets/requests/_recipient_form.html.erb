@@ -1,0 +1,34 @@
+<%= form_with url: requests_path(handle: recipient.handle), data: { controller: "redirect", redirect_url_value: requests_path(filter: "sent"), redirect_refresh_value: true } do |form| %>
+  <div class="rounded-3 bg-body-tertiary p-3 p-md-4 shadow-sm">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-3 pb-3">
+      <div class="d-flex align-items-center gap-2">
+        <% if recipient.avatar.attached? %>
+          <%= image_tag recipient.avatar, class: "rounded-circle object-fit-cover border border-success", width: 48, height: 48 %>
+        <% else %>
+          <%= image_tag "avatar.png", class: "rounded-circle border border-success", width: 48, height: 48 %>
+        <% end %>
+
+        <div class="d-flex flex-column">
+          <p class="m-0 fw-semibold text-success"><i class="bi bi-person-vcard me-1"></i><%= recipient.name %></p>
+          <p class="m-0 text-nowrap">@<%= recipient.handle %></p>
+        </div>
+      </div>
+
+      <%= form.button type: "submit", class: "btn btn-success d-none d-md-inline-flex align-items-center" do %>
+        <i class="bi bi-send-fill me-1"></i><%= t("sheets.requests.new.submit") %>
+      <% end %>
+    </div>
+
+    <div class="d-flex flex-column">
+      <%= form.collection_select :sheet_ids, sheets, :id, :name, { include_hidden: false }, placeholder: t("sheets.requests.new.select_sheets_placeholder"), multiple: true, id: "sheets",
+      required: true, data: { controller: "combobox", combobox_max_items_value: 5 } %>
+      <small class="mt-2"><%= t("sheets.requests.new.select_sheets_help") %></small>
+    </div>
+
+    <div class="mt-3 d-grid d-md-none">
+      <%= form.button type: "submit", class: "btn btn-success" do %>
+        <i class="bi bi-send-fill me-1"></i><%= t("sheets.requests.new.submit") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

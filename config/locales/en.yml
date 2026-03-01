@@ -76,6 +76,10 @@ en:
       invalid:              'That password reset link is invalid'
     email_verification:
       invalid:              'That email verification link is invalid'
+
+  errors:
+    sheet_request:
+      not_recipient:        "Only the recipient can accept this request"
   #--------------------------------------
 
   #views
@@ -100,6 +104,22 @@ en:
         name:               'Name'
         description:        'Description'
         sheet_type:         'Type'
+    requests:
+      index:
+        title:               'Sheet requests'
+        filter:              'Filter'
+        filters:
+          all:               'All'
+          sent:              'Sent by me'
+          received:          'Received'
+      new:
+        title:               'New sheet request'
+        search_user:         'Search user'
+        handle:              'Handle (@)'
+        submit:              'Send request'
+        select_sheets:       'Select sheets'
+        select_sheets_placeholder: 'Choose sheets...'
+        select_sheets_help:  'Select up to 5 sheets.'
 
   #sheet_requests----------------------------------
   sheet_request_shared:      'Shared a sheet'

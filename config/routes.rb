@@ -22,10 +22,12 @@ Rails.application.routes.draw do
     resources :workouts do
       resources :videos, only: [:destroy], module: :workouts
     end
-  end
 
-  resources :sheet_requests, only: [:index, :new, :create, :destroy] do
-    patch :accept, on: :member
+    collection do
+      resources :requests, module: :sheets, only: [:index, :new, :create, :destroy] do
+        patch :accept, on: :member
+      end
+    end
   end
 
   get :dashboard, to: "dashboard#index", as: :dashboard

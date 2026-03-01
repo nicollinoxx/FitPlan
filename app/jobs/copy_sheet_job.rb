@@ -3,10 +3,10 @@ class CopySheetJob < ApplicationJob
 
   queue_as :default
 
-  def perform(sheet_request)
-    sheet     = sheet_request.sheet
-    recipient = sheet_request.recipient
+  def perform(request)
+    sheet     = request.sheet
+    recipient = request.recipient
 
-    sheet_request.destroy if sheet.copy_to recipient
+    request.destroy if sheet.copy_to recipient
   end
 end

@@ -1,0 +1,9 @@
+sender_session:
+  user: lazaro_nixon
+  user_agent: "Rails Test"
+  ip_address: "127.0.0.1"
+
+recipient_session:
+  user: lazaro
+  user_agent: "Rails Test"
+  ip_address: "127.0.0.1"

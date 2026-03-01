@@ -31,6 +31,14 @@ class User < ApplicationRecord
 
   after_save :generate_handle_unique, if: :saved_change_to_name?
 
+  def sheet_requests_by_filter(filter)
+    if filter == "sent"
+      sent_sheet_requests
+    else
+      received_sheet_requests
+    end
+  end
+
   private
 
     def generate_handle_unique

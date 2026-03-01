@@ -1,7 +1,7 @@
 @import url("https://esm.sh/tom-select@2.4.3/dist/css/tom-select.min.css");
 
 .ts-control {
-  background-color: var(--bs-light-bg);
+  background-color: var(--bs-body-bg, #fff);
   border-radius: 0.375rem;
   padding: 0.5rem 0.75rem;
   border-color: var(--bs-success);
@@ -21,7 +21,7 @@
 }
 
 .ts-dropdown {
-  background-color: var(--bs-light-bg);
+  background-color: var(--bs-body-bg, #fff);
   border: 1px solid var(--bs-border-color);
   border-radius: 0.375rem;
   padding: 0.25rem;
@@ -30,13 +30,17 @@
   opacity: 0;
 }
 
+.ts-dropdown-content {
+  background-color: var(--bs-body-bg, #fff);
+}
+
 .dropdown-active .ts-dropdown {
   opacity: 1;
   transform: scale(1);
 }
 
 .ts-dropdown .option {
-  background-color: var(--bs-light-bg);
+  background-color: var(--bs-body-bg, #fff);
   padding: 0.375rem 0.5rem;
   border-radius: 0.25rem;
   cursor: pointer;

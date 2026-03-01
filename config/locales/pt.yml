@@ -80,6 +80,10 @@ pt:
     email_verification:
       invalid:              'O link de verificação de e-mail é inválido'
 
+  errors:
+    sheet_request:
+      not_recipient:        "Apenas o destinatário pode aceitar esta solicitação"
+
   #views
   #sheets--------------------------------
   workout:            "Treino"
@@ -102,6 +106,23 @@ pt:
         name:               'Nome'
         description:        'Descrição'
         sheet_type:         'Tipo'
+    requests:
+      index:
+        title:               'Solicitações de planilha'
+        filter:              'Filtrar'
+        filters:
+          sent:              'Enviado por min'
+          received:          'Recebido'
+        sent:                "compartilhou uma ficha"
+        received:            "recebeu uma ficha"
+      new:
+        title:               'Nova solicitação de planilha'
+        search_user:         'Pesquisar usuário'
+        handle:              'Handle do usuário (@)'
+        submit:              'Enviar solicitação'
+        select_sheets:       'Selecionar fichas'
+        select_sheets_placeholder: 'Escolha as fichas...'
+        select_sheets_help:  'Selecione até 5 fichas.'
 
   #sheet_requests----------------------------------
   sheet_request_shared:      'Compartilhou uma ficha'
