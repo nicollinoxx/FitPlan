@@ -307,6 +307,7 @@ en:
       submit:                  'Sign up'
       error_message_form:      'prohibited this registration from being saved:'
       label:
+        name:                  'Name'
         password:              'Password'
         password_confirmation: 'Password confirmation'
 

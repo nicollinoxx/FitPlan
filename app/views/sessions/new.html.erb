@@ -25,7 +25,7 @@
 
       <div class="mb-3">
         <div class="d-flex justify-content-between">
-          <%= form.label :password, t('.label.password'), class: 'form-label' %>
+          <%= form.label :password, t('.form.label.password'), class: 'form-label' %>
           <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'small' %>
         </div>
         <%= form.password_field :password, required: true, class: 'form-control', placeholder: "password" %>

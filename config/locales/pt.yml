@@ -311,6 +311,7 @@ pt:
       submit:                  'Cadastrar'
       error_message_form:      'impediram este cadastro de ser salvo:'
       label:
+        name:                  'Nome'
         password:              'Senha'
         password_confirmation: 'Confirmação de senha'
 

@@ -38,7 +38,6 @@ class DietsController < ApplicationController
 
   def destroy
     @diet.destroy!
-
     recede_or_redirect_to sheet_diets_url(@sheet), notice: I18n.t('notice.diet.destroy')
   end
 
@@ -49,7 +48,7 @@ class DietsController < ApplicationController
     end
 
     def diet_params
-      params.require(:diet).permit(:meal, :description, :protein_g, :carbohydrate_g, :fat_g, :calories)
+      params.expect(diet: [ :meal, :description, :protein_g, :carbohydrate_g, :fat_g, :calories ])
     end
 
     def redirect_if_sheet_type_is_same_as_workout

@@ -38,7 +38,8 @@ class SheetsController < ApplicationController
   end
 
   def destroy
-    @sheet.destroy!; flash[:notice] = I18n.t('notice.sheet.destroy')
+    @sheet.destroy!
+    recede_or_redirect_to sheets_url, notice: I18n.t('notice.sheet.destroy')
   end
 
   private
@@ -51,6 +52,6 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params.require(:sheet).permit(:name, :description, :sheet_type)
+      params.expect(sheet: [ :name, :description, :sheet_type ])
     end
 end

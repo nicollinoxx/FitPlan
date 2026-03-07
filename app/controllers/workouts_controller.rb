@@ -47,7 +47,7 @@ class WorkoutsController < ApplicationController
     end
 
     def workout_params
-      params.require(:workout).permit(:exercise, :series, :repetitions, :charge, :interval, :video)
+      params.expect(workout: [ :exercise, :series, :repetitions, :charge, :interval, :video ])
     end
 
     def redirect_if_sheet_type_is_same_as_diet
