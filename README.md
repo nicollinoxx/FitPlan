@@ -14,7 +14,7 @@ The platform allows you to create personalized workout and diet records, calcula
 ## Prerequisites / Dependencies
 
 - Git  
-- Ruby 3.4.1  
+- Ruby 3.4.5  
 - Bundler  
 - PostgreSQL  
 
