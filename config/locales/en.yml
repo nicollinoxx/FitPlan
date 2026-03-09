@@ -23,6 +23,9 @@ en:
   minimum_characters: "6 characters minimum."
   cancel:             "Cancel"
   confirm:            "Confirm"
+  all:                "All"
+  type:               "Type"
+  visibility:         "Visibility"
 
   #error forms
   error:                 'errors'

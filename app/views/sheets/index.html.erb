@@ -6,7 +6,7 @@
 </div>
 
 <%= turbo_frame_tag "sheets" do %>
-  <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-2">
+  <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-2 py-2" style="top: 56px;">
     <% if turbo_native_app? %>
         <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
           <div class="d-flex align-items-center">
@@ -19,32 +19,26 @@
         <% end %>
     <% end %>
 
-    <div class="ms-auto dropdown bg-light rounded mt-2">
-      <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-        <i class="bi bi-funnel-fill"></i> <%= t('.filter') %>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-          <%= link_to sheets_path(type: 'diet'), class: 'dropdown-item' do %>
-            <i class="bi bi-egg-fried me-2"></i> <%= t('diet') %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to sheets_path(type: 'workout'), class: 'dropdown-item' do %>
-            <i class="bi-heart-pulse me-2"></i> <%= t('workout') %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to sheets_path, class: 'dropdown-item' do %>
-            <i class="bi bi-list-ul me-2"></i> <%= t('all') %>
-          <% end %>
-        </li>
-      </ul>
+    <div class="ms-auto d-flex gap-1">
+      <%= render "shared/filter_pills", label: t('type'), current_value: params[:type], style: "bg-body-tertiary border",
+            options: [
+              { label: t('all'), value: nil, url: sheets_path(visibility: params[:visibility]) },
+              { label: t('workout'), value: "workout", url: sheets_path(type: "workout", visibility: params[:visibility]) },
+              { label: t('diet'), value: "diet", url: sheets_path(type: "diet", visibility: params[:visibility]) }
+            ] %>
+
+      <%= render "shared/filter_pills", label: t('visibility'), current_value: params[:visibility], style: "bg-body-tertiary border",
+            options: [
+              { label: t('all'), value: nil, url: sheets_path(type: params[:type]) },
+              { label: t("enums.sheet.visibility.shareable"), value: "shareable", url: sheets_path(type: params[:type], visibility: "shareable") },
+              { label: t("enums.sheet.visibility.importable"), value: "importable", url: sheets_path(type: params[:type], visibility: "importable") }
+            ] %>
     </div>
   </div>
 
   <div id="paginables" class="row">
     <%= render partial: "sheet_card", collection: @page.records, as: :sheet %>
-    <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
+    <%= render "shared/paginables/next_page_container",
+      src: sheets_path(page: @page.next_param, type: params[:type], visibility: params[:visibility], format: :turbo_stream) unless @page.last? %>
   </div>
 <% end %>

@@ -1,0 +1,18 @@
+<%# locals: (options:, current_value:, label:, style: "btn-outline-secondary") %>
+<% active_option = options.find { |o| o[:value].to_s == current_value.to_s } %>
+<div class="dropdown">
+  <button class="btn btn-sm <%= active_option ? style.sub('outline-', '') : style %> dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-funnel-fill me-1"></i><%= label %><% if active_option %>: <%= active_option[:label] %><% end %>
+  </button>
+  <ul class="dropdown-menu">
+    <% options.each do |option| %>
+      <li>
+        <% active = current_value.to_s == option[:value].to_s %>
+        <%= link_to option[:url], class: "dropdown-item d-flex align-items-center gap-2 #{'active' if active}", data: { turbo_frame: option[:turbo_frame] } do %>
+          <% if active %><i class="bi bi-check-lg"></i><% end %>
+          <%= option[:label] %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

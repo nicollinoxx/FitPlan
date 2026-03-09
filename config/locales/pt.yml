@@ -25,7 +25,8 @@ pt:
   cancel:             "Cancelar"
   confirm:            "Confirmar"
   all:                'Todos'
-
+  type:               'Tipo'
+  visibility:         'Visibilidade'
 
   #error forms
   error:                 'erros'

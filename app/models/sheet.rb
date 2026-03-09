@@ -14,8 +14,9 @@ class Sheet < ApplicationRecord
 
   after_update :destroy_invalid_content, if: :saved_change_to_sheet_type?
 
-  scope :search_by_type, ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
-  scope :originals, -> { where(copy: false) }
+  scope :search_by_type,       ->(type)       { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
+  scope :search_by_visibility, ->(visibility) { visibilities.keys.include?(visibility) ? where(visibility: visibility) : all }
+  scope :originals,            -> { where(copy: false) }
 
   def self.grouped_by(period)
     case period.to_s
@@ -24,6 +25,10 @@ class Sheet < ApplicationRecord
     when "year" then originals.group_by_year(:created_at).count
     else originals.group_by_month(:created_at).count
     end
+  end
+
+  def self.filtered_by(params)
+    search_by_type(params[:type]).search_by_visibility(params[:visibility])
   end
 
   private
