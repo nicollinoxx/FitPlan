@@ -88,6 +88,16 @@ pt:
   #sheets--------------------------------
   workout:            "Treino"
   diet:               "Dieta"
+  shareable:          "Compartilhável"
+  importable:         "Importável"
+  enums:
+    sheet:
+      sheet_type:
+        workout:      "Treino"
+        diet:         "Dieta"
+      visibility:
+        shareable:    "Compartilhável"
+        importable:   "Importável"
 
   sheets:
     index:
@@ -106,6 +116,7 @@ pt:
         name:               'Nome'
         description:        'Descrição'
         sheet_type:         'Tipo'
+        visibility:         'Visibilidade'
     requests:
       index:
         title:               'Solicitações de planilha'

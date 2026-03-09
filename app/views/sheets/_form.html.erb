@@ -22,6 +22,12 @@
   </div>
 
   <div class="mb-3">
+    <%= form.label :visibility, t('.label.visibility'), class: 'form-check-label mb-1' %>
+    <%= form.select :visibility, options_for_select(Sheet.visibilities.keys.map { |k| [t("enums.sheet.visibility.#{k}"), k] }, form.object.visibility), {},
+      class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
     <%= form.label :sheet_type, t('.label.sheet_type'), class: 'form-check-label mb-1' %><br />
 
     <div class="form-check form-check-inline">

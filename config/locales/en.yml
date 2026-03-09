@@ -86,6 +86,16 @@ en:
   #sheets--------------------------------
   workout:            "Workout"
   diet:               "Diet"
+  shareable:          "Shareable"
+  importable:         "Importable"
+  enums:
+    sheet:
+      sheet_type:
+        workout:      "Workout"
+        diet:         "Diet"
+      visibility:
+        shareable:    "Shareable"
+        importable:   "Importable"
 
   sheets:
     index:
@@ -104,6 +114,7 @@ en:
         name:               'Name'
         description:        'Description'
         sheet_type:         'Type'
+        visibility:         'Visibility'
     requests:
       index:
         title:               'Sheet requests'

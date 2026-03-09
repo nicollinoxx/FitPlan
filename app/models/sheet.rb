@@ -9,6 +9,7 @@ class Sheet < ApplicationRecord
 
   validates :sheet_type, inclusion: { in: %w[ workout diet ] }
 
+  enum :visibility, { shareable: "shareable", importable: "importable" }
   enum :sheet_type, { workout: "workout", diet: "diet" }
 
   after_update :destroy_invalid_content, if: :saved_change_to_sheet_type?

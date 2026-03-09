@@ -52,6 +52,6 @@ class SheetsController < ApplicationController
     end
 
     def sheet_params
-      params.expect(sheet: [ :name, :description, :sheet_type ])
+      params.expect(sheet: [ :name, :description, :sheet_type, :visibility ])
     end
 end
