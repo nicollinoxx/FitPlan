@@ -24,11 +24,20 @@ Rails.application.routes.draw do
     end
 
     collection do
+      resources :imports, module: :sheets, only: [:index, :show]
       resources :requests, module: :sheets, only: [:index, :new, :create, :destroy] do
         patch :accept, on: :member
       end
     end
   end
+
+  namespace :marketplace do
+    resources :products, only: %i[index show] do
+      post :import, on: :member
+    end
+  end
+
+  resources :products
 
   get :dashboard, to: "dashboard#index", as: :dashboard
 
