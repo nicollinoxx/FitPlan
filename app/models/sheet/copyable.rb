@@ -1,9 +1,9 @@
 module Sheet::Copyable
-  def copy_to(recipient)
+  def copy_to(recipient, origin_type: :direct_share, sheet_import: nil)
     return true unless workouts.exists? || diets.exists?
 
     ActiveRecord::Base.transaction do
-      copy = recipient.sheets.create!(attributes_for_copy)
+      copy = recipient.sheets.create!(attributes_for_copy(origin_type:, sheet_import:))
 
       if workout?
         copy_workouts_to(copy)
@@ -33,5 +33,13 @@ module Sheet::Copyable
   end
 
   def copy_item_attributes(item) = item.attributes.except("id", "created_at", "updated_at")
-  def attributes_for_copy        = attributes.except("id", "created_at", "updated_at").merge(copy: true)
+  def attributes_for_copy(origin_type:, sheet_import:)
+    attributes.except("id", "created_at", "updated_at").merge(
+      copy: true,
+      visibility: "shareable",
+      source_sheet_id: id,
+      origin_type: origin_type,
+      sheet_import_id: sheet_import&.id
+    )
+  end
 end

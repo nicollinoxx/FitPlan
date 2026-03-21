@@ -7,6 +7,6 @@ class CopySheetJob < ApplicationJob
     sheet     = request.sheet
     recipient = request.recipient
 
-    request.destroy if sheet.copy_to recipient
+    request.destroy if sheet.copy_to(recipient, origin_type: :direct_share)
   end
 end
