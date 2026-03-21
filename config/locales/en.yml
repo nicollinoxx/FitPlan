@@ -5,6 +5,8 @@ en:
   #navbar
   link_sheets: 'Sheets'
   link_sheet_requests: 'Sheet Requests'
+  link_marketplace: 'Marketplace'
+  link_my_products: 'My Products'
   link_dashboard: 'Dashboard'
 
   #languages
@@ -67,6 +69,11 @@ en:
       create:               'Healthy metric was successfully created'
     sheet_request:
       create:               'Sheet request was successfully created'
+    product:
+      create:               "Product was successfully created"
+      update:               "Product was successfully updated"
+      destroy:              "Product was successfully destroyed"
+      import:               "Package imported successfully"
     profiles:
       update:               'Profile updated successfully'
 
@@ -74,6 +81,8 @@ en:
   alert:
     session:
       invalid:               'Email or password is incorrect'
+    product:
+      import_not_allowed:    "This product cannot be imported"
     password_reset:
       create:               "You can't reset your password until you verify your email"
       invalid:              'That password reset link is invalid'
@@ -83,6 +92,8 @@ en:
   errors:
     sheet_request:
       not_recipient:        "Only the recipient can accept this request"
+    product:
+      missing_sheets:       "Select at least one importable sheet"
   #--------------------------------------
 
   #views
@@ -101,9 +112,22 @@ en:
         importable:   "Importable"
 
   sheets:
+    badges:
+      copied:               "Copied"
+      imported:             "Imported"
     index:
       title:                'Sheets'
       filter:               'Filter'
+      imports:              'Imports'
+    imports:
+      index:
+        title:                "Imports"
+        products:             "Products"
+        imported_sheets:
+          one:                "1 imported sheet"
+          other:              "%{count} imported sheets"
+      show:
+        back:                 "Back"
     new:
       title:                'New sheet'
     edit:
@@ -111,6 +135,7 @@ en:
       alert:                'The content present in the sheet will be deleted if you change the current sheet type.'
     show:
       title:                'Sheet'
+      imported_from:        "Imported from"
     form:
       error_message_form:     'prohibited this sheet from being saved:'
       label:
@@ -151,6 +176,41 @@ en:
       title:                'New sheet request'
       search_user:          'Search user'
       handle:               'Handle (@)'
+
+  marketplace:
+    products:
+      index:
+        title:                "Marketplace"
+        no_description:       "No description"
+        sheets_count:
+          one:                "1 sheet"
+          other:              "%{count} sheets"
+      show:
+        included_sheets:      "Included sheets"
+        import:               "Import package"
+        back:                 "Back"
+
+  products:
+    index:
+      title:                "My Products"
+      no_description:       "No description"
+      sheets_count:
+        one:                "1 sheet"
+        other:              "%{count} sheets"
+    new:
+      title:                "New product"
+    edit:
+      title:                "Edit product"
+    show:
+      included_sheets:      "Included sheets"
+      back:                 "Back"
+    form:
+      title:              "Title"
+      description:        "Description"
+      status:             "Status"
+      sheets:             "Importable sheets"
+      empty:              "You do not have importable sheets available yet."
+      submit:             "Save product"
 
   #workouts------------------------------
   repetitions:        'Repetitions'

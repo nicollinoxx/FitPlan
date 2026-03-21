@@ -6,6 +6,8 @@ pt:
   #navbar
   link_sheets:         'Planilhas'
   link_sheet_requests: 'Solicitações de Planilha'
+  link_marketplace:    'Marketplace'
+  link_my_products:    'Meus Produtos'
   link_dashboard:      'Painel'
 
   #languages
@@ -68,6 +70,11 @@ pt:
       create:               'Métrica adicionada com sucesso'
     sheet_request:
       create:               'Solicitação de planilha criada com sucesso'
+    product:
+      create:               "Produto criado com sucesso"
+      update:               "Produto atualizado com sucesso"
+      destroy:              "Produto excluído com sucesso"
+      import:               "Pacote importado com sucesso"
     profiles:
       update:               'Perfil atualizado com sucesso'
 
@@ -75,6 +82,8 @@ pt:
   alert:
     session:
       invalid:               'E-mail ou senha incorretos'
+    product:
+      import_not_allowed:    "Este produto não pode ser importado"
     password_reset:
       create:               "Você não pode redefinir sua senha até verificar seu e-mail"
       invalid:              'O link para redefinir a senha é inválido'
@@ -84,6 +93,8 @@ pt:
   errors:
     sheet_request:
       not_recipient:        "Apenas o destinatário pode aceitar esta solicitação"
+    product:
+      missing_sheets:       "Selecione pelo menos uma ficha importável"
 
   #views
   #sheets--------------------------------
@@ -101,9 +112,22 @@ pt:
         importable:   "Importável"
 
   sheets:
+    badges:
+      copied:               "Copiada"
+      imported:             "Importada"
     index:
       title:                'Planilhas'
       filter:               'Filtrar'
+      imports:              'Importações'
+    imports:
+      index:
+        title:                "Importações"
+        products:             "Produtos"
+        imported_sheets:
+          one:                "1 ficha importada"
+          other:              "%{count} fichas importadas"
+      show:
+        back:                 "Voltar"
     new:
       title:                'Nova planilha'
     edit:
@@ -111,6 +135,7 @@ pt:
       alert:                'O conteúdo desta planilha será apagado se você alterar o tipo atual.'
     show:
       title:                'Planilha'
+      imported_from:        "Importada de"
     form:
       error_message_form:     'impediram esta planilha de ser salva:'
       label:
@@ -153,6 +178,41 @@ pt:
       title:                'Nova solicitação de planilha'
       search_user:          'Pesquisar usuário'
       handle:               'Handle do usuário (@)'
+
+  marketplace:
+    products:
+      index:
+        title:                "Marketplace"
+        no_description:       "Sem descrição"
+        sheets_count:
+          one:                "1 ficha"
+          other:              "%{count} fichas"
+      show:
+        included_sheets:      "Fichas incluídas"
+        import:               "Importar pacote"
+        back:                 "Voltar"
+
+  products:
+    index:
+      title:                "Meus Produtos"
+      no_description:       "Sem descrição"
+      sheets_count:
+        one:                "1 ficha"
+        other:              "%{count} fichas"
+    new:
+      title:                "Novo produto"
+    edit:
+      title:                "Editar produto"
+    show:
+      included_sheets:      "Fichas incluídas"
+      back:                 "Voltar"
+    form:
+      title:              "Título"
+      description:        "Descrição"
+      status:             "Status"
+      sheets:             "Fichas importáveis"
+      empty:              "Você ainda não tem fichas importáveis para vender."
+      submit:             "Salvar produto"
 
   #workouts------------------------------
   repetitions:        'Repetições'
