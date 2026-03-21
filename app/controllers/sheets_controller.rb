@@ -3,7 +3,7 @@ class SheetsController < ApplicationController
   before_action :set_sheet, only: %i[ show edit update destroy ]
 
   def index
-    @sheets = @user.sheets.filtered_by(params)
+    @sheets = @user.sheets.authored.filtered_by(params)
 
     set_page_and_extract_portion_from @sheets.order(created_at: :desc)
     sleep 2.seconds unless @page.first?

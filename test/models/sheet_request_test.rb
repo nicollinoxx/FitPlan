@@ -57,12 +57,20 @@ class SheetRequestTest < ActiveSupport::TestCase
     assert_equal ["pending"], created_requests.distinct.pluck(:status)
   end
 
-  test "create_for_sheets raises RecordNotFound when a sheet does not belong to sender" do
+  test "create_for_sheets raises RecordInvalid when a sheet does not belong to sender" do
     outsider_sheet = @recipient.sheets.create!(name: "Recipient Sheet", sheet_type: "workout")
 
     assert_no_difference("SheetRequest.count") do
-      assert_raises(ActiveRecord::RecordNotFound) do
+      assert_raises(ActiveRecord::RecordInvalid) do
         SheetRequest.create_for_sheets(sender: @sender, recipient: @recipient, sheet_ids: [outsider_sheet.id])
+      end
+    end
+  end
+
+  test "create_for_sheets raises RecordInvalid when a sheet is importable" do
+    assert_no_difference("SheetRequest.count") do
+      assert_raises(ActiveRecord::RecordInvalid) do
+        SheetRequest.create_for_sheets(sender: @sender, recipient: @recipient, sheet_ids: [sheets(:importable_workout).id])
       end
     end
   end
