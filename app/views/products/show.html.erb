@@ -1,0 +1,24 @@
+<% content_for(:title, @product.title) %>
+
+<div class="d-flex justify-content-between align-items-start mb-3 gap-3">
+  <div>
+    <h1 class="mb-1"><%= @product.title %></h1>
+    <p class="text-muted mb-0"><%= @product.description %></p>
+  </div>
+  <div class="text-end">
+    <small class="badge bg-primary-subtle text-primary-emphasis"><%= @product.status %></small>
+  </div>
+</div>
+
+<h2 class="h5"><%= t(".included_sheets") %></h2>
+<div class="row">
+  <% @product.product_items.each do |item| %>
+    <%= render partial: "sheets/sheet_card", locals: { sheet: item.sheet } %>
+  <% end %>
+</div>
+
+<div class="d-flex gap-2 mt-3">
+  <%= link_to t("edit"), edit_product_path(@product), class: "btn btn-primary" %>
+  <%= button_to t("destroy"), product_path(@product), method: :delete, class: "btn btn-danger", data: { turbo_confirm: t("message_destroy") } %>
+  <%= link_to t(".back"), products_path, class: "btn btn-outline-secondary" %>
+</div>
