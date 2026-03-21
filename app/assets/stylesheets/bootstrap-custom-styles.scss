@@ -16,3 +16,19 @@ input.form-control:focus {
 .hover-zoom-sm:hover { transform: scale(1.02); }
 .hover-zoom:hover    { transform: scale(1.05); }
 .hover-zoom-lg:hover { transform: scale(1.1);  }
+
+.bg-purple-subtle {
+  background-color: color-mix(in srgb, var(--bs-purple), var(--bs-body-bg) 84%);
+}
+
+.text-purple {
+  color: color-mix(in srgb, var(--bs-purple), var(--bs-body-color) 12%);
+}
+
+[data-bs-theme="dark"] .bg-purple-subtle {
+  background-color: color-mix(in srgb, var(--bs-purple), var(--bs-body-bg) 72%);
+}
+
+[data-bs-theme="dark"] .text-purple {
+  color: color-mix(in srgb, var(--bs-purple), white 24%);
+}

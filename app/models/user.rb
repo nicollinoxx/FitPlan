@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_one  :healthy_metric, dependent: :destroy
   has_many :sessions,       dependent: :destroy
   has_many :sheets,         dependent: :destroy
+  has_many :products,       dependent: :destroy
+  has_many :sheet_imports,  dependent: :destroy
 
   has_many :sent_sheet_requests, class_name: "SheetRequest", foreign_key: :sender_id, dependent: :destroy
   has_many :received_sheet_requests, class_name: "SheetRequest", foreign_key: :recipient_id, dependent: :destroy

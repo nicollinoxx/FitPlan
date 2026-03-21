@@ -12,7 +12,7 @@ module Sheets
     end
 
     def new
-      @sheets = @user.sheets
+      @sheets = @user.sheets.authored.shareable
     end
 
     def create

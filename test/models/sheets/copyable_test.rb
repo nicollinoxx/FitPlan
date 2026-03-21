@@ -22,6 +22,8 @@ module Sheets
 
       copied_sheet = @recipient.sheets.order(created_at: :desc).first
       assert copied_sheet.workout?
+      assert_equal sheet, copied_sheet.source_sheet
+      assert_equal "direct_share", copied_sheet.origin_type
 
       assert_equal 1, copied_sheet.workouts.count
       assert copied_sheet.workouts.first.video.attached?
@@ -39,6 +41,8 @@ module Sheets
 
       copied_sheet = @recipient.sheets.order(created_at: :desc).first
       assert copied_sheet.diet?
+      assert_equal sheet, copied_sheet.source_sheet
+      assert_equal "direct_share", copied_sheet.origin_type
       assert_equal sheet.diets.count, copied_sheet.diets.count
 
       copied_diet = copied_sheet.diets.first

@@ -38,6 +38,18 @@
         </li>
 
         <li class="nav-item">
+          <%= link_to marketplace_products_path, class: 'nav-link px-3 fw-medium py-2' do %>
+            <i class="bi bi-shop me-1"></i> <%= t('link_marketplace') %>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to products_path, class: 'nav-link px-3 fw-medium py-2' do %>
+            <i class="bi bi-box-seam me-1"></i> <%= t('link_my_products') %>
+          <% end %>
+        </li>
+
+        <li class="nav-item">
           <%= link_to dashboard_path, class: 'nav-link px-3 fw-medium py-2' do %>
             <i class="bi bi-activity me-1"></i> <%= t('link_dashboard') %>
           <% end %>

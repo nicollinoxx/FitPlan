@@ -5,21 +5,32 @@ one:
   description: "A workout sheet"
   sheet_type: workout
   user: lazaro_nixon
+  visibility: shareable
 
 two:
   name: Diet Sheet 1
   description: "A diet sheet"
   sheet_type: diet
   user: lazaro_nixon
+  visibility: shareable
 
 empty_workout:
   name: Empty Workout Sheet
   description: "No workouts here"
   sheet_type: workout
   user: lazaro_nixon
+  visibility: shareable
 
 empty_diet:
   name: Empty Diet Sheet
   description: "No diets here"
   sheet_type: diet
   user: lazaro_nixon
+  visibility: shareable
+
+importable_workout:
+  name: Importable Workout Sheet
+  description: "A product workout sheet"
+  sheet_type: workout
+  user: lazaro_nixon
+  visibility: importable

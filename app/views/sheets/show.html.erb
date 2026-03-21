@@ -6,6 +6,9 @@
     <div class="text-end fs-6">
       <small class="text-muted d-block">type: <%= @sheet.workout? ? t('workout') : t('diet') %></small>
       <small class="text-muted">font: <%= @sheet.copy? ? "copied" : "original" %></small>
+      <% if @sheet.sheet_import.present? %>
+        <small class="text-muted d-block"><%= t("sheets.show.imported_from") %>: <%= @sheet.sheet_import.product.title %></small>
+      <% end %>
     </div>
   </div>
 </div>

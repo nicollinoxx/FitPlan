@@ -1,0 +1,40 @@
+<%= form_with model: product, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" } do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(product.errors.count, t('error')) %> <%= t('.error_message_form')%></h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, t(".title"), class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, t(".description"), class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <%= form.label :status, t(".status"), class: "form-label" %>
+      <%= form.select :status, Product.statuses.keys.map { |key| [key.humanize, key] }, {}, class: "form-select" %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :sheet_ids, t(".sheets"), class: "form-label" %>
+    <%= form.collection_select :sheet_ids, @user.sheets.available_for_import, :id, :name, { prompt: t(".empty") }, { multiple: true, class: "form-select" } %>
+  </div>
+
+  <div class="d-flex gap-2">
+    <%= form.submit t(".submit"), class: "btn btn-success" %>
+    <%= link_to t("cancel"), products_path, class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>
