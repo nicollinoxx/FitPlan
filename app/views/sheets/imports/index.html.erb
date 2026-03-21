@@ -1,0 +1,15 @@
+<% content_for(:title, t(".title")) %>
+
+<h1><%= t(".title") %></h1>
+
+<div class="row">
+  <% @sheet_imports.each do |sheet_import| %>
+    <div class="col-md-6 p-2">
+      <div class="rounded shadow-sm border bg-body-tertiary p-3">
+        <h2 class="h5 mb-1"><%= link_to sheet_import.product.title, import_path(sheet_import), class: "text-decoration-none" %></h2>
+        <div class="text-muted small mb-2"><%= t(".imported_sheets", count: sheet_import.sheets.size) %></div>
+        <small class="badge bg-info-subtle text-info-emphasis"><%= sheet_import.status %></small>
+      </div>
+    </div>
+  <% end %>
+</div>

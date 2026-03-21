@@ -1,0 +1,17 @@
+<% content_for(:title, @sheet_import.product.title) %>
+
+<div class="d-flex justify-content-between align-items-start mb-3 gap-3">
+  <div>
+    <h1 class="mb-1"><%= @sheet_import.product.title %></h1>
+    <p class="text-muted mb-0"><%= @sheet_import.product.description %></p>
+  </div>
+  <small class="badge bg-info-subtle text-info-emphasis"><%= @sheet_import.status %></small>
+</div>
+
+<div class="row">
+  <% @sheet_import.sheets.order(created_at: :desc).each do |sheet| %>
+    <%= render partial: "sheets/sheet_card", locals: { sheet: sheet } %>
+  <% end %>
+</div>
+
+<%= link_to t(".back"), imports_path, class: "btn btn-outline-secondary mt-3" %>

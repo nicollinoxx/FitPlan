@@ -11,6 +11,16 @@
           <small class="badge <%= visibility_badge_class(sheet) %>">
             <%= t("enums.sheet.visibility.#{sheet.visibility}") %>
           </small>
+
+          <% if sheet.sheet_import.present? %>
+            <small class="badge bg-info-subtle text-info-emphasis">
+              <%= t("sheets.badges.imported") %>
+            </small>
+          <% elsif sheet.copy? %>
+            <small class="badge bg-secondary-subtle text-secondary-emphasis">
+              <%= t("sheets.badges.copied") %>
+            </small>
+          <% end %>
         </div>
       </div>
     </div>
