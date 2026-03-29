@@ -16,7 +16,7 @@ module Completion::Completable
   end
 
   def complete_sheet_if_all_done
-    sheet.sheet_completions.create!(user: user, completed_at: completed_at)
+    sheet.sheet_completions.create!(user: sheet.user, completed_at: completed_at)
   end
 
   def item_by_sheet_type

@@ -6,10 +6,6 @@ class Diet < ApplicationRecord
 
   validates :meal, presence: true
 
-  def completion_on_round
-    completions.current_round(sheet)
-  end
-
   before_save :calculate_calories
 
   def percentage_of_calories

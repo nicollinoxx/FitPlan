@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
     @average_diet_calories = average_diet_calories
 
     @completions = completions_by_period
-    @total_completions_today = @user.completions.today.count
+    @total_completions_today = @user.sheet_completions.today.count
   end
 
   private
@@ -41,7 +41,7 @@ class DashboardController < ApplicationController
   end
 
   def completions_by_period
-    @user.completions.grouped_by(params[:period] || "month")
+    @user.sheet_completions.grouped_by(params[:period] || "month")
   end
 
   def set_user

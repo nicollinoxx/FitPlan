@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="my-4">
-  <%= render @workout, count: 0, last_completion: nil %>
+  <%= render @workout, completed: @workout.completions.current_round(@sheet).exists? %>
 </div>
 
 <div data-controller="bridge--menu">
@@ -12,5 +12,6 @@
       <%= button_to t('destroy'), sheet_workout_path(@sheet, @workout), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger' %>
     </div>
   <hr>
-    <%= link_to 'back', sheet_workouts_path(@sheet), class: 'hide-on-mobile mt-2' %>
+
+  <%= link_to 'back', sheet_workouts_path(@sheet), class: 'hide-on-mobile mt-2' %>
 </div>

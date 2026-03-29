@@ -1,6 +1,6 @@
 <% content_for(:title, t('.title')) %>
 
-<%= render @diet, count: 0, last_completion: nil %>
+<%= render @diet, count: 0, completed: @diet.completions.current_round(@sheet).exists? %>
 
 <%= render 'diets/analyze', percentage: @percentage unless @diet.calories.zero? %>
 

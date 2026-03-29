@@ -4,7 +4,7 @@ module Workouts
     before_action :set_workout
 
     def create
-      @completion = @sheet.completions.create!(user: Current.user, workout: @workout)
+      @completion = @sheet.completions.create!(workout: @workout)
       refresh_or_redirect_to sheet_workouts_url(@sheet), notice: congratulations_notice
     end
 

@@ -9,7 +9,7 @@
   <div class="row">
     <% @workouts.each do |workout| %>
       <div class="col-md-6 mb-4">
-        <%= render workout, completed: workout.completion_on_round.exists? %>
+        <%= render workout, completed: workout.completions.current_round(@sheet).exists? %>
       </div>
     <% end %>
   </div>
