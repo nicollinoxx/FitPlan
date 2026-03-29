@@ -1,11 +1,11 @@
 <div class="col-md-6 p-2 hover-zoom-sm">
-  <div class="<%= sheet.sheet_completions.today.any? ? "bg-completed-#{sheet_color(sheet)} border border-completed-#{sheet_color(sheet)}" : 'bg-body-tertiary' %>
+  <div class="<%= sheet.sheet_completions_today.any? ? "bg-completed-#{sheet_color(sheet)} border border-completed-#{sheet_color(sheet)}" : 'bg-body-tertiary' %>
     border-start border-2 border-<%= sheet_color(sheet) %> rounded shadow-sm position-relative px-3 py-2">
 
     <%= render sheet %>
 
     <div class="position-absolute top-0 end-0 p-1", style="top: 1rem; right: 1rem; z-index: 2;">
-      <% if sheet.sheet_completions.today.any? %>
+      <% if sheet.sheet_completions_today.any? %>
         <span class="badge bg-<%= sheet_color(sheet) %> me-1">
           <%= sheet.sheet_completions_today.size %>x <%= t('today') %>
         </span>

@@ -98,6 +98,7 @@ pt:
     index:
       title:                'Planilhas'
       filter:               'Filtrar'
+      completed:            'Concluídos'
     new:
       title:                'Nova planilha'
     edit:

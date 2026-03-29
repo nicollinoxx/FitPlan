@@ -96,6 +96,7 @@ en:
     index:
       title:                'Sheets'
       filter:               'Filter'
+      completed:            'Completed'
     new:
       title:                'New sheet'
     edit:
