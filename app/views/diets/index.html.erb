@@ -8,7 +8,7 @@
 <div id="diets" class="row">
     <% @diets.each do |diet| %>
         <div class="col-md-6 p-2 mb-2">
-            <%= render diet, completed: diet.completions.current_round(@sheet).exists? %>
+            <%= render diet, completed: @diets_completed.include?(diet.id) %>
         </div>
     <% end %>
 </div>

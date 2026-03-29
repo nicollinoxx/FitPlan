@@ -20,6 +20,10 @@ class Sheet < ApplicationRecord
   scope :completed_today, -> { joins(:sheet_completions_today).distinct }
   scope :filter_by,       ->(type, completed) { completed ? search_by_type(type).completed_today : search_by_type(type) }
 
+  def completed_item_ids(item_key)
+    completions.current_round(self).where.not(item_key => nil).pluck(item_key).to_set
+  end
+
   def self.grouped_by(period)
     case period.to_s
     when "day"  then group_by_day(:created_at).count
