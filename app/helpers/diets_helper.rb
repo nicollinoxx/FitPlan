@@ -1,7 +1,7 @@
 module DietsHelper
   def diet_completion_button(sheet, diet, completed)
     if completed
-      button_to sheet_diet_completions_path(sheet, diet), method: :delete, class: 'btn btn-sm btn-light' do
+      button_to sheet_diet_completion_path(sheet, diet, diet.completion_on_round.last), method: :delete, class: 'btn btn-sm btn-light' do
         content_tag(:i, '', class: 'bi bi-check-lg')
       end
     else

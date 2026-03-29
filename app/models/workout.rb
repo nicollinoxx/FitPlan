@@ -4,4 +4,8 @@ class Workout < ApplicationRecord
   has_many :completions, dependent: :destroy
 
   validates :exercise, :series, :repetitions, presence: true
+
+  def completion_on_round
+    completions.current_round(sheet)
+  end
 end

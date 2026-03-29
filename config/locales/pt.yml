@@ -49,6 +49,8 @@ pt:
     completion:
       create:               'Marcado como concluído'
       destroy:              'Conclusão removida'
+    sheet_completion:
+      create:               'Parabéns, ficha concluída!'
     password:
       update:               'Sua senha foi alterada'
     password_reset:

@@ -46,6 +46,8 @@ en:
     completion:
       create:               'Marked as completed'
       destroy:              'Completion removed'
+    sheet_completion:
+      create:               'Congratulations, sheet completed!'
     password:
       update:               'Your password has been changed'
     password_reset:
