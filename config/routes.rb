@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :sheets do
+    resources :completions, only: %i[create destroy], module: :sheets
     resources :diets
     resources :workouts do
       resources :videos, only: [:destroy], module: :workouts
