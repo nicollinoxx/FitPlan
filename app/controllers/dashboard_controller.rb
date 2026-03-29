@@ -1,35 +1,31 @@
-# app/controllers/dashboard_controller.rb
 class DashboardController < ApplicationController
   before_action :set_user
 
   def index
     @healthy_metric = Current.user.healthy_metric
 
-    @sheets = sheets_by_type
-
     @diets_calories = diet_calories_by_sheet
     @total_diet_calories = total_diet_calories
     @average_diet_calories = average_diet_calories
 
-    @completions = completions_by_period
-    @total_completions_today = @user.sheet_completions.today.count
+    completions = @user.sheet_completions
+    @completions = completions_by_type
+    @completions_by_sheet = completions_by_sheet
+    @total_completions_today = completions.today.count
+    @total_completions = completions.count
+    @streak = completions.streak
+    @best_day = completions.best_weekday
+    @weekly_progress = completions.weekly_progress
   end
 
   private
-
-  def sheets_by_type
-    [
-      { name: "Workout", data: @user.sheets.workout.grouped_by(params[:period]) },
-      { name: "Diet",    data: @user.sheets.diet.grouped_by(params[:period]) }
-    ]
-  end
 
   def sheets_with_diets
     @sheets_with_diets ||= @user.sheets.diet.joins(:diets)
   end
 
   def diet_calories_by_sheet
-    sheets_with_diets.group('sheets.id', 'sheets.name').pluck('sheets.name, SUM(diets.calories)')
+    sheets_with_diets.group('sheets.name').sum('diets.calories')
   end
 
   def total_diet_calories
@@ -40,8 +36,15 @@ class DashboardController < ApplicationController
     sheets_with_diets.average('diets.calories')&.round(2) || 0
   end
 
-  def completions_by_period
-    @user.sheet_completions.grouped_by(params[:period] || "month")
+  def completions_by_type
+    [
+      { name: "Workout", data: @user.sheet_completions.joins(sheet: :workouts).merge(Sheet.workout).grouped_by(params[:period]) },
+      { name: "Diet",    data: @user.sheet_completions.joins(sheet: :diets).merge(Sheet.diet).grouped_by(params[:period]) }
+    ]
+  end
+
+  def completions_by_sheet
+    @user.sheet_completions.joins(:sheet).group('sheets.name').count
   end
 
   def set_user

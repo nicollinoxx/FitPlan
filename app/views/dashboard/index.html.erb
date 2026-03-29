@@ -6,12 +6,28 @@
   <%= render 'card', title: t('.cards.total_calories'), content: "#{@total_diet_calories} kcal", icon: "bi bi-fire" %>
   <%= render 'card', title: t('.cards.average_calories'), content: "#{@average_diet_calories} kcal", icon: "bi bi-activity" %>
   <%= render 'card', title: t('.cards.completions_today'), content: @total_completions_today, icon: "bi bi-check-circle" %>
+  <%= render 'card', title: t('.cards.total_completions'), content: @total_completions, icon: "bi bi-bar-chart" %>
+  <%= render 'card', title: t('.cards.streak'), content: "#{@streak} #{t('.cards.days')}", icon: "bi bi-trophy" %>
+  <%= render 'card', title: t('.cards.best_day'), content: @best_day ? t("date.day_names")[@best_day] : "-", icon: "bi bi-star" %>
 </div>
+
+<% if @weekly_progress[:last_week] > 0 || @weekly_progress[:this_week] > 0 %>
+  <div class="bg-body-tertiary rounded border-bottom border-orange p-3 mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-2 ">
+      <h6 class="mb-0"><i class="bi bi-bar-chart text-orange"></i> <%= t('.weekly_progress.title') %></h6>
+      <small class="text-muted"><%= @weekly_progress[:this_week] %> / <%= @weekly_progress[:last_week] %> <%= t('.weekly_progress.vs_last_week') %></small>
+    </div>
+    <p class="text-muted small mb-2"><%= t('.weekly_progress.description') %></p>
+    <div class="progress" style="height: 8px;">
+      <div class="progress-bar bg-orange" style="width: <%= @weekly_progress[:percentage] %>%"></div>
+    </div>
+  </div>
+<% end %>
 
 <div class="d-flex justify-content-end mb-2 mt-4">
   <%= form_with(url: dashboard_path, method: :get, data: { turbo_frame: :sheets }) do |form| %>
     <%= form.select :period, period_options, { selected: params[:period] || 'month' },
-      class: "form-select form-select-sm", onchange: "this.form.requestSubmit()" %>
+      class: "form-select form-select-sm border-primary", onchange: "this.form.requestSubmit()" %>
   <% end %>
 </div>
 
@@ -20,30 +36,27 @@
     <div class="col-md-6 mb-3">
       <div class="p-3 bg-body-tertiary border-start border-bottom border-success rounded">
         <h5 class="card-title mb-3">
-          <%= t('.charts.sheets_created') %>
+          <%= t('.charts.completions') %>
           <%= t(".filters.period.#{params[:period] || 'month'}") %>
         </h5>
-        <%= line_chart @sheets, colors: ["green", "red"], height: "300px" %>
+        <%= line_chart @completions, colors: ["green", "red"], height: "300px" %>
       </div>
     </div>
 
     <div class="col-md-6 mb-3">
-      <div class="p-3 bg-body-tertiary border-start border-bottom border-success rounded">
-        <h5 class="card-title mb-3"><%= t('.charts.diets_calories_by_sheet') %></h5>
-        <%= column_chart @diets_calories, colors: ["#4caf50"], height: "300px" %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row my-2">
-    <div class="col-md-12 mb-3">
-      <div class="p-3 bg-body-tertiary border-start border-bottom border-success rounded">
-        <h5 class="card-title mb-3">
-          <%= t('.charts.completions') %>
-          <%= t(".filters.period.#{params[:period] || 'month'}") %>
-        </h5>
-        <%= area_chart @completions, colors: ["#4caf50"], height: "300px" %>
+      <div class="p-3 bg-body-tertiary border-start border-bottom border-primary rounded">
+        <h5 class="card-title mb-3"><%= t('.charts.completions_by_sheet') %></h5>
+        <%= column_chart @completions_by_sheet, colors: ["#0000FF"], height: "300px" %>
       </div>
     </div>
   </div>
 <% end %>
+
+<div class="row my-2 mb-3">
+  <div class="col-md-12">
+    <div class="p-3 bg-body-tertiary border-start border-bottom border-orange rounded">
+      <h5 class="card-title mb-3"><%= t('.charts.diets_calories_by_sheet') %></h5>
+      <%= bar_chart @diets_calories, colors: ["#FF7F00"], height: "300px" %>
+    </div>
+  </div>
+</div>

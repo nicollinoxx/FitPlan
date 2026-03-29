@@ -1,5 +1,15 @@
 
 pt:
+  date:
+    day_names:
+      - Domingo
+      - Segunda-feira
+      - Terça-feira
+      - Quarta-feira
+      - Quinta-feira
+      - Sexta-feira
+      - Sábado
+
   #system Theme
   system_theme: 'Sistema'
 
@@ -256,10 +266,19 @@ pt:
         total_calories: "Calorias totais"
         average_calories: "Calorias médias"
         completions_today: "Conclusões hoje"
+        total_completions: "Total de conclusões"
+        streak: "Sequência"
+        days: "dias"
+        best_day: "Melhor dia"
+      weekly_progress:
+        title: "Progresso semanal"
+        description: "Conclusões desta semana comparadas com a semana passada"
+        vs_last_week: "vs semana passada"
       charts:
         sheets_created: "Fichas criadas por"
         diets_calories_by_sheet: "Calorias das dietas por ficha"
         completions: "Conclusões por"
+        completions_by_sheet: "Conclusões por ficha"
       filters:
         period:
           day:   "dia"

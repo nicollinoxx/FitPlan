@@ -269,10 +269,19 @@ en:
         total_calories: "Total calories"
         average_calories: "Average calories"
         completions_today: "Completions today"
+        total_completions: "Total completions"
+        streak: "Streak"
+        days: "days"
+        best_day: "Best day"
+      weekly_progress:
+        title: "Weekly progress"
+        description: "Completions this week compared to last week"
+        vs_last_week: "vs last week"
       charts:
         sheets_created: "Sheets created"
         diets_calories_by_sheet: "Calories by sheet"
         completions: "Completions by"
+        completions_by_sheet: "Completions by sheet"
       filters:
         period:
           day:   "day"

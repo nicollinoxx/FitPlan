@@ -1,7 +1,7 @@
 $color-mode-type: data;
 
-input.form-control { border-color: var(--bs-success) !important; }
-select.form-select { border-color: var(--bs-success) !important; }
+input.form-control { border-color: var(--bs-success); }
+select.form-select { border-color: var(--bs-success); }
 
 input.form-control:focus {
   border-color: var(--bs-success) !important;
