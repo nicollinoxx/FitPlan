@@ -4,7 +4,7 @@ class WorkoutsController < ApplicationController
   before_action :redirect_if_sheet_type_is_same_as_diet
 
   def index
-    @workouts = @sheet.workouts
+    @workouts = @sheet.workouts.includes(:completions_today)
   end
 
   def show
@@ -43,7 +43,7 @@ class WorkoutsController < ApplicationController
   private
 
     def set_workout
-      @workout =  @sheet.workouts.find(params[:id])
+      @workout = @sheet.workouts.find(params[:id])
     end
 
     def workout_params

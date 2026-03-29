@@ -5,7 +5,7 @@ class SheetsController < ApplicationController
   def index
     @sheets = @user.sheets.search_by_type(params[:type])
 
-    set_page_and_extract_portion_from @sheets.order(created_at: :desc)
+    set_page_and_extract_portion_from @sheets.includes(:sheet_completions_today).order(created_at: :desc)
     sleep 2.seconds unless @page.first?
   end
 

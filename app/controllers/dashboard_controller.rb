@@ -10,6 +10,9 @@ class DashboardController < ApplicationController
     @diets_calories = diet_calories_by_sheet
     @total_diet_calories = total_diet_calories
     @average_diet_calories = average_diet_calories
+
+    @completions = completions_by_period
+    @total_completions_today = @user.completions.today.count
   end
 
   private
@@ -35,6 +38,10 @@ class DashboardController < ApplicationController
 
   def average_diet_calories
     sheets_with_diets.average('diets.calories')&.round(2) || 0
+  end
+
+  def completions_by_period
+    @user.completions.grouped_by(params[:period] || "month")
   end
 
   def set_user
