@@ -24,15 +24,6 @@ class Sheet < ApplicationRecord
     completions.current_round(self).where.not(item_key => nil).pluck(item_key).to_set
   end
 
-  def self.grouped_by(period)
-    case period.to_s
-    when "day"  then group_by_day(:created_at).count
-    when "week" then group_by_week(:created_at).count
-    when "year" then group_by_year(:created_at).count
-    else group_by_month(:created_at).count
-    end
-  end
-
   private
 
     def destroy_invalid_content
