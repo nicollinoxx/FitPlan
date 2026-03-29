@@ -91,28 +91,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_231122) do
     t.index ["user_id"], name: "index_healthy_metrics_on_user_id"
   end
 
-  create_table "product_items", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.bigint "product_id", null: false
-    t.bigint "sheet_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id", "sheet_id"], name: "index_product_items_on_product_id_and_sheet_id", unique: true
-    t.index ["product_id"], name: "index_product_items_on_product_id"
-    t.index ["sheet_id"], name: "index_product_items_on_sheet_id"
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.text "description"
-    t.datetime "published_at"
-    t.string "status", default: "draft", null: false
-    t.string "title", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["status"], name: "index_products_on_status"
-    t.index ["user_id"], name: "index_products_on_user_id"
-  end
-
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -132,18 +110,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_231122) do
     t.index ["user_id"], name: "index_sheet_completions_on_user_id"
   end
 
-  create_table "sheet_imports", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "imported_at"
-    t.bigint "product_id", null: false
-    t.string "status", default: "pending", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["product_id"], name: "index_sheet_imports_on_product_id"
-    t.index ["status"], name: "index_sheet_imports_on_status"
-    t.index ["user_id"], name: "index_sheet_imports_on_user_id"
-  end
-
   create_table "sheet_requests", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "recipient_id", null: false
@@ -161,16 +127,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_231122) do
     t.datetime "created_at", null: false
     t.text "description"
     t.string "name"
-    t.string "origin_type"
-    t.bigint "sheet_import_id"
     t.string "sheet_type"
-    t.bigint "source_sheet_id"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.string "visibility", default: "shareable", null: false
-    t.index ["origin_type"], name: "index_sheets_on_origin_type"
-    t.index ["sheet_import_id"], name: "index_sheets_on_sheet_import_id"
-    t.index ["source_sheet_id"], name: "index_sheets_on_source_sheet_id"
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
 
@@ -205,19 +164,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_231122) do
   add_foreign_key "completions", "workouts"
   add_foreign_key "diets", "sheets"
   add_foreign_key "healthy_metrics", "users"
-  add_foreign_key "product_items", "products"
-  add_foreign_key "product_items", "sheets"
-  add_foreign_key "products", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "sheet_completions", "sheets"
   add_foreign_key "sheet_completions", "users"
-  add_foreign_key "sheet_imports", "products"
-  add_foreign_key "sheet_imports", "users"
   add_foreign_key "sheet_requests", "sheets"
   add_foreign_key "sheet_requests", "users", column: "recipient_id"
   add_foreign_key "sheet_requests", "users", column: "sender_id"
-  add_foreign_key "sheets", "sheet_imports"
-  add_foreign_key "sheets", "sheets", column: "source_sheet_id"
+
   add_foreign_key "sheets", "users"
   add_foreign_key "workouts", "sheets"
 end
