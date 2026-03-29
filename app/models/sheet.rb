@@ -5,7 +5,10 @@ class Sheet < ApplicationRecord
 
   has_many :workouts, dependent: :destroy
   has_many :diets,    dependent: :destroy
+  has_many :completions, dependent: :destroy
   has_many :sheet_requests, dependent: :destroy
+  has_many :sheet_completions, dependent: :destroy
+  has_many :sheet_completions_today, -> { today }, class_name: "SheetCompletion"
 
   validates :sheet_type, inclusion: { in: %w[ workout diet ] }
 
