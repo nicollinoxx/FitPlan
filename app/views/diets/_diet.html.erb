@@ -1,13 +1,13 @@
 <div id="<%= dom_id diet %>" class="shadow rounded border">
-  <div class="bg-success p-2 text-light rounded-top d-flex justify-content-between align-items-center">
+  <div class="bg-success p-2 text-light rounded-top">
     <h2 class="h6 mb-0 text-truncate">
-      <i class="bi bi-cup-hot me-1"></i><%= diet.meal %>
-    </h2>
-    <% if action_name != 'show' %>
-      <%= link_to sheet_diet_path(@sheet, diet), class: 'btn btn-sm btn-outline-light rounded' do %>
-        <i class="bi bi-pencil"></i>
+      <i class="bi bi-cup-hot me-1"></i>
+      <% if action_name != 'show' %>
+        <%= link_to diet.meal, sheet_diet_path(@sheet, diet), class: 'text-light text-decoration-none' %>
+      <% else %>
+        <%= diet.meal %>
       <% end %>
-    <% end %>
+    </h2>
   </div>
 
   <div class="px-3 pb-3">
@@ -33,6 +33,20 @@
         <p class="small text-muted mb-0"><i class="bi bi-fire"></i> <%= t('calories')%></p>
         <p class="fw-bold mb-0 text-danger"><%= diet.calories %></p>
       </div>
+    </div>
+  </div>
+
+  <div class="border-top p-2 d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-2">
+      <%= button_to sheet_completions_path(@sheet), params: { completion: { diet_id: diet.id } }, class: 'btn btn-sm btn-success' do %>
+        <i class="bi bi-check-lg me-1"></i><%= t('complete') %>
+      <% end %>
+      <% if count > 0 %>
+        <span class="text-success fw-semibold small"><%= count %>x <%= t('today') %></span>
+        <%= button_to sheet_completion_path(@sheet, last_completion), method: :delete, class: 'btn btn-sm btn-outline-secondary' do %>
+          <i class="bi bi-arrow-counterclockwise"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
