@@ -2,32 +2,24 @@ module Completion::Completable
   extend ActiveSupport::Concern
 
   included do
-    after_create :complete_sheet_if_all_done
+    after_create :complete_sheet_if_all_done, if: :all_items_completed?
   end
 
   private
 
   def complete_sheet_if_all_done
-    counts = completion_counts
-
-    return unless all_items_completed?(counts) && new_round?(counts)
     sheet.sheet_completions.create!(user: user, completed_at: Time.current)
   end
 
-  def completion_counts
-    item_key = sheet.workout? ? :workout_id : :diet_id
-    sheet.completions.today.group(item_key).count
+  def all_items_completed?
+    sheet.completions.current_round(sheet).distinct.count(item_by_sheet_type) == sheet_items.count
   end
 
-  def all_items_completed?(counts)
-    counts.size == items_count
+  def item_by_sheet_type
+    sheet.workout? ? :workout_id : :diet_id
   end
 
-  def new_round?(counts)
-    counts.values.min > sheet.sheet_completions.today.count
-  end
-
-  def items_count
-    sheet.workout? ? sheet.workouts.count : sheet.diets.count
+  def sheet_items
+    sheet.workout? ? sheet.workouts : sheet.diets
   end
 end

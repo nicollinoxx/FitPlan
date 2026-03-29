@@ -1,5 +1,5 @@
 <div id="<%= dom_id workout %>" class="shadow rounded border">
-  <div class="bg-success text-light bg-opacity-20 p-2 rounded-top">
+  <div class="bg-success text-light bg-opacity-20 p-2 rounded-top d-flex justify-content-between align-items-center">
     <h2 class="h6 mb-0 text-truncate">
       <i class="bi bi-activity me-1"></i>
       <% if action_name != 'show' %>
@@ -8,6 +8,8 @@
         <%= workout.exercise %>
       <% end %>
     </h2>
+
+    <%= workout_completion_button(@sheet, workout, completed) if action_name != 'show' %>
   </div>
 
   <div class="p-3">
@@ -45,19 +47,5 @@
         </div>
       </div>
     <% end %>
-  </div>
-
-  <div class="border-top p-2 d-flex justify-content-between align-items-center">
-    <div class="d-flex align-items-center gap-2">
-      <%= button_to sheet_completions_path(@sheet), params: { completion: { workout_id: workout.id } }, class: 'btn btn-sm btn-success' do %>
-        <i class="bi bi-check-lg me-1"></i><%= t('complete') %>
-      <% end %>
-      <% if count > 0 %>
-        <span class="text-success fw-semibold small"><%= count %>x <%= t('today') %></span>
-        <%= button_to sheet_completion_path(@sheet, last_completion), method: :delete, class: 'btn btn-sm btn-outline-secondary' do %>
-          <i class="bi bi-arrow-counterclockwise"></i>
-        <% end %>
-      <% end %>
-    </div>
   </div>
 </div>

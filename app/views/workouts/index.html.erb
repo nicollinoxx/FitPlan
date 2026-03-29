@@ -9,7 +9,7 @@
   <div class="row">
     <% @workouts.each do |workout| %>
       <div class="col-md-6 mb-4">
-        <%= render workout, count: workout.completions_today.size, last_completion: workout.completions_today.last %>
+        <%= render workout, completed: workout.completions.current_round(@sheet).exists? %>
       </div>
     <% end %>
   </div>

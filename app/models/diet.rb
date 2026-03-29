@@ -1,8 +1,8 @@
 class Diet < ApplicationRecord
   belongs_to :sheet
   has_rich_text :description
+
   has_many :completions, dependent: :destroy
-  has_many :completions_today, -> { today }, class_name: "Completion"
 
   validates :meal, presence: true
 

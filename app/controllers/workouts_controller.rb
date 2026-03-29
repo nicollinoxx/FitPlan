@@ -4,7 +4,7 @@ class WorkoutsController < ApplicationController
   before_action :redirect_if_sheet_type_is_same_as_diet
 
   def index
-    @workouts = @sheet.workouts.includes(:completions_today)
+    @workouts = @sheet.workouts
   end
 
   def show

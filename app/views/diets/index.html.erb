@@ -8,7 +8,7 @@
 <div id="diets" class="row">
     <% @diets.each do |diet| %>
         <div class="col-md-6 p-2 mb-2">
-            <%= render diet, count: diet.completions_today.size, last_completion: diet.completions_today.last %>
+            <%= render diet, completed: diet.completions.current_round(@sheet).exists? %>
         </div>
     <% end %>
 </div>
