@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+yesterday:
+  sheet: one
+  user: lazaro_nixon
+  completed_at: <%= 1.day.ago %>
+
+two_days_ago:
+  sheet: one
+  user: lazaro_nixon
+  completed_at: <%= 2.days.ago %>

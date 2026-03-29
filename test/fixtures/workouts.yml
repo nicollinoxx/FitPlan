@@ -7,6 +7,13 @@ one:
   charge: MyString
   sheet: one
 
+another:
+  exercise: Another Exercise
+  series: 3
+  repetitions: 10
+  charge: MyString
+  sheet: one
+
 two:
   exercise: MyString
   series: 1
