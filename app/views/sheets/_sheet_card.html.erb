@@ -1,14 +1,17 @@
 <div class="col-md-6 p-2 hover-zoom-sm">
-  <div class="bg-body-tertiary border-start border-2 <%= sheet.workout? ? 'border-success' : 'border-warning' %>
-    rounded shadow position-relative p-3">
+  <div class="<%= sheet.sheet_completions.today.any? ? "bg-completed-#{sheet_color(sheet)} border border-completed-#{sheet_color(sheet)}" : 'bg-body-tertiary' %>
+    border-start border-2 border-<%= sheet_color(sheet) %> rounded shadow-sm position-relative px-3 py-2">
 
     <%= render sheet %>
-    <div class="position-absolute top-0 end-0 p-2", style="top: 1rem; right: 1rem; z-index: 2;">
+
+    <div class="position-absolute top-0 end-0 p-1", style="top: 1rem; right: 1rem; z-index: 2;">
       <% if sheet.sheet_completions.today.any? %>
-        <span class="badge bg-success me-1"><%= sheet.sheet_completions_today.size %>x <%= t('today') %></span>
+        <span class="badge bg-<%= sheet_color(sheet) %> me-1">
+          <%= sheet.sheet_completions_today.size %>x <%= t('today') %>
+        </span>
       <% end %>
 
-      <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "me-1 btn btn-sm border border-2 rounded" do %>
+      <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "me-1 btn btn-sm border border-1 rounded" do %>
         <i class="bi bi-pencil"></i>
       <% end %>
     </div>
