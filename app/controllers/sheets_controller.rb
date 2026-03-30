@@ -39,7 +39,7 @@ class SheetsController < ApplicationController
 
   def destroy
     @sheet.destroy!
-    recede_or_redirect_to sheets_url, notice: I18n.t('notice.sheet.destroy')
+    recede_or_redirect_to sheets_url(format: :html), notice: I18n.t('notice.sheet.destroy')
   end
 
   private

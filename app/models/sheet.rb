@@ -18,7 +18,14 @@ class Sheet < ApplicationRecord
 
   scope :search_by_type,  ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
   scope :completed_today, -> { joins(:sheet_completions_today).distinct }
-  scope :filter_by,       ->(type, completed) { completed ? search_by_type(type).completed_today : search_by_type(type) }
+
+  def self.filter_by(type, completed)
+    if completed.to_s == 'true'
+      search_by_type(type).completed_today
+    else
+      search_by_type(type)
+    end
+  end
 
   def completed_item_ids(item_key)
     completions.current_round(self).where.not(item_key => nil).pluck(item_key).to_set

@@ -3,6 +3,7 @@ require "test_helper"
 class SheetCompletionTest < ActiveSupport::TestCase
   setup do
     @user = users(:lazaro_nixon)
+    travel_to Time.zone.local(2026, 3, 29, 12, 0, 0)
   end
 
   test "streak should count consecutive days from today" do
@@ -12,6 +13,7 @@ class SheetCompletionTest < ActiveSupport::TestCase
   end
 
   test "streak should be zero with no completions today" do
+    SheetCompletion.destroy_all
     assert_equal 0, @user.sheet_completions.streak
   end
 

@@ -4,7 +4,7 @@ module Diets
     before_action :set_diet
 
     def create
-      @completion = @sheet.completions.create!(diet: @diet)
+      @completion = @sheet.completions.current_round(@sheet).find_or_create_by!(diet: @diet)
       refresh_or_redirect_to sheet_diets_url(@sheet), notice: congratulations_notice
     end
 
