@@ -9,7 +9,7 @@
   <div class="row">
     <% @workouts.each do |workout| %>
       <div class="col-md-6 mb-4">
-        <%= render workout %>
+        <%= render workout, completed: @workouts_completed.include?(workout.id) %>
       </div>
     <% end %>
   </div>

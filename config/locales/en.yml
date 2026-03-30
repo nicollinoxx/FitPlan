@@ -19,6 +19,8 @@ en:
   edit:               "Edit"
   new:                "+ New"
   destroy:            "Destroy"
+  complete:           "Complete"
+  today:              "today"
   message_destroy:    "Are you sure?"
   minimum_characters: "6 characters minimum."
   cancel:             "Cancel"
@@ -41,6 +43,11 @@ en:
       create:               'Diet was successfully created'
       update:               'Diet was successfully updated'
       destroy:              'Diet was successfully destroyed'
+    completion:
+      create:               'Marked as completed'
+      destroy:              'Completion removed'
+    sheet_completion:
+      create:               'Congratulations, sheet completed!'
     password:
       update:               'Your password has been changed'
     password_reset:
@@ -91,6 +98,7 @@ en:
     index:
       title:                'Sheets'
       filter:               'Filter'
+      completed:            'Completed'
     new:
       title:                'New sheet'
     edit:
@@ -260,9 +268,20 @@ en:
       cards:
         total_calories: "Total calories"
         average_calories: "Average calories"
+        completions_today: "Completions today"
+        total_completions: "Total completions"
+        streak: "Streak"
+        days: "days"
+        best_day: "Best day"
+      weekly_progress:
+        title: "Weekly progress"
+        description: "Completions this week compared to last week"
+        vs_last_week: "vs last week"
       charts:
         sheets_created: "Sheets created"
         diets_calories_by_sheet: "Calories by sheet"
+        completions: "Completions by"
+        completions_by_sheet: "Completions by sheet"
       filters:
         period:
           day:   "day"

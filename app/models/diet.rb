@@ -2,6 +2,8 @@ class Diet < ApplicationRecord
   belongs_to :sheet
   has_rich_text :description
 
+  has_many :completions, dependent: :destroy
+
   validates :meal, presence: true
 
   before_save :calculate_calories

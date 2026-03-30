@@ -1,0 +1,6 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+old:
+  sheet: one
+  workout: one
+  completed_at: <%= 1.week.ago %>

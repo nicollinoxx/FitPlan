@@ -5,6 +5,7 @@ class WorkoutsController < ApplicationController
 
   def index
     @workouts = @sheet.workouts
+    @workouts_completed = @sheet.completed_item_ids(:workout_id)
   end
 
   def show
@@ -43,7 +44,7 @@ class WorkoutsController < ApplicationController
   private
 
     def set_workout
-      @workout =  @sheet.workouts.find(params[:id])
+      @workout = @sheet.workouts.find(params[:id])
     end
 
     def workout_params

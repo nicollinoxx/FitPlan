@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_26_011934) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_28_225954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,18 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_26_011934) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "completions", force: :cascade do |t|
+    t.datetime "completed_at", null: false
+    t.datetime "created_at", null: false
+    t.bigint "diet_id"
+    t.bigint "sheet_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "workout_id"
+    t.index ["diet_id"], name: "index_completions_on_diet_id"
+    t.index ["sheet_id"], name: "index_completions_on_sheet_id"
+    t.index ["workout_id"], name: "index_completions_on_workout_id"
+  end
+
   create_table "diets", force: :cascade do |t|
     t.decimal "calories", default: "0.0"
     t.decimal "carbohydrate_g", default: "0.0"
@@ -84,6 +96,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_26_011934) do
     t.string "user_agent"
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "sheet_completions", force: :cascade do |t|
+    t.datetime "completed_at", null: false
+    t.datetime "created_at", null: false
+    t.bigint "sheet_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["sheet_id"], name: "index_sheet_completions_on_sheet_id"
+    t.index ["user_id"], name: "index_sheet_completions_on_user_id"
   end
 
   create_table "sheet_requests", force: :cascade do |t|
@@ -134,9 +156,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_26_011934) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "completions", "diets"
+  add_foreign_key "completions", "sheets"
+  add_foreign_key "completions", "workouts"
   add_foreign_key "diets", "sheets"
   add_foreign_key "healthy_metrics", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "sheet_completions", "sheets"
+  add_foreign_key "sheet_completions", "users"
   add_foreign_key "sheet_requests", "sheets"
   add_foreign_key "sheet_requests", "users", column: "recipient_id"
   add_foreign_key "sheet_requests", "users", column: "sender_id"

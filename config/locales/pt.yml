@@ -1,5 +1,15 @@
 
 pt:
+  date:
+    day_names:
+      - Domingo
+      - Segunda-feira
+      - Terça-feira
+      - Quarta-feira
+      - Quinta-feira
+      - Sexta-feira
+      - Sábado
+
   #system Theme
   system_theme: 'Sistema'
 
@@ -20,6 +30,8 @@ pt:
   edit:               "Editar"
   new:                "+ Novo"
   destroy:            "Excluir"
+  complete:           "Concluir"
+  today:              "hoje"
   message_destroy:    "Você tem certeza?"
   minimum_characters: "Mínimo de 6 caracteres."
   cancel:             "Cancelar"
@@ -44,6 +56,11 @@ pt:
       create:               'Dieta criada com sucesso'
       update:               'Dieta atualizada com sucesso'
       destroy:              'Dieta excluída com sucesso'
+    completion:
+      create:               'Marcado como concluído'
+      destroy:              'Conclusão removida'
+    sheet_completion:
+      create:               'Parabéns, ficha concluída!'
     password:
       update:               'Sua senha foi alterada'
     password_reset:
@@ -93,6 +110,7 @@ pt:
     index:
       title:                'Planilhas'
       filter:               'Filtrar'
+      completed:            'Concluídos'
     new:
       title:                'Nova planilha'
     edit:
@@ -247,9 +265,20 @@ pt:
       cards:
         total_calories: "Calorias totais"
         average_calories: "Calorias médias"
+        completions_today: "Conclusões hoje"
+        total_completions: "Total de conclusões"
+        streak: "Sequência"
+        days: "dias"
+        best_day: "Melhor dia"
+      weekly_progress:
+        title: "Progresso semanal"
+        description: "Conclusões desta semana comparadas com a semana passada"
+        vs_last_week: "vs semana passada"
       charts:
         sheets_created: "Fichas criadas por"
         diets_calories_by_sheet: "Calorias das dietas por ficha"
+        completions: "Conclusões por"
+        completions_by_sheet: "Conclusões por ficha"
       filters:
         period:
           day:   "dia"

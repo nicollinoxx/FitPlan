@@ -5,7 +5,10 @@ class Sheet < ApplicationRecord
 
   has_many :workouts, dependent: :destroy
   has_many :diets,    dependent: :destroy
+  has_many :completions, dependent: :destroy
   has_many :sheet_requests, dependent: :destroy
+  has_many :sheet_completions, dependent: :destroy
+  has_many :sheet_completions_today, -> { today }, class_name: "SheetCompletion"
 
   validates :sheet_type, inclusion: { in: %w[ workout diet ] }
 
@@ -13,16 +16,19 @@ class Sheet < ApplicationRecord
 
   after_update :destroy_invalid_content, if: :saved_change_to_sheet_type?
 
-  scope :search_by_type, ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
-  scope :originals, -> { where(copy: false) }
+  scope :search_by_type,  ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
+  scope :completed_today, -> { joins(:sheet_completions_today).distinct }
 
-  def self.grouped_by(period)
-    case period.to_s
-    when "day"  then originals.group_by_day(:created_at).count
-    when "week" then originals.group_by_week(:created_at).count
-    when "year" then originals.group_by_year(:created_at).count
-    else originals.group_by_month(:created_at).count
+  def self.filter_by(type, completed)
+    if completed.to_s == 'true'
+      search_by_type(type).completed_today
+    else
+      search_by_type(type)
     end
+  end
+
+  def completed_item_ids(item_key)
+    completions.current_round(self).where.not(item_key => nil).pluck(item_key).to_set
   end
 
   private

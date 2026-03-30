@@ -1,7 +1,7 @@
 $color-mode-type: data;
 
-input.form-control { border-color: var(--bs-success) !important; }
-select.form-select { border-color: var(--bs-success) !important; }
+input.form-control { border-color: var(--bs-success); }
+select.form-select { border-color: var(--bs-success); }
 
 input.form-control:focus {
   border-color: var(--bs-success) !important;
@@ -16,3 +16,57 @@ input.form-control:focus {
 .hover-zoom-sm:hover { transform: scale(1.02); }
 .hover-zoom:hover    { transform: scale(1.05); }
 .hover-zoom-lg:hover { transform: scale(1.1);  }
+
+// Custom color: Orange
+$orange: #fd7e14;
+
+:root {
+  --bs-orange: #{$orange};
+}
+
+.bg-orange { background-color: var(--bs-orange) !important; }
+.text-orange { color: var(--bs-orange) !important; }
+.border-orange { border-color: var(--bs-orange) !important; }
+
+.btn-orange {
+  @extend .btn;
+  background-color: var(--bs-orange);
+  border-color: var(--bs-orange);
+  color: white;
+
+  &:hover, &:focus, &:active, &.active {
+    background-color: darken($orange, 10%);
+    border-color: darken($orange, 10%);
+    color: white;
+  }
+}
+
+.btn-outline-orange {
+  @extend .btn;
+  color: var(--bs-orange);
+  border-color: var(--bs-orange);
+
+  &:hover, &:focus, &:active, &.active {
+    background-color: var(--bs-orange);
+    border-color: var(--bs-orange);
+    color: white;
+  }
+}
+
+.badge-orange {
+  background-color: var(--bs-orange) !important;
+  color: white;
+}
+
+// Custom completed colors (Bootstrap-style naming)
+:root {
+  --bs-completed-success-bg: rgba(25, 135, 84, 0.15);
+  --bs-completed-success-border: rgba(25, 135, 84, 0.4);
+  --bs-completed-warning-bg: rgba(255, 193, 7, 0.15);
+  --bs-completed-warning-border: rgba(255, 193, 7, 0.4);
+}
+
+.bg-completed-success { background-color: var(--bs-completed-success-bg) !important; }
+.bg-completed-warning { background-color: var(--bs-completed-warning-bg) !important; }
+.border-completed-success { border-color: var(--bs-completed-success-border) !important; }
+.border-completed-warning { border-color: var(--bs-completed-warning-border) !important; }
