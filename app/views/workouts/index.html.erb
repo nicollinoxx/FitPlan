@@ -5,15 +5,15 @@
   <%= link_to t('new'), new_sheet_workout_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success flex-shrink-0' %>
 </div>
 
-<div id="workouts">
+<%= turbo_frame_tag "workouts" do %>
   <div class="row">
     <% @workouts.each do |workout| %>
       <div class="col-md-6 mb-4">
-        <%= render workout, completed: @workouts_completed.include?(workout.id) %>
+        <%= render workout, completion: @completions_by_workout_id[workout.id] %>
       </div>
     <% end %>
   </div>
-</div>
+<% end %>
 
 <br>
 

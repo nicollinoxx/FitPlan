@@ -27,8 +27,16 @@ class Sheet < ApplicationRecord
     end
   end
 
-  def completed_item_ids(item_key)
-    completions.current_round(self).where.not(item_key => nil).pluck(item_key).to_set
+  def completions_in_current_round
+    completions.current_round(self)
+  end
+
+  def completed_diet_ids
+    completions.today.where.not(diet_id: nil).pluck(:diet_id).to_set
+  end
+
+  def completions_indexed_by_workout_id
+    completions_in_current_round.where.not(workout_id: nil).index_by(&:workout_id)
   end
 
   private

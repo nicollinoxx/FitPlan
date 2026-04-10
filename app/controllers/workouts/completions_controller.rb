@@ -4,8 +4,8 @@ module Workouts
     before_action :set_workout
 
     def create
-      @completion = @sheet.completions.current_round(@sheet).find_or_create_by!(workout: @workout)
-      refresh_or_redirect_to sheet_workouts_url(@sheet), notice: congratulations_notice
+      @sheet.completions.current_round(@sheet).find_or_create_by!(workout: @workout).decrement_series!
+      refresh_or_redirect_to sheet_workouts_url(@sheet)
     end
 
     def destroy
@@ -17,10 +17,6 @@ module Workouts
 
       def set_workout
         @workout = @sheet.workouts.find(params[:workout_id])
-      end
-
-      def congratulations_notice
-        t('notice.sheet_completion.create') if @completion.sheet_completed?
       end
   end
 end

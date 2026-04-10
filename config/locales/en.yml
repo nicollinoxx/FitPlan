@@ -151,6 +151,10 @@ en:
   series:             'Series'
   interval:           'Interval'
   charge:             'Charge'
+  options_charge:
+                      - 'low'
+                      - 'medium'
+                      - 'high'
   show_video:         'Show Video'
 
   workouts:

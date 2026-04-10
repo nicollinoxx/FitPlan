@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="my-4">
-  <%= render @workout, completed: @workout.completions.current_round(@sheet).exists? %>
+  <%= render @workout, completion: @workout.current_round_completion %>
 </div>
 
 <div data-controller="bridge--menu">
