@@ -5,7 +5,7 @@ module Workouts
 
     def create
       @sheet.completions.current_round(@sheet).find_or_create_by!(workout: @workout).decrement_series!
-      refresh_or_redirect_to sheet_workouts_url(@sheet)
+      refresh_or_redirect_to sheet_workouts_url(@sheet, pulsed: @workout.id)
     end
 
     def destroy

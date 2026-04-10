@@ -14,7 +14,10 @@
 
   <div class="p-3">
     <div class="d-flex flex-wrap gap-2">
-      <div class="border text-center p-2 rounded flex-grow-1" style="min-width: 45%">
+      <div class="border text-center p-2 rounded flex-grow-1 position-relative
+        <%= 'pulse-success' if params[:pulsed].to_i == workout.id %>" style="min-width: 45%">
+
+        <%= workout_reset_button(@sheet, workout, completion) if action_name != 'show' %>
         <p class="small text-muted mb-0"><i class="bi bi-repeat"></i> <%= t('series') %></p>
         <p class="fw-bold mb-0"><%= completion&.remaining_series || workout.series %></p>
       </div>
