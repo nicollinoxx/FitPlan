@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_28_225954) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_10_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -56,6 +56,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_225954) do
     t.datetime "completed_at", null: false
     t.datetime "created_at", null: false
     t.bigint "diet_id"
+    t.integer "remaining_series"
     t.bigint "sheet_id", null: false
     t.datetime "updated_at", null: false
     t.bigint "workout_id"
@@ -125,9 +126,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_225954) do
     t.datetime "created_at", null: false
     t.text "description"
     t.string "name"
+    t.string "origin_type"
+    t.bigint "sheet_import_id"
     t.string "sheet_type"
+    t.bigint "source_sheet_id"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.string "visibility", default: "shareable", null: false
+    t.index ["origin_type"], name: "index_sheets_on_origin_type"
+    t.index ["sheet_import_id"], name: "index_sheets_on_sheet_import_id"
+    t.index ["source_sheet_id"], name: "index_sheets_on_source_sheet_id"
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
 
@@ -167,6 +175,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_28_225954) do
   add_foreign_key "sheet_requests", "sheets"
   add_foreign_key "sheet_requests", "users", column: "recipient_id"
   add_foreign_key "sheet_requests", "users", column: "sender_id"
+  add_foreign_key "sheets", "sheets", column: "source_sheet_id"
   add_foreign_key "sheets", "users"
   add_foreign_key "workouts", "sheets"
 end
