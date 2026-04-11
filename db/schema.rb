@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_10_150000) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_11_013122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -57,10 +57,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_10_150000) do
     t.datetime "created_at", null: false
     t.bigint "diet_id"
     t.integer "remaining_series"
+    t.bigint "sheet_completion_id"
     t.bigint "sheet_id", null: false
     t.datetime "updated_at", null: false
     t.bigint "workout_id"
     t.index ["diet_id"], name: "index_completions_on_diet_id"
+    t.index ["sheet_completion_id"], name: "index_completions_on_sheet_completion_id"
     t.index ["sheet_id"], name: "index_completions_on_sheet_id"
     t.index ["workout_id"], name: "index_completions_on_workout_id"
   end
@@ -165,6 +167,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_10_150000) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "completions", "diets"
+  add_foreign_key "completions", "sheet_completions"
   add_foreign_key "completions", "sheets"
   add_foreign_key "completions", "workouts"
   add_foreign_key "diets", "sheets"
