@@ -12,7 +12,7 @@ class Workouts::CompletionsControllerTest < ActionDispatch::IntegrationTest
       post sheet_workout_completion_url(@sheet, @workout)
     end
 
-    assert_redirected_to sheet_workouts_url(@sheet)
+    assert_redirected_to sheet_workouts_url(@sheet, pulsed: @workout.id)
   end
 
   test "should destroy completion" do
@@ -25,10 +25,10 @@ class Workouts::CompletionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to sheet_workouts_url(@sheet)
   end
 
-  test "should create sheet_completion when all workouts completed" do
-    assert_difference("SheetCompletion.count") do
+  test "should create sheet_completion when all workouts decremented to zero" do
+    assert_difference("SheetCompletion.count", 1) do
       @sheet.workouts.each do |workout|
-        post sheet_workout_completion_url(@sheet, workout)
+        workout.series.times { post sheet_workout_completion_url(@sheet, workout) }
       end
     end
   end
