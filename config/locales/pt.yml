@@ -32,6 +32,7 @@ pt:
   destroy:            "Excluir"
   complete:           "Concluir"
   today:              "hoje"
+  completed:          "concluíu"
   message_destroy:    "Você tem certeza?"
   minimum_characters: "Mínimo de 6 caracteres."
   cancel:             "Cancelar"

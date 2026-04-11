@@ -5,12 +5,18 @@ module Sheets
 
     def create
       @sheet.complete!
-      render turbo_stream: turbo_stream.replace("#{dom_id(@sheet)}_card", partial: 'sheets/sheet', locals: { sheet: @sheet })
+      refresh_sheet_card
     end
 
     def destroy
       @sheet.uncomplete!
-      render turbo_stream: turbo_stream.replace("#{dom_id(@sheet)}_card", partial: 'sheets/sheet', locals: { sheet: @sheet })
+      refresh_sheet_card
+    end
+
+    private
+
+    def refresh_sheet_card
+      render turbo_stream: turbo_stream.replace("#{dom_id(@sheet)}", partial: 'sheets/sheet', locals: { sheet: @sheet })
     end
   end
 end

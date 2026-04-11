@@ -1,4 +1,4 @@
-<div id="<%= dom_id sheet %>_card" class="hover-zoom-sm <%= 'col-md-6 p-2' unless action_name == 'show' %>">
+<div id="<%= dom_id sheet %>" class="hover-zoom-sm <%= 'col-md-6 p-2' unless action_name == 'show' %>">
   <div class="<%= sheet.sheet_completions_today.any? ? "bg-completed-#{sheet_color(sheet)} border border-completed-#{sheet_color(sheet)}" : 'bg-body-tertiary' %>
     border-start border-2 border-<%= sheet_color(sheet) %> rounded shadow-sm position-relative px-3 py-2">
 

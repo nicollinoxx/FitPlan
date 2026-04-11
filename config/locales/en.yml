@@ -20,6 +20,7 @@ en:
   new:                "+ New"
   destroy:            "Destroy"
   complete:           "Complete"
+  completed:          "Completed"
   today:              "today"
   message_destroy:    "Are you sure?"
   minimum_characters: "6 characters minimum."
