@@ -20,10 +20,10 @@ class Sheet < ApplicationRecord
   scope :completed_today, -> { joins(:sheet_completions_today).distinct }
 
   def self.filter_by(type, completed)
-    if completed.to_s == 'true'
-      search_by_type(type).completed_today
-    else
-      search_by_type(type)
+    case completed.to_s
+    when 'true'  then search_by_type(type).completed_today
+    when 'false' then search_by_type(type).where.missing(:sheet_completions_today)
+    else              search_by_type(type)
     end
   end
 

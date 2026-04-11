@@ -11,7 +11,7 @@ module SheetsHelper
     count = sheet.sheet_completions_today.size
     return if count.zero?
 
-    content_tag(:span, "#{count}x #{t('today')}", class: "position-absolute bottom-0 end-0 m-2 badge bg-#{sheet_color(sheet)} text-light")
+    content_tag(:span, "#{count}x #{t('today')}", class: "position-absolute bottom-0 end-0 m-2 badge bg-#{sheet_color(sheet)} text-light z-2")
   end
 
   def sheet_completion_button(sheet)

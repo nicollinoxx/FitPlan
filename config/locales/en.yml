@@ -21,6 +21,7 @@ en:
   destroy:            "Destroy"
   complete:           "Complete"
   completed:          "Completed"
+  uncompleted:        "Uncompleted"
   today:              "today"
   message_destroy:    "Are you sure?"
   minimum_characters: "6 characters minimum."

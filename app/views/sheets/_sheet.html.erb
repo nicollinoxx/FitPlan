@@ -15,7 +15,7 @@
     <p class="mb-0 card-text text-muted fs-6"><%= sheet.description %></p>
 
     <% unless action_name == 'show' %>
-      <div class="position-absolute top-0 end-0 m-2 d-flex gap-1">
+      <div class="position-absolute top-0 end-0 m-2 d-flex gap-1 z-2">
         <%= sheet_completion_button(sheet) %>
         <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm border border-1 rounded" do %>
           <i class="bi bi-pencil"></i>
