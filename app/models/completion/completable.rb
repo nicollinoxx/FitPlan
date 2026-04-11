@@ -5,18 +5,14 @@ module Completion::Completable
     after_save :complete_sheet, if: :should_complete_sheet?
   end
 
-  def sheet_completed?
-    sheet.sheet_completions.where("created_at >= ?", created_at).exists?
-  end
-
   private
 
     def complete_sheet
-      sheet.sheet_completions.create!(user: sheet.user, completed_at: completed_at) if all_items_completed?
+      sheet.mark_sheet_completion!
     end
 
     def should_complete_sheet?
-      !sheet_completed? && (diet_id.present? || workout_just_finished?)
+      sheet_completion_id.nil? && (diet_id.present? || workout_just_finished?) && all_items_completed?
     end
 
     def workout_just_finished?
@@ -27,7 +23,7 @@ module Completion::Completable
       if sheet.workout?
         sheet.completions_in_current_round.where(remaining_series: 0).distinct.count(:workout_id) == sheet.workouts.count
       elsif sheet.diet?
-        sheet.completions.today.distinct.count(:diet_id) == sheet.diets.count
+        sheet.completions.current_round.distinct.count(:diet_id) == sheet.diets.count
       end
     end
 end

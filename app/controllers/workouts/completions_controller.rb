@@ -4,12 +4,12 @@ module Workouts
     before_action :set_workout
 
     def create
-      @sheet.completions.current_round(@sheet).find_or_create_by!(workout: @workout).decrement_series!
+      @sheet.completions.current_round.find_or_create_by!(workout: @workout).decrement_series!
       refresh_or_redirect_to sheet_workouts_url(@sheet, pulsed: @workout.id)
     end
 
     def destroy
-      @sheet.completions.current_round(@sheet).find_by!(workout: @workout).destroy!
+      @sheet.completions.current_round.find_by!(workout: @workout).destroy!
       refresh_or_redirect_to sheet_workouts_url(@sheet)
     end
 

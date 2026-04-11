@@ -7,6 +7,6 @@ class Workout < ApplicationRecord
   validates :exercise, :series, :repetitions, presence: true
 
   def current_round_completion
-    completions.current_round(sheet).first
+    completions.current_round.first
   end
 end

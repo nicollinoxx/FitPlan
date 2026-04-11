@@ -6,7 +6,7 @@
 </div>
 
 <%= turbo_frame_tag "sheets" do %>
-  <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-2">
+  <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-3">
     <% if turbo_native_app? %>
         <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
           <div class="d-flex align-items-center">
@@ -24,7 +24,7 @@
   </div>
 
   <div id="paginables" class="row">
-    <%= render partial: "sheet_card", collection: @page.records, as: :sheet %>
+    <%= render partial: "sheet", collection: @page.records, as: :sheet %>
     <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
   </div>
 <% end %>

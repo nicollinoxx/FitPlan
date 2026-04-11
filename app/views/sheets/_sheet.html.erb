@@ -1,5 +1,7 @@
-<% cache [sheet] do %>
-  <div id="<%= dom_id sheet %>">
+<div id="<%= dom_id sheet %>_card" class="hover-zoom-sm <%= 'col-md-6 p-2' unless action_name == 'show' %>">
+  <div class="<%= sheet.sheet_completions_today.any? ? "bg-completed-#{sheet_color(sheet)} border border-completed-#{sheet_color(sheet)}" : 'bg-body-tertiary' %>
+    border-start border-2 border-<%= sheet_color(sheet) %> rounded shadow-sm position-relative px-3 py-2">
+
     <div class="d-flex align-items-center mb-2">
       <i class="bi <%= sheet.workout? ? 'bi-heart-pulse' : 'bi-egg-fried' %> text-<%= sheet_color(sheet) %> fs-3 me-2"></i>
       <div>
@@ -9,6 +11,20 @@
         </small>
       </div>
     </div>
+
     <p class="mb-0 card-text text-muted fs-6"><%= sheet.description %></p>
+
+    <% unless action_name == 'show' %>
+      <div class="position-absolute top-0 end-0 m-2 d-flex gap-1" style="z-index: 10;">
+        <%= sheet_completion_button(sheet) %>
+        <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm border border-1 rounded" do %>
+          <i class="bi bi-pencil"></i>
+        <% end %>
+      </div>
+
+      <%= sheet_completions_today_badge(sheet) %>
+
+      <%= link_to "", sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top"}, class: "stretched-link" %>
+    <% end %>
   </div>
-<% end %>
+</div>

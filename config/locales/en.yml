@@ -35,6 +35,8 @@ en:
       create:               'Sheet was successfully created'
       update:               'Sheet was successfully updated'
       destroy:              'Sheet was successfully destroyed'
+      complete:             'Sheet marked as completed'
+      uncomplete:           'Sheet unmarked'
     workout:
       create:               'Workout was successfully created'
       update:               'Workout was successfully updated'

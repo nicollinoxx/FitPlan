@@ -2,6 +2,8 @@ class SheetCompletion < ApplicationRecord
   belongs_to :sheet
   belongs_to :user
 
+  has_many :completions, dependent: :destroy
+
   validates :completed_at, presence: true
 
   scope :on_date, ->(date) { where(completed_at: date.all_day) }

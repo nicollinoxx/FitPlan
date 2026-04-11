@@ -28,7 +28,7 @@ class Sheet < ApplicationRecord
   end
 
   def completions_in_current_round
-    completions.current_round(self)
+    completions.current_round
   end
 
   def completed_diet_ids
@@ -39,7 +39,31 @@ class Sheet < ApplicationRecord
     completions_in_current_round.where.not(workout_id: nil).index_by(&:workout_id)
   end
 
+  def completed?
+    sheet_completions_today.exists?
+  end
+
+  def complete!
+    workout? ? mark_sheet_completion! : complete_all_diets!
+  end
+
+  def uncomplete!
+    sheet_completions_today.order(:completed_at).last&.destroy!
+  end
+
+  def mark_sheet_completion!
+    transaction do
+      sheet_completion = sheet_completions.create!(user: user, completed_at: Time.current)
+      completions.current_round.update_all(sheet_completion_id: sheet_completion.id)
+    end
+  end
+
   private
+
+    def complete_all_diets!
+      diets.find_each { |diet| completions.today.find_or_create_by!(diet: diet) }
+      mark_sheet_completion! unless completed?
+    end
 
     def destroy_invalid_content
       if workout?

@@ -48,6 +48,8 @@ pt:
       create:               'Planilha criada com sucesso'
       update:               'Planilha atualizada com sucesso'
       destroy:              'Planilha excluída com sucesso'
+      complete:             'Planilha marcada como concluída'
+      uncomplete:           'Planilha desmarcada'
     workout:
       create:               'Treino criado com sucesso'
       update:               'Treino atualizado com sucesso'
@@ -111,6 +113,7 @@ pt:
       title:                'Planilhas'
       filter:               'Filtrar'
       completed:            'Concluídos'
+
     new:
       title:                'Nova planilha'
     edit:

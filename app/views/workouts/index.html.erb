@@ -6,12 +6,7 @@
 </div>
 
 <%= turbo_frame_tag "workouts" do %>
-  <% if @sheet.sheet_completions_today.any? %>
-    <p class="fw-semibold mb-2">
-      <i class="bi bi-trophy-fill me-1 text-warning"></i>
-      completed <%= @sheet.sheet_completions_today.size %>x <%= t('today') %>
-    </p>
-  <% end %>
+  <%= render 'shared/completion_today_size' %>
 
   <div class="row">
     <% @workouts.each do |workout| %>
