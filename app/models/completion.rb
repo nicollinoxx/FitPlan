@@ -14,7 +14,7 @@ class Completion < ApplicationRecord
 
   scope :on_date,       ->(date) { where(completed_at: date.all_day) }
   scope :today,         -> { on_date(Date.current) }
-  scope :current_round, -> { where(sheet_completion_id: nil) }
+  scope :current_round, -> { today.where(sheet_completion_id: nil) }
 
   def decrement_series!
     return unless workout_id.present? && remaining_series.positive?

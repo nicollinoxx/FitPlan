@@ -28,16 +28,16 @@
       <% end %>
     </li>
 
-    <li class="">
-      <%= link_to sheets_path(type: params[:type], completed: 'true'),
+    <li>
+      <%= link_to sheets_path(type: params[:type], completed: params[:completed] == 'true' ? nil : 'true'),
         class: "dropdown-item #{'bg-secondary text-light' if params[:completed] == 'true'}" do %>
 
         <i class="bi bi-check-lg"></i> <%= t('completed') %>
       <% end %>
     </li>
 
-    <li class="">
-      <%= link_to sheets_path(type: params[:type], completed: 'false'),
+    <li>
+      <%= link_to sheets_path(type: params[:type], completed: params[:completed] == 'false' ? nil : 'false'),
         class: "dropdown-item #{'bg-danger text-light' if params[:completed] == 'false'}" do %>
 
         <i class="bi bi-x-lg"></i> <%= t('uncompleted') %>
