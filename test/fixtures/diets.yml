@@ -30,4 +30,4 @@ fixture_diet:
   carbohydrate_g: 30
   fat_g: 10
   calories: 300
-  sheet: empty_diet
+  sheet: two

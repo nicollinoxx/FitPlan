@@ -26,4 +26,4 @@ fixture_workout:
   series: 2
   repetitions: 8
   charge: MyString
-  sheet: empty_workout
+  sheet: one
