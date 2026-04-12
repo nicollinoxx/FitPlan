@@ -5,7 +5,7 @@ class DietsController < ApplicationController
 
   def index
     @diets = @sheet.diets
-    @diets_completed = @sheet.completed_diet_ids
+    @completions_by_diet_id = @sheet.completed_diets_indexed_by_diet_id
   end
 
   def show

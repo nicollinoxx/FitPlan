@@ -10,7 +10,7 @@
 
   <% @diets.each do |diet| %>
     <div class="col-md-6 p-2 mb-2">
-      <%= render diet, completed: @diets_completed.include?(diet.id) %>
+      <%= render diet, completed: @completions_by_diet_id[diet.id] %>
     </div>
   <% end %>
 <% end %>

@@ -28,8 +28,8 @@ class Sheet < ApplicationRecord
     end
   end
 
-  def completed_diet_ids
-    completions.today.where.not(diet_id: nil).pluck(:diet_id).to_set
+  def completed_diets_indexed_by_diet_id
+    completions.today.where.not(diet_id: nil).index_by(&:diet_id)
   end
 
   def completions_indexed_by_workout_id
