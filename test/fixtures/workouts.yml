@@ -20,3 +20,10 @@ two:
   repetitions: 12
   charge: MyString
   sheet: two
+
+fixture_workout:
+  exercise: Fixture Workout
+  series: 2
+  repetitions: 8
+  charge: MyString
+  sheet: empty_workout

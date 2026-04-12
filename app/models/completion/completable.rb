@@ -8,7 +8,7 @@ module Completion::Completable
   private
 
     def complete_sheet
-      sheet.mark_sheet_completion!
+      sheet.complete!
     end
 
     def should_complete_sheet?
@@ -21,7 +21,7 @@ module Completion::Completable
 
     def all_items_completed?
       if sheet.workout?
-        sheet.completions_in_current_round.where(remaining_series: 0).distinct.count(:workout_id) == sheet.workouts.count
+        sheet.completions.current_round.where(remaining_series: 0).distinct.count(:workout_id) == sheet.workouts.count
       elsif sheet.diet?
         sheet.completions.current_round.distinct.count(:diet_id) == sheet.diets.count
       end

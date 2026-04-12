@@ -3,7 +3,9 @@ require "test_helper"
 class SheetTest < ActiveSupport::TestCase
   setup do
     @workout_sheet = sheets(:one)
-    @diet_sheet    = sheets(:two)
+    @diet_sheet = sheets(:two)
+    @empty_workout_sheet = sheets(:empty_workout)
+    @empty_diet_sheet = sheets(:empty_diet)
   end
 
   test "should destroy workouts when changing sheet_type to diet" do
@@ -18,67 +20,67 @@ class SheetTest < ActiveSupport::TestCase
     assert_empty @diet_sheet.diets.reload
   end
 
-  test "completed? returns true when sheet has a sheet_completion today" do
+  test "completed? should be true with a completion today" do
     assert_not @workout_sheet.completed?
     @workout_sheet.complete!
     assert @workout_sheet.completed?
   end
 
-  test "complete! on workout sheet creates a sheet_completion directly" do
-    assert_difference("SheetCompletion.count", 1) do
+  test "complete! should create a sheet completion for workout" do
+    assert_difference "SheetCompletion.count", 1 do
       @workout_sheet.complete!
     end
   end
 
-  test "complete! on workout sheet supports multiple rounds per day" do
+  test "complete! should allow multiple workout rounds in the same day" do
     @workout_sheet.complete!
-    assert_difference("SheetCompletion.count", 1) do
+
+    assert_difference "SheetCompletion.count", 1 do
       @workout_sheet.complete!
     end
   end
 
-  test "complete! on diet sheet creates completions for missing diets and a sheet_completion" do
-    assert_difference -> { Completion.count }, @diet_sheet.diets.count do
+  test "complete! should create only a sheet completion for diet" do
+    assert_no_difference "Completion.count" do
       assert_difference "SheetCompletion.count", 1 do
         @diet_sheet.complete!
       end
     end
   end
 
-  test "complete! on diet sheet is idempotent when already completed" do
+  test "complete! should allow multiple diet rounds in the same day" do
     @diet_sheet.complete!
 
-    assert_no_difference "SheetCompletion.count" do
+    assert_difference "SheetCompletion.count", 1 do
       assert_no_difference "Completion.count" do
         @diet_sheet.complete!
       end
     end
   end
 
-  test "mark_sheet_completion! associates pending completions to the new sheet_completion" do
-    completion = @workout_sheet.completions.create!(workout: workouts(:one))
+  test "complete! should associate pending completions" do
+    completion = completions(:fixture_workout_pending)
 
-    @workout_sheet.mark_sheet_completion!
+    @empty_workout_sheet.complete!
 
     assert_not_nil completion.reload.sheet_completion_id
-    assert_equal @workout_sheet.sheet_completions_today.last.id, completion.sheet_completion_id
+    assert_equal @empty_workout_sheet.sheet_completions_today.last.id, completion.sheet_completion_id
   end
 
-  test "uncomplete! destroys the latest sheet_completion and cascades to its completions" do
-    @diet_sheet.complete!
-    sc = @diet_sheet.sheet_completions_today.last
-    associated = @diet_sheet.completions.where(sheet_completion_id: sc.id)
-
-    assert associated.any?
+  test "uncomplete! should destroy the latest completion and its items" do
+    completion = completions(:fixture_diet_pending)
+    @empty_diet_sheet.complete!
 
     assert_difference "SheetCompletion.count", -1 do
-      assert_difference "Completion.count", -associated.count do
-        @diet_sheet.uncomplete!
+      assert_difference "Completion.count", -1 do
+        @empty_diet_sheet.uncomplete!
       end
     end
+
+    assert_raises(ActiveRecord::RecordNotFound) { completion.reload }
   end
 
-  test "uncomplete! is a no-op when sheet is not completed today" do
+  test "uncomplete! should do nothing without a completion today" do
     assert_no_difference "SheetCompletion.count" do
       @workout_sheet.uncomplete!
     end

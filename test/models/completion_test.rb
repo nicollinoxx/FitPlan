@@ -37,7 +37,7 @@ class CompletionTest < ActiveSupport::TestCase
     end
   end
 
-  test "current_round should be empty after completing all items" do
+  test "current_round should be empty after all items are completed" do
     @sheet.workouts.each do |workout|
       completion = @sheet.completions.create!(workout: workout)
       workout.series.times { completion.decrement_series! }
@@ -46,14 +46,15 @@ class CompletionTest < ActiveSupport::TestCase
     assert_empty @sheet.completions.current_round
   end
 
-  test "current_round should include completions with nil sheet_completion_id" do
-    completion = @sheet.completions.create!(workout: @workout)
-    assert_includes @sheet.completions.current_round, completion
+  test "current_round should include pending completions" do
+    completion = completions(:fixture_workout_pending)
+
+    assert_includes completion.sheet.completions.current_round, completion
   end
 
-  test "current_round should exclude completions associated with a sheet_completion" do
+  test "current_round should exclude completed completions" do
     completion = @sheet.completions.create!(workout: @workout)
-    @sheet.mark_sheet_completion!
+    @sheet.complete!
 
     assert_not_includes @sheet.completions.current_round, completion.reload
     assert_not_nil completion.sheet_completion_id

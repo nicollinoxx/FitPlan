@@ -18,13 +18,14 @@ class Completion < ApplicationRecord
 
   def decrement_series!
     return unless workout_id.present? && remaining_series.positive?
+
     update!(remaining_series: remaining_series - 1)
   end
 
   private
 
     def set_remaining_series
-      self.remaining_series = workout.series 
+      self.remaining_series ||= workout.series
     end
 
     def workout_or_diet_present

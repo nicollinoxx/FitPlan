@@ -6,6 +6,8 @@ class SheetCompletion < ApplicationRecord
 
   validates :completed_at, presence: true
 
+  before_validation -> { self.completed_at ||= Time.current }, on: :create
+
   scope :on_date, ->(date) { where(completed_at: date.all_day) }
   scope :today, -> { on_date(Date.current) }
 

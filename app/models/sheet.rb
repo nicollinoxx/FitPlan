@@ -3,11 +3,12 @@ class Sheet < ApplicationRecord
 
   belongs_to :user
 
-  has_many :workouts, dependent: :destroy
-  has_many :diets,    dependent: :destroy
-  has_many :completions, dependent: :destroy
-  has_many :sheet_requests, dependent: :destroy
+  has_many :workouts,          dependent: :destroy
+  has_many :diets,             dependent: :destroy
+  has_many :completions,       dependent: :destroy
+  has_many :sheet_requests,    dependent: :destroy
   has_many :sheet_completions, dependent: :destroy
+
   has_many :sheet_completions_today, -> { today }, class_name: "SheetCompletion"
 
   validates :sheet_type, inclusion: { in: %w[ workout diet ] }
@@ -27,43 +28,30 @@ class Sheet < ApplicationRecord
     end
   end
 
-  def completions_in_current_round
-    completions.current_round
-  end
-
   def completed_diet_ids
     completions.today.where.not(diet_id: nil).pluck(:diet_id).to_set
   end
 
   def completions_indexed_by_workout_id
-    completions_in_current_round.where.not(workout_id: nil).index_by(&:workout_id)
-  end
-
-  def completed?
-    sheet_completions_today.exists?
+    completions.current_round.where.not(workout_id: nil).index_by(&:workout_id)
   end
 
   def complete!
-    workout? ? mark_sheet_completion! : complete_all_diets!
+    transaction do
+      sheet_completion = sheet_completions.create!(user: user)
+      completions.current_round.update_all(sheet_completion_id: sheet_completion.id)
+    end
   end
 
   def uncomplete!
     sheet_completions_today.order(:completed_at).last&.destroy!
   end
 
-  def mark_sheet_completion!
-    transaction do
-      sheet_completion = sheet_completions.create!(user: user, completed_at: Time.current)
-      completions.current_round.update_all(sheet_completion_id: sheet_completion.id)
-    end
+  def completed?
+    sheet_completions_today.exists?
   end
 
   private
-
-    def complete_all_diets!
-      diets.find_each { |diet| completions.today.find_or_create_by!(diet: diet) }
-      mark_sheet_completion! unless completed?
-    end
 
     def destroy_invalid_content
       if workout?

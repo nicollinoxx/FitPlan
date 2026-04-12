@@ -4,29 +4,29 @@ class Sheets::CompletionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in_as(users(:lazaro_nixon))
     @workout_sheet = sheets(:one)
-    @diet_sheet    = sheets(:two)
+    @diet_sheet = sheets(:two)
   end
 
   test "should mark workout sheet as completed" do
-    assert_difference("SheetCompletion.count", 1) do
+    assert_difference "SheetCompletion.count", 1 do
       post sheet_completion_url(@workout_sheet)
     end
   end
 
-  test "should mark diet sheet as completed and create missing diet completions" do
-    assert_difference -> { Completion.count }, @diet_sheet.diets.count do
+  test "should mark diet sheet as completed" do
+    assert_no_difference "Completion.count" do
       assert_difference "SheetCompletion.count", 1 do
         post sheet_completion_url(@diet_sheet)
       end
     end
   end
 
-  test "should destroy latest sheet_completion and cascade its completions" do
+  test "should destroy the latest sheet completion" do
+    @diet_sheet.completions.create!(diet: diets(:one))
     post sheet_completion_url(@diet_sheet)
-    cascade_count = @diet_sheet.completions.where.not(sheet_completion_id: nil).count
 
     assert_difference "SheetCompletion.count", -1 do
-      assert_difference "Completion.count", -cascade_count do
+      assert_difference "Completion.count", -1 do
         delete sheet_completion_url(@diet_sheet)
       end
     end

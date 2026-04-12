@@ -4,3 +4,14 @@ old:
   sheet: one
   workout: one
   completed_at: <%= 1.week.ago %>
+
+fixture_workout_pending:
+  sheet: empty_workout
+  workout: fixture_workout
+  remaining_series: 2
+  completed_at: <%= Time.current %>
+
+fixture_diet_pending:
+  sheet: empty_diet
+  diet: fixture_diet
+  completed_at: <%= Time.current %>
