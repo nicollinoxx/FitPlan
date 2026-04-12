@@ -76,4 +76,10 @@ $orange: #fd7e14;
   100% { box-shadow: 0 0 0 0.5rem rgba(25, 145, 84, 0); border-color: inherit; }
 }
 
+@keyframes pulse-warning {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.6); border-color: var(--bs-warning); }
+  100% { box-shadow: 0 0 0 0.5rem rgba(255, 193, 7, 0); border-color: inherit; }
+}
+
 .pulse-success { animation: pulse-success 0.9s ease-out; }
+.pulse-warning { animation: pulse-warning 0.9s ease-out; }

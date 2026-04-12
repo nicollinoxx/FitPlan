@@ -16,7 +16,7 @@
               </small>
 
               <% if sheet.sheet_completions_today.any? %>
-                <small class="ms-1">
+                <small class="ms-1 px-1 <%= "pulse-#{sheet_color(sheet)}" if local_assigns[:pulse] %> rounded">
                   <i class="bi bi-trophy-fill me-1 text-warning"></i><%= "#{sheet.sheet_completions_today.size}x #{t('today')}" %>
                 </small>
               <% end %>
