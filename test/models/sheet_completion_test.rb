@@ -6,14 +6,20 @@ class SheetCompletionTest < ActiveSupport::TestCase
     travel_to Time.zone.local(2026, 3, 29, 12, 0, 0)
   end
 
-  test "streak should count consecutive days from today" do
-    SheetCompletion.create!(sheet: sheets(:one), user: @user, completed_at: Time.current)
+  teardown do
+    travel_back
+  end
 
-    assert @user.sheet_completions.streak >= 1
+  test "streak should count consecutive days from today" do
+    @user.sheet_completions.destroy_all
+    @user.sheet_completions.create!(sheet: sheets(:one), completed_at: Time.current)
+    @user.sheet_completions.create!(sheet: sheets(:one), completed_at: 1.day.ago)
+
+    assert_equal 2, @user.sheet_completions.streak
   end
 
   test "streak should be zero with no completions today" do
-    SheetCompletion.destroy_all
+    @user.sheet_completions.destroy_all
     assert_equal 0, @user.sheet_completions.streak
   end
 
@@ -23,7 +29,7 @@ class SheetCompletionTest < ActiveSupport::TestCase
   end
 
   test "best_weekday should return nil with no completions" do
-    SheetCompletion.destroy_all
+    @user.sheet_completions.destroy_all
     assert_nil @user.sheet_completions.best_weekday
   end
 
@@ -36,7 +42,7 @@ class SheetCompletionTest < ActiveSupport::TestCase
   end
 
   test "weekly_progress percentage should be 100 when last_week is zero" do
-    SheetCompletion.destroy_all
+    @user.sheet_completions.destroy_all
     progress = @user.sheet_completions.weekly_progress
 
     assert_equal 100, progress[:percentage]
