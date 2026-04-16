@@ -5,14 +5,16 @@
   <%= link_to t('new'), new_sheet_diet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ Diet" }, class: 'btn btn-success flex-shrink-0' %>
 </div>
 
-<%= turbo_frame_tag "diets", class: "row" do %>
+<%= turbo_frame_tag "diets" do %>
   <%= render 'shared/completion_today_size' %>
 
-  <% @diets.each do |diet| %>
-    <div class="col-md-6 p-2 mb-2">
-      <%= render diet, completed: @completions_by_diet_id[diet.id] %>
-    </div>
-  <% end %>
+  <div class="row">
+    <% @diets.each do |diet| %>
+      <div class="col-md-6 p-2 mb-2">
+        <%= render diet, completed: @completions_by_diet_id[diet.id] %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <br>
