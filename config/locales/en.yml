@@ -155,10 +155,6 @@ en:
   series:             'Series'
   interval:           'Interval'
   charge:             'Charge'
-  options_charge:
-                      - 'low'
-                      - 'medium'
-                      - 'high'
   show_video:         'Show Video'
 
   workouts:
@@ -177,9 +173,9 @@ en:
         interval:           'Interval'
         charge:             'Charge'
       options_charge:
-                            - 'low'
-                            - 'medium'
-                            - 'high'
+        low:              'low'
+        medium:           'medium'
+        high:             'high'
       supported_files:      'Supported files mp4, mpeg and quicktime'
       remove_preview:       'Remove preview'
 

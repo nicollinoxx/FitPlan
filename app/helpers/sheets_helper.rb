@@ -13,7 +13,7 @@ module SheetsHelper
         content_tag(:i, '', class: 'bi bi-x-lg')
       end
     else
-      button_to sheet_completion_path(sheet), data: { turbo_frame: "_refresh" }, class: "btn btn-sm btn-success" do
+      button_to sheet_completion_path(sheet), data: { turbo_frame: "sheets" }, class: "btn btn-sm btn-success" do
         content_tag(:i, '', class: 'bi bi-check-lg')
       end
     end

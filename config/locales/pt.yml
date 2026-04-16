@@ -170,10 +170,6 @@ pt:
   series:             'Séries'
   interval:           'Intervalo'
   charge:             'Carga'
-  options_charge:
-                      - 'leve'
-                      - 'média'
-                      - 'alta'
   show_video:         'Mostrar vídeo'
 
   workouts:
@@ -192,9 +188,9 @@ pt:
         interval:           'Intervalo'
         charge:             'Carga'
       options_charge:
-                            - 'leve'
-                            - 'média'
-                            - 'alta'
+        low:              'leve'
+        medium:           'média'
+        high:             'alta'
       supported_files:      'Arquivos suportados: mp4, mpeg e quicktime'
       remove_preview:       'Remover pré-visualização'
 

@@ -17,7 +17,7 @@ class Completion < ApplicationRecord
   scope :current_round, -> { today.where(sheet_completion_id: nil) }
 
   def decrement_series!
-    return unless workout_id.present? && remaining_series.positive?
+    return unless workout_id.present? && remaining_series&.positive?
 
     update!(remaining_series: remaining_series - 1)
   end
