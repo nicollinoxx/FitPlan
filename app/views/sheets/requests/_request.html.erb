@@ -3,7 +3,14 @@
     <div class="d-flex align-items-center mb-2">
       <% user = params[:filter] == "sent" ? request.recipient : request.sender %>
 
-      <%= image_tag user.avatar.attached? ? user.avatar : "avatar.png", class: "object-fit-cover rounded-circle me-3", width: 40, height: 40 %>
+      <% if Current.user.avatar.attached? %>
+        <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover me-2', style: 'width: 40px; height: 40px;' %>
+      <% else %>
+        <div class="me-2 rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">
+          <i class="bi bi-person-fill fs-5"></i>
+        </div>
+      <% end %>
+
       <div class="flex-grow-1">
         <h6 class="m-0 text-success"><%= user.name %></h6>
         <small class="text-muted"><%= params[:filter] == "sent" ? t("sheet_request_received") : t("sheet_request_shared") %></small>
