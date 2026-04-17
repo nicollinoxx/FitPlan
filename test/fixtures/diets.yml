@@ -23,3 +23,11 @@ diet_without_calories:
   fat_g: 5
   calories: 0
   sheet: two
+
+fixture_diet:
+  meal: Fixture Meal
+  protein_g: 20
+  carbohydrate_g: 30
+  fat_g: 10
+  calories: 300
+  sheet: two

@@ -2,28 +2,28 @@ module Completion::Completable
   extend ActiveSupport::Concern
 
   included do
-    after_create :complete_sheet_if_all_done, if: :all_items_completed?
-  end
-
-  def sheet_completed?
-    sheet.sheet_completions.where("created_at >= ?", created_at).exists?
+    after_save :complete_sheet, if: :should_complete_sheet?
   end
 
   private
 
-  def all_items_completed?
-    sheet.completions.current_round(sheet).distinct.count(item_by_sheet_type) == sheet_items.count
-  end
+    def complete_sheet
+      sheet.complete!
+    end
 
-  def complete_sheet_if_all_done
-    sheet.sheet_completions.create!(user: sheet.user, completed_at: completed_at)
-  end
+    def should_complete_sheet?
+      sheet_completion_id.nil? && (diet_id.present? || workout_just_finished?) && all_items_completed?
+    end
 
-  def item_by_sheet_type
-    sheet.workout? ? :workout_id : :diet_id
-  end
+    def workout_just_finished?
+      workout_id.present? && saved_change_to_remaining_series? && remaining_series&.zero?
+    end
 
-  def sheet_items
-    sheet.workout? ? sheet.workouts : sheet.diets
-  end
+    def all_items_completed?
+      if sheet.workout?
+        sheet.completions.current_round.where(remaining_series: 0).distinct.count(:workout_id) == sheet.workouts.count
+      elsif sheet.diet?
+        sheet.completions.current_round.distinct.count(:diet_id) == sheet.diets.count
+      end
+    end
 end

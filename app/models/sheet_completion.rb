@@ -2,7 +2,11 @@ class SheetCompletion < ApplicationRecord
   belongs_to :sheet
   belongs_to :user
 
+  has_many :completions, dependent: :destroy
+
   validates :completed_at, presence: true
+
+  before_validation -> { self.completed_at ||= Time.current }, on: :create
 
   scope :on_date, ->(date) { where(completed_at: date.all_day) }
   scope :today, -> { on_date(Date.current) }

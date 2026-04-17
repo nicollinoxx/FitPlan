@@ -31,6 +31,8 @@ pt:
   new:                "+ Novo"
   destroy:            "Excluir"
   complete:           "Concluir"
+  completed:          "Concluído"
+  uncompleted:        "Não Concluído"
   today:              "hoje"
   message_destroy:    "Você tem certeza?"
   minimum_characters: "Mínimo de 6 caracteres."
@@ -48,6 +50,8 @@ pt:
       create:               'Planilha criada com sucesso'
       update:               'Planilha atualizada com sucesso'
       destroy:              'Planilha excluída com sucesso'
+      complete:             'Planilha marcada como concluída'
+      uncomplete:           'Planilha desmarcada'
     workout:
       create:               'Treino criado com sucesso'
       update:               'Treino atualizado com sucesso'
@@ -111,6 +115,7 @@ pt:
       title:                'Planilhas'
       filter:               'Filtrar'
       completed:            'Concluídos'
+
     new:
       title:                'Nova planilha'
     edit:
@@ -183,9 +188,9 @@ pt:
         interval:           'Intervalo'
         charge:             'Carga'
       options_charge:
-                            - 'leve'
-                            - 'média'
-                            - 'alta'
+        low:              'leve'
+        medium:           'média'
+        high:             'alta'
       supported_files:      'Arquivos suportados: mp4, mpeg e quicktime'
       remove_preview:       'Remover pré-visualização'
 

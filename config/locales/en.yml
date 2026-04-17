@@ -20,6 +20,8 @@ en:
   new:                "+ New"
   destroy:            "Destroy"
   complete:           "Complete"
+  completed:          "Completed"
+  uncompleted:        "Uncompleted"
   today:              "today"
   message_destroy:    "Are you sure?"
   minimum_characters: "6 characters minimum."
@@ -35,6 +37,8 @@ en:
       create:               'Sheet was successfully created'
       update:               'Sheet was successfully updated'
       destroy:              'Sheet was successfully destroyed'
+      complete:             'Sheet marked as completed'
+      uncomplete:           'Sheet unmarked'
     workout:
       create:               'Workout was successfully created'
       update:               'Workout was successfully updated'
@@ -169,9 +173,9 @@ en:
         interval:           'Interval'
         charge:             'Charge'
       options_charge:
-                            - 'low'
-                            - 'medium'
-                            - 'high'
+        low:              'low'
+        medium:           'medium'
+        high:             'high'
       supported_files:      'Supported files mp4, mpeg and quicktime'
       remove_preview:       'Remove preview'
 

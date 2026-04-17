@@ -1,14 +1,11 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="shadow border rounded p-2 mb-3">
-  <div class="d-flex justify-content-between">
-    <%= render 'sheet', sheet: @sheet %>
-    <div class="text-end fs-6">
-      <small class="text-muted d-block">type: <%= @sheet.workout? ? t('workout') : t('diet') %></small>
-      <small class="text-muted">font: <%= @sheet.copy? ? "copied" : "original" %></small>
-    </div>
-  </div>
-</div>
+<%= render 'sheet', sheet: @sheet %>
+
+<small class="text-muted d-block mt-1 mb-3">
+  type: <%= @sheet.workout? ? t('workout') : t('diet') %> |
+  font: <%= @sheet.copy? ? "copied" : "original" %>
+</small>
 
 <div id="sheets" data-controller="bridge--menu">
   <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>

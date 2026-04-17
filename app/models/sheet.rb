@@ -3,11 +3,12 @@ class Sheet < ApplicationRecord
 
   belongs_to :user
 
-  has_many :workouts, dependent: :destroy
-  has_many :diets,    dependent: :destroy
-  has_many :completions, dependent: :destroy
-  has_many :sheet_requests, dependent: :destroy
+  has_many :workouts,          dependent: :destroy
+  has_many :diets,             dependent: :destroy
+  has_many :completions,       dependent: :destroy
+  has_many :sheet_requests,    dependent: :destroy
   has_many :sheet_completions, dependent: :destroy
+
   has_many :sheet_completions_today, -> { today }, class_name: "SheetCompletion"
 
   validates :sheet_type, inclusion: { in: %w[ workout diet ] }
@@ -20,15 +21,34 @@ class Sheet < ApplicationRecord
   scope :completed_today, -> { joins(:sheet_completions_today).distinct }
 
   def self.filter_by(type, completed)
-    if completed.to_s == 'true'
-      search_by_type(type).completed_today
-    else
-      search_by_type(type)
+    case completed.to_s
+    when 'true'  then search_by_type(type).completed_today
+    when 'false' then search_by_type(type).where.missing(:sheet_completions_today)
+    else              search_by_type(type)
     end
   end
 
-  def completed_item_ids(item_key)
-    completions.current_round(self).where.not(item_key => nil).pluck(item_key).to_set
+  def completed_diets_indexed_by_diet_id
+    completions.today.where.not(diet_id: nil).index_by(&:diet_id)
+  end
+
+  def completions_indexed_by_workout_id
+    completions.current_round.where.not(workout_id: nil).index_by(&:workout_id)
+  end
+
+  def complete!
+    transaction do
+      sheet_completion = sheet_completions.create!(user: user)
+      completions.current_round.update_all(sheet_completion_id: sheet_completion.id)
+    end
+  end
+
+  def uncomplete!
+    sheet_completions_today.order(:completed_at).last&.destroy!
+  end
+
+  def completed?
+    sheet_completions_today.exists?
   end
 
   private

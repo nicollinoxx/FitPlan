@@ -5,7 +5,7 @@ class WorkoutsController < ApplicationController
 
   def index
     @workouts = @sheet.workouts
-    @workouts_completed = @sheet.completed_item_ids(:workout_id)
+    @completions_by_workout_id = @sheet.completions_indexed_by_workout_id
   end
 
   def show
