@@ -22,6 +22,10 @@ class Completion < ApplicationRecord
     update!(remaining_series: remaining_series - 1)
   end
 
+  def series_zero?
+    workout_id.present? && remaining_series.zero?
+  end
+
   private
 
     def set_remaining_series

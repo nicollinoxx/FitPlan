@@ -1,6 +1,16 @@
 module WorkoutsHelper
   def workout_completion_button(sheet, workout, completion)
-    completion_toggle_button(sheet_workout_completion_path(sheet, workout), completion&.remaining_series&.zero?)
+    spinner_icon = content_tag(:i, '', class: 'bi-hourglass-split')
+
+    if completion&.series_zero?
+      button_to sheet_workout_completion_path(sheet, workout), method: :delete, class: 'btn btn-sm btn-light', data: { turbo_submits_with: spinner_icon } do
+        content_tag(:i, '', class: 'bi bi-check-lg')
+      end
+    else
+      button_to sheet_workout_completion_path(sheet, workout), class: 'btn btn-sm btn-outline-light', data: { turbo_submits_with: spinner_icon } do
+        content_tag(:i, '', class: 'bi bi-check-lg')
+      end
+    end
   end
 
   def workout_reset_button(sheet, workout, completion)
