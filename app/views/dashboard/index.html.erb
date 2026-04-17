@@ -39,7 +39,7 @@
           <%= t('.charts.completions') %>
           <%= t(".filters.period.#{params[:period] || 'month'}") %>
         </h5>
-        <%= line_chart @completions, colors: ["green", "red"], height: "300px" %>
+        <%= line_chart @completions_by_type, colors: ["green", "red"], height: "300px" %>
       </div>
     </div>
 
