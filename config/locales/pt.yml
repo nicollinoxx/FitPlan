@@ -25,6 +25,8 @@ pt:
         pt:     'Português'
         en:     'Inglês'
 
+  login:        'Login'
+
   #common
   show:               "Mostrar"
   edit:               "Editar"
@@ -326,6 +328,8 @@ pt:
         error_message_form: 'impediram esta sessão de ser salva:'
         label:
           password: 'Senha'
+        placeholder:
+          email:    'email@exemplo.com'
 
   #passwords------------------------------
   passwords:
@@ -348,6 +352,9 @@ pt:
         name:                  'Nome'
         password:              'Senha'
         password_confirmation: 'Confirmação de senha'
+      placeholder:
+        name:                  'Nome'
+        email:                 'email@exemplo.com'
 
   #identity----------------------------
   identity:

@@ -14,6 +14,8 @@ en:
         pt:     'Portuguese'
         en:     'English'
 
+  login:        'Login'
+
   #common
   show:               "Show"
   edit:               "Edit"
@@ -125,13 +127,13 @@ en:
           sent:              'Sent by me'
           received:          'Received'
       new:
-        title:               'New sheet request'
-        search_user:         'Search user'
-        handle:              'Handle (@)'
-        submit:              'Send request'
-        select_sheets:       'Select sheets'
+        title:                     'New sheet request'
+        search_user:               'Search user'
+        handle:                    'Handle (@)'
+        submit:                    'Send request'
+        select_sheets:             'Select sheets'
         select_sheets_placeholder: 'Choose sheets...'
-        select_sheets_help:  'Select up to 5 sheets.'
+        select_sheets_help:        'Select up to 5 sheets.'
 
   #sheet_requests----------------------------------
   sheet_request_shared:      'Shared a sheet'
@@ -311,6 +313,9 @@ en:
         error_message_form: 'prohibited this session from being saved:'
         label:
           password: 'Password'
+        placeholder:
+          email:    'email@example.com'
+
 
   #passwords------------------------------
   passwords:
@@ -333,6 +338,9 @@ en:
         name:                  'Name'
         password:              'Password'
         password_confirmation: 'Password confirmation'
+      placeholder:
+        name:                  'Name'
+        email:                 'email@example.com'
 
   #identity----------------------------
   identity:

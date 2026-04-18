@@ -4,7 +4,7 @@
   <div class="d-flex flex-column-reverse flex-md-row align-items-center gap-5 w-100">
     <%= image_tag "undraw/mindfulness.svg", alt: "descrição", class: "img-fluid" %>
 
-    <div class="w-100 bg-body-tertiary rounded p-4 shadow position-relative">
+    <div class="w-100 bg-body-tertiary border rounded p-4 shadow position-relative">
       <div class="position-absolute top-0 end-0 m-2">
         <%= render 'shared/language_dropdown' %>
       </div>
@@ -16,7 +16,7 @@
       <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
         <div class="mb-4">
           <%= form.label :email, class: 'form-label' %>
-          <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control', placeholder: "name@example.com" %>
+          <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control', placeholder: t('.form.placeholder.email') %>
         </div>
 
         <div class="mb-4">
@@ -25,7 +25,7 @@
             <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'small' %>
           </div>
 
-          <%= form.password_field :password, required: true, class: 'form-control', placeholder: "password" %>
+          <%= form.password_field :password, required: true, class: 'form-control', placeholder: "••••••••" %>
         </div>
 
         <div class="mb-4">
