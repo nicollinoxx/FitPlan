@@ -1,5 +1,11 @@
 <% content_for(:title, t('.title')) %>
 
+<h1 class="mb-3">
+  <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+</h1>
+
 <%= render 'sheet', sheet: @sheet %>
 
 <small class="text-muted d-block mt-1 mb-3">
@@ -15,6 +21,4 @@
     <%= link_to t('edit'), edit_sheet_path(@sheet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-2' %>
     <%= button_to t('destroy'), @sheet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger' %>
   </div>
-
-  <%= link_to 'back', sheets_path, class: 'hide-on-mobile' %>
 </div>
