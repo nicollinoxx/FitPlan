@@ -1,46 +1,42 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="mx-auto py-3" style="max-width: 500px;">
-  <div class="shadow p-4 rounded border position-relative mb-3">
-    <div class="position-absolute top-0 start-0 m-2 z-3">
-      <%= render 'shared/language_dropdown' %>
-    </div>
+<div class="min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="d-flex flex-column-reverse flex-md-row align-items-center gap-5 w-100">
+    <%= image_tag "undraw/mindfulness.svg", alt: "descrição", class: "img-fluid" %>
 
-    <div class="position-absolute top-0 end-0 m-2 z-3">
-      <%= render 'shared/theme_toggle' %>
-    </div>
-
-    <div class="text-center mb-4">
-      <div class="mb-3">
-        <%= image_tag 'logo.png', class: 'img-fluid', style: 'max-height: 90px;' %>
-      </div>
-      <h2 class="text-success"><%= t('.title') %></h2>
-    </div>
-
-    <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
-      <div class="mb-3">
-        <%= form.label :email, class: 'form-label' %>
-        <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control focus-ring focus-ring-success py-1 px-2', placeholder: "name@example.com" %>
+    <div class="w-100 bg-body-tertiary rounded p-4 shadow position-relative">
+      <div class="position-absolute top-0 end-0 m-2">
+        <%= render 'shared/language_dropdown' %>
       </div>
 
-      <div class="mb-3">
-        <div class="d-flex justify-content-between">
-          <%= form.label :password, t('.form.label.password'), class: 'form-label' %>
-          <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'small' %>
+      <h1 class="text-center text-success fw-bold mb-3">FITPLAN</h1>
+
+      <h2 class="text-success mb-2"><%= t('.title') %></h2>
+
+      <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
+        <div class="mb-4">
+          <%= form.label :email, class: 'form-label' %>
+          <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control', placeholder: "name@example.com" %>
         </div>
-        <%= form.password_field :password, required: true, class: 'form-control', placeholder: "password" %>
-      </div>
 
-      <div class="my-4">
-        <%= form.submit t(".submit"), class: 'btn btn-success w-100' %>
-      </div>
-    <% end %>
+        <div class="mb-4">
+          <div class="d-flex justify-content-between">
+            <%= form.label :password, t('.form.label.password'), class: 'form-label' %>
+            <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'small' %>
+          </div>
 
-    <div>
-      <p class="mb-2"><%= t('.section_signup') %></p>
-      <%= link_to t('.signup'), sign_up_path, class: 'btn btn-secondary w-100' %>
+          <%= form.password_field :password, required: true, class: 'form-control', placeholder: "password" %>
+        </div>
+
+        <div class="mb-4">
+          <%= form.submit t(".submit"), class: 'btn btn-success w-100' %>
+        </div>
+      <% end %>
+
+      <div class="mt-3">
+        <p class="mb-3"><%= t('.section_signup') %></p>
+        <%= link_to t('.signup'), sign_up_path, class: 'btn btn-secondary w-100' %>
+      </div>
     </div>
   </div>
-
-  <%= link_to t('.welcome_link'), welcome_path, class: "hide-on-mobile" %>
 </div>

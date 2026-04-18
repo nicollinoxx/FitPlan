@@ -1,6 +1,10 @@
 <% content_for(:title, t('.title')) %>
 
-<h1><%= t('.title') %></h1>
+<h1 class="mb-3">
+  <%= link_to account_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+</h1>
 
 <div id="sessions">
   <ul class="list-group rounded">
