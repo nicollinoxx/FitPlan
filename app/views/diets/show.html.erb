@@ -1,5 +1,11 @@
 <% content_for(:title, t('.title')) %>
 
+<h1 class="mb-3">
+  <%= link_to sheet_diets_path(@sheet), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+</h1>
+
 <%= render @diet, completed: @diet.completions.current_round.exists? %>
 
 <%= render 'diets/analyze', percentage: @percentage unless @diet.calories.zero? %>
@@ -12,6 +18,4 @@
     <%= link_to t('edit'), edit_sheet_diet_path(@sheet, @diet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-4' %>
     <%= button_to t('destroy'), sheet_diet_path(@sheet, @diet), method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger' %>
   </div>
-  <hr>
-    <%= link_to 'back', sheet_diets_path(@sheet), class: 'hide-on-mobile mt-2' %>
 </div>
