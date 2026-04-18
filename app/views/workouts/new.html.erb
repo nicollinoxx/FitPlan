@@ -1,7 +1,9 @@
 <% content_for(:title, t('.title')) %>
 
+<h1 class="mb-3">
+  <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+</h1>
+
 <%= render "form", workout: @workout %>
-
-<br>
-
-<%= link_to 'back', sheet_workouts_path(@sheet), class: 'hide-on-mobile mt-2' %>
