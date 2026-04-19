@@ -1,7 +1,14 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="min-vh-100 d-flex align-items-center justify-content-center">
-  <div class="d-flex flex-column-reverse flex-md-row align-items-center gap-5 w-100">
+<div class="d-flex flex-column min-vh-100">
+  <h1 class="pb-2 pt-3 mt-md-5">
+    <%= link_to welcome_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('back') %>
+    <% end %>
+  </h1>
+
+  <div class="d-flex align-items-center justify-content-center flex-grow-1">
+    <div class="d-flex flex-column-reverse flex-md-row align-items-center gap-5 w-100">
     <%= image_tag "undraw/mindfulness.svg", alt: "descrição", class: "img-fluid" %>
 
     <div class="w-100 bg-body-tertiary border rounded p-4 shadow position-relative">
@@ -34,9 +41,10 @@
       <% end %>
 
       <div class="mt-3">
-        <p class="mb-2"><%= t('.section_signup') %></p>
+        <p class="mb-1"><%= t('.section_signup') %></p>
         <%= link_to t('.signup'), sign_up_path, class: 'btn btn-secondary w-100' %>
       </div>
+    </div>
     </div>
   </div>
 </div>

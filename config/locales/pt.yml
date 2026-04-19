@@ -26,6 +26,7 @@ pt:
         en:     'Inglês'
 
   login:        'Login'
+  back:         'Voltar'
 
   #common
   show:               "Mostrar"
@@ -348,6 +349,8 @@ pt:
       title:                   'Cadastrar'
       submit:                  'Cadastrar'
       error_message_form:      'impediram este cadastro de ser salvo:'
+      section_signin:          'Já tem uma conta?'
+      signin:                  'Entrar'
       label:
         name:                  'Nome'
         password:              'Senha'

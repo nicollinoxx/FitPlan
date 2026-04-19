@@ -2,62 +2,67 @@
 
 <div class="d-flex flex-column min-vh-100">
   <h1 class="pb-2 pt-3 mt-md-5">
-    <%= link_to sign_in_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
-      <i class="bi bi-arrow-left-short"></i><%= t('login') %>
+    <%= link_to welcome_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('back') %>
     <% end %>
   </h1>
 
   <div class="d-flex align-items-center justify-content-center flex-grow-1">
-  <div class="d-flex flex-column-reverse flex-md-row align-items-center gap-5 w-100">
-    <%= image_tag "undraw/mindfulness.svg", alt: "descrição", class: "img-fluid" %>
+    <div class="d-flex flex-column-reverse flex-md-row align-items-center gap-5 w-100">
+      <%= image_tag "undraw/mindfulness.svg", alt: "descrição", class: "img-fluid" %>
 
-    <div class="w-100 bg-body-tertiary border rounded p-4 shadow position-relative">
-      <div class="position-absolute top-0 end-0 m-2">
-        <%= render 'shared/language_dropdown' %>
-      </div>
+      <div class="w-100 bg-body-tertiary border rounded p-4 shadow position-relative">
+        <div class="position-absolute top-0 end-0 m-2">
+          <%= render 'shared/language_dropdown' %>
+        </div>
 
-      <h1 class="text-center text-success fw-bold mb-3">FITPLAN</h1>
+        <h1 class="text-center text-success fw-bold mb-3">FITPLAN</h1>
 
-      <h2 class="text-success mb-2"><%= t('.title') %></h2>
+        <h2 class="text-success mb-2"><%= t('.title') %></h2>
 
-      <%= form_with(url: sign_up_path, data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
-        <% if @user.errors.any? %>
-          <div class="alert alert-danger">
-            <p class="mb-2 fw-semibold"><%= pluralize(@user.errors.count, t('error')) %> <%= t('.error_message_form') %></p>
-            <ul class="mb-0">
-              <% @user.errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
-            </ul>
+        <%= form_with(url: sign_up_path, data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
+          <% if @user.errors.any? %>
+            <div class="alert alert-danger">
+              <p class="mb-2 fw-semibold"><%= pluralize(@user.errors.count, t('error')) %> <%= t('.error_message_form') %></p>
+              <ul class="mb-0">
+                <% @user.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="mb-3">
+            <%= form.label :name, t('.label.name'), class: 'form-label' %>
+            <%= form.text_field :name, value: @user.name, required: true, autofocus: true, class: 'form-control', placeholder: t('.placeholder.name') %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :email, class: 'form-label' %>
+            <%= form.email_field :email, value: @user.email, required: true, autocomplete: "email", class: 'form-control', placeholder: t('.placeholder.email') %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :password, t('.label.password'), class: 'form-label' %>
+            <%= form.password_field :password, required: true, autocomplete: "new-password", class: 'form-control', placeholder: "••••••••" %>
+            <small class="text-muted"><%= t('minimum_characters') %></small>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :password_confirmation, t('.label.password_confirmation'), class: 'form-label' %>
+            <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control', placeholder: "••••••••" %>
+          </div>
+
+          <div class="mt-4">
+            <%= form.submit t(".submit"), class: 'btn btn-success w-100' %>
           </div>
         <% end %>
 
-        <div class="mb-3">
-          <%= form.label :name, t('.label.name'), class: 'form-label' %>
-          <%= form.text_field :name, value: @user.name, required: true, autofocus: true, class: 'form-control', placeholder: t('.placeholder.name') %>
+        <div class="mt-4">
+          <p class="mb-1"><%= t('.section_signin') %></p>
+          <%= link_to t('.signin'), sign_in_path, class: 'btn btn-secondary w-100' %>
         </div>
-
-        <div class="mb-3">
-          <%= form.label :email, class: 'form-label' %>
-          <%= form.email_field :email, value: @user.email, required: true, autocomplete: "email", class: 'form-control', placeholder: t('.placeholder.email') %>
-        </div>
-
-        <div class="mb-3">
-          <%= form.label :password, t('.label.password'), class: 'form-label' %>
-          <%= form.password_field :password, required: true, autocomplete: "new-password", class: 'form-control', placeholder: "••••••••" %>
-          <small class="text-muted"><%= t('minimum_characters') %></small>
-        </div>
-
-        <div class="mb-3">
-          <%= form.label :password_confirmation, t('.label.password_confirmation'), class: 'form-label' %>
-          <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control', placeholder: "••••••••" %>
-        </div>
-
-        <div class="mt-5">
-          <%= form.submit t(".submit"), class: 'btn btn-success w-100' %>
-        </div>
-      <% end %>
-    </div>
+      </div>
     </div>
   </div>
 </div>

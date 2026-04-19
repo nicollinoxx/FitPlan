@@ -15,6 +15,7 @@ en:
         en:     'English'
 
   login:        'Login'
+  back:         'Back'
 
   #common
   show:               "Show"
@@ -334,6 +335,8 @@ en:
       title:                   'Sign up'
       submit:                  'Sign up'
       error_message_form:      'prohibited this registration from being saved:'
+      section_signin:          "Already have an account?"
+      signin:                  'Sign In'
       label:
         name:                  'Name'
         password:              'Password'
