@@ -1,64 +1,82 @@
 <% content_for(:title, t("welcome.title")) %>
 
-<div class="mt-5 text-center">
-  <h1 class="fw-bold text-success"><%= t("welcome.title") %></h1>
-
-  <div class="fixed-top mt-5 p-5 start-50 translate-middle-x w-100" style="max-width: 60rem;">
-    <div class="position-absolute top-0 end-0">
-      <%= render 'shared/theme_toggle' %>
-    </div>
-
-    <div class="position-absolute top-0 start-0">
+<div class="d-flex flex-column min-vh-100 bg-light">
+  <!-- Header with Language Dropdown -->
+  <div class="d-flex justify-content-between align-items-center p-3 p-md-4">
+    <div></div>
+    <div>
       <%= render 'shared/language_dropdown' %>
     </div>
   </div>
 
-  <p class="lead mt-3 mb-2">
-    <%= t("welcome.subtitle_html") %>
-  </p>
+  <!-- Hero Section -->
+  <div class="flex-grow-1 d-flex flex-column justify-content-center">
+    <div class="container-lg">
+      <div class="row align-items-center g-5">
+        <!-- Left Column: Content & CTA -->
+        <div class="col-12 col-lg-6 text-center text-lg-start">
+          <h1 class="fw-bold text-success display-4 mb-4">FITPLAN</h1>
+          <p class="lead text-muted mb-5">
+            <%= t("welcome.subtitle_html") %>
+          </p>
 
-  <div>
-    <%= link_to t("welcome.sign_in"), sign_in_path, class: "btn btn-success px-4 mb-3" %>
+          <!-- CTA Buttons -->
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start mb-5">
+            <%= link_to t("welcome.sign_in"), sign_in_path, class: "btn btn-success btn-lg px-5 py-3" %>
+            <%= link_to t("welcome.sign_up"), sign_up_path, class: "btn btn-outline-success btn-lg px-5 py-3" %>
+          </div>
 
-    <p class="m-0"><%= t("welcome.section_signup")%></p>
-    <%= link_to t('welcome.sign_up'), sign_up_path, class: 'btn btn-secondary px-4' %>
-  </div>
+          <!-- Feature Cards -->
+          <div class="row g-4">
+            <div class="col-12">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-start">
+                  <div class="d-flex align-items-start gap-3">
+                    <div class="fs-3">📋</div>
+                    <div>
+                      <h6 class="text-success fw-semibold mb-2"><%= t("welcome.cards.training.title") %></h6>
+                      <p class="small text-muted mb-0"><%= t("welcome.cards.training.text") %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <div class="d-flex align-items-center justify-content-between my-3 w-75 mx-auto text-primary">
-    <hr class="flex-grow-1 me-3">
-    <i class="bi bi-activity fs-4"></i>
-    <hr class="flex-grow-1 ms-3">
-  </div>
+            <div class="col-12">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-start">
+                  <div class="d-flex align-items-start gap-3">
+                    <div class="fs-3">🥗</div>
+                    <div>
+                      <h6 class="text-success fw-semibold mb-2"><%= t("welcome.cards.diet.title") %></h6>
+                      <p class="small text-muted mb-0"><%= t("welcome.cards.diet.text") %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <div class="d-flex flex-wrap justify-content-center align-items-center gap-5">
-    <div class="mx-2">
-      <div class="text-center h-100 d-flex flex-column">
-        <div class="fs-2 mb-2">📋</div>
-        <h6 class="text-success fw-semibold mb-2"><%= t("welcome.cards.training.title") %></h6>
-        <p class="small text-muted flex-grow-1"><%= t("welcome.cards.training.text") %></p>
+            <div class="col-12">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-start">
+                  <div class="d-flex align-items-start gap-3">
+                    <div class="fs-3">📈</div>
+                    <div>
+                      <h6 class="text-success fw-semibold mb-2"><%= t("welcome.cards.progress.title") %></h6>
+                      <p class="small text-muted mb-0"><%= t("welcome.cards.progress.text") %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Illustration -->
+        <div class="col-12 col-lg-6 d-flex justify-content-center">
+          <%= image_tag 'undraw/athletes_running.svg', class: 'img-fluid', style: 'max-width: 500px;' %>
+        </div>
       </div>
-
-      <i class="bi bi-lightning-charge-fill fs-5"></i>
-    </div>
-
-    <div class="mx-2">
-      <div class="text-center h-100 d-flex flex-column">
-        <div class="fs-2 mb-2">🥗</div>
-        <h6 class="text-success fw-semibold mb-2"><%= t("welcome.cards.diet.title") %></h6>
-        <p class="small text-muted flex-grow-1"><%= t("welcome.cards.diet.text") %></p>
-      </div>
-
-      <i class="bi bi-suit-heart-fill fs-5"></i>
-    </div>
-
-    <div class="m-2">
-      <div class="text-center h-100 d-flex flex-column">
-        <div class="fs-2 mb-2">📈</div>
-        <h6 class="text-success fw-semibold mb-2"><%= t("welcome.cards.progress.title") %></h6>
-        <p class="small text-muted flex-grow-1"><%= t("welcome.cards.progress.text") %></p>
-      </div>
-
-      <i class="bi bi-graph-up-arrow"></i>
     </div>
   </div>
 </div>
