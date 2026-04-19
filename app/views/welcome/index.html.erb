@@ -1,7 +1,6 @@
 <% content_for(:title, t("welcome.title")) %>
 
 <div class="d-flex flex-column min-vh-100 bg-light">
-  <!-- Header with Language Dropdown -->
   <div class="d-flex justify-content-between align-items-center p-3 p-md-4">
     <div></div>
     <div>
@@ -9,24 +8,23 @@
     </div>
   </div>
 
-  <!-- Hero Section -->
   <div class="flex-grow-1 d-flex flex-column justify-content-center">
     <div class="container-lg">
       <div class="row align-items-center g-5">
-        <!-- Left Column: Content & CTA -->
         <div class="col-12 col-lg-6 text-center text-lg-start">
           <h1 class="fw-bold text-success display-4 mb-4">FITPLAN</h1>
           <p class="lead text-muted mb-5">
             <%= t("welcome.subtitle_html") %>
           </p>
 
-          <!-- CTA Buttons -->
-          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start mb-5">
-            <%= link_to t("welcome.sign_in"), sign_in_path, class: "btn btn-success btn-lg px-5 py-3" %>
-            <%= link_to t("welcome.sign_up"), sign_up_path, class: "btn btn-outline-success btn-lg px-5 py-3" %>
+          <div class="mb-5">
+            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+              <%= link_to t("welcome.sign_in"), sign_in_path, class: "btn btn-success btn-lg px-5 py-3" %>
+              <%= link_to t("welcome.sign_up"), sign_up_path, class: "btn btn-outline-success btn-lg px-5 py-3" %>
+            </div>
+            <p class="small text-muted mt-3 mb-0"><%= t("welcome.section_signup") %></p>
           </div>
 
-          <!-- Feature Cards -->
           <div class="row g-4">
             <div class="col-12">
               <div class="card border-0 shadow-sm h-100">
@@ -72,7 +70,6 @@
           </div>
         </div>
 
-        <!-- Right Column: Illustration -->
         <div class="col-12 col-lg-6 d-flex justify-content-center">
           <%= image_tag 'undraw/athletes_running.svg', class: 'img-fluid', style: 'max-width: 500px;' %>
         </div>
