@@ -3,7 +3,7 @@
     <h2 class="h6 mb-0 text-truncate">
       <i class="bi bi-cup-hot me-1"></i>
       <% if action_name != 'show' %>
-        <%= link_to diet.meal, sheet_diet_path(@sheet, diet), data: { turbo_frame: "_top" }, class: 'text-light text-decoration-none' %>
+        <%= link_to diet.meal, sheet_diet_path(@sheet, diet), data: { turbo_frame: "_top" }, class: 'text-light' %>
       <% else %>
         <%= diet.meal %>
       <% end %>

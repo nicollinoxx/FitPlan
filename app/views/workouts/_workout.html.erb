@@ -3,7 +3,7 @@
     <h2 class="h6 mb-0 text-truncate">
       <i class="bi bi-activity me-1"></i>
       <% if action_name != 'show' %>
-        <%= link_to workout.exercise, sheet_workout_path(@sheet, workout), data: { turbo_frame: "_top" }, class: 'text-light text-decoration-none' %>
+        <%= link_to workout.exercise, sheet_workout_path(@sheet, workout), data: { turbo_frame: "_top" }, class: 'text-light' %>
       <% else %>
         <%= workout.exercise %>
       <% end %>
