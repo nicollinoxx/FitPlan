@@ -29,6 +29,7 @@ pt:
   login:        'Login'
   back:         'Voltar'
   save:         'Salvar'
+  search:       'Buscar'
 
   #common
   show:               "Mostrar"

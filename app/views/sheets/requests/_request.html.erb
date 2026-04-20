@@ -1,5 +1,5 @@
 <div id="<%= dom_id(request) %>" class="col-md-6 p-2 hover-zoom-sm">
-  <div class="bg-body-tertiary border-start border-2 <%= request.sheet.workout? ? 'border-success' : 'border-warning' %> shadow rounded p-2">
+  <div class="bg-body-tertiary border-start border-2 <%= request.sheet.workout? ? 'border-success' : 'border-warning' %> shadow-sm rounded p-2">
     <div class="d-flex align-items-center mb-2">
       <% user = params[:filter] == "sent" ? request.recipient : request.sender %>
 
@@ -41,6 +41,7 @@
         <a class="text-muted small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= request.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= request.id %>">
           <i class="bi bi-blockquote-right me-1"></i> Show description
         </a>
+
         <div class="collapse mt-1 bg-dark-subtle rounded py-1 px-2" id="desc-<%= request.id %>"><%= request.sheet.description %></div>
       </div>
     <% end %>

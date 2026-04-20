@@ -18,6 +18,7 @@ en:
   login:        'Login'
   back:         'Back'
   save:         'Save'
+  search:       'Search'
 
   #common
   show:               "Show"
