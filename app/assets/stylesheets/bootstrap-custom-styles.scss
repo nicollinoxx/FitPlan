@@ -1,8 +1,5 @@
 $color-mode-type: data;
 
-input.form-control { border-color: var(--bs-success); }
-select.form-select { border-color: var(--bs-success); }
-
 input.form-control:focus {
   border-color: var(--bs-success) !important;
   box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;

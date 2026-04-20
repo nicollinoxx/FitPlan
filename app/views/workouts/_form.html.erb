@@ -14,27 +14,27 @@
 
   <div class='mb-3'>
     <%= form.label :exercise, t('.label.exercise'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :exercise, class: 'form-control border border-success' %>
+    <%= form.text_field :exercise, class: 'form-control' %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :series, t('.label.series'), style: "display: block", class: 'form-label' %>
-    <%= form.number_field :series, class: 'form-control border border-success' %>
+    <%= form.number_field :series, class: 'form-control' %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :repetitions, t('.label.repetitions'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :repetitions,  maxlength: 20, class: 'form-control border border-success' %>
+    <%= form.text_field :repetitions,  maxlength: 20, class: 'form-control' %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :interval, t('.label.interval'), style: "display: block", class: 'form-label' %>
-    <%= form.time_field :interval, class: 'form-control border border-success' %>
+    <%= form.time_field :interval, class: 'form-control' %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :charge, t('.label.charge'), style: "display: block", class: 'form-label' %>
-    <%= form.select :charge, t('.options_charge').invert, {}, class: "form-select border border-success" %>
+    <%= form.select :charge, t('.options_charge').invert, {}, class: "form-select" %>
   </div>
 
   <div class='mb-3'>
