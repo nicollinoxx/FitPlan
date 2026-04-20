@@ -14,8 +14,10 @@ en:
         pt:     'Portuguese'
         en:     'English'
 
+
   login:        'Login'
   back:         'Back'
+  save:         'Save'
 
   #common
   show:               "Show"
