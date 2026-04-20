@@ -1,5 +1,11 @@
 <% content_for(:title, t('.title')) %>
 
+<h1 class="mb-3">
+  <%= link_to account_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+</h1>
+
 <%= form_with(model: @user, url: identity_profile_path) do |form| %>
   <div class='mb-3'>
     <%= form.label :name, t('.name'), style: "display: block", class: 'form-label' %>

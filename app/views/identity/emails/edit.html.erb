@@ -1,7 +1,20 @@
 <% if Current.user.verified? %>
   <% content_for(:title, t('.change_email_title')) %>
+
+  <h1 class="mb-3">
+    <%= link_to account_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('.change_email_title') %>
+    <% end %>
+  </h1>
 <% else %>
   <% content_for(:title, t('.verify_email_title')) %>
+
+  <h1 class="mb-3">
+    <%= link_to account_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('.verify_email_title') %>
+    <% end %>
+  </h1>
+
   <p><%= t('.message_verification') %></p>
   <p><%= button_to t('.send_verification_email'), identity_email_verification_path, class: 'btn btn-warning mb-4' %></p>
 <% end %>

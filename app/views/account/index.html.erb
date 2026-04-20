@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="d-flex justify-content-between">
-  <h1 class="h4"><%= t('.title') %></h1>
+  <h1><%= t('.title') %></h1>
   <%= button_to "Log out", Current.session, method: :delete, data: { controller: "bridge--nav-button", bridge_title: "Log out", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
 </div>
 

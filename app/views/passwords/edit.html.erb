@@ -1,5 +1,11 @@
 <% content_for(:title, t('.title')) %>
 
+<h1 class="mb-3">
+  <%= link_to account_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+</h1>
+
 <%= form_with(url: password_path, method: :patch, data: { controller: "bridge--form", action: "turbo:submit-start->bridge--form#submitStart turbo:submit-end->bridge--form#submitEnd" }) do |form| %>
   <% if @user.errors.any? %>
     <div style="color: red">
