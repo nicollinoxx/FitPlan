@@ -14,7 +14,7 @@
   <%= turbo_frame_tag "diets" do %>
     <%= render 'shared/completion_today_size' %>
 
-    <div class="row">
+    <div class="row mb-3">
       <% @diets.each do |diet| %>
         <div class="col-md-6 p-2 mb-2">
           <%= render diet, completed: @completions_by_diet_id[diet.id] %>

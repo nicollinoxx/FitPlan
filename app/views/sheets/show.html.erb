@@ -6,19 +6,23 @@
   <% end %>
 </h1>
 
-<%= render 'sheet', sheet: @sheet %>
+<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+  <%= render 'sheet', sheet: @sheet %>
 
-<small class="text-muted d-block mt-1 mb-3">
-  type: <%= @sheet.workout? ? t('workout') : t('diet') %> |
-  font: <%= @sheet.copy? ? "copied" : "original" %>
-</small>
+  <small class="text-muted d-block mt-1 mb-3">
+    type: <%= @sheet.workout? ? t('workout') : t('diet') %> |
+    font: <%= @sheet.copy? ? "copied" : "original" %>
+  </small>
 
-<div id="sheets" data-controller="bridge--menu">
-  <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>
+  <div id="sheets" data-controller="bridge--menu">
+    <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>
 
-  <div class='d-flex mb-3'>
-    <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
-    <%= link_to t('edit'), edit_sheet_path(@sheet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-2' %>
-    <%= button_to t('destroy'), @sheet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger' %>
+    <div class='d-flex mb-3'>
+      <div data-bridge--menu-target="title" class="d-none">Contact Options</div>
+      <%= link_to t('edit'), edit_sheet_path(@sheet), data: { bridge__menu_target: "item" }, class: 'btn btn-secondary me-2' %>
+      <%= button_to t('destroy'), @sheet, method: :delete, data: { bridge__menu_target: "item", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger' %>
+    </div>
   </div>
+
+  <%= image_tag 'undraw/grading_papers.svg', class: 'img-fluid mt-auto ms-auto' %>
 </div>
