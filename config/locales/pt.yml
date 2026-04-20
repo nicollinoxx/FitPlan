@@ -244,6 +244,10 @@ pt:
       session:
         title:                  'Sessão'
         collection_sessions:    'Sessões'
+      preferences:
+        title:                  'Preferências'
+        language:               'Idioma'
+        color_scheme:           'Tema'
 
   #welcome------------------------------------
   welcome:

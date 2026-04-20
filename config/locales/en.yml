@@ -229,6 +229,10 @@ en:
       session:
         title:                  'Session'
         collection_sessions:    'Sessions'
+      preferences:
+        title:                  'Preferences'
+        language:               'Language'
+        color_scheme:           'Color scheme'
 
 
 
