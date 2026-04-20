@@ -6,37 +6,25 @@
   <% end %>
 </h1>
 
-<div id="sessions">
-  <ul class="list-group rounded">
-    <% @sessions.each do |session| %>
-      <div id="<%= dom_id session %>">
-        <li class="list-group-item">
-          <p>
-            <strong><%= t('.user_agent') %></strong>
-            <%= session.user_agent %>
-          </p>
+<ul id="sessions" class="list-unstyled p-0 m-0">
+  <% @sessions.each do |session| %>
+    <li class="bg-body-tertiary rounded p-2 mb-3 shadow-sm" id="<%= dom_id session %>">
+      <p class="my-1">
+        <strong><%= t('.user_agent') %></strong>
+        <%= session.user_agent %>
+      </p>
 
-          <p>
-            <strong><%= t('.ip_address') %></strong>
-            <%= session.ip_address %>
-          </p>
+      <p class="my-1">
+        <strong><%= t('.ip_address') %></strong>
+        <%= session.ip_address %>
+      </p>
 
-          <p>
-            <strong><%= t('.created_at') %></strong>
-            <%= session.created_at %>
-          </p>
+      <p class="my-1">
+        <strong><%= t('.created_at') %></strong>
+        <%= session.created_at %>
+      </p>
 
-          <p>
-            <%= button_to t('destroy'), session, method: :delete, data: { turbo_confirm: t("message_destroy")}, class: 'btn btn-danger d-grid' %>
-          </p>
-        </li>
-      </div>
-    <% end %>
-  </ul>
-</div>
-
-<br>
-
-<div class='hide-on-mobile'>
-  <%= link_to 'back', account_path %>
-</div>
+      <%= button_to t('destroy'), session, method: :delete, data: { turbo_confirm: t("message_destroy")}, class: 'btn btn-danger mt-2' %>
+    </li>
+  <% end %>
+</ul>
