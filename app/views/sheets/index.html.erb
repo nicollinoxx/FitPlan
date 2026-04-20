@@ -2,11 +2,11 @@
 
 <div class="d-flex justify-content-between align-items-center">
   <h1><%= t('.title') %></h1>
-  <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-2' %>
+  <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
 </div>
 
 <%= turbo_frame_tag "sheets" do %>
-  <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-3">
+  <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-2">
     <% if turbo_native_app? %>
         <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
           <div class="d-flex align-items-center">
