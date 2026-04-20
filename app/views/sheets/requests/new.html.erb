@@ -6,18 +6,22 @@
   <% end %>
 </h1>
 
-<%= turbo_frame_tag "sheet_requests" do %>
-  <%= form_with url: new_request_path, method: :get, local: true do %>
-    <div class="mb-5">
-      <label class="form-label"><%= t('.search_user') %></label>
-      <div class="input-group">
-        <span class="input-group-text">@</span>
-        <%= text_field_tag :handle, params[:handle], class: "form-control", placeholder: t('.handle'), onchange: "this.form.requestSubmit();" %>
+<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+  <%= turbo_frame_tag "sheet_requests" do %>
+    <%= form_with url: new_request_path, method: :get, local: true do %>
+      <div class="mb-5">
+        <label class="form-label"><%= t('.search_user') %></label>
+        <div class="input-group">
+          <span class="input-group-text">@</span>
+          <%= text_field_tag :handle, params[:handle], class: "form-control", placeholder: t('.handle'), onchange: "this.form.requestSubmit();" %>
+        </div>
       </div>
-    </div>
+    <% end %>
+
+    <% if @recipient.present? %>
+      <%= render partial: "recipient_form", locals: { recipient: @recipient, sheets: @sheets } %>
+    <% end %>
   <% end %>
 
-  <% if @recipient.present? %>
-    <%= render partial: "recipient_form", locals: { recipient: @recipient, sheets: @sheets } %>
-  <% end %>
-<% end %>
+  <%= image_tag 'undraw/mobile_user.svg', class: 'img-fluid mt-auto ms-auto' %>
+</div>

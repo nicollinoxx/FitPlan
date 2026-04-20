@@ -10,16 +10,18 @@
   <%= link_to t('new'), new_sheet_workout_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success flex-shrink-0' %>
 </div>
 
-<%= turbo_frame_tag "workouts" do %>
-  <%= render 'shared/completion_today_size' %>
+<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+  <%= turbo_frame_tag "workouts" do %>
+    <%= render 'shared/completion_today_size' %>
 
-  <div class="row">
-    <% @workouts.each do |workout| %>
-      <div class="col-md-6 mb-4">
-        <%= render workout, completion: @completions_by_workout_id[workout.id] %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+    <div class="row">
+      <% @workouts.each do |workout| %>
+        <div class="col-md-6 mb-4">
+          <%= render workout, completion: @completions_by_workout_id[workout.id] %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
-<%= image_tag 'undraw/working_out.svg', class: 'd-block ms-auto img-fluid mt-5' %>
+  <%= image_tag 'undraw/working_out.svg', class: 'img-fluid mt-auto ms-auto' %>
+</div>
