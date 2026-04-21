@@ -39,6 +39,11 @@ pt:
   cancel:             "Cancelar"
   confirm:            "Confirmar"
   all:                'Todos'
+  login:              'Login'
+  back:               'Voltar'
+  save:               'Salvar'
+  search:             'Buscar'
+
 
 
   #error forms
@@ -241,6 +246,10 @@ pt:
       session:
         title:                  'Sessão'
         collection_sessions:    'Sessões'
+      preferences:
+        title:                  'Preferências'
+        language:               'Idioma'
+        color_scheme:           'Tema'
 
   #welcome------------------------------------
   welcome:
@@ -326,6 +335,8 @@ pt:
         error_message_form: 'impediram esta sessão de ser salva:'
         label:
           password: 'Senha'
+        placeholder:
+          email:    'email@exemplo.com'
 
   #passwords------------------------------
   passwords:
@@ -344,10 +355,15 @@ pt:
       title:                   'Cadastrar'
       submit:                  'Cadastrar'
       error_message_form:      'impediram este cadastro de ser salvo:'
+      section_signin:          'Já tem uma conta?'
+      signin:                  'Entrar'
       label:
         name:                  'Nome'
         password:              'Senha'
         password_confirmation: 'Confirmação de senha'
+      placeholder:
+        name:                  'Nome'
+        email:                 'email@exemplo.com'
 
   #identity----------------------------
   identity:

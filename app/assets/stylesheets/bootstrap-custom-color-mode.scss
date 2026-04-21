@@ -1,6 +1,4 @@
 @include color-mode(dark) {
-  .bi-sun-fill { display: inline; }
-  .bi-moon-stars-fill { display: none; }
   .bg-light { background-color: var(--bs-dark) !important; }
 
   .alert-dark {
@@ -10,8 +8,6 @@
 }
 
 @include color-mode(light) {
-  .bi-sun-fill { display: none; }
-  .bi-moon-stars-fill { display: inline; }
   .bg-dark-subtle { background-color: var(--bs-light) !important; }
 
   .alert-dark {

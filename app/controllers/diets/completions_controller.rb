@@ -5,12 +5,12 @@ module Diets
 
     def create
       @sheet.completions.today.find_or_create_by!(diet: @diet)
-      refresh_or_redirect_to sheet_diets_url(@sheet)
+      redirect_to sheet_diets_url(@sheet)
     end
 
     def destroy
       @sheet.completions.today.find_by!(diet: @diet).destroy!
-      refresh_or_redirect_to sheet_diets_url(@sheet)
+      redirect_to sheet_diets_url(@sheet)
     end
 
     private

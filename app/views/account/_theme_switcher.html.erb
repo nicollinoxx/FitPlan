@@ -1,0 +1,27 @@
+<div class="d-flex align-items-center gap-2">
+  <label class="form-check-label" for="themeSwitch">
+    <i class="bi bi-sun-fill"></i>
+  </label>
+
+  <div class="form-check form-switch ps-0 m-0 d-flex align-items-center">
+    <input class="form-check-input m-0" type="checkbox" role="switch" id="themeSwitch" data-theme-target="switch" data-action="change->theme#toggle">
+  </div>
+
+  <label class="form-check-label m-0" for="themeSwitch">
+    <i class="bi bi-moon-stars-fill"></i>
+  </label>
+
+  <div class="dropdown ms-1">
+    <button type="button" class="btn btn-sm btn-link p-0 text-body" data-bs-toggle="dropdown">
+      <i class="bi bi-three-dots-vertical"></i>
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li>
+        <button class="dropdown-item" type="button" data-action="theme#system">
+          <i class="bi bi-laptop"></i> <%= t('system_theme') %>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

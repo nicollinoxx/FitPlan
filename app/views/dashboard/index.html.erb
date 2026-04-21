@@ -24,14 +24,21 @@
   </div>
 <% end %>
 
-<div class="d-flex justify-content-end mb-2 mt-4">
-  <%= form_with(url: dashboard_path, method: :get, data: { turbo_frame: :sheets }) do |form| %>
-    <%= form.select :period, period_options, { selected: params[:period] || 'month' },
-      class: "form-select form-select-sm border-primary", onchange: "this.form.requestSubmit()" %>
-  <% end %>
-</div>
-
 <%= turbo_frame_tag :sheets do %>
+<div class="d-flex justify-content-end mb-2 mt-4">
+  <div class="dropdown bg-light rounded">
+    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="periodButton" data-bs-toggle="dropdown">
+      <i class="bi bi-calendar3"></i> <%= t(".filters.period.#{params[:period] || 'month'}") %>
+    </button>
+
+      <ul class="dropdown-menu dropdown-menu-end">
+        <% period_options.each do |label, value| %>
+          <li><%= link_to label, dashboard_path(period: value), class: 'dropdown-item', data: { turbo_frame: :sheets } %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
   <div class="row my-2">
     <div class="col-md-6 mb-3">
       <div class="p-3 bg-body-tertiary border-start border-bottom border-success rounded">

@@ -31,5 +31,5 @@
         <%= form.select :gender, options_for_select([['Male', 'male'], ['Female', 'female']], @healthy_metric.gender), {}, { required: true, class: "form-select" } %>
     </div>
 
-    <%= form.submit "Save", class: "btn btn-success" %>
+    <%= form.submit t("save"), class: "btn btn-success" %>
 <% end %>
