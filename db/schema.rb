@@ -79,6 +79,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_21_164651) do
     t.index ["sheet_id"], name: "index_diets_on_sheet_id"
   end
 
+  create_table "follows", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "followed_id", null: false
+    t.bigint "follower_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_follows_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_follows_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+  end
+
   create_table "healthy_metrics", force: :cascade do |t|
     t.date "birth_date"
     t.datetime "created_at", null: false
