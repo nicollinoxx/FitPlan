@@ -8,13 +8,7 @@
       <div class="flex-grow-1">
         <div class="d-flex justify-content-between align-items-start gap-3">
           <div>
-            <% unless action_name == 'show' %>
-              <%= link_to sheet, data: { turbo_frame: "_top" }, class: 'text-body position-relative z-2 d-inline-block py-1 pe-3' do %>
-                <h2 class="h6 mb-0 fw-semibold lh-sm"><%= sheet.name %></h2>
-              <% end %>
-            <% else %>
-              <h2 class="h6 mb-0 fw-semibold lh-sm"><%= sheet.name %></h2>
-            <% end %>
+            <h2 class="h6 mb-0 fw-semibold lh-sm"><%= sheet.name %></h2>
 
             <div class="d-flex flex-wrap align-items-center">
               <small class="badge bg-<%= sheet_color(sheet) %>-subtle text-<%= sheet_color(sheet) %>">
@@ -29,9 +23,15 @@
             </div>
           </div>
 
-          <div class="d-flex gap-1 position-relative z-2">
-            <%= sheet_completion_button(sheet) %>
-          </div>
+          <% unless action_name == 'show' %>
+            <div class="d-flex gap-1 z-2">
+              <%= link_to edit_sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm btn-secondary" do %>
+                <i class="bi bi-pencil-square"></i>
+              <% end %>
+
+              <%= sheet_completion_button(sheet) %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

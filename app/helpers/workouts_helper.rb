@@ -7,7 +7,7 @@ module WorkoutsHelper
         content_tag(:i, '', class: 'bi bi-check-lg')
       end
     else
-      button_to sheet_workout_completion_path(sheet, workout), class: 'btn btn-sm btn-outline-light', data: { turbo_submits_with: spinner_icon } do
+      button_to sheet_workout_completion_path(sheet, workout), class: 'btn btn-sm btn-light', data: { turbo_submits_with: spinner_icon } do
         content_tag(:i, '', class: 'bi bi-check-lg')
       end
     end
