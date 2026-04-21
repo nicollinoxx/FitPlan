@@ -17,6 +17,15 @@ Rails.application.routes.draw do
     resource :healthy_metric,     except: [:destroy]
   end
 
+  namespace :social do
+    resources :profiles, only: [:index, :show] do
+      member do
+        post   :follow
+        delete :unfollow
+      end
+    end
+  end
+
   resources :sheets do
     resource :completion, only: %i[create destroy], module: :sheets
 
