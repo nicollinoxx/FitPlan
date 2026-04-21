@@ -1,6 +1,6 @@
 module WorkoutsHelper
   def workout_completion_button(sheet, workout, completion)
-    spinner_icon = content_tag(:i, '', class: 'bi-hourglass-split')
+    spinner_icon = content_tag(:i, '', class: 'bi bi-hourglass-split')
 
     if completion&.series_zero?
       button_to sheet_workout_completion_path(sheet, workout), method: :delete, class: 'btn btn-sm btn-light', data: { turbo_submits_with: spinner_icon } do
