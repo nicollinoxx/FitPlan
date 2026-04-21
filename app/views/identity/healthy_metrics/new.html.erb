@@ -1,3 +1,10 @@
 <% content_for(:title, t('healthy_metric.new.title')) %>
 
+<h1 class="mb-3">
+  <%= link_to account_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('healthy_metric.title') %>
+  <% end %>
+</h1>
+
+
 <%= render 'form', healthy_metric: @healthy_metric %>

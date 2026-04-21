@@ -1,22 +1,27 @@
 <% content_for(:title, @sheet.name) %>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h1><%= @sheet.name %></h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>
+    <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= @sheet.name %>
+    <% end %>
+  </h1>
+
   <%= link_to t('new'), new_sheet_workout_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success flex-shrink-0' %>
 </div>
 
-<%= turbo_frame_tag "workouts" do %>
-  <%= render 'shared/completion_today_size' %>
+<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+  <%= turbo_frame_tag "workouts" do %>
+    <%= render 'shared/completion_today_size' %>
 
-  <div class="row">
-    <% @workouts.each do |workout| %>
-      <div class="col-md-6 mb-4">
-        <%= render workout, completion: @completions_by_workout_id[workout.id] %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+    <div class="row">
+      <% @workouts.each do |workout| %>
+        <div class="col-md-6 mb-4">
+          <%= render workout, completion: @completions_by_workout_id[workout.id] %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
-<br>
-
-<%= link_to 'back', sheets_path, class: 'hide-on-mobile mt-2' %>
+  <%= image_tag 'undraw/working_out.svg', alt: '', class: 'img-fluid mt-auto ms-auto' %>
+</div>

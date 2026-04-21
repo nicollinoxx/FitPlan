@@ -1,4 +1,4 @@
-<nav class="hide-on-mobile navbar navbar-expand-lg border-bottom sticky-top top-0 bg-body z-4 py-2">
+<nav class="hide-on-mobile navbar navbar-expand-lg border-bottom sticky-top top-0 bg-body z-4 py-2 mb-4">
   <div class="container d-flex align-items-center">
     <button class="navbar-toggler border px-2 order-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <i class="bi bi-list fs-3"></i>
@@ -8,15 +8,12 @@
       <span class="fw-bold text-success fs-4 lh-1">FITPLAN</span>
     <% end %>
 
-    <div class="d-flex align-items-center gap-2 order-3 d-lg-none">
-      <%= render 'shared/theme_toggle' %>
-
-      <%= link_to account_path do %>
+    <div class="d-flex align-items-center order-3 d-lg-none">
+      <%= link_to account_path, aria: { label: t('account.index.title') } do %>
         <% if Current.user.avatar.attached? %>
-          <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', style: 'width: 36px; height: 36px;' %>
+          <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
         <% else %>
-          <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white"
-               style="width: 36px; height: 36px;">
+          <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 36px; height: 36px;">
             <i class="bi bi-person-fill fs-5"></i>
           </div>
         <% end %>
@@ -50,17 +47,14 @@
         </li>
       </ul>
 
-      <div class="d-none d-lg-flex align-items-center ms-auto gap-3 ps-3">
-        <%= render 'shared/theme_toggle' %>
-
-        <%= link_to account_path, class: 'd-flex align-items-center' do %>
+      <div class="d-none d-lg-flex ms-auto">
+        <%= link_to account_path, class: 'd-flex align-items-center', aria: { label: t('account.index.title') } do %>
           <% if Current.user.avatar.attached? %>
-            <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', style: 'width: 36px; height: 36px;' %>
+            <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
           <% else %>
-            <span class="rounded-circle bg-white bg-opacity-25 d-inline-flex align-items-center justify-content-center"
-                  style="width: 36px; height: 36px;">
-              <i class="bi bi-person-fill"></i>
-            </span>
+            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 36px; height: 36px;">
+              <i class="bi bi-person-fill fs-5"></i>
+            </div>
           <% end %>
         <% end %>
       </div>

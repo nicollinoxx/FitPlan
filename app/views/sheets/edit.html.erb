@@ -1,5 +1,11 @@
 <% content_for(:title, t('.title')) %>
 
+<h1 class="mb-3">
+  <%= link_to sheet_path(@sheet), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+</h1>
+
 <% if @sheet.workouts.exists? || @sheet.diets.exists? %>
   <div class="alert alert-warning py-2 rounded" role="alert"><%= t('.alert')%></div>
 <% end %>
@@ -7,5 +13,3 @@
 <div class="my-4">
     <%= render "form", sheet: @sheet %>
 </div>
-
-<%= link_to 'back', @sheet, class: 'hide-on-mobile' %>

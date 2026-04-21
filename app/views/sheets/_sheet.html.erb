@@ -2,15 +2,15 @@
   <div class="<%= sheet.sheet_completions_today.any? ? "bg-completed-#{sheet_color(sheet)} border border-completed-#{sheet_color(sheet)}" : 'bg-body-tertiary' %>
     border-start border-2 border-<%= sheet_color(sheet) %> rounded shadow-sm position-relative px-2 py-2">
 
-    <div class="d-flex align-items-start gap-3 mb-2">
+    <div class="d-flex align-items-start gap-3">
       <i class="bi <%= sheet.workout? ? 'bi-heart-pulse' : 'bi-egg-fried' %> text-<%= sheet_color(sheet) %> fs-3 mt-1"></i>
 
       <div class="flex-grow-1">
         <div class="d-flex justify-content-between align-items-start gap-3">
           <div>
-            <h2 class="h6 mb-1 fw-semibold lh-sm"><%= sheet.name %></h2>
+            <h2 class="h6 mb-0 fw-semibold lh-sm"><%= sheet.name %></h2>
 
-            <div class="d-flex flex-wrap align-items-center gap-1">
+            <div class="d-flex flex-wrap align-items-center">
               <small class="badge bg-<%= sheet_color(sheet) %>-subtle text-<%= sheet_color(sheet) %>">
                 <%= sheet.workout? ? t('workout') : t('diet') %>
               </small>
@@ -25,18 +25,18 @@
 
           <% unless action_name == 'show' %>
             <div class="d-flex gap-1 z-2">
-              <%= sheet_completion_button(sheet) %>
-              <%= link_to sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm btn-secondary" do %>
-                <i class="bi bi-pencil"></i>
+              <%= link_to edit_sheet_path(sheet), data: { turbo_frame: "_top" }, class: "btn btn-sm btn-secondary" do %>
+                <i class="bi bi-pencil-square"></i>
               <% end %>
+
+              <%= sheet_completion_button(sheet) %>
             </div>
           <% end %>
         </div>
       </div>
     </div>
 
-    <p class="mb-0 text-muted small pe-5"><%= sheet.description %></p>
-
-    <%= link_to "", sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top"}, class: "stretched-link" unless action_name == 'show' %>
+    <p class="mb-0 text-muted small"><%= sheet.description %></p>
+    <%= link_to "", sheet_diets_or_workouts_path(sheet), data: { turbo_frame: "_top" }, class: "stretched-link" unless action_name == 'show' %>
   </div>
 </div>

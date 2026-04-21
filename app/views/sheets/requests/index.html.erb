@@ -2,25 +2,31 @@
 
 <div class="d-flex justify-content-between align-items-center">
   <h1><%= t('.title') %></h1>
-  <%= link_to t('new'), new_request_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success mb-3 flex-shrink-0' %>
+  <%= link_to t('new'), new_request_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success flex-shrink-0' %>
 </div>
 
-<%= turbo_frame_tag "sheet_requests" do %>
-  <div class="sticky-top d-flex align-items-center justify-content-between mb-3 py-2 z-4">
-    <h5 class="text-success"><%= params[:filter] == "sent" ? t('.filters.sent') : t('.filters.received') %></h5>
-    <div class="ms-auto dropdown bg-light rounded mt-2">
-      <button class="btn btn-sm border dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-        <i class="bi bi-funnel-fill"><%= t('.filter') %></i>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li><%= link_to t('.filters.sent'), requests_path(filter: 'sent'), class: 'dropdown-item' %></li>
-        <li><%= link_to t('.filters.received'), requests_path(filter: 'received'), class: 'dropdown-item' %></li>
-      </ul>
-    </div>
-  </div>
+<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+  <%= turbo_frame_tag "sheet_requests" do %>
+    <div class="d-flex align-items-center justify-content-between mb-3 py-2">
+      <h5 class="text-success m-0"><%= params[:filter] == "sent" ? t('.filters.sent') : t('.filters.received') %></h5>
 
-  <div id="paginables" class="row">
-    <%= render partial: 'sheets/requests/request', collection: @page.records, as: :request %>
-    <%= render 'shared/paginables/next_page_container', src: requests_path(@page.next_param, format: :turbo_stream) unless @page.last? %>
-  </div>
-<% end %>
+      <div class="ms-auto dropdown bg-light rounded mt-2">
+        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+          <i class="bi bi-funnel-fill"></i> <%= t('.filter') %>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><%= link_to t('.filters.sent'), requests_path(filter: 'sent'), class: 'dropdown-item' %></li>
+          <li><%= link_to t('.filters.received'), requests_path(filter: 'received'), class: 'dropdown-item' %></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="paginables" class="row mb-3">
+      <%= render partial: 'sheets/requests/request', collection: @page.records, as: :request %>
+      <%= render 'shared/paginables/next_page_container', src: requests_path(@page.next_param, format: :turbo_stream) unless @page.last? %>
+    </div>
+  <% end %>
+
+  <%= image_tag 'undraw/request_sent.svg', alt: '', class: 'img-fluid mt-auto ms-auto' %>
+</div>

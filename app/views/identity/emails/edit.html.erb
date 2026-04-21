@@ -1,7 +1,20 @@
 <% if Current.user.verified? %>
   <% content_for(:title, t('.change_email_title')) %>
+
+  <h1 class="mb-3">
+    <%= link_to account_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('.change_email_title') %>
+    <% end %>
+  </h1>
 <% else %>
   <% content_for(:title, t('.verify_email_title')) %>
+
+  <h1 class="mb-3">
+    <%= link_to account_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('.verify_email_title') %>
+    <% end %>
+  </h1>
+
   <p><%= t('.message_verification') %></p>
   <p><%= button_to t('.send_verification_email'), identity_email_verification_path, class: 'btn btn-warning mb-4' %></p>
 <% end %>
@@ -21,19 +34,15 @@
 
   <div class='mb-3'>
     <%= form.label :email, t('.label.email'), style: "display: block", class: 'form-label' %>
-    <%= form.email_field :email, required: true, autofocus: true, class: 'form-control border border-success' %>
+    <%= form.email_field :email, required: true, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :password_challenge, t('.label.password_challenge'), style: "display: block", class: 'form-label' %>
-    <%= form.password_field :password_challenge, required: true, autocomplete: "current-password", class: 'form-control border border-success' %>
+    <%= form.password_field :password_challenge, required: true, autocomplete: "current-password", class: 'form-control' %>
   </div>
 
   <div class='mb-3'>
-    <%= form.submit "Save", data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
+    <%= form.submit t("save"), data: { "bridge--form-target": "submit", "bridge-title": "Save" }, class: 'btn btn-success' %>
   </div>
 <% end %>
-
-<div class='hide-on-mobile'>
-  <%= link_to "back", account_path %>
-</div>

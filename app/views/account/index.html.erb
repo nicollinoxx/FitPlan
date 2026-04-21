@@ -1,7 +1,7 @@
 <% content_for(:title, t('.title')) %>
 
 <div class="d-flex justify-content-between">
-  <h1 class="h4"><%= t('.title') %></h1>
+  <h1><%= t('.title') %></h1>
   <%= button_to "Log out", Current.session, method: :delete, data: { controller: "bridge--nav-button", bridge_title: "Log out", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
 </div>
 
@@ -58,6 +58,39 @@
 </div>
 
 <div class="card shadow-sm mb-3 bg-body-tertiary rounded">
+  <div class="card-header bg-transparent border-bottom-0">
+      <h3 class="h6 fw-bold mb-0">
+          <i class="bi bi-sliders me-2 text-primary"></i><%= t('.preferences.title') %>
+      </h3>
+  </div>
+
+  <div class="list-group list-group-flush rounded-bottom">
+    <div class="list-group-item d-flex align-items-center">
+      <i class="bi bi-translate me-3 text-muted"></i><%= t('.preferences.language') %>
+
+      <div class="dropdown ms-auto">
+        <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <%= I18n.locale == :en ? t('languages.en') : t('languages.pt') %>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><%= link_to t('languages.en'), set_locale_path('en'), data: { turbo_frame: "_top" }, class: 'dropdown-item' %></li>
+          <li><%= link_to t('languages.pt'), set_locale_path('pt'), data: { turbo_frame: "_top" }, class: 'dropdown-item' %></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="list-group-item d-flex align-items-center">
+      <i class="bi bi-palette me-3 text-muted"></i><%= t('.preferences.color_scheme') %>
+
+      <div class="ms-auto">
+        <%= render "theme_switcher" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow-sm bg-body-tertiary rounded">
     <div class="card-header bg-transparent border-bottom-0">
         <h3 class="h6 fw-bold mb-0">
         <i class="bi bi-pc-display me-2 text-primary"></i><%= t('.session.title') %>
@@ -69,22 +102,3 @@
         <% end %>
     </div>
 </div>
-
-<div class="card shadow-sm mb-4 border rounded-3 mb-5">
-    <div class="card-header bg-transparent border-bottom-0 d-flex justify-content-between align-items-center">
-        <h3 class="h6 fw-bold mb-0">
-            <i class="bi bi-translate me-2 text-primary"></i><%= t('language') %>
-        </h3>
-        <div class="dropdown">
-            <button class="btn btn-sm dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
-                <%= I18n.locale == :en ? t('languages.en') : t('languages.pt') %>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><%= link_to t('languages.en'), set_locale_path('en'), data: { turbo_frame: "_top" }, class: 'dropdown-item' %></li>
-                <li><%= link_to t('languages.pt'), set_locale_path('pt'), data: { turbo_frame: "_top" }, class: 'dropdown-item' %></li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<%= render 'shared/theme_toggle' if turbo_native_app? %>
