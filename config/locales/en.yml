@@ -34,6 +34,8 @@ en:
   minimum_characters: "6 characters minimum."
   cancel:             "Cancel"
   confirm:            "Confirm"
+  follow:             "Follow"
+  unfollow:           "Unfollow"
 
   #error forms
   error:                 'errors'
