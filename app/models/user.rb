@@ -17,8 +17,13 @@ class User < ApplicationRecord
   has_many :sent_sheet_requests, class_name: "SheetRequest", foreign_key: :sender_id, dependent: :destroy
   has_many :received_sheet_requests, class_name: "SheetRequest", foreign_key: :recipient_id, dependent: :destroy
 
+  has_many :followers, class_name: "Follow", foreign_key: :followed_id, dependent: :destroy
+  has_many :following, class_name: "Follow", foreign_key: :follower_id, dependent: :destroy
+
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }
+
+
 
   normalizes :email, with: -> { _1.strip.downcase }
 
@@ -31,6 +36,23 @@ class User < ApplicationRecord
   end
 
   after_save :generate_handle_unique, if: :saved_change_to_name?
+
+  def self.search_by(query)
+    return User.none unless query.present?
+    where("name ILIKE ? OR handle ILIKE ?", "%#{I18n.transliterate(query)}%", "%#{I18n.transliterate(query)}%")
+  end
+
+  def follow!(user)
+    following.create!(followed_id: user.id)
+  end
+
+  def unfollow!(user)
+    following.find_by!(followed_id: user.id)&.destroy
+  end
+
+  def following?(user)
+    following.exists?(followed_id: user.id)
+  end
 
   def sheet_requests_by_filter(filter)
     if filter == "sent"
