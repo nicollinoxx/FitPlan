@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_17_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_21_164651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -149,7 +149,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_17_120000) do
     t.string "charge"
     t.datetime "created_at", null: false
     t.string "exercise"
-    t.time "interval"
+    t.integer "interval"
     t.string "repetitions"
     t.integer "series"
     t.integer "sheet_id", null: false
