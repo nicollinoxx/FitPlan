@@ -12,13 +12,25 @@ export default class extends Controller {
     if (this.interval) return
     this.interval = setInterval(() => {
       if (this.remainingTime <= 0) {
-        this.stop()
-        setTimeout(() => { alert("Rest Finished!") }, 100)
+        this.finish() 
         return
       }
       this.remainingTime--
       this.updateDisplay()
     }, 1000)
+  }
+
+  finish() {
+    this.stop()
+    
+    const completionBtn = this.element.closest('.border').querySelector('.completion-button')
+    
+    if (completionBtn) {
+      completionBtn.click()
+    } else {
+
+      setTimeout(() => { alert("Rest Finished!") }, 100)
+    }
   }
 
   pause() {
