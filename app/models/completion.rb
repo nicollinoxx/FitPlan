@@ -23,7 +23,7 @@ class Completion < ApplicationRecord
   end
 
   def series_zero?
-    workout_id.present? && remaining_series.zero?
+    workout_id.present? && remaining_series.to_i.zero?
   end
 
   private
