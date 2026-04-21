@@ -17,8 +17,13 @@ class User < ApplicationRecord
   has_many :sent_sheet_requests, class_name: "SheetRequest", foreign_key: :sender_id, dependent: :destroy
   has_many :received_sheet_requests, class_name: "SheetRequest", foreign_key: :recipient_id, dependent: :destroy
 
-  has_many :followers, class_name: "Follow", foreign_key: :followed_id, dependent: :destroy
-  has_many :following, class_name: "Follow", foreign_key: :follower_id, dependent: :destroy
+  # low-level Follow records
+  has_many :follower_follows, class_name: "Follow", foreign_key: :followed_id, dependent: :destroy
+  has_many :following_follows, class_name: "Follow", foreign_key: :follower_id, dependent: :destroy
+
+  # high-level user collections
+  has_many :followers, through: :follower_follows, source: :follower
+  has_many :followings, through: :following_follows, source: :followed
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }
@@ -43,15 +48,15 @@ class User < ApplicationRecord
   end
 
   def follow!(user)
-    following.create!(followed_id: user.id)
+    following_follows.create!(followed: user)
   end
 
   def unfollow!(user)
-    following.find_by!(followed_id: user.id)&.destroy
+    following_follows.find_by!(followed: user)&.destroy
   end
 
   def following?(user)
-    following.exists?(followed_id: user.id)
+    followings.exists?(id: user.id)
   end
 
   def self.sanitize(query)
