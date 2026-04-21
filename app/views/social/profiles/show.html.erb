@@ -1,3 +1,9 @@
 <%= content_for :title, @profile.name %>
 
+<h1 class="mb-4">
+  <%= link_to social_profiles_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= @profile.name %>
+  <% end %>
+</h1>
+
 <%= render 'profile', profile: @profile %>

@@ -311,6 +311,12 @@ en:
     index:
       title: "Profiles"
 
+  #social------------------------------
+  social:
+    profiles:
+      index:
+        title: "Profiles"
+
   #sessions------------------------------
   sessions:
     index:

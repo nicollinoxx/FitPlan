@@ -302,6 +302,12 @@ pt:
           month: "mês"
           year:  "ano"
 
+  #social------------------------------
+  social:
+    profiles:
+      index:
+        title: "Perfis"
+
   #healthy_metric------------------------------------
   height: 'Altura (cm)'
   weight: 'Peso (kg)'
