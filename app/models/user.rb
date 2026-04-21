@@ -61,16 +61,16 @@ class User < ApplicationRecord
     "%#{escape_wildcards(string)}%"
   end
 
-  def follow!(user)
-    following_follows.create!(followed: user)
+  def follow!(followed:)
+    following_follows.find_or_create_by!(followed: followed)
   end
 
-  def unfollow!(user)
-    following_follows.find_by!(followed: user)&.destroy
+  def unfollow!(followed:)
+    following_follows.find_by(followed: followed)&.destroy!
   end
 
-  def following?(user)
-    followings.exists?(id: user.id)
+  def following?(followed)
+    followings.exists?(id: followed.id)
   end
 
   def sheet_requests_by_filter(filter)

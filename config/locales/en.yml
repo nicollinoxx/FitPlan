@@ -84,6 +84,10 @@ en:
       create:               'Sheet request was successfully created'
     profiles:
       update:               'Profile updated successfully'
+    social:
+      profiles:
+        follow:             'You are now following %{name}'
+        unfollow:           'You are no longer following %{name}'
 
   #when the notice was not successfully
   alert:

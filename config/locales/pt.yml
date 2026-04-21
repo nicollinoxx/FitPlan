@@ -95,6 +95,10 @@ pt:
       create:               'Solicitação de planilha criada com sucesso'
     profiles:
       update:               'Perfil atualizado com sucesso'
+    social:
+      profiles:
+        follow:             'Agora você está seguindo %{name}'
+        unfollow:           'Você não está mais seguindo %{name}'
 
   #when the notice was not successfully
   alert:
