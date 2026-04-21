@@ -196,6 +196,8 @@ pt:
         low:              'leve'
         medium:           'média'
         high:             'alta'
+      help:
+        interval:         'Intervalo em segundos, ex: 60 (1 minuto)'
       supported_files:      'Arquivos suportados: mp4, mpeg e quicktime'
       remove_preview:       'Remover pré-visualização'
 

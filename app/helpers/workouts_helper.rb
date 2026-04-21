@@ -24,4 +24,8 @@ module WorkoutsHelper
       content_tag(:i, '', class: 'bi bi-arrow-counterclockwise text-light')
     end
   end
+
+  def format_interval(seconds)
+    format("%02d:%02d", seconds / 60, seconds % 60) if seconds.present?
+  end
 end
