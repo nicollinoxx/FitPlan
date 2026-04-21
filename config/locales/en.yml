@@ -6,6 +6,7 @@ en:
   link_sheets: 'Sheets'
   link_sheet_requests: 'Sheet Requests'
   link_dashboard: 'Dashboard'
+  link_profiles:  'Profiles'
 
   #languages
   language:     'Language'
@@ -304,6 +305,11 @@ en:
           week:  "week"
           month: "month"
           year:  "year"
+
+  #profiles------------------------------
+  profiles:
+    index:
+      title: "Profiles"
 
   #sessions------------------------------
   sessions:

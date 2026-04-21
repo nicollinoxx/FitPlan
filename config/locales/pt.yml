@@ -17,6 +17,7 @@ pt:
   link_sheets:         'Planilhas'
   link_sheet_requests: 'Solicitações de Planilha'
   link_dashboard:      'Painel'
+  link_profiles:       'Perfis'
 
   #languages
   language:     'Idioma'
@@ -43,7 +44,6 @@ pt:
   back:               'Voltar'
   save:               'Salvar'
   search:             'Buscar'
-
 
 
   #error forms
