@@ -39,7 +39,7 @@ class User < ApplicationRecord
 
   def self.search_by(query)
     return User.none unless query.present?
-    where("name ILIKE ? OR handle ILIKE ?", "%#{I18n.transliterate(query)}%", "%#{I18n.transliterate(query)}%")
+    where("name ILIKE ? OR handle ILIKE ?", "%#{sanitize(query)}%", "%#{sanitize(query)}%")
   end
 
   def follow!(user)
@@ -52,6 +52,10 @@ class User < ApplicationRecord
 
   def following?(user)
     following.exists?(followed_id: user.id)
+  end
+
+  def self.sanitize(query)
+    I18n.transliterate(query.to_s.strip) if query.present?
   end
 
   def sheet_requests_by_filter(filter)
