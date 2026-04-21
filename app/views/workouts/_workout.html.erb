@@ -30,9 +30,29 @@
         <p class="fw-bold mb-0"><%= workout.repetitions %></p>
       </div>
 
-      <div class="border text-center p-2 rounded flex-grow-1" style="min-width: 45%">
+      <div class="border text-center p-2 rounded flex-grow-1"
+          data-controller="workouts--timer"
+          data-workouts--timer-seconds-value="<%= workout.interval %>">
+
         <p class="small text-muted mb-0"><i class="bi bi-stopwatch"></i> <%= t('interval') %></p>
-        <p class="fw-bold mb-0"><%= workout.interval&.strftime("%M:%S") %></p>
+
+        <p class="fw-bold mb-0" data-workouts--timer-target="display">
+          <%= format_interval(workout.interval) %>
+        </p>
+
+        <div class="d-flex justify-content-center gap-3">
+          <button type="button" class="btn btn-sm text-success p-0" data-action="click->workouts--timer#start">
+            <i class="bi bi-play-circle-fill fs-5"></i>
+          </button>
+
+          <button type="button" class="btn btn-sm text-warning p-0" data-action="click->workouts--timer#pause">
+            <i class="bi bi-pause-circle-fill fs-5"></i>
+          </button>
+
+          <button type="button" class="btn btn-sm text-danger p-0" data-action="click->workouts--timer#stop">
+            <i class="bi bi-arrow-counterclockwise fs-5"></i>
+          </button>
+        </div>
       </div>
 
       <div class="border text-center p-2 rounded flex-grow-1" style="min-width: 45%">

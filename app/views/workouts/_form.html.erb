@@ -29,7 +29,9 @@
 
   <div class='mb-3'>
     <%= form.label :interval, t('.label.interval'), style: "display: block", class: 'form-label' %>
-    <%= form.time_field :interval, class: 'form-control' %>
+
+    <%= form.number_field :interval, class: 'form-control' %>
+    <small class='text-muted'><%= t('.help.interval') %></small>
   </div>
 
   <div class='mb-3'>
