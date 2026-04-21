@@ -40,6 +40,12 @@
           <% end %>
         </li>
 
+        <li class="nav-item">
+          <%= link_to social_profiles_path, class: 'nav-link px-3 fw-medium py-2' do %>
+            <i class="bi bi-person me-1"></i> <%= t('link_profiles') %>
+          <% end %>
+        </li>
+
         <li class="d-md-none nav-item px-3 py-2">
           <%= button_to Current.session, method: :delete, class: "btn btn-sm btn-danger w-100" do %>
             <i class="bi bi-box-arrow-left me-1"></i> <%= t('logout') %>
