@@ -28,8 +28,6 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }
 
-
-
   normalizes :email, with: -> { _1.strip.downcase }
 
   before_validation if: :email_changed?, on: :update do
@@ -42,9 +40,25 @@ class User < ApplicationRecord
 
   after_save :generate_handle_unique, if: :saved_change_to_name?
 
-  def self.search_by(query)
+  def self.search_users(query)
     return User.none unless query.present?
-    where("name ILIKE ? OR handle ILIKE ?", "%#{sanitize(query)}%", "%#{sanitize(query)}%")
+
+    normalized = normalize_search_query(query)
+    pattern = search_pattern_for(normalized)
+
+    where("name ILIKE ? OR handle ILIKE ?", pattern, pattern)
+  end
+
+  def self.normalize_search_query(query)
+    I18n.transliterate(query.to_s.strip)
+  end
+
+  def self.escape_wildcards(string)
+    ActiveRecord::Base.sanitize_sql_like(string.to_s)
+  end
+
+  def self.search_pattern_for(string)
+    "%#{escape_wildcards(string)}%"
   end
 
   def follow!(user)
@@ -57,10 +71,6 @@ class User < ApplicationRecord
 
   def following?(user)
     followings.exists?(id: user.id)
-  end
-
-  def self.sanitize(query)
-    I18n.transliterate(query.to_s.strip) if query.present?
   end
 
   def sheet_requests_by_filter(filter)
