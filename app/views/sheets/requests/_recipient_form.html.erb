@@ -3,9 +3,9 @@
     <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-3 pb-3">
       <div class="d-flex align-items-center gap-2">
         <% if recipient.avatar.attached? %>
-          <%= image_tag recipient.avatar, class: "rounded-circle object-fit-cover border border-success", width: 48, height: 48 %>
+          <%= image_tag recipient.avatar, class: "rounded-circle object-fit-cover border border-success", width: 48, height: 48, alt: "" %>
         <% else %>
-          <%= image_tag "avatar.png", class: "rounded-circle border border-success", width: 48, height: 48 %>
+          <%= image_tag "avatar.png", class: "rounded-circle border border-success", width: 48, height: 48, alt: "" %>
         <% end %>
 
         <div class="d-flex flex-column">

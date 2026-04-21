@@ -11,7 +11,7 @@
       <% if turbo_native_app? %>
           <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
             <div class="d-flex align-items-center">
-              <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', size: '45x45' if @user.avatar.attached? %>
+              <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', alt: '', size: '45x45' if @user.avatar.attached? %>
               <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
             </div>
           <% end %>
@@ -30,5 +30,5 @@
     </div>
   <% end %>
 
-  <%= image_tag 'undraw/grading_papers.svg', class: 'img-fluid mt-auto ms-auto' %>
+  <%= image_tag 'undraw/grading_papers.svg', alt: '', class: 'img-fluid mt-auto ms-auto' %>
 </div>

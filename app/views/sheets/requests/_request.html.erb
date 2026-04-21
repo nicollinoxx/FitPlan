@@ -4,7 +4,7 @@
       <% user = params[:filter] == "sent" ? request.recipient : request.sender %>
 
       <% if Current.user.avatar.attached? %>
-        <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover me-2', style: 'width: 40px; height: 40px;' %>
+        <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover me-2', style: 'width: 40px; height: 40px;', alt: '' %>
       <% else %>
         <div class="me-2 rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">
           <i class="bi bi-person-fill fs-5"></i>
