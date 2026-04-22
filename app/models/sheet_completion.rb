@@ -12,8 +12,7 @@ class SheetCompletion < ApplicationRecord
   scope :today, -> { on_date(Date.current) }
 
   def self.streak
-    dates = where(completed_at: 1.year.ago..).pluck(Arel.sql("DATE(completed_at)")).uniq.sort.reverse
-    dates.each_with_index.take_while { |date, index| date == Date.current - index }.size
+    (0..).take_while { |i| on_date(Date.current - i).exists? }.size
   end
 
   def self.best_weekday
