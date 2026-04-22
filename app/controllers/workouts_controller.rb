@@ -4,7 +4,7 @@ class WorkoutsController < ApplicationController
   before_action :redirect_if_sheet_type_is_same_as_diet
 
   def index
-    @workouts = @sheet.workouts.order(created_at: :asc)
+    @workouts = @sheet.workouts
     @completions_by_workout_id = @sheet.completions_indexed_by_workout_id
   end
 
