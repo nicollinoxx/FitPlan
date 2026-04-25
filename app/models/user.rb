@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Followable
+
   has_secure_password
   has_one_attached :avatar
 
@@ -17,14 +19,6 @@ class User < ApplicationRecord
   has_many :sent_sheet_requests, class_name: "SheetRequest", foreign_key: :sender_id, dependent: :destroy
   has_many :received_sheet_requests, class_name: "SheetRequest", foreign_key: :recipient_id, dependent: :destroy
 
-  # low-level Follow records
-  has_many :follower_follows, class_name: "Follow", foreign_key: :followed_id, dependent: :destroy
-  has_many :following_follows, class_name: "Follow", foreign_key: :follower_id, dependent: :destroy
-
-  # high-level user collections
-  has_many :followers, through: :follower_follows, source: :follower
-  has_many :followings, through: :following_follows, source: :followed
-
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }
 
@@ -41,36 +35,17 @@ class User < ApplicationRecord
   after_save :generate_handle_unique, if: :saved_change_to_name?
 
   def self.search_users(query)
-    return User.none unless query.present?
+    return none unless query.present?
 
-    normalized = normalize_search_query(query)
-    pattern = search_pattern_for(normalized)
-
-    where("name ILIKE ? OR handle ILIKE ?", pattern, pattern)
+    where("name ILIKE :search OR handle ILIKE :search", search: "%#{sanitize_search(query)}%")
   end
 
-  def self.normalize_search_query(query)
-    I18n.transliterate(query.to_s.strip)
+  def self.sanitize_search(value)
+    ActiveRecord::Base.sanitize_sql_like(normalize(value))
   end
 
-  def self.escape_wildcards(string)
-    ActiveRecord::Base.sanitize_sql_like(string.to_s)
-  end
-
-  def self.search_pattern_for(string)
-    "%#{escape_wildcards(string)}%"
-  end
-
-  def follow!(followed:)
-    following_follows.find_or_create_by!(followed: followed)
-  end
-
-  def unfollow!(followed:)
-    following_follows.find_by(followed: followed)&.destroy!
-  end
-
-  def following?(followed)
-    followings.exists?(id: followed.id)
+  def self.normalize(value)
+    I18n.transliterate(value.to_s.strip)
   end
 
   def sheet_requests_by_filter(filter)
