@@ -24,6 +24,13 @@ Rails.application.routes.draw do
         delete :unfollow
       end
     end
+
+    resources :follows, only: [] do
+      collection do
+        get :followers
+        get :followings
+      end
+    end
   end
 
   resources :sheets do

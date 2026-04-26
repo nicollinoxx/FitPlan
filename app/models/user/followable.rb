@@ -22,4 +22,12 @@ module User::Followable
   def following?(followed)
     followings.exists?(id: followed.id)
   end
+
+  def mark_followers_as_seen!
+    follower_follows.where(seen_at: nil).update_all(seen_at: Time.current)
+  end
+
+  def unseen_followers_count
+    follower_follows.where(seen_at: nil).count
+  end
 end
