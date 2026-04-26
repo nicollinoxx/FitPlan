@@ -22,11 +22,6 @@ Rails.application.routes.draw do
       member do
         post   :follow
         delete :unfollow
-      end
-    end
-
-    resources :follows, only: [] do
-      collection do
         get :followers
         get :followings
       end

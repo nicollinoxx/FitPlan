@@ -13,28 +13,6 @@
 
 <%= turbo_frame_tag :profiles do %>
   <div class="row">
-    <% @profiles.each do |profile| %>
-      <div class="col-md-6 mb-3">
-        <%= link_to social_profile_path(profile), data: {turbo_frame: '_top'}, class: 'text-decoration-none' do %>
-          <div class="d-flex align-items-center justify-content-between p-3 bg-body-tertiary shadow-sm rounded border-success border-start border-4">
-            <div class="d-flex align-items-center gap-3">
-              <% if profile.avatar.attached? %>
-                <%= image_tag profile.avatar, class: "rounded-circle border border-success-subtle border-3", width: 56, height: 56 %>
-              <% else %>
-                <span class="d-inline-flex align-items-center justify-content-center rounded-circle border border-success-subtle border-3"
-                      style="width: 56px; height: 56px;">
-                  <i class="bi bi-person-fill text-body"></i>
-                </span>
-              <% end %>
-
-              <div>
-                <h6 class="fw-semibold mb-1 text-truncate text-body"><%= profile.name %></h6>
-                <p class="text-muted small mb-0">@<%= profile.handle %></p>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+    <%= render partial: 'shared/profile', collection: @profiles, as: :profile %>
   </div>
 <% end %>

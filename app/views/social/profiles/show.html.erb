@@ -6,4 +6,11 @@
   <% end %>
 </h1>
 
-<%= render 'profile', profile: @profile %>
+<div class="p-3 bg-body-tertiary rounded shadow-sm">
+  <div class="d-flex justify-content-start align-items-center mb-2 gap-3">
+    <%= link_to "#{@profile.followers.count} followers", followers_social_profile_path(@profile), class: 'text-primary text-decoration-none fw-semibold' %>
+    <%= link_to "#{@profile.followings.count} following", followings_social_profile_path(@profile), class: 'text-primary text-decoration-none fw-semibold' %>
+  </div>
+
+  <%= render 'profile', profile: @profile %>
+</div>
