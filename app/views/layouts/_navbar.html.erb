@@ -9,7 +9,7 @@
     <% end %>
 
     <div class="d-flex align-items-center order-3 d-lg-none">
-      <%= link_to account_path, aria: { label: t('account.index.title') } do %>
+      <%= link_to identity_profile_path, aria: { label: t('account.index.title') } do %>
         <% if Current.user.avatar.attached? %>
           <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
         <% else %>
@@ -54,7 +54,7 @@
       </ul>
 
       <div class="d-none d-lg-flex ms-auto">
-        <%= link_to account_path, class: 'd-flex align-items-center', aria: { label: t('account.index.title') } do %>
+        <%= link_to identity_profile_path, class: 'd-flex align-items-center', aria: { label: t('account.index.title') } do %>
           <% if Current.user.avatar.attached? %>
             <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
           <% else %>

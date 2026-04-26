@@ -1,5 +1,5 @@
 <div class="col-md-6 mb-3">
-  <%= link_to social_profile_path(profile), data: {turbo_frame: '_top'}, class: 'text-decoration-none' do %>
+  <%= link_to profile_action_link(profile), data: {turbo_frame: '_top'}, class: 'text-decoration-none' do %>
     <div class="d-flex align-items-center justify-content-between p-3 bg-body-tertiary shadow-sm rounded border-success border-start border-4">
       <div class="d-flex align-items-center gap-3">
         <% if profile.avatar.attached? %>

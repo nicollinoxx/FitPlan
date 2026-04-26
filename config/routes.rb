@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "welcome", to: "welcome#index"
-  get "account", to: "account#index"
+  get "account", to: redirect("/identity/profile")
 
   get    "sign_in", to: "sessions#new"
   post   "sign_in", to: "sessions#create"
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resource :email,              only: [:edit, :update]
     resource :email_verification, only: [:show, :create]
     resource :password_reset,     only: [:new,  :edit, :create, :update]
-    resource :profile,            only: [:edit, :update]
+    resource :profile,            only: [:show, :edit, :update]
     resource :avatar,             only: [:update, :destroy]
     resource :healthy_metric,     except: [:destroy]
   end
