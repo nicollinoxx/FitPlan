@@ -2,7 +2,7 @@
 
 <div class="mb-4 d-flex justify-content-between align-items-center">
   <h1>
-    <%= link_to social_profiles_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <%= link_to social_profiles_path(query: params[:query]), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
       <i class="bi bi-arrow-left-short"></i><%= @profile.name %>
     <% end %>
   </h1>

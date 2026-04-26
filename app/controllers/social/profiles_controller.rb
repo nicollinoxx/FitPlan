@@ -20,7 +20,7 @@ class Social::ProfilesController < ApplicationController
   end
 
   def followers
-    @follower_follows = @profile.followers.order(created_at: :desc)
+    @followers = @profile.followers.order(created_at: :desc)
   end
 
   def followings

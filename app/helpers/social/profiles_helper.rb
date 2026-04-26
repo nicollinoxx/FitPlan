@@ -13,7 +13,7 @@ module Social::ProfilesHelper
     if profile == Current.user
       identity_profile_path
     else
-      social_profile_path(profile)
+      social_profile_path(profile, query: params[:query])
     end
   end
 end
