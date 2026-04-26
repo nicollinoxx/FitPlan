@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center justify-content-between p-3 bg-body-tertiary shadow-sm rounded border-success border-start border-4">
       <div class="d-flex align-items-center gap-3">
         <% if profile.avatar.attached? %>
-          <%= image_tag profile.avatar, class: "rounded-circle border border-success-subtle border-3", width: 56, height: 56 %>
+          <%= image_tag profile.avatar, class: "rounded-circle border border-success-subtle border-3 object-fit-cover", width: 56, height: 56 %>
         <% else %>
           <span class="d-inline-flex align-items-center justify-content-center rounded-circle border border-success-subtle border-3"
                 style="width: 56px; height: 56px;">

@@ -3,12 +3,12 @@ class Identity::AvatarsController < ApplicationController
 
   def update
     @user.update!(params.permit(:avatar))
-    refresh_or_redirect_to account_path, notice: I18n.t('notice.avatar.update')
+    refresh_or_redirect_to identity_profile_path, notice: I18n.t('notice.avatar.update')
   end
 
   def destroy
     @user.avatar.purge_later
-    refresh_or_redirect_to account_path, notice: I18n.t('notice.avatar.destroy')
+    refresh_or_redirect_to identity_profile_path, notice: I18n.t('notice.avatar.destroy')
   end
 
   private

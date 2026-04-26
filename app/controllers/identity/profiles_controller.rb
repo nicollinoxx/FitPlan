@@ -9,7 +9,7 @@ class Identity::ProfilesController < ApplicationController
 
   def update
     @user.update!(user_params)
-    redirect_to identity_profile_path, notice: I18n.t('notice.profiles.update')
+    recede_or_redirect_to identity_profile_path, notice: I18n.t('notice.profiles.update')
   end
 
   private

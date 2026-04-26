@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "welcome", to: "welcome#index"
-  get "account", to: redirect("/identity/profile")
+  get "account", to: "account#index"
 
   get    "sign_in", to: "sessions#new"
   post   "sign_in", to: "sessions#create"
