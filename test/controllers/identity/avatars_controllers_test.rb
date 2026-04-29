@@ -10,7 +10,7 @@ class Identity::AvatarsControllerTest < ActionDispatch::IntegrationTest
     file = fixture_file_upload("avatar.png", "image/png")
 
     patch identity_avatar_url(@user), params: { user: { avatar: file } }
-    assert_redirected_to account_url
+    assert_redirected_to identity_profile_url
     follow_redirect!
     assert_match I18n.t("notice.avatar.update"), response.body
   end
@@ -21,7 +21,7 @@ class Identity::AvatarsControllerTest < ActionDispatch::IntegrationTest
 
     delete identity_avatar_url(@user)
 
-    assert_redirected_to account_url
+    assert_redirected_to identity_profile_url
     follow_redirect!
     assert_match I18n.t("notice.avatar.destroy"), response.body
   end

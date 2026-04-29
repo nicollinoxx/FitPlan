@@ -15,7 +15,7 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update profile" do
     patch identity_profile_url, params: { user: { name: "New Name" } }
-    assert_redirected_to account_url
+    assert_redirected_to identity_profile_url
     follow_redirect!
     assert_match "Profile updated successfully", response.body
     @user.reload
