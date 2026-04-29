@@ -317,6 +317,10 @@ en:
     index:
       title: "Profiles"
 
+  #toast------------------------------
+  toast:
+    new_follower: 'started following you'
+
   #social------------------------------
   social:
     profiles:

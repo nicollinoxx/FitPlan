@@ -307,6 +307,10 @@ pt:
           month: "mês"
           year:  "ano"
 
+  #toast------------------------------
+  toast:
+    new_follower: 'começou a te seguir'
+
   #social------------------------------
   social:
     profiles:

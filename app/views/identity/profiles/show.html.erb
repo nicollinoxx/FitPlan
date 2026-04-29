@@ -6,8 +6,15 @@
 </div>
 
 <div class="mb-3 text-center">
-  <div class="d-flex justify-content-center align-items-center mb-3 gap-3">
-    <%= link_to "#{Current.user.followers.count} followers", followers_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
+  <div class="d-flex justify-content-center align-items-center mb-3 gap-4">
+    <div class="position-relative">
+      <% if Current.user.unseen_followers? %>
+        <span class="position-absolute start-100 translate-middle p-1 bg-warning rounded-circle"></span>
+      <% end %>
+
+      <%= link_to "#{Current.user.followers.count} followers", followers_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
+    </div>
+
     <%= link_to "#{Current.user.followings.count} following", followings_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
   </div>
 

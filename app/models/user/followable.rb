@@ -27,10 +27,6 @@ module User::Followable
     follower_follows.where(seen_at: nil).update_all(seen_at: Time.current)
   end
 
-  def unseen_followers_count
-    follower_follows.where(seen_at: nil).count
-  end
-
   def unseen_followers?
     follower_follows.where(seen_at: nil).exists?
   end
