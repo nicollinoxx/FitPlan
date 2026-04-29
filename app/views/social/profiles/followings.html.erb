@@ -1,7 +1,7 @@
 <%= content_for :title, t('.title') %>
 
 <h1 class="mb-4">
-  <%= link_to profile_action_link(@profile), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+  <%= link_to identity_profile_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
     <i class="bi bi-arrow-left-short"></i> <%= t('.title') %>
   <% end %>
 </h1>

@@ -326,7 +326,11 @@ en:
   social:
     profiles:
       index:
-        title: "Profiles"
+        title:     "Profiles"
+      followers:
+        title:     'Followers'
+      followings:
+        title:     'Following'
 
   #sessions------------------------------
   sessions:

@@ -18,4 +18,8 @@ module Social::ProfilesHelper
       social_profile_path(profile, query: params[:query])
     end
   end
+
+  def back_or_profiles_path
+    request.referer&.start_with?(root_url) ? request.referer : social_profiles_path
+  end
 end

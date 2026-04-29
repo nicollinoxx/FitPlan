@@ -316,7 +316,11 @@ pt:
   social:
     profiles:
       index:
-        title: "Perfis"
+        title:     "Perfis"
+      followers:
+        title:     'Seguidores'
+      followings:
+        title:     'Seguindo'
 
   #healthy_metric------------------------------------
   height: 'Altura (cm)'
