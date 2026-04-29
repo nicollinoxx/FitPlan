@@ -45,6 +45,7 @@ pt:
   save:               'Salvar'
   search:             'Buscar'
   follow:             'Seguir'
+  follow_back:        'Seguir de volta'
   unfollow:           'Deixar de Seguir'
 
   #error forms

@@ -35,6 +35,7 @@ en:
   cancel:             "Cancel"
   confirm:            "Confirm"
   follow:             "Follow"
+  follow_back:        "Follow back"
   unfollow:           "Unfollow"
 
   #error forms
