@@ -34,7 +34,7 @@ en:
   cancel:             "Cancel"
   confirm:            "Confirm"
   logout:             "Log out"
-  
+
   #error forms
   error:                 'errors'
 
