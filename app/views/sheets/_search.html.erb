@@ -1,0 +1,14 @@
+<%= form_with url: sheets_path, method: :get, data: { turbo_frame: "sheets" } do |f| %>
+  <%= hidden_field_tag :type, params[:type] %>
+  <%= hidden_field_tag :completed, params[:completed] %>
+
+  <div class="input-group input-group-sm mt-3">
+    <span class="input-group-text bg-transparent border-end-0">
+      <i class="bi bi-compass"></i>
+    </span>
+    <%= f.search_field :search,
+        value: params[:search],
+        class: "form-control border-start-0 ps-0",
+        placeholder: t('search') %>
+  </div>
+<% end %>
