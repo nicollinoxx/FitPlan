@@ -18,4 +18,10 @@ module SheetsHelper
       end
     end
   end
+
+   def sheet_filter_params(type: params[:type], completed: params[:completed])
+    { type: type, completed: completed, search: params[:search] }
+  end
+  
 end
+
