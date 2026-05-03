@@ -1,11 +1,11 @@
-<div class="ms-auto dropdown rounded mt-3">
+<div class="ms-auto dropdown rounded mt-2">
   <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
     <i class="bi bi-funnel-fill"></i> <%= t('.filter') %>
   </button>
 
   <ul class="dropdown-menu dropdown-menu-end">
     <li>
-      <%= link_to sheets_path(type: 'diet', completed: params[:completed]),
+      <%= link_to sheets_path(type: 'diet', completed: params[:completed], search: params[:search]),
         class: "dropdown-item #{'bg-warning text-light' if params[:type] == 'diet'}" do %>
 
         <i class="bi bi-egg-fried me-2"></i> <%= t('diet') %>
@@ -13,7 +13,7 @@
     </li>
 
     <li>
-      <%= link_to sheets_path(type: 'workout', completed: params[:completed]),
+      <%= link_to sheets_path(type: 'workout', completed: params[:completed], search: params[:search]),
         class: "dropdown-item #{'bg-success text-light' if params[:type] == 'workout'}" do %>
 
         <i class="bi-heart-pulse me-2"></i> <%= t('workout') %>
@@ -21,7 +21,7 @@
     </li>
 
     <li>
-      <%= link_to sheets_path(completed: params[:completed]),
+      <%= link_to sheets_path(completed: params[:completed], search: params[:search]),
         class: "dropdown-item #{'bg-primary text-light' unless params[:type]}" do %>
 
         <i class="bi bi-list-ul me-2"></i> <%= t('all') %>
@@ -29,7 +29,7 @@
     </li>
 
     <li>
-      <%= link_to sheets_path(type: params[:type], completed: params[:completed] == 'true' ? nil : 'true'),
+      <%= link_to sheets_path(type: params[:type], completed: params[:completed] == 'true' ? nil : 'true', search: params[:search]),
         class: "dropdown-item #{'bg-secondary text-light' if params[:completed] == 'true'}" do %>
 
         <i class="bi bi-check-lg"></i> <%= t('completed') %>
@@ -37,7 +37,7 @@
     </li>
 
     <li>
-      <%= link_to sheets_path(type: params[:type], completed: params[:completed] == 'false' ? nil : 'false'),
+      <%= link_to sheets_path(type: params[:type], completed: params[:completed] == 'false' ? nil : 'false', search: params[:search]),
         class: "dropdown-item #{'bg-danger text-light' if params[:completed] == 'false'}" do %>
 
         <i class="bi bi-x-lg"></i> <%= t('uncompleted') %>

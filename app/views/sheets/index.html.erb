@@ -7,8 +7,9 @@
 
 <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
   <%= turbo_frame_tag "sheets" do %>
-    <div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-2">
+    <div class="sticky-top z-3 mb-3">
       <% if turbo_native_app? %>
+        <div class="d-flex align-items-center">
           <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
             <div class="d-flex align-items-center">
               <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', alt: '', size: '45x45' if @user.avatar.attached? %>
@@ -19,28 +20,14 @@
           <%= link_to requests_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info rounded-circle' do %>
             <i class="bi bi-file-earmark-spreadsheet-fill"></i>
           <% end %>
+        </div>
       <% end %>
 
-      <%= render 'filter' %>
-    </div>
-
-<div class="sticky-top z-3 d-flex align-items-center justify-content-between mb-2">
-  <% if turbo_native_app? %>
-    <%= link_to account_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
-      <div class="d-flex align-items-center">
-        <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', alt: '', size: '45x45' if @user.avatar.attached? %>
-        <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
+      <div class="d-flex align-items-center justify-content-between">
+        <%= render 'search' %>
+        <%= render 'filter' %>
       </div>
-    <% end %>
-
-    <%= link_to requests_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info rounded-circle' do %>
-      <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-    <% end %>
-  <% end %>
-
-  <%= render 'search' %>
-  <%= render 'filter' %>
-</div>
+    </div>
 
     <div id="paginables" class="row mb-3">
       <%= render partial: "sheet", collection: @page.records, as: :sheet %>
