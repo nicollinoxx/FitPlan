@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between">
   <h1><%= t('.title') %></h1>
-  <%= button_to t('logout'), Current.session, method: :delete, data: { controller: "bridge--nav-button", bridge_title: "Log out", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
+  <%= button_to t('logout'), Current.session, method: :delete, data: { controller: "bridge--nav-button", bridge_title: t('logout'), 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
 </div>
 
 <div class="card-body text-center">
