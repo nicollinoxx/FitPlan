@@ -20,6 +20,7 @@ module Social::ProfilesHelper
   end
 
   def back_or_profiles_path
-    request.referer&.start_with?(root_url) ? request.referer : social_profiles_path
+    referer = request.referer
+    referer&.start_with?(root_url) && referer != request.url ? referer : social_profiles_path
   end
 end
