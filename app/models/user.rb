@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Normalizable
   include Followable
 
   has_secure_password
@@ -38,14 +39,6 @@ class User < ApplicationRecord
     return none unless query.present?
 
     where("name ILIKE :search OR handle ILIKE :search", search: "%#{sanitize_search(query)}%")
-  end
-
-  def self.sanitize_search(value)
-    ActiveRecord::Base.sanitize_sql_like(normalize(value))
-  end
-
-  def self.normalize(value)
-    I18n.transliterate(value.to_s.strip)
   end
 
   def sheet_requests_by_filter(filter)
