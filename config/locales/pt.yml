@@ -47,6 +47,7 @@ pt:
   follow:             'Seguir'
   follow_back:        'Seguir de volta'
   unfollow:           'Deixar de Seguir'
+  logout:             'Sair'
 
   #error forms
   error:                 'erros'

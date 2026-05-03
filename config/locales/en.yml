@@ -37,6 +37,7 @@ en:
   follow:             "Follow"
   follow_back:        "Follow back"
   unfollow:           "Unfollow"
+  logout:             "Log out"
 
   #error forms
   error:                 'errors'

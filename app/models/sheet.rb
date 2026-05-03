@@ -1,4 +1,5 @@
 class Sheet < ApplicationRecord
+  include Normalizable
   include Sheet::Copyable
 
   belongs_to :user
@@ -19,12 +20,13 @@ class Sheet < ApplicationRecord
 
   scope :search_by_type,  ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
   scope :completed_today, -> { joins(:sheet_completions_today).distinct }
+  scope :search_by_name, ->(name) { name.present? ? where("name ILIKE ?", "%#{sanitize_search(name)}%") : all }
 
-  def self.filter_by(type, completed)
+  def self.filter_by(type, completed, search = nil)
     case completed.to_s
-    when 'true'  then search_by_type(type).completed_today
-    when 'false' then search_by_type(type).where.missing(:sheet_completions_today)
-    else              search_by_type(type)
+    when 'true'  then search_by_type(type).completed_today.search_by_name(search)
+    when 'false' then search_by_type(type).where.missing(:sheet_completions_today).search_by_name(search)
+    else              search_by_type(type).search_by_name(search)
     end
   end
 
