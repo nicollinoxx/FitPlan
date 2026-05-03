@@ -11,6 +11,3 @@ module Normalizable
     end
   end
 end
-
-
-
