@@ -33,6 +33,7 @@ en:
   minimum_characters: "6 characters minimum."
   cancel:             "Cancel"
   confirm:            "Confirm"
+  logout:             "Log out"
 
   #error forms
   error:                 'errors'

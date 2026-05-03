@@ -43,7 +43,7 @@ pt:
   back:               'Voltar'
   save:               'Salvar'
   search:             'Buscar'
-
+  logout:             'Sair'
 
 
   #error forms
