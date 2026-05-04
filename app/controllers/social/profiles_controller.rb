@@ -34,6 +34,6 @@ class Social::ProfilesController < ApplicationController
   end
 
   def mark_followers_as_seen
-    Current.user.mark_followers_as_seen! if Current.user.unseen_followers?
+    Current.user.mark_followers_as_seen! if @profile == Current.user && Current.user.unseen_followers?
   end
 end

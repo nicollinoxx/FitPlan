@@ -47,11 +47,18 @@ class Social::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should mark own followers as seen after visiting followers" do
+  test "marks own followers as seen when visiting own followers page" do
+    assert @user.unseen_followers?
+
+    get followers_social_profile_url(@user)
+    assert_not @user.reload.unseen_followers?
+  end
+
+  test "does not mark followers as seen when visiting another profile's followers" do
     assert @user.unseen_followers?
 
     get followers_social_profile_url(@profile)
-    assert_not @user.reload.unseen_followers?
+    assert @user.reload.unseen_followers?
   end
 
   test "should get followings" do
