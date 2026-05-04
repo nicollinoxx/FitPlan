@@ -7,10 +7,6 @@ module ApplicationCable
       Rails.cache.write("user_online:#{current_user.id}", true, expires_in: 10.minutes)
     end
 
-    def disconnect
-      Rails.cache.delete("user_online:#{current_user.id}")
-    end
-
     private
 
     def authenticate

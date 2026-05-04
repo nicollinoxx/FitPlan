@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   include Normalizable
-  include Followable
+  include User::Followable
 
   has_secure_password
   has_one_attached :avatar

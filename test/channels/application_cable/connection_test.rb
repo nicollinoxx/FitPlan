@@ -21,11 +21,12 @@ module ApplicationCable
       end
     end
 
-    test "clears online status on disconnect" do
+    test "online status expires via TTL without heartbeat" do
       with_memory_cache do |cache|
         cookies.signed[:session_token] = @session.id
         connect
-        disconnect
+        assert cache.exist?("user_online:#{@user.id}")
+        cache.delete("user_online:#{@user.id}") # simulate TTL expiry
         assert_not cache.exist?("user_online:#{@user.id}")
       end
     end

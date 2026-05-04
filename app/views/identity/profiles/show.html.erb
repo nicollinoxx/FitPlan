@@ -28,16 +28,16 @@
 
 <div class="d-flex align-items-center gap-2">
   <%= link_to edit_identity_profile_path, class: "btn btn-sm btn-primary mt-3" do %>
-    <i class="bi bi-pencil-square me-1"></i> <%= t('.edit_profile') %>
+    <i class="bi bi-pencil-square me-1"></i> <%= t('account.index.identity.edit_profile') %>
   <% end %>
 
   <% if @user.healthy_metric.present? %>
     <%= link_to identity_healthy_metric_path, class: "btn btn-sm btn-outline-secondary mt-3" do %>
-        <i class="bi bi-calculator-fill me-1 text-muted"></i><%= t('.identity.show') %>
+        <i class="bi bi-calculator-fill me-1 text-muted"></i><%= t('account.index.identity.show') %>
     <% end %>
   <% else %>
     <%= link_to new_identity_healthy_metric_path, class: "btn btn-sm btn-outline-secondary my-3" do %>
-        <i class="bi bi-calculator-fill me-1 text-muted"></i><%= t('.identity.add') %>
+        <i class="bi bi-calculator-fill me-1 text-muted"></i><%= t('account.index.identity.add') %>
     <% end %>
   <% end %>
 </div>
@@ -45,5 +45,5 @@
 <hr class="my-3">
 
 <%= link_to account_path, class: "btn btn-sm btn-outline-secondary mt-2" do %>
-  <i class="bi bi-gear-fill me-1"></i> <%= t('.account') %>
+  <i class="bi bi-gear-fill me-1"></i> <%= t('account.index.title') %>
 <% end %>
