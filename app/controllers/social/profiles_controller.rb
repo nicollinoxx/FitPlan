@@ -7,6 +7,8 @@ class Social::ProfilesController < ApplicationController
   end
 
   def show
+    @followers_count  = @profile.followers.count
+    @followings_count = @profile.followings.count
   end
 
   def follow

@@ -12,8 +12,8 @@
 
 <div class="mt-3">
   <div class="d-flex justify-content-center align-items-center mb-3 gap-3">
-    <%= link_to "#{@profile.followers.count} followers", followers_social_profile_path(@profile), class: 'text-primary text-decoration-none fw-semibold' %>
-    <%= link_to "#{@profile.followings.count} following", followings_social_profile_path(@profile), class: 'text-primary text-decoration-none fw-semibold' %>
+    <%= link_to "#{@followers_count} followers", followers_social_profile_path(@profile), class: 'text-primary text-decoration-none fw-semibold' %>
+    <%= link_to "#{@followings_count} following", followings_social_profile_path(@profile), class: 'text-primary text-decoration-none fw-semibold' %>
   </div>
 
   <%= render 'profile', profile: @profile %>
