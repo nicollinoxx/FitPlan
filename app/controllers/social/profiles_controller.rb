@@ -3,7 +3,7 @@ class Social::ProfilesController < ApplicationController
   after_action :mark_followers_as_seen, only: :followers
 
   def index
-    @profiles = User.search_users(params[:query])
+    @profiles = User.search_users(params[:query]).includes(avatar_attachment: :blob)
   end
 
   def show
