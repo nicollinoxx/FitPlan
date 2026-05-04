@@ -20,11 +20,11 @@ class Social::ProfilesController < ApplicationController
   end
 
   def followers
-    @followers = @profile.followers.order(created_at: :desc)
+    @followers = @profile.followers.order(created_at: :desc).includes(avatar_attachment: :blob)
   end
 
   def followings
-    @followings = @profile.followings.order(:name)
+    @followings = @profile.followings.order(:name).includes(avatar_attachment: :blob)
   end
 
   private
