@@ -328,6 +328,9 @@ en:
     profiles:
       index:
         title:     "Profiles"
+      show:
+        followers: "%{count} followers"
+        followings: "%{count} following"
       followers:
         title:     'Followers'
       followings:

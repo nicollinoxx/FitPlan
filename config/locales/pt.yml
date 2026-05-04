@@ -318,6 +318,9 @@ pt:
     profiles:
       index:
         title:     "Perfis"
+      show:
+        followers: "%{count} seguidores"
+        followings: "%{count} seguindo"
       followers:
         title:     'Seguidores'
       followings:

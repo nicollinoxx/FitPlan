@@ -12,10 +12,10 @@
         <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning rounded-circle"></span>
       <% end %>
 
-      <%= link_to "#{Current.user.followers.count} followers", followers_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
+      <%= link_to t('social.profiles.show.followers', count: Current.user.followers.count), followers_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
     </div>
 
-    <%= link_to "#{Current.user.followings.count} following", followings_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
+    <%= link_to t('social.profiles.show.followings', count: Current.user.followings.count), followings_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
   </div>
 
   <%= render "avatar_form", user: @user %>
