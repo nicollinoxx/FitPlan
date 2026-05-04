@@ -12,4 +12,11 @@ class UserMailer < ApplicationMailer
 
     mail to: @user.email, subject: "Verify your email"
   end
+
+  def new_follower
+    @follower = params[:follow].follower
+    @followed = params[:follow].followed
+
+    mail to: @followed.email, subject: t(".subject", name: @follower.name)
+  end
 end

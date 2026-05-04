@@ -439,6 +439,11 @@ pt:
       strong_confirm:                    "Você deve clicar no link abaixo para confirmar que recebeu este e-mail."
       confirm_link:                      "Sim, usar este e-mail na minha conta"
       help_message:                      "Tem dúvidas ou precisa de ajuda? Responda a este e-mail e nossa equipe de suporte ajudará você."
+    new_follower:
+      subject:                           "%{name} está te seguindo no FitPlan"
+      message:                           "%{name} começou a te seguir no FitPlan"
+      cta:                               "Confira o perfil dele e siga de volta se quiser se conectar."
+      view_profile:                      "Ver perfil de %{name}"
     password_reset:
       message:                           "Não lembra a senha da conta %{email}? Tudo bem, acontece.
                                           Clique no link abaixo para definir uma nova senha."

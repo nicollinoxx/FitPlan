@@ -4,6 +4,7 @@ import "trix"
 import "@rails/actiontext"
 
 import "controllers"
+import "channels/presence_channel"
 
 import "chartkick"
 import "Chart.bundle"

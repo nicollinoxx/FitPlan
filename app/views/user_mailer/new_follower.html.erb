@@ -1,0 +1,7 @@
+<p><%= t('greeting') %></p>
+
+<p><%= t('.message', name: @follower.name) %></p>
+
+<p><%= t('.cta') %></p>
+
+<p><%= link_to t('.view_profile', name: @follower.name), social_profile_url(@follower) %></p>

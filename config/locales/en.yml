@@ -436,6 +436,11 @@ en:
       confirm_link:                      "Yes, use this email for my account"
       help_message:                      "Have questions or need help? Just reply to this email and our support team will help
                                           you sort it out."
+    new_follower:
+      subject:                           "%{name} is now following you on FitPlan"
+      message:                           "%{name} started following you on FitPlan."
+      cta:                               "Check out their profile and follow them back if you'd like to connect."
+      view_profile:                      "View %{name}'s profile"
     password_reset:
       message:                           "Can't remember your password for %{email}? That's OK, it happens.
                                           Just hit the link below to set a new one."

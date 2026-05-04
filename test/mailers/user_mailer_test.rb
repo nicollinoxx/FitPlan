@@ -16,4 +16,12 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal "Verify your email", mail.subject
     assert_equal [@user.email], mail.to
   end
+
+  test "new_follower" do
+    follow = follows(:two)
+    mail   = UserMailer.with(follow: follow).new_follower
+
+    assert_equal [ follow.followed.email ], mail.to
+    assert_equal "#{follow.follower.name} is now following you on FitPlan", mail.subject
+  end
 end
