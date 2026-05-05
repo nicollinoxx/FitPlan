@@ -68,17 +68,17 @@ class FollowTest < ActiveSupport::TestCase
     assert_includes @user.followings, @other
   end
 
-  test "user_online? returns true when cache key exists" do
+  test "followed online? returns true when cache key exists" do
     with_memory_cache do |cache|
       cache.write("user_online:#{@other.id}", true)
       follow = Follow.new(follower: @user, followed: @other)
-      assert follow.send(:user_online?)
+      assert follow.followed.online?
     end
   end
 
-  test "user_online? returns false when cache key is absent" do
+  test "followed online? returns false when cache key is absent" do
     follow = Follow.new(follower: @user, followed: @other)
-    assert_not follow.send(:user_online?)
+    assert_not follow.followed.online?
   end
 
   test "broadcasts to followed user when online" do

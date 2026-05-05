@@ -41,6 +41,10 @@ class User < ApplicationRecord
     where("name ILIKE :search OR handle ILIKE :search", search: "%#{sanitize_search(query)}%")
   end
 
+  def online?
+    Rails.cache.exist?("user_online:#{id}")
+  end
+
   def sheet_requests_by_filter(filter)
     if filter == "sent"
       sent_sheet_requests

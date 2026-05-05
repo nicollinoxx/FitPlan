@@ -11,7 +11,7 @@ class Follow < ApplicationRecord
   private
 
   def notify_followed_user
-    return notify_followed if user_online?
+    return notify_followed if followed.online?
     UserMailer.with(follow: self).new_follower.deliver_later
   end
 
@@ -20,10 +20,6 @@ class Follow < ApplicationRecord
       target: "flash_container",
       partial: "layouts/flash_notice/follow_notice",
       locals: { follower: follower })
-  end
-
-  def user_online?
-    Rails.cache.exist?("user_online:#{followed_id}")
   end
 
   def cannot_follow_self
