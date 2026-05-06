@@ -4,6 +4,9 @@ FitPlan is a software designed for managing **personalized records** (diet and w
 The platform allows you to create personalized workout and diet records, calculate **BMI (Body Mass Index)**, 
 **BMR (Basal Metabolic Rate)**, and **meal calories**, and send copies of records to other users.
 
+# Advisors
+- Fabio Pereira Botelho
+
 ## Technologies
 
 - Ruby 3.4.5
@@ -21,5 +24,5 @@ The platform allows you to create personalized workout and diet records, calcula
 ## setup
 - bundle install
 - rails db:prepare
-- rails yarn build:css
+- yarn build:css
 - rails s
