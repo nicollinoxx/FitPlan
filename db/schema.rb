@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_21_164651) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_25_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -77,6 +77,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_21_164651) do
     t.integer "sheet_id", null: false
     t.datetime "updated_at", null: false
     t.index ["sheet_id"], name: "index_diets_on_sheet_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "followed_id", null: false
+    t.bigint "follower_id", null: false
+    t.datetime "seen_at"
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_follows_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_follows_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.check_constraint "follower_id <> followed_id", name: "follows_follower_not_equal_followed"
   end
 
   create_table "healthy_metrics", force: :cascade do |t|
@@ -164,6 +176,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_21_164651) do
   add_foreign_key "completions", "sheets"
   add_foreign_key "completions", "workouts"
   add_foreign_key "diets", "sheets"
+  add_foreign_key "follows", "users", column: "followed_id"
+  add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "healthy_metrics", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "sheet_completions", "sheets"

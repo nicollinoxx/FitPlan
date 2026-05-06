@@ -1,0 +1,49 @@
+<% content_for(:title, t('.title')) %>
+
+<div class="mb-4 d-flex justify-content-between">
+  <h1><%= t('.title') %></h1>
+  <%= button_to "Log out", Current.session, method: :delete, data: { controller: "bridge--nav-button", bridge_title: "Log out", 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
+</div>
+
+<div class="mb-3 text-center">
+  <div class="d-flex justify-content-center align-items-center mb-3 gap-4">
+    <div class="position-relative">
+      <% if Current.user.unseen_followers? %>
+        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning rounded-circle"></span>
+      <% end %>
+
+      <%= link_to t('social.profiles.show.followers', count: Current.user.followers.count), followers_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
+    </div>
+
+    <%= link_to t('social.profiles.show.followings', count: Current.user.followings.count), followings_social_profile_path(Current.user), class: 'text-primary text-decoration-none fw-semibold' %>
+  </div>
+
+  <%= render "avatar_form", user: @user %>
+
+  <h5 class="mb-2 fw-bold"><%= @user.name %></h5>
+
+  <p class="mb-2 text-muted"><i class="bi bi-person-fill"></i> @<%= @user.handle %></p>
+  <p class="text-muted small"><i class="bi bi-envelope-fill"></i> <%= @user.email %></p>
+</div>
+
+<div class="d-flex align-items-center gap-2">
+  <%= link_to edit_identity_profile_path, class: "btn btn-sm btn-primary mt-3" do %>
+    <i class="bi bi-pencil-square me-1"></i> <%= t('account.index.identity.edit_profile') %>
+  <% end %>
+
+  <% if @user.healthy_metric.present? %>
+    <%= link_to identity_healthy_metric_path, class: "btn btn-sm btn-outline-secondary mt-3" do %>
+        <i class="bi bi-calculator-fill me-1 text-muted"></i><%= t('account.index.identity.show') %>
+    <% end %>
+  <% else %>
+    <%= link_to new_identity_healthy_metric_path, class: "btn btn-sm btn-outline-secondary my-3" do %>
+        <i class="bi bi-calculator-fill me-1 text-muted"></i><%= t('account.index.identity.add') %>
+    <% end %>
+  <% end %>
+</div>
+
+<hr class="my-3">
+
+<%= link_to account_path, class: "btn btn-sm btn-outline-secondary mt-2" do %>
+  <i class="bi bi-gear-fill me-1"></i> <%= t('account.index.title') %>
+<% end %>

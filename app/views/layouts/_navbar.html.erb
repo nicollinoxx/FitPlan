@@ -1,4 +1,4 @@
-<nav class="hide-on-mobile navbar navbar-expand-lg border-bottom sticky-top top-0 bg-body z-4 py-2 mb-4">
+<nav class="hide-on-mobile navbar navbar-expand-lg border-bottom sticky-top top-0 bg-body z-4 py-2 mb-3">
   <div class="container d-flex align-items-center">
     <button class="navbar-toggler border px-2 order-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <i class="bi bi-list fs-3"></i>
@@ -9,7 +9,7 @@
     <% end %>
 
     <div class="d-flex align-items-center order-3 d-lg-none">
-      <%= link_to account_path, aria: { label: t('account.index.title') } do %>
+      <%= link_to identity_profile_path, aria: { label: t('account.index.title') } do %>
         <% if Current.user.avatar.attached? %>
           <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
         <% else %>
@@ -40,6 +40,12 @@
           <% end %>
         </li>
 
+        <li class="nav-item">
+          <%= link_to social_profiles_path, class: 'nav-link px-3 fw-medium py-2' do %>
+            <i class="bi bi-person me-1"></i> <%= t('link_profiles') %>
+          <% end %>
+        </li>
+
         <li class="d-md-none nav-item px-3 py-2">
           <%= button_to Current.session, method: :delete, class: "btn btn-sm btn-danger w-100" do %>
             <i class="bi bi-box-arrow-left me-1"></i> <%= t('logout') %>
@@ -48,7 +54,7 @@
       </ul>
 
       <div class="d-none d-lg-flex ms-auto">
-        <%= link_to account_path, class: 'd-flex align-items-center', aria: { label: t('account.index.title') } do %>
+        <%= link_to identity_profile_path, class: 'd-flex align-items-center', aria: { label: t('account.index.title') } do %>
           <% if Current.user.avatar.attached? %>
             <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
           <% else %>

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  include Normalizable
+  include User::Followable
+
   has_secure_password
   has_one_attached :avatar
 
@@ -31,6 +34,16 @@ class User < ApplicationRecord
   end
 
   after_save :generate_handle_unique, if: :saved_change_to_name?
+
+  def self.search_users(query)
+    return none unless query.present?
+
+    where("name ILIKE :search OR handle ILIKE :search", search: "%#{sanitize_search(query)}%")
+  end
+
+  def online?
+    Rails.cache.exist?("user_online:#{id}")
+  end
 
   def sheet_requests_by_filter(filter)
     if filter == "sent"

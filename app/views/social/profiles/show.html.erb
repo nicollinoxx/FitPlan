@@ -1,0 +1,20 @@
+<% content_for :title, @profile.name %>
+
+<div class="mb-4 d-flex justify-content-between align-items-center">
+  <h1>
+    <%= link_to back_or_profiles_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= @profile.name %>
+    <% end %>
+  </h1>
+
+  <%= follow_toggle(@profile) %>
+</div>
+
+<div class="mt-3">
+  <div class="d-flex justify-content-center align-items-center mb-3 gap-3">
+    <%= link_to t('.followers', count: @followers_count), followers_social_profile_path(@profile), class: 'text-primary text-decoration-none fw-semibold' %>
+    <%= link_to t('.followings', count: @followings_count), followings_social_profile_path(@profile), class: 'text-primary text-decoration-none fw-semibold' %>
+  </div>
+
+  <%= render 'profile', profile: @profile %>
+</div>

@@ -1,0 +1,13 @@
+<% content_for :title, t('.title') %>
+
+<h1 class="mb-4">
+  <%= link_to social_profile_path(@profile), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i> <%= t('.title') %>
+  <% end %>
+</h1>
+
+<%= turbo_frame_tag :profiles do %>
+  <div class="row">
+    <%= render partial: 'shared/profile', collection: @followers, as: :profile %>
+  </div>
+<% end %>

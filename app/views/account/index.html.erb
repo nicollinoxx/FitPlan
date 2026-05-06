@@ -1,60 +1,28 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="d-flex justify-content-between">
-  <h1><%= t('.title') %></h1>
-  <%= button_to t('logout'), Current.session, method: :delete, data: { controller: "bridge--nav-button", bridge_title: t('logout'), 'turbo-confirm': t('message_destroy') }, class: 'btn btn-danger hide-on-mobile' %>
+<div class="d-flex justify-content-between mb-4">
+  <h1>
+    <%= link_to identity_profile_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+    <% end %>
+  </h1>
 </div>
 
-<div class="card-body text-center">
-  <div>
-    <%= render "avatar_form", user: @user %>
-  </div>
+<div class="card shadow-sm bg-body-tertiary rounded flex-fill mb-3" style="min-width: 300px;">
+    <div class="card-header bg-transparent border-bottom-0">
+        <h2 class="h6 fw-bold mb-0">
+        <i class="bi bi-gear me-2 text-primary"></i><%= t('.settings.title') %>
+        </h2>
+    </div>
 
-  <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-envelope-fill me-1"></i><%= @user.email %></h6>
-  <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-person-fill me-1"></i><%= @user.name %></h6>
-  <h6 class="card-subtitle mb-2 text-warning"><small>@ </small><%= @user.handle %></h6>
-</div>
-
-<div class="d-flex flex-wrap gap-2 mb-3">
-  <div class="card shadow-sm bg-body-tertiary rounded flex-fill" style="min-width: 300px;">
-      <div class="card-header border-bottom-0">
-          <h2 class="h6 fw-bold mb-0">
-              <i class="bi bi-person-gear me-3 text-primary"></i><%= t('.identity.title') %>
-          </h2>
-      </div>
-
-      <div class="list-group list-group-flush rounded-bottom">
-        <%= link_to edit_identity_profile_path(@user), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
-            <i class="bi bi-person-lines-fill me-3 text-muted"></i><%= t('.identity.edit_profile') %>
+    <div class="list-group list-group-flush rounded-bottom">
+        <%= link_to edit_password_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+            <i class="bi bi-key me-3 text-muted"></i><%= t('.settings.change_password') %>
         <% end %>
-
-        <% if @user.healthy_metric.present? %>
-          <%= link_to identity_healthy_metric_path(@user.healthy_metric), class: "list-group-item list-group-item-action d-flex align-items-center" do %>
-              <i class="bi bi-calculator-fill me-3 text-muted"></i><%= t('.identity.show') %>
-          <% end %>
-        <% else %>
-          <%= link_to new_identity_healthy_metric_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
-              <i class="bi bi-calculator-fill me-3 text-muted"></i><%= t('.identity.add') %>
-          <% end %>
+        <%= link_to edit_identity_email_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
+            <i class="bi bi-envelope me-3 text-muted"></i><%= t('.settings.change_email') %>
         <% end %>
-      </div>
-  </div>
-
-  <div class="card shadow-sm bg-body-tertiary rounded flex-fill" style="min-width: 300px;">
-      <div class="card-header bg-transparent border-bottom-0">
-          <h2 class="h6 fw-bold mb-0">
-          <i class="bi bi-gear me-2 text-primary"></i><%= t('.settings.title') %>
-          </h2>
-      </div>
-      <div class="list-group list-group-flush rounded-bottom">
-          <%= link_to edit_password_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
-              <i class="bi bi-key me-3 text-muted"></i><%= t('.settings.change_password') %>
-          <% end %>
-          <%= link_to edit_identity_email_path, class: "list-group-item list-group-item-action d-flex align-items-center" do %>
-              <i class="bi bi-envelope me-3 text-muted"></i><%= t('.settings.change_email') %>
-          <% end %>
-      </div>
-  </div>
+    </div>
 </div>
 
 <div class="card shadow-sm mb-3 bg-body-tertiary rounded">

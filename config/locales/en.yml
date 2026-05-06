@@ -6,6 +6,7 @@ en:
   link_sheets: 'Sheets'
   link_sheet_requests: 'Sheet Requests'
   link_dashboard: 'Dashboard'
+  link_profiles:  'Profiles'
 
   #languages
   language:     'Language'
@@ -33,6 +34,9 @@ en:
   minimum_characters: "6 characters minimum."
   cancel:             "Cancel"
   confirm:            "Confirm"
+  follow:             "Follow"
+  follow_back:        "Follow back"
+  unfollow:           "Unfollow"
   logout:             "Log out"
 
   #error forms
@@ -84,6 +88,10 @@ en:
       create:               'Sheet request was successfully created'
     profiles:
       update:               'Profile updated successfully'
+    social:
+      profiles:
+        follow:             'You are now following %{name}'
+        unfollow:           'You are no longer following %{name}'
 
   #when the notice was not successfully
   alert:
@@ -306,6 +314,28 @@ en:
           month: "month"
           year:  "year"
 
+  #profiles------------------------------
+  profiles:
+    index:
+      title: "Profiles"
+
+  #toast------------------------------
+  toast:
+    new_follower: 'started following you'
+
+  #social------------------------------
+  social:
+    profiles:
+      index:
+        title:     "Profiles"
+      show:
+        followers: "%{count} followers"
+        followings: "%{count} following"
+      followers:
+        title:     'Followers'
+      followings:
+        title:     'Following'
+
   #sessions------------------------------
   sessions:
     index:
@@ -409,6 +439,11 @@ en:
       confirm_link:                      "Yes, use this email for my account"
       help_message:                      "Have questions or need help? Just reply to this email and our support team will help
                                           you sort it out."
+    new_follower:
+      subject:                           "%{name} is now following you on FitPlan"
+      message:                           "%{name} started following you on FitPlan."
+      cta:                               "Check out their profile and follow them back if you'd like to connect."
+      view_profile:                      "View %{name}'s profile"
     password_reset:
       message:                           "Can't remember your password for %{email}? That's OK, it happens.
                                           Just hit the link below to set a new one."

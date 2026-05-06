@@ -1,0 +1,18 @@
+<% content_for(:title, t('.title')) %>
+
+<h1 class="mb-2"><%= t('.title') %></h1>
+
+<%= form_with url: social_profiles_path, method: :get do |form| %>
+  <div class="mb-3">
+    <%= form.label :query, t('search') %>
+    <%= form.text_field :query, class: 'form-control' %>
+  </div>
+
+  <%= form.submit t('search'), class: 'btn btn-success mb-4' %>
+<% end %>
+
+<%= turbo_frame_tag :profiles do %>
+  <div class="row">
+    <%= render partial: 'shared/profile', collection: @profiles, as: :profile %>
+  </div>
+<% end %>

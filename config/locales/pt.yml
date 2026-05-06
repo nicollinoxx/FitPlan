@@ -17,6 +17,7 @@ pt:
   link_sheets:         'Planilhas'
   link_sheet_requests: 'Solicitações de Planilha'
   link_dashboard:      'Painel'
+  link_profiles:       'Perfis'
 
   #languages
   language:     'Idioma'
@@ -43,8 +44,10 @@ pt:
   back:               'Voltar'
   save:               'Salvar'
   search:             'Buscar'
+  follow:             'Seguir'
+  follow_back:        'Seguir de volta'
+  unfollow:           'Deixar de Seguir'
   logout:             'Sair'
-
 
   #error forms
   error:                 'erros'
@@ -95,6 +98,10 @@ pt:
       create:               'Solicitação de planilha criada com sucesso'
     profiles:
       update:               'Perfil atualizado com sucesso'
+    social:
+      profiles:
+        follow:             'Agora você está seguindo %{name}'
+        unfollow:           'Você não está mais seguindo %{name}'
 
   #when the notice was not successfully
   alert:
@@ -302,6 +309,23 @@ pt:
           month: "mês"
           year:  "ano"
 
+  #toast------------------------------
+  toast:
+    new_follower: 'começou a te seguir'
+
+  #social------------------------------
+  social:
+    profiles:
+      index:
+        title:     "Perfis"
+      show:
+        followers: "%{count} seguidores"
+        followings: "%{count} seguindo"
+      followers:
+        title:     'Seguidores'
+      followings:
+        title:     'Seguindo'
+
   #healthy_metric------------------------------------
   height: 'Altura (cm)'
   weight: 'Peso (kg)'
@@ -418,6 +442,11 @@ pt:
       strong_confirm:                    "Você deve clicar no link abaixo para confirmar que recebeu este e-mail."
       confirm_link:                      "Sim, usar este e-mail na minha conta"
       help_message:                      "Tem dúvidas ou precisa de ajuda? Responda a este e-mail e nossa equipe de suporte ajudará você."
+    new_follower:
+      subject:                           "%{name} está te seguindo no FitPlan"
+      message:                           "%{name} começou a te seguir no FitPlan"
+      cta:                               "Confira o perfil dele e siga de volta se quiser se conectar."
+      view_profile:                      "Ver perfil de %{name}"
     password_reset:
       message:                           "Não lembra a senha da conta %{email}? Tudo bem, acontece.
                                           Clique no link abaixo para definir uma nova senha."
