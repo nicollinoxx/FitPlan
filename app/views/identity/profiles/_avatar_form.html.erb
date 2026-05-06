@@ -3,10 +3,16 @@
     <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
       <div class="position-relative">
         <%= form.label :avatar, class: "d-inline-block", style: "cursor: pointer;" do %>
-          <%= image_tag @user.avatar.attached? ? @user.avatar : "avatar.png", class: "rounded-circle object-fit-cover bg-secondary",
-              style: "width:115px; height:115px;", alt: t("identity.avatars.show.title"), data: { "upload-preview-target": "preview" } %>
+          <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar, class: "rounded-circle object-fit-cover bg-secondary",
+                style: "width: 100px; height: 100px;", alt: t("identity.avatars.show.title"), data: { "upload-preview-target": "preview" } %>
+          <% else %>
+            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white"
+              style="width: 100px; height: 100px;" data-upload-preview-target="preview">
+            </div>
+          <% end %>
 
-          <div class="position-absolute top-50 start-50 translate-middle text-white z-1">
+          <div class="position-absolute top-50 start-50 translate-middle text-white z-1 pb-1" data-upload-preview-target="cameraIcon">
             <i class="bi bi-camera-fill"></i>
           </div>
         <% end %>

@@ -1,9 +1,9 @@
 <div class="text-center">
   <% if profile.avatar.attached? %>
-    <%= image_tag profile.avatar, class: "rounded-circle object-fit-cover flex-shrink-0 border-success-subtle border-3", width: 80, height: 80 %>
+    <%= image_tag profile.avatar, class: "rounded-circle object-fit-cover flex-shrink-0 border-success-subtle border-3", width: 90, height: 90 %>
   <% else %>
     <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-secondary-subtle border border-success-subtle border-3"
-          style="width: 80px; height: 80px;">
+          style="width: 100px; height: 100px;">
       <i class="bi bi-person-fill fs-3 text-secondary"></i>
     </div>
   <% end %>
