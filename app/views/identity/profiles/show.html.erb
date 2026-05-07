@@ -28,7 +28,7 @@
 
 <div class="d-flex justify-content-start align-items-center gap-2 mt-2">
   <div class="dropdown">
-    <button class="btn btn-sm border rounded dropdown-toggle" type="button" data-bs-toggle="dropdown">
+    <button class="btn btn-sm btn-light border dropdown-toggle" type="button" data-bs-toggle="dropdown">
       <i class="bi bi-person-fill me-1"></i><%= t('.profile') %>
     </button>
     <ul class="dropdown-menu">
@@ -50,7 +50,7 @@
     </ul>
   </div>
 
-  <%= link_to identity_settings_path, class: "btn btn-sm btn-outline-secondary" do %>
+  <%= link_to identity_settings_path, class: "btn btn-sm btn-light border" do %>
     <i class="bi bi-gear-fill me-1"></i><%= t('identity.settings.show.title') %>
   <% end %>
 </div>
