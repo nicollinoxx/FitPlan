@@ -230,35 +230,6 @@ pt:
         proteins:           'Proteínas g'
         fat:                'Gorduras g'
 
-  #account------------------------------------
-  account:
-    metrics:
-      edit:
-        title:                  'Métricas'
-        label:
-          height:               'Altura (cm)'
-          weight:               'Peso (kg)'
-          age:                  'Idade'
-          gender:               'Gênero'
-    index:
-      title:                    'Conta'
-      identity:
-        title:                  'Informação de usuário'
-        show:                   'Ver métricas saudáveis'
-        add:                    'Adicionar métricas saudáveis'
-        edit_profile:           'Alterar informações de perfil'
-      settings:
-        title:                  'Configurações'
-        change_avatar:          'Alterar avatar'
-        change_password:        'Alterar senha'
-        change_email:           'Alterar endereço de e-mail'
-      session:
-        title:                  'Sessão'
-        collection_sessions:    'Sessões'
-      preferences:
-        title:                  'Preferências'
-        language:               'Idioma'
-        color_scheme:           'Tema'
 
   #welcome------------------------------------
   welcome:
@@ -393,12 +364,29 @@ pt:
 
   #identity----------------------------
   identity:
+    settings:
+      show:
+        title:                    'Configurações'
+        settings:
+          title:                  'Configurações'
+          change_password:        'Alterar senha'
+          change_email:           'Alterar endereço de e-mail'
+        session:
+          title:                  'Sessão'
+          collection_sessions:    'Sessões'
+        preferences:
+          title:                  'Preferências'
+          language:               'Idioma'
+          color_scheme:           'Tema'
     profiles:
       edit:
         title:                   'Editar informações'
         name:                    'Nome'
       show:
         title:                   'Perfil'
+        profile:                 'Perfil'
+        edit:                    'Editar'
+        metrics:                 'Métricas'
     avatars:
       edit:
         title:                   'Editar avatar'

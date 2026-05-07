@@ -24,9 +24,9 @@ class Identity::EmailsController < ApplicationController
     def redirect_to_root
       if @user.email_previously_changed?
         resend_email_verification
-        redirect_to account_path, notice: I18n.t('notice.email.update')
+        redirect_to identity_settings_path, notice: I18n.t('notice.email.update')
       else
-        redirect_to account_path
+        redirect_to identity_settings_path
       end
     end
 

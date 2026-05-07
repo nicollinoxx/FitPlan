@@ -218,35 +218,6 @@ en:
         proteins:           'Proteins g'
         fat:                'Fat g'
 
-  #account------------------------------------
-  account:
-    metrics:
-      edit:
-        title:                  'Metrics'
-        label:
-          height:               'Height (cm)'
-          weight:               'Weight (kg)'
-          age:                  'Age'
-          gender:               'Gender'
-    index:
-      title:                    'Account'
-      identity:
-        title:                  'Profile information'
-        show:                   'View healthy metrics'
-        add:                    'Add healthy metrics'
-        edit_profile:           'Change profile information'
-      settings:
-        title:                  'Settings'
-        change_avatar:          'Change avatar'
-        change_password:        'Change password'
-        change_email:           'Change email address'
-      session:
-        title:                  'Session'
-        collection_sessions:    'Sessions'
-      preferences:
-        title:                  'Preferences'
-        language:               'Language'
-        color_scheme:           'Color scheme'
 
 
 
@@ -387,12 +358,29 @@ en:
 
   #identity----------------------------
   identity:
+    settings:
+      show:
+        title:                    'Settings'
+        settings:
+          title:                  'Settings'
+          change_password:        'Change password'
+          change_email:           'Change email address'
+        session:
+          title:                  'Session'
+          collection_sessions:    'Sessions'
+        preferences:
+          title:                  'Preferences'
+          language:               'Language'
+          color_scheme:           'Color scheme'
     profiles:
       edit:
         title:                   'Edit informations'
         name:                    'Name'
       show:
         title:                   'Profile'
+        profile:                 'Profile'
+        edit:                    'Edit'
+        metrics:                 'Metrics'
     avatars:
       edit:
         title:                   'Edit Avatar'
