@@ -7,33 +7,31 @@ export default class extends Controller {
     const file = this.fileInputTarget.files[0]
     if (!file) return
 
-    const reader = new FileReader()
-    reader.onload = () => {
-      this.previewTarget.src = reader.result
-      this.previewTarget.hidden = false
-      this.showSaveButton()
-
-      if (file.type.startsWith("video/")) this.videoPreview()
-    }
-    reader.readAsDataURL(file)
+    this.#showPreview(file)
+    this.#toggle({ save: false, remove: true, clear: false })
   }
 
   removePreview() {
-    this.fileInputTarget.value = ""
-    this.previewTarget.src = ""
-    this.previewTarget.hidden = true
-    if (this.hasClearButtonTarget) this.clearButtonTarget.hidden = true
-    if (this.hasRemoveButtonTarget) this.removeButtonTarget.hidden = false
+    this.#clearPreview()
+    this.#toggle({ save: true, remove: false, clear: true })
   }
 
-  videoPreview() {
+  #showPreview(file) {
+    this.previewTarget.src    = URL.createObjectURL(file)
     this.previewTarget.hidden = false
-    this.previewTarget.load()
+    if (file.type.startsWith("video/")) this.previewTarget.load()
   }
 
-  showSaveButton() {
-    if (this.hasSaveButtonTarget) this.saveButtonTarget.hidden = false
-    if (this.hasRemoveButtonTarget) this.removeButtonTarget.hidden = true
-    if (this.hasClearButtonTarget) this.clearButtonTarget.hidden = false
+  #clearPreview() {
+    URL.revokeObjectURL(this.previewTarget.src)
+    this.previewTarget.src     = ""
+    this.previewTarget.hidden  = true
+    this.fileInputTarget.value = ""
+  }
+
+  #toggle({ save, remove, clear }) {
+    if (this.hasSaveButtonTarget)   this.saveButtonTarget.hidden   = save
+    if (this.hasRemoveButtonTarget) this.removeButtonTarget.hidden = remove
+    if (this.hasClearButtonTarget)  this.clearButtonTarget.hidden  = clear
   }
 }
