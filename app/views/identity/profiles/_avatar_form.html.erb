@@ -7,12 +7,11 @@
             <%= image_tag @user.avatar, class: "rounded-circle object-fit-cover bg-secondary",
                 style: "width: 100px; height: 100px;", alt: t("identity.avatars.show.title"), data: { "upload-preview-target": "preview" } %>
           <% else %>
-            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white"
-              style="width: 100px; height: 100px;" data-upload-preview-target="preview">
-            </div>
+            <img class="rounded-circle bg-secondary object-fit-cover"
+              style="width: 100px; height: 100px;" data-upload-preview-target="preview" alt="">
           <% end %>
 
-          <div class="position-absolute top-50 start-50 translate-middle text-white z-1 pb-1" data-upload-preview-target="cameraIcon">
+          <div class="btn btn-secondary btn-sm rounded-circle position-absolute bottom-0 start-0">
             <i class="bi bi-camera-fill"></i>
           </div>
         <% end %>
