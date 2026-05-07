@@ -26,24 +26,31 @@
   <p class="text-muted small"><i class="bi bi-envelope-fill"></i> <%= @user.email %></p>
 </div>
 
-<div class="d-flex align-items-center gap-2">
-  <%= link_to edit_identity_profile_path, class: "btn btn-sm btn-primary mt-3" do %>
-    <i class="bi bi-pencil-square me-1"></i> <%= t('account.index.identity.edit_profile') %>
-  <% end %>
+<div class="d-flex justify-content-start align-items-center gap-2 mt-2">
+  <div class="dropdown">
+    <button class="btn btn-sm border rounded dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      <i class="bi bi-person-fill me-1"></i><%= t('.profile') %>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to edit_identity_profile_path, class: "dropdown-item" do %>
+          <i class="bi bi-pencil-square me-2"></i><%= t('.edit') %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to @user.healthy_metric.present? ? identity_healthy_metric_path : new_identity_healthy_metric_path, class: "dropdown-item" do %>
+          <i class="bi bi-calculator-fill me-2"></i><%= t('.metrics') %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to dashboard_path, class: "dropdown-item" do %>
+          <i class="bi bi-activity me-2"></i><%= t('link_dashboard') %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
 
-  <% if @user.healthy_metric.present? %>
-    <%= link_to identity_healthy_metric_path, class: "btn btn-sm btn-outline-secondary mt-3" do %>
-        <i class="bi bi-calculator-fill me-1 text-muted"></i><%= t('account.index.identity.show') %>
-    <% end %>
-  <% else %>
-    <%= link_to new_identity_healthy_metric_path, class: "btn btn-sm btn-outline-secondary my-3" do %>
-        <i class="bi bi-calculator-fill me-1 text-muted"></i><%= t('account.index.identity.add') %>
-    <% end %>
+  <%= link_to identity_settings_path, class: "btn btn-sm btn-outline-secondary" do %>
+    <i class="bi bi-gear-fill me-1"></i><%= t('identity.settings.show.title') %>
   <% end %>
 </div>
-
-<hr class="my-3">
-
-<%= link_to account_path, class: "btn btn-sm btn-outline-secondary mt-2" do %>
-  <i class="bi bi-gear-fill me-1"></i> <%= t('account.index.title') %>
-<% end %>
