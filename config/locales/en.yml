@@ -364,7 +364,7 @@ en:
       show:
         title:                    'Settings'
         settings:
-          title:                  'Settings'
+          title:                  'Security & Credentials'
           change_password:        'Change password'
           change_email:           'Change email address'
         session:

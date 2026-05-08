@@ -10,7 +10,7 @@
     <div class="sticky-top z-3 mb-3">
       <% if turbo_native_app? %>
         <div class="d-flex align-items-center">
-          <%= link_to identity_settings_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
+          <%= link_to identity_profile_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
             <div class="d-flex align-items-center">
               <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', alt: '', size: '45x45' if @user.avatar.attached? %>
               <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>

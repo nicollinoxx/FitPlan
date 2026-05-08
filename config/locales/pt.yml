@@ -370,7 +370,7 @@ pt:
       show:
         title:                    'Configurações'
         settings:
-          title:                  'Configurações'
+          title:                  'Segurança & Credenciais'
           change_password:        'Alterar senha'
           change_email:           'Alterar endereço de e-mail'
         session:
