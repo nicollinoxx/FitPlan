@@ -232,11 +232,13 @@ en:
   female: 'Female'
 
   healthy_metric:
-    title: 'Health Metrics'
+    title: 'Body Metrics'
     new:
-      title: 'Add Health Metric'
+      title: 'Add Body Metrics'
     edit:
-      title: 'Edit Health Metric'
+      title: 'Edit Body Metrics'
+    show:
+      title: 'Body Metrics'
 
   #welcome------------------------------------
   welcome:

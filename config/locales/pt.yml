@@ -308,11 +308,13 @@ pt:
   female: 'Feminino'
 
   healthy_metric:
-    title:   'Métricas'
+    title:   'Métricas Corporais'
     new:
-      title: 'Adicionar métricas'
+      title: 'Adicionar Métricas Corporais'
     edit:
-      title: 'Editar métricas'
+      title: 'Editar Métricas Corporais'
+    show:
+      title: 'Métricas Corporais'
 
   #sessions------------------------------
   sessions:
