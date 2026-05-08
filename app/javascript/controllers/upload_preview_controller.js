@@ -17,6 +17,7 @@ export default class extends Controller {
   }
 
   #showPreview(file) {
+    if (this.previewTarget.src.startsWith("blob:")) URL.revokeObjectURL(this.previewTarget.src)
     this.previewTarget.src    = URL.createObjectURL(file)
     this.previewTarget.hidden = false
     if (file.type.startsWith("video/")) this.previewTarget.load()

@@ -8,7 +8,7 @@ class SessionsTest < ApplicationSystemTestCase
   test "visiting the index" do
     sign_in_as @user
 
-    visit account_url
+    visit identity_settings_url
 
     click_on "Sessions"
     assert_selector "h1", text: "Sessions"
@@ -24,7 +24,7 @@ class SessionsTest < ApplicationSystemTestCase
 
   test "signing out" do
     sign_in_as @user
-    visit account_url
+    visit identity_settings_url
 
     click_on "Log out"
 

@@ -6,7 +6,7 @@ class PasswordsTest < ApplicationSystemTestCase
   end
 
   test "updating the password" do
-    visit account_url
+    visit identity_settings_url
 
     click_on "Change password"
 
