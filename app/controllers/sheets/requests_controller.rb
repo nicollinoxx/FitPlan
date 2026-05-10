@@ -1,18 +1,15 @@
 module Sheets
   class RequestsController < ApplicationController
-    include Scrollable
-
     before_action :set_user
     before_action :set_request, only: %i[accept destroy]
 
     def index
-      requests = @user.sheet_requests_by_filter(params[:filter]).includes(:sender, :recipient, :sheet)
-      scrollable_to requests
+      set_page_and_extract_portion_from @user.sheet_requests_by_filter(params[:filter]).includes(:sender, :recipient, :sheet)
     end
 
     def new
       @sheets = @user.sheets
-      scrollable_to friends.includes(avatar_attachment: :blob)
+      set_page_and_extract_portion_from friends.includes(avatar_attachment: :blob)
     end
 
     def create
