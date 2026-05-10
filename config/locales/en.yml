@@ -142,7 +142,7 @@ en:
       new:
         title:                     'New sheet request'
         search_user:               'Search user'
-        handle:                    'Handle (@)'
+        handle:                    'Search user'
         submit:                    'Send request'
         select_sheets:             'Select sheets'
         select_sheets_placeholder: 'Choose sheets...'
@@ -163,7 +163,7 @@ en:
     new:
       title:                'New sheet request'
       search_user:          'Search user'
-      handle:               'Handle (@)'
+      handle:               'Search user'
 
   #workouts------------------------------
   repetitions:        'Repetitions'

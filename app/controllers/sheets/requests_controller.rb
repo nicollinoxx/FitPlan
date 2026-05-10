@@ -12,9 +12,7 @@ module Sheets
 
     def new
       @sheets = @user.sheets
-      friends = @user.friends.search_users(params[:query]).includes(avatar_attachment: :blob)
-
-      scrollable_to friends
+      scrollable_to friends.includes(avatar_attachment: :blob)
     end
 
     def create
@@ -25,7 +23,6 @@ module Sheets
     end
 
     def accept
-      return head :gone unless @request
       @request.accepted!
       CopySheetJob.perform_later(@request)
     end
@@ -39,6 +36,10 @@ module Sheets
 
     def set_user
       @user = Current.user
+    end
+
+    def friends
+      params[:query].present? ? @user.friends.search_users(params[:query]) : @user.friends
     end
 
     def set_request
