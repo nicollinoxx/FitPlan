@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   namespace :social do
-    resources :profiles, only: [:index, :show] do
+    resources :profiles, only: [:index, :show], param: :handle do
       member do
         post   :follow
         delete :unfollow
