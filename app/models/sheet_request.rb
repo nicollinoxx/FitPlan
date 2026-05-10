@@ -18,7 +18,7 @@ class SheetRequest < ApplicationRecord
   end
 
   def self.create_for_sheets(sender:, recipient:, sheet_ids:)
-    return if sheet_ids.empty? || sheet_ids.size > 5
+    return if sheet_ids.blank? || sheet_ids.size > 5
 
     allowed_sheet_ids = sender.sheets.where(id: sheet_ids).ids
 

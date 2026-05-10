@@ -36,7 +36,7 @@ class User < ApplicationRecord
   after_save :generate_handle_unique, if: :saved_change_to_name?
 
   def self.search_users(query)
-    return all unless query.present?
+    return none unless query.present?
 
     where("name ILIKE :search OR handle ILIKE :search", search: "%#{sanitize_search(query)}%")
   end
