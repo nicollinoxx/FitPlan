@@ -23,18 +23,22 @@
       </div>
     </div>
 
-    <p class="m-0">
-      <i class="bi bi-file-earmark-spreadsheet-fill me-1"></i><%= request.sheet.name %>
-      <small class="badge <%= request.sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>"><%= request.sheet.workout? ? t('workout') : t('diet') %></small>
-    </p>
+    <div class="d-flex align-items-center justify-content-between">
+      <p class="m-0">
+        <i class="bi bi-file-earmark-spreadsheet-fill me-1"></i><%= request.sheet.name %>
+        <small class="badge <%= request.sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>"><%= request.sheet.workout? ? t('workout') : t('diet') %></small>
+      </p>
 
-    <% if request.sheet.description.present? %>
-      <div class="mt-2">
+      <% if request.sheet.description.present? %>
         <a class="text-muted small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= request.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= request.id %>">
           <i class="bi bi-blockquote-right me-1"></i> Show description
         </a>
+      <% end %>
+    </div>
 
-        <div class="collapse mt-1 bg-dark-subtle rounded py-1 px-2" id="desc-<%= request.id %>"><%= request.sheet.description %></div>
+    <% if request.sheet.description.present? %>
+      <div class="collapse mt-1 bg-secondary-subtle rounded py-1 px-2" id="desc-<%= request.id %>">
+        <%= request.sheet.description %>
       </div>
     <% end %>
   </div>
