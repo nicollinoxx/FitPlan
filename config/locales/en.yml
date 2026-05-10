@@ -139,6 +139,8 @@ en:
           all:               'All'
           sent:              'Sent by me'
           received:          'Received'
+      index:
+        show_description:          'Show description'
       new:
         title:                     'New sheet request'
         search_user:               'Search user'

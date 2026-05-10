@@ -150,6 +150,8 @@ pt:
           received:          'Recebido'
         sent:                "compartilhou uma ficha"
         received:            "recebeu uma ficha"
+      index:
+        show_description:    'Ver descrição'
       new:
         title:               'Nova solicitação de planilha'
         search_user:         'Pesquisar usuário'
