@@ -22,18 +22,19 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }
+  validates :handle, presence: true, uniqueness: true, length: { minimum: 3 }, on: :update
 
-  normalizes :email, with: -> { _1.strip.downcase }
+  normalizes :email, :handle, with: -> { _1.strip.downcase }
 
   before_validation if: :email_changed?, on: :update do
     self.verified = false
   end
 
+  before_create :generate_handle_unique
+
   after_update if: :password_digest_previously_changed? do
     sessions.where.not(id: Current.session).delete_all
   end
-
-  after_save :generate_handle_unique, if: :saved_change_to_name?
 
   def self.search_users(query)
     return none unless query.present?
@@ -41,21 +42,24 @@ class User < ApplicationRecord
     where("name ILIKE :search OR handle ILIKE :search", search: "%#{sanitize_search(query)}%")
   end
 
+  def to_param
+    handle
+  end
+
   def online?
     Rails.cache.exist?("user_online:#{id}")
   end
 
   def sheet_requests_by_filter(filter)
-    if filter == "sent"
-      sent_sheet_requests
-    else
-      received_sheet_requests
-    end
+    filter == "sent" ? sent_sheet_requests : received_sheet_requests
   end
 
   private
 
-    def generate_handle_unique
-      self.update(handle: name.parameterize + "#{id}#{SecureRandom.random_number(1000)}")
+  def generate_handle_unique
+    loop do
+      self.handle = "#{name.parameterize}-#{SecureRandom.hex(4)}"
+      break unless User.exists?(handle: handle)
     end
+  end
 end
