@@ -378,6 +378,9 @@ en:
       edit:
         title:                   'Edit informations'
         name:                    'Name'
+        handle:                  'Handle'
+        handle_description:      'Handle is used to identify you in the community.'
+        error_message_form:      'prohibited this email from being saved:'
       show:
         title:                   'Profile'
         profile:                 'Profile'
@@ -456,3 +459,9 @@ en:
             avatar:
               error_avatar_type:         'must be a file (png, jpeg, jpg)'
               error_avatar_size:         "is too big. Maximum size allowed is 2MB."
+            handle:
+              blank:                     'choose a handle for your profile'
+              taken:                     'is already taken, please choose another'
+              too_short:
+                one:                     'must be at least %{count} character'
+                other:                   'must be at least %{count} characters'

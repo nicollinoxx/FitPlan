@@ -384,6 +384,9 @@ pt:
       edit:
         title:                   'Editar informações'
         name:                    'Nome'
+        handle:                  'Handle'
+        handle_description:      'Handle é usado para identificar você na comunidade.'
+        error_message_form:      'impediram as informações de serem salvas:'
       show:
         title:                   'Perfil'
         profile:                 'Perfil'
@@ -460,6 +463,7 @@ pt:
         password:                        'Senha'
         password_challenge:              'Senha atual'
         password_confirmation:           'Confirmar senha'
+        handle:                          'Handle'
     errors:
       models:
         workout:
