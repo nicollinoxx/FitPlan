@@ -8,8 +8,11 @@ class Identity::ProfilesController < ApplicationController
   end
 
   def update
-    @user.update!(user_params)
-    recede_or_redirect_to identity_profile_path, notice: I18n.t('notice.profiles.update')
+    if @user.update(user_params)
+      recede_or_redirect_to identity_profile_path, notice: I18n.t('notice.profiles.update')
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
@@ -19,6 +22,6 @@ class Identity::ProfilesController < ApplicationController
     end
 
     def user_params
-      params.expect(user: [:name])
+      params.expect(user: [:name, :handle])
     end
 end

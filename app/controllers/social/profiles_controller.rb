@@ -32,7 +32,7 @@ class Social::ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = User.find(params.expect(:id))
+    @profile = User.find_by!(handle: params[:handle])
   end
 
   def mark_followers_as_seen
