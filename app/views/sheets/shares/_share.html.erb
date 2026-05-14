@@ -21,6 +21,7 @@
 
         <div class="text-end flex-shrink-0">
           <% pending_count = share.sheet_requests.count(&:pending?) %>
+
           <% if pending_count > 0 %>
             <span class="badge bg-warning-subtle text-warning"><%= pending_count %> <%= t('.pending') %></span>
           <% else %>

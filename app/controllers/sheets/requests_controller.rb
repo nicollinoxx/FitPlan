@@ -25,4 +25,8 @@ class Sheets::RequestsController < ApplicationController
     def set_request
       @request = SheetRequest.accessible_by(Current.user).find(params[:id])
     end
+
+    def sheet_content
+      @sheet.workout? ? @workouts : @diets
+    end
 end
