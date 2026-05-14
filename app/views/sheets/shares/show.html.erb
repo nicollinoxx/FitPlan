@@ -1,29 +1,27 @@
 <% content_for(:title, t('.title')) %>
 
-<h1 class="mb-3">
+<h1 class="d-flex align-items-center justify-content-between gap-3 mb-3">
   <%= link_to sheets_shares_path(filter: params[:filter]), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
     <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
   <% end %>
+
+  <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: "btn btn-danger", data: { turbo_confirm: t('message_destroy') } do %>
+    <i class="bi bi-trash"></i> <%= t('sheets.shares.show.refuse') %>
+  <% end %>
 </h1>
 
-<div class="bg-body-tertiary shadow-sm rounded p-3 mb-3">
-  <div class="d-flex align-items-center gap-3">
-    <% if share_other_user(@share).avatar.attached? %>
-      <%= image_tag share_other_user(@share).avatar, class: "rounded-circle object-fit-cover flex-shrink-0", width: 48, height: 48, alt: "" %>
-    <% else %>
-      <div class="rounded-circle bg-secondary-subtle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px;">
-        <i class="bi bi-person-fill text-secondary fs-4"></i>
-      </div>
-    <% end %>
-
-    <div class="flex-grow-1">
-      <h5 class="mb-0 fw-semibold"><%= share_other_user(@share).name %></h5>
-      <small class="text-muted">@<%= share_other_user(@share).handle %></small>
+<div class="d-flex align-items-center gap-3 mt-2 mb-4">
+  <% if share_other_user(@share).avatar.attached? %>
+    <%= image_tag share_other_user(@share).avatar, class: "rounded-circle object-fit-cover flex-shrink-0", width: 48, height: 48, alt: "" %>
+  <% else %>
+    <div class="rounded-circle bg-secondary-subtle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px;">
+      <i class="bi bi-person-fill text-secondary fs-4"></i>
     </div>
+  <% end %>
 
-    <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: "btn btn-danger btn-sm rounded-circle flex-shrink-0", data: { turbo_confirm: t('message_destroy') } do %>
-      <i class="bi bi-trash"></i>
-    <% end %>
+  <div class="flex-grow-1">
+    <h5 class="mb-0 fw-semibold"><%= share_other_user(@share).name %></h5>
+    <small class="text-muted">@<%= share_other_user(@share).handle %></small>
   </div>
 </div>
 

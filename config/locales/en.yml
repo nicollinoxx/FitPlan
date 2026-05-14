@@ -142,6 +142,7 @@ en:
           received: 'Received'
       show:
         title:    'Share'
+        refuse:   'Delete'
       new:
         title:                     'Share sheets'
         handle:                    'Search user'

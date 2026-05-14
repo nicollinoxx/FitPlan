@@ -152,6 +152,7 @@ pt:
           received: 'Recebidos'
       show:
         title:    'Compartilhamento'
+        refuse:   'Excluir'
       new:
         title:                     'Compartilhar fichas'
         handle:                    'Pesquisar usuário'
