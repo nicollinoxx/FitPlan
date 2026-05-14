@@ -6,7 +6,7 @@
       <%= request.sheet.workout? ? t('workout') : t('diet') %>
     </small>
 
-    <%= link_to preview_path(request, filter: params[:filter]), data: { turbo_frame: "_top" }, class: "text-muted small flex-shrink-0 text-decoration-none" do %>
+    <%= link_to preview_content_sheets_request_path(request), data: { turbo_frame: "_top" }, class: "text-muted small flex-shrink-0 text-decoration-none" do %>
       <i class="bi bi-eye"></i>
     <% end %>
 

@@ -29,7 +29,9 @@ Rails.application.routes.draw do
 
   namespace :sheets do
     resources :shares, only: [:index, :new, :create, :show, :destroy] do
-      resources :requests, only: [:update, :destroy], shallow: true
+      resources :requests, only: [:update, :destroy], shallow: true do
+        get :preview_content, on: :member
+      end
     end
   end
 
@@ -37,14 +39,10 @@ Rails.application.routes.draw do
     resource :completion, only: %i[create destroy], module: :sheets
 
     resources :diets do
-      get :preview, on: :collection
-
       resource :completion, only: %i[create destroy], module: :diets
     end
 
     resources :workouts do
-      get :preview, on: :collection
-
       resource :completion, only: %i[create destroy], module: :workouts
       resources :videos, only: [:destroy], module: :workouts
     end
