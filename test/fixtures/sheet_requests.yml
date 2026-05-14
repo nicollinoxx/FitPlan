@@ -1,13 +1,14 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  sender: lazaro_nixon
-  recipient: lazaro
-  status: pending
+  sheet_share: one
   sheet: one
+  status: pending
+
+one_extra:
+  sheet_share: one
+  sheet: two
+  status: pending
 
 two:
-  sender: lazaro
-  recipient: lazaro_nixon
-  status: pending
+  sheet_share: two
   sheet: two
+  status: pending

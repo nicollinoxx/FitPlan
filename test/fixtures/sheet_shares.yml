@@ -1,0 +1,7 @@
+one:
+  sender: lazaro_nixon
+  recipient: lazaro
+
+two:
+  sender: lazaro
+  recipient: lazaro_nixon
