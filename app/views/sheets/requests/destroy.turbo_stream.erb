@@ -1,5 +1,0 @@
-<% if @request.sheet_share.destroyed? %>
-  <%= turbo_stream.remove dom_id(@request.sheet_share) %>
-<% else %>
-  <%= turbo_stream.remove dom_id(@request) %>
-<% end %>

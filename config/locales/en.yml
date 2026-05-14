@@ -102,6 +102,8 @@ en:
       invalid:              'That password reset link is invalid'
     email_verification:
       invalid:              'That email verification link is invalid'
+    sheet_share:
+      not_found:            'Share not found'
 
   errors:
     sheet_request:

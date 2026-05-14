@@ -2,7 +2,6 @@ class Sheets::SharesController < ApplicationController
   include ActionView::RecordIdentifier
 
   before_action :set_user
-  before_action :set_share, only: [:destroy]
 
   def index
     sheet_shares = @user.sheet_shares_by_filter(params[:filter]).includes(:sender, :recipient, sheet_requests: :sheet)
@@ -11,6 +10,9 @@ class Sheets::SharesController < ApplicationController
 
   def show
     @share = SheetShare.accessible_by(@user).includes(:sender, :recipient, sheet_requests: :sheet).find(params[:id])
+
+    rescue ActiveRecord::RecordNotFound
+      redirect_to sheets_shares_path(params[:filter]), alert: t("alert.sheet_share.not_found")
   end
 
   def new

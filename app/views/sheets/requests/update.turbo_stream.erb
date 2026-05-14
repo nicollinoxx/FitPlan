@@ -1,5 +1,0 @@
-<%= turbo_stream.remove dom_id(@request) %>
-
-<% if @request.sheet_share.sheet_requests.reload.none? %>
-  <%= turbo_stream.remove dom_id(@request.sheet_share) %>
-<% end %>

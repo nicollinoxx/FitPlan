@@ -112,6 +112,8 @@ pt:
       invalid:              'O link para redefinir a senha é inválido'
     email_verification:
       invalid:              'O link de verificação de e-mail é inválido'
+    sheet_share:
+      not_found:            'Compartilhamento não encontrado'
 
   errors:
     sheet_request:
