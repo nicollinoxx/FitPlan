@@ -14,6 +14,7 @@ class SheetShare < ApplicationRecord
     transaction do
       share = create!(sender: sender, recipient: recipient)
       share.sheet_requests.insert_all(allowed_ids.map { { sheet_id: _1, status: "pending" } })
+      share
     end
   end
 end
