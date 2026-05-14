@@ -131,41 +131,30 @@ en:
         name:               'Name'
         description:        'Description'
         sheet_type:         'Type'
-    requests:
+    shares:
       index:
-        title:               'Sheet requests'
-        filter:              'Filter'
+        title:    'Shares'
+        filter:   'Filter'
         filters:
-          all:               'All'
-          sent:              'Sent by me'
-          received:          'Received'
-      index:
-        show_description:          'Show description'
+          sent:     'Sent by me'
+          received: 'Received'
+      show:
+        title:    'Share'
       new:
-        title:                     'New sheet request'
-        search_user:               'Search user'
+        title:                     'Share sheets'
         handle:                    'Search user'
-        submit:                    'Send request'
-        select_sheets:             'Select sheets'
+        share:                     'Share'
+        submit:                    'Send'
         select_sheets_placeholder: 'Choose sheets...'
         select_sheets_help:        'Select up to 5 sheets.'
-
-  #sheet_requests----------------------------------
-  sheet_request_shared:      'Shared a sheet'
-  sheet_request_received:    'Received a sheet'
-
-  sheet_requests:
-    index:
-      title:                 'Sheet requests'
-      filter:                'Filter'
-      filters:
-        all:                 'All'
-        sent:                'Sent by me'
-        received:            'Received'
-    new:
-      title:                'New sheet request'
-      search_user:          'Search user'
-      handle:               'Search user'
+      share:
+        sent:
+          one:   'shared %{count} sheet'
+          other: 'shared %{count} sheets'
+        received:
+          one:   'sent you %{count} sheet'
+          other: 'sent you %{count} sheets'
+        pending: 'pending'
 
   #workouts------------------------------
   repetitions:        'Repetitions'

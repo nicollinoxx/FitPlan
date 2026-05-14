@@ -141,43 +141,30 @@ pt:
         name:               'Nome'
         description:        'Descrição'
         sheet_type:         'Tipo'
-    requests:
+    shares:
       index:
-        title:               'Solicitações de planilha'
-        filter:              'Filtrar'
+        title:    'Compartilhamentos'
+        filter:   'Filtrar'
         filters:
-          sent:              'Enviado por min'
-          received:          'Recebido'
-        sent:                "compartilhou uma ficha"
-        received:            "recebeu uma ficha"
-      index:
-        show_description:    'Ver descrição'
+          sent:     'Enviados por mim'
+          received: 'Recebidos'
+      show:
+        title:    'Compartilhamento'
       new:
-        title:               'Nova solicitação de planilha'
-        search_user:         'Pesquisar usuário'
-        handle:              'Pesquisar usuário'
-        submit:              'Enviar solicitação'
-        select_sheets:       'Selecionar fichas'
+        title:                     'Compartilhar fichas'
+        handle:                    'Pesquisar usuário'
+        share:                     'Compartilhar'
+        submit:                    'Enviar'
         select_sheets_placeholder: 'Escolha as fichas...'
-        select_sheets_help:  'Selecione até 5 fichas.'
-
-  #sheet_requests----------------------------------
-  sheet_request_shared:      'Compartilhou uma ficha'
-  sheet_request_received:    'Recebeu uma ficha'
-
-  sheet_requests:
-    index:
-      title:                 'Solicitações de planilha'
-      filter:                'Filtrar'
-      filters:
-        sent:                'Enviado por min'
-        received:            'Recebido'
-      sent:                  "compartilhou uma ficha"
-      received:              "recebeu uma ficha"
-    new:
-      title:                'Nova solicitação de planilha'
-      search_user:          'Pesquisar usuário'
-      handle:               'Pesquisar usuário'
+        select_sheets_help:        'Selecione até 5 fichas.'
+      share:
+        sent:
+          one:   'compartilhou %{count} ficha'
+          other: 'compartilhou %{count} fichas'
+        received:
+          one:   'enviou %{count} ficha'
+          other: 'enviou %{count} fichas'
+        pending: 'pendente'
 
   #workouts------------------------------
   repetitions:        'Repetições'
