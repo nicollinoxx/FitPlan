@@ -20,7 +20,10 @@ class Sheet < ApplicationRecord
 
   scope :search_by_type,  ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
   scope :completed_today, -> { joins(:sheet_completions_today).distinct }
-  scope :search_by_name, ->(name) { name.present? ? where("name ILIKE ?", "%#{sanitize_search(name)}%") : all }
+  scope :search_by_name,  ->(name) { name.present? ? where("name ILIKE ?", "%#{sanitize_search(name)}%") : all }
+  scope :has_workouts,    -> { where(Workout.where("workouts.sheet_id = sheets.id").arel.exists) }
+  scope :has_diets,       -> { where(Diet.where("diets.sheet_id = sheets.id").arel.exists) }
+  scope :with_content,    -> { has_workouts.or(has_diets) }
 
   def self.filter_by(type, completed, search = nil)
     case completed.to_s

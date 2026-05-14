@@ -8,21 +8,12 @@ class SheetShare < ApplicationRecord
   scope :accessible_by, ->(user) { where(sender: user).or(where(recipient: user)) }
 
   def self.create_with_requests(sender:, recipient:, sheet_ids:)
-    return if sheet_ids.blank? || sheet_ids.size > 5
-
-    has_workouts = Workout.where("workouts.sheet_id = sheets.id").arel.exists
-    has_diets    = Diet.where("diets.sheet_id = sheets.id").arel.exists
-
-    allowed_ids = sender.sheets.where(id: sheet_ids).where(has_workouts.or(has_diets)).ids
+    allowed_ids = sender.sheets.with_content.where(id: sheet_ids).ids
     return if allowed_ids.empty?
 
     transaction do
       share = create!(sender: sender, recipient: recipient)
-      allowed_ids.each do |id|
-        share.sheet_requests.create!(sheet_id: id)
-      end
-
-      share
+      share.sheet_requests.insert_all(allowed_ids.map { { sheet_id: _1, status: "pending" } })
     end
   end
 end
