@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_25_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_14_102755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -125,14 +125,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_25_120000) do
 
   create_table "sheet_requests", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.integer "recipient_id", null: false
-    t.integer "sender_id", null: false
     t.integer "sheet_id", null: false
+    t.bigint "sheet_share_id", null: false
     t.string "status"
     t.datetime "updated_at", null: false
-    t.index ["recipient_id"], name: "index_sheet_requests_on_recipient_id"
-    t.index ["sender_id"], name: "index_sheet_requests_on_sender_id"
     t.index ["sheet_id"], name: "index_sheet_requests_on_sheet_id"
+    t.index ["sheet_share_id"], name: "index_sheet_requests_on_sheet_share_id"
+  end
+
+  create_table "sheet_shares", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "recipient_id", null: false
+    t.bigint "sender_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_sheet_shares_on_recipient_id"
+    t.index ["sender_id"], name: "index_sheet_shares_on_sender_id"
   end
 
   create_table "sheets", force: :cascade do |t|
@@ -182,9 +189,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_25_120000) do
   add_foreign_key "sessions", "users"
   add_foreign_key "sheet_completions", "sheets"
   add_foreign_key "sheet_completions", "users"
+  add_foreign_key "sheet_requests", "sheet_shares"
   add_foreign_key "sheet_requests", "sheets"
-  add_foreign_key "sheet_requests", "users", column: "recipient_id"
-  add_foreign_key "sheet_requests", "users", column: "sender_id"
+  add_foreign_key "sheet_shares", "users", column: "recipient_id"
+  add_foreign_key "sheet_shares", "users", column: "sender_id"
   add_foreign_key "sheets", "users"
   add_foreign_key "workouts", "sheets"
 end
