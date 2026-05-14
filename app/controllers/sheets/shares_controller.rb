@@ -1,6 +1,4 @@
 class Sheets::SharesController < ApplicationController
-  include ActionView::RecordIdentifier
-
   before_action :set_user
 
   def index
@@ -12,11 +10,11 @@ class Sheets::SharesController < ApplicationController
     @share = SheetShare.accessible_by(@user).includes(:sender, :recipient, sheet_requests: :sheet).find(params[:id])
 
     rescue ActiveRecord::RecordNotFound
-      redirect_to sheets_shares_path(params[:filter]), alert: t("alert.sheet_share.not_found")
+      redirect_to sheets_shares_path(filter: params[:filter]), alert: t("alert.sheet_share.not_found")
   end
 
   def new
-    @sheets = @user.sheets
+    @sheets = @user.sheets.with_content
     set_page_and_extract_portion_from friends.includes(avatar_attachment: :blob)
   end
 

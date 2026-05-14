@@ -18,8 +18,8 @@
         </div>
 
         <div class="text-end flex-shrink-0">
-          <% if share.sheet_requests.any?(&:pending?) %>
-            <span class="badge bg-warning-subtle text-warning"><%= share.sheet_requests.count(&:pending?) %> <%= t('.pending') %></span>
+          <% if share_pending_count(share) > 0 %>
+            <span class="badge bg-warning-subtle text-warning"><%= share_pending_count(share) %> <%= t('.pending') %></span>
           <% else %>
             <i class="bi bi-check2-all text-success"></i>
           <% end %>

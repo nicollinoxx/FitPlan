@@ -18,10 +18,8 @@
       <% end %>
     <% end %>
 
-    <% if request.sender? || request.receiver? %>
-      <%= button_to sheets_request_path(request, params[:filter]), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { turbo_confirm: t('message_destroy') } do %>
-        <i class="bi <%= request.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
-      <% end %>
+    <%= button_to sheets_request_path(request, params[:filter]), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { turbo_confirm: t('message_destroy') } do %>
+      <i class="bi <%= request.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
     <% end %>
   </div>
 </div>
