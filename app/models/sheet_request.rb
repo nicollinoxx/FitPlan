@@ -1,13 +1,20 @@
 class SheetRequest < ApplicationRecord
-  belongs_to :sender, class_name: "User"
-  belongs_to :recipient, class_name: "User"
+  belongs_to :sheet_share
   belongs_to :sheet
 
-  validates :sender, :recipient, :sheet, presence: true
+  delegate :sender, :recipient, to: :sheet_share
 
-  validate :can_accept_request, on: :update, if: :accepted?
+  validates :sheet, presence: true
 
-  enum :status, { pending: "pending", accepted: "accepted" }
+  validate :only_recipient_can_accept, on: :update, if: :accepted?
+
+  enum :status, { pending: "pending", accepted: "accepted", rejected: "rejected" }, default: :pending
+
+  scope :accessible_by, ->(user) {
+    joins(:sheet_share).where(sheet_shares: { sender_id: user }).or(joins(:sheet_share).where(sheet_shares: { recipient_id: user }))
+  }
+
+  after_destroy :destroy_share_if_empty
 
   def sender?(user = Current.user)
     sender == user
@@ -17,21 +24,13 @@ class SheetRequest < ApplicationRecord
     recipient == user
   end
 
-  def self.create_for_sheets(sender:, recipient:, sheet_ids:)
-    return if sheet_ids.blank? || sheet_ids.size > 5
-
-    allowed_sheet_ids = sender.sheets.where(id: sheet_ids).ids
-
-    transaction do
-      allowed_sheet_ids.each do |sheet_id|
-        create!(sender: sender, recipient: recipient, sheet_id: sheet_id, status: "pending")
-      end
-    end
-  end
-
   private
 
-    def can_accept_request
+    def only_recipient_can_accept
       errors.add(:base, I18n.t("errors.sheet_request.not_recipient")) unless receiver?
+    end
+
+    def destroy_share_if_empty
+      sheet_share.destroy if sheet_share.sheet_requests.none?
     end
 end

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   include Normalizable
   include User::Followable
+  include User::Shareable
 
   has_secure_password
   has_one_attached :avatar
@@ -16,9 +17,6 @@ class User < ApplicationRecord
   has_many :sessions,           dependent: :destroy
   has_many :sheets,             dependent: :destroy
   has_many :sheet_completions
-
-  has_many :sent_sheet_requests, class_name: "SheetRequest", foreign_key: :sender_id, dependent: :destroy
-  has_many :received_sheet_requests, class_name: "SheetRequest", foreign_key: :recipient_id, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }
@@ -43,14 +41,6 @@ class User < ApplicationRecord
 
   def online?
     Rails.cache.exist?("user_online:#{id}")
-  end
-
-  def sheet_requests_by_filter(filter)
-    if filter == "sent"
-      sent_sheet_requests
-    else
-      received_sheet_requests
-    end
   end
 
   private
