@@ -19,8 +19,12 @@
       <% end %>
     <% end %>
 
-    <%= button_to sheets_request_path(request, params[:filter]), method: :delete, class: "btn btn-danger btn-sm", data: { turbo_confirm: t('message_destroy') } do %>
-      <i class="bi <%= request.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
+    <% if request.pending? %>
+      <%= button_to sheets_request_path(request, params[:filter]), method: :delete, class: "btn btn-danger btn-sm", data: { turbo_confirm: t('message_destroy') } do %>
+        <i class="bi bi-x-lg"></i>
+      <% end %>
+    <% else %>
+      <span class="badge bg-success-subtle text-success fw-semibold"><%= t('request.processing') %></span>
     <% end %>
   </div>
 </div>

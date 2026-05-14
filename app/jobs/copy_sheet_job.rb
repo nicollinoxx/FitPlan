@@ -1,4 +1,6 @@
 class CopySheetJob < ApplicationJob
+  discard_on ActiveRecord::RecordNotFound
+
   retry_on ActiveRecord::RecordInvalid, wait: ->(executions) { executions * 3.minutes }, attempts: 3
 
   queue_as :default

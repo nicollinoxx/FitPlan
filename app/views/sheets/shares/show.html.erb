@@ -5,8 +5,8 @@
     <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
   <% end %>
 
-  <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: "btn btn-danger", data: { turbo_confirm: t('message_destroy') } do %>
-    <i class="bi bi-trash"></i> <%= t('sheets.shares.show.refuse') %>
+  <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: "btn btn-danger", data: { turbo_confirm: t('.refuse_confirm') } do %>
+    <i class="bi bi-trash"></i> <%= t('.refuse')  %>
   <% end %>
 </h1>
 

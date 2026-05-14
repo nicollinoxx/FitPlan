@@ -36,6 +36,9 @@ pt:
   uncompleted:        "Não Concluído"
   today:              "hoje"
   message_destroy:    "Você tem certeza?"
+
+  request:
+    processing: "Processando"
   minimum_characters: "Mínimo de 6 caracteres."
   cancel:             "Cancelar"
   confirm:            "Confirmar"
@@ -151,8 +154,9 @@ pt:
           sent:     'Enviados por mim'
           received: 'Recebidos'
       show:
-        title:    'Compartilhamento'
-        refuse:   'Excluir'
+        title:          'Compartilhamento'
+        refuse:         'Excluir'
+        refuse_confirm: 'Isso cancelará todas as solicitações, incluindo fichas que já estão sendo processadas. Tem certeza?'
       new:
         title:                     'Compartilhar fichas'
         handle:                    'Pesquisar usuário'

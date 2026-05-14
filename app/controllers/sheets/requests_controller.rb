@@ -1,17 +1,17 @@
 class Sheets::RequestsController < ApplicationController
   before_action :set_request
-  before_action :set_sheet_share, only: %i[update destroy]
+  before_action :set_sheet_share, only: [:update, :destroy]
 
   def update
     @request.accepted!
     CopySheetJob.perform_later(@request)
 
-    turbo_respond @sheet_share.sheet_requests.reload.pending.none?
+    redirect_after_request
   end
 
   def destroy
     @request.destroy!
-    turbo_respond @sheet_share.destroyed?
+    redirect_after_request
   end
 
   def preview_content
@@ -37,8 +37,11 @@ class Sheets::RequestsController < ApplicationController
       @diets = @sheet.diets.order(:created_at)
     end
 
-    def turbo_respond(redirect)
-      return redirect_to sheets_shares_path(filter: params[:filter], format: :html) if redirect
-      render turbo_stream: turbo_stream.remove(@request)
+    def redirect_after_request
+      if @sheet_share.sheet_requests.empty?
+        redirect_to sheets_shares_path(filter: params[:filter], format: :html)
+      else
+        redirect_to sheets_share_path(@sheet_share, filter: params[:filter])
+      end
     end
 end

@@ -31,6 +31,9 @@ en:
   uncompleted:        "Uncompleted"
   today:              "today"
   message_destroy:    "Are you sure?"
+
+  request:
+    processing: "Processing"
   minimum_characters: "6 characters minimum."
   cancel:             "Cancel"
   confirm:            "Confirm"
@@ -141,8 +144,9 @@ en:
           sent:     'Sent by me'
           received: 'Received'
       show:
-        title:    'Share'
-        refuse:   'Delete'
+        title:          'Share'
+        refuse:         'Delete'
+        refuse_confirm: 'This will cancel all requests, including any sheets already being processed. Are you sure?'
       new:
         title:                     'Share sheets'
         handle:                    'Search user'
