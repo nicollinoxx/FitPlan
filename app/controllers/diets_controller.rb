@@ -8,6 +8,10 @@ class DietsController < ApplicationController
     @completions_by_diet_id = @sheet.completed_diets_indexed_by_diet_id
   end
 
+  def preview
+    @diets = @sheet.diets.order(created_at: :asc)
+  end
+
   def show
     @percentage = @diet.percentage_of_calories
   end

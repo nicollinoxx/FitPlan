@@ -8,6 +8,10 @@ class WorkoutsController < ApplicationController
     @completions_by_workout_id = @sheet.completions_indexed_by_workout_id
   end
 
+  def preview
+    @workouts = @sheet.workouts.order(created_at: :asc)
+  end
+
   def show
   end
 
