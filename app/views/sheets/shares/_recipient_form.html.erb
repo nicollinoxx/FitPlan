@@ -1,5 +1,5 @@
 <div class="col-md-6 mb-3">
-  <%= form_with url: requests_path(handle: recipient.handle), data: { controller: "redirect", redirect_url_value: requests_path(filter: "sent"), redirect_refresh_value: true } do |form| %>
+  <%= form_with url: sheets_shares_path(handle: recipient.handle), data: { controller: "redirect", redirect_url_value: sheets_shares_path(filter: "sent"), redirect_refresh_value: true } do |form| %>
     <div class="p-3 bg-body-tertiary shadow-sm rounded border-success border-start border-4">
       <div class="d-flex align-items-center justify-content-between gap-3">
         <div class="d-flex align-items-center gap-3">
@@ -19,19 +19,19 @@
         </div>
 
         <a class="btn btn-sm btn-outline-success flex-shrink-0" data-bs-toggle="collapse" href="#<%= recipient.handle %>" role="button" aria-expanded="false" aria-controls="<%= recipient.handle %>">
-          <i class="bi bi-send me-1"></i><%= t("sheets.requests.new.share") %>
+          <i class="bi bi-send me-1"></i><%= t("sheets.shares.new.share") %>
         </a>
       </div>
 
       <div class="collapse mt-3" id="<%= recipient.handle %>">
         <hr class="mt-0 mb-3">
         <%= form.collection_select :sheet_ids, sheets, :id, :name, { include_hidden: false },
-            placeholder: t("sheets.requests.new.select_sheets_placeholder"), multiple: true, id: "sheets",
+            placeholder: t("sheets.shares.new.select_sheets_placeholder"), multiple: true, id: "sheets",
             required: true, data: { controller: "combobox", combobox_max_items_value: 5 } %>
-        <small class="d-block mt-1 text-body-secondary"><%= t("sheets.requests.new.select_sheets_help") %></small>
+        <small class="d-block mt-1 text-body-secondary"><%= t("sheets.shares.new.select_sheets_help") %></small>
 
         <%= form.button type: "submit", class: "btn btn-success w-100 mt-3" do %>
-          <i class="bi bi-send-fill me-1"></i><%= t("sheets.requests.new.submit") %>
+          <i class="bi bi-send-fill me-1"></i><%= t("sheets.shares.new.submit") %>
         <% end %>
       </div>
     </div>
