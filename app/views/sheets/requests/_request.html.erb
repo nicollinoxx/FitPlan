@@ -14,13 +14,13 @@
 
   <div class="d-flex gap-2 flex-shrink-0 ms-2 position-relative z-2">
     <% if request.pending? && request.receiver? %>
-      <%= button_to sheets_request_path(request, params[:filter]), method: :patch, class: "btn btn-success btn-sm", data: { turbo_confirm: t('message_destroy') } do %>
+      <%= button_to sheets_request_path(request, filter: params[:filter]), method: :patch, class: "btn btn-success btn-sm", data: { turbo_confirm: t('message_destroy') } do %>
         <i class="bi bi-check2"></i>
       <% end %>
     <% end %>
 
     <% if request.pending? %>
-      <%= button_to sheets_request_path(request, params[:filter]), method: :delete, class: "btn btn-danger btn-sm", data: { turbo_confirm: t('message_destroy') } do %>
+      <%= button_to sheets_request_path(request, filter: params[:filter]), method: :delete, class: "btn btn-danger btn-sm", data: { turbo_confirm: t('message_destroy') } do %>
         <i class="bi bi-x-lg"></i>
       <% end %>
     <% else %>
