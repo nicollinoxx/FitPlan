@@ -1,6 +1,6 @@
 module Sheets::SharesHelper
   def share_other_user(share)
-    share.sender == Current.user ? share.recipient : share.sender
+    share.sender_id == Current.user.id ? share.recipient : share.sender
   end
 
   def share_pending_count(share)

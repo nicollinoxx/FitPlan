@@ -2,11 +2,12 @@
   <div class="container mt-1 mb-3 hide-on-mobile">
     <div class="alert alert-dark py-2 rounded mb-0 d-flex align-items-center gap-2" role="alert" data-controller="toast">
       <span>
-        <%= link_to share.sender.name, social_profile_path(share.sender), class: "text-decoration-none text-primary" %>
+        <%= share.sender.name %>
         <%= t('toast.new_sheet_share') %>
-        <%= link_to t('toast.view'), sheets_share_path(share), class: "text-decoration-none text-primary" %>
       </span>
-      <button type="button" class="btn-close text-body ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+
+      <%= link_to t('toast.view'), sheets_share_path(share), class: "btn btn-sm btn-outline-light py-0" %>
+      <button type="button" class="btn-close text-body ms-1" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   </div>
 </div>

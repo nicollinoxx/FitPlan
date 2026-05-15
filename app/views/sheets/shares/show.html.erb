@@ -16,13 +16,16 @@
 
 <% other = share_other_user(@share) %>
 <div class="d-flex align-items-center gap-3 mt-2 mb-4">
-  <% if other.avatar.attached? %>
-    <%= image_tag other.avatar, class: "rounded-circle object-fit-cover flex-shrink-0", width: 48, height: 48, alt: "" %>
-  <% else %>
-    <div class="rounded-circle bg-secondary-subtle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px;">
-      <i class="bi bi-person-fill text-secondary fs-4"></i>
-    </div>
+  <%= link_to social_profile_path(other), class: 'text-decoration-none text-body' do %>
+    <% if other.avatar.attached? %>
+      <%= image_tag other.avatar, class: "rounded-circle object-fit-cover flex-shrink-0", width: 48, height: 48, alt: "" %>
+    <% else %>
+      <div class="rounded-circle bg-secondary-subtle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px;">
+        <i class="bi bi-person-fill text-secondary fs-4"></i>
+      </div>
+    <% end %>
   <% end %>
+
 
   <div class="flex-grow-1">
     <h5 class="mb-0 fw-semibold"><%= other.name %></h5>

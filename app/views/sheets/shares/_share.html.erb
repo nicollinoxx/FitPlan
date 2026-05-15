@@ -16,7 +16,7 @@
         <div class="flex-grow-1 min-w-0">
           <h6 class="mb-0 fw-semibold text-truncate"><%= other.name %></h6>
           <small class="text-muted">
-            <%= t(share.sender == Current.user ? '.sent' : '.received', count: share.sheet_requests.size) %>
+            <%= t(share.sender_id == Current.user.id ? '.sent' : '.received', count: share.sheet_requests.size) %>
           </small>
         </div>
 
