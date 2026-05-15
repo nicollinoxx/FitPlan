@@ -295,6 +295,8 @@ en:
   #toast------------------------------
   toast:
     new_follower: 'started following you'
+    new_sheet_share: 'sent you sheets to review.'
+    view: 'View'
 
   #social------------------------------
   social:

@@ -281,6 +281,8 @@ pt:
   #toast------------------------------
   toast:
     new_follower: 'começou a te seguir'
+    new_sheet_share: 'compartilhou fichas com você.'
+    view: 'Visualizar'
 
   #social------------------------------
   social:
