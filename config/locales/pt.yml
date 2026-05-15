@@ -99,6 +99,7 @@ pt:
       create:               'Métrica adicionada com sucesso'
     sheet_request:
       create:               'Solicitação de planilha criada com sucesso'
+      destroy:              'Compartilhamento excluído com sucesso'
     profiles:
       update:               'Perfil atualizado com sucesso'
     social:
@@ -155,6 +156,8 @@ pt:
           received: 'Recebidos'
       show:
         title:           'Compartilhamento'
+        delete:          'Excluir'
+        confirm_delete:  'Excluir este compartilhamento irá remover todas as solicitações. Cópias em andamento também serão canceladas. Confirmar?'
         auto_close_hint: 'Este compartilhamento é encerrado automaticamente quando todas as solicitações forem processadas ou removidas.'
       new:
         title:                     'Compartilhar fichas'

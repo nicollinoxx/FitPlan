@@ -1,8 +1,12 @@
 <% content_for(:title, t('.title')) %>
 
-<h1 class="d-flex align-items-center gap-2 mb-3">
+<h1 class="d-flex align-items-center justify-content-between gap-2 mb-3">
   <%= link_to sheets_shares_path(filter: params[:filter]), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
     <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+
+  <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: 'btn btn-danger', data: { turbo_confirm: t('.confirm_delete') } do %>
+    <i class="bi bi-trash"></i> <span class="d-none d-sm-inline"><%= t('.delete') %></span>
   <% end %>
 </h1>
 
