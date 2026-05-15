@@ -3,8 +3,7 @@ class Sheets::SharesController < ApplicationController
   before_action :set_share, only: :show
 
   def index
-    sheet_shares = @user.sheet_shares_by_filter(params[:filter]).includes(:sender, :recipient, sheet_requests: :sheet)
-    set_page_and_extract_portion_from sheet_shares
+    set_page_and_extract_portion_from @user.sheet_shares_by_filter(params[:filter])
   end
 
   def show
@@ -25,9 +24,9 @@ class Sheets::SharesController < ApplicationController
   private
 
     def set_share
-      @share = SheetShare.accessible_by(@user).includes(:sender, :recipient, sheet_requests: :sheet).find(params[:id])
+      @share = SheetShare.accessible_by(@user).with_associations.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      redirect_to sheets_shares_path(filter: params[:filter]), alert: t("alert.sheet_share.not_found")
+      redirect_to sheets_shares_path(filter: params[:filter])
     end
 
     def set_user

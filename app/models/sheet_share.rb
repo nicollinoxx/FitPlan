@@ -5,7 +5,8 @@ class SheetShare < ApplicationRecord
 
   validates :sender, :recipient, presence: true
 
-  scope :accessible_by, ->(user) { where(sender: user).or(where(recipient: user)) }
+  scope :accessible_by,     ->(user) { where(sender: user).or(where(recipient: user)) }
+  scope :with_associations, -> { includes(:sender, :recipient, sheet_requests: :sheet) }
 
   def self.create_with_requests(sender:, recipient:, sheet_ids:)
     allowed_ids = sender.sheets.with_content.where(id: sheet_ids).ids

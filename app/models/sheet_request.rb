@@ -11,7 +11,7 @@ class SheetRequest < ApplicationRecord
   enum :status, { pending: "pending", accepted: "accepted", rejected: "rejected" }, default: :pending
 
   scope :accessible_by, ->(user) {
-    joins(:sheet_share).where(sheet_shares: { sender_id: user }).or(joins(:sheet_share).where(sheet_shares: { recipient_id: user }))
+    joins(:sheet_share).where("sheet_shares.sender_id = ? OR sheet_shares.recipient_id = ?", user.id, user.id)
   }
 
   after_destroy :destroy_share_if_empty

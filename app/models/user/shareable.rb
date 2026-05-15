@@ -10,9 +10,9 @@ module User::Shareable
 
   def sheet_shares_by_filter(filter)
     if filter == "sent"
-      sent_sheet_shares
+      sent_sheet_shares.includes(:recipient, sheet_requests: :sheet)
     else
-      received_sheet_shares
+      received_sheet_shares.includes(:sender, sheet_requests: :sheet)
     end
   end
 end
