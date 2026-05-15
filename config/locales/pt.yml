@@ -154,9 +154,8 @@ pt:
           sent:     'Enviados por mim'
           received: 'Recebidos'
       show:
-        title:          'Compartilhamento'
-        refuse:         'Excluir'
-        refuse_confirm: 'Isso cancelará todas as solicitações, incluindo fichas que já estão sendo processadas. Tem certeza?'
+        title:           'Compartilhamento'
+        auto_close_hint: 'Este compartilhamento é encerrado automaticamente quando todas as solicitações forem processadas ou removidas.'
       new:
         title:                     'Compartilhar fichas'
         handle:                    'Pesquisar usuário'

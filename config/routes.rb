@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   namespace :sheets do
-    resources :shares, only: [:index, :new, :create, :show, :destroy] do
+    resources :shares, only: [:index, :new, :create, :show] do
       resources :requests, only: [:update, :destroy], shallow: true do
         get :preview_content, on: :member
       end

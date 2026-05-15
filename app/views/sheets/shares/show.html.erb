@@ -1,14 +1,14 @@
 <% content_for(:title, t('.title')) %>
 
-<h1 class="d-flex align-items-center justify-content-between gap-3 mb-3">
+<h1 class="d-flex align-items-center gap-2 mb-3">
   <%= link_to sheets_shares_path(filter: params[:filter]), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
     <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
   <% end %>
-
-  <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: "btn btn-danger", data: { turbo_confirm: t('.refuse_confirm') } do %>
-    <i class="bi bi-trash"></i> <%= t('.refuse')  %>
-  <% end %>
 </h1>
+
+<p class="text-muted small my-3">
+  <i class="bi bi-info-circle me-1"></i><%= t('.auto_close_hint') %>
+</p>
 
 <div class="d-flex align-items-center gap-3 mt-2 mb-4">
   <% if share_other_user(@share).avatar.attached? %>

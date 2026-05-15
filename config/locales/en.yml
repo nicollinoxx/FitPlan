@@ -144,9 +144,8 @@ en:
           sent:     'Sent by me'
           received: 'Received'
       show:
-        title:          'Share'
-        refuse:         'Delete'
-        refuse_confirm: 'This will cancel all requests, including any sheets already being processed. Are you sure?'
+        title:           'Share'
+        auto_close_hint: 'This share closes automatically when all requests are processed or removed.'
       new:
         title:                     'Share sheets'
         handle:                    'Search user'

@@ -24,11 +24,6 @@ class Sheets::SharesController < ApplicationController
     recede_or_redirect_to sheets_shares_path(filter: "sent"), notice: t("notice.sheet_request.create")
   end
 
-  def destroy
-    SheetShare.accessible_by(@user).find(params[:id]).destroy!
-    recede_or_redirect_to sheets_shares_path(format: :html, filter: params[:filter])
-  end
-
   private
 
     def not_found
