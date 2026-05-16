@@ -67,8 +67,8 @@ class Social::ProfilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "back link uses referer when from same site" do
-    get social_profile_url(@profile), headers: { "HTTP_REFERER" => social_profiles_url }
-    assert_select "a[href='#{social_profiles_url}']"
+    get social_profile_url(@profile), headers: { "HTTP_REFERER" => social_profiles_path }
+    assert_select "a[href='#{social_profiles_path}']"
   end
 
   test "back link falls back to profiles when referer is current page" do
