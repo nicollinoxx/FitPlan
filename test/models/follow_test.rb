@@ -85,7 +85,7 @@ class FollowTest < ActiveSupport::TestCase
     follows(:one).destroy
     with_memory_cache do |cache|
       cache.write("user_online:#{@other.id}", true)
-      assert_broadcasts("follow_notifications_#{@other.id}", 1) do
+      assert_broadcasts("user_notifications_#{@other.id}", 1) do
         @user.follow!(followed: @other)
       end
     end
