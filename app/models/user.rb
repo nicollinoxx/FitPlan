@@ -49,14 +49,6 @@ class User < ApplicationRecord
     Rails.cache.exist?("user_online:#{id}")
   end
 
-  def sheet_requests_by_filter(filter)
-    if filter == "sent"
-      sent_sheet_requests
-    else
-      received_sheet_requests
-    end
-  end
-  
   private
 
   def generate_handle_unique
