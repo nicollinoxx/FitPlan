@@ -386,7 +386,7 @@ pt:
         name:                    'Nome'
         handle:                  'Handle'
         handle_description:      'Handle é usado para identificar você na comunidade.'
-        error_message_form:      'impediram as informações de serem salvas:'
+        error_message_form:      'impediram o perfil de ser salvo:'
       show:
         title:                   'Perfil'
         profile:                 'Perfil'
@@ -466,6 +466,14 @@ pt:
         handle:                          'Handle'
     errors:
       models:
+        user:
+          attributes:
+            handle:
+              blank:    'escolha um handle para o seu perfil'
+              taken:    'já está em uso'
+              too_short:
+                one:    'deve ter pelo menos %{count} caractere'
+                other:  'deve ter pelo menos %{count} caracteres'
         workout:
           attributes:
             video:

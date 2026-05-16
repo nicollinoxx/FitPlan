@@ -380,7 +380,7 @@ en:
         name:                    'Name'
         handle:                  'Handle'
         handle_description:      'Handle is used to identify you in the community.'
-        error_message_form:      'prohibited this email from being saved:'
+        error_message_form:      'prohibited this profile from being saved:'
       show:
         title:                   'Profile'
         profile:                 'Profile'

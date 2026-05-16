@@ -18,7 +18,17 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to identity_profile_url
     follow_redirect!
     assert_match "Profile updated successfully", response.body
-    @user.reload
-    assert_equal "New Name", @user.name
+    assert_equal "New Name", @user.reload.name
+  end
+
+  test "should update handle" do
+    patch identity_profile_url, params: { user: { handle: "new-handle" } }
+    assert_redirected_to identity_profile_url
+    assert_equal "new-handle", @user.reload.handle
+  end
+
+  test "rejects duplicate handle" do
+    patch identity_profile_url, params: { user: { handle: users(:lazaro).handle } }
+    assert_response :unprocessable_entity
   end
 end
