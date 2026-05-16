@@ -1,0 +1,17 @@
+<% content_for(:title, @sheet.name) %>
+
+<h1 class="mb-3">
+  <%= link_to :back, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= @sheet.name %>
+  <% end %>
+</h1>
+
+<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+  <% if @sheet.workout? %>
+    <%= render 'sheets/requests/previews/workouts', workouts: @workouts %>
+    <%= image_tag 'undraw/working_out.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
+  <% else %>
+    <%= render 'sheets/requests/previews/diets', diets: @diets %>
+    <%= image_tag 'undraw/cooking.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
+  <% end %>
+</div>

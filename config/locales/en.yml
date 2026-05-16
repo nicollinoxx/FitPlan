@@ -31,6 +31,9 @@ en:
   uncompleted:        "Uncompleted"
   today:              "today"
   message_destroy:    "Are you sure?"
+
+  request:
+    processing: "Processing"
   minimum_characters: "6 characters minimum."
   cancel:             "Cancel"
   confirm:            "Confirm"
@@ -86,6 +89,9 @@ en:
       create:               'Healthy metric was successfully created'
     sheet_request:
       create:               'Sheet request was successfully created'
+      destroy:              'Share was successfully deleted'
+    sheet_share:
+      destroy:              'Share deleted successfully'
     profiles:
       update:               'Profile updated successfully'
     social:
@@ -102,6 +108,8 @@ en:
       invalid:              'That password reset link is invalid'
     email_verification:
       invalid:              'That email verification link is invalid'
+    sheet_share:
+      not_found:            'Share not found'
 
   errors:
     sheet_request:
@@ -118,6 +126,8 @@ en:
       title:                'Sheets'
       filter:               'Filter'
       completed:            'Completed'
+      shares:
+        title:              'Shared'
     new:
       title:                'New sheet'
     edit:
@@ -131,39 +141,33 @@ en:
         name:               'Name'
         description:        'Description'
         sheet_type:         'Type'
-    requests:
+    shares:
       index:
-        title:               'Sheet requests'
-        filter:              'Filter'
+        title:    'Shares'
+        filter:   'Filter'
         filters:
-          all:               'All'
-          sent:              'Sent by me'
-          received:          'Received'
+          sent:     'Sent by me'
+          received: 'Received'
+      show:
+        title:           'Share'
+        delete:          'Delete'
+        confirm_delete:  'Deleting this share will remove all requests. Any in-progress copies will also be cancelled. Confirm?'
+        auto_close_hint: 'This share closes automatically when all requests are processed or removed.'
       new:
-        title:                     'New sheet request'
-        search_user:               'Search user'
-        handle:                    'Handle (@)'
-        submit:                    'Send request'
-        select_sheets:             'Select sheets'
+        title:                     'Share sheets'
+        handle:                    'Search user'
+        share:                     'Share'
+        submit:                    'Send'
         select_sheets_placeholder: 'Choose sheets...'
         select_sheets_help:        'Select up to 5 sheets.'
-
-  #sheet_requests----------------------------------
-  sheet_request_shared:      'Shared a sheet'
-  sheet_request_received:    'Received a sheet'
-
-  sheet_requests:
-    index:
-      title:                 'Sheet requests'
-      filter:                'Filter'
-      filters:
-        all:                 'All'
-        sent:                'Sent by me'
-        received:            'Received'
-    new:
-      title:                'New sheet request'
-      search_user:          'Search user'
-      handle:               'Handle (@)'
+      share:
+        sent:
+          one:   'shared %{count} sheet'
+          other: 'shared %{count} sheets'
+        received:
+          one:   'sent you %{count} sheet'
+          other: 'sent you %{count} sheets'
+        pending: 'pending'
 
   #workouts------------------------------
   repetitions:        'Repetitions'
@@ -295,6 +299,8 @@ en:
   #toast------------------------------
   toast:
     new_follower: 'started following you'
+    new_sheet_share: 'sent you sheets to review.'
+    view: 'View'
 
   #social------------------------------
   social:
@@ -423,6 +429,13 @@ en:
 
   #mailers------------------------------
   greeting:                              "Hello"
+
+  sheet_share_mailer:
+    new_sheet_share:
+      subject:              "%{name} shared sheets with you on FitPlan"
+      message:              "%{name} sent you sheets to review on FitPlan."
+      cta:                  "Open the share to accept or reject each sheet."
+      view_share:           "View shared sheets"
 
   user_mailer:
     email_verification:

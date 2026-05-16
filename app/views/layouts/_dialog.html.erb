@@ -1,9 +1,10 @@
-<dialog data-controller="turbo-confirm" class="shadow rounded border p-3 mx-auto" style="width: 28rem; min-height: 6.8rem;">
-  <form method="dialog" class="d-flex flex-column justify-content-between h-100">
-    <div class="d-flex align-items-center gap-1">
-        <i class="bi bi-exclamation-diamond-fill fs-6 alert alert-danger rounded-circle px-2 py-1"></i>
-        <p class="fw-bold mb-3 fs-6"><%= t('message_destroy') %></p>
+<dialog data-controller="turbo-confirm" class="shadow rounded border p-3 mx-auto" style="width: 28rem;">
+  <form method="dialog" class="d-flex flex-column gap-3">
+    <div class="d-flex align-items-center justify-content-start gap-2">
+      <i class="bi bi-exclamation-diamond-fill alert alert-danger rounded-circle px-2 py-1"></i>
+      <p class="fw-bold fs-6"><%= t('message_destroy') %></p>
     </div>
+
     <div class="d-flex justify-content-end gap-2">
       <button value="cancel" class="btn btn-secondary btn-sm">
         <i class="bi bi-x"></i> <%= t("cancel") %>

@@ -16,9 +16,9 @@ class Follow < ApplicationRecord
   end
 
   def notify_followed
-    broadcast_replace_to("follow_notifications_#{followed_id}",
+    broadcast_replace_to("user_notifications_#{followed_id}",
       target: "flash_container",
-      partial: "layouts/flash_notice/follow_notice",
+      partial: "shared/flash_notice/follow_notice",
       locals: { follower: follower })
   end
 

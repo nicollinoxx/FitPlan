@@ -36,6 +36,9 @@ pt:
   uncompleted:        "Não Concluído"
   today:              "hoje"
   message_destroy:    "Você tem certeza?"
+
+  request:
+    processing: "Processando"
   minimum_characters: "Mínimo de 6 caracteres."
   cancel:             "Cancelar"
   confirm:            "Confirmar"
@@ -96,6 +99,9 @@ pt:
       create:               'Métrica adicionada com sucesso'
     sheet_request:
       create:               'Solicitação de planilha criada com sucesso'
+      destroy:              'Compartilhamento excluído com sucesso'
+    sheet_share:
+      destroy:              'Compartilhamento excluído com sucesso'
     profiles:
       update:               'Perfil atualizado com sucesso'
     social:
@@ -112,6 +118,8 @@ pt:
       invalid:              'O link para redefinir a senha é inválido'
     email_verification:
       invalid:              'O link de verificação de e-mail é inválido'
+    sheet_share:
+      not_found:            'Compartilhamento não encontrado'
 
   errors:
     sheet_request:
@@ -127,6 +135,8 @@ pt:
       title:                'Planilhas'
       filter:               'Filtrar'
       completed:            'Concluídos'
+      shares:
+        title:              'Compartilhadas'
 
     new:
       title:                'Nova planilha'
@@ -141,41 +151,33 @@ pt:
         name:               'Nome'
         description:        'Descrição'
         sheet_type:         'Tipo'
-    requests:
+    shares:
       index:
-        title:               'Solicitações de planilha'
-        filter:              'Filtrar'
+        title:    'Compartilhamentos'
+        filter:   'Filtrar'
         filters:
-          sent:              'Enviado por min'
-          received:          'Recebido'
-        sent:                "compartilhou uma ficha"
-        received:            "recebeu uma ficha"
+          sent:     'Enviados por mim'
+          received: 'Recebidos'
+      show:
+        title:           'Compartilhamento'
+        delete:          'Excluir'
+        confirm_delete:  'Excluir este compartilhamento irá remover todas as solicitações. Cópias em andamento também serão canceladas. Confirmar?'
+        auto_close_hint: 'Este compartilhamento é encerrado automaticamente quando todas as solicitações forem processadas ou removidas.'
       new:
-        title:               'Nova solicitação de planilha'
-        search_user:         'Pesquisar usuário'
-        handle:              'Handle do usuário (@)'
-        submit:              'Enviar solicitação'
-        select_sheets:       'Selecionar fichas'
+        title:                     'Compartilhar fichas'
+        handle:                    'Pesquisar usuário'
+        share:                     'Compartilhar'
+        submit:                    'Enviar'
         select_sheets_placeholder: 'Escolha as fichas...'
-        select_sheets_help:  'Selecione até 5 fichas.'
-
-  #sheet_requests----------------------------------
-  sheet_request_shared:      'Compartilhou uma ficha'
-  sheet_request_received:    'Recebeu uma ficha'
-
-  sheet_requests:
-    index:
-      title:                 'Solicitações de planilha'
-      filter:                'Filtrar'
-      filters:
-        sent:                'Enviado por min'
-        received:            'Recebido'
-      sent:                  "compartilhou uma ficha"
-      received:              "recebeu uma ficha"
-    new:
-      title:                'Nova solicitação de planilha'
-      search_user:          'Pesquisar usuário'
-      handle:               'Handle do usuário (@)'
+        select_sheets_help:        'Selecione até 5 fichas.'
+      share:
+        sent:
+          one:   'compartilhou %{count} ficha'
+          other: 'compartilhou %{count} fichas'
+        received:
+          one:   'enviou %{count} ficha'
+          other: 'enviou %{count} fichas'
+        pending: 'pendente'
 
   #workouts------------------------------
   repetitions:        'Repetições'
@@ -283,6 +285,8 @@ pt:
   #toast------------------------------
   toast:
     new_follower: 'começou a te seguir'
+    new_sheet_share: 'compartilhou fichas com você.'
+    view: 'Visualizar'
 
   #social------------------------------
   social:
@@ -427,6 +431,13 @@ pt:
 
   #mailers------------------------------
   greeting:                              "Olá"
+
+  sheet_share_mailer:
+    new_sheet_share:
+      subject:              "%{name} compartilhou fichas com você no FitPlan"
+      message:              "%{name} enviou fichas para você revisar no FitPlan."
+      cta:                  "Abra o compartilhamento para aceitar ou rejeitar cada ficha."
+      view_share:           "Ver fichas compartilhadas"
 
   user_mailer:
     email_verification:

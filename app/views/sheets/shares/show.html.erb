@@ -1,0 +1,42 @@
+<% content_for(:title, t('.title')) %>
+
+<div class="d-flex align-items-center justify-content-between gap-2">
+  <h1>
+    <%= link_to sheets_shares_path(filter: params[:filter]), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+    <% end %>
+  </h1>
+
+  <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: 'btn btn-danger',data: { turbo_confirm: t('.confirm_delete'), controller: "bridge--nav-button", bridge_title: "🗑️ destroy" } do %>
+    <i class="bi bi-trash"></i> <span class="d-none d-sm-inline"><%= t('.delete') %></span>
+  <% end %>
+</div>
+
+<p class="text-muted small mb-3">
+  <i class="bi bi-info-circle me-1"></i><%= t('.auto_close_hint') %>
+</p>
+
+<% other = share_other_user(@share) %>
+<div class="d-flex align-items-center gap-3 mt-2 mb-4">
+  <%= link_to social_profile_path(other), class: 'text-decoration-none text-body' do %>
+    <% if other.avatar.attached? %>
+      <%= image_tag other.avatar, class: "rounded-circle object-fit-cover flex-shrink-0", width: 48, height: 48, alt: "" %>
+    <% else %>
+      <div class="rounded-circle bg-secondary-subtle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px;">
+        <i class="bi bi-person-fill text-secondary fs-4"></i>
+      </div>
+    <% end %>
+  <% end %>
+
+
+  <div class="flex-grow-1">
+    <h5 class="mb-0 fw-semibold"><%= other.name %></h5>
+    <small class="text-muted">@<%= other.handle %></small>
+  </div>
+</div>
+
+<div class="d-flex flex-column gap-2">
+  <% @share.sheet_requests.each do |request| %>
+    <%= render "sheets/requests/request", request: request %>
+  <% end %>
+</div>

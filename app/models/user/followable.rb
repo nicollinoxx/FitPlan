@@ -23,6 +23,10 @@ module User::Followable
     followings.exists?(id: followed.id)
   end
 
+  def friends
+    followings.where(id: followers)
+  end
+
   def mark_followers_as_seen!
     follower_follows.where(seen_at: nil).update_all(seen_at: Time.current)
   end

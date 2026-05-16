@@ -17,10 +17,10 @@
   <body>
     <%= render 'layouts/navbar' if Current.user.present? %>
 
-    <%= turbo_stream_from "follow_notifications_#{Current.user.id}" if Current.user.present?  %>
+    <%= turbo_stream_from "user_notifications_#{Current.user.id}" if Current.user.present? %>
 
     <div id="flash_container" class="position-sticky z-3" style="top: 8px;">
-      <%= render 'layouts/flash_notice/notice', message: notice if notice.present?%>
+      <%= render 'shared/flash_notice/notice', message: notice if notice.present?%>
     </div>
 
     <div class="container <%= 'mt-4' if turbo_native_app? %>">

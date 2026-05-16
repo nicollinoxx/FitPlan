@@ -1,0 +1,26 @@
+<% content_for(:title, t('.title')) %>
+
+<h1 class="mb-3">
+  <%= link_to sheets_shares_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+  <% end %>
+</h1>
+
+<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+  <%= turbo_frame_tag "sheet_shares" do %>
+    <%= form_with url: new_sheets_share_path(query: params[:query]), method: :get, local: true do |form| %>
+      <div class="position-relative mb-3">
+        <%= form.text_field :query, value: params[:query], class: "form-control pe-4", placeholder: t('.handle') %>
+        <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-body-secondary" style="pointer-events: none;"></i>
+      </div>
+      <%= form.submit t('search'), class: "btn btn-success px-3 mb-4" %>
+    <% end %>
+
+    <div id="paginables" class="row">
+      <%= render partial: "sheets/shares/recipient_form", collection: @page.records, as: :recipient, locals: { sheets: @sheets } %>
+      <%= render "shared/paginables/next_page_container", src: new_sheets_share_path(query: params[:query], page: @page.next_param, format: :turbo_stream) unless @page.last? %>
+    </div>
+  <% end %>
+
+  <%= image_tag 'undraw/mobile_user.svg', alt: '', class: 'img-fluid mt-auto ms-auto' %>
+</div>

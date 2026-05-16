@@ -3,15 +3,15 @@
     <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
       <div class="position-relative">
         <%= form.label :avatar, class: "d-inline-block", style: "cursor: pointer;" do %>
-          <% if @user.avatar.attached? %>
-            <%= image_tag @user.avatar, class: "rounded-circle object-fit-cover border border-2",
-                style: "width: 100px; height: 100px;", alt: t("identity.avatars.show.title"), data: { "upload-preview-target": "preview" } %>
-          <% else %>
-            <div class="rounded-circle object-fit-cover border border-2 bg-secondary-subtle d-flex align-items-center justify-content-center text-white"
-                style="width: 100px; height: 100px;" data-upload-preview-target="preview">
-              <i class="bi bi-person-fill" style="font-size: 2.5rem;"></i>
-            </div>
-          <% end %>
+          <div class="rounded-circle border border-2 bg-secondary-subtle overflow-hidden position-relative d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+            <% unless @user.avatar.attached? %>
+              <i class="bi bi-person-fill text-secondary" style="font-size: 2.5rem;"></i>
+            <% end %>
+            <%= image_tag @user.avatar.attached? ? @user.avatar : "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
+                class: "w-100 h-100 object-fit-cover position-absolute top-0 start-0",
+                alt: t("identity.avatars.show.title"),
+                data: { "upload-preview-target": "preview" } %>
+          </div>
 
           <div class="btn btn-secondary btn-sm rounded-circle position-absolute bottom-0 start-0">
             <i class="bi bi-camera-fill"></i>

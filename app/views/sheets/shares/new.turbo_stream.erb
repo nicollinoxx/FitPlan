@@ -1,0 +1,6 @@
+<%= turbo_stream.replace :next_page_container, partial: "sheets/shares/recipient_form", collection: @page.records, as: :recipient, locals: { sheets: @sheets } %>
+
+<% unless @page.last? %>
+  <%= turbo_stream.append :paginables, partial: "shared/paginables/next_page_container",
+    locals: { src: new_sheets_share_path(query: params[:query], page: @page.next_param, format: :turbo_stream) } %>
+<% end %>

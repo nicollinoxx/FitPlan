@@ -8,24 +8,22 @@ export default class extends Controller {
     if (!file) return
 
     const reader = new FileReader()
-    reader.onload = () => {
-      this.#showPreview(reader.result)
-      this.#showSaveButton()
-      if (file.type.startsWith("video/")) this.previewTarget.load()
-    }
+    reader.onload = () => { this.#applyPreview(reader.result, file) }
     reader.readAsDataURL(file)
   }
 
-  #showPreview(src) {
-    const el = this.previewTarget
-    if (el.tagName === "IMG") {
-      el.src = src
-    } else {
-      el.style.backgroundImage    = `url('${src}')`
-      el.style.backgroundSize     = "cover"
-      el.style.backgroundPosition = "center"
-      el.querySelector("i")?.remove()
-    }
+  #applyPreview(src, file) {
+    this.#setPreviewSrc(src)
+    this.#showSaveButton()
+    this.#loadVideoPreview(file)
+  }
+
+  #setPreviewSrc(src) {
+    this.previewTarget.src = src
+  }
+
+  #loadVideoPreview(file) {
+    if (file.type.startsWith("video/")) this.previewTarget.load()
   }
 
   #showSaveButton() {

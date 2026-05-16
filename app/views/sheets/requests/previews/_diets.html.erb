@@ -1,0 +1,39 @@
+<div class="row mb-3">
+  <% diets.each do |diet| %>
+    <div class="col-md-6 p-2 mb-2">
+      <div class="shadow-sm bg-body-tertiary rounded border">
+        <div class="bg-success text-light bg-opacity-20 p-2 rounded-top">
+          <h2 class="h6 mb-0 text-truncate">
+            <i class="bi bi-cup-hot me-1"></i><%= diet.meal %>
+          </h2>
+        </div>
+
+        <div class="px-3 pb-3">
+          <p class="mb-3"><%= diet.description %></p>
+
+          <div class="small rounded row g-0 m-0 border">
+            <div class="col-6 col-md-3 text-center p-1 border-end">
+              <p class="small text-muted mb-0"><i class="bi bi-egg-fried"></i> <%= t('proteins') %></p>
+              <p class="fw-bold mb-0 text-primary"><%= diet.protein_g %>g</p>
+            </div>
+
+            <div class="col-6 col-md-3 text-center p-1 border-end">
+              <p class="small text-muted mb-0"><i class="bi bi-basket"></i> <%= t('carbohydrates') %></p>
+              <p class="fw-bold mb-0 text-success"><%= diet.carbohydrate_g %>g</p>
+            </div>
+
+            <div class="col-6 col-md-3 text-center p-1 border-end">
+              <p class="small text-muted mb-0"><i class="bi bi-droplet"></i> <%= t('fats') %></p>
+              <p class="fw-bold mb-0 text-warning"><%= diet.fat_g %>g</p>
+            </div>
+
+            <div class="col-6 col-md-3 text-center p-1">
+              <p class="small text-muted mb-0"><i class="bi bi-fire"></i> <%= t('calories') %></p>
+              <p class="fw-bold mb-0 text-danger"><%= diet.calories %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

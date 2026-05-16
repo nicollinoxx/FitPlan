@@ -1,0 +1,33 @@
+<% other = share_other_user(share) %>
+<% pending_count = share_pending_count(share) %>
+
+<div id="<%= dom_id(share) %>" class="col-md-6 p-2 hover-zoom-sm">
+  <%= link_to sheets_share_path(share, filter: params[:filter]), data: { turbo_frame: "_top" }, class: "text-decoration-none text-body" do %>
+    <div class="bg-body-tertiary border-start border-2 border-success shadow-sm rounded p-3 h-100">
+      <div class="d-flex align-items-center gap-3">
+        <% if other.avatar.attached? %>
+          <%= image_tag other.avatar, class: "rounded-circle object-fit-cover flex-shrink-0", width: 44, height: 44, alt: "" %>
+        <% else %>
+          <div class="rounded-circle bg-secondary-subtle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px;">
+            <i class="bi bi-person-fill text-secondary fs-5"></i>
+          </div>
+        <% end %>
+
+        <div class="flex-grow-1 min-w-0">
+          <h6 class="mb-0 fw-semibold text-truncate"><%= other.name %></h6>
+          <small class="text-muted">
+            <%= t(share.sender_id == Current.user.id ? '.sent' : '.received', count: share.sheet_requests.size) %>
+          </small>
+        </div>
+
+        <div class="text-end flex-shrink-0">
+          <% if pending_count > 0 %>
+            <span class="badge bg-warning-subtle text-warning"><%= pending_count %> <%= t('.pending') %></span>
+          <% else %>
+            <i class="bi bi-check2-all text-success"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -22,6 +22,7 @@ class SheetTest < ActiveSupport::TestCase
 
   test "completed? should be true with a completion today" do
     assert_not @workout_sheet.completed?
+
     @workout_sheet.complete!
     assert @workout_sheet.completed?
   end
@@ -84,5 +85,12 @@ class SheetTest < ActiveSupport::TestCase
     assert_no_difference "SheetCompletion.count" do
       @workout_sheet.uncomplete!
     end
+  end
+
+  test "with_content includes sheets with workouts or diets and excludes empty ones" do
+    assert_includes Sheet.with_content, @workout_sheet
+    assert_includes Sheet.with_content, @diet_sheet
+    assert_not_includes Sheet.with_content, @empty_workout_sheet
+    assert_not_includes Sheet.with_content, @empty_diet_sheet
   end
 end

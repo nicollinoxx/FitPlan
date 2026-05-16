@@ -1,0 +1,39 @@
+<div class="col-md-6 mb-3">
+  <%= form_with url: sheets_shares_path(handle: recipient.handle), data: { controller: "redirect", redirect_url_value: sheets_shares_path(filter: "sent"), redirect_refresh_value: true } do |form| %>
+    <div class="p-3 bg-body-tertiary shadow-sm rounded border-success border-start border-4">
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <div class="d-flex align-items-center gap-3 min-w-0">
+          <% if recipient.avatar.attached? %>
+            <%= image_tag recipient.avatar, class: "rounded-circle border-success-subtle border-3 object-fit-cover", width: 56, height: 56, alt: "" %>
+          <% else %>
+            <span class="d-flex align-items-center justify-content-center rounded-circle border-success-subtle border-3"
+                  style="width: 56px; height: 56px;">
+              <i class="bi bi-person-fill text-body"></i>
+            </span>
+          <% end %>
+
+          <div class="min-w-0">
+            <h6 class="fw-semibold mb-1 text-truncate"><%= recipient.name %></h6>
+            <p class="text-muted small mb-0 text-truncate">@<%= recipient.handle %></p>
+          </div>
+        </div>
+
+        <a class="btn btn-sm btn-outline-success" data-bs-toggle="collapse" href="#<%= recipient.handle %>" role="button" aria-expanded="false" aria-controls="<%= recipient.handle %>" title="<%= t('sheets.shares.new.share') %>">
+          <i class="bi bi-send"></i> <%= t('sheets.shares.new.share') %>
+        </a>
+      </div>
+
+      <div class="collapse mt-3" id="<%= recipient.handle %>">
+        <hr class="mt-0 mb-3">
+        <%= form.collection_select :sheet_ids, sheets, :id, :name, { include_hidden: false },
+            placeholder: t("sheets.shares.new.select_sheets_placeholder"), multiple: true, id: "sheets",
+            required: true, data: { controller: "combobox", combobox_max_items_value: 5 } %>
+        <small class="d-block mt-1 text-body-secondary"><%= t("sheets.shares.new.select_sheets_help") %></small>
+
+        <%= form.button type: "submit", class: "btn btn-success w-100 mt-3" do %>
+          <i class="bi bi-send-fill me-1"></i><%= t("sheets.shares.new.submit") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

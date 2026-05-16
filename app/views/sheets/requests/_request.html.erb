@@ -1,41 +1,30 @@
-<div id="<%= dom_id(request) %>" class="col-md-6 p-2 hover-zoom-sm">
-  <div class="bg-body-tertiary border-start border-2 <%= request.sheet.workout? ? 'border-success' : 'border-warning' %> shadow-sm rounded p-2">
-    <div class="d-flex align-items-center mb-2">
-      <%= sheet_request_avatar(request, params[:filter]) %>
+<div id="<%= dom_id(request) %>" class="d-flex align-items-center justify-content-between rounded border-start
+  border-2 border-<%= sheet_color(request.sheet) %> p-2 mb-1 bg-body-tertiary shadow-sm position-relative">
 
-      <div class="flex-grow-1">
-        <h6 class="m-0 text-success"><%= sheet_request_user(request, params[:filter]).name %></h6>
-        <small class="text-muted"><%= sheet_request_direction_label(params[:filter]) %></small>
-      </div>
+  <div class="d-flex align-items-center gap-2 flex-grow-1 min-w-0">
+    <i class="bi bi-file-earmark-spreadsheet-fill text-body-secondary flex-shrink-0"></i>
+    <span class="text-truncate"><%= request.sheet.name %></span>
+    <small class="badge flex-shrink-0 <%= sheet_type_badge_class(request.sheet) %>">
+      <%= t(request.sheet.sheet_type) %>
+    </small>
+    <%= link_to preview_content_sheets_request_path(request), data: { turbo_frame: "_top" }, class: "stretched-link" do %>
+      <span class="visually-hidden"><%= request.sheet.name %></span>
+    <% end %>
+  </div>
 
-      <div class="d-flex gap-2">
-        <% if request.pending? && request.receiver? %>
-          <%= button_to accept_request_path(request), method: :patch, class: "btn btn-success btn-sm rounded-circle" do %>
-            <i class="bi bi-check2-all"></i>
-          <% end %>
-        <% end %>
+  <div class="d-flex gap-2 flex-shrink-0 ms-2 position-relative z-2">
+    <% if request.pending? && request.receiver? %>
+      <%= button_to sheets_request_path(request, filter: params[:filter]), method: :patch, class: "btn btn-success btn-sm", data: { turbo_confirm: t('message_destroy') } do %>
+        <i class="bi bi-check2"></i>
+      <% end %>
+    <% end %>
 
-        <% if request.sender? || request.receiver? %>
-          <%= button_to request_path(request), method: :delete, class: "btn btn-danger btn-sm rounded-circle", data: { confirm: "Tem certeza que deseja excluir este compartilhamento?" } do %>
-            <i class="bi <%= request.accepted? ? 'bi-trash' : 'bi-x-lg' %>"></i>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-
-    <p class="m-0">
-      <i class="bi bi-file-earmark-spreadsheet-fill me-1"></i><%= request.sheet.name %>
-      <small class="badge <%= request.sheet.workout? ? 'bg-danger-subtle text-danger' : 'bg-warning-subtle text-warning' %>"><%= request.sheet.workout? ? t('workout') : t('diet') %></small>
-    </p>
-
-    <% if request.sheet.description.present? %>
-      <div class="mt-2">
-        <a class="text-muted small d-flex align-items-center text-decoration-none" data-bs-toggle="collapse" href="#desc-<%= request.id %>" role="button" aria-expanded="false" aria-controls="desc-<%= request.id %>">
-          <i class="bi bi-blockquote-right me-1"></i> Show description
-        </a>
-
-        <div class="collapse mt-1 bg-dark-subtle rounded py-1 px-2" id="desc-<%= request.id %>"><%= request.sheet.description %></div>
-      </div>
+    <% if request.pending? %>
+      <%= button_to sheets_request_path(request, filter: params[:filter]), method: :delete, class: "btn btn-danger btn-sm", data: { turbo_confirm: t('message_destroy') } do %>
+        <i class="bi bi-x-lg"></i>
+      <% end %>
+    <% else %>
+      <span class="badge bg-success-subtle text-success fw-semibold"><%= t('request.processing') %></span>
     <% end %>
   </div>
 </div>
