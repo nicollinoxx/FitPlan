@@ -90,6 +90,8 @@ en:
     sheet_request:
       create:               'Sheet request was successfully created'
       destroy:              'Share was successfully deleted'
+    sheet_share:
+      destroy:              'Share deleted successfully'
     profiles:
       update:               'Profile updated successfully'
     social:
@@ -424,6 +426,13 @@ en:
 
   #mailers------------------------------
   greeting:                              "Hello"
+
+  sheet_share_mailer:
+    new_sheet_share:
+      subject:              "%{name} shared sheets with you on FitPlan"
+      message:              "%{name} sent you sheets to review on FitPlan."
+      cta:                  "Open the share to accept or reject each sheet."
+      view_share:           "View shared sheets"
 
   user_mailer:
     email_verification:

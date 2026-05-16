@@ -100,6 +100,8 @@ pt:
     sheet_request:
       create:               'Solicitação de planilha criada com sucesso'
       destroy:              'Compartilhamento excluído com sucesso'
+    sheet_share:
+      destroy:              'Compartilhamento excluído com sucesso'
     profiles:
       update:               'Perfil atualizado com sucesso'
     social:
@@ -426,6 +428,13 @@ pt:
 
   #mailers------------------------------
   greeting:                              "Olá"
+
+  sheet_share_mailer:
+    new_sheet_share:
+      subject:              "%{name} compartilhou fichas com você no FitPlan"
+      message:              "%{name} enviou fichas para você revisar no FitPlan."
+      cta:                  "Abra o compartilhamento para aceitar ou rejeitar cada ficha."
+      view_share:           "Ver fichas compartilhadas"
 
   user_mailer:
     email_verification:

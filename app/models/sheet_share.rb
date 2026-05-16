@@ -11,7 +11,7 @@ class SheetShare < ApplicationRecord
   after_create_commit :notify_recipient
 
   def self.create_with_requests(sender:, recipient:, sheet_ids:)
-    allowed_ids = sender.sheets.with_content.where(id: sheet_ids).ids
+    allowed_ids = sender.sheets.with_content.where(id: sheet_ids).ids.first(5)
     create_requests!(sender, recipient, allowed_ids) unless allowed_ids.empty?
   end
 
@@ -27,6 +27,7 @@ class SheetShare < ApplicationRecord
 
   def notify_recipient
     return notify_recipient_realtime if recipient.online?
+
     SheetShareMailer.with(share: self).new_sheet_share.deliver_later
   end
 
