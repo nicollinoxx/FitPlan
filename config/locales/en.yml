@@ -465,3 +465,4 @@ en:
               too_short:
                 one:                     'must be at least %{count} character'
                 other:                   'must be at least %{count} characters'
+              invalid:                   'can only contain letters, numbers and hyphens'
