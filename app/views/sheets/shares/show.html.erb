@@ -1,16 +1,18 @@
 <% content_for(:title, t('.title')) %>
 
-<h1 class="d-flex align-items-center justify-content-between gap-2 mb-3">
-  <%= link_to sheets_shares_path(filter: params[:filter]), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
-    <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
-  <% end %>
+<div class="d-flex align-items-center justify-content-between gap-2">
+  <h1>
+    <%= link_to sheets_shares_path(filter: params[:filter]), class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+      <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+    <% end %>
+  </h1>
 
-  <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: 'btn btn-danger', data: { turbo_confirm: t('.confirm_delete') } do %>
+  <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: 'btn btn-danger',data: { turbo_confirm: t('.confirm_delete'), controller: "bridge--nav-button", bridge_title: "🗑️ destroy" } do %>
     <i class="bi bi-trash"></i> <span class="d-none d-sm-inline"><%= t('.delete') %></span>
   <% end %>
-</h1>
+</div>
 
-<p class="text-muted small my-3">
+<p class="text-muted small mb-3">
   <i class="bi bi-info-circle me-1"></i><%= t('.auto_close_hint') %>
 </p>
 

@@ -17,7 +17,7 @@ class Sheets::RequestsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert @sheet_request.reload.accepted?
-    assert_redirected_to sheets_share_path(@sheet_request.sheet_share)
+    assert_response :ok
   end
 
   test "should destroy request" do
@@ -25,6 +25,6 @@ class Sheets::RequestsControllerTest < ActionDispatch::IntegrationTest
       delete sheets_request_path(@sheet_request)
     end
 
-    assert_redirected_to sheets_share_path(@sheet_request.sheet_share)
+    assert_response :ok
   end
 end

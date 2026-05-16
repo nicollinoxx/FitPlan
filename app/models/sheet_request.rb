@@ -14,6 +14,7 @@ class SheetRequest < ApplicationRecord
     joins(:sheet_share).where("sheet_shares.sender_id = ? OR sheet_shares.recipient_id = ?", user.id, user.id)
   }
 
+  after_update :copy_sheet_job, if: -> { saved_change_to_status?(to: "accepted") }
   after_destroy :destroy_share_if_empty
 
   def sender?(user = Current.user)
@@ -26,11 +27,15 @@ class SheetRequest < ApplicationRecord
 
   private
 
+    def copy_sheet_job
+      CopySheetJob.perform_later(self)
+    end
+
     def only_recipient_can_accept
       errors.add(:base, I18n.t("errors.sheet_request.not_recipient")) unless receiver?
     end
 
     def destroy_share_if_empty
-      sheet_share.destroy if sheet_share.sheet_requests.none?
+      sheet_share.destroy if sheet_share.sheet_requests.empty?
     end
 end

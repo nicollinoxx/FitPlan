@@ -1,12 +1,14 @@
 class Sheets::SharesController < ApplicationController
   before_action :set_user
-  before_action :set_share, only: :show
 
   def index
     set_page_and_extract_portion_from @user.sheet_shares_by_filter(params[:filter])
   end
 
   def show
+    @share = SheetShare.accessible_by(@user).with_associations.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    recede_or_redirect_to sheets_shares_path(filter: params[:filter])
   end
 
   def new
@@ -23,16 +25,10 @@ class Sheets::SharesController < ApplicationController
 
   def destroy
     SheetShare.accessible_by(@user).find(params[:id]).destroy!
-    redirect_to sheets_shares_path(filter: params[:filter], format: :html), notice: t("notice.sheet_request.destroy")
+    recede_or_redirect_to sheets_shares_path(filter: params[:filter], format: :html), notice: t("notice.sheet_request.destroy")
   end
 
   private
-
-    def set_share
-      @share = SheetShare.accessible_by(@user).with_associations.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to sheets_shares_path(filter: params[:filter])
-    end
 
     def set_user
       @user = Current.user

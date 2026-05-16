@@ -124,6 +124,8 @@ en:
       title:                'Sheets'
       filter:               'Filter'
       completed:            'Completed'
+      shares:
+        title:              'Shared'
     new:
       title:                'New sheet'
     edit:

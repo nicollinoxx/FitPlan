@@ -133,6 +133,8 @@ pt:
       title:                'Planilhas'
       filter:               'Filtrar'
       completed:            'Concluídos'
+      shares:
+        title:              'Compartilhadas'
 
     new:
       title:                'Nova planilha'
