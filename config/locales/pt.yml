@@ -254,9 +254,9 @@ pt:
         text: "Visualize seu desempenho, compare resultados e evolua."
 
 
-  #dashboard-------------------------------------
-  dashboard:
-    index:
+  #dashboards-------------------------------------
+  dashboards:
+    show:
       title: "Painel"
       cards:
         total_calories: "Calorias totais"
