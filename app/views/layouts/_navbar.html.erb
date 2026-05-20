@@ -10,8 +10,8 @@
 
     <div class="d-flex align-items-center order-3 d-lg-none">
       <%= link_to identity_profile_path, aria: { label: t('identity.profiles.show.title') } do %>
-        <% if Current.user.avatar.attached? %>
-          <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
+        <% if @user_avatar&.attached? %>
+          <%= image_tag @user_avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
         <% else %>
           <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 36px; height: 36px;">
             <i class="bi bi-person-fill fs-5"></i>
@@ -55,8 +55,8 @@
 
       <div class="d-none d-lg-flex ms-auto">
         <%= link_to identity_profile_path, class: 'd-flex align-items-center', aria: { label: t('identity.profiles.show.title') } do %>
-          <% if Current.user.avatar.attached? %>
-            <%= image_tag Current.user.avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
+          <% if @user_avatar&.attached? %>
+            <%= image_tag @user_avatar, class: 'rounded-circle object-fit-cover', alt: '', style: 'width: 36px; height: 36px;' %>
           <% else %>
             <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 36px; height: 36px;">
               <i class="bi bi-person-fill fs-5"></i>

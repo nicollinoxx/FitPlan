@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_request_details
   before_action :authenticate, except: %i[ set_session_locale ]
+  before_action :cache_user_avatar
   before_action :set_locale
 
   def set_session_locale
@@ -15,6 +16,11 @@ class ApplicationController < ActionController::Base
       else
         redirect_to welcome_path
       end
+    end
+
+    def cache_user_avatar
+      return unless Current.user.present?
+      @user_avatar = Current.user.avatar
     end
 
     def set_current_request_details
