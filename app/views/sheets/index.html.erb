@@ -1,39 +1,16 @@
 <% content_for(:title, t('.title')) %>
 
-<div class="d-flex justify-content-between align-items-center">
-  <h1><%= t('.title') %></h1>
-  <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: "+ New" }, class: 'btn btn-success' %>
-</div>
+<h1 class="mb-2"><%= t('.title') %></h1>
 
-<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
-  <%= turbo_frame_tag "sheets" do %>
-    <div class="sticky-top z-3 mb-3">
-      <% if turbo_native_app? %>
-        <div class="d-flex align-items-center justify-content-between">
-          <%= link_to identity_profile_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
-            <div class="d-flex align-items-center">
-              <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', alt: '', size: '45x45' if @user.avatar.attached? %>
-              <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
-            </div>
-          <% end %>
+<%= form_with url: social_profiles_path, method: :get, data: { controller: "search", turbo_frame: "profiles" } do |form| %>
+  <div class="mb-3">
+    <%= form.label :query, t('search') %>
+    <%= form.text_field :query, class: 'form-control', data: { action: "search#submit" } %>
+  </div>
+<% end %>
 
-          <%= link_to sheets_shares_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info' do %>
-            <i class="bi bi-file-earmark-spreadsheet-fill"></i> <%= t('.shares.title') %>
-          <% end %>
-        </div>
-      <% end %>
-
-      <div class="d-flex align-items-center justify-content-between">
-        <%= render 'search' %>
-        <%= render 'filter' %>
-      </div>
-    </div>
-
-    <div id="paginables" class="row mb-3">
-      <%= render partial: "sheet", collection: @page.records, as: :sheet %>
-      <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
-    </div>
-  <% end %>
-
-  <%= image_tag 'undraw/grading_papers.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
-</div>
+<%= turbo_frame_tag :profiles do %>
+  <div class="row">
+    <%= render partial: 'shared/profile', collection: @profiles, as: :profile %>
+  </div>
+<% end %>

@@ -1,21 +1,21 @@
 import { Controller } from "@hotwired/stimulus"
 
+const DEBOUNCE_DELAY = 300
+
 export default class extends Controller {
+  connect() {
+    this.submitTimeout = null
+  }
 
-  static targets = [ "form" ]
-
-  initialize() {
-    this.timeout = null
+  disconnect() {
+    clearTimeout(this.submitTimeout)
   }
 
   submit() {
+    clearTimeout(this.submitTimeout)
 
-    clearTimeout(this.timeout)
-
-
-    this.timeout = setTimeout(() => {
-
-      this.formTarget.requestSubmit()
-    }, 300) 
+    this.submitTimeout = setTimeout(() => {
+      this.element.requestSubmit()
+    }, DEBOUNCE_DELAY)
   }
 }
