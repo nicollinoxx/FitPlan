@@ -8,7 +8,7 @@
       <ul class="dropdown-menu dropdown-menu-end">
         <% period_options.each do |label, value| %>
           <li>
-            <%= link_to label, dashboard_path(period: value), class: 'dropdown-item' %>
+            <%= link_to label, charts_dashboard_path(period: value, format: :turbo_stream), class: 'dropdown-item', data: { turbo_frame: :charts, turbo_prefetch: false } %>
           </li>
         <% end %>
       </ul>

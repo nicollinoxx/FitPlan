@@ -16,7 +16,10 @@ class DashboardsController < ApplicationController
 
   def charts
     @charts = charts_data
-    render turbo_stream: turbo_stream.replace('charts', partial: "charts", locals: { charts: @charts })
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace('charts', partial: "charts", locals: { charts: @charts }) }
+      format.html { redirect_to dashboard_path }
+    end
   end
 
   private
@@ -34,7 +37,7 @@ class DashboardsController < ApplicationController
   end
 
   def diet_calories_by_sheet
-    sheets_with_diets.group('sheets.name').sum('diets.calories') || 0
+    sheets_with_diets.group('sheets.name').sum('diets.calories')
   end
 
   def total_diet_calories
@@ -46,7 +49,7 @@ class DashboardsController < ApplicationController
   end
 
   def completions_by_sheet
-    @completions.joins(:sheet).group('sheets.name').count || 0
+    @completions.joins(:sheet).group('sheets.name').count
   end
 
   def completions_by_type

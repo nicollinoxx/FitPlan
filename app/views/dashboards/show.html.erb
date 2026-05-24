@@ -28,6 +28,6 @@
 
 <%= turbo_frame_tag :charts do %>
   <div class="my-5">
-    <%= render "shared/paginables/next_page_container", src: charts_dashboard_path(period: params[:period], format: :turbo_frame) %>
+    <%= render "shared/paginables/next_page_container", src: charts_dashboard_path(period: params[:period], format: :turbo_stream) %>
   </div>
 <% end %>
