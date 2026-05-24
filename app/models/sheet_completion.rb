@@ -12,7 +12,7 @@ class SheetCompletion < ApplicationRecord
   scope :today, -> { on_date(Date.current) }
 
   def self.streak
-    dates = group(Arel.sql("DATE(completed_at)")).order(Arel.sql("DATE(completed_at) DESC")) .pluck(Arel.sql("DATE(completed_at)"))
+    dates = group(Arel.sql("DATE(completed_at)")).order(Arel.sql("DATE(completed_at) DESC")).pluck(Arel.sql("DATE(completed_at)"))
     return 0 unless dates.first == Date.current
 
     dates.each_with_index.take_while { |date, i| date == Date.current - i }.size
