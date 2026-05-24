@@ -2,13 +2,11 @@
 
 <h1 class="mb-2"><%= t('.title') %></h1>
 
-<%= form_with url: social_profiles_path, method: :get do |form| %>
+<%= form_with url: social_profiles_path, method: :get, data: { controller: "search", turbo_frame: "profiles" } do |form| %>
   <div class="mb-3">
     <%= form.label :query, t('search') %>
-    <%= form.text_field :query, class: 'form-control' %>
+    <%= form.text_field :query, class: 'form-control', data: { action: "search#submit" } %>
   </div>
-
-  <%= form.submit t('search'), class: 'btn btn-success mb-4' %>
 <% end %>
 
 <%= turbo_frame_tag :profiles do %>
