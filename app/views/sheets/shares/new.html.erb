@@ -7,18 +7,20 @@
 </h1>
 
 <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
-  <%= turbo_frame_tag "sheet_shares" do %>
-    <%= form_with url: new_sheets_share_path(query: params[:query]), method: :get, local: true do |form| %>
-      <div class="position-relative mb-3">
-        <%= form.text_field :query, value: params[:query], class: "form-control pe-4", placeholder: t('.handle') %>
-        <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-body-secondary" style="pointer-events: none;"></i>
-      </div>
-      <%= form.submit t('search'), class: "btn btn-success px-3 mb-4" %>
-    <% end %>
+  <%= form_with url: new_sheets_share_path(query: params[:query]), method: :get, data: { controller: "search", turbo_frame: "sheet_shares" }, local: true do |form| %>
+    <div class="position-relative mb-3">
+      <%= form.text_field :query, value: params[:query], class: "form-control pe-4", placeholder: t('.handle'), data: { action: "search#submit" } %>
 
+      <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-body-secondary" style="pointer-events: none;"></i>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag "sheet_shares" do %>
     <div id="paginables" class="row">
       <%= render partial: "sheets/shares/recipient_form", collection: @page.records, as: :recipient, locals: { sheets: @sheets } %>
-      <%= render "shared/paginables/next_page_container", src: new_sheets_share_path(query: params[:query], page: @page.next_param, format: :turbo_stream) unless @page.last? %>
+
+      <%= render "shared/paginables/next_page_container", src: new_sheets_share_path(query: params[:query],
+        page: @page.next_param, format: :turbo_stream) unless @page.last? %>
     </div>
   <% end %>
 
