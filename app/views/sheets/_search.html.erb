@@ -1,4 +1,4 @@
-<%= form_with url: sheets_path, method: :get, data: { turbo_frame: "sheets" } do |form| %>
+<%= form_with url: sheets_path, method: :get, data: { controller: "search", turbo_frame: "sheets" } do |form| %>
   <%= form.hidden_field :type, value: params[:type] %>
   <%= form.hidden_field :completed, value: params[:completed] %>
 
@@ -7,6 +7,7 @@
       <i class="bi bi-compass"></i>
     </span>
 
-    <%= form.search_field :search, value: params[:search], class: "form-control border-start-0 ps-0", placeholder: t('search') %>
+    <%= form.search_field :search, value: params[:search], class: "form-control border-start-0 ps-0",
+      placeholder: t('search'), data: { action: "search#submit" } %>
   </div>
 <% end %>
