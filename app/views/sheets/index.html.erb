@@ -6,29 +6,29 @@
 </div>
 
 <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
-  <%= turbo_frame_tag "sheets" do %>
-    <div class="sticky-top z-3 mb-3">
-      <% if turbo_native_app? %>
-        <div class="d-flex align-items-center justify-content-between">
-          <%= link_to identity_profile_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
-            <div class="d-flex align-items-center">
-              <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', alt: '', size: '45x45' if @user.avatar.attached? %>
-              <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
-            </div>
-          <% end %>
-
-          <%= link_to sheets_shares_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info' do %>
-            <i class="bi bi-file-earmark-spreadsheet-fill"></i> <%= t('.shares.title') %>
-          <% end %>
-        </div>
-      <% end %>
-
+  <div class="sticky-top z-3 mb-3">
+    <% if turbo_native_app? %>
       <div class="d-flex align-items-center justify-content-between">
-        <%= render 'search' %>
-        <%= render 'filter' %>
-      </div>
-    </div>
+        <%= link_to identity_profile_path, class: "text-decoration-none", data: { turbo_frame: "_top" } do %>
+          <div class="d-flex align-items-center">
+            <%= image_tag @user.avatar, class: 'object-fit-cover rounded-circle me-2', alt: '', size: '45x45' if @user.avatar.attached? %>
+            <p class="fw-bold text-truncate mt-3" style="max-width: 8rem;"><%= @user.email %></p>
+          </div>
+        <% end %>
 
+        <%= link_to sheets_shares_path, data: {turbo_frame: "_top"}, class: 'ms-2 btn btn-sm btn-info' do %>
+          <i class="bi bi-file-earmark-spreadsheet-fill"></i> <%= t('.shares.title') %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="d-flex align-items-center justify-content-between">
+      <%= render 'search' %>
+      <%= render 'filter' %>
+    </div>
+  </div>
+
+  <%= turbo_frame_tag "sheets" do %>
     <div id="paginables" class="row mb-3">
       <%= render partial: "sheet", collection: @page.records, as: :sheet %>
       <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
