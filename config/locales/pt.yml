@@ -270,6 +270,7 @@ pt:
         title: "Progresso semanal"
         description: "Conclusões desta semana comparadas com a semana passada"
         vs_last_week: "vs semana passada"
+    charts:
       charts:
         sheets_created: "Fichas criadas por"
         diets_calories_by_sheet: "Calorias das dietas por ficha"

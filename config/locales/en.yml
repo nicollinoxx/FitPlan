@@ -279,6 +279,7 @@ en:
         title: "Weekly progress"
         description: "Completions this week compared to last week"
         vs_last_week: "vs last week"
+    charts:
       charts:
         sheets_created: "Sheets created"
         diets_calories_by_sheet: "Calories by sheet"
