@@ -88,3 +88,9 @@ $orange: #fd7e14;
 
 .pulse-success { animation: pulse-success 0.9s ease-out; }
 .pulse-warning { animation: pulse-warning 0.9s ease-out; }
+
+turbo-frame[aria-busy="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.15s ease-in;
+}

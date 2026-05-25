@@ -26,46 +26,8 @@
   </div>
 <% end %>
 
-<%= turbo_frame_tag :sheets do %>
-<div class="d-flex justify-content-end mb-2 mt-4">
-  <div class="dropdown bg-light rounded">
-    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="periodButton" data-bs-toggle="dropdown">
-      <i class="bi bi-calendar3"></i> <%= t(".filters.period.#{params[:period] || 'month'}") %>
-    </button>
-
-      <ul class="dropdown-menu dropdown-menu-end">
-        <% period_options.each do |label, value| %>
-          <li><%= link_to label, dashboard_path(period: value), class: 'dropdown-item', data: { turbo_frame: :sheets } %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <div class="row my-2">
-    <div class="col-md-6 mb-3">
-      <div class="p-3 bg-body-tertiary border-start border-bottom border-success rounded">
-        <h5 class="card-title mb-3">
-          <%= t('.charts.completions') %>
-          <%= t(".filters.period.#{params[:period] || 'month'}") %>
-        </h5>
-        <%= line_chart @completions_by_type, colors: ["green", "red"], height: "300px" %>
-      </div>
-    </div>
-
-    <div class="col-md-6 mb-3">
-      <div class="p-3 bg-body-tertiary border-start border-bottom border-primary rounded">
-        <h5 class="card-title mb-3"><%= t('.charts.completions_by_sheet') %></h5>
-        <%= column_chart @completions_by_sheet, colors: ["#0000FF"], height: "300px" %>
-      </div>
-    </div>
+<%= turbo_frame_tag :charts do %>
+  <div class="my-5">
+    <%= render "shared/paginables/next_page_container", src: charts_dashboard_path(period: params[:period], format: :turbo_stream) %>
   </div>
 <% end %>
-
-<div class="row my-2 mb-3">
-  <div class="col-md-12">
-    <div class="p-3 bg-body-tertiary border-start border-bottom border-orange rounded">
-      <h5 class="card-title mb-3"><%= t('.charts.diets_calories_by_sheet') %></h5>
-      <%= bar_chart @diets_calories, colors: ["#FF7F00"], height: "300px" %>
-    </div>
-  </div>
-</div>

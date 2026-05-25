@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post   "sign_in", to: "sessions#create"
   get    "sign_up", to: "registrations#new"
   post   "sign_up", to: "registrations#create"
+
   resources :sessions, only: [:index, :show, :destroy]
   resource  :password, only: [:edit, :update]
   namespace :identity do
@@ -48,7 +49,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get :dashboard, to: "dashboard#index", as: :dashboard
+  resource :dashboard, only: [:show] do
+    get :charts
+  end
 
   root 'sheets#index'
   get "set_locale/(:locale)", to: "application#set_session_locale", as: :set_locale

@@ -254,9 +254,9 @@ pt:
         text: "Visualize seu desempenho, compare resultados e evolua."
 
 
-  #dashboard-------------------------------------
-  dashboard:
-    index:
+  #dashboards-------------------------------------
+  dashboards:
+    show:
       title: "Painel"
       cards:
         total_calories: "Calorias totais"
@@ -270,6 +270,7 @@ pt:
         title: "Progresso semanal"
         description: "Conclusões desta semana comparadas com a semana passada"
         vs_last_week: "vs semana passada"
+    charts:
       charts:
         sheets_created: "Fichas criadas por"
         diets_calories_by_sheet: "Calorias das dietas por ficha"
