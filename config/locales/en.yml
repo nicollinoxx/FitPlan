@@ -197,7 +197,7 @@ en:
         high:             'high'
       help:
         interval:         'Interval in seconds, ex: 60 (1 minute)'
-      supported_files:      'Supported files mp4, mpeg and quicktime'
+      supported_files:      'Supported files: mp4, mpeg and quicktime · Max 16MB'
       remove_preview:       'Remove preview'
 
   #diets--------------------------------------
@@ -397,7 +397,7 @@ en:
       edit:
         title:                   'Edit Avatar'
       form:
-        supported_files:         'Supported Files jpg, jpeg, and png'
+        supported_files:         'Supported files: jpg, jpeg and png · Max 4MB'
       show:
         title:                   'Avatar'
     emails:

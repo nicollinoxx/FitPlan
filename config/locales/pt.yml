@@ -207,7 +207,7 @@ pt:
         high:             'alta'
       help:
         interval:         'Intervalo em segundos, ex: 60 (1 minuto)'
-      supported_files:      'Arquivos suportados: mp4, mpeg e quicktime'
+      supported_files:      'Arquivos suportados: mp4, mpeg e quicktime · Máximo 16MB'
       remove_preview:       'Remover pré-visualização'
 
   #diets--------------------------------------
@@ -401,7 +401,7 @@ pt:
       edit:
         title:                   'Editar avatar'
       form:
-        supported_files:         'Arquivos suportados: jpg, jpeg e png'
+        supported_files:         'Arquivos suportados: jpg, jpeg e png · Máximo 4MB'
       show:
         title:                   'Avatar'
     emails:

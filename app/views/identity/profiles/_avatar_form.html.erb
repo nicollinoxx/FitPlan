@@ -35,5 +35,6 @@
 
     <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: "d-none",
       data: { controller: "size-validation", "upload-preview-target": "fileInput", action: "change->size-validation#validate change->upload-preview#preview" } %>
+    <%= content_tag :small, t("identity.profiles.form.supported_files"), class: "text-muted" %>
   <% end %>
 </div>
