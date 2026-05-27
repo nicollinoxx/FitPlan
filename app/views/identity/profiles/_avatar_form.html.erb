@@ -1,6 +1,6 @@
 <div data-controller="upload-preview" class="text-center">
   <%= form_with url: identity_avatar_path, method: :patch do |form| %>
-    <div class="d-flex justify-content-center align-items-center gap-3 mb-3">
+    <div class="d-flex justify-content-center align-items-center gap-3 mb-1">
       <div class="position-relative">
         <%= form.label :avatar, class: "d-inline-block", style: "cursor: pointer;" do %>
           <div class="rounded-circle border border-2 bg-secondary-subtle overflow-hidden position-relative d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
@@ -33,8 +33,11 @@
       </div>
     </div>
 
-    <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: "d-none",
-      data: { controller: "size-validation", "upload-preview-target": "fileInput", action: "change->size-validation#validate change->upload-preview#preview" } %>
-    <%= content_tag :small, t("identity.profiles.form.supported_files"), class: "text-muted" %>
+    <div class="mb-3">
+      <%= form.file_field :avatar, accept: 'image/png, image/jpeg, image/jpg', class: "d-none",
+        data: { controller: "size-validation", "upload-preview-target": "fileInput", action: "change->size-validation#validate change->upload-preview#preview" } %>
+
+      <small class="text-muted"><%= t("identity.avatars.form.supported_files") %></small>
+    </div>
   <% end %>
 </div>
