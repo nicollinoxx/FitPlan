@@ -5,5 +5,4 @@ class Workout < ApplicationRecord
   has_many :completions, dependent: :destroy
 
   validates :exercise, :series, :repetitions, presence: true
-  validates :video, presence: true, blob: { size_range: 1..16.megabytes }
 end
