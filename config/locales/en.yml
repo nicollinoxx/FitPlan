@@ -472,7 +472,7 @@ en:
           attributes:
             avatar:
               error_avatar_type:         'must be a file (png, jpeg, jpg)'
-              error_avatar_size:         "is too big. Maximum size allowed is 2MB."
+              error_avatar_size:         "is too big. Maximum size allowed is 4MB."
             handle:
               blank:                     'choose a handle for your profile'
               taken:                     'is already taken, please choose another'
