@@ -1,6 +1,6 @@
 class Workout < ApplicationRecord
   belongs_to :sheet
-  has_one_attached :video
+  has_one_attached :video, presence: true, blob: { size_range: 1..16.megabytes }
 
   has_many :completions, dependent: :destroy
 

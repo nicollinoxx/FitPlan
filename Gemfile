@@ -73,3 +73,5 @@ gem "geared_pagination"
 
 gem "chartkick"
 gem "groupdate"
+
+gem 'aws-sdk-s3'

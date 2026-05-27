@@ -19,7 +19,7 @@ module SheetsHelper
     end
   end
 
-   def sheet_filter_params(type: params[:type], completed: params[:completed])
-    { type: type, completed: completed, search: params[:search] }
+  def sheet_filter_params(type: params[:type], completed: params[:completed], search: params[:search])
+    { type: type, completed: completed, search: search }
   end
 end

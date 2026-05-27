@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_secure_password
   has_one_attached :avatar
 
+  validates :avatar, presence: true, blob: { size_range: 1..4.megabytes }
+
   generates_token_for :email_verification, expires_in: 2.days do
     email
   end
