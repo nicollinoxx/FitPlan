@@ -20,6 +20,7 @@ export default class extends Controller {
 
   #setPreviewSrc(src) {
     this.previewTarget.src = src
+    this.previewTarget.hidden = false
   }
 
   #loadVideoPreview(file) {
