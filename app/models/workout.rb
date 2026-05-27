@@ -11,8 +11,6 @@ class Workout < ApplicationRecord
   private
 
   def video_size
-    return unless video.attached? && video.blob.byte_size > 16.megabytes
-
-    errors.add(:video, :too_large, max: "16MB")
+    errors.add(:video, :error_video_size) if video.attached? && video.blob.byte_size > 16.megabytes
   end
 end

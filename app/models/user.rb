@@ -54,7 +54,7 @@ class User < ApplicationRecord
   private
 
   def avatar_size
-    errors.add(:avatar, :too_large, max: "4MB") if avatar.attached? && avatar.blob.byte_size > 4.megabytes
+    errors.add(:avatar, :error_avatar_size) if avatar.attached? && avatar.blob.byte_size > 4.megabytes
   end
 
   def generate_handle_unique
