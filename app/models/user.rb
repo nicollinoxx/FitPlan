@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :sheets,             dependent: :destroy
   has_many :sheet_completions
 
+  validate :avatar_size
+
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }
   validates :handle, presence: true, uniqueness: true, length: { minimum: 3 },
@@ -50,6 +52,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def avatar_size
+    errors.add(:avatar, :too_large, max: "4MB") if avatar.attached? && avatar.blob.byte_size > 4.megabytes
+  end
 
   def generate_handle_unique
     loop do
