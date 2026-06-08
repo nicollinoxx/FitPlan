@@ -13,7 +13,7 @@
 
   <div class='mb-3'>
     <%= form.label :meal, t('.label.meal'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :meal, class: 'form-control' %>
+    <%= form.text_field :meal, class: 'form-control', placeholder: t('.placeholder.meal') %>
   </div>
 
   <div class='mb-3'>
@@ -23,17 +23,17 @@
 
   <div class='mb-3'>
     <%= form.label :protein_g, t('.label.proteins'), style: "display: block", class: 'form-label' %>
-    <%= form.number_field :protein_g, step: 'any', class: 'form-control' %>
+    <%= form.number_field :protein_g, step: 'any', class: 'form-control', placeholder: t('.placeholder.protein_g') %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :carbohydrate_g, t('.label.carbohydrates'), style: "display: block", class: 'form-label' %>
-    <%= form.number_field :carbohydrate_g, step: 'any', class: 'form-control' %>
+    <%= form.number_field :carbohydrate_g, step: 'any', class: 'form-control', placeholder: t('.placeholder.carbohydrate_g') %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :fat_g, t('.label.fat'), style: "display: block", class: 'form-label' %>
-    <%= form.number_field :fat_g, step: 'any', class: 'form-control' %>
+    <%= form.number_field :fat_g, step: 'any', class: 'form-control', placeholder: t('.placeholder.fat_g') %>
   </div>
 
   <div>

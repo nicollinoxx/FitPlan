@@ -151,6 +151,9 @@ pt:
         name:               'Nome'
         description:        'Descrição'
         sheet_type:         'Tipo'
+      placeholder:
+        name:               'Ex: Treino A'
+        description:        'Descrição da planilha...'
     shares:
       index:
         title:    'Compartilhamentos'
@@ -196,11 +199,16 @@ pt:
     form:
       error_message_form:     'impediram este treino de ser salvo:'
       label:
-        name:               'Nome'
+        exercise:           'Exercício'
         repetitions:        'Repetições'
         series:             'Séries'
         interval:           'Intervalo'
         charge:             'Carga'
+      placeholder:
+        exercise:           'Ex: Supino reto'
+        series:             'Ex: 4'
+        repetitions:        'Ex: 10-12'
+        interval:           'Ex: 60'
       options_charge:
         low:              'leve'
         medium:           'média'
@@ -231,6 +239,11 @@ pt:
         carbohydrates:      'Carboidratos g'
         proteins:           'Proteínas g'
         fat:                'Gorduras g'
+      placeholder:
+        meal:               'Ex: Café da manhã'
+        protein_g:          'Ex: 30'
+        carbohydrate_g:     'Ex: 50'
+        fat_g:              'Ex: 10'
 
 
   #welcome------------------------------------
@@ -294,6 +307,8 @@ pt:
     profiles:
       index:
         title:     "Perfis"
+        placeholder:
+          query:   'Buscar usuários...'
       show:
         followers: "%{count} seguidores"
         followings: "%{count} seguindo"
@@ -392,6 +407,9 @@ pt:
         handle:                  'Handle'
         handle_description:      'Handle é usado para identificar você na comunidade.'
         error_message_form:      'impediram o perfil de ser salvo:'
+        placeholder:
+          name:                  'Seu nome'
+          handle:                'seu-handle'
       show:
         title:                   'Perfil'
         profile:                 'Perfil'
@@ -415,6 +433,8 @@ pt:
         label:
           email:                         'Novo e-mail'
           password_challenge:            "Senha atual"
+        placeholder:
+          email:                         'email@exemplo.com'
 
     password_resets:
       edit:
@@ -429,6 +449,8 @@ pt:
       new:
         title:                     'Nova senha'
         send_reset_email:          'Enviar e-mail de redefinição de senha'
+        placeholder:
+          email:                   'email@exemplo.com'
 
   #mailers------------------------------
   greeting:                              "Olá"

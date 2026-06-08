@@ -23,13 +23,23 @@
 
   <div class='mb-3'>
     <%= form.label :password, t('.label.password'), style: "display: block", class: 'form-label' %>
-    <%= form.password_field :password, required: true, autofocus: true, autocomplete: "new-password", class: 'form-control' %>
+    <div class="position-relative" data-controller="password-visibility">
+      <%= form.password_field :password, required: true, autofocus: true, autocomplete: "new-password", class: 'form-control pe-5', placeholder: "••••••••", data: { "password-visibility-target": "input" } %>
+      <button class="btn btn-link position-absolute top-50 end-0 translate-middle-y pe-2 text-body-secondary border-0" type="button" data-action="password-visibility#toggle" tabindex="-1">
+        <i class="bi bi-eye" data-password-visibility-target="icon"></i>
+      </button>
+    </div>
     <%= content_tag :small, t('minimum_characters'), class: "text-muted" %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :password_confirmation, t('.label.password_confirmation'), style: "display: block", class: 'form-label' %>
-    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control' %>
+    <div class="position-relative" data-controller="password-visibility">
+      <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", class: 'form-control pe-5', placeholder: "••••••••", data: { "password-visibility-target": "input" } %>
+      <button class="btn btn-link position-absolute top-50 end-0 translate-middle-y pe-2 text-body-secondary border-0" type="button" data-action="password-visibility#toggle" tabindex="-1">
+        <i class="bi bi-eye" data-password-visibility-target="icon"></i>
+      </button>
+    </div>
   </div>
 
   <div>

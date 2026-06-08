@@ -141,6 +141,9 @@ en:
         name:               'Name'
         description:        'Description'
         sheet_type:         'Type'
+      placeholder:
+        name:               'e.g. Workout A'
+        description:        'Sheet description...'
     shares:
       index:
         title:    'Shares'
@@ -186,11 +189,16 @@ en:
     form:
       error_message_form:     'prohibited this workout from being saved:'
       label:
-        name:               'Name'
+        exercise:           'Exercise'
         repetitions:        'Repetitions'
         series:             'Series'
         interval:           'Interval'
         charge:             'Charge'
+      placeholder:
+        exercise:           'e.g. Bench press'
+        series:             'e.g. 4'
+        repetitions:        'e.g. 10-12'
+        interval:           'e.g. 60'
       options_charge:
         low:              'low'
         medium:           'medium'
@@ -221,6 +229,11 @@ en:
         carbohydrates:      'Carbohydrates g'
         proteins:           'Proteins g'
         fat:                'Fat g'
+      placeholder:
+        meal:               'e.g. Breakfast'
+        protein_g:          'e.g. 30'
+        carbohydrate_g:     'e.g. 50'
+        fat_g:              'e.g. 10'
 
 
 
@@ -308,6 +321,8 @@ en:
     profiles:
       index:
         title:     "Profiles"
+        placeholder:
+          query:   'Search users...'
       show:
         followers: "%{count} followers"
         followings: "%{count} following"
@@ -388,6 +403,9 @@ en:
         handle:                  'Handle'
         handle_description:      'Handle is used to identify you in the community.'
         error_message_form:      'prohibited this profile from being saved:'
+        placeholder:
+          name:                  'Your name'
+          handle:                'your-handle'
       show:
         title:                   'Profile'
         profile:                 'Profile'
@@ -412,6 +430,8 @@ en:
         label:
           email:                         'New email'
           password_challenge:            "Password challenge"
+        placeholder:
+          email:                         'email@example.com'
 
     password_resets:
       edit:
@@ -427,6 +447,8 @@ en:
       new:
         title:                     'New password'
         send_reset_email:          'Send password reset email'
+        placeholder:
+          email:                   'email@example.com'
 
   #mailers------------------------------
   greeting:                              "Hello"

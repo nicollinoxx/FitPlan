@@ -8,9 +8,10 @@
 
 <%= form_with(model: @user, url: identity_profile_path) do |form| %>
   <% if @user.errors.any? %>
-    <div class="alert alert-danger">
-      <strong><%= pluralize(@user.errors.count, t('error')) %> <%= t('.error_message_form') %></strong>
-      <ul class="mb-0 mt-1">
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, t('error')) %> <%= t('.error_message_form') %></h2>
+
+      <ul>
         <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -20,12 +21,12 @@
 
   <div class='mb-3'>
     <%= form.label :name, t('.name'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :name, required: true, class: 'form-control' %>
+    <%= form.text_field :name, required: true, class: 'form-control', placeholder: t('.placeholder.name') %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :handle, t('.handle'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :handle, required: true, class: 'form-control' %>
+    <%= form.text_field :handle, required: true, class: 'form-control', placeholder: t('.placeholder.handle') %>
     <span class='form-text'><%= t('.handle_description') %></span>
   </div>
 

@@ -14,23 +14,23 @@
 
   <div class='mb-3'>
     <%= form.label :exercise, t('.label.exercise'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :exercise, class: 'form-control' %>
+    <%= form.text_field :exercise, class: 'form-control', placeholder: t('.placeholder.exercise') %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :series, t('.label.series'), style: "display: block", class: 'form-label' %>
-    <%= form.number_field :series, class: 'form-control' %>
+    <%= form.number_field :series, class: 'form-control', placeholder: t('.placeholder.series') %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :repetitions, t('.label.repetitions'), style: "display: block", class: 'form-label' %>
-    <%= form.text_field :repetitions,  maxlength: 20, class: 'form-control' %>
+    <%= form.text_field :repetitions, maxlength: 20, class: 'form-control', placeholder: t('.placeholder.repetitions') %>
   </div>
 
   <div class='mb-3'>
     <%= form.label :interval, t('.label.interval'), style: "display: block", class: 'form-label' %>
 
-    <%= form.number_field :interval, class: 'form-control' %>
+    <%= form.number_field :interval, class: 'form-control', placeholder: t('.placeholder.interval') %>
     <small class='text-muted'><%= t('.help.interval') %></small>
   </div>
 

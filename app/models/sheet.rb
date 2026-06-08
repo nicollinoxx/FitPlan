@@ -13,6 +13,7 @@ class Sheet < ApplicationRecord
   has_many :sheet_completions_today, -> { today }, class_name: "SheetCompletion"
 
   validates :sheet_type, inclusion: { in: %w[ workout diet ] }
+  validates :name, presence: true
 
   enum :sheet_type, { workout: "workout", diet: "diet" }
 

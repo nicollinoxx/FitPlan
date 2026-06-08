@@ -32,7 +32,12 @@
             <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'small' %>
           </div>
 
-          <%= form.password_field :password, required: true, class: 'form-control', placeholder: "••••••••" %>
+          <div class="position-relative" data-controller="password-visibility">
+            <%= form.password_field :password, required: true, class: 'form-control pe-5', placeholder: "••••••••", data: { "password-visibility-target": "input" } %>
+            <button class="btn btn-link position-absolute top-50 end-0 translate-middle-y pe-2 text-body-secondary border-0" type="button" data-action="password-visibility#toggle" tabindex="-1">
+              <i class="bi bi-eye" data-password-visibility-target="icon"></i>
+            </button>
+          </div>
         </div>
 
         <div class="mb-4">

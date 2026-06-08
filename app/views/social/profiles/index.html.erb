@@ -5,7 +5,7 @@
 <%= form_with url: social_profiles_path, method: :get, data: { controller: "search", turbo_frame: "profiles" } do |form| %>
   <div class="mb-3">
     <%= form.label :query, t('search') %>
-    <%= form.text_field :query, class: 'form-control', data: { action: "search#submit" } %>
+    <%= form.text_field :query, class: 'form-control', placeholder: t('.placeholder.query'), data: { action: "search#submit" } %>
   </div>
 <% end %>
 
