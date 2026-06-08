@@ -40,6 +40,7 @@ pt:
   request:
     processing: "Processando"
   minimum_characters: "Mínimo de 6 caracteres."
+  toggle_password_visibility: 'Alternar visibilidade da senha'
   cancel:             "Cancelar"
   confirm:            "Confirmar"
   all:                'Todos'

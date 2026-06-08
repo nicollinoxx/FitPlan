@@ -2,10 +2,15 @@ require "test_helper"
 
 class SheetTest < ActiveSupport::TestCase
   setup do
-    @workout_sheet = sheets(:one)
-    @diet_sheet = sheets(:two)
+    @workout_sheet       = sheets(:one)
+    @diet_sheet          = sheets(:two)
     @empty_workout_sheet = sheets(:empty_workout)
-    @empty_diet_sheet = sheets(:empty_diet)
+    @empty_diet_sheet    = sheets(:empty_diet)
+  end
+
+  test "should be invalid without a name" do
+    sheet = Sheet.new(sheet_type: :workout, user: @workout_sheet.user)
+    assert_not sheet.valid?
   end
 
   test "should destroy workouts when changing sheet_type to diet" do
