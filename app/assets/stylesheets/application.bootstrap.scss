@@ -1,7 +1,12 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
-@import 'strada';
-@import 'actiontext';
+@import 'variables';
+
 @import 'bootstrap-custom-styles';
 @import 'bootstrap-custom-color-mode';
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+@import 'strada';
+
+@import 'actiontext';
+
 @import 'combobox';

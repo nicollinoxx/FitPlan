@@ -10,84 +10,78 @@ $color-mode-type: data;
 
 input.form-control:focus {
   border-color: var(--bs-success) !important;
-  box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+  box-shadow: 0 0 0 0.25rem #{rgba($success, 0.25)} !important;
   outline: 0 !important;
 }
 
-.hover-zoom-sm, .hover-zoom, .hover-zoom-lg {
+.hover-zoom-sm {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hover-zoom-sm:hover { transform: scale(1.02); }
-.hover-zoom:hover    { transform: scale(1.05); }
-.hover-zoom-lg:hover { transform: scale(1.1);  }
 
 // Custom color: Orange
-$orange: #fd7e14;
+$orange: #ff6b35;
 
 :root {
   --bs-orange: #{$orange};
 }
 
-.bg-orange { background-color: var(--bs-orange) !important; }
-.text-orange { color: var(--bs-orange) !important; }
-.border-orange { border-color: var(--bs-orange) !important; }
+.bg-orange    { background-color: var(--bs-orange) !important; }
+.text-orange  { color: var(--bs-orange) !important; }
+.border-orange { --bs-border-color: #{$orange}; border-color: var(--bs-orange) !important; }
 
-.btn-orange {
-  @extend .btn;
-  background-color: var(--bs-orange);
-  border-color: var(--bs-orange);
-  color: white;
-
-  &:hover, &:focus, &:active, &.active {
-    background-color: darken($orange, 10%);
-    border-color: darken($orange, 10%);
-    color: white;
-  }
+.btn.btn-orange {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #{$orange};
+  --bs-btn-border-color: #{$orange};
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #{darken($orange, 10%)};
+  --bs-btn-hover-border-color: #{darken($orange, 10%)};
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #{darken($orange, 15%)};
+  --bs-btn-active-border-color: #{darken($orange, 15%)};
 }
 
-.btn-outline-orange {
-  @extend .btn;
-  color: var(--bs-orange);
-  border-color: var(--bs-orange);
-
-  &:hover, &:focus, &:active, &.active {
-    background-color: var(--bs-orange);
-    border-color: var(--bs-orange);
-    color: white;
-  }
+.btn.btn-outline-body {
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: var(--bs-body-color);
+  --bs-btn-hover-color: var(--bs-body-bg);
+  --bs-btn-hover-bg: var(--bs-body-color);
+  --bs-btn-hover-border-color: var(--bs-body-color);
+  --bs-btn-active-color: var(--bs-body-bg);
+  --bs-btn-active-bg: var(--bs-body-color);
+  --bs-btn-active-border-color: var(--bs-body-color);
 }
 
-.badge-orange {
-  background-color: var(--bs-orange) !important;
-  color: white;
-}
-
-// Custom completed colors (Bootstrap-style naming)
+// Completed state colors
 :root {
-  --bs-completed-success-bg: rgba(25, 135, 84, 0.15);
-  --bs-completed-success-border: rgba(25, 135, 84, 0.4);
-  --bs-completed-warning-bg: rgba(255, 193, 7, 0.15);
-  --bs-completed-warning-border: rgba(255, 193, 7, 0.4);
+  --bs-completed-success-bg: #{rgba($success, 0.15)};
+  --bs-completed-success-border: #{rgba($success, 0.4)};
+  --bs-completed-orange-bg: #{rgba($orange, 0.15)};
+  --bs-completed-orange-border: #{rgba($orange, 0.9)};
 }
 
-.bg-completed-success { background-color: var(--bs-completed-success-bg) !important; }
-.bg-completed-warning { background-color: var(--bs-completed-warning-bg) !important; }
-.border-completed-success { border-color: var(--bs-completed-success-border) !important; }
-.border-completed-warning { border-color: var(--bs-completed-warning-border) !important; }
+.bg-completed-success     { background-color: var(--bs-completed-success-bg) !important; }
+.bg-completed-orange      { background-color: var(--bs-completed-orange-bg) !important; }
+.border-completed-success { --bs-border-color: var(--bs-completed-success-border); border-color: var(--bs-completed-success-border) !important; }
+.border-completed-orange  { --bs-border-color: var(--bs-completed-orange-border); border-color: var(--bs-completed-orange-border) !important; }
+
+.bg-orange-subtle { background-color: #{rgba($orange, 0.1)} !important; }
 
 @keyframes pulse-success {
-  0%   { box-shadow: 0 0 0 0 rgba(25, 145, 84, 0.6); border-color: var(--bs-success); }
-  100% { box-shadow: 0 0 0 0.5rem rgba(25, 145, 84, 0); border-color: inherit; }
+  0%   { box-shadow: 0 0 0 0 #{rgba($success, 0.6)}; border-color: var(--bs-success); }
+  100% { box-shadow: 0 0 0 0.5rem #{rgba($success, 0)}; border-color: inherit; }
 }
 
-@keyframes pulse-warning {
-  0%   { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.6); border-color: var(--bs-warning); }
-  100% { box-shadow: 0 0 0 0.5rem rgba(255, 193, 7, 0); border-color: inherit; }
+@keyframes pulse-orange {
+  0%   { box-shadow: 0 0 0 0 #{rgba($orange, 0.6)}; border-color: var(--bs-orange); }
+  100% { box-shadow: 0 0 0 0.5rem #{rgba($orange, 0)}; border-color: inherit; }
 }
 
 .pulse-success { animation: pulse-success 0.9s ease-out; }
-.pulse-warning { animation: pulse-warning 0.9s ease-out; }
+.pulse-orange  { animation: pulse-orange  0.9s ease-out; }
 
 turbo-frame[aria-busy="true"] {
   opacity: 0.5;

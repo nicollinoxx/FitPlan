@@ -1,4 +1,4 @@
-@include color-mode(dark) {
+[data-bs-theme="dark"] {
   .bg-light { background-color: var(--bs-dark) !important; }
 
   .alert-dark {
@@ -7,7 +7,7 @@
   }
 }
 
-@include color-mode(light) {
+[data-bs-theme="light"] {
   .bg-dark-subtle { background-color: var(--bs-light) !important; }
 
   .alert-dark {

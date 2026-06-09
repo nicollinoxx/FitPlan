@@ -1,6 +1,6 @@
 module SheetsHelper
   def sheet_color(sheet)
-    sheet.workout? ? "success" : "warning"
+    sheet.workout? ? "success" : "orange"
   end
 
   def sheet_diets_or_workouts_path(sheet)
