@@ -3,7 +3,7 @@
 <div class="d-flex flex-column min-vh-100">
   <h1 class="pb-2 pt-3 mt-md-5">
     <%= link_to welcome_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
-      <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+      <i class="bi bi-arrow-left-short"></i><%= t('back') %>
     <% end %>
   </h1>
 
@@ -17,7 +17,7 @@
       </div>
 
       <h1 class="text-center fw-bold">
-        <%= image_tag 'logo.svg', alt: 'FITPLAN', class: 'img-fluid d-block mx-auto mb-1' %>
+        <%= image_tag 'logo.svg', alt: '', aria: { hidden: true }, class: 'img-fluid d-block mx-auto mb-1' %>
         Fit<span class="text-success">Plan</span>
       </h1>
 
