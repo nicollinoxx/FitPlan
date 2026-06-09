@@ -55,7 +55,7 @@
 
 .ts-wrapper.multi .ts-control > .item {
   background-color: var(--bs-success) !important;
-  color: var(--bs-white);
+  color: var(--bs-dark);
   border-radius: 0.2rem;
   padding: 0.25rem 0.75rem;
   font-size: 0.8125rem;
@@ -71,7 +71,7 @@
 .ts-wrapper.multi .ts-control > .item .remove {
   font-size: 1.2rem;
   font-weight: bold;
-  color: var(--bs-white);
+  color: var(--bs-dark);
   opacity: 0.9;
   width: 1.5rem;
   height: 1.5rem;

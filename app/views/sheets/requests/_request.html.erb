@@ -5,7 +5,7 @@
     <i class="bi bi-file-earmark-spreadsheet-fill text-body-secondary flex-shrink-0"></i>
     <span class="text-truncate"><%= request.sheet.name %></span>
     <small class="badge flex-shrink-0 <%= sheet_type_badge_class(request.sheet) %>">
-      <%= t(request.sheet.sheet_type) %>
+      <%= t request.sheet.sheet_type %>
     </small>
     <%= link_to preview_content_sheets_request_path(request), data: { turbo_frame: "_top" }, class: "stretched-link" do %>
       <span class="visually-hidden"><%= request.sheet.name %></span>
