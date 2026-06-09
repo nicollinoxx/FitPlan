@@ -3,8 +3,8 @@ module DietsHelper
     spinner_icon = content_tag(:i, '', class: 'bi bi-hourglass-split')
 
     if completed.present?
-      button_to sheet_diet_completion_path(sheet, diet), method: :delete, class: 'btn btn-sm btn-light', data: { turbo_submits_with: spinner_icon } do
-        content_tag(:i, '', class: 'bi bi-check-lg')
+      button_to sheet_diet_completion_path(sheet, diet), method: :delete, class: 'btn btn-sm btn-danger', data: { turbo_submits_with: spinner_icon } do
+        content_tag(:i, '', class: 'bi bi-x-lg')
       end
     else
       button_to sheet_diet_completion_path(sheet, diet), class: 'btn btn-sm btn-light', data: { turbo_submits_with: spinner_icon } do
