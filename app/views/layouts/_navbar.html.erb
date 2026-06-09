@@ -4,8 +4,9 @@
       <i class="bi bi-list fs-3"></i>
     </button>
 
-    <%= link_to root_path, class: 'navbar-brand order-2 mx-auto mx-lg-0 order-lg-1 py-0' do %>
-      <span class="fw-bold text-success fs-4 lh-1">FITPLAN</span>
+    <%= link_to root_path, class: 'navbar-brand order-2 mx-auto mx-lg-0 order-lg-1 py-0 d-flex align-items-center gap-2' do %>
+      <%= image_tag 'logo.svg', alt: '', class: 'img-fluid', height: 24, width: 24 %>
+      <span class="fw-bold fs-3 lh-2">Fit<span class="text-success">Plan</span></span>
     <% end %>
 
     <div class="d-flex align-items-center order-3 d-lg-none">

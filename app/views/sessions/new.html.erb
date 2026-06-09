@@ -3,7 +3,7 @@
 <div class="d-flex flex-column min-vh-100">
   <h1 class="pb-2 pt-3 mt-md-5">
     <%= link_to welcome_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
-      <i class="bi bi-arrow-left-short"></i><%= t('back') %>
+      <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
     <% end %>
   </h1>
 
@@ -16,9 +16,10 @@
         <%= render 'shared/language_dropdown' %>
       </div>
 
-      <h1 class="text-center text-success fw-bold mb-3">FITPLAN</h1>
-
-      <h2 class="text-success mb-2"><%= t('.title') %></h2>
+      <h1 class="text-center fw-bold">
+        <%= image_tag 'logo.svg', alt: 'FITPLAN', class: 'img-fluid d-block mx-auto mb-1' %>
+        Fit<span class="text-success">Plan</span>
+      </h1>
 
       <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
         <div class="mb-4">
@@ -47,7 +48,7 @@
 
       <div class="mt-3">
         <p class="mb-1"><%= t('.section_signup') %></p>
-        <%= link_to t('.signup'), sign_up_path, class: 'btn btn-secondary w-100' %>
+        <%= link_to t('.signup'), sign_up_path, class: 'btn btn-orange w-100' %>
       </div>
     </div>
     </div>
