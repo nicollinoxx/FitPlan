@@ -1,5 +1,9 @@
 $color-mode-type: data;
 
+body {
+  overflow-x: clip;
+}
+
 .alert-dark .btn-close {
   filter: var(--bs-btn-close-white-filter, invert(1) grayscale(100%) brightness(200%));
 }
@@ -20,7 +24,6 @@ input.form-control:focus {
 
 .hover-zoom-sm:hover { transform: scale(1.02); }
 
-// Custom color: Orange
 $orange: #ff6b35;
 
 :root {
@@ -55,7 +58,6 @@ $orange: #ff6b35;
   --bs-btn-active-border-color: var(--bs-body-color);
 }
 
-// Completed state colors
 :root {
   --bs-completed-success-bg: #{rgba($success, 0.15)};
   --bs-completed-success-border: #{rgba($success, 0.4)};
@@ -69,6 +71,7 @@ $orange: #ff6b35;
 .border-completed-orange  { --bs-border-color: var(--bs-completed-orange-border); border-color: var(--bs-completed-orange-border) !important; }
 
 .bg-orange-subtle { background-color: #{rgba($orange, 0.1)} !important; }
+.bg-success-subtle { background-color: #{rgba($success, 0.1)} !important; }
 
 @keyframes pulse-success {
   0%   { box-shadow: 0 0 0 0 #{rgba($success, 0.6)}; border-color: var(--bs-success); }
