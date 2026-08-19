@@ -8,8 +8,15 @@ class SheetCompletion < ApplicationRecord
 
   before_validation -> { self.completed_at ||= Time.current }, on: :create
 
+  after_create_commit  -> { user.refresh_ranking! }
+  after_destroy_commit -> { user.refresh_ranking! }
+
   scope :on_date, ->(date) { where(completed_at: date.all_day) }
   scope :today, -> { on_date(Date.current) }
+
+  def self.active_days_since(date)
+    where(completed_at: date..).distinct.count(Arel.sql("DATE(completed_at)"))
+  end
 
   def self.streak
     dates = group(Arel.sql("DATE(completed_at)")).order(Arel.sql("DATE(completed_at) DESC")).pluck(Arel.sql("DATE(completed_at)"))

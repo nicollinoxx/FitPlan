@@ -7,6 +7,7 @@ en:
   link_sheet_requests: 'Sheet Requests'
   link_dashboard: 'Dashboard'
   link_profiles:  'Profiles'
+  link_rankings:  'Rankings'
 
   #languages
   language:     'Language'
@@ -316,6 +317,30 @@ en:
     new_follower: 'started following you'
     new_sheet_share: 'sent you sheets to review.'
     view: 'View'
+
+  #rankings------------------------------
+  rankings:
+    you:         'You'
+    points:      'pts'
+    description: 'Score combines your consistency over the last 30 days with your current streak.'
+    streak_days:
+      one:       '%{count} day'
+      other:     '%{count} days'
+    tabs:
+      global:    'Global'
+      friends:   'Friends'
+    summary:
+      position:  'Position'
+      score:     'Score'
+      streak:    'Streak'
+      unranked:  'Complete a sheet to enter the ranking.'
+    global:
+      title:     'Global ranking'
+      empty:     'No one is ranked yet.'
+    friends:
+      title:     'Friends ranking'
+      empty:     "You don't have friends yet."
+      find_friends: 'Find friends'
 
   #social------------------------------
   social:

@@ -1,0 +1,13 @@
+<ul class="nav nav-pills gap-2 mb-4">
+  <li class="nav-item">
+    <%= link_to global_rankings_path, class: "nav-link #{'active' if current_page?(global_rankings_path)}" do %>
+      <i class="bi bi-globe me-1"></i> <%= t('rankings.tabs.global') %>
+    <% end %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to friends_rankings_path, class: "nav-link #{'active' if current_page?(friends_rankings_path)}" do %>
+      <i class="bi bi-people me-1"></i> <%= t('rankings.tabs.friends') %>
+    <% end %>
+  </li>
+</ul>

@@ -53,6 +53,11 @@ Rails.application.routes.draw do
     get :charts
   end
 
+  resource :rankings, only: [] do
+    get :global
+    get :friends
+  end
+
   root 'sheets#index'
   get "set_locale/(:locale)", to: "application#set_session_locale", as: :set_locale
 

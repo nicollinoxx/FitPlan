@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include Normalizable
   include User::Followable
   include User::Shareable
+  include User::Rankable
 
   has_secure_password
   has_one_attached :avatar
