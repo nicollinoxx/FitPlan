@@ -19,6 +19,14 @@ class RankingsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", social_profile_path(@user)
   end
 
+  test "explains how the score is calculated" do
+    get global_rankings_url
+
+    assert_response :success
+    assert_select "details summary", text: I18n.t("rankings.description")
+    assert_select "details", text: /#{Regexp.escape(I18n.t("rankings.about.note"))}/
+  end
+
   test "global skips unranked users" do
     @user.update!(ranking_score: 0)
     @other.update!(ranking_score: 0)

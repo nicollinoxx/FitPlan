@@ -9,7 +9,7 @@ class SheetCompletion < ApplicationRecord
   before_validation -> { self.completed_at ||= Time.current }, on: :create
 
   after_create_commit  -> { user.refresh_ranking! }
-  after_destroy_commit -> { user.refresh_ranking! }
+  after_destroy_commit -> { user.refresh_ranking! if user&.persisted? }
 
   scope :on_date, ->(date) { where(completed_at: date.all_day) }
   scope :today, -> { on_date(Date.current) }

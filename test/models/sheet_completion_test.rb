@@ -23,6 +23,22 @@ class SheetCompletionTest < ActiveSupport::TestCase
     assert_equal 0, @user.sheet_completions.streak
   end
 
+  test "refreshes the user ranking when a completion is destroyed" do
+    @user.sheet_completions.destroy_all
+    completion = @user.sheet_completions.create!(sheet: sheets(:one), completed_at: Time.current)
+
+    assert_changes -> { @user.reload.ranking_score }, to: 0 do
+      completion.destroy!
+    end
+  end
+
+  test "destroying the user does not raise from the ranking callback" do
+    user = User.create!(name: "Deleted", email: "deleted@example.com", password: "Secret1*3*5*")
+    user.sheets.create!(name: "Sheet", sheet_type: "workout").sheet_completions.create!(user: user, completed_at: 1.day.ago)
+
+    assert_nothing_raised { user.destroy! }
+  end
+
   test "best_weekday should return day index" do
     result = @user.sheet_completions.best_weekday
     assert_includes (0..6), result
