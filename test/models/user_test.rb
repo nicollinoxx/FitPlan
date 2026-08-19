@@ -20,6 +20,21 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
   end
 
+  test "handle format is validated when the handle changes" do
+    user = users(:lazaro_nixon)
+    user.handle = "invalid_handle"
+
+    assert_not user.valid?(:update)
+    assert user.errors[:handle].any?
+  end
+
+  test "unrelated updates skip handle validation for legacy handles" do
+    user = users(:lazaro_nixon)
+    user.update_column(:handle, "legacy_handle")
+
+    assert user.reload.update(name: "Renamed")
+  end
+
   test "to_param returns handle" do
     assert_equal users(:lazaro_nixon).handle, users(:lazaro_nixon).to_param
   end

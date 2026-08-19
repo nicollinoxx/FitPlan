@@ -24,7 +24,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }
   validates :handle, presence: true, uniqueness: true, length: { minimum: 3 },
-                     format: { with: /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/ }, on: :update
+                     format: { with: /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/ }, on: :update, if: :handle_changed?
 
   normalizes :email, :handle, with: -> { _1.strip.downcase }
 

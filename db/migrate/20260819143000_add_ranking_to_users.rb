@@ -4,9 +4,5 @@ class AddRankingToUsers < ActiveRecord::Migration[8.1]
     add_column :users, :current_streak, :integer, default: 0, null: false
 
     add_index :users, [:ranking_score, :id], order: { ranking_score: :desc, id: :asc }
-
-    reversible do |direction|
-      direction.up { User.refresh_rankings! }
-    end
   end
 end

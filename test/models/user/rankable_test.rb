@@ -29,6 +29,12 @@ class User::RankableTest < ActiveSupport::TestCase
     assert_in_delta 4.67, @user.ranking_score, 0.01
   end
 
+  test "refresh_ranking! works for users with a legacy invalid handle" do
+    @user.update_column(:handle, "legacy_handle")
+
+    assert_nothing_raised { @user.reload.refresh_ranking! }
+  end
+
   # scopes -----------------------------
 
   test "ranked orders by score and skips unranked users" do
