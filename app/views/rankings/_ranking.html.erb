@@ -1,0 +1,39 @@
+<% position = offset + ranking_counter + 1 %>
+<% current = ranking == @user %>
+
+<%= link_to social_profile_path(ranking), data: { turbo_frame: '_top' }, class: 'text-decoration-none' do %>
+  <div class="d-flex align-items-center gap-3 p-3 mb-2 bg-body-tertiary shadow-sm rounded border-start border-4 <%= current ? 'border-success' : 'border-body-tertiary' %>">
+    <div class="text-center flex-shrink-0" style="width: 2.5rem;">
+      <% if position <= 3 %>
+        <i class="bi bi-trophy-fill fs-5 d-block <%= ranking_medal_class(position) %>"></i>
+      <% end %>
+      <span class="fw-bold <%= ranking_medal_class(position) %>"><%= position %></span>
+    </div>
+
+    <% if ranking.avatar.attached? %>
+      <%= image_tag ranking.avatar, class: 'rounded-circle border border-success-subtle border-3 object-fit-cover flex-shrink-0', width: 48, height: 48 %>
+    <% else %>
+      <span class="d-inline-flex align-items-center justify-content-center rounded-circle border border-success-subtle border-3 flex-shrink-0"
+            style="width: 48px; height: 48px;">
+        <i class="bi bi-person-fill text-body"></i>
+      </span>
+    <% end %>
+
+    <div class="flex-grow-1 overflow-hidden min-w-0">
+      <h6 class="fw-semibold mb-1 text-truncate text-body">
+        <%= ranking.name %>
+        <% if current %>
+          <span class="badge text-bg-success ms-1"><%= t('rankings.you') %></span>
+        <% end %>
+      </h6>
+      <p class="text-muted small mb-0 text-truncate">@<%= ranking.handle %></p>
+    </div>
+
+    <div class="text-end flex-shrink-0">
+      <p class="fw-bold text-success mb-0"><%= number_with_precision(ranking.ranking_score, precision: 0) %> <%= t('rankings.points') %></p>
+      <p class="text-muted small mb-0">
+        <i class="bi bi-fire me-1"></i><%= t('rankings.streak_days', count: ranking.current_streak) %>
+      </p>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+<% content_for(:title, t('.title')) %>
+
+<h1><%= t('.title') %></h1>
+<p class="text-muted"><%= t('rankings.description') %></p>
+
+<%= render 'tabs' %>
+<%= render 'summary' %>
+
+<div id="paginables" class="mb-3">
+  <% if @page.empty? %>
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-trophy fs-1 d-block mb-3"></i>
+      <p class="mb-0"><%= t('.empty') %></p>
+    </div>
+  <% else %>
+    <%= render partial: 'ranking', collection: @page.records, as: :ranking, locals: { offset: @offset } %>
+    <%= render 'shared/paginables/next_page_container', src: global_rankings_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
+  <% end %>
+</div>

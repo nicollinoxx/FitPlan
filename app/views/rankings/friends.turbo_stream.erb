@@ -1,0 +1,5 @@
+<%= turbo_stream.replace :next_page_container, partial: 'ranking', collection: @page.records, as: :ranking, locals: { offset: @offset } %>
+
+<% unless @page.last? %>
+  <%= turbo_stream.append :paginables, partial: 'shared/paginables/next_page_container', locals: { src: friends_rankings_path(page: @page.next_param, format: :turbo_stream) } %>
+<% end %>

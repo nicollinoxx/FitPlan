@@ -18,6 +18,7 @@ pt:
   link_sheet_requests: 'Solicitações de Planilha'
   link_dashboard:      'Painel'
   link_profiles:       'Perfis'
+  link_rankings:       'Ranking'
 
   #languages
   language:     'Idioma'
@@ -302,6 +303,30 @@ pt:
     new_follower: 'começou a te seguir'
     new_sheet_share: 'compartilhou fichas com você.'
     view: 'Visualizar'
+
+  #rankings------------------------------
+  rankings:
+    you:         'Você'
+    points:      'pts'
+    description: 'A pontuação combina sua consistência nos últimos 30 dias com sua sequência atual.'
+    streak_days:
+      one:       '%{count} dia'
+      other:     '%{count} dias'
+    tabs:
+      global:    'Global'
+      friends:   'Amigos'
+    summary:
+      position:  'Posição'
+      score:     'Pontuação'
+      streak:    'Sequência'
+      unranked:  'Complete uma ficha para entrar no ranking.'
+    global:
+      title:     'Ranking global'
+      empty:     'Ninguém está no ranking ainda.'
+    friends:
+      title:     'Ranking de amigos'
+      empty:     'Você ainda não tem amigos.'
+      find_friends: 'Encontrar amigos'
 
   #social------------------------------
   social:
