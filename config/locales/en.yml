@@ -323,6 +323,14 @@ en:
     you:         'You'
     points:      'pts'
     description: 'Score combines your consistency over the last 30 days with your current streak.'
+    about:
+      consistency:      'Consistency (70%):'
+      consistency_text: 'distinct days you trained in the last 30 days.'
+      streak:           'Streak (30%):'
+      streak_text:      'consecutive days training. It requires a workout today, so it resets when you skip a day.'
+      friends:          'Friends:'
+      friends_text:     'people you follow who also follow you back.'
+      note:             'Unmarking a sheet removes today from both, but days you already trained keep counting.'
     streak_days:
       one:       '%{count} day'
       other:     '%{count} days'
