@@ -38,6 +38,27 @@ class User < ApplicationRecord
     sessions.where.not(id: Current.session).delete_all
   end
 
+  def self.from_omniauth(auth)
+
+    user = where(provider: auth.provider, uid: auth.uid).first
+    return user if user
+
+    user = find_by(email: auth.info.email)
+    if user
+      user.update(provider: auth.provider, uid: auth.uid)
+      return user
+    end
+
+    create do |new_user|
+      new_user.provider = auth.provider
+      new_user.uid = auth.uid
+      new_user.email = auth.info.email
+      new_user.name = auth.info.name || auth.info.email.split('@').first
+      new_user.password = SecureRandom.hex(12)
+      new_user.verified = true
+    end
+  end
+
   def self.search_users(query)
     return none unless query.present?
 
@@ -60,7 +81,8 @@ class User < ApplicationRecord
 
   def generate_handle_unique
     loop do
-      self.handle = "#{name.parameterize}-#{SecureRandom.hex(4)}"
+      base_name = name.present? ? name.parameterize : "user"
+      self.handle = "#{base_name}-#{SecureRandom.hex(4)}"
       break unless User.exists?(handle: handle)
     end
   end

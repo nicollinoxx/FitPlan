@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: %i[ new create ]
+  skip_before_action :authenticate, only: %i[ new create omniauth failure ]
   before_action :set_session, only: :destroy
 
   def index
@@ -16,6 +16,23 @@ class SessionsController < ApplicationController
     else
       refresh_or_redirect_to sign_in_path(email_hint: params[:email]), notice: I18n.t('alert.session.invalid')
     end
+  end
+
+  def omniauth
+    user = User.from_omniauth(request.env['omniauth.auth'])
+
+    if user.persisted?
+      @session = user.sessions.create!
+      cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
+
+      redirect_to root_path, notice: "Login realizado com sucesso!"
+    else
+      redirect_to sign_in_path, alert: "Não foi possível autenticar pelo Google."
+    end
+  end
+
+  def failure
+    redirect_to sign_in_path, alert: "Autenticação cancelada."
   end
 
   def destroy
