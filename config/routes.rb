@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get    "sign_up", to: "registrations#new"
   post   "sign_up", to: "registrations#create"
 
+  get '/auth/:provider/callback', to: 'sessions#omniauth'
+  get '/auth/failure', to: 'sessions#failure'
+
+
   resources :sessions, only: [:index, :show, :destroy]
   resource  :password, only: [:edit, :update]
   namespace :identity do

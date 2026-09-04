@@ -21,13 +21,13 @@
         Fit<span class="text-success">Plan</span>
       </h1>
 
-      <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
-        <div class="mb-4">
+      <%= form_with(url: sign_in_path, class: 'mb-3', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
+        <div class="mb-3">
           <%= form.label :email, class: 'form-label' %>
           <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control', placeholder: t('.form.placeholder.email') %>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
           <div class="d-flex justify-content-between">
             <%= form.label :password, t('.form.label.password'), class: 'form-label' %>
             <%= link_to t('.link_forgot_password'), new_identity_password_reset_path, class: 'small' %>
@@ -41,14 +41,23 @@
           </div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
           <%= form.submit t(".submit"), class: 'btn btn-success w-100' %>
         </div>
       <% end %>
 
-      <div class="mt-3">
-        <p class="mb-1"><%= t('.section_signup') %></p>
-        <%= link_to t('.signup'), sign_up_path, class: 'btn btn-orange w-100' %>
+      <div class="mb-3">
+        <%= button_to "/auth/google_oauth2",
+              method: :post,
+              data: { turbo: false },
+              class: 'btn btn-light border w-100 d-flex align-items-center justify-content-center gap-2 text-dark' do %>
+          <i class="bi bi-google"></i> Entrar com o Google
+        <% end %>
+      </div>
+
+      <div class="mt-3 text-center">
+        <p class="mb-1 text-muted"><%= t('.section_signup') %></p>
+        <%= link_to t('.signup'), sign_up_path, class: 'btn btn-orange w-100 text-white' %>
       </div>
     </div>
     </div>
