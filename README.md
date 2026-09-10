@@ -4,6 +4,10 @@ FitPlan is a software designed for managing **personalized records** (diet and w
 The platform allows you to create personalized workout and diet records, calculate **BMI (Body Mass Index)**, 
 **BMR (Basal Metabolic Rate)**, and **meal calories**, and send copies of records to other users.
 
+## Mobile
+- [Android](https://github.com/nicollinoxx/FitPlan-Android) — Kotlin, Turbo Native and Strada
+- [iOS](https://github.com/nicollinoxx/FitPlan-IOS) — Swift, Turbo Native and Strada
+
 # Advisors
 - Fabio Pereira Botelho
 
