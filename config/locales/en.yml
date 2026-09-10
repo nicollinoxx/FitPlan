@@ -322,12 +322,12 @@ en:
   rankings:
     you:         'You'
     points:      'pts'
-    description: 'Score combines your consistency over the last 30 days with your current streak.'
+    description: 'The monthly ranking combines consistency and streaks from the current month. It resets at the start of each month.'
     about:
       consistency:      'Consistency (70%):'
-      consistency_text: 'distinct days you trained in the last 30 days.'
+      consistency_text: 'distinct days with completed sheets in the last 30 days, limited to the current month.'
       streak:           'Streak (30%):'
-      streak_text:      'consecutive days training. It requires a workout today, so it resets when you skip a day.'
+      streak_text:      'consecutive days with completed sheets in the current month. It requires a completion today.'
       friends:          'Friends:'
       friends_text:     'people you follow who also follow you back.'
       note:             'Unmarking a sheet removes today from both, but days you already trained keep counting.'
