@@ -4,6 +4,7 @@ class RankingsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user  = users(:lazaro_nixon)
     @other = users(:lazaro)
+    User.update_all(ranking_month: Date.current.beginning_of_month)
 
     sign_in_as(@user)
   end
@@ -73,10 +74,23 @@ class RankingsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", social_profile_path(@other), false
   end
 
+  test "both endpoints ignore a requested month and hide old scores" do
+    @user.update!(ranking_score: 90, ranking_month: Date.current.prev_month.beginning_of_month)
+
+    get global_rankings_url, params: { current_month: @user.ranking_month }
+    assert_response :success
+    assert_select "a[href=?]", social_profile_path(@user), false
+
+    get friends_rankings_url, params: { current_month: @user.ranking_month }
+    assert_response :success
+    assert_select "a[href=?]", social_profile_path(@user)
+    assert_select "p", text: "90 pts", count: 0
+  end
+
   private
 
   def create_ranked_user(index)
     User.create!(name: "ranked#{index}", email: "ranked#{index}@example.com",
-                 password: "Secret1*3*5*", ranking_score: 100 - index)
+                 password: "Secret1*3*5*", ranking_score: 100 - index, ranking_month: Date.current.beginning_of_month)
   end
 end
