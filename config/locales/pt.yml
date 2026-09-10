@@ -308,12 +308,12 @@ pt:
   rankings:
     you:         'Você'
     points:      'pts'
-    description: 'A pontuação combina sua consistência nos últimos 30 dias com sua sequência atual.'
+    description: 'O ranking mensal combina consistência e sequência do mês atual. A competição reinicia no início de cada mês.'
     about:
       consistency:      'Consistência (70%):'
-      consistency_text: 'dias distintos em que você treinou nos últimos 30 dias.'
+      consistency_text: 'dias distintos com fichas concluídas nos últimos 30 dias, limitados ao mês atual.'
       streak:           'Sequência (30%):'
-      streak_text:      'dias seguidos treinando. Exige treino hoje, então zera quando você pula um dia.'
+      streak_text:      'dias seguidos com fichas concluídas no mês atual. Exige uma conclusão hoje.'
       friends:          'Amigos:'
       friends_text:     'pessoas que você segue e que também seguem você.'
       note:             'Desmarcar uma ficha remove o dia de hoje dos dois, mas os dias já treinados continuam contando.'

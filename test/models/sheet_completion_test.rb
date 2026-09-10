@@ -64,3 +64,38 @@ class SheetCompletionTest < ActiveSupport::TestCase
     assert_equal 100, progress[:percentage]
   end
 end
+
+class SheetCompletionConcurrencyTest < ActiveSupport::TestCase
+  self.use_transactional_tests = false
+  self.fixture_table_names = []
+
+  test "concurrent completions and refreshes preserve distinct day scoring" do
+    travel_to Time.zone.local(2026, 9, 15, 12) do
+      user = User.create!(name: "Concurrent", email: "concurrent-ranking@example.com", password: "Secret1*3*5*")
+      sheet = user.sheets.create!(name: "Concurrent", sheet_type: "workout")
+      ready = Queue.new
+      start = Queue.new
+      threads = [Time.current, 1.day.ago].map do |time|
+        Thread.new do
+          ActiveRecord::Base.connection_pool.with_connection do
+            ready << true
+            start.pop
+            2.times { SheetCompletion.create!(user_id: user.id, sheet_id: sheet.id, completed_at: time) }
+          end
+        end
+      end
+      2.times { ready.pop }
+      2.times { start << true }
+      threads.each(&:value)
+
+      assert_equal 4, user.sheet_completions.count
+      assert_equal 2, user.reload.current_streak
+      assert_in_delta 6.67, user.ranking_score, 0.01
+      user.refresh_ranking!
+      assert_in_delta 6.67, user.reload.ranking_score, 0.01
+    ensure
+      threads&.each(&:join)
+      user&.destroy!
+    end
+  end
+end
