@@ -74,6 +74,20 @@ class RankingsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", social_profile_path(@other), false
   end
 
+  test "each tab reports the position within its own ranking" do
+    @user.update!(ranking_score: 10)
+    @other.update!(ranking_score: 50)
+    3.times { |index| create_ranked_user(index) }
+
+    get friends_rankings_url
+    assert_response :success
+    assert_select "p", text: "#2"
+
+    get global_rankings_url
+    assert_response :success
+    assert_select "p", text: "#5"
+  end
+
   test "both endpoints ignore a requested month and hide old scores" do
     @user.update!(ranking_score: 90, ranking_month: Date.current.prev_month.beginning_of_month)
 

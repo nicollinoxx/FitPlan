@@ -326,7 +326,7 @@ pt:
     summary:
       position:  'Posição'
       score:     'Pontuação'
-      streak:    'Sequência'
+      streak:    'Sequência do mês'
       unranked:  'Complete uma ficha para entrar no ranking.'
     global:
       title:     'Ranking global'

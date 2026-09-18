@@ -11,7 +11,7 @@
   <%= render 'shared/paginables/next_page_container', src: friends_rankings_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
 </div>
 
-<% unless @has_friends %>
+<% unless @user.friends.exists? %>
   <div class="text-center py-5 text-muted">
     <i class="bi bi-people fs-1 d-block mb-3"></i>
     <p><%= t('.empty') %></p>

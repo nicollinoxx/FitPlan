@@ -8,28 +8,30 @@ module User::Rankable
   STREAK_WEIGHT      = 0.3
 
   included do
-    scope :by_score, -> {
-      score = Arel::Nodes::Case.new(arel_table[:ranking_month]).when(Date.current.beginning_of_month)
-        .then(arel_table[:ranking_score]).else(0)
-      order(score.desc, id: :asc)
-    }
-    scope :ranked, -> { where(ranking_month: Date.current.beginning_of_month).where.not(ranking_score: ..0).by_score }
+    scope :by_current_score, -> { order(arel_table[:ranking_month].desc.nulls_last, ranking_score: :desc, id: :asc) }
+
+    scope :current_month, -> { where(ranking_month: Date.current.beginning_of_month) }
+    scope :ranked, -> { current_month.where.not(ranking_score: ..0).by_current_score }
   end
 
   class_methods do
     def refresh_rankings!
-      find_each(&:refresh_ranking!)
+      find_each do |user|
+        user.refresh_ranking!
+      rescue StandardError => error
+        Rails.error.report(error, context: { user_id: user.id }, source: "rankings")
+      end
     end
   end
 
   def friends_ranking
-    User.where(id: friends).or(User.where(id: id)).by_score
+    User.where(id: friends).or(User.where(id: id)).by_current_score
   end
 
-  def ranking_position
-    rankings = User.ranked
-    higher_scores = rankings.where.not(ranking_score: ..ranking_score)
-    higher_scores.or(rankings.where(ranking_score: ranking_score, id: ...id)).count + 1
+  def position_in_ranking(ranking)
+    scored = ranking.current_month
+    ahead = scored.where.not(ranking_score: ..ranking_score)
+    ahead.or(scored.where(ranking_score: ranking_score, id: ...id)).count + 1
   end
 
   def ranking_score
@@ -45,23 +47,23 @@ module User::Rankable
   end
 
   def refresh_ranking!
-    with_lock do
+    with_lock("FOR NO KEY UPDATE") do
       now = Time.current
-      completions = sheet_completions.where(completed_at: now.beginning_of_month..now)
-      streak = completions.streak(today: now.to_date)
-      update!(current_streak: streak, ranking_score: score_from(streak, completions, now), ranking_month: now.to_date.beginning_of_month)
+      days = sheet_completions.where(completed_at: now.beginning_of_month..now).active_days
+      streak = SheetCompletion.streak(today: now.to_date, days: days)
+      assign_attributes(current_streak: streak, ranking_score: score_from(streak, days), ranking_month: now.to_date.beginning_of_month)
+      save!(validate: false)
     end
   end
 
   private
 
-  def score_from(streak, completions, now)
-    (consistency_rate(completions, now) * CONSISTENCY_WEIGHT + streak_rate(streak) * STREAK_WEIGHT).round(2)
+  def score_from(streak, days)
+    (consistency_rate(days) * CONSISTENCY_WEIGHT + streak_rate(streak) * STREAK_WEIGHT).round(2)
   end
 
-  def consistency_rate(completions, now)
-    active_days = completions.active_days_since(now - CONSISTENCY_WINDOW_DAYS.days)
-    active_days / CONSISTENCY_WINDOW_DAYS.to_f * 100
+  def consistency_rate(days)
+    [days.size, CONSISTENCY_WINDOW_DAYS].min / CONSISTENCY_WINDOW_DAYS.to_f * 100
   end
 
   def streak_rate(streak)

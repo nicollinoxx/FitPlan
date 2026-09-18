@@ -340,7 +340,7 @@ en:
     summary:
       position:  'Position'
       score:     'Score'
-      streak:    'Streak'
+      streak:    'Streak this month'
       unranked:  'Complete a sheet to enter the ranking.'
     global:
       title:     'Global ranking'

@@ -1,86 +1,138 @@
 # Ranking
 
-## Fluxo existente
+## Existing flow
 
-Conclusões manuais de fichas e conclusões automáticas dos itens de treino/dieta
-criam `SheetCompletion`. Os callbacks de criação/remoção recalculam
-`User#ranking_score` e `current_streak`; `User.refresh_rankings!` continua sendo
-executado diariamente pelo Solid Queue em `config/recurring.yml`.
-Não há cache específico do ranking.
+Manual sheet completions and automatic workout/diet item completions create a
+`SheetCompletion`. The create/destroy callbacks recalculate `User#ranking_score`
+and `current_streak`; `User.refresh_rankings!` still runs daily through Solid
+Queue in `config/recurring.yml`. There is no ranking-specific cache.
 
-## Ranking mensal
+## Monthly ranking
 
-O cálculo usa `Time.current` no servidor e o timezone da aplicação,
-`America/Sao_Paulo`. Considera conclusões entre o início do mês e o instante do
-recálculo. Mantém a fórmula: dias distintos nos últimos 30 dias / 30 × 70,
-mais sequência atual, limitada a 30 dias, / 30 × 30; arredondamento de duas casas.
-Ambos os componentes ficam restritos ao mês atual.
+The calculation uses server-side `Time.current` and the application time zone,
+`America/Sao_Paulo`. It considers completions between the start of the month and
+the moment of the recalculation. The formula is unchanged: distinct active days
+/ 30 × 70, plus the current streak / 30 × 30; rounded to two decimals. Both
+components are restricted to the current month.
 
-`users.ranking_month` identifica o mês do agregado existente. Consultas e leitores
-de pontuação/sequência tratam agregados de outros meses (ou sem mês) como zero,
-inclusive antes da rotina diária. O reset é lógico, sem novo job ou exclusão de
-histórico. `sheet_completions` continua sendo a fonte de reconstrução; não são
-criadas cópias de pontuação nem snapshots de classificação mensal.
+Both components are capped at 30 days, so a 31-day month cannot push the score
+past 100. The window is the month itself rather than a rolling 30-day cutoff
+measured from `Time.current`: a cutoff relative to the current clock would drop
+part of the first day of the month during the 31st, making the score fall on its
+own between two recalculations on the same day, with no completion created or
+removed.
 
-Na implantação, executar `bin/rails db:migrate` e
-`bin/rails runner 'User.refresh_rankings!'` no ambiente correspondente para
-reconstruir os agregados dos usuários existentes. Sem esse recálculo, agregados
-legados ficam logicamente zerados até uma conclusão ou a rotina diária.
-A atualização diária já existente continua responsável pelo decaimento da
-sequência e da janela de 30 dias dentro do mês.
+`users.ranking_month` identifies the period of the existing aggregate. Queries
+and score/streak readers treat aggregates from other months (or with no month)
+as zero, including before the daily job runs. The reset is logical — no new job
+and no history deletion. `sheet_completions` remains the source for rebuilds; no
+score copies or monthly standings snapshots are created.
 
-## Antifraude
+On deploy, run `bin/rails db:migrate` and
+`bin/rails runner 'User.refresh_rankings!'` in the target environment to rebuild
+the aggregates of existing users. Without that recalculation, legacy aggregates
+stay logically zeroed until a completion or the daily job. The existing daily
+refresh remains responsible for streak decay and for the 30-day window within
+the month.
 
-- Os três endpoints de conclusão já determinam `completed_at` no backend e não
-  aceitam timestamps, timezone ou pontuação enviados pelo cliente. Essa proteção
-  foi mantida e coberta por testes de requisição.
-- O ranking ignora conclusões futuras no momento do cálculo e de meses anteriores.
-- O Groupdate já instalado agrupa dias no timezone da aplicação, evitando que
-  a meia-noite UTC transforme um único dia local em dois dias pontuáveis.
-- A pontuação continua contando dias distintos. Retries e múltiplas rodadas
-  legítimas no mesmo dia não somam pontos extras. Não há deduplicação das rodadas:
-  o domínio e os testes existentes permitem várias conclusões diárias.
-- `with_lock` no usuário serializa leitura e gravação dos recálculos concorrentes,
-  inclusive os disparados pelos callbacks e pela rotina diária.
+## Anti-fraud
 
-O sistema registra conclusões declaradas pelo usuário; não verifica fisicamente
-a realização do treino. Escritas internas em modelos podem preservar datas
-históricas e devem continuar restritas a fontes confiáveis.
+- All three completion endpoints already assign `completed_at` on the backend
+  and reject client-supplied timestamps, time zones or scores. That protection
+  is preserved and covered by request tests.
+- The ranking ignores completions in the future at calculation time and
+  completions from previous months.
+- The already-installed Groupdate groups days in the application time zone,
+  preventing UTC midnight from turning a single local day into two scorable days.
+- Scoring still counts distinct days. Retries and legitimate repeated rounds on
+  the same day do not add extra points. Rounds are not deduplicated: the domain
+  and the existing tests allow several completions per day.
+- A refresh runs two statements: the lock and one grouped read of the month.
+  Days come back newest first, so the streak reads off the same list the
+  consistency counts instead of grouping twice. `avatar_size` only validates
+  when an avatar is actually being attached, so a write of three derived
+  columns no longer queries ActiveStorage while holding the lock.
+- `with_lock("FOR NO KEY UPDATE")` on the user serializes reads and writes of
+  concurrent recalculations, including those triggered by callbacks and by the
+  daily job. `FOR NO KEY UPDATE` does not conflict with the `FOR KEY SHARE`
+  locks that PostgreSQL takes when inserting rows referencing `users`, so a
+  recalculation no longer blocks unrelated completions or follows.
+- A completion only refreshes the ranking when it is the earliest one of its
+  local day. Extra rounds on a day that already scored cannot change a distinct
+  day count, so they take no lock at all: 50 completions on one day acquire one
+  lock instead of 50. Comparing by id keeps the lowest one always refreshing, so
+  concurrent completions on the same day never all skip. Deletions always
+  refresh, since removing the last completion of a day does change the score.
 
-## Ranking entre amigos
+The system records completions declared by the user; it does not physically
+verify that the workout happened. Internal writes from models can preserve
+historical dates and should stay restricted to trusted sources.
 
-Reutiliza `friends_ranking` e `User#friends`, já existentes: usuário atual mais
-seguidores mútuos. Não existem estados de aprovação ou bloqueio neste modelo;
-relações unilaterais e desfeitas ficam de fora. Amigos sem pontos e o próprio
-usuário continuam aparecendo; o global continua exibindo apenas pontuação positiva.
+## Streaks on the dashboard and in the ranking
 
-Ambos usam `by_score`, ordenação SQL por pontuação decrescente e ID crescente.
-`ranking_position` também respeita esse desempate. As rotas, paginação, carregamento
-de avatares e templates existentes foram preservados.
+They are different quantities and the labels say so. The dashboard card counts
+consecutive days over the whole history, next to total completions and best
+weekday, which are also all-time. The ranking card counts the streak that
+scores, which the month restricts, and is labelled as the month's.
 
-## ORM e testes
+Making the dashboard monthly would have matched the numbers by discarding the
+one users care about: a 50-day streak would read as one day on the 1st. The
+monthly reset exists to let a newcomer reach the top of a leaderboard, not to
+erase training history.
 
-Os filtros de mês, pontuação positiva e desempate usam relations ActiveRecord,
-intervalos e `or`, sem strings SQL novas. `by_score` usa um `CASE` construído com
-Arel para ordenar agregados antigos como zero sem atualizá-los; um `order` simples
-sobre a coluna persistida não representa esse reset lógico. O Groupdate existente
-cuida das datas e da ordem dos dias, sem conversão ou ordenação adicional em Ruby.
+## Friends ranking
 
-As regras de mês, pontuação, amizades e concorrência são testadas nos models.
-Os testes de requisição verificam somente parâmetros controlados pelo cliente,
-reutilização da conclusão de dieta em retries e apresentação do ranking. Não há
-novos testes de navegador/E2E nem simulação de um treino inteiro para testar datas.
+Reuses the existing `friends_ranking` and `User#friends`: the current user plus
+mutual followers. This model has no approval or block states; one-way and undone
+relationships are left out. Friends with no points and the user themselves still
+appear; the global ranking still shows only positive scores.
 
-## Arquivos relevantes
+Both order by descending score and ascending id, and the position honours the
+same tie-breaker. The existing routes, pagination, avatar loading and templates
+were preserved.
 
-- `app/models/user/rankable.rb`: agregado mensal, ordenação e recálculo com lock.
-- `app/models/sheet_completion.rb`: histórico, callbacks e agrupamento diário.
-- `app/models/user/followable.rb`: definição existente de amigos.
-- `app/controllers/rankings_controller.rb`: endpoints global e amigos existentes.
-- `db/migrate/20260909160000_add_ranking_month_to_users.rb`: coluna mensal reversível.
-- `config/locales/{pt,en}.yml`: explicação do período nas telas.
-- `test/models/{user/rankable,sheet_completion}_test.rb`: mês, timezone,
-  duplicação, concorrência, histórico, amigos e desempate.
-- `test/controllers/rankings_controller_test.rb` e
+The position is counted on the ranking being displayed, not on a fixed one:
+`position_in_ranking` takes the ranking as a required argument, so each tab
+reports its own number and there is no implicit one to fall back to. The summary card on the friends tab used
+to show the global position, contradicting the list right below it, where a
+newcomer can lead their friends while sitting far down the global ranking. The
+count is restricted to the current month because aggregates from other months
+are displayed as zero and must not count as ahead of anyone.
+
+Both use `by_current_score`, which orders by the two stored columns rather than
+by an expression: a month is never in the future, so the current one always
+sorts first and aggregates from other months fall behind it, which is where a
+score that reads as zero belongs. `ranking_month` is nullable for users who
+were never refreshed, and those sort last too. `ranked` constrains the month to
+a single value, so the planner drops it from the sort and
+`index_users_on_ranking_month_and_ranking_score_and_id` serves the global page
+as an index scan, with no sort of the whole table.
+
+## ORM and tests
+
+The month, positive-score and tie-breaker filters use ActiveRecord relations,
+ranges and `or`, with no new SQL strings. `by_current_score` orders stale aggregates behind the current ones without
+updating them, using only the stored columns. The existing Groupdate
+handles the dates and the day ordering, with no extra conversion or sorting in
+Ruby.
+
+The month, scoring, friendship and concurrency rules are tested in the models.
+The request tests only cover client-controlled parameters, reuse of the diet
+completion on retries, and ranking presentation. There are no new browser/E2E
+tests and no simulation of a full workout to test dates.
+
+## Relevant files
+
+- `app/models/user/rankable.rb`: monthly aggregate, ordering and locked refresh.
+- `app/models/sheet_completion.rb`: history, callbacks and daily grouping.
+- `app/models/user/followable.rb`: existing friends definition.
+- `app/controllers/rankings_controller.rb`: global and friends endpoints, each passing its own ranking to the summary.
+- `db/migrate/20260909160000_add_ranking_month_to_users.rb`: reversible monthly column.
+- `db/migrate/20260909160001_index_users_on_ranking_month.rb`: index backing the global ranking.
+- `db/migrate/20260918130000_remove_ranking_score_index_from_users.rb`: drops the index no ranking reads any more.
+- `config/locales/{pt,en}.yml`: period explanation on the screens.
+- `test/models/{user/rankable,sheet_completion}_test.rb`: month, time zone,
+  duplication, concurrency, history, friends and tie-breaker.
+- `test/controllers/rankings_controller_test.rb` and
   `test/controllers/{sheets,workouts,diets}/completions_controller_test.rb`:
-  consultas e tentativas de manipulação dos parâmetros.
+  queries and parameter tampering attempts.
