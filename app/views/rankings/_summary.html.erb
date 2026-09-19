@@ -2,7 +2,7 @@
   <div class="col-4">
     <div class="h-100 p-3 text-center bg-body-tertiary shadow-sm rounded border-bottom border-4 border-warning">
       <i class="bi bi-award-fill fs-4 d-block mb-1 text-warning"></i>
-      <p class="h4 fw-bold mb-0"><%= @user.ranked? ? "##{@user.ranking_position}" : '—' %></p>
+      <p class="h4 fw-bold mb-0"><%= @user.ranked? ? "##{@position}" : '—' %></p>
       <p class="text-muted small mb-0"><%= t('rankings.summary.position') %></p>
     </div>
   </div>

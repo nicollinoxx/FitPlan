@@ -6,7 +6,6 @@ class RankingsController < ApplicationController
   end
 
   def friends
-    @has_friends = @user.friends.exists?
     set_rankings_page_from @user.friends_ranking
   end
 
@@ -17,6 +16,8 @@ class RankingsController < ApplicationController
   end
 
   def set_rankings_page_from(rankings)
+    @position = @user.position_in_ranking(rankings)
+
     set_page_and_extract_portion_from rankings.includes(avatar_attachment: :blob)
     @offset = @page.records.offset_value.to_i
   end

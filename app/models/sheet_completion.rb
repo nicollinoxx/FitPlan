@@ -8,21 +8,18 @@ class SheetCompletion < ApplicationRecord
 
   before_validation -> { self.completed_at ||= Time.current }, on: :create
 
-  after_create_commit  -> { user.refresh_ranking! }
+  after_create_commit  -> { user.refresh_ranking! unless earlier_completion_on_same_day? }
   after_destroy_commit -> { user.refresh_ranking! if user&.persisted? }
 
   scope :on_date, ->(date) { where(completed_at: date.all_day) }
   scope :today, -> { on_date(Date.current) }
 
-  def self.active_days_since(date)
-    where(completed_at: date..).distinct.count(Arel.sql("DATE(completed_at)"))
+  def self.active_days
+    group_by_day(:completed_at, time_zone: Time.zone, series: false, reverse: true).count.keys
   end
 
-  def self.streak
-    dates = group(Arel.sql("DATE(completed_at)")).order(Arel.sql("DATE(completed_at) DESC")).pluck(Arel.sql("DATE(completed_at)"))
-    return 0 unless dates.first == Date.current
-
-    dates.each_with_index.take_while { |date, i| date == Date.current - i }.size
+  def self.streak(today: Date.current, days: active_days)
+    days.each_with_index.take_while { |day, index| day == today - index }.size
   end
 
   def self.best_weekday
@@ -49,4 +46,10 @@ class SheetCompletion < ApplicationRecord
     else             group_by_month(:completed_at).count
     end
   end
+
+  private
+
+    def earlier_completion_on_same_day?
+      user.sheet_completions.on_date(completed_at.to_date).where(id: ...id).exists?
+    end
 end

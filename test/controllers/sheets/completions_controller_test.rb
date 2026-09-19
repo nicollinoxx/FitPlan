@@ -37,4 +37,16 @@ class Sheets::CompletionsControllerTest < ActionDispatch::IntegrationTest
       delete sheet_completion_url(@workout_sheet)
     end
   end
+
+  test "sheet completion ignores client dates and timezone" do
+    travel_to Time.zone.local(2026, 9, 30, 23, 30) do
+      post sheet_completion_url(@workout_sheet), params: {
+        completed_at: 1.month.from_now, current_date: 1.month.from_now.to_date, timezone: "Pacific/Auckland",
+        sheet_completion: { completed_at: 1.month.ago, created_at: 1.month.ago }, ranking_score: 100
+      }
+
+      assert_response :success
+      assert_equal Time.current, @workout_sheet.sheet_completions.order(:id).last.completed_at
+    end
+  end
 end
