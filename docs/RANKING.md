@@ -35,6 +35,34 @@ stay logically zeroed until a completion or the daily job. The existing daily
 refresh remains responsible for streak decay and for the 30-day window within
 the month.
 
+## The nightly run
+
+Consistency counts distinct days in the month, so it only moves when a
+completion is created or removed, and both already refresh the user. A streak
+is consecutive days ending today, so it is the only part of the score that
+decays with time, and time passing is not an event this application sees. That
+is the whole job of the scheduled run: zero the streak of everyone who did not
+complete anything today.
+
+Once the streak is zero the score is its consistency half, which is stored in
+`users.consistency_score` for exactly this reason. The run is then a single
+statement that copies one column into another, with no formula in SQL to drift
+from the Ruby one:
+
+    UPDATE users SET current_streak = 0, ranking_score = consistency_score
+    WHERE current_streak <> 0 AND id NOT IN (completions today)
+
+For 200 users that is one statement instead of 801, and no row locks at all.
+The result is identical to recalculating every user, which a test asserts by
+running both and comparing the aggregates. Being one statement is also why it
+runs at 00:05 rather than at 3am: the stored streak is stale between midnight
+and the run, and closing that window was not affordable when it cost four
+statements and a lock per user.
+
+`User.refresh_rankings!` remains the full recalculation, for deploys and for
+rebuilding after a formula change. It reports a failing user through
+`Rails.error` and carries on, so one bad row cannot stall the rest.
+
 ## Anti-fraud
 
 - All three completion endpoints already assign `completed_at` on the backend

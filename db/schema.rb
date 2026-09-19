@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_18_130000) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_18_140000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -154,6 +154,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_18_130000) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.decimal "consistency_score", precision: 5, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.integer "current_streak", default: 0, null: false
     t.string "email", null: false
