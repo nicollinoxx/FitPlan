@@ -15,6 +15,12 @@ module User::Rankable
   end
 
   class_methods do
+    def expire_streaks!
+      where.not(current_streak: 0)
+        .where.not(id: SheetCompletion.today.select(:user_id))
+        .update_all(current_streak: 0, ranking_score: arel_table[:consistency_score])
+    end
+
     def refresh_rankings!
       find_each do |user|
         user.refresh_ranking!
@@ -51,22 +57,25 @@ module User::Rankable
       now = Time.current
       days = sheet_completions.where(completed_at: now.beginning_of_month..now).active_days
       streak = SheetCompletion.streak(today: now.to_date, days: days)
-      assign_attributes(current_streak: streak, ranking_score: score_from(streak, days), ranking_month: now.to_date.beginning_of_month)
+      consistency = consistency_score_from(days)
+
+      assign_attributes(
+        current_streak: streak,
+        consistency_score: consistency.round(2),
+        ranking_score: (consistency + streak_score_from(streak)).round(2),
+        ranking_month: now.to_date.beginning_of_month
+      )
       save!(validate: false)
     end
   end
 
   private
 
-  def score_from(streak, days)
-    (consistency_rate(days) * CONSISTENCY_WEIGHT + streak_rate(streak) * STREAK_WEIGHT).round(2)
+  def consistency_score_from(days)
+    [days.size, CONSISTENCY_WINDOW_DAYS].min / CONSISTENCY_WINDOW_DAYS.to_f * 100 * CONSISTENCY_WEIGHT
   end
 
-  def consistency_rate(days)
-    [days.size, CONSISTENCY_WINDOW_DAYS].min / CONSISTENCY_WINDOW_DAYS.to_f * 100
-  end
-
-  def streak_rate(streak)
-    [streak, STREAK_CAP_DAYS].min / STREAK_CAP_DAYS.to_f * 100
+  def streak_score_from(streak)
+    [streak, STREAK_CAP_DAYS].min / STREAK_CAP_DAYS.to_f * 100 * STREAK_WEIGHT
   end
 end

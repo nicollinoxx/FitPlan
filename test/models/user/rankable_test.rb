@@ -43,6 +43,31 @@ class User::RankableTest < ActiveSupport::TestCase
     assert_in_delta 4.67, @user.reload.ranking_score, 0.01
   end
 
+  test "expire_streaks! leaves the same aggregate a full recalculation would" do
+    travel_to Time.zone.local(2026, 9, 21, 0, 5)
+    @user.refresh_ranking!
+    @other.refresh_ranking!
+    expired = User.expire_streaks! && User.order(:id).pluck(:current_streak, :ranking_score)
+
+    User.refresh_rankings!
+
+    assert_equal 0, @user.reload.current_streak
+    assert_equal expired, User.order(:id).pluck(:current_streak, :ranking_score)
+  end
+
+  test "expire_streaks! spares users who completed today" do
+    travel_to Time.zone.local(2026, 9, 21, 0, 5)
+    @user.sheet_completions.create!(sheet: sheets(:one))
+    streak = @user.reload.current_streak
+    score = @user.ranking_score
+
+    User.expire_streaks!
+
+    assert_equal 1, streak
+    assert_equal streak, @user.reload.current_streak
+    assert_equal score, @user.ranking_score
+  end
+
   test "refresh_rankings! keeps going when one user fails" do
     @user.update_column(:ranking_month, nil)
     failing_id = @other.id
