@@ -49,6 +49,15 @@ class SheetCompletionTest < ActiveSupport::TestCase
     assert_nil @user.sheet_completions.best_weekday
   end
 
+  test "streak spans months, so the dashboard keeps counting across a reset" do
+    @user.sheet_completions.destroy_all
+    travel_to Time.zone.local(2026, 10, 1, 12)
+    (0..4).each { |day| @user.sheet_completions.create!(sheet: sheets(:one), completed_at: day.days.ago) }
+
+    assert_equal 5, @user.sheet_completions.streak
+    assert_equal 1, @user.current_streak
+  end
+
   test "weekly_progress should return this_week last_week and percentage" do
     progress = @user.sheet_completions.weekly_progress
 
@@ -62,5 +71,60 @@ class SheetCompletionTest < ActiveSupport::TestCase
     progress = @user.sheet_completions.weekly_progress
 
     assert_equal 100, progress[:percentage]
+  end
+end
+
+class SheetCompletionConcurrencyTest < ActiveSupport::TestCase
+  self.use_transactional_tests = false
+  self.fixture_table_names = []
+
+  test "concurrent completions on the same day always refresh the ranking once" do
+    travel_to Time.zone.local(2026, 9, 15, 12) do
+      user = User.create!(name: "Same day", email: "same-day-ranking@example.com", password: "Secret1*3*5*")
+      sheet = user.sheets.create!(name: "Same day", sheet_type: "workout")
+      threads = 4.times.map do
+        Thread.new do
+          ActiveRecord::Base.connection_pool.with_connection { sheet.sheet_completions.create!(user_id: user.id) }
+        end
+      end
+      threads.each(&:value)
+
+      assert_equal 4, user.sheet_completions.count
+      assert_equal 1, user.reload.current_streak
+      assert_in_delta 3.33, user.ranking_score, 0.01
+    ensure
+      threads&.each(&:join)
+      user&.destroy!
+    end
+  end
+
+  test "concurrent completions and refreshes preserve distinct day scoring" do
+    travel_to Time.zone.local(2026, 9, 15, 12) do
+      user = User.create!(name: "Concurrent", email: "concurrent-ranking@example.com", password: "Secret1*3*5*")
+      sheet = user.sheets.create!(name: "Concurrent", sheet_type: "workout")
+      ready = Queue.new
+      start = Queue.new
+      threads = [Time.current, 1.day.ago].map do |time|
+        Thread.new do
+          ActiveRecord::Base.connection_pool.with_connection do
+            ready << true
+            start.pop
+            2.times { SheetCompletion.create!(user_id: user.id, sheet_id: sheet.id, completed_at: time) }
+          end
+        end
+      end
+      2.times { ready.pop }
+      2.times { start << true }
+      threads.each(&:value)
+
+      assert_equal 4, user.sheet_completions.count
+      assert_equal 2, user.reload.current_streak
+      assert_in_delta 6.67, user.ranking_score, 0.01
+      user.refresh_ranking!
+      assert_in_delta 6.67, user.reload.ranking_score, 0.01
+    ensure
+      threads&.each(&:join)
+      user&.destroy!
+    end
   end
 end

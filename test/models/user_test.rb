@@ -1,6 +1,16 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
+  # avatar --------------------------------------------------------------------
+
+  test "rejects an avatar over the size limit" do
+    user = users(:lazaro_nixon)
+    user.avatar.attach(io: StringIO.new("x" * 5.megabytes), filename: "big.png", content_type: "image/png")
+
+    assert_not user.valid?
+    assert_predicate user.errors[:avatar], :any?
+  end
+
   # handle --------------------------------------------------------------------
 
   test "generates handle on create" do

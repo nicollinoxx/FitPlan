@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :sheets,             dependent: :destroy
   has_many :sheet_completions
 
-  validate :avatar_size
+  validate :avatar_size, if: -> { attachment_changes["avatar"] }
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 6 }

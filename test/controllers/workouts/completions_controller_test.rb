@@ -32,4 +32,18 @@ class Workouts::CompletionsControllerTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  test "workout completion uses server time despite client timestamps" do
+    travel_to Time.zone.local(2026, 9, 30, 23, 30) do
+      post sheet_workout_completion_url(@sheet, @workout), params: {
+        completed_at: 1.month.from_now, remaining_series: 0,
+        completion: { completed_at: 1.month.ago, created_at: 1.month.ago }
+      }
+
+      assert_response :redirect
+      completion = @sheet.completions.today.find_by!(workout: @workout)
+      assert_equal Time.current, completion.completed_at
+      assert_equal @workout.series - 1, completion.remaining_series
+    end
+  end
 end

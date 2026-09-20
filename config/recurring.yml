@@ -14,6 +14,6 @@ production:
     command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
     schedule: every hour at minute 12
 
-  refresh_rankings:
-    command: "User.refresh_rankings!"
-    schedule: every day at 3am
+  expire_streaks:
+    class: ExpireStreaksJob
+    schedule: every day at 00:05am
