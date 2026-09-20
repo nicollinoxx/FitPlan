@@ -105,6 +105,7 @@ en:
   alert:
     session:
       invalid:               'Email or password is incorrect'
+      omniauth:              'Could not sign in with Google'
     password_reset:
       create:               "You can't reset your password until you verify your email"
       invalid:              'That password reset link is invalid'
@@ -375,6 +376,7 @@ en:
     new:
       title:        'Sign in'
       submit:       'Sign in'
+      google:       'Sign in with Google'
       signup:       'Sign up'
       welcome_link: 'Welcome'
       section_signup: "Don't have an account?"

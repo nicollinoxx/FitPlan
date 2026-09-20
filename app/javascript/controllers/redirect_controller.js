@@ -6,20 +6,25 @@ export default class extends Controller {
 
   connect() {
     this.handleSubmitEndBound = this.handleSubmitEnd.bind(this);
-    this.target = this.element.closest("form") || this.element;
-    this.target.addEventListener("turbo:submit-end", this.handleSubmitEndBound);
+    this.form = this.element.closest("form");
+
+    if (this.form) {
+      this.form.addEventListener("turbo:submit-end", this.handleSubmitEndBound);
+    } else {
+      this.#redirect();
+    }
   }
 
   disconnect() {
-    this.target.removeEventListener("turbo:submit-end", this.handleSubmitEndBound);
+    this.form?.removeEventListener("turbo:submit-end", this.handleSubmitEndBound);
   }
 
   handleSubmitEnd(event) {
-    if (!event.detail.success || !this.hasUrlValue) return;
-    this.#redirect()(this.urlValue || window.location.href);
+    if (event.detail.success) this.#redirect();
   }
 
-  #redirect()   { return this.refreshValue ? this.#refresh : this.#visit; }
-  #visit(url)   { Turbo.visit(url); }
-  #refresh(url) { Turbo.visit(url, { action: "replace" }); }
+  #redirect() {
+    if (!this.hasUrlValue) return;
+    Turbo.visit(this.urlValue || window.location.href, this.refreshValue ? { action: "replace" } : {});
+  }
 }

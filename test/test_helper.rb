@@ -14,6 +14,14 @@ class ActiveSupport::TestCase
     post(sign_in_url, params: { email: user.email, password: "Secret1*3*5*" }); user
   end
 
+  def stub_uri_open(file)
+    original = URI.method(:open)
+    URI.define_singleton_method(:open) { |*| file }
+    yield
+  ensure
+    URI.define_singleton_method(:open, original)
+  end
+
   def with_memory_cache
     original = Rails.cache
     Rails.cache = ActiveSupport::Cache::MemoryStore.new

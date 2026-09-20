@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   post   "sign_up", to: "registrations#create"
 
   get '/auth/:provider/callback', to: 'sessions#omniauth'
-  get '/auth/failure', to: 'sessions#failure'
-
+  get '/auth/failure',           to: 'sessions#omniauth'
 
   resources :sessions, only: [:index, :show, :destroy]
   resource  :password, only: [:edit, :update]
