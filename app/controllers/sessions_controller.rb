@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: %i[ new create ]
+  skip_before_action :authenticate, only: %i[ new create omniauth ]
   before_action :set_session, only: :destroy
 
   def index
@@ -18,11 +18,21 @@ class SessionsController < ApplicationController
     end
   end
 
+  def omniauth
+    if user = User.from_omniauth(request.env['omniauth.auth'])
+      @session = user.sessions.create!
+      cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
+    else
+      redirect_to sign_in_path, notice: I18n.t('alert.session.omniauth')
+    end
+  end
+
   def destroy
     @session.destroy; recede_or_redirect_to(sessions_path, notice: I18n.t('notice.session.destroy'))
   end
 
   private
+
     def set_session
       @session = Current.user.sessions.find(params[:id])
     end
