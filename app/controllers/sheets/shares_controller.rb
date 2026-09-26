@@ -20,7 +20,7 @@ class Sheets::SharesController < ApplicationController
     @recipient = @user.friends.find_by!(handle: params[:handle])
 
     SheetShare.create_with_requests(sender: @user, recipient: @recipient, sheet_ids: params[:sheet_ids])
-    recede_or_redirect_to sheets_shares_path(filter: "sent"), notice: t("notice.sheet_request.create")
+    redirect_to sheets_shares_path(filter: "sent"), notice: t("notice.sheet_request.create")
   end
 
   def destroy
