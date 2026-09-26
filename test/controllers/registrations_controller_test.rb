@@ -11,6 +11,6 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
       post sign_up_url, params: { email: "lazaronixon@hey.com", password: "Secret1*3*5*", password_confirmation: "Secret1*3*5*", name: "lazaronixon" }
     end
 
-    assert_redirected_to root_url
+    assert_redirected_to sheets_url(format: :html)
   end
 end
