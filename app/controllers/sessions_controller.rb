@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
       redirect_to sheets_path(format: :html)
     else
-      refresh_or_redirect_to sign_in_path(email_hint: params[:email]), notice: I18n.t('alert.session.invalid')
+      redirect_to sign_in_path(email_hint: params[:email]), notice: I18n.t('alert.session.invalid')
     end
   end
 

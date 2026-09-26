@@ -43,6 +43,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_response :success
+    assert_select "input[name=email][value=?]", @user.email
   end
 
   test "should sign out" do
