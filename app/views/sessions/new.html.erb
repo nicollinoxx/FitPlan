@@ -21,7 +21,7 @@
         Fit<span class="text-success">Plan</span>
       </h1>
 
-      <%= form_with(url: sign_in_path, class: 'mb-4', data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
+      <%= form_with(url: sign_in_path, class: 'mb-4') do |form| %>
         <div class="mb-4">
           <%= form.label :email, class: 'form-label' %>
           <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control', placeholder: t('.form.placeholder.email') %>

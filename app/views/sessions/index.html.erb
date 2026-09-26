@@ -1,4 +1,5 @@
 <% content_for(:title, t('.title')) %>
+<% turbo_refreshes_with method: :morph, scroll: :preserve %>
 
 <h1 class="mb-3">
   <%= link_to identity_settings_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>

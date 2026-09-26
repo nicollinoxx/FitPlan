@@ -31,7 +31,11 @@ class ApplicationController < ActionController::Base
   protected
 
     def set_locale
-      I18n.locale = session[:locale] || I18n.default_locale
+      I18n.locale = session[:locale] || device_locale || I18n.default_locale
+    end
+
+    def device_locale
+      request.headers["Accept-Language"].to_s[/\A[a-z]{2}/].presence_in(I18n.available_locales.map(&:to_s))
     end
 
     def has_locale_in_params?

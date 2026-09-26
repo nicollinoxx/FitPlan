@@ -19,9 +19,20 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should sign in" do
     post sign_in_url, params: { email: @user.email, password: "Secret1*3*5*" }
+    assert_redirected_to sheets_url(format: :html)
 
-    get root_url
+    follow_redirect!
     assert_response :success
+  end
+
+  test "should land on an HTML page when signing in from a Turbo form" do
+    turbo_stream = { "Accept" => "text/vnd.turbo-stream.html, text/html, application/xhtml+xml" }
+
+    post sign_in_url, params: { email: @user.email, password: "Secret1*3*5*" }, headers: turbo_stream
+    follow_redirect! headers: turbo_stream
+
+    assert_response :success
+    assert_equal "text/html", response.media_type
   end
 
   test "should not sign in with wrong credentials" do
@@ -32,6 +43,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_response :success
+    assert_select "input[name=email][value=?]", @user.email
   end
 
   test "should sign out" do
