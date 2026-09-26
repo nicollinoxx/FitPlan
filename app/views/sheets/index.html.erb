@@ -6,18 +6,23 @@
 </div>
 
 <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
-  <div class="sticky-top z-3 mb-3">
-    <div class="d-flex align-items-center justify-content-between">
-      <%= render 'search' %>
-      <%= render 'filter' %>
+  <%# Filtering swaps this frame instead of visiting the page, so the native apps
+      stay on the same screen. The web still updates the URL. Searching targets
+      the inner frame alone, to keep the search field focused while typing. %>
+  <%= turbo_frame_tag "sheets_page", data: { turbo_action: ("advance" unless turbo_native_app?) } do %>
+    <div class="sticky-top z-3 mb-3">
+      <div class="d-flex align-items-center justify-content-between">
+        <%= render 'search' %>
+        <%= render 'filter' %>
+      </div>
     </div>
-  </div>
 
-  <%= turbo_frame_tag "sheets" do %>
-    <div id="paginables" class="row mb-3">
-      <%= render partial: "sheet", collection: @page.records, as: :sheet %>
-      <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
-    </div>
+    <%= turbo_frame_tag "sheets" do %>
+      <div id="paginables" class="row mb-3">
+        <%= render partial: "sheet", collection: @page.records, as: :sheet %>
+        <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
+      </div>
+    <% end %>
   <% end %>
 
   <%= image_tag 'undraw/grading_papers.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
