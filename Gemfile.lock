@@ -330,8 +330,6 @@ GEM
       thor (>= 1.3.1)
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
-    strada-rails (0.0.5)
-      railties (>= 6.0.0)
     stringio (3.2.0)
     thor (1.5.0)
     thruster (0.1.19)
@@ -393,7 +391,6 @@ DEPENDENCIES
   solid_cache
   solid_queue
   stimulus-rails
-  strada-rails (~> 0.0.5)
   thruster
   turbo-rails
   tzinfo-data
