@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
     if user = User.from_omniauth(request.env['omniauth.auth'])
       @session = user.sessions.create!
       cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
+      redirect_to sheets_path(format: :html)
     else
       redirect_to sign_in_path, notice: I18n.t('alert.session.omniauth')
     end
