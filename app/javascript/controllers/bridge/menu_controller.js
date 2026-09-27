@@ -1,5 +1,5 @@
-import { BridgeComponent } from "@hotwired/strada"
-import { BridgeElement } from "@hotwired/strada"
+import { BridgeComponent } from "@hotwired/hotwire-native-bridge"
+import { BridgeElement } from "@hotwired/hotwire-native-bridge"
 
 // Example
 // https://github.com/lazaronixon/strada-rails/wiki/Menu
