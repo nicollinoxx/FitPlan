@@ -34,6 +34,15 @@ class Social::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to social_profile_url(@profile)
   end
 
+  test "should follow back to the exact page it was clicked on" do
+    follows(:one).destroy
+    referer = social_profile_url(@profile, query: "ana")
+
+    post follow_social_profile_url(@profile), headers: { "Referer" => referer }
+
+    assert_redirected_to referer
+  end
+
   test "should unfollow profile" do
     assert_difference "Follow.count", -1 do
       delete unfollow_social_profile_url(@profile)
