@@ -69,11 +69,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
       get "/auth/google_oauth2/callback"
     end
 
-    assert_response :success
-    assert_select "[data-controller=redirect][data-redirect-url-value=?]", root_path
+    assert_redirected_to sheets_url(format: :html)
     assert_equal "123", @user.reload.uid
 
-    get root_url
+    follow_redirect!
     assert_response :success
   end
 
@@ -84,10 +83,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
       get "/auth/google_oauth2/callback"
     end
 
-    assert_response :success
+    assert_redirected_to sheets_url(format: :html)
     assert User.find_by(email: "new@hotmail.com").verified?
 
-    get root_url
+    follow_redirect!
     assert_response :success
   end
 
