@@ -13,12 +13,12 @@ class Social::ProfilesController < ApplicationController
 
   def follow
     Current.user.follow!(followed: @profile)
-    refresh_or_redirect_to social_profile_path(@profile), notice: I18n.t('notice.social.profiles.follow', name: @profile.name)
+    redirect_back_or_to social_profile_path(@profile), notice: I18n.t('notice.social.profiles.follow', name: @profile.name)
   end
 
   def unfollow
     Current.user.unfollow!(followed: @profile)
-    refresh_or_redirect_to social_profile_path(@profile), notice: I18n.t('notice.social.profiles.unfollow', name: @profile.name)
+    redirect_back_or_to social_profile_path(@profile), notice: I18n.t('notice.social.profiles.unfollow', name: @profile.name)
   end
 
   def followers

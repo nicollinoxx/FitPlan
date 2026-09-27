@@ -1,4 +1,5 @@
 <% content_for :title, @profile.name %>
+<% turbo_refreshes_with method: :morph, scroll: :preserve %>
 
 <div class="mb-4 d-flex justify-content-between align-items-center gap-3">
   <h1>

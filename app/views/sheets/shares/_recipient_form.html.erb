@@ -1,5 +1,5 @@
 <div class="col-md-6 mb-3">
-  <%= form_with url: sheets_shares_path(handle: recipient.handle), data: { controller: "redirect", redirect_url_value: sheets_shares_path(filter: "sent"), redirect_refresh_value: true } do |form| %>
+  <%= form_with url: sheets_shares_path(handle: recipient.handle) do |form| %>
     <div class="p-3 bg-body-tertiary shadow-sm rounded border-success border-start border-4">
       <div class="d-flex align-items-center justify-content-between gap-2">
         <div class="d-flex align-items-center gap-3 min-w-0" style="max-width: 65%">

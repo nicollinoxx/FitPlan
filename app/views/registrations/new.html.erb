@@ -21,7 +21,7 @@
           Fit<span class="text-success">Plan</span>
         </h1>
 
-        <%= form_with(url: sign_up_path, data: { controller: "redirect", redirect_url_value: root_path }) do |form| %>
+        <%= form_with(url: sign_up_path) do |form| %>
           <% if @user.errors.any? %>
             <div class="alert alert-danger">
               <p class="mb-2 fw-semibold"><%= pluralize(@user.errors.count, t('error')) %> <%= t('.error_message_form') %></p>

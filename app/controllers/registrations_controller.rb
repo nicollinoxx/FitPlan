@@ -13,6 +13,7 @@ class RegistrationsController < ApplicationController
       cookies.signed.permanent[:session_token] = { value: session_record.id, httponly: true }
 
       send_email_verification
+      redirect_to sheets_path(format: :html)
     else
       render :new, status: :unprocessable_entity
     end

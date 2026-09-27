@@ -8,7 +8,7 @@
   </h1>
 
   <%= button_to sheets_share_path(@share, filter: params[:filter]), method: :delete, class: 'btn btn-danger',data: { turbo_confirm: t('.confirm_delete'), controller: "bridge--nav-button", bridge_title: "🗑️ destroy" } do %>
-    <i class="bi bi-trash"></i> <span class="d-none d-sm-inline"><%= t('.delete') %></span>
+    <span class="d-none d-sm-inline"><%= t('.delete') %></span>
   <% end %>
 </div>
 
