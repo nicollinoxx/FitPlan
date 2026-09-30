@@ -233,6 +233,9 @@ GEM
       logger
       rack (>= 2.2.3)
       rack-protection
+    omniauth-facebook (11.0.0)
+      bigdecimal
+      omniauth-oauth2 (>= 1.2, < 3)
     omniauth-google-oauth2 (1.2.2)
       jwt (>= 2.9.2)
       oauth2 (~> 2.0)
@@ -434,6 +437,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   omniauth (~> 2.0)
+  omniauth-facebook
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg

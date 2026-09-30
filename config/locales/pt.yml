@@ -383,6 +383,7 @@ pt:
       title:        'Entrar'
       submit:       'Entrar'
       google:       'Entrar com o Google'
+      facebook:     'Entrar com o Facebook'
       signup:       'Cadastrar'
       welcome_link: 'Bem-vindo'
       section_signup: "Não tem uma conta?"

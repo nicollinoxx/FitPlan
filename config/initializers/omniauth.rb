@@ -9,4 +9,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       image_size: 200,
       client_options: { ssl: { verify: !Rails.env.development? } }
     }
+
+  provider :facebook,
+      Rails.application.credentials.dig(:facebook, :app_id),
+      Rails.application.credentials.dig(:facebook, :app_secret)
+
 end
