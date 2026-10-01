@@ -116,6 +116,7 @@ pt:
   alert:
     session:
       invalid:               'E-mail ou senha incorretos'
+      omniauth:              'Não foi possível entrar com o Google'
     password_reset:
       create:               "Você não pode redefinir sua senha até verificar seu e-mail"
       invalid:              'O link para redefinir a senha é inválido'
@@ -381,6 +382,8 @@ pt:
     new:
       title:        'Entrar'
       submit:       'Entrar'
+      google:       'Entrar com o Google'
+      facebook:     'Entrar com o Facebook'
       signup:       'Cadastrar'
       welcome_link: 'Bem-vindo'
       section_signup: "Não tem uma conta?"

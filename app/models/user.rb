@@ -3,6 +3,7 @@ class User < ApplicationRecord
   include User::Followable
   include User::Shareable
   include User::Rankable
+  include User::Omniauthable
 
   has_secure_password
   has_one_attached :avatar
@@ -60,7 +61,7 @@ class User < ApplicationRecord
 
   def generate_handle_unique
     loop do
-      self.handle = "#{name.parameterize}-#{SecureRandom.hex(4)}"
+      self.handle = "#{name.to_s.parameterize.presence || 'user'}-#{SecureRandom.hex(4)}"
       break unless User.exists?(handle: handle)
     end
   end
