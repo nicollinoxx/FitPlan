@@ -99,3 +99,11 @@ turbo-frame[aria-busy="true"] {
 
 [data-bs-toggle="collapse"] .bi-chevron-up { display: inline-block; transition: transform 0.2s ease; }
 [data-bs-toggle="collapse"].collapsed .bi-chevron-up { transform: rotate(180deg); }
+
+// Sticks below the navbar instead of underneath it. --topbar-height is
+// published by the topbar controller; without it there is no navbar to clear.
+.sticky-under-topbar {
+  position: sticky;
+  top: var(--topbar-height, 0px);
+  z-index: 3;
+}
