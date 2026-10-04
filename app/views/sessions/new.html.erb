@@ -51,24 +51,26 @@
         </div>
       <% end %>
 
-      <div class="mb-3">
-        <%= button_to "/auth/google_oauth2",
-              method: :post,
-              data: { turbo: false },
-              class: 'btn btn-light border w-100 d-flex align-items-center justify-content-center gap-2 text-dark' do %>
-          <i class="bi bi-google"></i> <%= t('.google') %>
-        <% end %>
-      </div>
+      <% if social_login_available? %>
+        <div class="mb-3">
+          <%= button_to "/auth/google_oauth2",
+                method: :post,
+                data: { turbo: false },
+                class: 'btn btn-light border w-100 d-flex align-items-center justify-content-center gap-2 text-dark' do %>
+            <i class="bi bi-google"></i> <%= t('.google') %>
+          <% end %>
+        </div>
 
-      <div class="mb-3">
-        <%= button_to "/auth/facebook",
-              method: :post,
-              data: { turbo: false },
-              class: 'btn text-white w-100 d-flex align-items-center justify-content-center gap-2',
-              style: 'background-color: #1877F2;' do %>
-          <i class="bi bi-facebook"></i> <%= t('.facebook') %>
-        <% end %>
-      </div>
+        <div class="mb-3">
+          <%= button_to "/auth/facebook",
+                method: :post,
+                data: { turbo: false },
+                class: 'btn text-white w-100 d-flex align-items-center justify-content-center gap-2',
+                style: 'background-color: #1877F2;' do %>
+            <i class="bi bi-facebook"></i> <%= t('.facebook') %>
+          <% end %>
+        </div>
+      <% end %>
 
       <div class="mt-3 text-center">
         <p class="mb-1 text-muted"><%= t('.section_signup') %></p>
