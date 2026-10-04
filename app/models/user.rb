@@ -27,6 +27,8 @@ class User < ApplicationRecord
   validates :handle, presence: true, uniqueness: true, length: { minimum: 3 },
                      format: { with: /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/ }, on: :update, if: :handle_changed?
 
+  validates :locale, allow_nil: true, inclusion: { in: I18n.available_locales.map(&:to_s) }
+
   normalizes :email, :handle, with: -> { _1.strip.downcase }
 
   before_validation if: :email_changed?, on: :update do

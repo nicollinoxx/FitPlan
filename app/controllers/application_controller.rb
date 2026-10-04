@@ -1,21 +1,33 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_request_details
   before_action :authenticate, except: %i[ change_locale ]
+  before_action :resume_session, only: %i[ change_locale ]
   before_action :set_locale
+  after_action :publish_locale
 
   helper_method :current_user_avatar
 
   def change_locale
-    cookies.permanent[:locale] = params[:locale] if has_locale_in_params?
+    remember_locale if has_locale_in_params?
     recede_or_redirect_to request.referer || root_path
   end
 
   private
     def authenticate
-      if session_record = Session.find_by_id(cookies.signed[:session_token])
-        Current.session = session_record
+      redirect_to welcome_path unless resume_session
+    end
+
+    def resume_session
+      Current.session = Session.find_by_id(cookies.signed[:session_token])
+    end
+
+    # Signed in, the language belongs to the account and follows the person to
+    # their next browser. Signed out, the cookie is all there is to hold it.
+    def remember_locale
+      if Current.user
+        Current.user.update!(locale: params[:locale])
       else
-        redirect_to welcome_path
+        cookies.permanent[:locale] = params[:locale]
       end
     end
 
@@ -31,7 +43,23 @@ class ApplicationController < ActionController::Base
   protected
 
     def set_locale
-      I18n.locale = stored_locale || device_locale || I18n.default_locale
+      I18n.locale = current_locale
+    end
+
+    # An account's language is mirrored into the cookie, which is what the
+    # native apps watch. Only a language someone asked for is written: were the
+    # one merely inferred from the device published, it would freeze there and
+    # the browser would stop following its own setting.
+    #
+    # It runs after the action because the action is where the language
+    # changes, and a cookie written before it would report the previous one.
+    def publish_locale
+      chosen = Current.user&.locale or return
+      cookies.permanent[:locale] = chosen unless cookies[:locale] == chosen
+    end
+
+    def current_locale
+      Current.user&.locale || stored_locale || device_locale || I18n.default_locale
     end
 
     # The language used to live in the session, which the native apps cannot
