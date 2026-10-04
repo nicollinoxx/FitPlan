@@ -397,6 +397,7 @@ pt:
     new:
       title:        'Entrar'
       submit:       'Entrar'
+      or:           'ou'
       google:       'Entrar com o Google'
       facebook:     'Entrar com o Facebook'
       signup:       'Cadastrar'

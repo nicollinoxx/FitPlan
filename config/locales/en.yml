@@ -391,6 +391,7 @@ en:
     new:
       title:        'Sign in'
       submit:       'Sign in'
+      or:           'or'
       google:       'Sign in with Google'
       facebook:     'Sign in with Facebook'
       signup:       'Sign up'

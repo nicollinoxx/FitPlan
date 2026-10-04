@@ -21,13 +21,8 @@
         Fit<span class="text-success">Plan</span>
       </h1>
 
-
-
-      
-
       <%= form_with(url: sign_in_path, class: 'mb-4') do |form| %>
         <div class="mb-4">
-
           <%= form.label :email, class: 'form-label' %>
           <%= form.email_field :email, value: params[:email_hint], required: true, autofocus: true, class: 'form-control', placeholder: t('.form.placeholder.email') %>
         </div>
@@ -52,27 +47,36 @@
       <% end %>
 
       <% if social_login_available? %>
-        <div class="mb-3">
-          <%= button_to "/auth/google_oauth2",
-                method: :post,
-                data: { turbo: false },
-                class: 'btn btn-light border w-100 d-flex align-items-center justify-content-center gap-2 text-dark' do %>
-            <i class="bi bi-google"></i> <%= t('.google') %>
-          <% end %>
+        <div class="d-flex align-items-center gap-2 mb-3 small text-body-secondary">
+          <hr class="flex-grow-1 my-0">
+          <%= t('.or') %>
+          <hr class="flex-grow-1 my-0">
         </div>
 
-        <div class="mb-3">
-          <%= button_to "/auth/facebook",
-                method: :post,
-                data: { turbo: false },
-                class: 'btn text-white w-100 d-flex align-items-center justify-content-center gap-2',
-                style: 'background-color: #1877F2;' do %>
-            <i class="bi bi-facebook"></i> <%= t('.facebook') %>
-          <% end %>
+        <div class="row g-2">
+          <div class="col-6">
+            <%= button_to "/auth/google_oauth2",
+                  method: :post,
+                  data: { turbo: false },
+                  aria: { label: t('.google') },
+                  class: 'btn btn-outline-body w-100 d-flex align-items-center justify-content-center gap-2' do %>
+              <i class="bi bi-google"></i> Google
+            <% end %>
+          </div>
+
+          <div class="col-6">
+            <%= button_to "/auth/facebook",
+                  method: :post,
+                  data: { turbo: false },
+                  aria: { label: t('.facebook') },
+                  class: 'btn btn-outline-body w-100 d-flex align-items-center justify-content-center gap-2' do %>
+              <i class="bi bi-facebook"></i> Facebook
+            <% end %>
+          </div>
         </div>
       <% end %>
 
-      <div class="mt-3 text-center">
+      <div class="mt-4 pt-3 border-top text-center">
         <p class="mb-1 text-muted"><%= t('.section_signup') %></p>
         <%= link_to t('.signup'), sign_up_path, class: 'btn btn-orange w-100 text-white' %>
       </div>
