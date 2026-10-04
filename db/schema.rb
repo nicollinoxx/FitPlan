@@ -161,8 +161,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_18_140000) do
     t.string "handle", null: false
     t.string "name"
     t.string "password_digest", null: false
+    t.string "provider"
     t.date "ranking_month"
     t.decimal "ranking_score", precision: 5, scale: 2, default: "0.0", null: false
+    t.string "uid"
     t.datetime "updated_at", null: false
     t.boolean "verified", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
