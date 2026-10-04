@@ -42,7 +42,8 @@
     </div>
     <p class="text-muted small mb-2"><%= t('.weekly_progress.description') %></p>
     <div class="progress" style="height: 8px;">
-      <div class="progress-bar bg-orange" style="width: <%= @weekly_progress[:percentage] %>%"></div>
+      <div class="progress-bar bg-orange" style="width: 0"
+        data-controller="progress" data-progress-percentage-value="<%= @weekly_progress[:percentage] %>"></div>
     </div>
   </div>
 <% end %>

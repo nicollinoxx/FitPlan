@@ -33,6 +33,16 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "show starts the weekly progress bar empty" do
+    SheetCompletion.create!(sheet: sheets(:one), user: @user, completed_at: Time.current)
+
+    get dashboard_url
+
+    assert_response :success
+    assert_select ".progress-bar[style=?]", "width: 0"
+    assert_select ".progress-bar[data-progress-percentage-value]"
+  end
+
   test "should get charts as turbo_stream" do
     get charts_dashboard_url(format: :turbo_stream)
 
