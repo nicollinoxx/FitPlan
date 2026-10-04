@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_request_details
-  before_action :authenticate, except: %i[ set_session_locale ]
+  before_action :authenticate, except: %i[ change_locale ]
   before_action :set_locale
 
   helper_method :current_user_avatar
 
-  def set_session_locale
-    session[:locale] = params[:locale] if has_locale_in_params?
+  def change_locale
+    cookies.permanent[:locale] = params[:locale] if has_locale_in_params?
     recede_or_redirect_to request.referer || root_path
   end
 
@@ -31,7 +31,17 @@ class ApplicationController < ActionController::Base
   protected
 
     def set_locale
-      I18n.locale = session[:locale] || device_locale || I18n.default_locale
+      I18n.locale = stored_locale || device_locale || I18n.default_locale
+    end
+
+    # The language used to live in the session, which the native apps cannot
+    # read. They keep one web view per tab, so a tab that was off screen when
+    # the language changed went on showing the old one until it was pulled
+    # down by hand. A cookie they can read is what ends that.
+    #
+    # Anyone can write it, so it is read as a suggestion.
+    def stored_locale
+      cookies[:locale].presence_in(I18n.available_locales.map(&:to_s))
     end
 
     def device_locale
