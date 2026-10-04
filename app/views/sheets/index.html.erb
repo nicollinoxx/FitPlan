@@ -7,7 +7,7 @@
 
 <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
   <%= turbo_frame_tag "sheets_page", data: { controller: "frame-location", action: "turbo:frame-load->frame-location#sync" } do %>
-    <div class="sticky-top z-3 mb-3">
+    <div class="sticky-top z-3 mt-2">
       <div class="d-flex align-items-center justify-content-between">
         <%= render 'search' %>
         <%= render 'filter' %>
