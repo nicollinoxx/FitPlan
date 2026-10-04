@@ -1,22 +1,24 @@
-<div class="ms-auto dropdown rounded">
-  <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="languageButton" data-bs-toggle="dropdown">
+<div class="ms-auto dropdown">
+  <button class="btn btn-sm <%= sheet_filter_applied? ? 'btn-secondary' : 'btn-outline-body' %> dropdown-toggle" type="button" data-bs-toggle="dropdown">
     <i class="bi bi-funnel-fill"></i> <%= t('.filter') %>
   </button>
 
   <ul class="dropdown-menu dropdown-menu-end">
-    <li>
-      <%= link_to sheets_path(sheet_filter_params(type: 'diet')),
-        class: "dropdown-item #{'bg-warning text-light' if params[:type] == 'diet'}" do %>
+    <li><h6 class="dropdown-header"><%= t('.filters.type') %></h6></li>
 
-        <i class="bi bi-egg-fried me-2"></i> <%= t('diet') %>
+    <li>
+      <%= link_to sheets_path(sheet_filter_params(type: 'workout')),
+        class: "dropdown-item #{'bg-success text-dark' if params[:type] == 'workout'}" do %>
+
+        <i class="bi bi-heart-pulse me-2"></i> <%= t('workout') %>
       <% end %>
     </li>
 
     <li>
-      <%= link_to sheets_path(sheet_filter_params(type: 'workout')),
-        class: "dropdown-item #{'bg-success text-light' if params[:type] == 'workout'}" do %>
+      <%= link_to sheets_path(sheet_filter_params(type: 'diet')),
+        class: "dropdown-item #{'bg-orange text-dark' if params[:type] == 'diet'}" do %>
 
-        <i class="bi-heart-pulse me-2"></i> <%= t('workout') %>
+        <i class="bi bi-egg-fried me-2"></i> <%= t('diet') %>
       <% end %>
     </li>
 
@@ -28,11 +30,15 @@
       <% end %>
     </li>
 
+    <li><hr class="dropdown-divider"></li>
+
+    <li><h6 class="dropdown-header"><%= t('.filters.status') %></h6></li>
+
     <li>
       <%= link_to sheets_path(sheet_filter_params(completed: params[:completed] == 'true' ? nil : 'true')),
         class: "dropdown-item #{'bg-secondary text-light' if params[:completed] == 'true'}" do %>
 
-        <i class="bi bi-check-lg"></i> <%= t('completed') %>
+        <i class="bi bi-check-lg me-2"></i> <%= t('completed') %>
       <% end %>
     </li>
 
@@ -40,7 +46,7 @@
       <%= link_to sheets_path(sheet_filter_params(completed: params[:completed] == 'false' ? nil : 'false')),
         class: "dropdown-item #{'bg-danger text-light' if params[:completed] == 'false'}" do %>
 
-        <i class="bi bi-x-lg"></i> <%= t('uncompleted') %>
+        <i class="bi bi-x-lg me-2"></i> <%= t('uncompleted') %>
       <% end %>
     </li>
   </ul>

@@ -54,8 +54,8 @@ class DashboardsController < ApplicationController
 
   def completions_by_type
     [
-      { name: "Workout", data: @completions.joins(:sheet).merge(Sheet.workout).grouped_by(params[:period]) },
-      { name: "Diet",    data: @completions.joins(:sheet).merge(Sheet.diet).grouped_by(params[:period]) }
+      { name: t("workout"), data: @completions.joins(:sheet).merge(Sheet.workout).grouped_by(params[:period]) },
+      { name: t("diet"),    data: @completions.joins(:sheet).merge(Sheet.diet).grouped_by(params[:period]) }
     ]
   end
 

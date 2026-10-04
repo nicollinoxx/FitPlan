@@ -7,15 +7,17 @@
 
 <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
   <%= turbo_frame_tag "sheets_page", data: { controller: "frame-location", action: "turbo:frame-load->frame-location#sync" } do %>
-    <div class="sticky-top z-3 mb-3">
+    <div class="sticky-under-topbar bg-body py-2">
       <div class="d-flex align-items-center justify-content-between">
         <%= render 'search' %>
         <%= render 'filter' %>
       </div>
     </div>
 
+    <%= render 'legend' %>
+
     <%= turbo_frame_tag "sheets" do %>
-      <div id="paginables" class="row mb-3">
+      <div id="paginables" class="row g-0 mb-3">
         <%= render partial: "sheet", collection: @page.records, as: :sheet %>
         <%= render "shared/paginables/next_page_container", src: sheets_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
       </div>

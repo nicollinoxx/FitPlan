@@ -5,8 +5,8 @@ The platform allows you to create personalized workout and diet records, calcula
 **BMR (Basal Metabolic Rate)**, and **meal calories**, and send copies of records to other users.
 
 ## Mobile
-- [Android](https://github.com/nicollinoxx/FitPlan-Android) — Kotlin, Turbo Native and Strada
-- [iOS](https://github.com/nicollinoxx/FitPlan-IOS) — Swift, Turbo Native and Strada
+- [Android](https://github.com/nicollinoxx/FitPlan-Android) — Kotlin and Hotwire Native
+- [iOS](https://github.com/nicollinoxx/FitPlan-IOS) — Swift and Hotwire Native
 
 # Advisors
 - Fabio Pereira Botelho

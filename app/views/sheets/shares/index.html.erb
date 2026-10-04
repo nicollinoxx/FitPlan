@@ -10,13 +10,13 @@
     <div class="d-flex align-items-center justify-content-between mb-3 py-2">
       <h5 class="text-success m-0"><%= params[:filter] == "sent" ? t('.filters.sent') : t('.filters.received') %></h5>
 
-      <div class="ms-auto dropdown bg-light rounded">
-        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      <div class="ms-auto dropdown">
+        <button class="btn btn-sm btn-outline-body dropdown-toggle" type="button" data-bs-toggle="dropdown">
           <i class="bi bi-funnel-fill"></i> <%= t('.filter') %>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><%= link_to t('.filters.sent'),     sheets_shares_path(filter: 'sent'),     class: 'dropdown-item' %></li>
-          <li><%= link_to t('.filters.received'), sheets_shares_path(filter: 'received'), class: 'dropdown-item' %></li>
+          <li><%= link_to t('.filters.sent'),     sheets_shares_path(filter: 'sent'),     class: "dropdown-item #{'active' if params[:filter] == 'sent'}" %></li>
+          <li><%= link_to t('.filters.received'), sheets_shares_path(filter: 'received'), class: "dropdown-item #{'active' unless params[:filter] == 'sent'}" %></li>
         </ul>
       </div>
     </div>

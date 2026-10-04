@@ -2,3 +2,8 @@
 // Deve ser importado ANTES do arquivo principal do Bootstrap.
 
 $success: #00FF87;
+
+// O item ativo de um dropdown vinha no azul padrão do Bootstrap, que não faz
+// parte da paleta. O verde é claro demais para texto branco, daí o preto.
+$dropdown-link-active-bg: $success;
+$dropdown-link-active-color: #000;

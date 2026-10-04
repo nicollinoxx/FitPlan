@@ -1,15 +1,19 @@
 <div class="col-12 col-sm-6 col-md-3">
-  <div class="rounded p-2 bg-body-tertiary border-bottom border-2 h-100">
-    <div class="d-flex flex-column justify-content-between">
-      <div class="d-flex align-items-center gap-2 mb-2">
-        <% if icon.present? %>
-          <i class="<%= icon %> text-primary fs-5"></i>
-        <% end %>
+  <div class="hover-zoom-sm h-100 rounded p-3 bg-body-tertiary border-bottom border-2 border-<%= accent %>">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <span class="d-inline-flex align-items-center justify-content-center rounded bg-<%= accent %>-subtle" style="width: 2rem; height: 2rem;">
+        <i class="<%= icon %> text-<%= accent %>"></i>
+      </span>
 
-        <h6 class="card-title mb-0 text-muted text-uppercase small"><%= title %></h6>
-      </div>
+      <h2 class="h6 card-title mb-0 text-muted text-uppercase small"><%= title %></h2>
 
-      <p class="fs-5 fw-semibold mb-0"><%= content %></p>
+      <button type="button" class="btn btn-link btn-sm p-0 ms-auto lh-1 text-body-secondary"
+        aria-label="<%= t('dashboards.show.about', title: title) %>"
+        data-action="hint#show" data-hint-title-param="<%= title %>" data-hint-body-param="<%= hint %>">
+        <i class="bi bi-info-circle"></i>
+      </button>
     </div>
+
+    <p class="fs-4 fw-semibold mb-0"><%= content %></p>
   </div>
 </div>
