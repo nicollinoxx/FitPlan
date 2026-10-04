@@ -15,32 +15,23 @@
     </div>
   </div>
 
-  <div class="row my-2">
-    <div class="col-md-6 mb-3">
-      <div class="p-3 bg-body-tertiary border-start border-bottom border-success rounded">
-        <h5 class="card-title mb-3">
-          <%= t('.charts.completions') %>
-          <%= t(".filters.period.#{params[:period] || 'month'}") %>
-        </h5>
-
-        <%= line_chart charts[:completions_by_type], colors: ["green", "red"], height: "300px" %>
-      </div>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <%= render layout: 'panel', locals: { accent: 'success', title: "#{t('.charts.completions')} #{t(".filters.period.#{params[:period] || 'month'}")}" } do %>
+        <%= chart_tag "Line", charts[:completions_by_type], accents: %w[success orange] %>
+      <% end %>
     </div>
 
-    <div class="col-md-6 mb-3">
-      <div class="p-3 bg-body-tertiary border-start border-bottom border-primary rounded">
-        <h5 class="card-title mb-3"><%= t('.charts.completions_by_sheet') %></h5>
-        <%= column_chart charts[:completions_by_sheet], colors: ["#0000FF"], height: "300px" %>
-      </div>
+    <div class="col-md-6">
+      <%= render layout: 'panel', locals: { accent: 'success', title: t('.charts.completions_by_sheet') } do %>
+        <%= chart_tag "Column", charts[:completions_by_sheet], accents: %w[success] %>
+      <% end %>
     </div>
-  </div>
 
-  <div class="row my-2 mb-3">
-    <div class="col-md-12">
-      <div class="p-3 bg-body-tertiary border-start border-bottom border-orange rounded">
-        <h5 class="card-title mb-3"><%= t('.charts.diets_calories_by_sheet') %></h5>
-        <%= bar_chart charts[:diets_calories], colors: ["#FF7F00"], height: "300px" %>
-      </div>
+    <div class="col-12">
+      <%= render layout: 'panel', locals: { accent: 'orange', title: t('.charts.diets_calories_by_sheet') } do %>
+        <%= chart_tag "Bar", charts[:diets_calories], accents: %w[orange] %>
+      <% end %>
     </div>
   </div>
 <% end %>
