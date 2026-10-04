@@ -16,7 +16,7 @@
 
     <li>
       <%= link_to sheets_path(sheet_filter_params(type: 'diet')),
-        class: "dropdown-item #{'bg-warning text-dark' if params[:type] == 'diet'}" do %>
+        class: "dropdown-item #{'bg-orange text-dark' if params[:type] == 'diet'}" do %>
 
         <i class="bi bi-egg-fried me-2"></i> <%= t('diet') %>
       <% end %>
