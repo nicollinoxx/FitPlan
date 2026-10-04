@@ -128,6 +128,9 @@ en:
     index:
       title:                'Sheets'
       filter:               'Filter'
+      filters:
+        type:               'Type'
+        status:             'Status'
       completed:            'Completed'
       shares:
         title:              'Shared'

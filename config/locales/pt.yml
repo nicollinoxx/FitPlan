@@ -138,6 +138,9 @@ pt:
     index:
       title:                'Planilhas'
       filter:               'Filtrar'
+      filters:
+        type:               'Tipo'
+        status:             'Situação'
       completed:            'Concluídos'
       shares:
         title:              'Compartilhadas'

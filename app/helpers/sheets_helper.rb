@@ -19,6 +19,10 @@ module SheetsHelper
     end
   end
 
+  def sheet_filter_applied?
+    params[:type].present? || params[:completed].present?
+  end
+
   def sheet_filter_params(type: params[:type], completed: params[:completed], search: params[:search])
     { type: type, completed: completed, search: search }
   end
