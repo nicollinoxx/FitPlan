@@ -284,6 +284,8 @@ en:
     show:
       title: "Dashboard"
       cards:
+        imc: "BMI"
+        tmb: "BMR"
         total_calories: "Total calories"
         average_calories: "Average calories"
         completions_today: "Completions today"
@@ -291,6 +293,16 @@ en:
         streak: "Streak"
         days: "days"
         best_day: "Best day"
+      about: "About %{title}"
+      hints:
+        imc: "Body mass index: your weight divided by your height squared. It comes from the body metrics on your profile."
+        tmb: "Basal metabolic rate: the calories your body burns in a day at rest. It comes from the body metrics on your profile."
+        total_calories: "The calories of every meal across all of your diet sheets, added up."
+        average_calories: "How many calories a meal carries on average, across all of your diet sheets."
+        completions_today: "How many sheets you have marked as completed today."
+        total_completions: "How many sheets you have completed since you started."
+        streak: "Days in a row with at least one sheet completed, counting back from today. A day without a completion resets it."
+        best_day: "The weekday you complete the most sheets on."
       weekly_progress:
         title: "Weekly progress"
         description: "Completions this week compared to last week"

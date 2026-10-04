@@ -13,6 +13,26 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: I18n.t("dashboards.show.title")
   end
 
+  test "show names every card" do
+    get dashboard_url
+
+    assert_response :success
+    I18n.t("dashboards.show.cards").except(:days).each_value do |title|
+      assert_select "h2", text: title
+    end
+    assert_select ".translation_missing", false
+  end
+
+  test "show explains every card through the shared dialog" do
+    get dashboard_url
+
+    assert_response :success
+    assert_select "[data-hint-target=?]", "dialog", count: 1
+    I18n.t("dashboards.show.hints").each_value do |hint|
+      assert_select "[data-hint-body-param=?]", hint
+    end
+  end
+
   test "should get charts as turbo_stream" do
     get charts_dashboard_url(format: :turbo_stream)
 

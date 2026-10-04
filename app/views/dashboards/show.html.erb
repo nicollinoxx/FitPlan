@@ -8,15 +8,30 @@
   <% end %>
 </div>
 
-<div class="row g-3 mb-3">
-  <%= render 'card', title: t('.cards.imc'), content: "#{@healthy_metric&.imc || 0} kg/m²", icon: "bi bi-person-fill" %>
-  <%= render 'card', title: t('.cards.tmb'), content: "#{@healthy_metric&.tmb || 0} kcal/dia", icon: "bi bi-fire" %>
-  <%= render 'card', title: t('.cards.total_calories'), content: "#{@total_diet_calories} kcal", icon: "bi bi-fire" %>
-  <%= render 'card', title: t('.cards.average_calories'), content: "#{@average_diet_calories} kcal", icon: "bi bi-activity" %>
-  <%= render 'card', title: t('.cards.completions_today'), content: @total_completions_today, icon: "bi bi-check-circle" %>
-  <%= render 'card', title: t('.cards.total_completions'), content: @total_completions, icon: "bi bi-bar-chart" %>
-  <%= render 'card', title: t('.cards.streak'), content: "#{@streak} #{t('.cards.days')}", icon: "bi bi-trophy" %>
-  <%= render 'card', title: t('.cards.best_day'), content: @best_day ? t("date.day_names")[@best_day] : "-", icon: "bi bi-star" %>
+<div data-controller="hint">
+  <div class="row g-3 mb-3">
+    <%= render 'card', accent: 'orange',  title: t('.cards.imc'), hint: t('.hints.imc'), content: "#{@healthy_metric&.imc || 0} kg/m²", icon: "bi bi-person-fill" %>
+    <%= render 'card', accent: 'orange',  title: t('.cards.tmb'), hint: t('.hints.tmb'), content: "#{@healthy_metric&.tmb || 0} kcal/dia", icon: "bi bi-lightning-charge-fill" %>
+    <%= render 'card', accent: 'orange',  title: t('.cards.total_calories'), hint: t('.hints.total_calories'), content: "#{@total_diet_calories} kcal", icon: "bi bi-fire" %>
+    <%= render 'card', accent: 'orange',  title: t('.cards.average_calories'), hint: t('.hints.average_calories'), content: "#{@average_diet_calories} kcal", icon: "bi bi-activity" %>
+    <%= render 'card', accent: 'success', title: t('.cards.completions_today'), hint: t('.hints.completions_today'), content: @total_completions_today, icon: "bi bi-check-circle" %>
+    <%= render 'card', accent: 'success', title: t('.cards.total_completions'), hint: t('.hints.total_completions'), content: @total_completions, icon: "bi bi-bar-chart" %>
+    <%= render 'card', accent: 'success', title: t('.cards.streak'), hint: t('.hints.streak'), content: "#{@streak} #{t('.cards.days')}", icon: "bi bi-trophy" %>
+    <%= render 'card', accent: 'success', title: t('.cards.best_day'), hint: t('.hints.best_day'), content: @best_day ? t("date.day_names")[@best_day] : "-", icon: "bi bi-star" %>
+  </div>
+
+  <div class="modal fade" tabindex="-1" aria-hidden="true" data-hint-target="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h6 mb-0" data-hint-target="title"></h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body text-body-secondary" data-hint-target="body"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% if @weekly_progress[:last_week] > 0 || @weekly_progress[:this_week] > 0 %>

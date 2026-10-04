@@ -276,6 +276,8 @@ pt:
     show:
       title: "Painel"
       cards:
+        imc: "IMC"
+        tmb: "TMB"
         total_calories: "Calorias totais"
         average_calories: "Calorias médias"
         completions_today: "Conclusões hoje"
@@ -283,6 +285,16 @@ pt:
         streak: "Sequência"
         days: "dias"
         best_day: "Melhor dia"
+      about: "Sobre %{title}"
+      hints:
+        imc: "Índice de massa corporal: seu peso dividido pela altura ao quadrado. Vem das métricas corporais do seu perfil."
+        tmb: "Taxa metabólica basal: as calorias que seu corpo gasta em um dia em repouso. Vem das métricas corporais do seu perfil."
+        total_calories: "A soma das calorias de todas as refeições das suas fichas de dieta."
+        average_calories: "Quantas calorias uma refeição tem em média, somando todas as suas fichas de dieta."
+        completions_today: "Quantas fichas você marcou como concluídas hoje."
+        total_completions: "Quantas fichas você concluiu desde que começou."
+        streak: "Dias seguidos com pelo menos uma ficha concluída, contando a partir de hoje. Um dia sem conclusão zera a contagem."
+        best_day: "O dia da semana em que você mais conclui fichas."
       weekly_progress:
         title: "Progresso semanal"
         description: "Conclusões desta semana comparadas com a semana passada"
