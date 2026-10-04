@@ -91,3 +91,11 @@ turbo-frame[aria-busy="true"] {
   pointer-events: none;
   transition: opacity 0.15s ease-in;
 }
+// O resumo do painel recolhe no celular. A partir de md ele está sempre
+// aberto, independente de como o collapse ficou em uma tela menor.
+@media (min-width: 768px) {
+  .collapse-mobile { display: block !important; }
+}
+
+[data-bs-toggle="collapse"] .bi-chevron-up { display: inline-block; transition: transform 0.2s ease; }
+[data-bs-toggle="collapse"].collapsed .bi-chevron-up { transform: rotate(180deg); }

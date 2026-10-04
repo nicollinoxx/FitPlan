@@ -33,6 +33,14 @@ class DashboardsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "show opens the cards and lets a phone fold them away" do
+    get dashboard_url
+
+    assert_response :success
+    assert_select "#dashboard_cards.collapse.show"
+    assert_select "button[data-bs-target=?][aria-expanded=?]", "#dashboard_cards", "true"
+  end
+
   test "show starts the weekly progress bar empty" do
     SheetCompletion.create!(sheet: sheets(:one), user: @user, completed_at: Time.current)
 

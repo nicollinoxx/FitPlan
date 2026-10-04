@@ -286,6 +286,7 @@ en:
   dashboards:
     show:
       title: "Dashboard"
+      summary: "Summary"
       cards:
         imc: "BMI"
         tmb: "BMR"

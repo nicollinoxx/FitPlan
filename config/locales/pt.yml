@@ -278,6 +278,7 @@ pt:
   dashboards:
     show:
       title: "Painel"
+      summary: "Resumo"
       cards:
         imc: "IMC"
         tmb: "TMB"
