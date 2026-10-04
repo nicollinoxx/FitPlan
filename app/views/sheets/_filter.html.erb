@@ -8,7 +8,7 @@
 
     <li>
       <%= link_to sheets_path(sheet_filter_params(type: 'workout')),
-        class: "dropdown-item #{'active' if params[:type] == 'workout'}" do %>
+        class: "dropdown-item #{'bg-success text-dark' if params[:type] == 'workout'}" do %>
 
         <i class="bi bi-heart-pulse me-2"></i> <%= t('workout') %>
       <% end %>
@@ -16,7 +16,7 @@
 
     <li>
       <%= link_to sheets_path(sheet_filter_params(type: 'diet')),
-        class: "dropdown-item #{'active' if params[:type] == 'diet'}" do %>
+        class: "dropdown-item #{'bg-warning text-dark' if params[:type] == 'diet'}" do %>
 
         <i class="bi bi-egg-fried me-2"></i> <%= t('diet') %>
       <% end %>
@@ -24,7 +24,7 @@
 
     <li>
       <%= link_to sheets_path(sheet_filter_params(type: nil)),
-        class: "dropdown-item #{'active' unless params[:type]}" do %>
+        class: "dropdown-item #{'bg-primary text-light' unless params[:type]}" do %>
 
         <i class="bi bi-list-ul me-2"></i> <%= t('all') %>
       <% end %>
@@ -36,7 +36,7 @@
 
     <li>
       <%= link_to sheets_path(sheet_filter_params(completed: params[:completed] == 'true' ? nil : 'true')),
-        class: "dropdown-item #{'active' if params[:completed] == 'true'}" do %>
+        class: "dropdown-item #{'bg-secondary text-light' if params[:completed] == 'true'}" do %>
 
         <i class="bi bi-check-lg me-2"></i> <%= t('completed') %>
       <% end %>
@@ -44,7 +44,7 @@
 
     <li>
       <%= link_to sheets_path(sheet_filter_params(completed: params[:completed] == 'false' ? nil : 'false')),
-        class: "dropdown-item #{'active' if params[:completed] == 'false'}" do %>
+        class: "dropdown-item #{'bg-danger text-light' if params[:completed] == 'false'}" do %>
 
         <i class="bi bi-x-lg me-2"></i> <%= t('uncompleted') %>
       <% end %>
