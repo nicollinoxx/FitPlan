@@ -82,7 +82,7 @@ pt:
     password:
       update:               'Sua senha foi alterada'
     password_reset:
-      create:               'Verifique seu e-mail para instruções de redefinição'
+      create:               'Se houver uma conta com esse e-mail, enviamos as instruções de redefinição'
       update:               'Sua senha foi redefinida com sucesso. Faça login'
     registration:
       create:               'Bem-vindo! Cadastro realizado com sucesso'
@@ -118,7 +118,6 @@ pt:
       invalid:               'E-mail ou senha incorretos'
       omniauth:              'Não foi possível entrar com o Google'
     password_reset:
-      create:               "Você não pode redefinir sua senha até verificar seu e-mail"
       invalid:              'O link para redefinir a senha é inválido'
     email_verification:
       invalid:              'O link de verificação de e-mail é inválido'
