@@ -12,5 +12,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   provider :facebook,
       Rails.application.credentials.dig(:facebook, :app_id),
-      Rails.application.credentials.dig(:facebook, :app_secret)
+      Rails.application.credentials.dig(:facebook, :app_secret),
+      { scope: 'email,public_profile' }
 end
