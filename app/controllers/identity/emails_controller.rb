@@ -18,16 +18,12 @@ class Identity::EmailsController < ApplicationController
     end
 
     def user_params
-      params.permit(:email, :password_challenge).with_defaults(password_challenge: "")
+      { unconfirmed_email: params[:email], password_challenge: params[:password_challenge].to_s }
     end
 
     def redirect_to_root
-      if @user.email_previously_changed?
-        resend_email_verification
-        redirect_to identity_settings_path, notice: I18n.t('notice.email.update')
-      else
-        redirect_to identity_settings_path
-      end
+      resend_email_verification unless User.exists?(email: @user.unconfirmed_email)
+      redirect_to identity_settings_path, notice: I18n.t('notice.email.update')
     end
 
     def resend_email_verification

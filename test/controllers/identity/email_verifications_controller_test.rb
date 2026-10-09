@@ -21,6 +21,16 @@ class Identity::EmailVerificationsControllerTest < ActionDispatch::IntegrationTe
     assert_redirected_to identity_settings_url
   end
 
+  test "should switch to the new email once it is verified" do
+    @user.update! unconfirmed_email: "new_email@hey.com"
+    sid = @user.generate_token_for(:email_verification)
+
+    get identity_email_verification_url(sid: sid)
+    assert_equal "new_email@hey.com", @user.reload.email
+    assert_nil @user.unconfirmed_email
+    assert @user.verified?
+  end
+
   test "should not verify email with expired token" do
     sid = @user.generate_token_for(:email_verification)
 

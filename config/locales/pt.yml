@@ -93,7 +93,7 @@ pt:
       update:               'Avatar atualizado com sucesso'
       destroy:              'Avatar excluído com sucesso'
     email:
-      update:               'Seu e-mail foi alterado'
+      update:               'Confirme a alteração pelo link enviado ao novo e-mail'
     email_verification:
       verify:               'Obrigado por verificar seu endereço de e-mail'
       create:               'Enviamos um e-mail de verificação para o seu endereço'
@@ -484,6 +484,7 @@ pt:
         message_verification:            "Enviamos um e-mail de verificação para o endereço abaixo.
                                           Verifique seu e-mail e siga as instruções para confirmar que ele pertence a você."
         send_verification_email:         'Reenviar e-mail de verificação'
+        pending_email:                   'Aguardando a confirmação de %{email}. Até lá, seu e-mail atual continua valendo.'
         error_message_form:              'impediram este e-mail de ser salvo:'
         label:
           email:                         'Novo e-mail'
@@ -553,6 +554,7 @@ pt:
         password_challenge:              'Senha atual'
         password_confirmation:           'Confirmar senha'
         handle:                          'Handle'
+        unconfirmed_email:               'Novo e-mail'
     errors:
       models:
         workout:

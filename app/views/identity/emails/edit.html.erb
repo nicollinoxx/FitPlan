@@ -6,6 +6,10 @@
       <i class="bi bi-arrow-left-short"></i><%= t('.change_email_title') %>
     <% end %>
   </h1>
+
+  <% if Current.user.unconfirmed_email? %>
+    <p class="text-body-secondary"><%= t('.pending_email', email: Current.user.unconfirmed_email) %></p>
+  <% end %>
 <% else %>
   <% content_for(:title, t('.verify_email_title')) %>
 

@@ -3,7 +3,7 @@ class Identity::EmailVerificationsController < ApplicationController
   before_action :set_user, only: :show
 
   def show
-    @user.update! verified: true
+    @user.verify_email!
     redirect_to identity_settings_path, notice: I18n.t('notice.email_verification.verify')
   end
 

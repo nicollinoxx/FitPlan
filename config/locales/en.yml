@@ -82,7 +82,7 @@ en:
       update:               'Avatar was successfully updated'
       destroy:              'Avatar was successfully destroyed'
     email:
-      update:               'Your email has been changed'
+      update:               'Check your new email to confirm the change'
     email_verification:
       verify:               'Thank you for verifying your email address'
       create:               'We sent a verification email to your email address'
@@ -480,6 +480,7 @@ en:
                                           Check that email and follow those instructions to
                                           confirm it's your email address."
         send_verification_email:         'Re-send verification email'
+        pending_email:                   'Waiting for %{email} to be confirmed. Until then you keep using your current email.'
         error_message_form:              'prohibited this email from being saved:'
         label:
           email:                         'New email'
@@ -537,6 +538,9 @@ en:
 
   #--------------------------------------
   activerecord:
+    attributes:
+      user:
+        unconfirmed_email:               'New email'
     errors:
       models:
         workout:
