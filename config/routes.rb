@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   end
 
   root 'sheets#index'
-  get "set_locale/(:locale)", to: "application#change_locale", as: :set_locale
+  patch "set_locale/(:locale)", to: "application#change_locale", as: :set_locale
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
