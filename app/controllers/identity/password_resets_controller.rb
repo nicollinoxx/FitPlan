@@ -9,16 +9,14 @@ class Identity::PasswordResetsController < ApplicationController
   end
 
   def create
-    if @user = User.find_by(email: params[:email], verified: true)
-      send_password_reset_email
-      refresh_or_redirect_to sign_in_path, notice: I18n.t('notice.password_reset.create')
-    else
-      recede_or_redirect_to new_identity_password_reset_path, notice: I18n.t('alert.password_reset.create')
-    end
+    @user = User.find_by(email: params[:email])
+    send_password_reset_email if @user
+
+    refresh_or_redirect_to sign_in_path, notice: I18n.t('notice.password_reset.create')
   end
 
   def update
-    if @user.update(user_params)
+    if @user.update(user_params.merge(verified: true))
       refresh_or_redirect_to sign_in_path, notice: I18n.t('notice.password_reset.update')
     else
       render :edit, status: :unprocessable_entity
