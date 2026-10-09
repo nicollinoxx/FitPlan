@@ -104,6 +104,7 @@ en:
 
   #when the notice was not successfully
   alert:
+    rate_limit:              'Too many attempts. Please wait a few minutes and try again'
     session:
       invalid:               'Email or password is incorrect'
       omniauth:              'Could not sign in with Google'

@@ -70,4 +70,14 @@ class Identity::PasswordResetsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_identity_password_reset_url
     assert_equal "That password reset link is invalid", flash[:alert]
   end
+
+  test "should limit password reset requests" do
+    assert_no_enqueued_emails do
+      with_rate_limit_exceeded do
+        post identity_password_reset_url, params: { email: @user.email }
+      end
+    end
+
+    assert_redirected_to new_identity_password_reset_url
+  end
 end
