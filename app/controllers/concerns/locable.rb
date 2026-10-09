@@ -8,7 +8,7 @@ module Locable
 
   def change_locale
     remember_locale if has_locale_in_params?
-    recede_or_redirect_to request.referer || root_path
+    redirect_to request.referer || root_path
   end
 
   private
