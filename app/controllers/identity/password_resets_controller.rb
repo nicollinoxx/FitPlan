@@ -1,6 +1,7 @@
 class Identity::PasswordResetsController < ApplicationController
   skip_before_action :authenticate
   before_action :set_user, only: %i[ edit update ]
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_identity_password_reset_path, notice: I18n.t('alert.rate_limit') }
 
   def new
   end

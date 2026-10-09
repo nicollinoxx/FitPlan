@@ -22,6 +22,14 @@ class ActiveSupport::TestCase
     URI.define_singleton_method(:open, original)
   end
 
+  def with_rate_limit_exceeded
+    store = ActionController::Base.cache_store
+    store.define_singleton_method(:increment) { |*| Float::INFINITY }
+    yield
+  ensure
+    store.singleton_class.remove_method(:increment)
+  end
+
   def with_memory_cache
     original = Rails.cache
     Rails.cache = ActiveSupport::Cache::MemoryStore.new

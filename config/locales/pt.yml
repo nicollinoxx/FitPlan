@@ -114,6 +114,7 @@ pt:
 
   #when the notice was not successfully
   alert:
+    rate_limit:              'Muitas tentativas. Aguarde alguns minutos e tente novamente'
     session:
       invalid:               'E-mail ou senha incorretos'
       omniauth:              'Não foi possível entrar com o Google'

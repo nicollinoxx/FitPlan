@@ -2,6 +2,8 @@ class SessionsController < ApplicationController
   skip_before_action :authenticate, only: %i[ new create omniauth ]
   before_action :set_session, only: :destroy
 
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to sign_in_path, notice: I18n.t('alert.rate_limit') }
+
   def index
     @sessions = Current.user.sessions.order(created_at: :desc)
   end

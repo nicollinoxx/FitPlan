@@ -133,4 +133,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     def google_auth_hash(email:, name:, image: nil)
       OmniAuth::AuthHash.new(provider: "google_oauth2", uid: "123", info: { email: email, name: name, image: image })
     end
+
+  test "should limit sign in attempts" do
+    with_rate_limit_exceeded do
+      post sign_in_url, params: { email: @user.email, password: "Secret1*3*5*" }
+    end
+
+    assert_redirected_to sign_in_url
+    assert_equal "Too many attempts. Please wait a few minutes and try again", flash[:notice]
+  end
 end

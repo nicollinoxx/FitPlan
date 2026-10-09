@@ -1,6 +1,8 @@
 class RegistrationsController < ApplicationController
   skip_before_action :authenticate
 
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to sign_up_path, notice: I18n.t('alert.rate_limit') }
+
   def new
     @user = User.new
   end
