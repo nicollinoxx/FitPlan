@@ -10,11 +10,24 @@ class Identity::EmailsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update email" do
-    patch identity_email_url, params: { email: "new_email@hey.com", password_challenge: "Secret1*3*5*" }
+  test "should keep the email until the new one is verified" do
+    assert_enqueued_emails 1 do
+      patch identity_email_url, params: { email: "new_email@hey.com", password_challenge: "Secret1*3*5*" }
+    end
+
     assert_redirected_to identity_settings_url
+    assert_equal "lazaronixon@hotmail.com", @user.reload.email
+    assert_equal "new_email@hey.com", @user.unconfirmed_email
+    assert @user.verified?
   end
 
+  test "should not send a verification email to an email that is taken" do
+    assert_no_emails do
+      perform_enqueued_jobs { patch identity_email_url, params: { email: users(:lazaro).email, password_challenge: "Secret1*3*5*" } }
+    end
+
+    assert_redirected_to identity_settings_url
+  end
 
   test "should not update email with wrong password challenge" do
     patch identity_email_url, params: { email: "new_email@hey.com", password_challenge: "SecretWrong1*3" }
