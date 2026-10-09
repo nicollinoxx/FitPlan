@@ -10,6 +10,7 @@ module User::Omniauthable
       user = find_by(provider: auth.provider, uid: auth.uid) || find_or_initialize_by(email: auth.info.email)
 
       user.assign_attributes(signup_attributes(auth)) if user.new_record?
+      user.assign_attributes(password: SecureRandom.hex(16), verified: true) unless user.verified? || user.provider?
       user.update!(provider: auth.provider, uid: auth.uid)
 
       user.attach_avatar_from(auth.info.image)

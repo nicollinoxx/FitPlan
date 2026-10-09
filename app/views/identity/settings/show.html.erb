@@ -38,8 +38,8 @@
             </button>
 
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><%= link_to t('languages.en'), set_locale_path('en'), data: { turbo_frame: "_top" }, class: 'dropdown-item' %></li>
-              <li><%= link_to t('languages.pt'), set_locale_path('pt'), data: { turbo_frame: "_top" }, class: 'dropdown-item' %></li>
+              <li><%= button_to t('languages.en'), set_locale_path('en'), method: :patch, form: { data: { turbo_frame: "_top" } }, class: 'dropdown-item' %></li>
+              <li><%= button_to t('languages.pt'), set_locale_path('pt'), method: :patch, form: { data: { turbo_frame: "_top" } }, class: 'dropdown-item' %></li>
             </ul>
           </div>
         </div>

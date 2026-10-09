@@ -10,7 +10,7 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @signed_id = @user.generate_token_for(:email_verification)
 
-    mail to: @user.email, subject: "Verify your email"
+    mail to: @user.email_to_verify, subject: "Verify your email" unless @user.email_to_verify_taken?
   end
 
   def new_follower
