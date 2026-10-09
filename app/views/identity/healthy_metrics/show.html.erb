@@ -7,7 +7,7 @@
     <% end %>
   </h1>
 
-  <%= link_to t('edit'), edit_identity_healthy_metric_path(@metric), data: { controller: "bridge--nav-button", bridge_title: "Edit" }, class: 'btn btn-success' %>
+  <%= link_to t('edit'), edit_identity_healthy_metric_path(@metric), data: { controller: "bridge--nav-button", bridge_title: t('edit') }, class: 'btn btn-success' %>
 </div>
 
 <%= render 'healthy_metric', healthy_metric: @healthy_metric %>
