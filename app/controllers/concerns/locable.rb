@@ -2,7 +2,7 @@ module Locable
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_locale
+    around_action :switch_locale
     after_action :publish_locale
   end
 
@@ -13,8 +13,8 @@ module Locable
 
   private
 
-    def set_locale
-      I18n.locale = current_locale
+    def switch_locale(&action)
+      I18n.with_locale(current_locale, &action)
     end
 
     def current_locale
