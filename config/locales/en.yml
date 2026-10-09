@@ -39,6 +39,7 @@ en:
   toggle_password_visibility: 'Toggle password visibility'
   cancel:             "Cancel"
   confirm:            "Confirm"
+  all:                "All"
   follow:             "Follow"
   follow_back:        "Follow back"
   unfollow:           "Unfollow"
