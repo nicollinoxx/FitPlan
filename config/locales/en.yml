@@ -71,7 +71,7 @@ en:
     password:
       update:               'Your password has been changed'
     password_reset:
-      create:               'Check your email for reset instructions'
+      create:               'If an account exists for that email, we sent it reset instructions'
       update:               'Your password was reset successfully. Please sign in'
     registration:
       create:               'Welcome! You have signed up successfully'
@@ -107,7 +107,6 @@ en:
       invalid:               'Email or password is incorrect'
       omniauth:              'Could not sign in with Google'
     password_reset:
-      create:               "You can't reset your password until you verify your email"
       invalid:              'That password reset link is invalid'
     email_verification:
       invalid:              'That email verification link is invalid'
