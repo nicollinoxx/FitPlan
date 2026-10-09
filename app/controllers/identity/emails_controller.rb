@@ -18,7 +18,8 @@ class Identity::EmailsController < ApplicationController
     end
 
     def user_params
-      { unconfirmed_email: params[:email], password_challenge: params[:password_challenge].to_s }
+      unconfirmed_email, password_challenge = params.expect(:email, :password_challenge)
+      { unconfirmed_email:, password_challenge: }
     end
 
     def redirect_to_root
