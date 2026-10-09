@@ -85,7 +85,7 @@ pt:
       create:               'Verifique seu e-mail para instruções de redefinição'
       update:               'Sua senha foi redefinida com sucesso. Faça login'
     registration:
-      create:               'Bem-vindo! Cadastro realizado com sucesso'
+      create:               'Enviamos um e-mail para %{email} com os próximos passos'
     session:
       create:               'Login realizado com sucesso'
       destroy:              'Sessão encerrada com sucesso'
@@ -518,6 +518,12 @@ pt:
       view_share:           "Ver fichas compartilhadas"
 
   user_mailer:
+    account_exists:
+      subject:                           "Você já tem uma conta no FitPlan"
+      message:                           "Alguém tentou se cadastrar com %{email}, mas já existe uma conta com esse e-mail.
+                                          Se foi você e esqueceu a senha, pode definir uma nova."
+      link_text:                         "Redefinir sua senha"
+      help_message:                      "Se não foi você, pode ignorar este e-mail."
     email_verification:
       message:                           "Este e-mail confirma que %{email} é o e-mail que você deseja usar na sua conta.
                                           Caso perca sua senha, é para este endereço que enviaremos o link de redefinição."

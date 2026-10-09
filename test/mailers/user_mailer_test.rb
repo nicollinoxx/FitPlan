@@ -11,6 +11,12 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal [@user.email], mail.to
   end
 
+  test "account_exists" do
+    mail = UserMailer.with(user: @user).account_exists
+    assert_equal "You already have a FitPlan account", mail.subject
+    assert_equal [@user.email], mail.to
+  end
+
   test "email_verification" do
     mail = UserMailer.with(user: @user).email_verification
     assert_equal "Verify your email", mail.subject

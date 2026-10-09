@@ -74,7 +74,7 @@ en:
       create:               'Check your email for reset instructions'
       update:               'Your password was reset successfully. Please sign in'
     registration:
-      create:               'Welcome! You have signed up successfully'
+      create:               'We sent an email to %{email} with the next steps'
     session:
       create:               'Signed in successfully'
       destroy:              'This session was successfully destroyed'
@@ -515,6 +515,12 @@ en:
       view_share:           "View shared sheets"
 
   user_mailer:
+    account_exists:
+      subject:                           "You already have a FitPlan account"
+      message:                           "Someone tried to sign up with %{email}, but there is already an account with it.
+                                          If it was you and you forgot your password, you can set a new one."
+      link_text:                         "Reset your password"
+      help_message:                      "If it was not you, you can safely ignore this email."
     email_verification:
       message:                           "This is to confirm that %{email} is the email you want to use on your account.
                                           If you ever lose your password, that's where we'll email a reset link."

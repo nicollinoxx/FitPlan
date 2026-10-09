@@ -9,14 +9,15 @@ class RegistrationsController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      session_record = @user.sessions.create!
-      cookies.signed.permanent[:session_token] = { value: session_record.id, httponly: true }
-
       send_email_verification
-      redirect_to sheets_path(format: :html)
     else
-      render :new, status: :unprocessable_entity
+      @user.errors.delete(:email, :taken)
+      return render :new, status: :unprocessable_entity if @user.errors.any?
+
+      send_account_exists_email
     end
+
+    redirect_to sign_in_path, notice: I18n.t('notice.registration.create', email: @user.email)
   end
 
   private
@@ -26,5 +27,9 @@ class RegistrationsController < ApplicationController
 
     def send_email_verification
       UserMailer.with(user: @user).email_verification.deliver_later
+    end
+
+    def send_account_exists_email
+      UserMailer.with(user: User.find_by!(email: @user.email)).account_exists.deliver_later
     end
 end
