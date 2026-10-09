@@ -23,7 +23,7 @@ class Identity::EmailsController < ApplicationController
     end
 
     def redirect_to_root
-      resend_email_verification unless User.exists?(email: @user.unconfirmed_email)
+      resend_email_verification
       redirect_to identity_settings_path, notice: I18n.t('notice.email.update')
     end
 

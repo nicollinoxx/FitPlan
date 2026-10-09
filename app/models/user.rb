@@ -52,8 +52,12 @@ class User < ApplicationRecord
     unconfirmed_email || email
   end
 
-  def verify_email!
-    update! email: email_to_verify, unconfirmed_email: nil, verified: true
+  def email_to_verify_taken?
+    User.where.not(id:).exists?(email: email_to_verify)
+  end
+
+  def verify_email
+    update email: email_to_verify, unconfirmed_email: nil, verified: true
   end
 
   def online?

@@ -31,6 +31,23 @@ class Identity::EmailVerificationsControllerTest < ActionDispatch::IntegrationTe
     assert @user.verified?
   end
 
+  test "should not switch to a new email someone else took meanwhile" do
+    @user.update! unconfirmed_email: users(:lazaro).email
+    sid = @user.generate_token_for(:email_verification)
+
+    get identity_email_verification_url(sid: sid)
+    assert_redirected_to edit_identity_email_url
+    assert_equal "lazaronixon@hotmail.com", @user.reload.email
+  end
+
+  test "should not resend a verification email to an email that is taken" do
+    @user.update! unconfirmed_email: users(:lazaro).email
+
+    assert_no_emails do
+      perform_enqueued_jobs { post identity_email_verification_url }
+    end
+  end
+
   test "should not verify email with expired token" do
     sid = @user.generate_token_for(:email_verification)
 

@@ -22,8 +22,8 @@ class Identity::EmailsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not send a verification email to an email that is taken" do
-    assert_no_enqueued_emails do
-      patch identity_email_url, params: { email: users(:lazaro).email, password_challenge: "Secret1*3*5*" }
+    assert_no_emails do
+      perform_enqueued_jobs { patch identity_email_url, params: { email: users(:lazaro).email, password_challenge: "Secret1*3*5*" } }
     end
 
     assert_redirected_to identity_settings_url
