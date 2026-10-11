@@ -36,6 +36,8 @@ pt:
   completed:          "Concluído"
   uncompleted:        "Não Concluído"
   today:              "hoje"
+  reorder:            "Ordenar"
+  done:               "Pronto"
   message_destroy:    "Você tem certeza?"
 
   request:

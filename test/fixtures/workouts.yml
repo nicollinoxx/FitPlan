@@ -6,6 +6,7 @@ one:
   repetitions: 12
   charge: MyString
   sheet: one
+  position: 1
 
 another:
   exercise: Another Exercise
@@ -13,6 +14,7 @@ another:
   repetitions: 10
   charge: MyString
   sheet: one
+  position: 2
 
 two:
   exercise: MyString
@@ -20,6 +22,7 @@ two:
   repetitions: 12
   charge: MyString
   sheet: two
+  position: 1
 
 fixture_workout:
   exercise: Fixture Workout
@@ -27,3 +30,4 @@ fixture_workout:
   repetitions: 8
   charge: MyString
   sheet: one
+  position: 3

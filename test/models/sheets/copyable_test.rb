@@ -41,7 +41,7 @@ module Sheets
       assert copied_sheet.diet?
       assert_equal sheet.diets.count, copied_sheet.diets.count
 
-      copied_diet = copied_sheet.diets.first
+      copied_diet = copied_sheet.diets.find_by!(position: diet.position)
       assert_includes copied_diet.description.to_s, "Rich description for testing"
     end
 

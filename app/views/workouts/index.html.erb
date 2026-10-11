@@ -1,27 +1,32 @@
 <% content_for(:title, @sheet.name) %>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1>
-    <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
-      <i class="bi bi-arrow-left-short"></i><%= @sheet.name %>
-    <% end %>
-  </h1>
-
-  <%= link_to t('new'), new_sheet_workout_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: t('new') }, class: 'btn btn-success flex-shrink-0' %>
-</div>
-
-<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
-  <%= turbo_frame_tag "workouts" do %>
-    <%= render 'shared/completion_today_size' %>
-
-    <div class="row">
-      <% @workouts.each do |workout| %>
-        <div class="col-md-6 mb-4">
-          <%= render workout, completion: @completions_by_workout_id[workout.id] %>
-        </div>
+<div data-controller="sortable" data-sortable-resource-value="workout">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>
+      <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+        <i class="bi bi-arrow-left-short"></i><%= @sheet.name %>
       <% end %>
-    </div>
-  <% end %>
+    </h1>
 
-  <%= image_tag 'undraw/working_out.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
+    <div class="d-flex gap-2">
+      <%= render "shared/sort_button" if @workouts.many? %>
+      <%= link_to t('new'), new_sheet_workout_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: t('new') }, class: 'btn btn-success flex-shrink-0' %>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+    <%= turbo_frame_tag "workouts" do %>
+      <%= render 'shared/completion_today_size' %>
+
+      <div class="row" data-sortable-target="list">
+        <% @workouts.each do |workout| %>
+          <div class="col-md-6 mb-4" data-sortable-url="<%= sheet_workout_position_path(@sheet, workout) %>" data-sortable-position="<%= workout.position %>">
+            <%= render workout, completion: @completions_by_workout_id[workout.id] %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= image_tag 'undraw/working_out.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
+  </div>
 </div>

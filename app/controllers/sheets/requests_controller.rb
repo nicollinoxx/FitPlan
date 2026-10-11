@@ -33,10 +33,10 @@ class Sheets::RequestsController < ApplicationController
     end
 
     def workouts_content
-      @workouts = @sheet.workouts.order(:created_at)
+      @workouts = @sheet.workouts.positioned
     end
 
     def diets_content
-      @diets = @sheet.diets.order(:created_at)
+      @diets = @sheet.diets.positioned
     end
 end

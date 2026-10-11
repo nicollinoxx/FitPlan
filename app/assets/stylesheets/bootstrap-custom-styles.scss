@@ -24,6 +24,54 @@ input.form-control:focus {
 
 .hover-zoom-sm:hover { transform: scale(1.02); }
 
+.sort-active { display: none; }
+
+.sorting {
+  .sort-idle   { display: none; }
+  .sort-active { display: inline; }
+
+  .sort-toggle {
+    position: fixed;
+    top: calc(var(--topbar-height, 0px) + .75rem);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1030;
+    --bs-btn-border-color: var(--bs-black);
+    --bs-btn-hover-border-color: var(--bs-black);
+    --bs-btn-active-border-color: var(--bs-black);
+    border-radius: var(--bs-border-radius-pill);
+  }
+
+  .hover-zoom-sm,
+  .hover-zoom-sm:hover { transition: none; transform: none; }
+
+  [data-sortable-url] {
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+
+    * { pointer-events: none; }
+
+    > * {
+      outline: 2px dashed var(--bs-secondary-border-subtle);
+      outline-offset: 2px;
+    }
+
+    .btn { opacity: .4; }
+  }
+
+  .sortable-fallback {
+    opacity: 1 !important;
+    background: var(--bs-body-bg) content-box;
+
+    > * {
+      outline: none;
+      box-shadow: var(--bs-box-shadow-lg) !important;
+    }
+  }
+}
+
 $orange: #ff6b35;
 
 :root {
@@ -99,11 +147,3 @@ turbo-frame[aria-busy="true"] {
 
 [data-bs-toggle="collapse"] .bi-chevron-up { display: inline-block; transition: transform 0.2s ease; }
 [data-bs-toggle="collapse"].collapsed .bi-chevron-up { transform: rotate(180deg); }
-
-// Sticks below the navbar instead of underneath it. --topbar-height is
-// published by the topbar controller; without it there is no navbar to clear.
-.sticky-under-topbar {
-  position: sticky;
-  top: var(--topbar-height, 0px);
-  z-index: 3;
-}

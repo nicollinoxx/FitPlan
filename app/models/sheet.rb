@@ -1,8 +1,10 @@
 class Sheet < ApplicationRecord
   include Normalizable
   include Sheet::Copyable
+  include Positionable
 
   belongs_to :user
+  positioned_within :user
 
   has_many :workouts,          dependent: :destroy
   has_many :diets,             dependent: :destroy
