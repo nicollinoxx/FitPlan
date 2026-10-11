@@ -4,7 +4,7 @@ class SheetsController < ApplicationController
 
   def index
     @sheets = @user.sheets.filter_by(params[:type], params[:completed], params[:search])
-    set_page_and_extract_portion_from @sheets.includes(:sheet_completions_today).order(created_at: :asc)
+    set_page_and_extract_portion_from @sheets.includes(:sheet_completions_today).positioned
   end
 
   def show

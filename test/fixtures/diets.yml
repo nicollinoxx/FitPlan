@@ -7,6 +7,7 @@ one:
   fat_g: 9.99
   calories: 9.99
   sheet: two
+  position: 1
 
 two:
   meal: MyString
@@ -15,6 +16,7 @@ two:
   fat_g: 9.99
   calories: 9.99
   sheet: two
+  position: 2
 
 diet_without_calories:
   meal: MyString
@@ -23,6 +25,7 @@ diet_without_calories:
   fat_g: 5
   calories: 0
   sheet: two
+  position: 3
 
 fixture_diet:
   meal: Fixture Meal
@@ -31,3 +34,4 @@ fixture_diet:
   fat_g: 10
   calories: 300
   sheet: two
+  position: 4

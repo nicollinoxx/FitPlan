@@ -31,6 +31,8 @@ en:
   completed:          "Completed"
   uncompleted:        "Uncompleted"
   today:              "today"
+  reorder:            "Reorder"
+  done:               "Done"
   message_destroy:    "Are you sure?"
 
   request:

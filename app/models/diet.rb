@@ -1,5 +1,9 @@
 class Diet < ApplicationRecord
+  include Positionable
+
   belongs_to :sheet
+  positioned_within :sheet
+
   has_rich_text :description
 
   has_many :completions, dependent: :destroy

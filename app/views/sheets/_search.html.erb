@@ -7,7 +7,6 @@
       <i class="bi bi-compass"></i>
     </span>
 
-    <%= form.search_field :search, value: params[:search], class: "form-control border-start-0 ps-0",
-      placeholder: t('search'), data: { action: "search#submit" } %>
+    <%= form.search_field :search, value: params[:search], class: "form-control border-start-0", placeholder: t('search'), data: { action: "search#submit" } %>
   </div>
 <% end %>

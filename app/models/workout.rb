@@ -1,5 +1,9 @@
 class Workout < ApplicationRecord
+  include Positionable
+
   belongs_to :sheet
+  positioned_within :sheet
+
   has_one_attached :video
 
   has_many :completions, dependent: :destroy

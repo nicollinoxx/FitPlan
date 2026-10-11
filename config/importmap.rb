@@ -14,6 +14,8 @@ pin "bootstrap", to: "bootstrap.bundle.min.js"
 pin "chartkick", to: "chartkick.js"
 pin "Chart.bundle", to: "Chart.bundle.js"
 
+pin "sortablejs" # @1.15.7
+
 pin "@rails/actioncable", to: "actioncable.esm.js"
 
 pin_all_from "app/javascript/controllers", under: "controllers"

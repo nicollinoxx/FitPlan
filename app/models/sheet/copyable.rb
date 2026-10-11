@@ -20,14 +20,14 @@ module Sheet::Copyable
   private
 
   def copy_workouts_to(copy)
-    workouts.find_each do |workout|
+    workouts.positioned.each do |workout|
       new_workout = copy.workouts.create!(copy_item_attributes(workout))
       new_workout.video.attach(workout.video.blob) if workout.video.attached?
     end
   end
 
   def copy_diets_to(copy)
-    diets.find_each do |diet|
+    diets.positioned.each do |diet|
       copy.diets.create!(copy_item_attributes(diet).merge(description: diet.description&.to_s))
     end
   end

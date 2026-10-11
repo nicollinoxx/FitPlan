@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_09_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_11_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -73,9 +73,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_09_120000) do
     t.datetime "created_at", null: false
     t.decimal "fat_g", default: "0.0"
     t.string "meal"
+    t.integer "position", null: false
     t.decimal "protein_g", default: "0.0"
     t.integer "sheet_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["sheet_id", "position"], name: "index_diets_on_sheet_id_and_position"
     t.index ["sheet_id"], name: "index_diets_on_sheet_id"
   end
 
@@ -147,9 +149,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_09_120000) do
     t.datetime "created_at", null: false
     t.text "description"
     t.string "name"
+    t.integer "position", null: false
     t.string "sheet_type"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.index ["user_id", "position"], name: "index_sheets_on_user_id_and_position"
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
 
@@ -179,10 +183,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_09_120000) do
     t.datetime "created_at", null: false
     t.string "exercise"
     t.integer "interval"
+    t.integer "position", null: false
     t.string "repetitions"
     t.integer "series"
     t.integer "sheet_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["sheet_id", "position"], name: "index_workouts_on_sheet_id_and_position"
     t.index ["sheet_id"], name: "index_workouts_on_sheet_id"
   end
 

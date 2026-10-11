@@ -1,0 +1,4 @@
+<button type="button" class="btn <%= 'btn-sm' if turbo_native_app? %> btn-outline-secondary flex-shrink-0 sort-toggle" data-sortable-target="toggle" data-action="sortable#toggle" aria-pressed="false">
+  <span class="sort-idle"><i class="bi bi-arrow-down-up"></i><span class="d-none d-sm-inline ms-1"><%= t('reorder') %></span></span>
+  <span class="sort-active"><i class="bi bi-check-lg me-1"></i><%= t('done') %></span>
+</button>

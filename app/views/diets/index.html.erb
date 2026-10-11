@@ -1,27 +1,32 @@
 <% content_for(:title, @sheet.name) %>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1>
-    <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
-      <i class="bi bi-arrow-left-short"></i><%= @sheet.name %>
-    <% end %>
-  </h1>
-
-  <%= link_to t('new'), new_sheet_diet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: t('new') }, class: 'btn btn-success flex-shrink-0' %>
-</div>
-
-<div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
-  <%= turbo_frame_tag "diets" do %>
-    <%= render 'shared/completion_today_size' %>
-
-    <div class="row mb-3">
-      <% @diets.each do |diet| %>
-        <div class="col-md-6 p-2 mb-2">
-          <%= render diet, completed: @completions_by_diet_id[diet.id] %>
-        </div>
+<div data-controller="sortable" data-sortable-resource-value="diet">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>
+      <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+        <i class="bi bi-arrow-left-short"></i><%= @sheet.name %>
       <% end %>
-    </div>
-  <% end %>
+    </h1>
 
-  <%= image_tag 'undraw/cooking.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
+    <div class="d-flex gap-2">
+      <%= render "shared/sort_button" if @diets.many? %>
+      <%= link_to t('new'), new_sheet_diet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: t('new') }, class: 'btn btn-success flex-shrink-0' %>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+    <%= turbo_frame_tag "diets" do %>
+      <%= render 'shared/completion_today_size' %>
+
+      <div class="row mb-3" data-sortable-target="list">
+        <% @diets.each do |diet| %>
+          <div class="col-md-6 p-2 mb-2" data-sortable-url="<%= sheet_diet_position_path(@sheet, diet) %>" data-sortable-position="<%= diet.position %>">
+            <%= render diet, completed: @completions_by_diet_id[diet.id] %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= image_tag 'undraw/cooking.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
+  </div>
 </div>
