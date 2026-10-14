@@ -369,6 +369,7 @@ pt:
         followings: "%{count} seguindo"
       followers:
         title:     'Seguidores'
+        unseen:    'Novo seguidor'
       followings:
         title:     'Seguindo'
 

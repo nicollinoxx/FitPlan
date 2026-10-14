@@ -383,6 +383,7 @@ en:
         followings: "%{count} following"
       followers:
         title:     'Followers'
+        unseen:    'New follower'
       followings:
         title:     'Following'
 

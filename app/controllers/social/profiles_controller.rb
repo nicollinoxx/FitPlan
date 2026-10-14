@@ -23,7 +23,7 @@ class Social::ProfilesController < ApplicationController
   end
 
   def followers
-    @followers = @profile.followers.order("follows.created_at desc").includes(avatar_attachment: :blob)
+    @follows = @profile.follower_follows.order(created_at: :desc).includes(follower: { avatar_attachment: :blob })
   end
 
   def followings
@@ -37,6 +37,8 @@ class Social::ProfilesController < ApplicationController
   end
 
   def mark_followers_as_seen
+    return if request.headers["X-Sec-Purpose"] == "prefetch"
+
     Current.user.mark_followers_as_seen! if @profile == Current.user && Current.user.unseen_followers?
   end
 end
