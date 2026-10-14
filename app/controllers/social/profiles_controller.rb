@@ -4,6 +4,7 @@ class Social::ProfilesController < ApplicationController
 
   def index
     @profiles = User.search_users(params[:query]).includes(avatar_attachment: :blob)
+    set_page_and_extract_portion_from @profiles
   end
 
   def show

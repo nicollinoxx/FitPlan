@@ -33,6 +33,7 @@ en:
   today:              "today"
   reorder:            "Reorder"
   done:               "Done"
+  loading:            "Loading..."
   message_destroy:    "Are you sure?"
 
   request:

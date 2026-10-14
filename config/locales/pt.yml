@@ -38,6 +38,7 @@ pt:
   today:              "hoje"
   reorder:            "Ordenar"
   done:               "Pronto"
+  loading:            "Carregando..."
   message_destroy:    "Você tem certeza?"
 
   request:

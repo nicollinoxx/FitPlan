@@ -4,7 +4,7 @@
       <div class="d-flex align-items-center justify-content-between gap-2">
         <div class="d-flex align-items-center gap-3 min-w-0" style="max-width: 65%">
           <% if recipient.avatar.attached? %>
-            <%= image_tag recipient.avatar, class: "rounded-circle border-success-subtle border-3 object-fit-cover", width: 56, height: 56, alt: "" %>
+            <%= avatar_image_tag recipient.avatar, size: 56, class: "rounded-circle border-success-subtle border-3 object-fit-cover", alt: "" %>
           <% else %>
             <span class="d-flex align-items-center justify-content-center rounded-circle border-success-subtle border-3"
                   style="width: 56px; height: 56px;">
