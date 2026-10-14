@@ -10,7 +10,8 @@
 <% end %>
 
 <%= turbo_frame_tag :profiles do %>
-  <div class="row">
-    <%= render partial: 'shared/profile', collection: @profiles, as: :profile %>
+  <div id="paginables" class="row">
+    <%= render partial: 'shared/profile', collection: @page.records, as: :profile %>
+    <%= render "shared/paginables/next_page_container", src: social_profiles_path(query: params[:query], page: @page.next_param, format: :turbo_stream) unless @page.last? %>
   </div>
 <% end %>
