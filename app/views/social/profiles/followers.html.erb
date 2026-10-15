@@ -8,6 +8,8 @@
 
 <%= turbo_frame_tag :profiles do %>
   <div class="row">
-    <%= render partial: 'shared/profile', collection: @followers, as: :profile %>
+    <% @follows.each do |follow| %>
+      <%= render 'shared/profile', profile: follow.follower, unseen: follow.seen_at.nil? %>
+    <% end %>
   </div>
 <% end %>
