@@ -5,7 +5,7 @@
         <%= form.label :avatar, class: "d-inline-block", style: "cursor: pointer;" do %>
           <div class="rounded-circle border border-2 bg-secondary-subtle overflow-hidden position-relative d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
             <% if @user.avatar.attached? %>
-              <%= avatar_image_tag @user.avatar, size: 100,
+              <%= image_tag @user.avatar,
                   class: "w-100 h-100 object-fit-cover position-absolute top-0 start-0",
                   alt: t("identity.avatars.show.title"),
                   data: { "upload-preview-target": "preview" } %>
