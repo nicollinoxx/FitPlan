@@ -6,7 +6,7 @@
     <div class="bg-body-tertiary border-start border-2 border-success shadow-sm rounded p-3 h-100">
       <div class="d-flex align-items-center gap-3">
         <% if other.avatar.attached? %>
-          <%= avatar_image_tag other.avatar, size: 44, class: "rounded-circle object-fit-cover flex-shrink-0", alt: "" %>
+          <%= image_tag other.avatar, class: "rounded-circle object-fit-cover flex-shrink-0", size: 44, alt: "" %>
         <% else %>
           <div class="rounded-circle bg-secondary-subtle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px;">
             <i class="bi bi-person-fill text-secondary fs-5"></i>
