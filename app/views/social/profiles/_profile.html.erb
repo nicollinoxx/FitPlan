@@ -1,6 +1,6 @@
 <div class="text-center">
   <% if profile.avatar.attached? %>
-    <%= image_tag profile.avatar, class: "rounded-circle object-fit-cover flex-shrink-0 border-success-subtle border-3", width: 90, height: 90 %>
+    <%= image_tag profile.avatar, class: "rounded-circle object-fit-cover flex-shrink-0 border-success-subtle border-3", size: 90 %>
   <% else %>
     <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-secondary-subtle border border-success-subtle border-3"
           style="width: 100px; height: 100px;">

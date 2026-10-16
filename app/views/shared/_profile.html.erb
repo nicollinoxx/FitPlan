@@ -7,7 +7,7 @@
         <% avatar_border = unseen ? "border-warning" : "border-success-subtle" %>
 
         <% if profile.avatar.attached? %>
-          <%= image_tag profile.avatar, class: "rounded-circle border #{avatar_border} border-3 object-fit-cover", width: 56, height: 56 %>
+          <%= image_tag profile.avatar, class: "rounded-circle border #{avatar_border} border-3 object-fit-cover", size: 56 %>
         <% else %>
           <span class="d-inline-flex align-items-center justify-content-center rounded-circle border <%= avatar_border %> border-3"
                 style="width: 56px; height: 56px;">

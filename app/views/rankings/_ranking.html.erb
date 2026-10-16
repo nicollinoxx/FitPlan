@@ -11,7 +11,7 @@
     </div>
 
     <% if ranking.avatar.attached? %>
-      <%= image_tag ranking.avatar, class: 'rounded-circle border border-success-subtle border-3 object-fit-cover flex-shrink-0', width: 48, height: 48 %>
+      <%= image_tag ranking.avatar, class: 'rounded-circle border border-success-subtle border-3 object-fit-cover flex-shrink-0', size: 48 %>
     <% else %>
       <span class="d-inline-flex align-items-center justify-content-center rounded-circle border border-success-subtle border-3 flex-shrink-0"
             style="width: 48px; height: 48px;">
