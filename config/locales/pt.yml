@@ -19,6 +19,7 @@ pt:
   link_dashboard:      'Painel'
   link_profiles:       'Perfis'
   link_rankings:       'Ranking'
+  link_recommendations: 'Recomendações'
 
   #languages
   language:     'Idioma'
@@ -63,6 +64,9 @@ pt:
 
   #when the notice was successfully
   notice:
+    open_router:
+      connect:              'OpenRouter conectado. Escolha um modelo e gere sua recomendação'
+      disconnect:           'OpenRouter desconectado'
     sheet:
       create:               'Planilha criada com sucesso'
       update:               'Planilha atualizada com sucesso'
@@ -117,6 +121,11 @@ pt:
 
   #when the notice was not successfully
   alert:
+    open_router:
+      connect:               'Não foi possível conectar ao OpenRouter. Tente novamente'
+    recommendation:
+      failed:                'Não foi possível gerar ou salvar a recomendação. Tente novamente ou escolha outro modelo'
+      model_failed:          'Não foi possível gerar com %{model}. Tente novamente ou escolha outro modelo'
     rate_limit:              'Muitas tentativas. Aguarde alguns minutos e tente novamente'
     session:
       invalid:               'E-mail ou senha incorretos'
@@ -257,6 +266,61 @@ pt:
 
 
   #welcome------------------------------------
+  open_router:
+    usages:
+      show:
+        remaining:          '%{remaining} de %{limit} pedidos gratuitos hoje'
+
+  recommendations:
+    new:
+      title:                'Recomendações'
+      generate:             'Gerar recomendação'
+      generating:           'Gerando, pode levar até um minuto…'
+    connect:
+      title:                'Planilhas sugeridas por IA'
+      description:          'Conecte sua conta do OpenRouter para receber sugestões de treinos e dietas usando apenas modelos gratuitos.'
+      connect:              'Conectar com OpenRouter'
+      about:                'Como funciona?'
+      summary:              'Responda algumas perguntas sobre seu objetivo e sua rotina e receba sugestões de treinos, dietas ou ambos, prontas para revisar e salvar como planilhas. As sugestões são geradas por modelos de IA gratuitos através do OpenRouter, um serviço que reúne vários modelos em uma única conta.'
+    form:
+      for_sheet:            'Sugestões para a planilha %{name}'
+      kind:                 'O que você quer receber?'
+      kinds:
+        workout:            'Treino'
+        diet:               'Dieta'
+        both:               'Ambos'
+      goal:                 'Objetivo'
+      goals:
+        lose_weight:        'Perder peso'
+        gain_muscle:        'Ganhar massa'
+        maintain_weight:    'Manter o peso'
+      activity_level:       'Nível de atividade'
+      activity_levels:
+        sedentary:          'Sedentário'
+        lightly_active:     'Pouco ativo'
+        moderately_active:  'Moderadamente ativo'
+        very_active:        'Muito ativo'
+      dietary_preference:   'Preferência alimentar'
+      dietary_preferences:
+        none:               'Nenhuma'
+        vegetarian:         'Vegetariana'
+        vegan:              'Vegana'
+        keto:               'Cetogênica'
+        paleo:              'Paleolítica'
+      notes:                'Observações'
+      notes_placeholder:    'Lesões, equipamentos disponíveis, dias por semana, alergias...'
+      uses_metrics_html:    'Suas %{link} serão usadas para personalizar a sugestão'
+      health_metrics:       'métricas de saúde'
+      missing_metrics_html: '%{link} para sugestões mais precisas'
+      add_metrics:          'Adicione suas métricas de saúde'
+      model:                'Modelo'
+      free_only:            'gratuitos'
+      connected:            'Conectado ao OpenRouter'
+      disconnect:           'Desconectar'
+      preview:              'Pré-visualização'
+      discard_confirm:      'Descartar esta sugestão?'
+      discard:              'Descartar'
+
   welcome:
     title: "FitPlan"
     subtitle_html: >

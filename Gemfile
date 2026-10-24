@@ -78,3 +78,7 @@ gem 'omniauth', '~> 2.0'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
+
+gem "httparty"
+
+gem "ruby_llm", "~> 2.1"

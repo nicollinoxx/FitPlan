@@ -6,6 +6,9 @@
 
     <div class="d-flex gap-2">
       <%= render "shared/sort_button" if @user.sheets.many? && !turbo_native_app? %>
+      <%= link_to new_recommendation_path, class: 'btn btn-outline-success', aria: { label: t('link_recommendations') } do %>
+        <i class="bi bi-stars"></i>
+      <% end %>
       <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: t('new') }, class: 'btn btn-success' %>
     </div>
   </div>

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   include Shareable
   include Rankable
   include Omniauthable
+  include OpenRouter::Connectable
 
   has_secure_password
   has_one_attached :avatar

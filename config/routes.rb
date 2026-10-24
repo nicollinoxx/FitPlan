@@ -31,7 +31,17 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :open_router do
+    resource :connection, only: %i[ create destroy ] do
+      get :callback
+    end
+    resource :usage, only: :show
+  end
+
+  resource :recommendation, only: %i[ new create ]
+
   namespace :sheets do
+    resource :generation, only: :create
     resources :shares, only: [:index, :new, :create, :show, :destroy] do
       resources :requests, only: [:update, :destroy], shallow: true do
         get :preview_content, on: :member
@@ -42,6 +52,9 @@ Rails.application.routes.draw do
   resources :sheets do
     resource :completion, only: %i[create destroy], module: :sheets
     resource :position, only: :update, module: :sheets
+
+    post "workouts/generation", to: "workouts/generations#create", as: :workouts_generation
+    post "diets/generation",    to: "diets/generations#create",    as: :diets_generation
 
     resources :diets do
       resource :completion, only: %i[create destroy], module: :diets

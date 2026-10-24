@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "open_router_usage" do %>
+  <% if @free_requests %>
+    <span class="<%= @free_requests["remaining"].zero? ? 'text-danger' : 'text-body-emphasis' %>">
+      <i class="bi bi-lightning-charge-fill text-warning"></i> <%= t('.remaining', remaining: @free_requests["remaining"], limit: @free_requests["limit"]) %>
+    </span> ·
+  <% end %>
+<% end %>
