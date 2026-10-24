@@ -147,6 +147,10 @@ pt:
   diet:               "Dieta"
 
   sheets:
+    legend:
+      suggested:            'Sugerida por IA'
+    sheet:
+      suggested:            'Criada por sugestão de IA'
     index:
       title:                'Planilhas'
       filter:               'Filtrar'

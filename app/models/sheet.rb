@@ -35,7 +35,7 @@ class Sheet < ApplicationRecord
   def self.generate_from_recommendation!(sheets_attributes)
     transaction do
       sheets_attributes.map.with_index(1) do |attributes, position|
-        create!(attributes.slice(:name, :description, :sheet_type)).tap do |sheet|
+        create!(attributes.slice(:name, :description, :sheet_type).merge(suggested: true)).tap do |sheet|
           sheet.update!(position: position)
           sheet.add_recommended!(attributes.fetch(sheet.workout? ? :workouts : :diets, []))
         end

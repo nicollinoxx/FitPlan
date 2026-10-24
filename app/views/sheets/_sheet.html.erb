@@ -11,7 +11,10 @@
       <div class="flex-grow-1">
         <div class="d-flex justify-content-between align-items-start gap-3">
           <div>
-            <h2 class="h6 mb-0 fw-semibold lh-sm"><%= sheet.name %></h2>
+            <h2 class="h6 mb-0 fw-semibold lh-sm">
+              <%= sheet.name %>
+              <%= tag.i class: "bi bi-stars text-#{sheet_color(sheet)} ms-1", role: "img", aria: { label: t('sheets.sheet.suggested') }, title: t('sheets.sheet.suggested') if sheet.suggested? %>
+            </h2>
 
             <% if sheet.sheet_completions_today.any? %>
               <small class="d-inline-block px-1 <%= "pulse-#{sheet_color(sheet)}" if local_assigns[:pulse] %> rounded">

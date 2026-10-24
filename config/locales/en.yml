@@ -138,6 +138,10 @@ en:
   diet:               "Diet"
 
   sheets:
+    legend:
+      suggested:            'AI suggested'
+    sheet:
+      suggested:            'Created from an AI suggestion'
     index:
       title:                'Sheets'
       filter:               'Filter'
