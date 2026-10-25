@@ -1,15 +1,8 @@
 <%= form_with scope: :recommendation, url: recommendation_path(sheet_id: sheet&.id), id: "recommendation_form", data: { "recommendations--generate-target": "form", action: "recommendations--generate#generate:prevent change->recommendations--generate#toggle" } do |form| %>
-  <div class="mb-4" data-controller="hint">
-    <div class="d-flex align-items-center gap-2 mb-2">
-      <%= form.label :model, class: "mb-0" do %>
-        <%= t('.model') %> <span class="badge text-bg-success ms-1"><%= t('.free_only') %></span>
-      <% end %>
-
-      <button type="button" class="btn btn-link btn-sm p-0 lh-1 text-body-secondary" aria-label="<%= t('.about.title') %>"
-        data-action="hint#show" data-hint-title-param="<%= t('.about.title') %>" data-hint-body-param="<%= recommendation_about %>">
-        <i class="bi bi-info-circle"></i>
-      </button>
-    </div>
+  <div class="mb-4">
+    <%= form.label :model, class: "form-label" do %>
+      <%= t('.model') %> <span class="badge text-bg-success ms-1"><%= t('.free_only') %></span>
+    <% end %>
     <%= form.select :model, free_models.map { |model| [ model[:name], model[:id] ] }, { selected: Current.user.preferred_open_router_model }, required: true, class: "form-select" %>
 
     <small class="text-muted d-block mt-1">
@@ -17,14 +10,21 @@
       <%= turbo_frame_tag "open_router_usage", src: open_router_usage_path, data: { "recommendations--generate-target": "usage" } %>
       <%= link_to t('.disconnect'), open_router_connection_path, data: { turbo_method: :delete, turbo_confirm: t('message_destroy') }, class: "link-danger" %>
     </small>
+  </div>
+
+  <div class="d-flex align-items-center gap-2 mb-3" data-controller="hint">
+    <button class="btn btn-sm btn-outline-body" type="button"
+      data-bs-toggle="collapse" data-bs-target="#recommendation_questions" aria-expanded="true" aria-controls="recommendation_questions">
+      <%= sheet ? t('.for_sheet', name: sheet.name) : t('.kind') %> <i class="bi bi-chevron-up ms-1"></i>
+    </button>
+
+    <button type="button" class="btn btn-link p-0 lh-1 text-body-secondary" aria-label="<%= t('.about.title') %>"
+      data-action="hint#show" data-hint-title-param="<%= t('.about.title') %>" data-hint-body-param="<%= recommendation_about %>">
+      <i class="bi bi-info-circle fs-5"></i>
+    </button>
 
     <%= render "shared/hint_dialog" %>
   </div>
-
-  <button class="btn btn-sm btn-outline-body mb-3" type="button"
-    data-bs-toggle="collapse" data-bs-target="#recommendation_questions" aria-expanded="true" aria-controls="recommendation_questions">
-    <%= sheet ? t('.for_sheet', name: sheet.name) : t('.kind') %> <i class="bi bi-chevron-up ms-1"></i>
-  </button>
 
   <%= form.hidden_field :kind, value: sheet.sheet_type if sheet %>
 
