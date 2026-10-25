@@ -1,8 +1,15 @@
 <%= form_with scope: :recommendation, url: recommendation_path(sheet_id: sheet&.id), id: "recommendation_form", data: { "recommendations--generate-target": "form", action: "recommendations--generate#generate:prevent change->recommendations--generate#toggle" } do |form| %>
-  <div class="mb-4">
-    <%= form.label :model, class: "form-label" do %>
-      <%= t('.model') %> <span class="badge text-bg-success ms-1"><%= t('.free_only') %></span>
-    <% end %>
+  <div class="mb-4" data-controller="hint">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <%= form.label :model, class: "mb-0" do %>
+        <%= t('.model') %> <span class="badge text-bg-success ms-1"><%= t('.free_only') %></span>
+      <% end %>
+
+      <button type="button" class="btn btn-link btn-sm p-0 lh-1 text-body-secondary" aria-label="<%= t('.about.title') %>"
+        data-action="hint#show" data-hint-title-param="<%= t('.about.title') %>" data-hint-body-param="<%= recommendation_about %>">
+        <i class="bi bi-info-circle"></i>
+      </button>
+    </div>
     <%= form.select :model, free_models.map { |model| [ model[:name], model[:id] ] }, { selected: Current.user.preferred_open_router_model }, required: true, class: "form-select" %>
 
     <small class="text-muted d-block mt-1">
@@ -11,17 +18,7 @@
       <%= link_to t('.disconnect'), open_router_connection_path, data: { turbo_method: :delete, turbo_confirm: t('message_destroy') }, class: "link-danger" %>
     </small>
 
-    <div class="bg-body-tertiary rounded px-3 py-2 mt-3">
-      <small class="text-muted d-block">
-        <i class="bi bi-info-circle me-1"></i>
-        <%= Current.user.healthy_metric ? t('.uses_metrics_html', link: link_to(t('.health_metrics'), edit_identity_healthy_metric_path)) : t('.missing_metrics_html', link: link_to(t('.add_metrics'), new_identity_healthy_metric_path)) %>
-      </small>
-
-      <small class="text-muted d-block mt-1">
-        <i class="bi bi-translate me-1"></i>
-        <%= t('.language_html', language: link_to(t("languages.#{I18n.locale}"), identity_settings_path)) %>
-      </small>
-    </div>
+    <%= render "shared/hint_dialog" %>
   </div>
 
   <button class="btn btn-sm btn-outline-body mb-3" type="button"
