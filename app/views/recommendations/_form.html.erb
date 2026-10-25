@@ -1,4 +1,4 @@
-<%= form_with scope: :recommendation, url: recommendation_path(sheet_id: sheet&.id), id: "recommendation_form", data: { recommendation_target: "form", action: "recommendation#generate:prevent change->recommendation#toggle" } do |form| %>
+<%= form_with scope: :recommendation, url: recommendation_path(sheet_id: sheet&.id), id: "recommendation_form", data: { "recommendations--generate-target": "form", action: "recommendations--generate#generate:prevent change->recommendations--generate#toggle" } do |form| %>
   <div class="mb-4">
     <%= form.label :model, class: "form-label" do %>
       <%= t('.model') %> <span class="badge text-bg-success ms-1"><%= t('.free_only') %></span>
@@ -7,7 +7,7 @@
 
     <small class="text-muted d-block mt-1">
       <i class="bi bi-plug-fill text-success"></i> <%= t('.connected') %> ·
-      <%= turbo_frame_tag "open_router_usage", src: open_router_usage_path, data: { recommendation_target: "usage" } %>
+      <%= turbo_frame_tag "open_router_usage", src: open_router_usage_path, data: { "recommendations--generate-target": "usage" } %>
       <%= link_to t('.disconnect'), open_router_connection_path, data: { turbo_method: :delete, turbo_confirm: t('message_destroy') }, class: "link-danger" %>
     </small>
   </div>
@@ -19,13 +19,20 @@
 
   <%= form.hidden_field :kind, value: sheet.sheet_type if sheet %>
 
-  <div id="recommendation_questions" class="collapse show" data-recommendation-target="questions">
+  <div id="recommendation_questions" class="collapse show" data-recommendations--generate-target="questions">
     <div class="mb-3">
-      <% unless sheet %>
+      <% if sheet.nil? %>
         <div class="btn-group w-100 mb-3" role="group">
           <% OpenRouter::Recommendation::Restrictions::KINDS.each do |kind| %>
             <%= form.radio_button :kind, kind, checked: kind == "workout", class: "btn-check" %>
             <%= recommendation_kind_label(form, kind) %>
+          <% end %>
+        </div>
+      <% elsif sheet.items.any? %>
+        <div class="btn-group w-100 mb-3" role="group">
+          <% %w[ add improve ].each do |mode| %>
+            <%= form.radio_button :mode, mode, checked: mode == "add", class: "btn-check" %>
+            <%= recommendation_mode_label(form, mode, sheet) %>
           <% end %>
         </div>
       <% end %>
@@ -41,7 +48,7 @@
           <%= form.select :activity_level, OpenRouter::Recommendation::Restrictions::ACTIVITY_LEVELS.map { |level| [ t(".activity_levels.#{level}"), level ] }, { selected: "moderately_active" }, required: true, class: "form-select" %>
         </div>
 
-        <div class="col-md-4" data-recommendation-target="dietOnly" <%= 'hidden' unless sheet&.diet? %>>
+        <div class="col-md-4" data-recommendations--generate-target="dietOnly" <%= 'hidden' unless sheet&.diet? %>>
           <%= form.label :dietary_preference, t('.dietary_preference'), class: "form-label" %>
           <%= form.select :dietary_preference, OpenRouter::Recommendation::Restrictions::DIETARY_PREFERENCES.map { |preference| [ t(".dietary_preferences.#{preference}"), preference ] }, { selected: "none" }, required: true, class: "form-select" %>
         </div>
@@ -55,26 +62,27 @@
         <%= Current.user.healthy_metric ? t('.uses_metrics_html', link: link_to(t('.health_metrics'), edit_identity_healthy_metric_path)) : t('.missing_metrics_html', link: link_to(t('.add_metrics'), new_identity_healthy_metric_path)) %>
       </small>
 
-      <button type="submit" class="btn btn-success w-100 d-md-none mt-3" data-recommendation-target="submit">
+      <button type="submit" class="btn btn-success w-100 d-md-none mt-3" data-recommendations--generate-target="submit">
         <%= render "recommendations/generate_label" %>
       </button>
     </div>
   </div>
 <% end %>
 
-<div class="alert alert-danger" role="alert" data-recommendation-target="error" hidden></div>
+<div class="alert alert-danger" role="alert" data-recommendations--generate-target="error" hidden></div>
 
-<div class="mt-2" data-recommendation-target="preview" hidden>
+<div class="mt-2" data-recommendations--generate-target="preview" hidden>
   <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
     <h2 class="h6 fw-semibold mb-0"><%= t('.preview') %></h2>
 
     <div class="d-flex gap-2">
-      <button type="button" class="btn btn-sm btn-secondary" data-action="recommendation#discard" data-turbo-confirm="<%= t('.discard_confirm') %>"><%= t('.discard') %></button>
-      <button type="button" class="btn btn-sm btn-success" data-action="recommendation#save"><i class="bi bi-check2 me-1"></i><%= t('save') %></button>
+      <button type="button" class="btn btn-sm btn-secondary" data-action="recommendations--generate#discard" data-turbo-confirm="<%= t('.discard_confirm') %>"><%= t('.discard') %></button>
+      <button type="button" class="btn btn-sm btn-success" data-action="recommendations--generate#save"><i class="bi bi-check2 me-1"></i><%= t('save') %></button>
     </div>
   </div>
 
-  <div data-recommendation-target="sheets"></div>
+  <div data-recommendations--generate-target="sheets"></div>
+  <%= render "recommendations/changes", sheet: sheet if sheet %>
 </div>
 
 <%= render "recommendations/templates/sheet" %>

@@ -20,4 +20,14 @@ class Diets::GenerationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
   end
+
+  test "applies the suggested changes to the existing diets" do
+    sign_in_as(users(:lazaro_nixon))
+    item = diets(:one)
+
+    patch sheet_diets_generation_url(sheets(:two)), as: :json, params: { diets: [ { id: item.id, meal: "Brunch" } ] }
+
+    assert_response :success
+    assert_equal "Brunch", item.reload.meal.to_s
+  end
 end

@@ -53,8 +53,10 @@ Rails.application.routes.draw do
     resource :completion, only: %i[create destroy], module: :sheets
     resource :position, only: :update, module: :sheets
 
-    post "workouts/generation", to: "workouts/generations#create", as: :workouts_generation
-    post "diets/generation",    to: "diets/generations#create",    as: :diets_generation
+    post  "workouts/generation", to: "workouts/generations#create", as: :workouts_generation
+    patch "workouts/generation", to: "workouts/generations#update"
+    post  "diets/generation",    to: "diets/generations#create",    as: :diets_generation
+    patch "diets/generation",    to: "diets/generations#update"
 
     resources :diets do
       resource :completion, only: %i[create destroy], module: :diets

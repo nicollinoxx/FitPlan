@@ -1,0 +1,30 @@
+<div id="recommendation_changes" data-controller="recommendations--diff"
+     data-recommendations--diff-labels-value="<%= recommendation_change_labels.to_json %>"
+     data-recommendations--diff-charges-value="<%= t('workouts.form.options_charge').to_json %>"
+     data-recommendations--diff-color-value="<%= sheet_color(sheet) %>">
+
+  <p class="text-muted" data-recommendations--diff-target="empty" hidden><%= t('.none') %></p>
+  <div class="row" data-recommendations--diff-target="list"></div>
+
+  <template data-recommendations--diff-target="changeTemplate">
+    <div class="col-md-6 mb-3">
+      <div class="shadow-sm bg-body-tertiary rounded border h-100" data-field="card">
+        <div class="bg-<%= sheet_color(sheet) %> text-dark p-2 rounded-top">
+          <h4 class="h6 mb-0 text-truncate"><i class="bi bi-magic me-1"></i><span data-field="name"></span></h4>
+        </div>
+
+        <div class="p-3">
+          <ul class="list-unstyled mb-2" data-field="fields"></ul>
+          <p class="small text-body-secondary mb-0"><i class="bi bi-lightbulb me-1"></i><span data-field="reason"></span></p>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template data-recommendations--diff-target="fieldTemplate">
+    <li class="mb-1">
+      <span class="small text-body-secondary" data-field="label"></span>
+      <div><del class="text-danger" data-field="before"></del> <i class="bi bi-arrow-right mx-1"></i> <strong data-field="after"></strong></div>
+    </li>
+  </template>
+</div>

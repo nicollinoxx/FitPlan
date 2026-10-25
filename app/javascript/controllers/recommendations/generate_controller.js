@@ -3,7 +3,8 @@ import { Turbo } from "@hotwired/turbo-rails"
 
 export default class extends Controller {
   static targets = ["form", "submit", "questions", "usage", "dietOnly", "error", "preview", "sheets", "sheetTemplate", "workoutTemplate", "dietTemplate"]
-  static values = { saveUrl: String, existing: Boolean, charges: Object, errorMessage: String, modelErrorMessage: String }
+  static values = { saveUrl: String, existing: Boolean, sheetType: String, charges: Object, errorMessage: String, modelErrorMessage: String }
+  static outlets = ["recommendations--diff"]
 
   toggle() {
     const kind = new FormData(this.formTarget).get("recommendation[kind]")
@@ -28,7 +29,8 @@ export default class extends Controller {
 
   async save() {
     try {
-      const response = await this.request(this.saveUrlValue, JSON.stringify(this.payload), { "Content-Type": "application/json" })
+      const method = this.recommendation.changes ? "PATCH" : "POST"
+      const response = await this.request(this.saveUrlValue, JSON.stringify(this.payload), { "Content-Type": "application/json" }, method)
       const { location } = await response.json()
       Turbo.visit(location)
     } catch {
@@ -49,9 +51,9 @@ export default class extends Controller {
     collapsed ? questions.hide() : questions.show()
   }
 
-  async request(url, body, headers = {}) {
+  async request(url, body, headers = {}, method = "POST") {
     const response = await fetch(url, {
-      method: "POST",
+      method,
       headers: { "Accept": "application/json", "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content, ...headers },
       body
     })
@@ -61,6 +63,9 @@ export default class extends Controller {
   }
 
   get payload() {
+    const { changes } = this.recommendation
+
+    if (changes) return { [`${this.sheetTypeValue}s`]: changes.map(({ id, after }) => ({ id, ...after })) }
     if (!this.existingValue) return { sheets: this.recommendation.sheets }
 
     const [sheet] = this.recommendation.sheets
@@ -68,8 +73,11 @@ export default class extends Controller {
   }
 
   render() {
+    const { sheets = [], changes } = this.recommendation
+
     this.errorTarget.hidden = true
-    this.sheetsTarget.replaceChildren(...this.recommendation.sheets.map(sheet => this.renderSheet(sheet)))
+    this.sheetsTarget.replaceChildren(...sheets.map(sheet => this.renderSheet(sheet)))
+    if (this.hasRecommendationsDiffOutlet) this.recommendationsDiffOutlet.render(changes ?? [], Boolean(changes))
     this.previewTarget.hidden = false
     this.collapse(true)
     this.previewTarget.scrollIntoView({ behavior: "smooth" })

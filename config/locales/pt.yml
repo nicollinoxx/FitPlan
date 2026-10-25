@@ -287,6 +287,8 @@ pt:
         remaining:          '%{remaining} de %{limit} pedidos gratuitos hoje'
 
   recommendations:
+    changes:
+      none:                 'A IA não sugeriu mudanças para esta planilha.'
     new:
       title:                'Recomendações'
       generate:             'Gerar recomendação'
@@ -299,6 +301,9 @@ pt:
       summary:              'Responda algumas perguntas sobre seu objetivo e sua rotina e receba sugestões de treinos, dietas ou ambos, prontas para revisar e salvar como planilhas. As sugestões são geradas por modelos de IA gratuitos através do OpenRouter, um serviço que reúne vários modelos em uma única conta.'
     form:
       for_sheet:            'Sugestões para a planilha %{name}'
+      modes:
+        add:                'Adicionar novos'
+        improve:            'Melhorar existentes'
       kind:                 'O que você quer receber?'
       kinds:
         workout:            'Treino'

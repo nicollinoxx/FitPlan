@@ -1,11 +1,13 @@
 <% content_for(:title, t('.title')) %>
 
-<div data-controller="recommendation"
-     data-recommendation-save-url-value="<%= @sheet ? polymorphic_path([ @sheet, :"#{@sheet.sheet_type}s_generation" ]) : sheets_generation_path %>"
-     data-recommendation-existing-value="<%= @sheet.present? %>"
-     data-recommendation-charges-value="<%= t('workouts.form.options_charge').to_json %>"
-     data-recommendation-error-message-value="<%= t('alert.recommendation.failed') %>"
-     data-recommendation-model-error-message-value="<%= t('alert.recommendation.model_failed', model: '%{model}') %>">
+<div data-controller="recommendations--generate"
+     data-recommendations--generate-save-url-value="<%= @sheet ? polymorphic_path([ @sheet, :"#{@sheet.sheet_type}s_generation" ]) : sheets_generation_path %>"
+     data-recommendations--generate-existing-value="<%= @sheet.present? %>"
+     data-recommendations--generate-sheet-type-value="<%= @sheet&.sheet_type %>"
+     data-recommendations--generate-recommendations--diff-outlet="#recommendation_changes"
+     data-recommendations--generate-charges-value="<%= t('workouts.form.options_charge').to_json %>"
+     data-recommendations--generate-error-message-value="<%= t('alert.recommendation.failed') %>"
+     data-recommendations--generate-model-error-message-value="<%= t('alert.recommendation.model_failed', model: '%{model}') %>">
 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>
@@ -15,7 +17,7 @@
     </h1>
 
     <% if Current.user.open_router_connected? %>
-      <button type="submit" form="recommendation_form" class="btn btn-success flex-shrink-0 d-none d-md-inline-block" data-recommendation-target="submit">
+      <button type="submit" form="recommendation_form" class="btn btn-success flex-shrink-0 d-none d-md-inline-block" data-recommendations--generate-target="submit">
         <%= render "generate_label" %>
       </button>
     <% end %>

@@ -37,6 +37,18 @@ class RecommendationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[name='recommendation[kind]'][type=radio]", false
   end
 
+  test "offers to improve a sheet only when it already has items" do
+    @user.connect_open_router!("sk-or-test")
+
+    stub_singleton(OpenRouter::FreeModels, :all, -> { FREE_MODELS }) do
+      get new_recommendation_url(sheet_id: sheets(:one))
+      assert_select "input[name='recommendation[mode]'][value=improve]"
+
+      get new_recommendation_url(sheet_id: sheets(:empty_workout))
+      assert_select "input[name='recommendation[mode]']", false
+    end
+  end
+
   test "answers with the suggested sheets and remembers the chosen model" do
     @user.connect_open_router!("sk-or-test")
     answer = open_router_answer({ sheet_type: "workout", name: "Legs", workouts: [ { exercise: "Squat" } ] })

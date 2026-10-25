@@ -40,7 +40,7 @@ class OpenRouter::RecommendationTest < ActiveSupport::TestCase
       assert_equal "openrouter/free", asked.last[:model]
       assert_equal "gain_muscle", question.dig("answers", "goal")
       assert_equal "male", question.dig("profile", "gender")
-      assert_equal sheets(:one).workouts.pluck(:exercise), question.dig("existing", "workouts")
+      assert_equal sheets(:one).workouts.positioned.map { |workout| workout.slice("id", "exercise", "series", "repetitions", "interval", "charge") }, question.dig("existing", "workouts")
     end
   end
 
@@ -49,6 +49,41 @@ class OpenRouter::RecommendationTest < ActiveSupport::TestCase
       I18n.with_locale(:pt) { recommendation(kind: "diet").generate }
 
       assert_includes asked.last[:instructions], "Write every text value in Portuguese"
+    end
+  end
+
+  test "proposes changes to the existing items, next to how they are now" do
+    workout = workouts(:one)
+    answer  = { changes: [ { id: workout.id, exercise: "Front squat", series: 5, repetitions: "5", interval: 120, charge: "high", reason: "More strength" } ] }.to_json
+
+    stub_open_router_answer(answer) do |asked|
+      changes = OpenRouter::Recommendation.new(@user, sheet: sheets(:one), answers: { mode: "improve" }).generate[:changes]
+
+      assert_includes asked.last[:instructions], "Improve what is listed"
+      assert_equal [ workout.id ], changes.pluck(:id)
+      assert_equal workout.exercise, changes.first[:before]["exercise"]
+      assert_equal "Front squat", changes.first[:after]["exercise"]
+      assert_equal "More strength", changes.first[:reason]
+    end
+  end
+
+  test "leaves out changes to items the sheet does not have" do
+    answer = { changes: [ { id: workouts(:one).id, series: 5 }, { id: workouts(:two).id, series: 2 }, { id: 0, series: 1 } ] }.to_json
+
+    stub_open_router_answer(answer) do
+      assert_equal [ workouts(:one).id ], OpenRouter::Recommendation.new(@user, sheet: sheets(:one), answers: { mode: "improve" }).generate[:changes].pluck(:id)
+    end
+  end
+
+  test "keeps only the fields that really change" do
+    workout = workouts(:one)
+    answer  = { changes: [ { id: workout.id, exercise: workout.exercise, series: workout.series + 1 }, { id: workouts(:another).id, exercise: workouts(:another).exercise } ] }.to_json
+
+    stub_open_router_answer(answer) do
+      changes = OpenRouter::Recommendation.new(@user, sheet: sheets(:one), answers: { mode: "improve" }).generate[:changes]
+
+      assert_equal [ workout.id ], changes.pluck(:id)
+      assert_equal({ "series" => workout.series + 1 }, changes.first[:after])
     end
   end
 

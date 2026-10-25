@@ -20,4 +20,14 @@ class Workouts::GenerationsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :not_found
   end
+
+  test "applies the suggested changes to the existing workouts" do
+    sign_in_as(users(:lazaro_nixon))
+    item = workouts(:one)
+
+    patch sheet_workouts_generation_url(sheets(:one)), as: :json, params: { workouts: [ { id: item.id, series: 5 } ] }
+
+    assert_response :success
+    assert_equal "5", item.reload.series.to_s
+  end
 end

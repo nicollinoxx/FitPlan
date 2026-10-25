@@ -17,10 +17,10 @@ class RecommendationsController < ApplicationController
     end
 
     def recommendation_params
-      params.expect(recommendation: [ :kind, :goal, :activity_level, :dietary_preference, :notes, :model ])
+      params.expect(recommendation: [ :kind, :mode, :goal, :activity_level, :dietary_preference, :notes, :model ])
     end
 
     def open_router_recommendation
-      OpenRouter::Recommendation.new(Current.user, sheet: @sheet, answers: recommendation_params.slice(:kind, :goal, :activity_level, :dietary_preference, :notes).to_h)
+      OpenRouter::Recommendation.new(Current.user, sheet: @sheet, answers: recommendation_params.slice(:kind, :mode, :goal, :activity_level, :dietary_preference, :notes).to_h)
     end
 end

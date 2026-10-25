@@ -132,4 +132,14 @@ class SheetTest < ActiveSupport::TestCase
     assert_equal :suggested, Sheet.new(suggested: true).origin
     assert_equal :copied, Sheet.new(copy: true, suggested: true).origin
   end
+
+  test "improve_recommended! updates only the sheet's own items, all or nothing" do
+    workout = workouts(:one)
+
+    @workout_sheet.improve_recommended!([ { id: workout.id, series: 5, charge: "high" } ])
+    assert_equal [ 5, "high" ], workout.reload.values_at(:series, :charge)
+
+    assert_raises(ActiveRecord::RecordNotFound) { @workout_sheet.improve_recommended!([ { id: workout.id, series: 6 }, { id: workouts(:two).id, series: 2 } ]) }
+    assert_equal 5, workout.reload.series
+  end
 end

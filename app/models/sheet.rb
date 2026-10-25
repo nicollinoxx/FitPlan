@@ -43,8 +43,18 @@ class Sheet < ApplicationRecord
     end
   end
 
-  def add_recommended!(items)
-    (workout? ? workouts : diets).create!(items)
+  def items
+    workout? ? workouts : diets
+  end
+
+  def add_recommended!(attributes)
+    items.create!(attributes)
+  end
+
+  def improve_recommended!(changes)
+    transaction do
+      changes.each { |change| items.find(change[:id]).update!(change.except(:id)) }
+    end
   end
 
   def origin
