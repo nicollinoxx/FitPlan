@@ -343,6 +343,7 @@ pt:
       notes:                'Observações'
       notes_placeholder:    'Lesões, equipamentos disponíveis, dias por semana, alergias...'
       uses_metrics_html:    'Suas %{link} serão usadas para personalizar a sugestão'
+      language_html:        'As sugestões vêm no idioma do seu perfil: %{language}'
       health_metrics:       'métricas de saúde'
       missing_metrics_html: '%{link} para sugestões mais precisas'
       add_metrics:          'Adicione suas métricas de saúde'

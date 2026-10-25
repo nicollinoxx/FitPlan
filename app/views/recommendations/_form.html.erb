@@ -69,6 +69,11 @@
         <%= Current.user.healthy_metric ? t('.uses_metrics_html', link: link_to(t('.health_metrics'), edit_identity_healthy_metric_path)) : t('.missing_metrics_html', link: link_to(t('.add_metrics'), new_identity_healthy_metric_path)) %>
       </small>
 
+      <small class="text-muted d-block mt-1">
+        <i class="bi bi-translate me-1"></i>
+        <%= t('.language_html', language: link_to(t("languages.#{I18n.locale}"), identity_settings_path)) %>
+      </small>
+
       <button type="submit" class="btn btn-success w-100 d-md-none mt-3" data-recommendations--generate-target="submit">
         <%= render "recommendations/generate_label" %>
       </button>

@@ -30,4 +30,13 @@ class RecommendationJobTest < ActiveJob::TestCase
     message = JSON.parse(broadcasts(RecommendationChannel.broadcasting_for(@user)).last)
     assert_equal({ "token" => "token", "failed" => true }, message)
   end
+
+  test "writes the suggestion in the language of the request that asked for it" do
+    stub_open_router_answer(open_router_answer({ sheet_type: "workout", name: "Legs" })) do |asked|
+      I18n.with_locale(:en) { RecommendationJob.perform_later(@user, "token", { "kind" => "workout" }) }
+      I18n.with_locale(:pt) { perform_enqueued_jobs }
+
+      assert_includes asked.last[:instructions], "Write every text value in English"
+    end
+  end
 end

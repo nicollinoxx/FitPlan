@@ -352,6 +352,7 @@ en:
       notes:                'Notes'
       notes_placeholder:    'Injuries, available equipment, days per week, allergies...'
       uses_metrics_html:    'Your %{link} will be used to tailor the suggestion'
+      language_html:        "Suggestions come in your profile's language: %{language}"
       health_metrics:       'health metrics'
       missing_metrics_html: '%{link} for more accurate suggestions'
       add_metrics:          'Add your health metrics'
