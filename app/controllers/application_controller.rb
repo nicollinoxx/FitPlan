@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
     def start_new_session_for(user)
       @session = user.sessions.create!
 
+      cookies.delete(:session_handoff)
       cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
       redirect_to sheets_path(format: :html)
     end
@@ -32,7 +33,6 @@ class ApplicationController < ActionController::Base
 
     def claim_session_handoff
       if user = SessionHandoff.claim(cookies.signed[:session_handoff])
-        cookies.delete(:session_handoff)
         start_new_session_for(user)
       end
     end

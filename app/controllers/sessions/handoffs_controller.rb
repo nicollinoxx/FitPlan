@@ -7,4 +7,10 @@ class Sessions::HandoffsController < ApplicationController
     session[:session_handoff] = params.expect(:code)
     @provider = params[:provider]
   end
+
+  # Asked by the app's page while it waits. Once the provider is done, the
+  # before_action claiming the code redirects instead.
+  def status
+    head :no_content
+  end
 end

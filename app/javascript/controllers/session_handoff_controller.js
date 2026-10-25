@@ -5,25 +5,31 @@ import { Turbo } from "@hotwired/turbo-rails"
 // every few seconds. The asking itself trades the code for a session (see
 // SessionHandoff), and the page follows wherever that redirects. It cannot wait
 // to be shown again instead: iOS keeps it visible under the Safari sheet.
+//
+// One question at a time, to a route that renders nothing, so a slow server is
+// never asked again before it answered.
 export default class extends Controller {
-  static values = { interval: { type: Number, default: 2000 }, attempts: { type: Number, default: 150 } }
+  static values = { url: String, interval: { type: Number, default: 2000 }, attempts: { type: Number, default: 150 } }
 
   connect() {
-    this.timer = setInterval(this.check, this.intervalValue)
+    this.schedule()
   }
 
   disconnect() {
-    clearInterval(this.timer)
+    clearTimeout(this.timer)
+  }
+
+  schedule() {
+    if (this.attemptsValue-- > 0) this.timer = setTimeout(this.check, this.intervalValue)
   }
 
   check = async () => {
-    if (--this.attemptsValue < 0) return this.disconnect()
+    const response = await fetch(this.urlValue).catch(() => null)
 
-    const response = await fetch(window.location.href, { method: "HEAD" })
-
-    if (response.redirected) {
-      this.disconnect()
+    if (response?.redirected) {
       Turbo.visit(response.url, { action: "replace" })
+    } else if (this.element.isConnected) {
+      this.schedule()
     }
   }
 }
