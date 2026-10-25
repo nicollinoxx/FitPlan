@@ -27,18 +27,7 @@
     </div>
   </div>
 
-  <div class="modal fade" tabindex="-1" aria-hidden="true" data-hint-target="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title h6 mb-0" data-hint-target="title"></h2>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body text-body-secondary" data-hint-target="body"></div>
-      </div>
-    </div>
-  </div>
+  <%= render "shared/hint_dialog" %>
 </div>
 
 <% if @weekly_progress[:last_week] > 0 || @weekly_progress[:this_week] > 0 %>

@@ -1,0 +1,35 @@
+<% content_for(:title, t('.title')) %>
+
+<div data-controller="recommendations--generate"
+     data-recommendations--generate-save-url-value="<%= @sheet ? polymorphic_path([ @sheet, :"#{@sheet.sheet_type}s_generation" ]) : sheets_generation_path %>"
+     data-recommendations--generate-existing-value="<%= @sheet.present? %>"
+     data-recommendations--generate-sheet-type-value="<%= @sheet&.sheet_type %>"
+     data-recommendations--generate-recommendations--diff-outlet="#recommendation_changes"
+     data-recommendations--generate-charges-value="<%= t('workouts.form.options_charge').to_json %>"
+     data-recommendations--generate-error-message-value="<%= t('alert.recommendation.failed') %>"
+     data-recommendations--generate-model-error-message-value="<%= t('alert.recommendation.model_failed', model: '%{model}') %>">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>
+      <%= link_to @sheet ? sheet_diets_or_workouts_path(@sheet) : sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
+        <i class="bi bi-arrow-left-short"></i><%= t('.title') %>
+      <% end %>
+    </h1>
+
+    <% if Current.user.open_router_connected? %>
+      <button type="submit" form="recommendation_form" class="btn btn-success flex-shrink-0 d-none d-md-inline-block" data-recommendations--generate-target="submit">
+        <%= render "generate_label" %>
+      </button>
+    <% end %>
+  </div>
+
+  <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
+    <% if Current.user.open_router_connected? %>
+      <%= render "form", sheet: @sheet, free_models: @free_models %>
+    <% else %>
+      <%= render "connect" %>
+    <% end %>
+
+    <%= image_tag 'undraw/grading_papers.svg', alt: '', class: 'img-fluid mt-auto ms-auto', style: 'width: 25rem;' %>
+  </div>
+</div>

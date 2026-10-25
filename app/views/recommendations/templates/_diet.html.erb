@@ -1,0 +1,35 @@
+<template data-recommendations--generate-target="dietTemplate">
+  <div class="col-md-6 mb-3">
+    <div class="shadow-sm bg-body-tertiary rounded border h-100 pulse-suggested-orange">
+      <div class="bg-orange text-light bg-opacity-20 p-2 rounded-top">
+        <h4 class="h6 mb-0 text-truncate"><i class="bi bi-cup-hot me-1"></i><span data-field="meal"></span></h4>
+      </div>
+
+      <div class="p-3">
+        <p class="mb-3 small" data-field="description"></p>
+
+        <div class="small rounded row g-0 m-0 border">
+          <div class="col-6 col-md-3 text-center p-1 border-end">
+            <p class="small text-muted mb-0"><i class="bi bi-egg-fried"></i> <%= t('proteins') %></p>
+            <p class="fw-bold mb-0 text-primary" data-field="protein_g"></p>
+          </div>
+
+          <div class="col-6 col-md-3 text-center p-1 border-end">
+            <p class="small text-muted mb-0"><i class="bi bi-basket"></i> <%= t('carbohydrates') %></p>
+            <p class="fw-bold mb-0 text-success" data-field="carbohydrate_g"></p>
+          </div>
+
+          <div class="col-6 col-md-3 text-center p-1 border-end">
+            <p class="small text-muted mb-0"><i class="bi bi-droplet"></i> <%= t('fats') %></p>
+            <p class="fw-bold mb-0 text-warning" data-field="fat_g"></p>
+          </div>
+
+          <div class="col-6 col-md-3 text-center p-1">
+            <p class="small text-muted mb-0"><i class="bi bi-fire"></i> <%= t('calories') %></p>
+            <p class="fw-bold mb-0 text-danger" data-field="calories"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

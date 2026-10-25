@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-import * as bootstrap from "bootstrap"
+import "bootstrap"
 
 export default class extends Controller {
-  connect() { setTimeout(() => bootstrap.Alert.getOrCreateInstance(this.element).close(), 5000) }
+  connect() { setTimeout(() => window.bootstrap.Alert.getOrCreateInstance(this.element).close(), 5000) }
 }

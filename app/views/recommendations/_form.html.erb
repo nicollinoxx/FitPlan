@@ -1,0 +1,92 @@
+<%= form_with scope: :recommendation, url: recommendation_path(sheet_id: sheet&.id), id: "recommendation_form", data: { "recommendations--generate-target": "form", action: "recommendations--generate#generate:prevent change->recommendations--generate#toggle" } do |form| %>
+  <div class="mb-4">
+    <%= form.label :model, class: "form-label" do %>
+      <%= t('.model') %> <span class="badge text-bg-success ms-1"><%= t('.free_only') %></span>
+    <% end %>
+    <%= form.select :model, free_models.map { |model| [ model[:name], model[:id] ] }, { selected: Current.user.preferred_open_router_model }, required: true, class: "form-select" %>
+
+    <small class="text-muted d-block mt-1">
+      <i class="bi bi-plug-fill text-success"></i> <%= t('.connected') %> ·
+      <%= turbo_frame_tag "open_router_usage", src: open_router_usage_path, data: { "recommendations--generate-target": "usage" } %>
+      <%= link_to t('.disconnect'), open_router_connection_path, data: { turbo_method: :delete, turbo_confirm: t('message_destroy') }, class: "link-danger" %>
+    </small>
+  </div>
+
+  <button class="btn btn-sm btn-outline-body mb-3" type="button"
+    data-bs-toggle="collapse" data-bs-target="#recommendation_questions" aria-expanded="true" aria-controls="recommendation_questions">
+    <%= sheet ? t('.for_sheet', name: sheet.name) : t('.kind') %> <i class="bi bi-chevron-up ms-1"></i>
+  </button>
+
+  <%= form.hidden_field :kind, value: sheet.sheet_type if sheet %>
+
+  <div id="recommendation_questions" class="collapse show" data-recommendations--generate-target="questions">
+    <div class="mb-3">
+      <% if sheet.nil? %>
+        <div class="btn-group w-100 mb-2" role="group">
+          <% OpenRouter::Recommendation::Restrictions::KINDS.each do |kind| %>
+            <%= form.radio_button :kind, kind, checked: kind == "workout", class: "btn-check" %>
+            <%= recommendation_kind_label(form, kind) %>
+          <% end %>
+        </div>
+        <%= render "recommendations/choice_hints", choices: OpenRouter::Recommendation::Restrictions::KINDS, selected: "workout" %>
+      <% elsif sheet.items.any? %>
+        <div class="btn-group w-100 mb-2" role="group">
+          <% %w[ add improve ].each do |mode| %>
+            <%= form.radio_button :mode, mode, checked: mode == "add", class: "btn-check" %>
+            <%= recommendation_mode_label(form, mode, sheet) %>
+          <% end %>
+        </div>
+        <%= render "recommendations/choice_hints", choices: %w[ add improve ], selected: "add" %>
+      <% end %>
+
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <%= form.label :goal, t('.goal'), class: "form-label" %>
+          <%= form.select :goal, OpenRouter::Recommendation::Restrictions::GOALS.map { |goal| [ t(".goals.#{goal}"), goal ] }, { selected: "gain_muscle" }, required: true, class: "form-select" %>
+        </div>
+
+        <div class="col-md-4">
+          <%= form.label :activity_level, t('.activity_level'), class: "form-label" %>
+          <%= form.select :activity_level, OpenRouter::Recommendation::Restrictions::ACTIVITY_LEVELS.map { |level| [ t(".activity_levels.#{level}"), level ] }, { selected: "moderately_active" }, required: true, class: "form-select" %>
+        </div>
+
+        <div class="col-md-4" data-recommendations--generate-target="dietOnly" <%= 'hidden' unless sheet&.diet? %>>
+          <%= form.label :dietary_preference, t('.dietary_preference'), class: "form-label" %>
+          <%= form.select :dietary_preference, OpenRouter::Recommendation::Restrictions::DIETARY_PREFERENCES.map { |preference| [ t(".dietary_preferences.#{preference}"), preference ] }, { selected: "none" }, required: true, class: "form-select" %>
+        </div>
+      </div>
+
+      <%= form.label :notes, t('.notes'), class: "form-label" %>
+      <%= form.text_area :notes, rows: 2, maxlength: 500, class: "form-control", placeholder: t('.notes_placeholder') %>
+
+      <small class="text-muted d-block mt-1">
+        <i class="bi bi-info-circle me-1"></i>
+        <%= Current.user.healthy_metric ? t('.uses_metrics_html', link: link_to(t('.health_metrics'), edit_identity_healthy_metric_path)) : t('.missing_metrics_html', link: link_to(t('.add_metrics'), new_identity_healthy_metric_path)) %>
+      </small>
+
+      <button type="submit" class="btn btn-success w-100 d-md-none mt-3" data-recommendations--generate-target="submit">
+        <%= render "recommendations/generate_label" %>
+      </button>
+    </div>
+  </div>
+<% end %>
+
+<div class="alert alert-danger" role="alert" data-recommendations--generate-target="error" hidden></div>
+
+<div class="mt-2" data-recommendations--generate-target="preview" hidden>
+  <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+    <h2 class="h6 fw-semibold mb-0"><%= t('.preview') %></h2>
+
+    <div class="d-flex gap-2">
+      <button type="button" class="btn btn-sm btn-secondary" data-action="recommendations--generate#discard" data-turbo-confirm="<%= t('.discard_confirm') %>"><%= t('.discard') %></button>
+      <button type="button" class="btn btn-sm btn-success" data-action="recommendations--generate#save"><i class="bi bi-check2 me-1"></i><%= t('save') %></button>
+    </div>
+  </div>
+
+  <div data-recommendations--generate-target="sheets"></div>
+  <%= render "recommendations/changes", sheet: sheet if sheet %>
+</div>
+
+<%= render "recommendations/templates/sheet" %>
+<%= render "recommendations/templates/workout" %>
+<%= render "recommendations/templates/diet" %>

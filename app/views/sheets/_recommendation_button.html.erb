@@ -1,0 +1,4 @@
+<%= link_to new_recommendation_path, class: "btn #{'btn-sm' if turbo_native_app?} btn-outline-success flex-shrink-0",
+      data: { turbo_frame: "_top" }, aria: { label: t('link_recommendations') }, title: t('link_recommendations') do %>
+  <i class="bi bi-stars"></i>
+<% end %>

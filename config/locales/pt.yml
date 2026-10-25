@@ -1,6 +1,8 @@
 
 pt:
   date:
+    formats:
+      default: '%d/%m/%Y'
     day_names:
       - Domingo
       - Segunda-feira
@@ -19,6 +21,7 @@ pt:
   link_dashboard:      'Painel'
   link_profiles:       'Perfis'
   link_rankings:       'Ranking'
+  link_recommendations: 'Recomendações'
 
   #languages
   language:     'Idioma'
@@ -63,6 +66,9 @@ pt:
 
   #when the notice was successfully
   notice:
+    open_router:
+      connect:              'OpenRouter conectado. Escolha um modelo e gere sua recomendação'
+      disconnect:           'OpenRouter desconectado'
     sheet:
       create:               'Planilha criada com sucesso'
       update:               'Planilha atualizada com sucesso'
@@ -117,6 +123,11 @@ pt:
 
   #when the notice was not successfully
   alert:
+    open_router:
+      connect:               'Não foi possível conectar ao OpenRouter. Tente novamente'
+    recommendation:
+      failed:                'Não foi possível gerar ou salvar a recomendação. Tente novamente ou escolha outro modelo'
+      model_failed:          'Não foi possível gerar com %{model}. Tente novamente ou escolha outro modelo'
     rate_limit:              'Muitas tentativas. Aguarde alguns minutos e tente novamente'
     session:
       invalid:               'E-mail ou senha incorretos'
@@ -138,6 +149,10 @@ pt:
   diet:               "Dieta"
 
   sheets:
+    legend:
+      suggested:            'Sugerida por IA'
+    sheet:
+      suggested:            'Criada por sugestão de IA'
     index:
       title:                'Planilhas'
       filter:               'Filtrar'
@@ -155,6 +170,11 @@ pt:
       alert:                'O conteúdo desta planilha será apagado se você alterar o tipo atual.'
     show:
       title:                'Planilha'
+      created_on:           'Criada em %{date}'
+      origins:
+        copied:             'Recebida por compartilhamento'
+        suggested:          'Sugerida por IA'
+        manual:             'Criada manualmente'
     form:
       error_message_form:     'impediram esta planilha de ser salva:'
       label:
@@ -257,6 +277,76 @@ pt:
 
 
   #welcome------------------------------------
+  open_router:
+    connections:
+      callback:
+        title:              'OpenRouter conectado'
+        description:        'Pode fechar esta página e voltar ao FitPlan para gerar suas sugestões.'
+    usages:
+      show:
+        remaining:          '%{remaining} de %{limit} pedidos gratuitos hoje'
+
+  recommendations:
+    changes:
+      none:                 'A IA não sugeriu mudanças para esta planilha.'
+    new:
+      title:                'Recomendações'
+      generate:             'Gerar recomendação'
+      generating:           'Gerando, pode levar até um minuto…'
+    connect:
+      title:                'Planilhas sugeridas por IA'
+      description:          'Conecte sua conta do OpenRouter para receber sugestões de treinos e dietas usando apenas modelos gratuitos.'
+      connect:              'Conectar com OpenRouter'
+      about:                'Como funciona?'
+      summary:              'Responda algumas perguntas sobre seu objetivo e sua rotina e receba sugestões de treinos, dietas ou ambos, prontas para revisar e salvar como planilhas. As sugestões são geradas por modelos de IA gratuitos através do OpenRouter, um serviço que reúne vários modelos em uma única conta.'
+    form:
+      for_sheet:            'Sugestões para a planilha %{name}'
+      hints:
+        workout:           'Cria uma planilha nova de treino, com exercícios, séries e cargas.'
+        diet:              'Cria uma planilha nova de dieta, com refeições e macros.'
+        both:              'Cria duas planilhas, uma de treino e uma de dieta, pensadas juntas.'
+        add:               'Sugere exercícios ou refeições novos para completar esta planilha.'
+        improve:           'Propõe ajustes nos itens que já existem, mostrando o antes e o depois.'
+      modes:
+        add:                'Adicionar novos'
+        improve:            'Melhorar existentes'
+      kind:                 'O que você quer receber?'
+      kinds:
+        workout:            'Treino'
+        diet:               'Dieta'
+        both:               'Ambos'
+      goal:                 'Objetivo'
+      goals:
+        lose_weight:        'Perder peso'
+        gain_muscle:        'Ganhar massa'
+        maintain_weight:    'Manter o peso'
+      activity_level:       'Nível de atividade'
+      activity_levels:
+        sedentary:          'Sedentário'
+        lightly_active:     'Pouco ativo'
+        moderately_active:  'Moderadamente ativo'
+        very_active:        'Muito ativo'
+      dietary_preference:   'Preferência alimentar'
+      dietary_preferences:
+        none:               'Nenhuma'
+        vegetarian:         'Vegetariana'
+        vegan:              'Vegana'
+        keto:               'Cetogênica'
+        paleo:              'Paleolítica'
+      notes:                'Observações'
+      notes_placeholder:    'Lesões, equipamentos disponíveis, dias por semana, alergias...'
+      uses_metrics_html:    'Suas %{link} serão usadas para personalizar a sugestão'
+      health_metrics:       'métricas de saúde'
+      missing_metrics_html: '%{link} para sugestões mais precisas'
+      add_metrics:          'Adicione suas métricas de saúde'
+      model:                'Modelo'
+      free_only:            'gratuitos'
+      connected:            'Conectado ao OpenRouter'
+      disconnect:           'Desconectar'
+      preview:              'Pré-visualização'
+      discard_confirm:      'Descartar esta sugestão?'
+      discard:              'Descartar'
+
   welcome:
     title: "FitPlan"
     subtitle_html: >

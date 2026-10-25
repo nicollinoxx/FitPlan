@@ -22,6 +22,28 @@ class ActiveSupport::TestCase
     URI.define_singleton_method(:open, original)
   end
 
+  def stub_singleton(object, name, implementation)
+    original = object.method(name)
+    object.define_singleton_method(name, &implementation)
+    yield
+  ensure
+    object.define_singleton_method(name, original)
+  end
+
+  def stub_open_router_answer(content)
+    asked = []
+    RubyLLM::Chat.alias_method :original_ask, :ask
+    RubyLLM::Chat.define_method(:ask) { |question| asked << { model: model.id, instructions: messages.first.content, question: question }; RubyLLM::Message.new(role: :assistant, content: content) }
+    yield asked
+  ensure
+    RubyLLM::Chat.alias_method :ask, :original_ask
+    RubyLLM::Chat.remove_method :original_ask
+  end
+
+  def open_router_answer(*sheets)
+    "```json\n#{{ sheets: sheets }.to_json}\n```"
+  end
+
   def with_rate_limit_exceeded
     store = ActionController::Base.cache_store
     store.define_singleton_method(:increment) { |*| Float::INFINITY }

@@ -1,18 +1,15 @@
 class Sheet < ApplicationRecord
   include Normalizable
-  include Sheet::Copyable
+  include Copyable
   include Positionable
+  include Trackable
 
   belongs_to :user
   positioned_within :user
 
   has_many :workouts,          dependent: :destroy
   has_many :diets,             dependent: :destroy
-  has_many :completions,       dependent: :destroy
   has_many :sheet_requests,    dependent: :destroy
-  has_many :sheet_completions, dependent: :destroy
-
-  has_many :sheet_completions_today, -> { today }, class_name: "SheetCompletion"
 
   validates :sheet_type, inclusion: { in: %w[ workout diet ] }
   validates :name, presence: true
@@ -22,7 +19,6 @@ class Sheet < ApplicationRecord
   after_update :destroy_invalid_content, if: :saved_change_to_sheet_type?
 
   scope :search_by_type,  ->(type) { sheet_types.keys.include?(type) ? where(sheet_type: type) : all }
-  scope :completed_today, -> { joins(:sheet_completions_today).distinct }
   scope :search_by_name,  ->(name) { name.present? ? where("name ILIKE ?", "%#{sanitize_search(name)}%") : all }
   scope :has_workouts,    -> { where(Workout.where("workouts.sheet_id = sheets.id").arel.exists) }
   scope :has_diets,       -> { where(Diet.where("diets.sheet_id = sheets.id").arel.exists) }
@@ -36,27 +32,36 @@ class Sheet < ApplicationRecord
     end
   end
 
-  def completed_diets_indexed_by_diet_id
-    completions.today.where.not(diet_id: nil).index_by(&:diet_id)
-  end
-
-  def completions_indexed_by_workout_id
-    completions.current_round.where.not(workout_id: nil).index_by(&:workout_id)
-  end
-
-  def complete!
+  def self.generate_from_recommendation!(sheets_attributes)
     transaction do
-      sheet_completion = sheet_completions.create!(user: user)
-      completions.current_round.update_all(sheet_completion_id: sheet_completion.id)
+      sheets_attributes.map.with_index(1) do |attributes, position|
+        create!(attributes.slice(:name, :description, :sheet_type).merge(suggested: true)).tap do |sheet|
+          sheet.update!(position: position)
+          sheet.add_recommended!(attributes.fetch(sheet.workout? ? :workouts : :diets, []))
+        end
+      end
     end
   end
 
-  def uncomplete!
-    sheet_completions_today.order(:completed_at).last&.destroy!
+  def items
+    workout? ? workouts : diets
   end
 
-  def completed?
-    sheet_completions_today.exists?
+  def add_recommended!(attributes)
+    items.create!(attributes)
+  end
+
+  def improve_recommended!(changes)
+    transaction do
+      changes.each { |change| items.find(change[:id]).update!(change.except(:id)) }
+    end
+  end
+
+  def origin
+    return :copied    if copy?
+    return :suggested if suggested?
+
+    :manual
   end
 
   private

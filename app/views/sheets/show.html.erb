@@ -9,10 +9,13 @@
 <div class="d-flex flex-column" style="min-height: calc(100vh - 160px);">
   <%= render 'sheet', sheet: @sheet %>
 
-  <small class="text-muted d-block mt-1 mb-3">
-    type: <%= @sheet.workout? ? t('workout') : t('diet') %> |
-    font: <%= @sheet.copy? ? "copied" : "original" %>
-  </small>
+  <ul class="list-inline small text-body-secondary mt-2 mb-3">
+    <li class="list-inline-item me-3">
+      <i class="bi <%= @sheet.workout? ? 'bi-heart-pulse' : 'bi-egg-fried' %> text-<%= sheet_color(@sheet) %> me-1"></i><%= @sheet.workout? ? t('workout') : t('diet') %>
+    </li>
+    <li class="list-inline-item me-3"><%= sheet_origin(@sheet) %></li>
+    <li class="list-inline-item"><i class="bi bi-calendar3 me-1"></i><%= t('.created_on', date: l(@sheet.created_at.to_date)) %></li>
+  </ul>
 
   <div id="sheets" data-controller="bridge--menu">
     <div class="d-none" data-controller="bridge--nav-button" data-action="click->bridge--menu#show">Options</div>
