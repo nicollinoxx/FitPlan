@@ -49,25 +49,21 @@ class RecommendationsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "answers with the suggested sheets and remembers the chosen model" do
+  test "leaves the suggestion to a job and remembers the chosen model" do
     @user.connect_open_router!("sk-or-test")
-    answer = open_router_answer({ sheet_type: "workout", name: "Legs", workouts: [ { exercise: "Squat" } ] })
 
-    stub_open_router_answer(answer) do |asked|
-      post recommendation_url, params: { recommendation: answer_params.merge(model: "b/free:free") }
-
-      assert_equal "b/free:free", asked.last[:model]
+    assert_enqueued_with(job: RecommendationJob, args: [ @user, "token", answer_params.except(:model).merge(split: "3").stringify_keys, nil ]) do
+      post recommendation_url, params: { token: "token", recommendation: answer_params.merge(model: "b/free:free", split: "3") }
     end
 
-    assert_response :success
-    assert_equal "Legs", response.parsed_body.dig("sheets", 0, "name")
+    assert_response :accepted
     assert_equal "b/free:free", @user.reload.open_router_model
   end
 
   test "cannot recommend for someone else's sheet" do
     sign_in_as(users(:lazaro)).connect_open_router!("sk-or-test")
 
-    post recommendation_url(sheet_id: sheets(:one)), params: { recommendation: answer_params }
+    post recommendation_url(sheet_id: sheets(:one)), params: { token: "token", recommendation: answer_params }
 
     assert_response :not_found
   end

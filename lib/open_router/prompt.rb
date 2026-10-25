@@ -2,7 +2,7 @@ module OpenRouter
   class Prompt
     include Recommendation::Restrictions
 
-    delegate :user, :sheet, :answers, :sheet_types, :improving?, to: :@recommendation
+    delegate :user, :sheet, :answers, :sheet_types, :split, :improving?, to: :@recommendation
 
     def initialize(recommendation)
       @recommendation = recommendation
@@ -15,7 +15,7 @@ module OpenRouter
 
         Rules:
         - Reply with a single JSON object and nothing else: no markdown, no code fences, no comments.
-        - Write every text value in #{language}.
+        #{language_rule}
         #{improving? ? improve_rules : add_rules}
         - "interval" is the rest between series in seconds. "charge" is one of: #{CHARGES.join(", ")}.
         - Macronutrients are grams per meal. Calories are calculated by the app, do not send them.
@@ -38,10 +38,17 @@ module OpenRouter
 
       def add_rules
         <<~RULES.strip
-          - Return exactly one sheet for each of these sheet types: #{sheet_types.join(", ")}.
+          - Return exactly these sheets, in this order: #{sheet_types.join(", ")}.
           - A workout sheet has at most #{MAXIMUM_WORKOUTS} workouts; a diet sheet has at most #{MAXIMUM_DIETS} meals.
-          - Do not repeat anything listed in "existing"; complement it instead.
+          - Do not repeat anything listed in "existing"; complement it instead.#{split_rule}
         RULES
+      end
+
+      def split_rule
+        return if sheet || split == 1
+
+        letters = ("A".."Z").first(split).join(", ")
+        "\n- The #{split} workout sheets are a split, one per training day: name them #{letters} plus their focus, and give each different muscle groups so together they cover the whole body."
       end
 
       def improve_rules
@@ -54,6 +61,14 @@ module OpenRouter
 
       def existing
         { "#{sheet.sheet_type}s": sheet.items.positioned.map { |item| Recommendation::Format.item(item) } } if sheet
+      end
+
+      def language_rule
+        if answers[:notes].present?
+          "- Write every text value in the language the notes are written in, or in #{language} if that is unclear."
+        else
+          "- Write every text value in #{language}."
+        end
       end
 
       def language

@@ -7,7 +7,9 @@ class RecommendationsController < ApplicationController
 
   def create
     Current.user.update!(open_router_model: recommendation_params[:model])
-    render json: open_router_recommendation.generate
+    RecommendationJob.perform_later(Current.user, params.expect(:token), answers, @sheet)
+
+    head :accepted
   end
 
   private
@@ -17,10 +19,10 @@ class RecommendationsController < ApplicationController
     end
 
     def recommendation_params
-      params.expect(recommendation: [ :kind, :mode, :goal, :activity_level, :dietary_preference, :notes, :model ])
+      params.expect(recommendation: [ :kind, :mode, :split, :goal, :activity_level, :dietary_preference, :notes, :model ])
     end
 
-    def open_router_recommendation
-      OpenRouter::Recommendation.new(Current.user, sheet: @sheet, answers: recommendation_params.slice(:kind, :mode, :goal, :activity_level, :dietary_preference, :notes).to_h)
+    def answers
+      recommendation_params.slice(:kind, :mode, :split, :goal, :activity_level, :dietary_preference, :notes).to_h
     end
 end

@@ -5,6 +5,7 @@ module OpenRouter
       MAXIMUM_DIETS    = 10
 
       KINDS               = %w[ workout diet both ].freeze
+      SPLITS              = 1..5
       GOALS               = %w[ lose_weight gain_muscle maintain_weight ].freeze
       ACTIVITY_LEVELS     = %w[ sedentary lightly_active moderately_active very_active ].freeze
       DIETARY_PREFERENCES = %w[ none vegetarian vegan keto paleo ].freeze

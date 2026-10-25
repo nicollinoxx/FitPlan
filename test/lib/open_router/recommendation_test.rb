@@ -56,6 +56,14 @@ class OpenRouter::RecommendationTest < ActiveSupport::TestCase
     end
   end
 
+  test "answers in the language of the notes when there are any" do
+    stub_open_router_answer(open_router_answer({ sheet_type: "workout", name: "Legs" })) do |asked|
+      I18n.with_locale(:pt) { OpenRouter::Recommendation.new(@user, answers: { kind: "workout", notes: "Bad knee, no squats" }).generate }
+
+      assert_includes asked.last[:instructions], "in the language the notes are written in, or in Portuguese if that is unclear"
+    end
+  end
+
   test "asks for the answer in the user's language" do
     stub_open_router_answer(open_router_answer({ sheet_type: "diet", name: "Dieta" })) do |asked|
       I18n.with_locale(:pt) { recommendation(kind: "diet").generate }
@@ -99,9 +107,27 @@ class OpenRouter::RecommendationTest < ActiveSupport::TestCase
     end
   end
 
+  test "splits new workouts into as many sheets as asked, A to E at most" do
+    assert_equal %w[ workout workout workout ], recommendation(kind: "workout", split: "3").sheet_types
+    assert_equal %w[ workout workout diet ], recommendation(kind: "both", split: "2").sheet_types
+    assert_equal 5, recommendation(kind: "workout", split: "9").split
+    assert_equal %w[ workout ], OpenRouter::Recommendation.new(@user, sheet: sheets(:one), answers: { split: "3" }).sheet_types
+  end
+
+  test "keeps every sheet of a split, in order, and drops the extra ones" do
+    answer = open_router_answer(*%w[ A B C D ].map { |letter| { sheet_type: "workout", name: "Workout #{letter}" } }, { sheet_type: "diet", name: "Diet" })
+
+    stub_open_router_answer(answer) do |asked|
+      sheets = recommendation(kind: "both", split: "3").generate[:sheets]
+
+      assert_equal [ "Workout A", "Workout B", "Workout C", "Diet" ], sheets.pluck("name")
+      assert_includes asked.last[:instructions], "name them A, B, C"
+    end
+  end
+
   private
 
-    def recommendation(kind:)
-      OpenRouter::Recommendation.new(@user, answers: { kind: kind, goal: "gain_muscle" })
+    def recommendation(kind:, split: nil)
+      OpenRouter::Recommendation.new(@user, answers: { kind: kind, split: split, goal: "gain_muscle" })
     end
 end
