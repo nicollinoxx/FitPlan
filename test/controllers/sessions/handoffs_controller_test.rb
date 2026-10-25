@@ -37,11 +37,11 @@ class Sessions::HandoffsControllerTest < ActionDispatch::IntegrationTest
       tab.get handoff_link_for("google_oauth2")
 
       get welcome_url, headers: APP
-      assert_select "body[data-controller='refresh-on-return']"
+      assert_select "body[data-controller='session-handoff']"
 
       tab.get "/auth/google_oauth2/callback"
 
-      get welcome_url, headers: APP
+      head welcome_url, headers: APP
       assert_redirected_to sheets_url(format: :html)
     end
   end
