@@ -30,20 +30,31 @@ class Sessions::HandoffsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "whichever page the app is back on claims the sign in" do
+  test "the waiting page asks a route that renders nothing until the sign in is done" do
     with_memory_cache do
       get sign_in_url, headers: APP
       tab = open_session
       tab.get handoff_link_for("google_oauth2")
 
       get welcome_url, headers: APP
-      assert_select "body[data-controller='session-handoff']"
+      assert_select "body[data-controller='session-handoff'][data-session-handoff-url-value=?]", session_handoff_status_path
+
+      get session_handoff_status_url, headers: APP
+      assert_response :no_content
 
       tab.get "/auth/google_oauth2/callback"
 
-      head welcome_url, headers: APP
+      get session_handoff_status_url, headers: APP
       assert_redirected_to sheets_url(format: :html)
     end
+  end
+
+  test "signing in with a password drops the pending code" do
+    get sign_in_url, headers: APP
+    post sign_in_url, params: { email: users(:lazaro_nixon).email, password: "Secret1*3*5*" }, headers: APP
+
+    get welcome_url, headers: APP
+    assert_select "body[data-controller]", false
   end
 
   test "only the app that started the sign in can claim it" do

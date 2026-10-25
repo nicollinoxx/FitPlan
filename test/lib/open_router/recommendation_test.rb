@@ -6,6 +6,18 @@ class OpenRouter::RecommendationTest < ActiveSupport::TestCase
     @user.update!(open_router_key: "sk-or-test", open_router_model: "openrouter/free")
   end
 
+  test "forgets the cached free requests once the model was asked, even when it failed" do
+    with_memory_cache do |cache|
+      cache.write("open_router/free_requests/#{@user.id}", { "remaining" => 47 })
+
+      stub_open_router_answer("not json") do
+        assert_raises(StandardError) { recommendation(kind: "workout").generate }
+      end
+
+      assert_not cache.exist?("open_router/free_requests/#{@user.id}")
+    end
+  end
+
   test "asks for one sheet of each requested type" do
     assert_equal %w[ workout ], recommendation(kind: "workout").sheet_types
     assert_equal %w[ diet ], recommendation(kind: "diet").sheet_types

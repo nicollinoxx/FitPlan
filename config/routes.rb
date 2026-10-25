@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#omniauth'
   get '/auth/:provider/handoff',  to: 'sessions/handoffs#show', as: :session_handoff, constraints: { provider: /google_oauth2|facebook/ }
+  get '/session_handoff',         to: 'sessions/handoffs#status', as: :session_handoff_status
   get '/auth/failure',           to: 'sessions#omniauth'
 
   resources :sessions, only: [:index, :show, :destroy]
