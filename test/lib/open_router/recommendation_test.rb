@@ -44,6 +44,14 @@ class OpenRouter::RecommendationTest < ActiveSupport::TestCase
     end
   end
 
+  test "answers in the language of the notes when there are any" do
+    stub_open_router_answer(open_router_answer({ sheet_type: "workout", name: "Legs" })) do |asked|
+      I18n.with_locale(:pt) { OpenRouter::Recommendation.new(@user, answers: { kind: "workout", notes: "Bad knee, no squats" }).generate }
+
+      assert_includes asked.last[:instructions], "in the language the notes are written in, or in Portuguese if that is unclear"
+    end
+  end
+
   test "asks for the answer in the user's language" do
     stub_open_router_answer(open_router_answer({ sheet_type: "diet", name: "Dieta" })) do |asked|
       I18n.with_locale(:pt) { recommendation(kind: "diet").generate }

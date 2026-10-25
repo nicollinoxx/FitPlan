@@ -15,7 +15,7 @@ module OpenRouter
 
         Rules:
         - Reply with a single JSON object and nothing else: no markdown, no code fences, no comments.
-        - Write every text value in #{language}.
+        #{language_rule}
         #{improving? ? improve_rules : add_rules}
         - "interval" is the rest between series in seconds. "charge" is one of: #{CHARGES.join(", ")}.
         - Macronutrients are grams per meal. Calories are calculated by the app, do not send them.
@@ -61,6 +61,14 @@ module OpenRouter
 
       def existing
         { "#{sheet.sheet_type}s": sheet.items.positioned.map { |item| Recommendation::Format.item(item) } } if sheet
+      end
+
+      def language_rule
+        if answers[:notes].present?
+          "- Write every text value in the language the notes are written in, or in #{language} if that is unclear."
+        else
+          "- Write every text value in #{language}."
+        end
       end
 
       def language
