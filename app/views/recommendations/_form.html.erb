@@ -11,15 +11,17 @@
       <%= link_to t('.disconnect'), open_router_connection_path, data: { turbo_method: :delete, turbo_confirm: t('message_destroy') }, class: "link-danger" %>
     </small>
 
-    <small class="text-muted d-block mt-1">
-      <i class="bi bi-info-circle me-1"></i>
-      <%= Current.user.healthy_metric ? t('.uses_metrics_html', link: link_to(t('.health_metrics'), edit_identity_healthy_metric_path)) : t('.missing_metrics_html', link: link_to(t('.add_metrics'), new_identity_healthy_metric_path)) %>
-    </small>
+    <div class="bg-body-tertiary rounded px-3 py-2 mt-3">
+      <small class="text-muted d-block">
+        <i class="bi bi-info-circle me-1"></i>
+        <%= Current.user.healthy_metric ? t('.uses_metrics_html', link: link_to(t('.health_metrics'), edit_identity_healthy_metric_path)) : t('.missing_metrics_html', link: link_to(t('.add_metrics'), new_identity_healthy_metric_path)) %>
+      </small>
 
-    <small class="text-muted d-block mt-1">
-      <i class="bi bi-translate me-1"></i>
-      <%= t('.language_html', language: link_to(t("languages.#{I18n.locale}"), identity_settings_path)) %>
-    </small>
+      <small class="text-muted d-block mt-1">
+        <i class="bi bi-translate me-1"></i>
+        <%= t('.language_html', language: link_to(t("languages.#{I18n.locale}"), identity_settings_path)) %>
+      </small>
+    </div>
   </div>
 
   <button class="btn btn-sm btn-outline-body mb-3" type="button"
