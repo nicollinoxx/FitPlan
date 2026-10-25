@@ -8,7 +8,7 @@ module ApplicationHelper
     content = tag.i(class: "bi bi-#{icon}") + " " + label
 
     if turbo_native_app?
-      link_to content, session_handoff_path(provider, code: code, locale: I18n.locale), class: classes, aria: { label: t("sessions.new.#{icon}") }
+      link_to content, session_handoff_path(provider, code: code), class: classes, aria: { label: t("sessions.new.#{icon}") }
     else
       button_to content, "/auth/#{provider}", method: :post, data: { turbo: false }, class: classes, aria: { label: t("sessions.new.#{icon}") }
     end
