@@ -9,13 +9,12 @@ class SessionsController < ApplicationController
   end
 
   def new
+    claim_handoff || hold_handoff if turbo_native_app?
   end
 
   def create
     if user = User.authenticate_by(email: params[:email], password: params[:password])
-      @session = user.sessions.create!
-      cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
-      redirect_to sheets_path(format: :html)
+      start_new_session_for(user)
     else
       redirect_to sign_in_path(email_hint: params[:email]), notice: I18n.t('alert.session.invalid')
     end
@@ -23,9 +22,12 @@ class SessionsController < ApplicationController
 
   def omniauth
     if user = User.from_omniauth(request.env['omniauth.auth'])
-      @session = user.sessions.create!
-      cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
-      redirect_to sheets_path(format: :html)
+      if handoff = session.delete(:session_handoff)
+        SessionHandoff.complete(handoff, user)
+        render :handed_off
+      else
+        start_new_session_for(user)
+      end
     else
       redirect_to sign_in_path, notice: I18n.t('alert.session.omniauth')
     end
@@ -39,5 +41,24 @@ class SessionsController < ApplicationController
 
     def set_session
       @session = Current.user.sessions.find(params[:id])
+    end
+
+    def start_new_session_for(user)
+      @session = user.sessions.create!
+
+      cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
+      redirect_to sheets_path(format: :html)
+    end
+
+    def claim_handoff
+      if user = SessionHandoff.claim(cookies.signed[:session_handoff])
+        cookies.delete(:session_handoff)
+        start_new_session_for(user)
+      end
+    end
+
+    def hold_handoff
+      @handoff = cookies.signed[:session_handoff] || SessionHandoff.issue
+      cookies.signed[:session_handoff] = { value: @handoff, httponly: true, expires: SessionHandoff::EXPIRES_IN }
     end
 end
