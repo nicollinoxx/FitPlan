@@ -25,11 +25,25 @@ module User::OpenRouter::Connectable
     RubyLLM.context { |config| config.openrouter_api_key = open_router_key }.chat(model: open_router_model, provider: :openrouter, assume_model_exists: true)
   end
 
+  # Asked of OpenRouter at most once a minute: the count only moves when a
+  # suggestion is made, and that forgets it.
   def open_router_free_requests
-    OpenRouter::Client.key(open_router_key)&.dig("free_model_daily_requests")
+    Rails.cache.fetch(open_router_free_requests_key, expires_in: 1.minute) do
+      OpenRouter::Client.key(open_router_key)&.dig("free_model_daily_requests")
+    end
+  end
+
+  def forget_open_router_free_requests
+    Rails.cache.delete(open_router_free_requests_key)
   end
 
   def preferred_open_router_model
     open_router_model || OpenRouter::FreeModels::DEFAULT
   end
+
+  private
+
+    def open_router_free_requests_key
+      "open_router/free_requests/#{id}"
+    end
 end

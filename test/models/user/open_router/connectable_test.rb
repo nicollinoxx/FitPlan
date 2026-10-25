@@ -38,4 +38,19 @@ class User::OpenRouter::ConnectableTest < ActiveSupport::TestCase
 
     assert_equal "sk-or-secret", used_key
   end
+
+  test "asks OpenRouter for the free requests at most once a minute, until a suggestion forgets them" do
+    @user.connect_open_router!("sk-or-secret")
+    calls = 0
+
+    with_memory_cache do
+      stub_singleton(OpenRouter::Client, :key, ->(_) { calls += 1; { "free_model_daily_requests" => { "remaining" => 47 } } }) do
+        2.times { @user.open_router_free_requests }
+        @user.forget_open_router_free_requests
+        @user.open_router_free_requests
+      end
+    end
+
+    assert_equal 2, calls
+  end
 end
