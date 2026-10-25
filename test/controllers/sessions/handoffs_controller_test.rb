@@ -30,6 +30,22 @@ class Sessions::HandoffsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "whichever page the app is back on claims the sign in" do
+    with_memory_cache do
+      get sign_in_url, headers: APP
+      tab = open_session
+      tab.get handoff_link_for("google_oauth2")
+
+      get welcome_url, headers: APP
+      assert_select "body[data-controller='refresh-on-return']"
+
+      tab.get "/auth/google_oauth2/callback"
+
+      get welcome_url, headers: APP
+      assert_redirected_to sheets_url(format: :html)
+    end
+  end
+
   test "only the app that started the sign in can claim it" do
     with_memory_cache do
       get sign_in_url, headers: APP

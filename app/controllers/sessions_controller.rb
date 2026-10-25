@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   end
 
   def new
-    claim_handoff || hold_handoff if turbo_native_app?
+    hold_handoff if turbo_native_app?
   end
 
   def create
@@ -41,20 +41,6 @@ class SessionsController < ApplicationController
 
     def set_session
       @session = Current.user.sessions.find(params[:id])
-    end
-
-    def start_new_session_for(user)
-      @session = user.sessions.create!
-
-      cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
-      redirect_to sheets_path(format: :html)
-    end
-
-    def claim_handoff
-      if user = SessionHandoff.claim(cookies.signed[:session_handoff])
-        cookies.delete(:session_handoff)
-        start_new_session_for(user)
-      end
     end
 
     def hold_handoff
