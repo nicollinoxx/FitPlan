@@ -1,8 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 import { Turbo } from "@hotwired/turbo-rails"
+import consumer from "channels/consumer"
+
+const TIMEOUT = 3 * 60 * 1000
 
 export default class extends Controller {
-  static targets = ["form", "submit", "questions", "hint", "usage", "dietOnly", "error", "preview", "sheets", "sheetTemplate", "workoutTemplate", "dietTemplate"]
+  static targets = ["form", "submit", "questions", "hint", "usage", "dietOnly", "workoutOnly", "error", "preview", "sheets", "sheetTemplate", "workoutTemplate", "dietTemplate"]
   static values = { saveUrl: String, existing: Boolean, sheetType: String, charges: Object, errorMessage: String, modelErrorMessage: String }
   static outlets = ["recommendations--diff"]
 
@@ -12,23 +15,58 @@ export default class extends Controller {
     const choice = data.get("recommendation[mode]") ?? kind
 
     this.dietOnlyTarget.hidden = kind === "workout"
+    this.workoutOnlyTargets.forEach(target => target.hidden = kind === "diet")
     this.hintTargets.forEach(hint => hint.hidden = hint.dataset.choice !== choice)
   }
 
+  // The suggestion is made by a job and arrives on RecommendationChannel, so the
+  // page listens before it asks, and knows its answer by the token it sent.
   async generate() {
+    const token = crypto.randomUUID()
+    const data = new FormData(this.formTarget)
+
+    this.stopListening()
     this.errorTarget.hidden = true
     this.loading(true)
+    data.append("token", token)
 
     try {
-      const response = await this.request(this.formTarget.action, new FormData(this.formTarget))
-      this.recommendation = await response.json()
-      this.render()
+      await this.listen(token)
+      await this.request(this.formTarget.action, data)
+      this.timeout = setTimeout(() => this.received({ failed: true }), TIMEOUT)
     } catch {
-      this.failWithModel()
-    } finally {
-      this.loading(false)
-      this.usageTarget.reload()
+      this.received({ failed: true })
     }
+  }
+
+  listen(token) {
+    return new Promise(resolve => {
+      this.subscription = consumer.subscriptions.create("RecommendationChannel", {
+        connected: resolve,
+        received: message => { if (message.token === token) this.received(message) }
+      })
+    })
+  }
+
+  received({ recommendation, failed }) {
+    this.stopListening()
+    this.loading(false)
+    this.usageTarget.reload()
+
+    if (failed) return this.failWithModel()
+
+    this.recommendation = recommendation
+    this.render()
+  }
+
+  stopListening() {
+    clearTimeout(this.timeout)
+    this.subscription?.unsubscribe()
+    this.subscription = null
+  }
+
+  disconnect() {
+    this.stopListening()
   }
 
   async save() {

@@ -29,6 +29,11 @@
           <% end %>
         </div>
         <%= render "recommendations/choice_hints", choices: OpenRouter::Recommendation::Restrictions::KINDS, selected: "workout" %>
+
+        <div class="mb-3" data-recommendations--generate-target="workoutOnly">
+          <%= form.label :split, t('.split'), class: "form-label" %>
+          <%= form.select :split, OpenRouter::Recommendation::Restrictions::SPLITS.map { |split| [ t(".splits.#{split}"), split ] }, {}, class: "form-select" %>
+        </div>
       <% elsif sheet.items.any? %>
         <div class="btn-group w-100 mb-2" role="group">
           <% %w[ add improve ].each do |mode| %>

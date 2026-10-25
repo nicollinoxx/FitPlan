@@ -301,10 +301,17 @@ pt:
       summary:              'Responda algumas perguntas sobre seu objetivo e sua rotina e receba sugestões de treinos, dietas ou ambos, prontas para revisar e salvar como planilhas. As sugestões são geradas por modelos de IA gratuitos através do OpenRouter, um serviço que reúne vários modelos em uma única conta.'
     form:
       for_sheet:            'Sugestões para a planilha %{name}'
+      split:                'Divisão do treino'
+      splits:
+        1:                  'Uma planilha'
+        2:                  'A e B'
+        3:                  'A, B e C'
+        4:                  'A, B, C e D'
+        5:                  'A, B, C, D e E'
       hints:
-        workout:           'Cria uma planilha nova de treino, com exercícios, séries e cargas.'
+        workout:           'Cria planilhas de treino, uma só ou uma divisão A, B, C…, com exercícios, séries e cargas.'
         diet:              'Cria uma planilha nova de dieta, com refeições e macros.'
-        both:              'Cria duas planilhas, uma de treino e uma de dieta, pensadas juntas.'
+        both:              'Cria planilhas de treino e uma de dieta, pensadas juntas.'
         add:               'Sugere exercícios ou refeições novos para completar esta planilha.'
         improve:           'Propõe ajustes nos itens que já existem, mostrando o antes e o depois.'
       modes:

@@ -14,8 +14,18 @@ module OpenRouter
     end
 
     def sheet_types
-      kind = sheet&.sheet_type || answers[:kind]
-      kind == "both" ? %w[ workout diet ] : [ kind ]
+      return [ sheet.sheet_type ] if sheet
+
+      case answers[:kind]
+      when "workout" then workouts
+      when "diet"    then %w[ diet ]
+      else                workouts + %w[ diet ]
+      end
+    end
+
+    # How many workout sheets a new plan is split into: A, B, C...
+    def split
+      answers[:split].to_i.clamp(Restrictions::SPLITS)
     end
 
     def improving?
@@ -34,8 +44,14 @@ module OpenRouter
           .content
       end
 
+      def workouts
+        Array.new(split, "workout")
+      end
+
       def sheets(suggested)
-        sheet_types.map { |sheet_type| suggested.find { |suggestion| suggestion["sheet_type"] == sheet_type } }
+        sheet_types.tally.flat_map do |sheet_type, count|
+          suggested.select { |suggestion| suggestion["sheet_type"] == sheet_type }.first(count)
+        end
       end
 
       def changes(proposed)
