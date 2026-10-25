@@ -11,7 +11,7 @@ class RecommendationsControllerTest < ActionDispatch::IntegrationTest
     get new_recommendation_url
 
     assert_response :success
-    assert_select "form[action=?]", open_router_connection_path
+    assert_select "a[href^='https://openrouter.ai/auth']"
     assert_select "#recommendation_form", false
   end
 

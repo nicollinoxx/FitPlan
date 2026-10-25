@@ -1,16 +1,12 @@
 class OpenRouter::ConnectionsController < ApplicationController
-  before_action :set_pkce, :verify_state, only: :callback
+  skip_before_action :authenticate, only: :callback
+  before_action :resume_session, :set_connecting_user, only: :callback
 
-  def create
-    pkce = OpenRouter::Pkce.new
-    session[:open_router_pkce] = { verifier: pkce.verifier, state: pkce.state }
-
-    redirect_to pkce.authorize_url(callback_open_router_connection_url), allow_other_host: true
-  end
-
+  # Lands in the browser that started the flow, or in a Custom Tab from the
+  # native apps, where nobody is signed in and the page just says to go back.
   def callback
-    Current.user.connect_open_router!(OpenRouter::Client.exchange_code(code: params[:code], verifier: @pkce.verifier))
-    redirect_to new_recommendation_path, notice: I18n.t("notice.open_router.connect")
+    @user.connect_open_router!(OpenRouter::Client.exchange_code(code: params[:code], verifier: OpenRouter::Pkce.new(params[:state]).verifier))
+    redirect_to new_recommendation_path, notice: I18n.t("notice.open_router.connect") if Current.user
   end
 
   def destroy
@@ -20,11 +16,8 @@ class OpenRouter::ConnectionsController < ApplicationController
 
   private
 
-    def set_pkce
-      @pkce = OpenRouter::Pkce.new(**session.delete(:open_router_pkce).to_h.symbolize_keys)
-    end
-
-    def verify_state
-      redirect_to new_recommendation_path, notice: I18n.t("alert.open_router.connect") unless params[:state] == @pkce.state
+    def set_connecting_user
+      @user = User.find_signed(params[:state].to_s, purpose: :open_router_connection)
+      redirect_to new_recommendation_path, notice: I18n.t("alert.open_router.connect") unless @user
     end
 end

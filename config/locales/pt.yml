@@ -278,6 +278,10 @@ pt:
 
   #welcome------------------------------------
   open_router:
+    connections:
+      callback:
+        title:              'OpenRouter conectado'
+        description:        'Pode fechar esta página e voltar ao FitPlan para gerar suas sugestões.'
     usages:
       show:
         remaining:          '%{remaining} de %{limit} pedidos gratuitos hoje'

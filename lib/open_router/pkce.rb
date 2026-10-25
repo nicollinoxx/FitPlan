@@ -1,12 +1,19 @@
 module OpenRouter
+  # The flow keeps nothing in the session: in the native apps it runs in a Custom
+  # Tab, which has none of the WebView's cookies. The state carries who is
+  # connecting, and the verifier is derived from it with the app's secret, so it
+  # is never stored nor sent anywhere.
   class Pkce
     AUTHORIZE_URL = "https://openrouter.ai/auth".freeze
 
-    attr_reader :verifier, :state
+    attr_reader :state
 
-    def initialize(verifier: SecureRandom.urlsafe_base64(64), state: SecureRandom.urlsafe_base64(24))
-      @verifier = verifier
+    def initialize(state)
       @state = state
+    end
+
+    def verifier
+      OpenSSL::HMAC.hexdigest("SHA256", Rails.application.secret_key_base, state)
     end
 
     def authorize_url(callback_url)

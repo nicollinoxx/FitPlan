@@ -5,6 +5,10 @@ module User::OpenRouter::Connectable
     encrypts :open_router_key
   end
 
+  def open_router_authorize_url(callback_url)
+    OpenRouter::Pkce.new(signed_id(purpose: :open_router_connection, expires_in: 10.minutes)).authorize_url(callback_url)
+  end
+
   def open_router_connected?
     open_router_key.present?
   end

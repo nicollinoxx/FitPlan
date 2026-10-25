@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   end
 
   namespace :open_router do
-    resource :connection, only: %i[ create destroy ] do
+    resource :connection, only: :destroy do
       get :callback
     end
     resource :usage, only: :show
