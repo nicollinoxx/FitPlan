@@ -8,6 +8,13 @@ module RecommendationsHelper
     end
   end
 
+  def recommendation_about
+    metrics = Current.user.healthy_metric ? t("recommendations.form.about.metrics") : t("recommendations.form.about.no_metrics")
+    language = t("recommendations.form.about.language", language: t("languages.#{I18n.locale}"))
+
+    "#{metrics} #{language}"
+  end
+
   def recommendation_change_labels
     { exercise: t("workouts.form.label.exercise"), series: t("series"), repetitions: t("repetitions"), interval: t("interval"), charge: t("charge"),
       meal: t("diets.form.label.meal"), description: t("diets.form.label.description"), protein_g: t("proteins"), carbohydrate_g: t("carbohydrates"), fat_g: t("fats") }

@@ -342,11 +342,11 @@ pt:
         paleo:              'Paleolítica'
       notes:                'Observações'
       notes_placeholder:    'Lesões, equipamentos disponíveis, dias por semana, alergias...'
-      uses_metrics_html:    'Suas %{link} serão usadas para personalizar a sugestão'
-      language_html:        'As sugestões vêm no idioma das observações ou, sem elas, no do seu perfil: %{language}'
-      health_metrics:       'métricas de saúde'
-      missing_metrics_html: '%{link} para sugestões mais precisas'
-      add_metrics:          'Adicione suas métricas de saúde'
+      about:
+        title:              "Como a sugestão é gerada"
+        metrics:            "Suas métricas de saúde, como peso, altura e idade, são usadas para personalizar a sugestão."
+        no_metrics:         "Cadastre suas métricas de saúde no perfil para receber sugestões mais precisas."
+        language:           "As sugestões vêm no idioma das observações ou, sem elas, no idioma do seu perfil: %{language}."
       model:                'Modelo'
       free_only:            'gratuitos'
       connected:            'Conectado ao OpenRouter'

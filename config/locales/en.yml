@@ -351,11 +351,11 @@ en:
         paleo:              'Paleo'
       notes:                'Notes'
       notes_placeholder:    'Injuries, available equipment, days per week, allergies...'
-      uses_metrics_html:    'Your %{link} will be used to tailor the suggestion'
-      language_html:        "Suggestions come in the language of your notes or, without them, in your profile's: %{language}"
-      health_metrics:       'health metrics'
-      missing_metrics_html: '%{link} for more accurate suggestions'
-      add_metrics:          'Add your health metrics'
+      about:
+        title:              "How the suggestion is made"
+        metrics:            "Your health metrics, like weight, height and age, are used to tailor the suggestion."
+        no_metrics:         "Add your health metrics to your profile for more accurate suggestions."
+        language:           "Suggestions come in the language of your notes or, without them, in your profile's: %{language}."
       model:                'Model'
       free_only:            'free'
       connected:            'Connected to OpenRouter'
