@@ -62,6 +62,19 @@ class Sessions::HandoffsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "the tab speaks the app's language, which it has no cookie for" do
+    with_memory_cache do
+      get sign_in_url, headers: APP.merge("Accept-Language" => "pt-BR")
+      tab = open_session
+
+      tab.get handoff_link_for("google_oauth2"), headers: { "Accept-Language" => "en-US" }
+      tab.assert_select "p", I18n.t("sessions.handoffs.show.description", locale: :pt)
+
+      tab.get "/auth/google_oauth2/callback", headers: { "Accept-Language" => "en-US" }
+      tab.assert_select "h1", I18n.t("sessions.handed_off.title", locale: :pt)
+    end
+  end
+
   test "the browser keeps posting straight to the provider" do
     get sign_in_url
 
