@@ -158,6 +158,11 @@ en:
       alert:                'The content present in the sheet will be deleted if you change the current sheet type.'
     show:
       title:                'Sheet'
+      created_on:           'Created on %{date}'
+      origins:
+        copied:             'Received from a share'
+        suggested:          'AI suggested'
+        manual:             'Created manually'
     form:
       error_message_form:     'prohibited this sheet from being saved:'
       label:

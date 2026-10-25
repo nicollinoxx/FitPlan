@@ -1,6 +1,8 @@
 
 pt:
   date:
+    formats:
+      default: '%d/%m/%Y'
     day_names:
       - Domingo
       - Segunda-feira
@@ -168,6 +170,11 @@ pt:
       alert:                'O conteúdo desta planilha será apagado se você alterar o tipo atual.'
     show:
       title:                'Planilha'
+      created_on:           'Criada em %{date}'
+      origins:
+        copied:             'Recebida por compartilhamento'
+        suggested:          'Sugerida por IA'
+        manual:             'Criada manualmente'
     form:
       error_message_form:     'impediram esta planilha de ser salva:'
       label:

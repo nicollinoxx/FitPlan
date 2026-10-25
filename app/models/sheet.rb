@@ -47,6 +47,13 @@ class Sheet < ApplicationRecord
     (workout? ? workouts : diets).create!(items)
   end
 
+  def origin
+    return :copied    if copy?
+    return :suggested if suggested?
+
+    :manual
+  end
+
   private
 
     def destroy_invalid_content
