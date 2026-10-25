@@ -30,6 +30,15 @@ class SheetsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "show tells a suggested sheet from a hand made one" do
+    get sheet_url(@sheet)
+    assert_select "li", text: I18n.t("sheets.show.origins.manual")
+
+    @sheet.update!(suggested: true)
+    get sheet_url(@sheet)
+    assert_select "li", text: I18n.t("sheets.show.origins.suggested")
+  end
+
   test "should get edit" do
     get edit_sheet_url(@sheet)
     assert_response :success

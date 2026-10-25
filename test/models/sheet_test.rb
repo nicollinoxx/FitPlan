@@ -98,4 +98,38 @@ class SheetTest < ActiveSupport::TestCase
     assert_not_includes Sheet.with_content, @empty_workout_sheet
     assert_not_includes Sheet.with_content, @empty_diet_sheet
   end
+
+  test "generate_from_recommendation! creates suggested sheets with their items on top of the list" do
+    user = users(:lazaro_nixon)
+
+    sheets = user.sheets.generate_from_recommendation!([
+      { name: "Legs", description: "Lower body", sheet_type: "workout", workouts: [ { exercise: "Squat", series: 4, repetitions: "8", interval: 90, charge: "high" } ] },
+      { name: "Bulk", description: "More protein", sheet_type: "diet", diets: [ { meal: "Breakfast", description: "Eggs", protein_g: 30, carbohydrate_g: 40, fat_g: 10 } ] }
+    ])
+
+    assert_equal [ "Legs", "Bulk" ], user.sheets.positioned.first(2).map(&:name)
+    assert sheets.all?(&:suggested?)
+    assert_equal [ "Squat" ], sheets.first.workouts.pluck(:exercise)
+    assert_equal 370, sheets.last.diets.first.calories
+  end
+
+  test "generate_from_recommendation! saves nothing when an item is invalid" do
+    assert_no_difference "Sheet.count" do
+      assert_raises(ActiveRecord::RecordInvalid) do
+        users(:lazaro_nixon).sheets.generate_from_recommendation!([ { name: "Legs", sheet_type: "workout", workouts: [ { exercise: "" } ] } ])
+      end
+    end
+  end
+
+  test "add_recommended! adds items of the sheet's own type at the end" do
+    @workout_sheet.add_recommended!([ { exercise: "Lunge", series: 3, repetitions: "12" } ])
+
+    assert_equal "Lunge", @workout_sheet.workouts.positioned.last.exercise
+  end
+
+  test "origin tells copied, suggested and hand made sheets apart" do
+    assert_equal :manual, @workout_sheet.origin
+    assert_equal :suggested, Sheet.new(suggested: true).origin
+    assert_equal :copied, Sheet.new(copy: true, suggested: true).origin
+  end
 end
