@@ -10,6 +10,16 @@
       <%= turbo_frame_tag "open_router_usage", src: open_router_usage_path, data: { "recommendations--generate-target": "usage" } %>
       <%= link_to t('.disconnect'), open_router_connection_path, data: { turbo_method: :delete, turbo_confirm: t('message_destroy') }, class: "link-danger" %>
     </small>
+
+    <small class="text-muted d-block mt-1">
+      <i class="bi bi-info-circle me-1"></i>
+      <%= Current.user.healthy_metric ? t('.uses_metrics_html', link: link_to(t('.health_metrics'), edit_identity_healthy_metric_path)) : t('.missing_metrics_html', link: link_to(t('.add_metrics'), new_identity_healthy_metric_path)) %>
+    </small>
+
+    <small class="text-muted d-block mt-1">
+      <i class="bi bi-translate me-1"></i>
+      <%= t('.language_html', language: link_to(t("languages.#{I18n.locale}"), identity_settings_path)) %>
+    </small>
   </div>
 
   <button class="btn btn-sm btn-outline-body mb-3" type="button"
@@ -63,16 +73,6 @@
 
       <%= form.label :notes, t('.notes'), class: "form-label" %>
       <%= form.text_area :notes, rows: 2, maxlength: 500, class: "form-control", placeholder: t('.notes_placeholder') %>
-
-      <small class="text-muted d-block mt-1">
-        <i class="bi bi-info-circle me-1"></i>
-        <%= Current.user.healthy_metric ? t('.uses_metrics_html', link: link_to(t('.health_metrics'), edit_identity_healthy_metric_path)) : t('.missing_metrics_html', link: link_to(t('.add_metrics'), new_identity_healthy_metric_path)) %>
-      </small>
-
-      <small class="text-muted d-block mt-1">
-        <i class="bi bi-translate me-1"></i>
-        <%= t('.language_html', language: link_to(t("languages.#{I18n.locale}"), identity_settings_path)) %>
-      </small>
 
       <button type="submit" class="btn btn-success w-100 d-md-none mt-3" data-recommendations--generate-target="submit">
         <%= render "recommendations/generate_label" %>
