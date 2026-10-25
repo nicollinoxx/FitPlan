@@ -394,6 +394,14 @@ pt:
 
   #sessions------------------------------
   sessions:
+    handoffs:
+      show:
+        title:          'Entrando'
+        description:    'Abrindo o login…'
+        continue:       'Continuar'
+    handed_off:
+      title:            'Login concluído'
+      description:      'Pode fechar esta página e voltar ao FitPlan.'
     index:
       title:      'Sessões'
       user_agent: 'Dispositivo'

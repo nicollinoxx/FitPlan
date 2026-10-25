@@ -389,6 +389,14 @@ en:
 
   #sessions------------------------------
   sessions:
+    handoffs:
+      show:
+        title:          'Signing in'
+        description:    'Opening the sign in…'
+        continue:       'Continue'
+    handed_off:
+      title:            'Signed in'
+      description:      'You can close this page and go back to FitPlan.'
     index:
       title:      'Sessions'
       user_agent: 'Device'
