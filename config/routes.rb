@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post   "sign_up", to: "registrations#create"
 
   get '/auth/:provider/callback', to: 'sessions#omniauth'
+  get '/auth/:provider/handoff',  to: 'sessions/handoffs#show', as: :session_handoff, constraints: { provider: /google_oauth2|facebook/ }
   get '/auth/failure',           to: 'sessions#omniauth'
 
   resources :sessions, only: [:index, :show, :destroy]
