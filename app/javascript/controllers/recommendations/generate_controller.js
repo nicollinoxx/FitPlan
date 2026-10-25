@@ -2,13 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 import { Turbo } from "@hotwired/turbo-rails"
 
 export default class extends Controller {
-  static targets = ["form", "submit", "questions", "usage", "dietOnly", "error", "preview", "sheets", "sheetTemplate", "workoutTemplate", "dietTemplate"]
+  static targets = ["form", "submit", "questions", "hint", "usage", "dietOnly", "error", "preview", "sheets", "sheetTemplate", "workoutTemplate", "dietTemplate"]
   static values = { saveUrl: String, existing: Boolean, sheetType: String, charges: Object, errorMessage: String, modelErrorMessage: String }
   static outlets = ["recommendations--diff"]
 
   toggle() {
-    const kind = new FormData(this.formTarget).get("recommendation[kind]")
+    const data = new FormData(this.formTarget)
+    const kind = data.get("recommendation[kind]")
+    const choice = data.get("recommendation[mode]") ?? kind
+
     this.dietOnlyTarget.hidden = kind === "workout"
+    this.hintTargets.forEach(hint => hint.hidden = hint.dataset.choice !== choice)
   }
 
   async generate() {

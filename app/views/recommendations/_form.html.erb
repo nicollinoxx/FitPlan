@@ -22,19 +22,21 @@
   <div id="recommendation_questions" class="collapse show" data-recommendations--generate-target="questions">
     <div class="mb-3">
       <% if sheet.nil? %>
-        <div class="btn-group w-100 mb-3" role="group">
+        <div class="btn-group w-100 mb-2" role="group">
           <% OpenRouter::Recommendation::Restrictions::KINDS.each do |kind| %>
             <%= form.radio_button :kind, kind, checked: kind == "workout", class: "btn-check" %>
             <%= recommendation_kind_label(form, kind) %>
           <% end %>
         </div>
+        <%= render "recommendations/choice_hints", choices: OpenRouter::Recommendation::Restrictions::KINDS, selected: "workout" %>
       <% elsif sheet.items.any? %>
-        <div class="btn-group w-100 mb-3" role="group">
+        <div class="btn-group w-100 mb-2" role="group">
           <% %w[ add improve ].each do |mode| %>
             <%= form.radio_button :mode, mode, checked: mode == "add", class: "btn-check" %>
             <%= recommendation_mode_label(form, mode, sheet) %>
           <% end %>
         </div>
+        <%= render "recommendations/choice_hints", choices: %w[ add improve ], selected: "add" %>
       <% end %>
 
       <div class="row g-3 mb-3">
