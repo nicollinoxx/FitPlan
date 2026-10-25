@@ -42,6 +42,8 @@ module OpenRouter
           .with_provider_options(response_format: { type: "json_object" })
           .ask(prompt.question)
           .content
+      ensure
+        user.forget_open_router_free_requests
       end
 
       def workouts
