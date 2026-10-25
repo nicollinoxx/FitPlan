@@ -6,7 +6,7 @@ module OpenRouter
     headers "Content-Type" => "application/json"
 
     def self.exchange_code(code:, verifier:)
-      post("/auth/keys", body: { code: code, code_verifier: verifier, code_challenge_method: "S256" }.to_json)["key"]
+      post("/auth/keys", body: { code: code, code_verifier: verifier, code_challenge_method: "S256" }.to_json).fetch("key")
     end
 
     def self.models
