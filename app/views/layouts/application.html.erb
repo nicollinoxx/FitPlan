@@ -18,7 +18,7 @@
     <% end %>
   </head>
 
-  <body>
+  <body <%= tag.attributes(data: { controller: "session-handoff", session_handoff_url_value: session_handoff_status_path }) if session_handoff_pending? %>>
     <%= render 'layouts/navbar' if Current.user.present? %>
 
     <%= turbo_stream_from "user_notifications_#{Current.user.id}" if Current.user.present? %>

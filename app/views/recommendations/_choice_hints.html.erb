@@ -1,0 +1,4 @@
+<% choices.each do |choice| %>
+  <%= tag.p t("recommendations.form.hints.#{choice}"), hidden: choice != selected, class: "small text-body-secondary mb-3",
+        data: { "recommendations--generate-target": "hint", choice: choice } %>
+<% end %>

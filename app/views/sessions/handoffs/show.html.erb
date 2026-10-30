@@ -1,0 +1,10 @@
+<% content_for(:title, t('.title')) %>
+
+<div class="text-center mx-auto py-5" style="max-width: 28rem;">
+  <div class="spinner-border text-success mb-3" aria-hidden="true"></div>
+  <p class="text-muted"><%= t('.description') %></p>
+
+  <%= button_to "/auth/#{@provider}", method: :post, form: { data: { turbo: false, controller: "auto-submit" } }, class: "btn btn-outline-body" do %>
+    <%= t('.continue') %>
+  <% end %>
+</div>

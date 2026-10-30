@@ -15,6 +15,9 @@
         </button>
       <% end %>
       <%= render "shared/sort_button" if @diets.many? %>
+      <%= link_to new_recommendation_path(sheet_id: @sheet), class: 'btn btn-outline-success flex-shrink-0', aria: { label: t('link_recommendations') } do %>
+        <i class="bi bi-stars"></i>
+      <% end %>
       <%= link_to t('new'), new_sheet_diet_path(@sheet), data: { controller: "bridge--nav-button", bridge_title: t('new') }, class: 'btn btn-success flex-shrink-0' %>
     </div>
   </div>

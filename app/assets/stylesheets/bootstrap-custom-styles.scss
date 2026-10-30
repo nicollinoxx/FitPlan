@@ -106,6 +106,17 @@ $orange: #ff6b35;
   --bs-btn-active-border-color: var(--bs-body-color);
 }
 
+// Cor da opção marcada em grupos de .btn-check, igual ao filtro de planilhas.
+@each $name, $background, $color in (success, var(--bs-success), #000), (orange, var(--bs-orange), #000), (primary, var(--bs-primary), #fff) {
+  .btn.btn-checked-#{$name} {
+    --bs-btn-border-color: var(--bs-secondary);
+    --bs-btn-hover-border-color: var(--bs-secondary);
+    --bs-btn-active-bg: #{$background};
+    --bs-btn-active-border-color: #{$background};
+    --bs-btn-active-color: #{$color};
+  }
+}
+
 :root {
   --bs-completed-success-bg: #{rgba($success, 0.15)};
   --bs-completed-success-border: #{rgba($success, 0.4)};
@@ -133,6 +144,16 @@ $orange: #ff6b35;
 
 .pulse-success { animation: pulse-success 0.9s ease-out; }
 .pulse-orange  { animation: pulse-orange  0.9s ease-out; }
+
+// Usa outline porque .shadow-sm e .border-* travam box-shadow e border-color com !important.
+@each $name, $color in (success: $success, orange: $orange) {
+  @keyframes pulse-suggested-#{$name} {
+    0%   { outline: 2px solid #{rgba($color, 0.9)}; outline-offset: 0; }
+    100% { outline: 2px solid #{rgba($color, 0)};   outline-offset: 0.25rem; }
+  }
+
+  .pulse-suggested-#{$name} { animation: pulse-suggested-#{$name} 1.2s ease-out 2; }
+}
 
 turbo-frame[aria-busy="true"] {
   opacity: 0.5;

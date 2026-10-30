@@ -6,6 +6,7 @@
 
     <div class="d-flex gap-2">
       <%= render "shared/sort_button" if @user.sheets.many? && !turbo_native_app? %>
+      <%= render "recommendation_button" unless turbo_native_app? %>
       <%= link_to t('new'), new_sheet_path, data: { controller: "bridge--nav-button", bridge_title: t('new') }, class: 'btn btn-success' %>
     </div>
   </div>
@@ -19,7 +20,12 @@
 
       <div class="d-flex align-items-center justify-content-between mt-4 mb-2">
         <%= render 'legend' %>
-        <%= render "shared/sort_button" if @user.sheets.many? && turbo_native_app? %>
+        <% if turbo_native_app? %>
+          <div class="d-flex gap-2">
+            <%= render "recommendation_button" %>
+            <%= render "shared/sort_button" if @user.sheets.many? %>
+          </div>
+        <% end %>
       </div>
 
       <%= turbo_frame_tag "sheets" do %>

@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   include Normalizable
-  include User::Followable
-  include User::Shareable
-  include User::Rankable
-  include User::Omniauthable
+  include Followable
+  include Shareable
+  include Rankable
+  include Omniauthable
+  include OpenRouter::Connectable
 
   has_secure_password
   has_one_attached :avatar

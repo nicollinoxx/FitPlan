@@ -8,7 +8,7 @@ default: &default
   connects_to:
     database:
       writing: cable
-  polling_interval: 0.5.seconds
+  polling_interval: 1.second
   message_retention: 1.day
 
 

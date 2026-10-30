@@ -22,6 +22,12 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.cache_store = :null_store
 
+  # CI has no master key to read the credentials with, so the suite brings
+  # encryption keys of its own. They protect nothing but test data.
+  config.active_record.encryption.primary_key         = "test-primary-key"
+  config.active_record.encryption.deterministic_key   = "test-deterministic-key"
+  config.active_record.encryption.key_derivation_salt = "test-key-derivation-salt"
+
   # Render exception templates for rescuable exceptions and raise for other exceptions.
   config.action_dispatch.show_exceptions = :rescuable
 

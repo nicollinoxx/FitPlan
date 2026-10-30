@@ -7,6 +7,14 @@ class HealthyMetric < ApplicationRecord
 
   before_save :calculate_healthy_metrics
 
+  def age
+    ((Time.zone.now - birth_date.to_time) / 1.year).floor if birth_date
+  end
+
+  def recommendation_profile
+    { gender: gender, age: age, weight_kg: weight&.to_f, height_m: height&.to_f, bmi: imc&.to_f, bmr_kcal: tmb&.to_f }.compact
+  end
+
   private
 
     def calculate_healthy_metrics
@@ -19,8 +27,6 @@ class HealthyMetric < ApplicationRecord
     end
 
     def calculate_tmb
-      age = ((Time.zone.now - birth_date.to_time) / 1.year).floor
-
       self.tmb = if male?
         (10 * weight + 6.25 * height * 100 - 5 * age + 5).round(2)
       elsif female?
