@@ -1,6 +1,6 @@
 <% content_for(:title, @sheet.name) %>
 
-<div data-controller="sortable" data-sortable-resource-value="workout">
+<div data-controller="sortable export" data-sortable-resource-value="workout" data-export-title-value="<%= @sheet.name %>">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>
       <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
@@ -9,6 +9,11 @@
     </h1>
 
     <div class="d-flex gap-2">
+      <% unless turbo_native_app? %>
+        <button type="button" class="btn btn-outline-secondary" title="Imprimir" data-action="export#print">
+          <i class="bi bi-printer"></i> Imprimir
+        </button>
+      <% end %>
       <%= render "shared/sort_button" if @workouts.many? %>
       <%= link_to new_recommendation_path(sheet_id: @sheet), class: 'btn btn-outline-success flex-shrink-0', aria: { label: t('link_recommendations') } do %>
         <i class="bi bi-stars"></i>
@@ -21,7 +26,7 @@
     <%= turbo_frame_tag "workouts" do %>
       <%= render 'shared/completion_today_size' %>
 
-      <div class="row" data-sortable-target="list">
+      <div class="row" data-sortable-target="list" data-export-target="source">
         <% @workouts.each do |workout| %>
           <div class="col-md-6 mb-4" data-sortable-url="<%= sheet_workout_position_path(@sheet, workout) %>" data-sortable-position="<%= workout.position %>">
             <%= render workout, completion: @completions_by_workout_id[workout.id] %>
