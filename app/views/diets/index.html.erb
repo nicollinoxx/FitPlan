@@ -10,8 +10,8 @@
 
     <div class="d-flex gap-2">
       <% unless turbo_native_app? %>
-        <button type="button" class="btn btn-outline-secondary" title="Imprimir" data-action="export#print">
-          <i class="bi bi-printer"></i> Imprimir
+        <button type="button" class="btn btn-outline-secondary" title="<%= t('print') %>" data-action="export#print">
+          <i class="bi bi-printer"></i> <%= t('print') %>
         </button>
       <% end %>
       <%= render "shared/sort_button" if @diets.many? %>
