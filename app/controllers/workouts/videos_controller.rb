@@ -1,4 +1,5 @@
 class Workouts::VideosController < ApplicationController
+  include SheetScoped
   before_action :set_workout
 
   def destroy
@@ -9,6 +10,6 @@ class Workouts::VideosController < ApplicationController
   private
 
   def set_workout
-    @workout = Workout.find(params[:workout_id])
+    @workout = @sheet.workouts.find(params[:workout_id])
   end
 end
