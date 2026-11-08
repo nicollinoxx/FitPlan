@@ -8,13 +8,13 @@ class PasswordsTest < ApplicationSystemTestCase
   test "updating the password" do
     visit identity_settings_url
 
-    click_on "Change password"
+    click_on t("identity.settings.show.settings.change_password")
 
-    fill_in "Password challenge", with: "Secret1*3*5*"
-    fill_in "New password", with: "Secret6*4*2*"
-    fill_in "Confirm new password", with: "Secret6*4*2*"
-    click_on "Save"
+    fill_in :password_challenge, with: "Secret1*3*5*"
+    fill_in :password, with: "Secret6*4*2*"
+    fill_in :password_confirmation, with: "Secret6*4*2*"
+    click_on t("save")
 
-    assert_text "Your password has been changed"
+    assert_text t("notice.password.update")
   end
 end
