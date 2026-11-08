@@ -19,4 +19,13 @@ class Workouts::VideosControllerTest < ActionDispatch::IntegrationTest
     assert_match '<turbo-stream action="remove" target="video">', response.body
     assert_not @workout.reload.video.attached?
   end
+
+  test "should not purge the video of a workout from someone else" do
+    sign_in_as(users(:lazaro))
+
+    delete sheet_workout_video_url(@sheet, @workout, @workout.video), as: :turbo_stream
+
+    assert_response :not_found
+    assert @workout.reload.video.attached?
+  end
 end
