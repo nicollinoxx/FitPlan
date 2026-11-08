@@ -8,45 +8,37 @@ class SheetsTest < ApplicationSystemTestCase
 
   test "visiting the index" do
     visit sheets_url
-    assert_selector "h1", text: "Sheets"
+    assert_selector "h1", text: t("sheets.index.title")
   end
 
   test "should create sheet" do
     visit sheets_url
-    click_on "+ New"
+    click_on t("new")
 
-    fill_in "Description", with: @sheet.description
-    fill_in "Name", with: @sheet.name
-    choose @sheet.sheet_type.capitalize
+    fill_in :sheet_name, with: @sheet.name
+    fill_in :sheet_description, with: @sheet.description
+    choose "sheet_sheet_type_#{@sheet.sheet_type}"
+    click_on t("save")
 
-    click_on "Save"
-
-    assert_text "Sheet was successfully created"
+    assert_text t("notice.sheet.create")
   end
 
   test "should update Sheet" do
     visit sheet_url(@sheet)
-    click_on "Edit", match: :first
+    click_on t("edit"), match: :first
 
-    fill_in "Description", with: @sheet.description
-    fill_in "Name", with: @sheet.name
-    choose @sheet.sheet_type.capitalize
+    fill_in :sheet_name, with: @sheet.name
+    fill_in :sheet_description, with: @sheet.description
+    click_on t("save")
 
-    click_on "Save"
-
-    assert_text "Sheet was successfully updated"
+    assert_text t("notice.sheet.update")
   end
 
   test "should destroy Sheet" do
     visit sheet_url(@sheet)
-    click_on "Destroy", match: :first
+    click_on t("destroy"), match: :first
+    confirm_dialog
 
-    assert_selector "dialog[open]", visible: true
-
-    within "dialog[open]" do
-      click_on "Confirm"
-    end
-
-    assert_text "Sheet was successfully destroyed"
+    assert_text t("notice.sheet.destroy")
   end
 end

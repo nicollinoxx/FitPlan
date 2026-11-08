@@ -10,30 +10,21 @@ class SessionsTest < ApplicationSystemTestCase
 
     visit identity_settings_url
 
-    click_on "Sessions"
-    assert_selector "h1", text: "Sessions"
+    click_on t("identity.settings.show.session.collection_sessions")
+    assert_selector "h1", text: t("sessions.index.title")
   end
 
   test "signing in" do
-    visit sign_in_url
-    fill_in "Email", with: @user.email
-    fill_in "Password", with: "Secret1*3*5*"
-
-    click_on "Sign in"
+    sign_in_as @user
   end
 
   test "signing out" do
     sign_in_as @user
-    visit identity_settings_url
+    visit sessions_url
 
-    click_on "Log out"
+    click_on t("destroy"), match: :first
+    confirm_dialog
 
-    assert_selector "dialog[open]", visible: true
-
-    within "dialog[open]" do
-      click_on "Confirm"
-    end
-
-    assert_text "This session was successfully destroyed"
+    assert_text t("notice.session.destroy")
   end
 end

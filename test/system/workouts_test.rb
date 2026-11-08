@@ -13,46 +13,36 @@ class WorkoutsTest < ApplicationSystemTestCase
   end
 
   test "should create workout" do
-    visit new_sheet_workout_path(@sheet)
+    visit new_sheet_workout_url(@sheet)
 
-    fill_in "Exercise", with: "Push ups"
-    fill_in "Repetitions", with: "12"
-    fill_in "Series", with: "3"
-    fill_in "Interval", with: "30 seconds"
+    fill_in :workout_exercise, with: "Push ups"
+    fill_in :workout_repetitions, with: "12"
+    fill_in :workout_series, with: "3"
+    fill_in :workout_interval, with: "30"
+    select t("workouts.form.options_charge.low"), from: :workout_charge
+    click_on t("save")
 
-    select "low", from: "Charge"
-
-    click_on "Save"
-
-    assert_text "Workout was successfully created"
+    assert_text t("notice.workout.create")
   end
-
 
   test "should update Workout" do
     visit sheet_workout_url(@sheet, @workout)
-    click_on "Edit", match: :first
+    click_on t("edit"), match: :first
 
-    fill_in "Exercise", with: @workout.exercise
-    fill_in "Repetitions", with: @workout.repetitions
-    fill_in "Series", with: @workout.series
+    fill_in :workout_exercise, with: @workout.exercise
+    fill_in :workout_repetitions, with: @workout.repetitions
+    fill_in :workout_series, with: @workout.series
+    select t("workouts.form.options_charge.low"), from: :workout_charge
+    click_on t("save")
 
-    select "low", from: "Charge"
-
-    click_on "Save"
-
-    assert_text "Workout was successfully updated"
+    assert_text t("notice.workout.update")
   end
 
   test "should destroy Workout" do
     visit sheet_workout_url(@sheet, @workout)
-    click_on "Destroy"
+    click_on t("destroy"), match: :first
+    confirm_dialog
 
-    assert_selector "dialog[open]", visible: true
-
-    within "dialog[open]" do
-      click_on "Confirm"
-    end
-
-    assert_text "Workout was successfully destroyed"
+    assert_text t("notice.workout.destroy")
   end
 end

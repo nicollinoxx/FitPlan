@@ -15,38 +15,33 @@ class DietsTest < ApplicationSystemTestCase
   test "should create diet" do
     visit new_sheet_diet_url(@sheet)
 
-    fill_in "Carbohydrates g", with: @diet.carbohydrate_g
-    fill_in "Fat g", with: @diet.fat_g
-    fill_in "Proteins g", with: @diet.protein_g
-    fill_in "Meal", with: @diet.meal
-    click_on "Save"
+    fill_in :diet_meal, with: @diet.meal
+    fill_in :diet_protein_g, with: @diet.protein_g
+    fill_in :diet_carbohydrate_g, with: @diet.carbohydrate_g
+    fill_in :diet_fat_g, with: @diet.fat_g
+    click_on t("save")
 
-    assert_text "Diet was successfully created"
+    assert_text t("notice.diet.create")
   end
 
   test "should update Diet" do
     visit sheet_diet_url(@sheet, @diet)
-    click_on "Edit", match: :first
+    click_on t("edit"), match: :first
 
-    fill_in "Carbohydrates g", with: @diet.carbohydrate_g
-    fill_in "Fat g", with: @diet.fat_g
-    fill_in "Proteins g", with: @diet.protein_g
-    fill_in "Meal", with: @diet.meal
-    click_on "Save"
+    fill_in :diet_meal, with: @diet.meal
+    fill_in :diet_protein_g, with: @diet.protein_g
+    fill_in :diet_carbohydrate_g, with: @diet.carbohydrate_g
+    fill_in :diet_fat_g, with: @diet.fat_g
+    click_on t("save")
 
-    assert_text "Diet was successfully updated"
+    assert_text t("notice.diet.update")
   end
 
   test "should destroy Diet" do
     visit sheet_diet_url(@sheet, @diet)
-    click_on "Destroy", match: :first
+    click_on t("destroy"), match: :first
+    confirm_dialog
 
-    assert_selector "dialog[open]", visible: true
-
-    within "dialog[open]" do
-      click_on "Confirm"
-    end
-
-    assert_text "Diet was successfully destroyed"
+    assert_text t("notice.diet.destroy")
   end
 end
