@@ -1,14 +1,14 @@
 <% content_for(:title, @sheet.name) %>
 
 <div data-controller="sortable" data-sortable-resource-value="diet">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1>
-      <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body' do %>
-        <i class="bi bi-arrow-left-short"></i><%= @sheet.name %>
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+    <h1 class="mb-0 flex-grow-1 min-w-0">
+      <%= link_to sheets_path, class: 'd-flex align-items-center gap-2 text-decoration-none text-body text-break' do %>
+        <i class="bi bi-arrow-left-short flex-shrink-0"></i><span><%= @sheet.name %></span>
       <% end %>
     </h1>
 
-    <div class="d-flex gap-2">
+    <div class="d-flex gap-2 flex-shrink-0">
       <%= render "shared/sort_button" if @diets.many? %>
       <%= link_to new_recommendation_path(sheet_id: @sheet), class: 'btn btn-outline-success flex-shrink-0', aria: { label: t('link_recommendations') } do %>
         <i class="bi bi-stars"></i>
