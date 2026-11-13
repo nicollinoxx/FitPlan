@@ -8,6 +8,15 @@ The platform allows you to create personalized workout and diet records, calcula
 - [Android](https://github.com/nicollinoxx/FitPlan-Android) — Kotlin and Hotwire Native
 - [iOS](https://github.com/nicollinoxx/FitPlan-IOS) — Swift and Hotwire Native
 
+
+### Android download
+
+Download the APK from the [latest Android release](https://github.com/nicollinoxx/FitPlan-Android/releases/latest).
+
+Requires Android 9 or later and an internet connection.
+Open the downloaded APK to install it and, if prompted, allow installation
+from your browser or file manager.
+
 # Advisors
 - Fabio Pereira Botelho
 
