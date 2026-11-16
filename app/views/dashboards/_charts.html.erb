@@ -1,7 +1,7 @@
 <%= turbo_frame_tag :charts do %>
   <div class="d-flex justify-content-end mb-2 mt-4">
     <div class="dropdown">
-      <button class="btn btn-sm btn-outline-body dropdown-toggle" type="button" id="periodButton" data-bs-toggle="dropdown">
+      <button class="btn btn-sm btn-outline-body dropdown-toggle" type="button" id="periodButton" data-bs-toggle="dropdown" data-bs-display="static">
         <i class="bi bi-calendar3"></i> <%= t(".filters.period.#{params[:period] || 'month'}") %>
       </button>
 

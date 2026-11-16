@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div id="paginables" class="row mb-3">
+    <div id="paginables" class="row g-3 mb-3">
       <%= render partial: 'sheets/shares/share', collection: @page.records, as: :share %>
       <%= render 'shared/paginables/next_page_container', src: sheets_shares_path(@page.next_param, format: :turbo_stream) unless @page.last? %>
     </div>

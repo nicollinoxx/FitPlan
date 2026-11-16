@@ -22,7 +22,9 @@ input.form-control:focus {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hover-zoom-sm:hover { transform: scale(1.02); }
+@media (hover: hover) {
+  .hover-zoom-sm:hover { transform: scale(1.02); }
+}
 
 .sort-active { display: none; }
 

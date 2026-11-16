@@ -21,9 +21,9 @@
     <%= turbo_frame_tag "diets" do %>
       <%= render 'shared/completion_today_size' %>
 
-      <div class="row mb-3" data-sortable-target="list">
+      <div class="row g-3 mb-3" data-sortable-target="list">
         <% @diets.each do |diet| %>
-          <div class="col-md-6 p-2 mb-2" data-sortable-url="<%= sheet_diet_position_path(@sheet, diet) %>" data-sortable-position="<%= diet.position %>">
+          <div class="col-md-6" data-sortable-url="<%= sheet_diet_position_path(@sheet, diet) %>" data-sortable-position="<%= diet.position %>">
             <%= render diet, completed: @completions_by_diet_id[diet.id] %>
           </div>
         <% end %>
