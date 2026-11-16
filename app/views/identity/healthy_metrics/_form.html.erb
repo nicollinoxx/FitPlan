@@ -13,22 +13,22 @@
 
     <div class="mb-3">
         <%= form.label :height, t('height'), style: "display: block", class: 'form-label' %>
-        <%= form.number_field :height, required: true, class: "form-control", placeholder: "1,75", step: "any", min: 0 %>
+        <%= form.number_field :height, value: @healthy_metric.height, class: "form-control", placeholder: "1,75", step: "any", min: 1 %>
     </div>
 
     <div class="mb-3">
         <%= form.label :weight, t('weight'), style: "display: block", class: 'form-label' %>
-        <%= form.number_field :weight, required: true, class: "form-control", placeholder: "65,2", step: "any", min: 0 %>
+        <%= form.number_field :weight, value: @healthy_metric.weight, class: "form-control", placeholder: "65,2", step: "any", min: 1 %>
     </div>
 
     <div class="mb-3">
       <%= form.label :birth_date, "#{t('age')} (DD-MM-YYYY)", class: 'form-label' %>
-      <%= form.date_field :birth_date, required: true, class: "form-control", max: Date.today %>
+      <%= form.date_field :birth_date, class: "form-control", max: Date.today %>
     </div>
 
     <div class="mb-3">
       <%= form.label :gender, t('gender'), style: "display: block", class: 'form-label' %>
-      <%= form.select :gender, options_for_select([[t('male'), 'male'], [t('female'), 'female']], @healthy_metric.gender), {}, { required: true, class: "form-select" } %>
+      <%= form.select :gender, options_for_select([[t('male'), 'male'], [t('female'), 'female']], @healthy_metric.gender), { include_blank: true }, { class: "form-select" } %>
     </div>
 
     <%= form.submit t("save"), class: "btn btn-success" %>

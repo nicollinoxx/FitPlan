@@ -1,7 +1,7 @@
 class HealthyMetric < ApplicationRecord
   belongs_to :user
 
-  validates :height, :weight, numericality: { greater_than: 0 }
+  validates :height, :weight, numericality: { greater_than: 0 }, allow_nil: true
 
   enum :gender, { male: "male", female: "female" }
 
@@ -18,19 +18,16 @@ class HealthyMetric < ApplicationRecord
   private
 
     def calculate_healthy_metrics
-      calculate_imc
-      calculate_tmb
+      self.imc = (calculate_imc if height && weight)
+      self.tmb = (calculate_tmb if imc && birth_date && gender)
     end
 
     def calculate_imc
-      self.imc = (weight / (height**2)).round(2)
+      (weight / (height**2)).round(2)
     end
 
     def calculate_tmb
-      self.tmb = if male?
-        (10 * weight + 6.25 * height * 100 - 5 * age + 5).round(2)
-      elsif female?
-        (10 * weight + 6.25 * height * 100 - 5 * age - 161).round(2)
-      end
+      base = 10 * weight + 6.25 * height * 100 - 5 * age
+      (male? ? base + 5 : base - 161).round(2)
     end
 end
