@@ -9,6 +9,14 @@ export default class extends Controller {
   static values = { saveUrl: String, existing: Boolean, sheetType: String, charges: Object, errorMessage: String, modelErrorMessage: String }
   static outlets = ["recommendations--diff"]
 
+  connect() {
+    const stored = this.readRecommendation()
+    if (!stored) return
+
+    this.recommendation = stored
+    this.render({ scroll: false })
+  }
+
   toggle() {
     const data = new FormData(this.formTarget)
     const kind = data.get("recommendation[kind]")
@@ -25,6 +33,8 @@ export default class extends Controller {
     const token = crypto.randomUUID()
     const data = new FormData(this.formTarget)
 
+    this.recommendation = null
+    this.clearStoredRecommendation()
     this.stopListening()
     this.errorTarget.hidden = true
     this.loading(true)
@@ -56,6 +66,7 @@ export default class extends Controller {
     if (failed) return this.failWithModel()
 
     this.recommendation = recommendation
+    this.storeRecommendation(recommendation)
     this.render()
   }
 
@@ -70,10 +81,13 @@ export default class extends Controller {
   }
 
   async save() {
+    if (!this.recommendation) return this.fail()
+
     try {
       const method = this.recommendation.changes ? "PATCH" : "POST"
       const response = await this.request(this.saveUrlValue, JSON.stringify(this.payload), { "Content-Type": "application/json" }, method)
       const { location } = await response.json()
+      this.clearStoredRecommendation()
       Turbo.visit(location)
     } catch {
       this.fail()
@@ -84,6 +98,7 @@ export default class extends Controller {
     if (!await Turbo.config.forms.confirm(currentTarget.dataset.turboConfirm)) return
 
     this.recommendation = null
+    this.clearStoredRecommendation()
     this.previewTarget.hidden = true
     this.collapse(false)
   }
@@ -114,7 +129,7 @@ export default class extends Controller {
     return { [`${sheet.sheet_type}s`]: sheet[`${sheet.sheet_type}s`] }
   }
 
-  render() {
+  render({ scroll = true } = {}) {
     const { sheets = [], changes } = this.recommendation
 
     this.errorTarget.hidden = true
@@ -122,7 +137,40 @@ export default class extends Controller {
     if (this.hasRecommendationsDiffOutlet) this.recommendationsDiffOutlet.render(changes ?? [], Boolean(changes))
     this.previewTarget.hidden = false
     this.collapse(true)
-    this.previewTarget.scrollIntoView({ behavior: "smooth" })
+    if (scroll) this.previewTarget.scrollIntoView({ behavior: "smooth" })
+  }
+
+  get recommendationStorageKey() {
+    return `fitplan:recommendation:${window.location.pathname}${window.location.search}`
+  }
+
+  storeRecommendation(recommendation) {
+    try {
+      sessionStorage.setItem(this.recommendationStorageKey, JSON.stringify({ recommendation, savedAt: Date.now() }))
+    } catch {
+      // The in-memory recommendation remains available if browser storage is disabled.
+    }
+  }
+
+  readRecommendation() {
+    try {
+      const stored = JSON.parse(sessionStorage.getItem(this.recommendationStorageKey))
+      if (!stored?.recommendation || Date.now() - stored.savedAt > 30 * 60 * 1000) {
+        this.clearStoredRecommendation()
+        return null
+      }
+      return stored.recommendation
+    } catch {
+      return null
+    }
+  }
+
+  clearStoredRecommendation() {
+    try {
+      sessionStorage.removeItem(this.recommendationStorageKey)
+    } catch {
+      // Ignore unavailable browser storage.
+    }
   }
 
   renderSheet(sheet) {
