@@ -9,7 +9,7 @@ module RecommendationsHelper
   end
 
   def recommendation_about
-    metrics = Current.user.healthy_metric ? t("recommendations.form.about.metrics") : t("recommendations.form.about.no_metrics")
+    metrics = Current.user.healthy_metric&.recommendation_profile.present? ? t("recommendations.form.about.metrics") : t("recommendations.form.about.no_metrics")
     language = t("recommendations.form.about.language", language: t("languages.#{I18n.locale}"))
 
     "#{metrics} #{language}"

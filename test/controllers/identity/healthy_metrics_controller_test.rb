@@ -22,6 +22,18 @@ class Identity::HealthyMetricsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to identity_healthy_metric_path(HealthyMetric.last)
   end
 
+  test "should create healthy_metric without any metric" do
+    @healthy_metric.destroy
+
+    assert_difference("HealthyMetric.count", 1) do
+      post identity_healthy_metric_url, params: { healthy_metric: { height: "", weight: "", birth_date: "", gender: "" } }
+    end
+
+    assert_nil HealthyMetric.last.gender
+    get identity_healthy_metric_url(HealthyMetric.last)
+    assert_response :success
+  end
+
   test "should show healthy_metric" do
     get identity_healthy_metric_url(@healthy_metric)
     assert_response :success
@@ -41,7 +53,7 @@ class Identity::HealthyMetricsControllerTest < ActionDispatch::IntegrationTest
     @healthy_metric.destroy
 
     assert_no_difference("HealthyMetric.count") do
-      post identity_healthy_metric_url, params: { healthy_metric: { height: nil } }
+      post identity_healthy_metric_url, params: { healthy_metric: { height: -1 } }
     end
 
     assert_response :unprocessable_entity
