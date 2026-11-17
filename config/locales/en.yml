@@ -22,6 +22,7 @@ en:
   back:         'Back'
   save:         'Save'
   search:       'Search'
+  print:        'Print'
 
   #common
   show:               "Show"

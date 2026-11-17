@@ -30,6 +30,8 @@ pt:
         pt:     'Português'
         en:     'Inglês'
 
+  print:        'Imprimir'
+
   #common
   show:               "Mostrar"
   edit:               "Editar"
