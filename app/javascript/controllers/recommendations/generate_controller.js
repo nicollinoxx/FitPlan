@@ -84,7 +84,10 @@ export default class extends Controller {
     if (this.saving || !this.recommendation) return
     this.saving = true
     currentTarget.disabled = true
-    
+
+    const originalHtml = currentTarget.innerHTML
+    currentTarget.innerHTML = `<span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>${currentTarget.textContent.trim()}`
+
     try {
       const method = this.recommendation.changes ? "PATCH" : "POST"
       const response = await this.request(this.saveUrlValue, JSON.stringify(this.payload), { "Content-Type": "application/json" }, method)
@@ -94,6 +97,7 @@ export default class extends Controller {
     } catch {
       this.saving = false
       currentTarget.disabled = false
+      currentTarget.innerHTML = originalHtml
       this.fail()
     }
   }
