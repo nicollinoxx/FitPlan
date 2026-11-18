@@ -80,9 +80,11 @@ export default class extends Controller {
     this.stopListening()
   }
 
-  async save() {
-    if (!this.recommendation) return this.fail()
-
+  async save({ currentTarget }) {
+    if (this.saving || !this.recommendation) return
+    this.saving = true
+    currentTarget.disabled = true
+    
     try {
       const method = this.recommendation.changes ? "PATCH" : "POST"
       const response = await this.request(this.saveUrlValue, JSON.stringify(this.payload), { "Content-Type": "application/json" }, method)
@@ -90,6 +92,8 @@ export default class extends Controller {
       this.clearStoredRecommendation()
       Turbo.visit(location)
     } catch {
+      this.saving = false
+      currentTarget.disabled = false
       this.fail()
     }
   }
