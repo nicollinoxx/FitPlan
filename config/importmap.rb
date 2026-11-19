@@ -20,3 +20,5 @@ pin "@rails/actioncable", to: "actioncable.esm.js"
 
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/channels", under: "channels"
+pin "@rails/request.js", to: "@rails--request.js.js" # @0.0.12
+pin "tom-select" # @2.4.3
