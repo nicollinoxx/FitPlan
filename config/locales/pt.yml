@@ -640,8 +640,8 @@ pt:
     new_follower:
       subject:                           "%{name} está te seguindo no FitPlan"
       message:                           "%{name} começou a te seguir no FitPlan"
-      cta:                               "Confira o perfil dele e siga de volta se quiser se conectar."
-      view_profile:                      "Ver perfil de %{name}"
+      cta:                               "Confira seus seguidores e siga de volta se quiser se conectar."
+      view_followers:                    "Ver seus seguidores"
     password_reset:
       message:                           "Não lembra a senha da conta %{email}? Tudo bem, acontece.
                                           Clique no link abaixo para definir uma nova senha."

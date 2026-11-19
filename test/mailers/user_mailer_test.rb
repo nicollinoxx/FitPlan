@@ -23,6 +23,8 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [ follow.followed.email ], mail.to
     assert_equal "#{follow.follower.name} is now following you on FitPlan", mail.subject
+    assert_match "/social/profiles/#{follow.followed.handle}/followers", mail.body.encoded
+    assert_no_match "/social/profiles/#{follow.follower.handle}\"", mail.body.encoded
   end
 
   test "new_follower leaves links in the follower name out of the email" do
