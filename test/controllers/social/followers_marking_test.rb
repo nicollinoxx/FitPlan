@@ -52,8 +52,6 @@ class Social::FollowersMarkingTest < ActionDispatch::IntegrationTest
     assert_match "bridge--flash-message", html
   end
 
-  # The follower's name is plain text; the only link is to the reader's own
-  # list, where the new follower is highlighted. A name can't become a link.
   test "the follow notice links to the followers list, not to the follower" do
     follow = Follow.find_by!(followed: @me, follower: users(:lazaro))
     html   = ApplicationController.render(partial: "shared/flash_notice/follow_notice",

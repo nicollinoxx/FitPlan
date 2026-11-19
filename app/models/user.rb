@@ -6,15 +6,12 @@ class User < ApplicationRecord
   include Omniauthable
   include OpenRouter::Connectable
 
-  # TLDs that show up in spam links, plus the most common generic and country ones.
   LINK_TLDS = %w[
     com net org info biz pro tech xyz top site online website space fun shop store click link live club vip
     app dev io ai me co cc ly gg tv ws icu sbs cfd cyou bond buzz lol rest quest monster win bid loan work
     life today world email digital agency cloud tk ml ga cf gq pw su ru cn br us uk de fr es it pt in mx ar
   ].freeze
 
-  # Anything an email client would turn into a clickable link: a URL scheme,
-  # a "www." prefix, or a bare domain on one of LINK_TLDS.
   LINK_PATTERN = %r{
     [a-z][a-z0-9+.-]*://
     | \bwww\.
@@ -55,7 +52,6 @@ class User < ApplicationRecord
     sessions.where.not(id: Current.session).delete_all
   end
 
-  # Drops every word that looks like a link, e.g. "Win $500 https://scam.example" -> "Win $500".
   def self.without_links(text)
     text.to_s.split.reject { |word| word.match?(LINK_PATTERN) }.join(" ")
   end
@@ -86,8 +82,6 @@ class User < ApplicationRecord
     Rails.cache.exist?("user_online:#{id}")
   end
 
-  # The name without links, falling back to the handle, for text that leaves the
-  # app (emails), where clients turn URLs into clickable links.
   def name_without_links
     User.without_links(name).presence || handle
   end
