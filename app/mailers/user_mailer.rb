@@ -17,6 +17,8 @@ class UserMailer < ApplicationMailer
     @follower = params[:follow].follower
     @followed = params[:follow].followed
 
-    mail to: @followed.email, subject: t(".subject", name: @follower.name)
+    @follower_name = @follower.name_without_links
+
+    mail to: @followed.email, subject: t(".subject", name: @follower_name)
   end
 end
