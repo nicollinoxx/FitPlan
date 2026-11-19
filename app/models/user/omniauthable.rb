@@ -20,7 +20,7 @@ module User::Omniauthable
     private
 
       def signup_attributes(auth)
-        { name: auth.info.name, password: SecureRandom.hex(16), verified: true }
+        { name: User.without_links(auth.info.name), password: SecureRandom.hex(16), verified: true }
       end
   end
 

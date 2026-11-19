@@ -47,9 +47,19 @@ class Social::FollowersMarkingTest < ActionDispatch::IntegrationTest
     sign_in_as @me
     follow = Follow.find_by!(followed: @me, follower: users(:lazaro))
     html = ApplicationController.render(partial: "shared/flash_notice/follow_notice",
-                                        locals: { follower: follow.follower })
+                                        locals: { follower: follow.follower, followed: follow.followed })
 
     assert_match "bridge--flash-message", html
+  end
+
+  test "the follow notice links to the followers list, not to the follower" do
+    follow = Follow.find_by!(followed: @me, follower: users(:lazaro))
+    html   = ApplicationController.render(partial: "shared/flash_notice/follow_notice",
+                                          locals: { follower: follow.follower, followed: follow.followed })
+    links  = Nokogiri::HTML.fragment(html).css("a")
+
+    assert_equal [ followers_social_profile_path(@me) ], links.map { |link| link["href"] }
+    assert_equal "false", links.first["data-turbo-prefetch"], "o prefetch marcaria o seguidor como visto"
   end
 
   # Without a title of its own the bridge falls back to the element's text,
@@ -58,7 +68,7 @@ class Social::FollowersMarkingTest < ActionDispatch::IntegrationTest
   test "the snackbar is given the notice as a single line" do
     follow = Follow.find_by!(followed: @me, follower: users(:lazaro))
 
-    [ [ "shared/flash_notice/follow_notice", { follower: follow.follower } ],
+    [ [ "shared/flash_notice/follow_notice", { follower: follow.follower, followed: follow.followed } ],
       [ "shared/flash_notice/sheet_share_notice", { share: sheet_shares(:one) } ] ].each do |partial, locals|
       html  = ApplicationController.render(partial: partial, locals: locals)
       title = html[/data-bridge-title="([^"]*)"/, 1]

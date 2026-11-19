@@ -19,7 +19,7 @@ class Follow < ApplicationRecord
     broadcast_replace_to("user_notifications_#{followed_id}",
       target: "flash_container",
       partial: "shared/flash_notice/follow_notice",
-      locals: { follower: follower })
+      locals: { follower: follower, followed: followed })
   end
 
   def cannot_follow_self
