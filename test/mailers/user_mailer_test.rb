@@ -24,4 +24,15 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal [ follow.followed.email ], mail.to
     assert_equal "#{follow.follower.name} is now following you on FitPlan", mail.subject
   end
+
+  test "new_follower leaves links in the follower name out of the email" do
+    follow = follows(:two)
+    follow.follower.name = "Win $500 https://scam.example"
+    follow.follower.save!(validate: false)
+
+    mail = UserMailer.with(follow: follow).new_follower
+
+    assert_equal "Win $500 is now following you on FitPlan", mail.subject
+    assert_no_match "scam.example", mail.body.encoded
+  end
 end

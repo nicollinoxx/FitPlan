@@ -660,6 +660,8 @@ en:
               error_video_size:          "is too big. Maximum size allowed is 16MB."
         user:
           attributes:
+            name:
+              contains_link:             "can't contain links"
             avatar:
               error_avatar_type:         'must be a file (png, jpeg, jpg)'
               error_avatar_size:         "is too big. Maximum size allowed is 4MB."

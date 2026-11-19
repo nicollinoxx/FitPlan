@@ -6,6 +6,14 @@ class User < ApplicationRecord
   include Omniauthable
   include OpenRouter::Connectable
 
+  # Anything an email client would turn into a clickable link: a URL scheme,
+  # a "www." prefix, or a bare domain on a common TLD.
+  LINK_PATTERN = %r{
+    [a-z][a-z0-9+.-]*://
+    | \bwww\.
+    | \b[\p{L}\d-]+\.(?:com|net|org|info|biz|xyz|top|site|online|shop|store|click|link|live|club|vip|app|dev|io|me|co|cc|ly|gg|tk|ml|ga|cf|gq|pw|ru|cn|br|us|uk)\b
+  }ix
+
   has_secure_password
   has_one_attached :avatar
 
@@ -22,6 +30,7 @@ class User < ApplicationRecord
   has_many :sheet_completions
 
   validate :avatar_size, if: -> { attachment_changes["avatar"] }
+  validate :name_cannot_contain_links, if: :name_changed?
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :unconfirmed_email, allow_nil: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -37,6 +46,11 @@ class User < ApplicationRecord
 
   after_update if: :password_digest_previously_changed? do
     sessions.where.not(id: Current.session).delete_all
+  end
+
+  # Drops every word that looks like a link, e.g. "Win $500 https://scam.example" -> "Win $500".
+  def self.without_links(text)
+    text.to_s.split.reject { |word| word.match?(LINK_PATTERN) }.join(" ")
   end
 
   def self.search_users(query)
@@ -65,7 +79,17 @@ class User < ApplicationRecord
     Rails.cache.exist?("user_online:#{id}")
   end
 
+  # The name without links, falling back to the handle, for text that leaves the
+  # app (emails), where clients turn URLs into clickable links.
+  def name_without_links
+    User.without_links(name).presence || handle
+  end
+
   private
+
+  def name_cannot_contain_links
+    errors.add(:name, :contains_link) if name.to_s.match?(LINK_PATTERN)
+  end
 
   def avatar_size
     errors.add(:avatar, :error_avatar_size) if avatar.attached? && avatar.blob.byte_size > 4.megabytes

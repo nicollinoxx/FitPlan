@@ -76,4 +76,38 @@ class UserTest < ActiveSupport::TestCase
   test "search_users returns none when no match" do
     assert_empty User.search_users("nonexistent_user_xyz")
   end
+
+  test "rejects names that contain links" do
+    [ "Win $500 https://scam.example", "www.promo-fit", "visit scam.com", "bit.ly/abc", "t.me/channel" ].each do |name|
+      user = User.new(name: name, email: "spam@example.com", password: "Secret1*3*5*")
+
+      assert_not user.valid?, "expected #{name.inspect} to be rejected"
+      assert user.errors.of_kind?(:name, :contains_link)
+    end
+  end
+
+  test "accepts ordinary names with dots and symbols" do
+    [ "J.R.R. Tolkien", "Dr. Silva", "Ana.Paula", "Léo 2.0", "José D'Ávila" ].each do |name|
+      user = User.new(name: name, email: "ok@example.com", password: "Secret1*3*5*")
+
+      assert user.valid?, "expected #{name.inspect} to be accepted: #{user.errors.full_messages}"
+    end
+  end
+
+  test "rejects adding a link when renaming" do
+    user = users(:lazaro_nixon)
+
+    assert_not user.update(name: "Free coins https://scam.example")
+    assert user.errors.of_kind?(:name, :contains_link)
+  end
+
+  test "name_without_links drops link words and falls back to the handle" do
+    user = users(:lazaro_nixon)
+
+    user.name = "Win $500 https://scam.example now"
+    assert_equal "Win $500 now", user.name_without_links
+
+    user.name = "https://scam.example"
+    assert_equal user.handle, user.name_without_links
+  end
 end

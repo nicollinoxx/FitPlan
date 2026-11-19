@@ -14,6 +14,14 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to sheets_url(format: :html)
   end
 
+  test "should not sign up with a link in the name" do
+    assert_no_difference("User.count") do
+      post sign_up_url, params: { email: "spam@example.com", password: "Secret1*3*5*", password_confirmation: "Secret1*3*5*", name: "Win $500 https://scam.example" }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
   test "should limit sign up attempts" do
     assert_no_difference("User.count") do
       with_rate_limit_exceeded do
