@@ -78,7 +78,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "rejects names that contain links" do
-    [ "Win $500 https://scam.example", "www.promo-fit", "visit scam.com", "bit.ly/abc", "t.me/channel" ].each do |name|
+    [ "Win $500 https://scam.example", "www.promo-fit", "visit scam.com", "bit.ly/abc", "t.me/channel", "scam.pro", "scam.tech" ].each do |name|
       user = User.new(name: name, email: "spam@example.com", password: "Secret1*3*5*")
 
       assert_not user.valid?, "expected #{name.inspect} to be rejected"

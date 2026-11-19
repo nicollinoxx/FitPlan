@@ -6,12 +6,19 @@ class User < ApplicationRecord
   include Omniauthable
   include OpenRouter::Connectable
 
+  # TLDs that show up in spam links, plus the most common generic and country ones.
+  LINK_TLDS = %w[
+    com net org info biz pro tech xyz top site online website space fun shop store click link live club vip
+    app dev io ai me co cc ly gg tv ws icu sbs cfd cyou bond buzz lol rest quest monster win bid loan work
+    life today world email digital agency cloud tk ml ga cf gq pw su ru cn br us uk de fr es it pt in mx ar
+  ].freeze
+
   # Anything an email client would turn into a clickable link: a URL scheme,
-  # a "www." prefix, or a bare domain on a common TLD.
+  # a "www." prefix, or a bare domain on one of LINK_TLDS.
   LINK_PATTERN = %r{
     [a-z][a-z0-9+.-]*://
     | \bwww\.
-    | \b[\p{L}\d-]+\.(?:com|net|org|info|biz|xyz|top|site|online|shop|store|click|link|live|club|vip|app|dev|io|me|co|cc|ly|gg|tk|ml|ga|cf|gq|pw|ru|cn|br|us|uk)\b
+    | \b[\p{L}\d-]+\.(?:#{LINK_TLDS.join("|")})\b
   }ix
 
   has_secure_password
