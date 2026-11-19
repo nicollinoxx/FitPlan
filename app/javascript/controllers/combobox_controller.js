@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-import { get } from "https://esm.sh/@rails/request.js@0.0.12?standalone"
-import TomSelect from "https://esm.sh/tom-select@2.4.3?standalone"
+import { get } from "@rails/request.js"
+import TomSelect from "tom-select"
 
 export default class extends Controller {
   static values = {
