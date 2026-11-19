@@ -28,12 +28,6 @@ module FitPlan
     config.i18n.available_locales = [:en, :pt]
     config.i18n.default_locale = :pt
 
-    # Cloudflare sits in front of the app, so the request reaches Rails as
-    # visitor -> Cloudflare edge -> kamal-proxy. Trusting Cloudflare's ranges, on
-    # top of the private-network defaults that cover kamal-proxy, makes
-    # request.remote_ip the visitor's address instead of the edge's. Only these
-    # ranges are trusted, so a request that skips Cloudflare can't spoof it.
-    # Source: https://www.cloudflare.com/ips/
     config.action_dispatch.trusted_proxies = ActionDispatch::RemoteIp::TRUSTED_PROXIES + %w[
       173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18
       108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17

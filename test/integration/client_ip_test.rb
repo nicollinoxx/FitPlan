@@ -1,8 +1,5 @@
 require "test_helper"
 
-# In production a request reaches Rails as visitor -> Cloudflare edge -> kamal-proxy,
-# so REMOTE_ADDR is kamal-proxy on the Docker network and X-Forwarded-For carries
-# the rest of the chain.
 class ClientIpTest < ActionDispatch::IntegrationTest
   KAMAL_PROXY = "172.18.0.5"
 
