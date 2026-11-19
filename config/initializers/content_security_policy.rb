@@ -20,9 +20,6 @@ Rails.application.configure do
     policy.connect_src     :self
   end
 
-  # Nonce the importmap and any other inline scripts. Styles are left out on
-  # purpose: views rely on inline style attributes, and a style-src nonce would
-  # make browsers ignore 'unsafe-inline'.
   config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
   config.content_security_policy_nonce_directives = %w[script-src]
 end
