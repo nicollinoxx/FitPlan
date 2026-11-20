@@ -6,6 +6,18 @@ class User < ApplicationRecord
   include Omniauthable
   include OpenRouter::Connectable
 
+  LINK_TLDS = %w[
+    com net org info biz pro tech xyz top site online website space fun shop store click link live club vip
+    app dev io ai me co cc ly gg tv ws icu sbs cfd cyou bond buzz lol rest quest monster win bid loan work
+    life today world email digital agency cloud tk ml ga cf gq pw su ru cn br us uk de fr es it pt in mx ar
+  ].freeze
+
+  LINK_PATTERN = %r{
+    [a-z][a-z0-9+.-]*://
+    | \bwww\.
+    | \b[\p{L}\d-]+\.(?:#{LINK_TLDS.join("|")})\b
+  }ix
+
   has_secure_password
   has_one_attached :avatar
 
@@ -22,6 +34,7 @@ class User < ApplicationRecord
   has_many :sheet_completions
 
   validate :avatar_size, if: -> { attachment_changes["avatar"] }
+  validate :name_cannot_contain_links, if: :name_changed?
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :unconfirmed_email, allow_nil: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -37,6 +50,10 @@ class User < ApplicationRecord
 
   after_update if: :password_digest_previously_changed? do
     sessions.where.not(id: Current.session).delete_all
+  end
+
+  def self.without_links(text)
+    text.to_s.split.reject { |word| word.match?(LINK_PATTERN) }.join(" ")
   end
 
   def self.search_users(query)
@@ -65,7 +82,15 @@ class User < ApplicationRecord
     Rails.cache.exist?("user_online:#{id}")
   end
 
+  def name_without_links
+    User.without_links(name).presence || handle
+  end
+
   private
+
+  def name_cannot_contain_links
+    errors.add(:name, :contains_link) if name.to_s.match?(LINK_PATTERN)
+  end
 
   def avatar_size
     errors.add(:avatar, :error_avatar_size) if avatar.attached? && avatar.blob.byte_size > 4.megabytes

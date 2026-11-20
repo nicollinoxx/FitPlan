@@ -636,8 +636,8 @@ en:
     new_follower:
       subject:                           "%{name} is now following you on FitPlan"
       message:                           "%{name} started following you on FitPlan."
-      cta:                               "Check out their profile and follow them back if you'd like to connect."
-      view_profile:                      "View %{name}'s profile"
+      cta:                               "Check out your followers and follow them back if you'd like to connect."
+      view_followers:                    "View your followers"
     password_reset:
       message:                           "Can't remember your password for %{email}? That's OK, it happens.
                                           Just hit the link below to set a new one."
@@ -660,6 +660,8 @@ en:
               error_video_size:          "is too big. Maximum size allowed is 16MB."
         user:
           attributes:
+            name:
+              contains_link:             "can't contain links"
             avatar:
               error_avatar_type:         'must be a file (png, jpeg, jpg)'
               error_avatar_size:         "is too big. Maximum size allowed is 4MB."

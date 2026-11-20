@@ -640,8 +640,8 @@ pt:
     new_follower:
       subject:                           "%{name} está te seguindo no FitPlan"
       message:                           "%{name} começou a te seguir no FitPlan"
-      cta:                               "Confira o perfil dele e siga de volta se quiser se conectar."
-      view_profile:                      "Ver perfil de %{name}"
+      cta:                               "Confira seus seguidores e siga de volta se quiser se conectar."
+      view_followers:                    "Ver seus seguidores"
     password_reset:
       message:                           "Não lembra a senha da conta %{email}? Tudo bem, acontece.
                                           Clique no link abaixo para definir uma nova senha."
@@ -662,6 +662,7 @@ pt:
         meal:                            'Refeição'
         description:                     'Descrição'
       user:
+        name:                            'Nome'
         password:                        'Senha'
         password_challenge:              'Senha atual'
         password_confirmation:           'Confirmar senha'
@@ -676,6 +677,8 @@ pt:
               error_video_size:          "é muito grande. O tamanho máximo permitido é 16MB."
         user:
           attributes:
+            name:
+              contains_link:             'não pode conter links'
             avatar:
               error_avatar_type:         "deve ser um arquivo MP4, MPEG ou QuickTime"
               error_avatar_size:         "é muito grande. O tamanho máximo permitido é 4MB."
