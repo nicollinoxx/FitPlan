@@ -1,7 +1,9 @@
 class Sheets::GenerationsController < ApplicationController
+  include RecommendationScoped
+
   def create
-    sheets = Current.user.sheets.generate_from_recommendation!(sheets_params)
-    render json: { location: sheets_path(suggested: sheets.map(&:id)) }, status: :created
+    @recommendation.accept! { Current.user.sheets.generate_from_recommendation!(sheets_params, recommendation: @recommendation) }
+    render json: { location: sheets_path(suggested: @recommendation.generated_sheets.positioned.ids) }, status: :created
   end
 
   private

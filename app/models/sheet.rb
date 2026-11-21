@@ -5,6 +5,7 @@ class Sheet < ApplicationRecord
   include Trackable
 
   belongs_to :user
+  belongs_to :recommendation, optional: true
   positioned_within :user
 
   has_many :workouts,          dependent: :destroy
@@ -32,10 +33,10 @@ class Sheet < ApplicationRecord
     end
   end
 
-  def self.generate_from_recommendation!(sheets_attributes)
+  def self.generate_from_recommendation!(sheets_attributes, recommendation: nil)
     transaction do
       sheets_attributes.map.with_index(1) do |attributes, position|
-        create!(attributes.slice(:name, :description, :sheet_type).merge(suggested: true)).tap do |sheet|
+        create!(attributes.slice(:name, :description, :sheet_type).merge(suggested: true, recommendation: recommendation)).tap do |sheet|
           sheet.update!(position: position)
           sheet.add_recommended!(attributes.fetch(sheet.workout? ? :workouts : :diets, []))
         end

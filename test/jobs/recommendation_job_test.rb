@@ -8,23 +8,30 @@ class RecommendationJobTest < ActiveJob::TestCase
     @user.update!(open_router_key: "sk-or-test", open_router_model: "openrouter/free")
   end
 
-  test "sends the suggestion to the page that asked, by its token" do
+  test "sends the suggestion to the page that asked, by its token, and records the recommendation" do
     answer = open_router_answer({ sheet_type: "workout", name: "Legs", workouts: [ { exercise: "Squat" } ] })
 
     stub_open_router_answer(answer) do
-      assert_broadcasts(RecommendationChannel.broadcasting_for(@user), 1) do
-        RecommendationJob.perform_now(@user, "token", { "kind" => "workout" })
+      assert_difference -> { @user.recommendations.count }, 1 do
+        assert_broadcasts(RecommendationChannel.broadcasting_for(@user), 1) do
+          RecommendationJob.perform_now(@user, "token", { "kind" => "workout" }, sheets(:one))
+        end
       end
     end
+
+    recommendation = @user.recommendations.find_by!(token: "token")
+    assert_equal sheets(:one), recommendation.sheet
 
     message = broadcasts(RecommendationChannel.broadcasting_for(@user)).last
     assert_equal "token", JSON.parse(message)["token"]
     assert_equal "Legs", JSON.parse(message).dig("recommendation", "sheets", 0, "name")
   end
 
-  test "tells the page when the model could not answer" do
+  test "tells the page when the model could not answer and does not record a recommendation" do
     stub_open_router_answer("not json") do
-      RecommendationJob.perform_now(@user, "token", { "kind" => "workout" })
+      assert_no_difference -> { Recommendation.count } do
+        RecommendationJob.perform_now(@user, "token", { "kind" => "workout" })
+      end
     end
 
     message = JSON.parse(broadcasts(RecommendationChannel.broadcasting_for(@user)).last)

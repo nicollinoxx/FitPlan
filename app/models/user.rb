@@ -31,6 +31,7 @@ class User < ApplicationRecord
   has_one  :healthy_metric,     dependent: :destroy
   has_many :sessions,           dependent: :destroy
   has_many :sheets,             dependent: :destroy
+  has_many :recommendations,    dependent: :destroy
   has_many :sheet_completions
 
   validate :avatar_size, if: -> { attachment_changes["avatar"] }

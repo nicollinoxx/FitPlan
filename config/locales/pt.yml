@@ -1,4 +1,3 @@
-
 pt:
   date:
     formats:
@@ -295,6 +294,7 @@ pt:
       title:                'Recomendações'
       generate:             'Gerar recomendação'
       generating:           'Gerando, pode levar até um minuto…'
+      disclaimer:           'As recomendações são geradas por Inteligência Artificial de terceiros (OpenRouter). O usuário é responsável por revisar, validar e adaptar os treinos e dietas antes de aplicá-los.'
     connect:
       title:                'Planilhas sugeridas por IA'
       description:          'Conecte sua conta do OpenRouter para receber sugestões de treinos e dietas usando apenas modelos gratuitos.'
@@ -680,7 +680,7 @@ pt:
             name:
               contains_link:             'não pode conter links'
             avatar:
-              error_avatar_type:         "deve ser um arquivo MP4, MPEG ou QuickTime"
+              error_avatar_type:         "deve ser um arquivo PNG, JPEG ou JPG"
               error_avatar_size:         "é muito grande. O tamanho máximo permitido é 4MB."
             handle:
               blank:    'escolha um handle para o seu perfil'

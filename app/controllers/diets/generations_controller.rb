@@ -1,8 +1,8 @@
 class Diets::GenerationsController < ApplicationController
-  include SheetScoped
+  include SheetScoped, RecommendationScoped
 
   def create
-    @sheet.add_recommended!(diets_params)
+    @recommendation.accept! { @sheet.add_recommended!(diets_params) }
     render json: { location: sheet_diets_path(@sheet) }, status: :created
   end
 

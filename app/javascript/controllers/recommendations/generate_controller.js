@@ -9,9 +9,9 @@ export default class extends Controller {
   static values = { saveUrl: String, existing: Boolean, sheetType: String, charges: Object, errorMessage: String, modelErrorMessage: String }
   static outlets = ["recommendations--diff"]
 
-  connect() {
+connect() {
     const stored = this.readRecommendation()
-    if (!stored) return
+    if (!stored) return this.reset()
 
     this.recommendation = stored
     this.render({ scroll: false })
@@ -58,15 +58,15 @@ export default class extends Controller {
     })
   }
 
-  received({ recommendation, failed }) {
+  received({ token, recommendation, failed }) {
     this.stopListening()
     this.loading(false)
     this.usageTarget.reload()
 
     if (failed) return this.failWithModel()
 
-    this.recommendation = recommendation
-    this.storeRecommendation(recommendation)
+    this.recommendation = { ...recommendation, token }
+    this.storeRecommendation(this.recommendation)
     this.render()
   }
 
@@ -80,16 +80,23 @@ export default class extends Controller {
     this.stopListening()
   }
 
-  async save() {
+  async save({ currentTarget }) {
     if (!this.recommendation) return this.fail()
+
+    currentTarget.disabled = true
+    const originalHtml = currentTarget.innerHTML
+    currentTarget.innerHTML = `<span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>${currentTarget.textContent.trim()}`
 
     try {
       const method = this.recommendation.changes ? "PATCH" : "POST"
-      const response = await this.request(this.saveUrlValue, JSON.stringify(this.payload), { "Content-Type": "application/json" }, method)
+      const body = JSON.stringify({ ...this.payload, token: this.recommendation.token })
+      const response = await this.request(this.saveUrlValue, body, { "Content-Type": "application/json" }, method)
       const { location } = await response.json()
       this.clearStoredRecommendation()
       Turbo.visit(location)
     } catch {
+      currentTarget.disabled = false
+      currentTarget.innerHTML = originalHtml
       this.fail()
     }
   }
@@ -97,8 +104,12 @@ export default class extends Controller {
   async discard({ currentTarget }) {
     if (!await Turbo.config.forms.confirm(currentTarget.dataset.turboConfirm)) return
 
-    this.recommendation = null
     this.clearStoredRecommendation()
+    this.reset()
+  }
+
+  reset() {
+    this.recommendation = null
     this.previewTarget.hidden = true
     this.collapse(false)
   }

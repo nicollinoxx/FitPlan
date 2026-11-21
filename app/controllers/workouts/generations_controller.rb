@@ -1,8 +1,8 @@
 class Workouts::GenerationsController < ApplicationController
-  include SheetScoped
+  include SheetScoped, RecommendationScoped
 
   def create
-    @sheet.add_recommended!(workouts_params)
+    @recommendation.accept! { @sheet.add_recommended!(workouts_params) }
     render json: { location: sheet_workouts_path(@sheet) }, status: :created
   end
 
