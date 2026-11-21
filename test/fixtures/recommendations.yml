@@ -1,0 +1,13 @@
+new_sheets:
+  user: lazaro_nixon
+  token: new-sheets-token
+
+workouts:
+  user: lazaro_nixon
+  sheet: one
+  token: workouts-token
+
+diets:
+  user: lazaro_nixon
+  sheet: two
+  token: diets-token

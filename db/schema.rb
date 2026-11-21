@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_23_180000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_21_025056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -106,6 +106,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_23_180000) do
     t.index ["user_id"], name: "index_healthy_metrics_on_user_id"
   end
 
+  create_table "recommendations", force: :cascade do |t|
+    t.datetime "accepted_at"
+    t.datetime "created_at", null: false
+    t.bigint "sheet_id"
+    t.string "token", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["sheet_id"], name: "index_recommendations_on_sheet_id"
+    t.index ["user_id", "token"], name: "index_recommendations_on_user_id_and_token", unique: true
+    t.index ["user_id"], name: "index_recommendations_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "ip_address"
@@ -150,10 +162,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_23_180000) do
     t.text "description"
     t.string "name"
     t.integer "position", null: false
+    t.bigint "recommendation_id"
     t.string "sheet_type"
     t.boolean "suggested", default: false, null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.index ["recommendation_id"], name: "index_sheets_on_recommendation_id"
     t.index ["user_id", "position"], name: "index_sheets_on_user_id_and_position"
     t.index ["user_id"], name: "index_sheets_on_user_id"
   end
@@ -205,6 +219,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_23_180000) do
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "healthy_metrics", "users"
+  add_foreign_key "recommendations", "sheets", on_delete: :nullify
+  add_foreign_key "recommendations", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "sheet_completions", "sheets"
   add_foreign_key "sheet_completions", "users"
@@ -212,6 +228,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_23_180000) do
   add_foreign_key "sheet_requests", "sheets"
   add_foreign_key "sheet_shares", "users", column: "recipient_id"
   add_foreign_key "sheet_shares", "users", column: "sender_id"
+  add_foreign_key "sheets", "recommendations", on_delete: :nullify
   add_foreign_key "sheets", "users"
   add_foreign_key "workouts", "sheets"
 end

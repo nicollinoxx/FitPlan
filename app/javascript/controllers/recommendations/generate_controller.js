@@ -9,9 +9,9 @@ export default class extends Controller {
   static values = { saveUrl: String, existing: Boolean, sheetType: String, charges: Object, errorMessage: String, modelErrorMessage: String }
   static outlets = ["recommendations--diff"]
 
-  connect() {
+connect() {
     const stored = this.readRecommendation()
-    if (!stored) return
+    if (!stored) return this.reset()
 
     this.recommendation = stored
     this.render({ scroll: false })
@@ -104,8 +104,12 @@ export default class extends Controller {
   async discard({ currentTarget }) {
     if (!await Turbo.config.forms.confirm(currentTarget.dataset.turboConfirm)) return
 
-    this.recommendation = null
     this.clearStoredRecommendation()
+    this.reset()
+  }
+
+  reset() {
+    this.recommendation = null
     this.previewTarget.hidden = true
     this.collapse(false)
   }

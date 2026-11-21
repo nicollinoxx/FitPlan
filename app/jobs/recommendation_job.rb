@@ -6,6 +6,7 @@ class RecommendationJob < ApplicationJob
 
   def perform(user, token, answers, sheet = nil)
     recommendation = OpenRouter::Recommendation.new(user, sheet: sheet, answers: answers).generate
+    user.recommendations.create_or_find_by!(token: token) { |record| record.sheet = sheet }
     RecommendationChannel.broadcast_to(user, token: token, recommendation: recommendation)
   rescue StandardError => error
     Rails.error.report(error)
