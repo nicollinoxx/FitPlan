@@ -680,8 +680,8 @@ pt:
             name:
               contains_link:             'não pode conter links'
             avatar:
-              error_video_type:          "deve ser um arquivo MP4, MPEG ou QuickTime"
-              error_video_size:          "é muito grande. O tamanho máximo permitido é 4MB."
+              error_avatar_type:         "deve ser um arquivo PNG, JPEG ou JPG"
+              error_avatar_size:         "é muito grande. O tamanho máximo permitido é 4MB."
             handle:
               blank:    'escolha um handle para o seu perfil'
               taken:    'já está em uso, escolha outro'
