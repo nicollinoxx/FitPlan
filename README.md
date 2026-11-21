@@ -22,7 +22,7 @@ from your browser or file manager.
 
 ## Technologies
 
-- Ruby 3.4.13
+- Ruby 4.0.10
 - Rails 8
 - PostgreSQL  
 - Bootstrap 5 for frontend  
@@ -30,7 +30,7 @@ from your browser or file manager.
 ## Prerequisites / Dependencies
 
 - Git  
-- Ruby 3.4.13  
+- Ruby 4.0.10  
 - Bundler  
 - PostgreSQL  
 
